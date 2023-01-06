@@ -6,8 +6,7 @@
 module uim.cake.core.baseplugin;
 
 @safe:
-  import uim.cake;
-
+import uim.cake;
 
 /**
  * Base Plugin Class

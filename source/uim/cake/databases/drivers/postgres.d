@@ -1,6 +1,6 @@
-module uim.cake.databases.Driver;
+module uim.cake.databases.drivers;
 
-import uim.cake.databases.Driver;
+import uim.cake.databases.drivers;
 import uim.cake.databases.expressions.FunctionExpression;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.databases.expressions.StringExpression;

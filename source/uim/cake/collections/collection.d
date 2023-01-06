@@ -8,65 +8,83 @@ module uim.cake.collections.collection;
 @safe:
 import uim.cake;
 
+use ArrayIterator;
+use Exception;
+use IteratorIterator;
+use Serializable;
+
 /**
  * A collection is an immutable list of elements with a handful of functions to
  * iterate, group, transform and extract information from it.
  */
-class Collection : IteratorIterator : ICollection, Serializable {
+class Collection : IteratorIterator : ICollection, Serializable
+{
     use CollectionTrait;
 
     /**
      * Constructor. You can provide an array or any traversable object
      *
-     * @param iterable myItems Items.
+     * @param iterable $items Items.
      * @throws \InvalidArgumentException If passed incorrect type for items.
      */
-    this(iterable myItems) {
-        if (is_array(myItems)) {
-            myItems = new ArrayIterator(myItems);
+    this(iterable $items) {
+        if (is_array($items)) {
+            $items = new ArrayIterator($items);
         }
 
-        super.this(myItems);
+        super(($items);
     }
 
-    // Returns a string representation of this object that can be used to reconstruct it
+    /**
+     * Returns a string representation of this object that can be used
+     * to reconstruct it
+     */
     string serialize() {
-      return serialize(this.buffered());
+        return serialize(this.buffered());
     }
 
-    // Returns an array for serializing this of this object.
+    /**
+     * Returns an array for serializing this of this object.
+     */
     array __serialize() {
         return this.buffered().toArray();
     }
 
     /**
      * Unserializes the passed string and rebuilds the Collection instance
-     * @param string myCollection The serialized collection
+     *
+     * @param string $collection The serialized collection
      */
-    void unserialize(myCollection) {
-        this.this(unserialize(myCollection));
+    void unserialize($collection) {
+        __construct(unserialize($collection));
     }
 
     /**
      * Rebuilds the Collection instance.
-     * @param array myData Data array.
+     *
+     * @param array $data Data array.
      */
-    void __unserialize(array myData) {
-        this.this(myData);
+    void __unserialize(array $data) {
+        __construct($data);
     }
 
-    // 
+    /**
+     * {@inheritDoc}
+     */
     size_t count() {
-        myTraversable = this.optimizeUnwrap();
+        $traversable = this.optimizeUnwrap();
 
-        if (is_array(myTraversable)) {
-            return count(myTraversable);
+        if (is_array($traversable)) {
+            return count($traversable);
         }
 
-        return iterator_count(myTraversable);
+        return iterator_count($traversable);
     }
 
-    size_t countKeys() {
+    /**
+     * {@inheritDoc}
+     */
+    int countKeys() {
         return count(this.toArray());
     }
 
@@ -76,7 +94,15 @@ class Collection : IteratorIterator : ICollection, Serializable {
      *
      * @return array<string, mixed>
      */
-    size_t[string] __debugInfo() {
-      return ["count": this.count()];
+    array __debugInfo() {
+        try {
+            $count = this.count();
+        } catch (Exception $e) {
+            $count = "An exception occurred while getting count";
+        }
+
+        return [
+            "count": $count,
+        ];
     }
 }

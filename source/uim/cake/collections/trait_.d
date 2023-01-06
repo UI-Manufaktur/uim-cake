@@ -3,6 +3,17 @@ module uim.cake.collections;
 @safe:
 import uim.cake;
 
+use AppendIterator;
+use ArrayIterator;
+use Countable;
+use InvalidArgumentException;
+use LimitIterator;
+use LogicException;
+use OuterIterator;
+use RecursiveIteratorIterator;
+use RuntimeException;
+use Traversable;
+
 /**
  * Offers a handful of methods to manipulate iterators
  */
@@ -19,13 +30,14 @@ trait CollectionTrait
      * @param mixed ...$args Constructor arguments.
      * @return uim.cake.collections.ICollection
      */
-    protected ICollection newCollection(...$args) {
+    protected function newCollection(...$args): ICollection
+    {
         return new Collection(...$args);
     }
 
 
     function each(callable $callback) {
-        foreach ($k, $v; this.optimizeUnwrap()) {
+        foreach (this.optimizeUnwrap() as $k: $v) {
             $callback($v, $k);
         }
 
@@ -33,8 +45,9 @@ trait CollectionTrait
     }
 
 
-    ICollection filter(?callable $callback = null) {
-        if ($callback is null) {
+    function filter(?callable $callback = null): ICollection
+    {
+        if ($callback == null) {
             $callback = function ($v) {
                 return (bool)$v;
             };
@@ -44,16 +57,17 @@ trait CollectionTrait
     }
 
 
-    ICollection reject(callable $callback) {
-        return new FilterIterator(this.unwrap(), function (myKey, myValue, myItems) use ($callback) {
-            return !$callback(myKey, myValue, myItems);
+    function reject(callable $callback): ICollection
+    {
+        return new FilterIterator(this.unwrap(), function ($key, $value, $items) use ($callback) {
+            return !$callback($key, $value, $items);
         });
     }
 
 
     bool every(callable $callback) {
-        foreach (this.optimizeUnwrap() as myKey: myValue) {
-            if (!$callback(myValue, myKey)) {
+        foreach (this.optimizeUnwrap() as $key: $value) {
+            if (!$callback($value, $key)) {
                 return false;
             }
         }
@@ -63,8 +77,8 @@ trait CollectionTrait
 
 
     bool some(callable $callback) {
-        foreach (myKey, myValue; this.optimizeUnwrap()) {
-            if ($callback(myValue, myKey) == true) {
+        foreach (this.optimizeUnwrap() as $key: $value) {
+            if ($callback($value, $key) == true) {
                 return true;
             }
         }
@@ -73,9 +87,9 @@ trait CollectionTrait
     }
 
 
-    bool contains(myValue) {
-        foreach ($v; this.optimizeUnwrap()) {
-            if (myValue == $v) {
+    bool contains($value) {
+        foreach (this.optimizeUnwrap() as $v) {
+            if ($value == $v) {
                 return true;
             }
         }
@@ -95,26 +109,27 @@ trait CollectionTrait
             $isFirst = true;
         }
 
-        myResult = $initial;
-        foreach (this.optimizeUnwrap() as $k: myValue) {
+        $result = $initial;
+        foreach (this.optimizeUnwrap() as $k: $value) {
             if ($isFirst) {
-                myResult = myValue;
+                $result = $value;
                 $isFirst = false;
                 continue;
             }
-            myResult = $callback(myResult, myValue, $k);
+            $result = $callback($result, $value, $k);
         }
 
-        return myResult;
+        return $result;
     }
 
 
-    ICollection extract(myPath) {
-        $extractor = new ExtractIterator(this.unwrap(), myPath);
-        if (is_string(myPath) && indexOf(myPath, "{*}") != false) {
+    function extract($path): ICollection
+    {
+        $extractor = new ExtractIterator(this.unwrap(), $path);
+        if (is_string($path) && strpos($path, "{*}") != false) {
             $extractor = $extractor
-                .filter(function (myData) {
-                    return myData  !is null && (myData instanceof Traversable || is_array(myData));
+                .filter(function ($data) {
+                    return $data != null && ($data instanceof Traversable || is_array($data));
                 })
                 .unfold();
         }
@@ -123,125 +138,129 @@ trait CollectionTrait
     }
 
 
-    function max(myPath, int $sort = \SORT_NUMERIC) {
-        return (new SortIterator(this.unwrap(), myPath, \SORT_DESC, $sort)).first();
+    function max($path, int $sort = \SORT_NUMERIC) {
+        return (new SortIterator(this.unwrap(), $path, \SORT_DESC, $sort)).first();
     }
 
 
-    function min(myPath, int $sort = \SORT_NUMERIC) {
-        return (new SortIterator(this.unwrap(), myPath, \SORT_ASC, $sort)).first();
+    function min($path, int $sort = \SORT_NUMERIC) {
+        return (new SortIterator(this.unwrap(), $path, \SORT_ASC, $sort)).first();
     }
 
 
-    function avg(myPath = null) {
-        myResult = this;
-        if (myPath  !is null) {
-            myResult = myResult.extract(myPath);
+    function avg($path = null) {
+        $result = this;
+        if ($path != null) {
+            $result = $result.extract($path);
         }
-        myResult = myResult
+        $result = $result
             .reduce(function ($acc, $current) {
-                [myCount, $sum] = $acc;
+                [$count, $sum] = $acc;
 
-                return [myCount + 1, $sum + $current];
+                return [$count + 1, $sum + $current];
             }, [0, 0]);
 
-        if (myResult[0] == 0) {
+        if ($result[0] == 0) {
             return null;
         }
 
-        return myResult[1] / myResult[0];
+        return $result[1] / $result[0];
     }
 
 
-    function median(myPath = null) {
-        myItems = this;
-        if (myPath  !is null) {
-            myItems = myItems.extract(myPath);
+    function median($path = null) {
+        $items = this;
+        if ($path != null) {
+            $items = $items.extract($path);
         }
-        myValues = myItems.toList();
-        sort(myValues);
-        myCount = count(myValues);
+        $values = $items.toList();
+        sort($values);
+        $count = count($values);
 
-        if (myCount == 0) {
+        if ($count == 0) {
             return null;
         }
 
-        $middle = (int)(myCount / 2);
+        $middle = (int)($count / 2);
 
-        if (myCount % 2) {
-            return myValues[$middle];
+        if ($count % 2) {
+            return $values[$middle];
         }
 
-        return (myValues[$middle - 1] + myValues[$middle]) / 2;
+        return ($values[$middle - 1] + $values[$middle]) / 2;
     }
 
 
-    ICollection sortBy(myPath, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC) {
-        return new SortIterator(this.unwrap(), myPath, $order, $sort);
+    function sortBy($path, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC): ICollection
+    {
+        return new SortIterator(this.unwrap(), $path, $order, $sort);
     }
 
 
-    ICollection groupBy(myPath) {
-        $callback = _propertyExtractor(myPath);
-        myGroup = [];
-        foreach (this.optimizeUnwrap() as myValue) {
-            myPathValue = $callback(myValue);
-            if (myPathValue is null) {
+    function groupBy($path): ICollection
+    {
+        $callback = _propertyExtractor($path);
+        $group = [];
+        foreach (this.optimizeUnwrap() as $value) {
+            $pathValue = $callback($value);
+            if ($pathValue == null) {
                 throw new InvalidArgumentException(
                     "Cannot group by path that does not exist or contains a null value~ " ~
                     "Use a callback to return a default value for that path."
                 );
             }
-            myGroup[myPathValue][] = myValue;
+            $group[$pathValue][] = $value;
         }
 
-        return this.newCollection(myGroup);
+        return this.newCollection($group);
     }
 
 
-    ICollection indexBy(myPath) {
-        $callback = _propertyExtractor(myPath);
-        myGroup = [];
-        foreach (this.optimizeUnwrap() as myValue) {
-            myPathValue = $callback(myValue);
-            if (myPathValue is null) {
+    function indexBy($path): ICollection
+    {
+        $callback = _propertyExtractor($path);
+        $group = [];
+        foreach (this.optimizeUnwrap() as $value) {
+            $pathValue = $callback($value);
+            if ($pathValue == null) {
                 throw new InvalidArgumentException(
                     "Cannot index by path that does not exist or contains a null value~ " ~
                     "Use a callback to return a default value for that path."
                 );
             }
-            myGroup[myPathValue] = myValue;
+            $group[$pathValue] = $value;
         }
 
-        return this.newCollection(myGroup);
+        return this.newCollection($group);
     }
 
 
-    ICollection countBy(myPath) {
-        $callback = _propertyExtractor(myPath);
+    function countBy($path): ICollection
+    {
+        $callback = _propertyExtractor($path);
 
-        $mapper = void (myValue, myKey, $mr) use ($callback) {
-            /** @var uim.cake.collection.iIterator\MapReduce $mr */
-            $mr.emitIntermediate(myValue, $callback(myValue));
+        $mapper = void ($value, $key, $mr) use ($callback) {
+            /** @var uim.cake.collections.Iterator\MapReduce $mr */
+            $mr.emitIntermediate($value, $callback($value));
         };
 
-        $reducer = void (myValues, myKey, $mr) {
-            /** @var uim.cake.collection.iIterator\MapReduce $mr */
-            $mr.emit(count(myValues), myKey);
+        $reducer = void ($values, $key, $mr) {
+            /** @var uim.cake.collections.Iterator\MapReduce $mr */
+            $mr.emit(count($values), $key);
         };
 
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
     }
 
 
-    function sumOf(myPath = null) {
-        if (myPath is null) {
+    function sumOf($path = null) {
+        if ($path == null) {
             return array_sum(this.toList());
         }
 
-        $callback = _propertyExtractor(myPath);
+        $callback = _propertyExtractor($path);
         $sum = 0;
-        foreach ($k, $v; this.optimizeUnwrap()) {
+        foreach (this.optimizeUnwrap() as $k: $v) {
             $sum += $callback($v, $k);
         }
 
@@ -249,30 +268,35 @@ trait CollectionTrait
     }
 
 
-    ICollection shuffle() {
-        myItems = this.toList();
-        shuffle(myItems);
+    function shuffle(): ICollection
+    {
+        $items = this.toList();
+        shuffle($items);
 
-        return this.newCollection(myItems);
+        return this.newCollection($items);
     }
 
 
-    ICollection sample(int $length = 10) {
+    function sample(int $length = 10): ICollection
+    {
         return this.newCollection(new LimitIterator(this.shuffle(), 0, $length));
     }
 
 
-    ICollection take(int $length = 1, int $offset = 0) {
+    function take(int $length = 1, int $offset = 0): ICollection
+    {
         return this.newCollection(new LimitIterator(this, $offset, $length));
     }
 
 
-    ICollection skip(int $length) {
+    function skip(int $length): ICollection
+    {
         return this.newCollection(new LimitIterator(this, $length));
     }
 
 
-    ICollection match(array $conditions) {
+    function match(array $conditions): ICollection
+    {
         return this.filter(_createMatcherFilter($conditions));
     }
 
@@ -284,8 +308,8 @@ trait CollectionTrait
 
     function first() {
         $iterator = new LimitIterator(this, 0, 1);
-        foreach ($iterator as myResult) {
-            return myResult;
+        foreach ($iterator as $result) {
+            return $result;
         }
     }
 
@@ -297,24 +321,25 @@ trait CollectionTrait
         }
 
         if ($iterator instanceof Countable) {
-            myCount = count($iterator);
-            if (myCount == 0) {
+            $count = count($iterator);
+            if ($count == 0) {
                 return null;
             }
             /** @var iterable $iterator */
-            $iterator = new LimitIterator($iterator, myCount - 1, 1);
+            $iterator = new LimitIterator($iterator, $count - 1, 1);
         }
 
-        myResult = null;
-        foreach ($iterator as myResult) {
+        $result = null;
+        foreach ($iterator as $result) {
             // No-op
         }
 
-        return myResult;
+        return $result;
     }
 
 
-    ICollection takeLast(int $length) {
+    function takeLast(int $length): ICollection
+    {
         if ($length < 1) {
             throw new InvalidArgumentException("The takeLast method requires a number greater than 0.");
         }
@@ -325,19 +350,19 @@ trait CollectionTrait
         }
 
         if ($iterator instanceof Countable) {
-            myCount = count($iterator);
+            $count = count($iterator);
 
-            if (myCount == 0) {
+            if ($count == 0) {
                 return this.newCollection([]);
             }
 
-            $iterator = new LimitIterator($iterator, max(0, myCount - $length), $length);
+            $iterator = new LimitIterator($iterator, max(0, $count - $length), $length);
 
             return this.newCollection($iterator);
         }
 
         $generator = function ($iterator, $length) {
-            myResult = [];
+            $result = [];
             $bucket = 0;
             $offset = 0;
 
@@ -382,26 +407,26 @@ trait CollectionTrait
              *
              * - $head = elements to the right = [6, 7, 8]
              * - $tail = elements to the left =  [9]
-             * - myResult = $head + $tail = [6, 7, 8, 9]
+             * - $result = $head + $tail = [6, 7, 8, 9]
              *
              * The logic above applies to collections of any size.
              */
 
-            foreach ($k, $item; $iterator) {
-                myResult[$bucket] = [$k, $item];
+            foreach ($iterator as $k: $item) {
+                $result[$bucket] = [$k, $item];
                 $bucket = (++$bucket) % $length;
                 $offset++;
             }
 
             $offset = $offset % $length;
-            $head = array_slice(myResult, $offset);
-            $tail = array_slice(myResult, 0, $offset);
+            $head = array_slice($result, $offset);
+            $tail = array_slice($result, 0, $offset);
 
-            foreach ($v; $head) {
+            foreach ($head as $v) {
                 yield $v[0]: $v[1];
             }
 
-            foreach ($v; $tail) {
+            foreach ($tail as $v) {
                 yield $v[0]: $v[1];
             }
         };
@@ -410,100 +435,106 @@ trait CollectionTrait
     }
 
 
-    ICollection append(myItems) {
-      auto myList = new AppendIterator();
-      myList.append(this.unwrap());
-      myList.append(this.newCollection(myItems).unwrap());
+    function append($items): ICollection
+    {
+        $list = new AppendIterator();
+        $list.append(this.unwrap());
+        $list.append(this.newCollection($items).unwrap());
 
-      return this.newCollection(myList;
+        return this.newCollection($list);
     }
 
 
-    ICollection appendItem($item, myKey = null) {
-        if (myKey  !is null) {
-            myData = [myKey: $item];
+    function appendItem($item, $key = null): ICollection
+    {
+        if ($key != null) {
+            $data = [$key: $item];
         } else {
-            myData = [$item];
+            $data = [$item];
         }
 
-        return this.append(myData);
+        return this.append($data);
     }
 
 
-    ICollection prepend(myItems) {
-        return this.newCollection(myItems).append(this);
+    function prepend($items): ICollection
+    {
+        return this.newCollection($items).append(this);
     }
 
 
-    ICollection prependItem($item, myKey = null) {
-        if (myKey  !is null) {
-            myData = [myKey: $item];
+    function prependItem($item, $key = null): ICollection
+    {
+        if ($key != null) {
+            $data = [$key: $item];
         } else {
-            myData = [$item];
+            $data = [$item];
         }
 
-        return this.prepend(myData);
+        return this.prepend($data);
     }
 
 
-    ICollection combine(myKeyPath, myValuePath, myGroupPath = null) {
-        myOptions = [
-            "keyPath":_propertyExtractor(myKeyPath),
-            "valuePath":_propertyExtractor(myValuePath),
-            "groupPath":myGroupPath ? _propertyExtractor(myGroupPath) : null,
+    function combine($keyPath, $valuePath, $groupPath = null): ICollection
+    {
+        $options = [
+            "keyPath": _propertyExtractor($keyPath),
+            "valuePath": _propertyExtractor($valuePath),
+            "groupPath": $groupPath ? _propertyExtractor($groupPath) : null,
         ];
 
-        $mapper = function (myValue, myKey, MapReduce $mapReduce) use (myOptions) {
-            $rowKey = myOptions["keyPath"];
-            $rowVal = myOptions["valuePath"];
+        $mapper = function ($value, $key, MapReduce $mapReduce) use ($options) {
+            $rowKey = $options["keyPath"];
+            $rowVal = $options["valuePath"];
 
-            if (!myOptions["groupPath"]) {
-                $mapReduce.emit($rowVal(myValue, myKey), $rowKey(myValue, myKey));
+            if (!$options["groupPath"]) {
+                $mapReduce.emit($rowVal($value, $key), $rowKey($value, $key));
 
                 return null;
             }
 
-            myKey = myOptions["groupPath"](myValue, myKey);
+            $key = $options["groupPath"]($value, $key);
             $mapReduce.emitIntermediate(
-                [$rowKey(myValue, myKey): $rowVal(myValue, myKey)],
-                myKey
+                [$rowKey($value, $key): $rowVal($value, $key)],
+                $key
             );
         };
 
-        $reducer = void (myValues, myKey, MapReduce $mapReduce) {
-            myResult = [];
-            foreach (myValues as myValue) {
-                myResult += myValue;
+        $reducer = void ($values, $key, MapReduce $mapReduce) {
+            $result = [];
+            foreach ($values as $value) {
+                $result += $value;
             }
-            $mapReduce.emit(myResult, myKey);
+            $mapReduce.emit($result, $key);
         };
 
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
     }
 
 
-    ICollection nest($idPath, $parentPath, string nestingKey = "children") {
+    function nest($idPath, $parentPath, string $nestingKey = "children"): ICollection
+    {
         $parents = [];
         $idPath = _propertyExtractor($idPath);
         $parentPath = _propertyExtractor($parentPath);
         $isObject = true;
 
-        $mapper = void ($row, myKey, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey) {
+        $mapper = void ($row, $key, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey) {
             $row[$nestingKey] = [];
-            $id = $idPath($row, myKey);
-            $parentId = $parentPath($row, myKey);
+            $id = $idPath($row, $key);
+            $parentId = $parentPath($row, $key);
             $parents[$id] = &$row;
             $mapReduce.emitIntermediate($id, $parentId);
         };
 
-        $reducer = function (myValues, myKey, MapReduce $mapReduce) use (&$parents, &$isObject, $nestingKey) {
+        $reducer = function ($values, $key, MapReduce $mapReduce) use (&$parents, &$isObject, $nestingKey) {
             static $foundOutType = false;
             if (!$foundOutType) {
                 $isObject = is_object(current($parents));
                 $foundOutType = true;
             }
-            if (empty(myKey) || !isset($parents[myKey])) {
-                foreach ($id; myValues) {
+            if (empty($key) || !isset($parents[$key])) {
+                foreach ($values as $id) {
                     /** @psalm-suppress PossiblyInvalidArgument */
                     $parents[$id] = $isObject ? $parents[$id] : new ArrayIterator($parents[$id], 1);
                     $mapReduce.emit($parents[$id]);
@@ -513,29 +544,32 @@ trait CollectionTrait
             }
 
             $children = [];
-            foreach ($id; myValues) {
+            foreach ($values as $id) {
                 $children[] = &$parents[$id];
             }
-            $parents[myKey][$nestingKey] = $children;
+            $parents[$key][$nestingKey] = $children;
         };
 
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer))
-            .map(function (myValue) use (&$isObject) {
-                /** @var \ArrayIterator myValue */
-                return $isObject ? myValue : myValue.getArrayCopy();
+            .map(function ($value) use (&$isObject) {
+                /** @var \ArrayIterator $value */
+                return $isObject ? $value : $value.getArrayCopy();
             });
     }
 
-    ICollection insert(string myPath, myValues) {
-        return new InsertIterator(this.unwrap(), myPath, myValues);
+
+    function insert(string $path, $values): ICollection
+    {
+        return new InsertIterator(this.unwrap(), $path, $values);
     }
+
 
     array toArray(bool shouldKeepKeys = true) {
         $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
-            myItems = $iterator.getArrayCopy();
+            $items = $iterator.getArrayCopy();
 
-            return shouldKeepKeys ? myItems : array_values(myItems);
+            return shouldKeepKeys ? $items : array_values($items);
         }
         // RecursiveIteratorIterator can return duplicate key values causing
         // data loss when converted into an array
@@ -557,14 +591,16 @@ trait CollectionTrait
     }
 
 
-    ICollection compile(bool shouldKeepKeys = true) {
+    function compile(bool shouldKeepKeys = true): ICollection
+    {
         return this.newCollection(this.toArray(shouldKeepKeys));
     }
 
 
-    ICollection lazy() {
+    function lazy(): ICollection
+    {
         $generator = function () {
-            foreach ($k; $v; this.unwrap()) {
+            foreach (this.unwrap() as $k: $v) {
                 yield $k: $v;
             }
         };
@@ -573,27 +609,29 @@ trait CollectionTrait
     }
 
 
-    ICollection buffered() {
+    function buffered(): ICollection
+    {
         return new BufferedIterator(this.unwrap());
     }
 
 
-    ICollection listNested($order = "desc", $nestingKey = "children") {
+    function listNested($order = "desc", $nestingKey = "children"): ICollection
+    {
         if (is_string($order)) {
             $order = strtolower($order);
-            myModes = [
-                "desc":RecursiveIteratorIterator::SELF_FIRST,
-                "asc":RecursiveIteratorIterator::CHILD_FIRST,
-                "leaves":RecursiveIteratorIterator::LEAVES_ONLY,
+            $modes = [
+                "desc": RecursiveIteratorIterator::SELF_FIRST,
+                "asc": RecursiveIteratorIterator::CHILD_FIRST,
+                "leaves": RecursiveIteratorIterator::LEAVES_ONLY,
             ];
 
-            if (!isset(myModes[$order])) {
+            if (!isset($modes[$order])) {
                 throw new RuntimeException(sprintf(
                     "Invalid direction `%s` provided. Must be one of: "desc", "asc", "leaves"",
                     $order
                 ));
             }
-            $order = myModes[$order];
+            $order = $modes[$order];
         }
 
         return new TreeIterator(
@@ -603,7 +641,8 @@ trait CollectionTrait
     }
 
 
-    ICollection stopWhen($condition) {
+    function stopWhen($condition): ICollection
+    {
         if (!is_callable($condition)) {
             $condition = _createMatcherFilter($condition);
         }
@@ -612,8 +651,9 @@ trait CollectionTrait
     }
 
 
-    ICollection unfold(?callable $callback = null) {
-        if ($callback is null) {
+    function unfold(?callable $callback = null): ICollection
+    {
+        if ($callback == null) {
             $callback = function ($item) {
                 return $item;
             };
@@ -628,72 +668,77 @@ trait CollectionTrait
     }
 
 
-    ICollection through(callable $callback) {
-        myResult = $callback(this);
+    function through(callable $callback): ICollection
+    {
+        $result = $callback(this);
 
-        return myResult instanceof ICollection ? myResult : this.newCollection(myResult);
+        return $result instanceof ICollection ? $result : this.newCollection($result);
     }
 
 
-    ICollection zip(iterable myItems) {
+    function zip(iterable $items): ICollection
+    {
         return new ZipIterator(array_merge([this.unwrap()], func_get_args()));
     }
 
 
-    ICollection zipWith(iterable myItems, $callback) {
+    function zipWith(iterable $items, $callback): ICollection
+    {
         if (func_num_args() > 2) {
-            myItems = func_get_args();
-            $callback = array_pop(myItems);
+            $items = func_get_args();
+            $callback = array_pop($items);
         } else {
-            myItems = [myItems];
+            $items = [$items];
         }
 
-        return new ZipIterator(array_merge([this.unwrap()], myItems), $callback);
+        return new ZipIterator(array_merge([this.unwrap()], $items), $callback);
     }
 
 
-    ICollection chunk(int $chunkSize) {
+    function chunk(int $chunkSize): ICollection
+    {
         return this.map(function ($v, $k, $iterator) use ($chunkSize) {
-            myValues = [$v];
+            $values = [$v];
             for ($i = 1; $i < $chunkSize; $i++) {
                 $iterator.next();
                 if (!$iterator.valid()) {
                     break;
                 }
-                myValues[] = $iterator.current();
+                $values[] = $iterator.current();
             }
 
-            return myValues;
+            return $values;
         });
     }
 
 
-    ICollection chunkWithKeys(int $chunkSize, bool shouldKeepKeys = true) {
+    function chunkWithKeys(int $chunkSize, bool shouldKeepKeys = true): ICollection
+    {
         return this.map(function ($v, $k, $iterator) use ($chunkSize, shouldKeepKeys) {
-            myKey = 0;
+            $key = 0;
             if (shouldKeepKeys) {
-                myKey = $k;
+                $key = $k;
             }
-            myValues = [myKey: $v];
+            $values = [$key: $v];
             for ($i = 1; $i < $chunkSize; $i++) {
                 $iterator.next();
                 if (!$iterator.valid()) {
                     break;
                 }
                 if (shouldKeepKeys) {
-                    myValues[$iterator.key()] = $iterator.current();
+                    $values[$iterator.key()] = $iterator.current();
                 } else {
-                    myValues[] = $iterator.current();
+                    $values[] = $iterator.current();
                 }
             }
 
-            return myValues;
+            return $values;
         });
     }
 
 
     bool isEmpty() {
-        foreach ($el; this) {
+        foreach (this as $el) {
             return false;
         }
 
@@ -701,7 +746,8 @@ trait CollectionTrait
     }
 
 
-    Traversable unwrap() {
+    function unwrap(): Traversable
+    {
         $iterator = this;
         while (
             get_class($iterator) == Collection::class
@@ -726,47 +772,48 @@ trait CollectionTrait
      * @return uim.cake.collections.ICollection
      * @throws \LogicException
      */
-    ICollection cartesianProduct(?callable $operation = null, ?callable $filter = null) {
+    function cartesianProduct(?callable $operation = null, ?callable $filter = null): ICollection
+    {
         if (this.isEmpty()) {
             return this.newCollection([]);
         }
 
-        myCollectionArrays = [];
-        myCollectionArraysKeys = [];
-        myCollectionArraysCounts = [];
+        $collectionArrays = [];
+        $collectionArraysKeys = [];
+        $collectionArraysCounts = [];
 
-        foreach (myValue; this.toList()) {
-            myValueCount = count(myValue);
-            if (myValueCount != count(myValue, COUNT_RECURSIVE)) {
+        foreach (this.toList() as $value) {
+            $valueCount = count($value);
+            if ($valueCount != count($value, COUNT_RECURSIVE)) {
                 throw new LogicException("Cannot find the cartesian product of a multidimensional array");
             }
 
-            myCollectionArraysKeys[] = array_keys(myValue);
-            myCollectionArraysCounts[] = myValueCount;
-            myCollectionArrays[] = myValue;
+            $collectionArraysKeys[] = array_keys($value);
+            $collectionArraysCounts[] = $valueCount;
+            $collectionArrays[] = $value;
         }
 
-        myResult = [];
-        $lastIndex = count(myCollectionArrays) - 1;
+        $result = [];
+        $lastIndex = count($collectionArrays) - 1;
         // holds the indexes of the arrays that generate the current combination
         $currentIndexes = array_fill(0, $lastIndex + 1, 0);
 
         $changeIndex = $lastIndex;
 
-        while (!($changeIndex == 0 && $currentIndexes[0] == myCollectionArraysCounts[0])) {
-            $currentCombination = array_map(function (myValue, myKeys, $index) {
-                return myValue[myKeys[$index]];
-            }, myCollectionArrays, myCollectionArraysKeys, $currentIndexes);
+        while (!($changeIndex == 0 && $currentIndexes[0] == $collectionArraysCounts[0])) {
+            $currentCombination = array_map(function ($value, $keys, $index) {
+                return $value[$keys[$index]];
+            }, $collectionArrays, $collectionArraysKeys, $currentIndexes);
 
-            if ($filter is null || $filter($currentCombination)) {
-                myResult[] = $operation is null ? $currentCombination : $operation($currentCombination);
+            if ($filter == null || $filter($currentCombination)) {
+                $result[] = $operation == null ? $currentCombination : $operation($currentCombination);
             }
 
             $currentIndexes[$lastIndex]++;
 
             for (
                 $changeIndex = $lastIndex;
-                $currentIndexes[$changeIndex] == myCollectionArraysCounts[$changeIndex] && $changeIndex > 0;
+                $currentIndexes[$changeIndex] == $collectionArraysCounts[$changeIndex] && $changeIndex > 0;
                 $changeIndex--
             ) {
                 $currentIndexes[$changeIndex] = 0;
@@ -774,7 +821,7 @@ trait CollectionTrait
             }
         }
 
-        return this.newCollection(myResult);
+        return this.newCollection($result);
     }
 
     /**
@@ -783,32 +830,33 @@ trait CollectionTrait
      * @return uim.cake.collections.ICollection
      * @throws \LogicException
      */
-    ICollection transpose() {
+    function transpose(): ICollection
+    {
         $arrayValue = this.toList();
         $length = count(current($arrayValue));
-        myResult = [];
-        foreach ($row; $arrayValue) {
+        $result = [];
+        foreach ($arrayValue as $row) {
             if (count($row) != $length) {
                 throw new LogicException("Child arrays do not have even length");
             }
         }
 
         for ($column = 0; $column < $length; $column++) {
-            myResult[] = array_column($arrayValue, $column);
+            $result[] = array_column($arrayValue, $column);
         }
 
-        return this.newCollection(myResult);
+        return this.newCollection($result);
     }
 
 
     size_t count() {
-        myTraversable = this.optimizeUnwrap();
+        $traversable = this.optimizeUnwrap();
 
-        if (is_array(myTraversable)) {
-            return count(myTraversable);
+        if (is_array($traversable)) {
+            return count($traversable);
         }
 
-        return iterator_count(myTraversable);
+        return iterator_count($traversable);
     }
 
 
@@ -822,7 +870,7 @@ trait CollectionTrait
      *
      * @return iterable
      */
-    protected auto optimizeUnwrap(): iterable
+    protected function optimizeUnwrap(): iterable
     {
         /** @var \ArrayObject $iterator */
         $iterator = this.unwrap();

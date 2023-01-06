@@ -5,6 +5,9 @@
 **********************************************************************************************************/
 module uim.cake.caches;
 
+@safe:
+import uim.cake;
+
 /**
  * Interface for cache engines that defines methods
  * outside of the PSR16 interface that are used by `Cache`.

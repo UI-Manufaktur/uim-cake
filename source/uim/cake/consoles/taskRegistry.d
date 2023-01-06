@@ -27,10 +27,10 @@ class TaskRegistry : ObjectRegistry
     /**
      * Constructor
      *
-     * @param uim.cake.consoles.Shell myShell Shell instance
+     * @param uim.cake.consoles.Shell $shell Shell instance
      */
-    this(Shell myShell) {
-        _Shell = myShell;
+    this(Shell $shell) {
+        _Shell = $shell;
     }
 
     /**
@@ -38,12 +38,12 @@ class TaskRegistry : ObjectRegistry
      *
      * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}.
      *
-     * @param string myClass Partial classname to resolve.
+     * @param string $class Partial classname to resolve.
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected Nullable!string _resolveClassName(string myClass) {
-        return App::className(myClass, "Shell/Task", "Task");
+    protected Nullable!string _resolveClassName(string $class) {
+        return App::className($class, "Shell/Task", "Task");
     }
 
     /**
@@ -52,14 +52,15 @@ class TaskRegistry : ObjectRegistry
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      * and Cake\Core\ObjectRegistry::unload()
      *
-     * @param string myClass The classname that is missing.
-     * @param string|null myPlugin The plugin the task is missing in.
+     * @param string $class The classname that is missing.
+     * @param string|null $plugin The plugin the task is missing in.
+     * @return void
      * @throws uim.cake.consoles.exceptions.MissingTaskException
      */
-    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new MissingTaskException([
-            "class":myClass,
-            "plugin":myPlugin,
+            "class": $class,
+            "plugin": $plugin,
         ]);
     }
 
@@ -68,14 +69,15 @@ class TaskRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param string myClass The classname to create.
-     * @param string myAlias The alias of the task.
-     * @param array<string, mixed> myConfig An array of settings to use for the task.
+     * @param string $class The classname to create.
+     * @param string $alias The alias of the task.
+     * @param array<string, mixed> aConfig An array of settings to use for the task.
      * @return uim.cake.consoles.Shell The constructed task class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected Shell _create(myClass, string myAlias, array myConfig) {
+    protected function _create($class, string $alias, Json aConfig): Shell
+    {
         /** @var uim.cake.consoles.Shell */
-        return new myClass(_Shell.getIo());
+        return new $class(_Shell.getIo());
     }
 }

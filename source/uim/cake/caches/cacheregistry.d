@@ -5,9 +5,10 @@
 **********************************************************************************************************/
 module uim.cake.caches;
 
+@safe:
+import uim.cake;
+
 use BadMethodCallException;
-import uim.cake.core.App;
-import uim.cake.core.ObjectRegistry;
 use RuntimeException;
 
 /**

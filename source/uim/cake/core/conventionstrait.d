@@ -1,6 +1,7 @@
 module uim.cake.core;
 
-import uim.cake.utilities.Inflector;
+@safe:
+import uim.cake;
 
 /**
  * Provides methods that allow other classes access to conventions based inflections.

@@ -1,6 +1,6 @@
-module uim.cake.databases.Driver;
+module uim.cake.databases.drivers;
 
-import uim.cake.databases.Driver;
+import uim.cake.databases.drivers;
 import uim.cake.databases.Query;
 import uim.cake.databases.schemas.MysqlSchemaDialect;
 import uim.cake.databases.schemas.SchemaDialect;

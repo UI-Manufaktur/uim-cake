@@ -1,7 +1,8 @@
 module uim.cake.core;
 
-import uim.cake.core.exceptions.CakeException;
-import uim.cake.utilities.Hash;
+@safe:
+import uim.cake;
+
 use InvalidArgumentException;
 
 /**

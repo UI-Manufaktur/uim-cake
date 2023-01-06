@@ -1,6 +1,6 @@
 
-
-import uim.cake.core.Configure;
+@safe:
+import uim.cake;
 
 if (!defined("DS")) {
     /**

@@ -5,7 +5,9 @@
 **********************************************************************************************************/
 module uim.cake.caches;
 
-import uim.cake.core.InstanceConfigTrait;
+@safe:
+import uim.cake;
+
 use DateInterval;
 use DateTime;
 use Psr\SimpleCache\ICache;

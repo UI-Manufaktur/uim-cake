@@ -1,8 +1,8 @@
 module uim.cake.core.configures.Engine;
 
-import uim.cake.core.configures.IConfigEngine;
-import uim.cake.core.configures.FileConfigTrait;
-import uim.cake.core.exceptions\CakeException;
+@safe:
+import uim.cake;
+
 
 /**
  * PHP engine allows Configure to load configuration values from

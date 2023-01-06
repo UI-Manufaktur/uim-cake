@@ -1,5 +1,8 @@
 module uim.cake.core.Configure;
 
+@safe:
+import uim.cake;
+
 /**
  * An interface for creating objects compatible with Configure::load()
  */

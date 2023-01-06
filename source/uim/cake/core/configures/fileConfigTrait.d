@@ -1,7 +1,7 @@
 module uim.cake.core.Configure;
 
-import uim.cake.core.exceptions.CakeException;
-import uim.cake.core.Plugin;
+@safe:
+import uim.cake;
 
 /**
  * Trait providing utility methods for file based config engines.

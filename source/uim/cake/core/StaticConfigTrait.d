@@ -1,5 +1,8 @@
 module uim.cake.core;
 
+@safe:
+import uim.cake;
+
 use BadMethodCallException;
 use InvalidArgumentException;
 use LogicException;

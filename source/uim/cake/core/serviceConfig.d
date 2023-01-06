@@ -1,5 +1,8 @@
 module uim.cake.core.serviceconfig;
 
+@safe:
+import uim.cake;
+
 /**
  * Read-only wrapper for configuration data
  *

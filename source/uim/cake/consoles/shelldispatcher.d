@@ -15,11 +15,20 @@ import uim.cake;
  *
  * @deprecated 3.6.0 ShellDispatcher and Shell will be removed in 5.0
  */
-class ShellDispatcher {
-    // Contains arguments parsed from the command line.
-    array $args = [];
+class ShellDispatcher
+{
+    /**
+     * Contains arguments parsed from the command line.
+     *
+     * @var array
+     */
+    $args = [];
 
-    // List of connected aliases.
+    /**
+     * List of connected aliases.
+     *
+     * @var array<string, string>
+     */
     protected static STRINGAA _aliases = [];
 
     /**
@@ -65,11 +74,11 @@ class ShellDispatcher {
      * this.alias("alias");
      * ```
      *
-     * @param string short The new short name for the shell.
+     * @param string $short The new short name for the shell.
      * @param string|null $original The original full name for the shell.
      * @return string|null The aliased class name, or null if the alias does not exist
      */
-    static string alias(string short, Nullable!string original = null) {
+    static Nullable!string alias(string $short, Nullable!string $original = null) {
         $short = Inflector::camelize($short);
         if ($original) {
             static::_aliases[$short] = $original;
@@ -101,6 +110,7 @@ class ShellDispatcher {
     /**
      * Defines current working environment.
      *
+     * @return void
      * @throws uim.cake.Core\exceptions.CakeException
      */
     protected void _initEnvironment() {
@@ -115,10 +125,12 @@ class ShellDispatcher {
         this.shiftArgs();
     }
 
-    // Initializes the environment and loads the UIM core.
+    /**
+     * Initializes the environment and loads the CakePHP core.
+     */
     protected void _bootstrap() {
         if (!Configure::read("App.fullBaseUrl")) {
-            Configure.write("App.fullBaseUrl", "http://localhost");
+            Configure::write("App.fullBaseUrl", "http://localhost");
         }
     }
 
@@ -137,18 +149,16 @@ class ShellDispatcher {
      */
     int dispatch(array $extra = []) {
         try {
-            myResult = _dispatch($extra);
+            $result = _dispatch($extra);
         } catch (StopException $e) {
-            $code = $e.getCode();
-
-            return $code;
+            return $e.getCode();
         }
-        if (myResult is null || myResult == true) {
+        if ($result == null || $result == true) {
             /** @psalm-suppress DeprecatedClass */
             return Shell::CODE_SUCCESS;
         }
-        if (is_int(myResult)) {
-            return myResult;
+        if (is_int($result)) {
+            return $result;
         }
 
         /** @psalm-suppress DeprecatedClass */
@@ -166,30 +176,30 @@ class ShellDispatcher {
      * @return int|bool|null
      * @throws uim.cake.consoles.exceptions.MissingShellMethodException
      */
-    protected auto _dispatch(array $extra = []) {
-        myShellName = this.shiftArgs();
+    protected function _dispatch(array $extra = []) {
+        $shellName = this.shiftArgs();
 
-        if (!myShellName) {
+        if (!$shellName) {
             this.help();
 
             return false;
         }
-        if (in_array(myShellName, ["help", "--help", "-h"], true)) {
+        if (in_array($shellName, ["help", "--help", "-h"], true)) {
             this.help();
 
             return true;
         }
-        if (in_array(myShellName, ["version", "--version"], true)) {
+        if (in_array($shellName, ["version", "--version"], true)) {
             this.version();
 
             return true;
         }
 
-        myShell = this.findShell(myShellName);
+        $shell = this.findShell($shellName);
 
-        myShell.initialize();
+        $shell.initialize();
 
-        return myShell.runCommand(this.args, true, $extra);
+        return $shell.runCommand(this.args, true, $extra);
     }
 
     /**
@@ -201,65 +211,65 @@ class ShellDispatcher {
      * @return array the resultant list of aliases
      */
     array addShortPluginAliases() {
-        myPlugins = Plugin::loaded();
+        $plugins = Plugin::loaded();
 
         $io = new ConsoleIo();
         $task = new CommandTask($io);
         $io.setLoggers(false);
-        $list = $task.getShellList() + ["app":[]];
+        $list = $task.getShellList() + ["app": []];
         $fixed = array_flip($list["app"]) + array_flip($list["CORE"]);
-        myAliases = $others = [];
+        $aliases = $others = [];
 
-        foreach (myPlugins as myPlugin) {
-            if (!isset($list[myPlugin])) {
+        foreach ($plugins as $plugin) {
+            if (!isset($list[$plugin])) {
                 continue;
             }
 
-            foreach ($list[myPlugin] as myShell) {
-                myAliases += [myShell: myPlugin];
-                if (!isset($others[myShell])) {
-                    $others[myShell] = [myPlugin];
+            foreach ($list[$plugin] as $shell) {
+                $aliases += [$shell: $plugin];
+                if (!isset($others[$shell])) {
+                    $others[$shell] = [$plugin];
                 } else {
-                    $others[myShell] = array_merge($others[myShell], [myPlugin]);
+                    $others[$shell] = array_merge($others[$shell], [$plugin]);
                 }
             }
         }
 
-        foreach (myAliases as myShell: myPlugin) {
-            if (isset($fixed[myShell])) {
+        foreach ($aliases as $shell: $plugin) {
+            if (isset($fixed[$shell])) {
                 Log::write(
                     "debug",
-                    "command "myShell" in plugin "myPlugin" was not aliased, conflicts with another shell",
+                    "command "$shell" in plugin "$plugin" was not aliased, conflicts with another shell",
                     ["shell-dispatcher"]
                 );
                 continue;
             }
 
-            $other = static::alias(myShell);
+            $other = static::alias($shell);
             if ($other) {
-                if ($other != myPlugin) {
+                if ($other != $plugin) {
                     Log::write(
                         "debug",
-                        "command "myShell" in plugin "myPlugin" was not aliased, conflicts with "$other"",
+                        "command "$shell" in plugin "$plugin" was not aliased, conflicts with "$other"",
                         ["shell-dispatcher"]
                     );
                 }
                 continue;
             }
 
-            if (isset($others[myShell])) {
-                $conflicts = array_diff($others[myShell], [myPlugin]);
+            if (isset($others[$shell])) {
+                $conflicts = array_diff($others[$shell], [$plugin]);
                 if (count($conflicts) > 0) {
                     $conflictList = implode("", "", $conflicts);
                     Log::write(
                         "debug",
-                        "command "myShell" in plugin "myPlugin" was not aliased, conflicts with "$conflictList"",
+                        "command "$shell" in plugin "$plugin" was not aliased, conflicts with "$conflictList"",
                         ["shell-dispatcher"]
                     );
                 }
             }
 
-            static::alias(myShell, "myPlugin.myShell");
+            static::alias($shell, "$plugin.$shell");
         }
 
         return static::_aliases;
@@ -271,53 +281,54 @@ class ShellDispatcher {
      * All paths in the loaded shell paths are searched, handles alias
      * dereferencing
      *
-     * @param string myShell Optionally the name of a plugin
+     * @param string $shell Optionally the name of a plugin
      * @return uim.cake.consoles.Shell A shell instance.
      * @throws uim.cake.consoles.exceptions.MissingShellException when errors are encountered.
      */
-    Shell findShell(string myShell) {
-        myClassName = _shellExists(myShell);
-        if (!myClassName) {
-            myShell = _handleAlias(myShell);
-            myClassName = _shellExists(myShell);
+    function findShell(string $shell): Shell
+    {
+        $className = _shellExists($shell);
+        if (!$className) {
+            $shell = _handleAlias($shell);
+            $className = _shellExists($shell);
         }
 
-        if (!myClassName) {
+        if (!$className) {
             throw new MissingShellException([
-                "class":myShell,
+                "class": $shell,
             ]);
         }
 
-        return _createShell(myClassName, myShell);
+        return _createShell($className, $shell);
     }
 
     /**
      * If the input matches an alias, return the aliased shell name
      *
-     * @param string myShell Optionally the name of a plugin or alias
-     * @return Shell name with plugin prefix
+     * @param string $shell Optionally the name of a plugin or alias
+     * @return string Shell name with plugin prefix
      */
-    protected string _handleAlias(string myShell) {
-        myAliased = static::alias(myShell);
-        if (myAliased) {
-            myShell = myAliased;
+    protected string _handleAlias(string $shell) {
+        $aliased = static::alias($shell);
+        if ($aliased) {
+            $shell = $aliased;
         }
 
-        myClass = array_map("Cake\Utility\Inflector::camelize", explode(".", myShell));
+        $class = array_map("Cake\Utility\Inflector::camelize", explode(".", $shell));
 
-        return implode(".", myClass);
+        return implode(".", $class);
     }
 
     /**
      * Check if a shell class exists for the given name.
      *
-     * @param string myShell The shell name to look for.
+     * @param string $shell The shell name to look for.
      * @return string|null Either the classname or null.
      */
-    protected string _shellExists(string myShell) {
-        myClass = App::className(myShell, "Shell", "Shell");
-        if (myClass) {
-            return myClass;
+    protected Nullable!string _shellExists(string $shell) {
+        $class = App::className($shell, "Shell", "Shell");
+        if ($class) {
+            return $class;
         }
 
         return null;
@@ -326,15 +337,16 @@ class ShellDispatcher {
     /**
      * Create the given shell name, and set the plugin property
      *
-     * @param string myClassName The class name to instantiate
-     * @param string shortName The plugin-prefixed shell name
+     * @param string $className The class name to instantiate
+     * @param string $shortName The plugin-prefixed shell name
      * @return uim.cake.consoles.Shell A shell instance.
      */
-    protected Shell _createShell(string myClassName, string shortName) {
-        [myPlugin] = pluginSplit($shortName);
+    protected function _createShell(string $className, string $shortName): Shell
+    {
+        [$plugin] = pluginSplit($shortName);
         /** @var uim.cake.consoles.Shell $instance */
-        $instance = new myClassName();
-        $instance.plugin = trim((string)myPlugin, ".");
+        $instance = new $className();
+        $instance.plugin = trim((string)$plugin, ".");
 
         return $instance;
     }
@@ -354,18 +366,18 @@ class ShellDispatcher {
     void help() {
         trigger_error(
             "Console help cannot be generated from Shell classes anymore~ " ~
-            "Upgrade your application to import uim.cake.console.commandRunner instead.",
+            "Upgrade your application to import uim.cake.consoles.CommandRunner instead.",
             E_USER_WARNING
         );
     }
 
     /**
-     * Prints the currently installed version of UIM. Performs an internal dispatch to the CommandList Shell
+     * Prints the currently installed version of CakePHP. Performs an internal dispatch to the CommandList Shell
      */
     void version() {
         trigger_error(
             "Version information cannot be generated from Shell classes anymore~ " ~
-            "Upgrade your application to import uim.cake.console.commandRunner instead.",
+            "Upgrade your application to import uim.cake.consoles.CommandRunner instead.",
             E_USER_WARNING
         );
     }

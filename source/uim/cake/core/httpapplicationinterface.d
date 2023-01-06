@@ -1,6 +1,8 @@
 module uim.cake.core;
 
-import uim.cake.http.MiddlewareQueue;
+@safe:
+import uim.cake;
+
 use Psr\Http\servers.RequestHandlerInterface;
 
 /**

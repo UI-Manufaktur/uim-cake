@@ -8,28 +8,33 @@ module uim.cake.collections.extracttrait;
 @safe:
 import uim.cake;
 
+use Closure;
+use Traversable;
+
 /**
  * Provides utility protected methods for extracting a property or column
  * from an array or object.
  */
-trait ExtractTrait {
+trait ExtractTrait
+{
     /**
      * Returns a callable that can be used to extract a property or column from
      * an array or object based on a dot separated path.
      *
-     * @param callable|string myPath A dot separated path of column to follow
+     * @param callable|string $path A dot separated path of column to follow
      * so that the final one can be returned or a callable that will take care
      * of doing that.
      * @return callable
      */
-    protected callable _propertyExtractor(myPath) {
-        if (!is_string(myPath)) {
-            return myPath;
+    protected function _propertyExtractor($path): callable
+    {
+        if (!is_string($path)) {
+            return $path;
         }
 
-        $parts = explode(".", myPath);
+        $parts = explode(".", $path);
 
-        if (indexOf(myPath, "{*}") != false) {
+        if (strpos($path, "{*}") != false) {
             return function ($element) use ($parts) {
                 return _extract($element, $parts);
             };
@@ -41,70 +46,70 @@ trait ExtractTrait {
     }
 
     /**
-     * Returns a column from myData that can be extracted
-     * by iterating over the column names contained in myPath.
+     * Returns a column from $data that can be extracted
+     * by iterating over the column names contained in $path.
      * It will return arrays for elements in represented with `{*}`
      *
-     * @param \ArrayAccess|array myData Data.
+     * @param \ArrayAccess|array $data Data.
      * @param array<string> $parts Path to extract from.
      * @return mixed
      */
-    protected auto _extract(myData, array $parts) {
-        myValue = null;
-        myCollectionTransform = false;
+    protected string[] _extract($data, array $parts) {
+        $value = null;
+        $collectionTransform = false;
 
         foreach ($parts as $i: $column) {
             if ($column == "{*}") {
-                myCollectionTransform = true;
+                $collectionTransform = true;
                 continue;
             }
 
             if (
-                myCollectionTransform &&
+                $collectionTransform &&
                 !(
-                    myData instanceof Traversable ||
-                    is_array(myData)
+                    $data instanceof Traversable ||
+                    is_array($data)
                 )
             ) {
                 return null;
             }
 
-            if (myCollectionTransform) {
+            if ($collectionTransform) {
                 $rest = implode(".", array_slice($parts, $i));
 
-                return (new Collection(myData)).extract($rest);
+                return (new Collection($data)).extract($rest);
             }
 
-            if (!isset(myData[$column])) {
+            if (!isset($data[$column])) {
                 return null;
             }
 
-            myValue = myData[$column];
-            myData = myValue;
+            $value = $data[$column];
+            $data = $value;
         }
 
-        return myValue;
+        return $value;
     }
 
     /**
-     * Returns a column from myData that can be extracted
-     * by iterating over the column names contained in myPath
+     * Returns a column from $data that can be extracted
+     * by iterating over the column names contained in $path
      *
-     * @param \ArrayAccess|array myData Data.
-     * @param $parts Path to extract from.
+     * @param \ArrayAccess|array $data Data.
+     * @param array<string> $parts Path to extract from.
      * @return mixed
      */
-    protected auto _simpleExtract(myData, string[] $parts) {
-        myValue = null;
+    protected function _simpleExtract($data, array $parts) {
+        $value = null;
         foreach ($parts as $column) {
-            if (!isset(myData[$column])) {
+            if (!isset($data[$column])) {
                 return null;
             }
-            myValue = myData[$column];
-            myData = myValue;
+            $value = $data[$column];
+            $data = $value;
         }
 
-        return myValue;
+        return $value;
     }
 
     /**
@@ -116,18 +121,19 @@ trait ExtractTrait {
      * value to be compared the item with.
      * @return \Closure
      */
-    protected Closure _createMatcherFilter(array $conditions) {
+    protected function _createMatcherFilter(array $conditions): Closure
+    {
         $matchers = [];
-        foreach ($conditions as $property: myValue) {
+        foreach ($conditions as $property: $value) {
             $extractor = _propertyExtractor($property);
-            $matchers[] = function ($v) use ($extractor, myValue) {
-                return $extractor($v) == myValue;
+            $matchers[] = function ($v) use ($extractor, $value) {
+                return $extractor($v) == $value;
             };
         }
 
-        return function (myValue) use ($matchers) {
+        return function ($value) use ($matchers) {
             foreach ($matchers as $match) {
-                if (!$match(myValue)) {
+                if (!$match($value)) {
                     return false;
                 }
             }

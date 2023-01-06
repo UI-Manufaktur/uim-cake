@@ -6,7 +6,7 @@
 module uim.cake.core.app;
 
 @safe:
-  import uim.cake;
+import uim.cake;
 
 /**
  * App is responsible for resource location, and path management.

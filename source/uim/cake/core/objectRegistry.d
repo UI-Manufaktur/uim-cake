@@ -1,8 +1,9 @@
 module uim.cake.core;
 
+@safe:
+import uim.cake;
+
 use ArrayIterator;
-import uim.cake.events.IEventDispatcher;
-import uim.cake.events.IEventListener;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;

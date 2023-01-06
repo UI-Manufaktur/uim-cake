@@ -1,5 +1,8 @@
 module uim.cake.core;
 
+@safe:
+import uim.cake;
+
 use League\Container\DefinitionIContainer;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;

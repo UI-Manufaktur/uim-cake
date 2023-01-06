@@ -1,8 +1,7 @@
 module uim.cake.core.configures.Engine;
 
-import uim.cake.core.configures.IConfigEngine;
-import uim.cake.core.configures.FileConfigTrait;
-import uim.cakeilities.Hash;
+@safe:
+import uim.cake;
 
 /**
  * Ini file configuration engine.

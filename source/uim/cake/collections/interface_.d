@@ -3,8 +3,13 @@ module uim.cake.collections.interface_;
 @safe:
 import uim.cake
 
+use Iterator;
+use JsonSerializable;
+use Traversable;
+
 /**
- * Interface for describing collections. A collection is an immutable list of elements exposing a number of traversing and extracting method for
+ * Describes the methods a Collection should implement. A collection is an immutable
+ * list of elements exposing a number of traversing and extracting method for
  * generating other collections.
  */
 interface ICollection : Iterator, JsonSerializable
@@ -15,8 +20,8 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myCollection = (new Collection(myItems)).each(function (myValue, myKey) {
-     *  echo "Element myKey: myValue";
+     * $collection = (new Collection($items)).each(function ($value, $key) {
+     *  echo "Element $key: $value";
      * });
      * ```
      *
@@ -40,8 +45,8 @@ interface ICollection : Iterator, JsonSerializable
      * be present in the resulting collection:
      *
      * ```
-     * myCollection = (new Collection([1, 2, 3])).filter(function (myValue, myKey) {
-     *  return myValue % 2 == 0;
+     * $collection = (new Collection([1, 2, 3])).filter(function ($value, $key) {
+     *  return $value % 2 == 0;
      * });
      * ```
      *
@@ -50,7 +55,7 @@ interface ICollection : Iterator, JsonSerializable
      *   If left null, a callback that filters out falsey values will be used.
      * @return self
      */
-    function filter(?callable $callback = null);
+    function filter(?callable $callback = null): ICollection;
 
     /**
      * Looks through each value in the collection, and returns another collection with
@@ -66,8 +71,8 @@ interface ICollection : Iterator, JsonSerializable
      * be present in the resulting collection:
      *
      * ```
-     * myCollection = (new Collection([1, 2, 3])).reject(function (myValue, myKey) {
-     *  return myValue % 2 == 0;
+     * $collection = (new Collection([1, 2, 3])).reject(function ($value, $key) {
+     *  return $value % 2 == 0;
      * });
      * ```
      *
@@ -75,25 +80,24 @@ interface ICollection : Iterator, JsonSerializable
      * returns true whether they should be out of the resulting collection.
      * @return self
      */
-    ICollection reject(callable $callback);
+    function reject(callable $callback): ICollection;
 
     /**
      * Returns true if all values in this collection pass the truth test provided
      * in the callback.
      *
-     * Each time the callback is executed it will receive the value of the element
-     * in the current iteration and  the key of the element as arguments, in that
-     * order.
+     * The callback is passed the value and key of the element being tested and should
+     * return true if the test passed.
      *
      * ### Example:
      *
      * ```
-     * $overTwentyOne = (new Collection([24, 45, 60, 15])).every(function (myValue, myKey) {
-     *  return myValue > 21;
+     * $overTwentyOne = (new Collection([24, 45, 60, 15])).every(function ($value, $key) {
+     *  return $value > 21;
      * });
      * ```
      *
-     * Empty collections always return true because it is a vacuous truth.
+     * Empty collections always return true.
      *
      * @param callable $callback a callback function
      * @return bool true if for all elements in this collection the provided
@@ -105,15 +109,14 @@ interface ICollection : Iterator, JsonSerializable
      * Returns true if any of the values in this collection pass the truth test
      * provided in the callback.
      *
-     * Each time the callback is executed it will receive the value of the element
-     * in the current iteration and the key of the element as arguments, in that
-     * order.
+     * The callback is passed the value and key of the element being tested and should
+     * return true if the test passed.
      *
      * ### Example:
      *
      * ```
-     * $hasYoungPeople = (new Collection([24, 45, 15])).every(function (myValue, myKey) {
-     *  return myValue < 21;
+     * $hasYoungPeople = (new Collection([24, 45, 15])).some(function ($value, $key) {
+     *  return $value < 21;
      * });
      * ```
      *
@@ -124,13 +127,13 @@ interface ICollection : Iterator, JsonSerializable
     bool some(callable $callback);
 
     /**
-     * Returns true if myValue is present in this collection. Comparisons are made
+     * Returns true if $value is present in this collection. Comparisons are made
      * both by value and type.
      *
-     * @param mixed myValue The value to check for
-     * @return bool true if myValue is present in this collection
+     * @param mixed $value The value to check for
+     * @return bool true if $value is present in this collection
      */
-    bool contains(myValue);
+    bool contains($value);
 
     /**
      * Returns another collection after modifying each of the values in this one using
@@ -145,7 +148,7 @@ interface ICollection : Iterator, JsonSerializable
      * Getting a collection of booleans where true indicates if a person is female:
      *
      * ```
-     * myCollection = (new Collection($people)).map(function ($person, myKey) {
+     * $collection = (new Collection($people)).map(function ($person, $key) {
      *  return $person.gender == "female";
      * });
      * ```
@@ -154,7 +157,7 @@ interface ICollection : Iterator, JsonSerializable
      * returns the new value for the key that is being iterated
      * @return self
      */
-    ICollection map(callable $callback);
+    function map(callable $callback): ICollection;
 
     /**
      * Folds the values in this collection to a single value, as the result of
@@ -185,11 +188,11 @@ interface ICollection : Iterator, JsonSerializable
      * Extract the user name for all comments in the array:
      *
      * ```
-     * myItems = [
-     *  ["comment":["body":"cool", "user":["name":"Mark"]],
-     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
+     * $items = [
+     *  ["comment": ["body": "cool", "user": ["name": "Mark"]],
+     *  ["comment": ["body": "very cool", "user": ["name": "Renan"]]
      * ];
-     * $extracted = (new Collection(myItems)).extract("comment.user.name");
+     * $extracted = (new Collection($items)).extract("comment.user.name");
      *
      * // Result will look like this when converted to array
      * ["Mark", "Renan"]
@@ -198,22 +201,22 @@ interface ICollection : Iterator, JsonSerializable
      * It is also possible to extract a flattened collection out of nested properties
      *
      * ```
-     *  myItems = [
-     *      ["comment":["votes":[["value":1], ["value":2], ["value":3]]],
-     *      ["comment":["votes":[["value":4]]
+     *  $items = [
+     *      ["comment": ["votes": [["value": 1], ["value": 2], ["value": 3]]],
+     *      ["comment": ["votes": [["value": 4]]
      * ];
-     * $extracted = (new Collection(myItems)).extract("comment.votes.{*}.value");
+     * $extracted = (new Collection($items)).extract("comment.votes.{*}.value");
      *
      * // Result will contain
      * [1, 2, 3, 4]
      * ```
      *
-     * @param callable|string myPath A dot separated path of column to follow
+     * @param callable|string $path A dot separated path of column to follow
      * so that the final one can be returned or a callable that will take care
      * of doing that.
      * @return self
      */
-    ICollection extract(myPath);
+    function extract($path): ICollection;
 
     /**
      * Returns the top element in this collection after being sorted by a property.
@@ -223,9 +226,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * // For a collection of employees
-     * $max = myCollection.max("age");
-     * $max = myCollection.max("user.salary");
-     * $max = myCollection.max(function ($e) {
+     * $max = $collection.max("age");
+     * $max = $collection.max("user.salary");
+     * $max = $collection.max(function ($e) {
      *  return $e.get("user").get("salary");
      * });
      *
@@ -233,13 +236,13 @@ interface ICollection : Iterator, JsonSerializable
      * echo $max.name;
      * ```
      *
-     * @param callable|string myPath The column name to use for sorting or callback that returns the value.
+     * @param callable|string $path The column name to use for sorting or callback that returns the value.
      * @param int $sort The sort type, one of SORT_STRING
      * SORT_NUMERIC or SORT_NATURAL
      * @see uim.cake.collections.ICollection::sortBy()
      * @return mixed The value of the top element in the collection
      */
-    function max(myPath, int $sort = \SORT_NUMERIC);
+    function max($path, int $sort = \SORT_NUMERIC);
 
     /**
      * Returns the bottom element in this collection after being sorted by a property.
@@ -249,9 +252,9 @@ interface ICollection : Iterator, JsonSerializable
      *
      * ```
      * // For a collection of employees
-     * $min = myCollection.min("age");
-     * $min = myCollection.min("user.salary");
-     * $min = myCollection.min(function ($e) {
+     * $min = $collection.min("age");
+     * $min = $collection.min("user.salary");
+     * $min = $collection.min(function ($e) {
      *  return $e.get("user").get("salary");
      * });
      *
@@ -259,27 +262,27 @@ interface ICollection : Iterator, JsonSerializable
      * echo $min.name;
      * ```
      *
-     * @param callable|string myPath The column name to use for sorting or callback that returns the value.
+     * @param callable|string $path The column name to use for sorting or callback that returns the value.
      * @param int $sort The sort type, one of SORT_STRING
      * SORT_NUMERIC or SORT_NATURAL
      * @see uim.cake.collections.ICollection::sortBy()
      * @return mixed The value of the bottom element in the collection
      */
-    function min(myPath, int $sort = \SORT_NUMERIC);
+    function min($path, int $sort = \SORT_NUMERIC);
 
     /**
-     * Returns the average of all the values extracted with myPath
+     * Returns the average of all the values extracted with $path
      * or of this collection.
      *
      * ### Example:
      *
      * ```
-     * myItems = [
-     *  ["invoice":["total":100]],
-     *  ["invoice":["total":200]]
+     * $items = [
+     *  ["invoice": ["total": 100]],
+     *  ["invoice": ["total": 200]]
      * ];
      *
-     * $total = (new Collection(myItems)).avg("invoice.total");
+     * $total = (new Collection($items)).avg("invoice.total");
      *
      * // Total: 150
      *
@@ -290,29 +293,29 @@ interface ICollection : Iterator, JsonSerializable
      * The average of an empty set or 0 rows is `null`. Collections with `null`
      * values are not considered empty.
      *
-     * @param callable|string|null myPath The property name to sum or a function
+     * @param callable|string|null $path The property name to sum or a function
      * If no value is passed, an identity function will be used.
      * that will return the value of the property to sum.
      * @return float|int|null
      */
-    function avg(myPath = null);
+    function avg($path = null);
 
     /**
-     * Returns the median of all the values extracted with myPath
+     * Returns the median of all the values extracted with $path
      * or of this collection.
      *
      * ### Example:
      *
      * ```
-     * myItems = [
-     *  ["invoice":["total":400]],
-     *  ["invoice":["total":500]]
-     *  ["invoice":["total":100]]
-     *  ["invoice":["total":333]]
-     *  ["invoice":["total":200]]
+     * $items = [
+     *  ["invoice": ["total": 400]],
+     *  ["invoice": ["total": 500]]
+     *  ["invoice": ["total": 100]]
+     *  ["invoice": ["total": 333]]
+     *  ["invoice": ["total": 200]]
      * ];
      *
-     * $total = (new Collection(myItems)).median("invoice.total");
+     * $total = (new Collection($items)).median("invoice.total");
      *
      * // Total: 333
      *
@@ -323,12 +326,12 @@ interface ICollection : Iterator, JsonSerializable
      * The median of an empty set or 0 rows is `null`. Collections with `null`
      * values are not considered empty.
      *
-     * @param callable|string|null myPath The property name to sum or a function
+     * @param callable|string|null $path The property name to sum or a function
      * If no value is passed, an identity function will be used.
      * that will return the value of the property to sum.
      * @return float|int|null
      */
-    function median(myPath = null);
+    function median($path = null);
 
     /**
      * Returns a sorted iterator out of the elements in this collection,
@@ -336,7 +339,7 @@ interface ICollection : Iterator, JsonSerializable
      * callback. $callback can also be a string representing the column or property
      * name.
      *
-     * The callback will receive as its first argument each of the elements in myItems,
+     * The callback will receive as its first argument each of the elements in $items,
      * the value returned by the callback will be used as the value for sorting such
      * element. Please note that the callback function could be called more than once
      * per element.
@@ -344,29 +347,29 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = myCollection.sortBy(function (myUser) {
-     *  return myUser.age;
+     * $items = $collection.sortBy(function ($user) {
+     *  return $user.age;
      * });
      *
      * // alternatively
-     * myItems = myCollection.sortBy("age");
+     * $items = $collection.sortBy("age");
      *
      * // or use a property path
-     * myItems = myCollection.sortBy("department.name");
+     * $items = $collection.sortBy("department.name");
      *
      * // output all user name order by their age in descending order
-     * foreach (myItems as myUser) {
-     *  echo myUser.name;
+     * foreach ($items as $user) {
+     *  echo $user.name;
      * }
      * ```
      *
-     * @param callable|string myPath The column name to use for sorting or callback that returns the value.
+     * @param callable|string $path The column name to use for sorting or callback that returns the value.
      * @param int $order The sort order, either SORT_DESC or SORT_ASC
      * @param int $sort The sort type, one of SORT_STRING
      * SORT_NUMERIC or SORT_NATURAL
      * @return self
      */
-    ICollection sortBy(myPath, int $order = SORT_DESC, int $sort = \SORT_NUMERIC);
+    function sortBy($path, int $order = SORT_DESC, int $sort = \SORT_NUMERIC): ICollection;
 
     /**
      * Splits a collection into sets, grouped by the result of running each value
@@ -380,36 +383,36 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [
-     *  ["id":1, "name":"foo", "parent_id":10],
-     *  ["id":2, "name":"bar", "parent_id":11],
-     *  ["id":3, "name":"baz", "parent_id":10],
+     * $items = [
+     *  ["id": 1, "name": "foo", "parent_id": 10],
+     *  ["id": 2, "name": "bar", "parent_id": 11],
+     *  ["id": 3, "name": "baz", "parent_id": 10],
      * ];
      *
-     * myGroup = (new Collection(myItems)).groupBy("parent_id");
+     * $group = (new Collection($items)).groupBy("parent_id");
      *
      * // Or
-     * myGroup = (new Collection(myItems)).groupBy(function ($e) {
+     * $group = (new Collection($items)).groupBy(function ($e) {
      *  return $e["parent_id"];
      * });
      *
      * // Result will look like this when converted to array
      * [
      *  10: [
-     *      ["id":1, "name":"foo", "parent_id":10],
-     *      ["id":3, "name":"baz", "parent_id":10],
+     *      ["id": 1, "name": "foo", "parent_id": 10],
+     *      ["id": 3, "name": "baz", "parent_id": 10],
      *  ],
      *  11: [
-     *      ["id":2, "name":"bar", "parent_id":11],
+     *      ["id": 2, "name": "bar", "parent_id": 11],
      *  ]
      * ];
      * ```
      *
-     * @param callable|string myPath The column name to use for grouping or callback that returns the value.
+     * @param callable|string $path The column name to use for grouping or callback that returns the value.
      * or a function returning the grouping key out of the provided element
      * @return self
      */
-    ICollection groupBy(myPath);
+    function groupBy($path): ICollection;
 
     /**
      * Given a list and a callback function that returns a key for each element
@@ -423,32 +426,32 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [
-     *  ["id":1, "name":"foo"],
-     *  ["id":2, "name":"bar"],
-     *  ["id":3, "name":"baz"],
+     * $items = [
+     *  ["id": 1, "name": "foo"],
+     *  ["id": 2, "name": "bar"],
+     *  ["id": 3, "name": "baz"],
      * ];
      *
-     * $indexed = (new Collection(myItems)).indexBy("id");
+     * $indexed = (new Collection($items)).indexBy("id");
      *
      * // Or
-     * $indexed = (new Collection(myItems)).indexBy(function ($e) {
+     * $indexed = (new Collection($items)).indexBy(function ($e) {
      *  return $e["id"];
      * });
      *
      * // Result will look like this when converted to array
      * [
-     *  1: ["id":1, "name":"foo"],
-     *  3: ["id":3, "name":"baz"],
-     *  2: ["id":2, "name":"bar"],
+     *  1: ["id": 1, "name": "foo"],
+     *  3: ["id": 3, "name": "baz"],
+     *  2: ["id": 2, "name": "bar"],
      * ];
      * ```
      *
-     * @param callable|string myPath The column name to use for indexing or callback that returns the value.
+     * @param callable|string $path The column name to use for indexing or callback that returns the value.
      * or a function returning the indexing key out of the provided element
      * @return self
      */
-    ICollection indexBy(myPath);
+    function indexBy($path): ICollection;
 
     /**
      * Sorts a list into groups and returns a count for the number of elements
@@ -462,16 +465,16 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [
-     *  ["id":1, "name":"foo", "parent_id":10],
-     *  ["id":2, "name":"bar", "parent_id":11],
-     *  ["id":3, "name":"baz", "parent_id":10],
+     * $items = [
+     *  ["id": 1, "name": "foo", "parent_id": 10],
+     *  ["id": 2, "name": "bar", "parent_id": 11],
+     *  ["id": 3, "name": "baz", "parent_id": 10],
      * ];
      *
-     * myGroup = (new Collection(myItems)).countBy("parent_id");
+     * $group = (new Collection($items)).countBy("parent_id");
      *
      * // Or
-     * myGroup = (new Collection(myItems)).countBy(function ($e) {
+     * $group = (new Collection($items)).countBy(function ($e) {
      *  return $e["parent_id"];
      * });
      *
@@ -482,11 +485,11 @@ interface ICollection : Iterator, JsonSerializable
      * ];
      * ```
      *
-     * @param callable|string myPath The column name to use for indexing or callback that returns the value.
+     * @param callable|string $path The column name to use for indexing or callback that returns the value.
      * or a function returning the indexing key out of the provided element
      * @return self
      */
-    ICollection countBy(myPath);
+    function countBy($path): ICollection;
 
     /**
      * Returns the total sum of all the values extracted with $matcher
@@ -495,12 +498,12 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [
-     *  ["invoice":["total":100]],
-     *  ["invoice":["total":200]]
+     * $items = [
+     *  ["invoice": ["total": 100]],
+     *  ["invoice": ["total": 200]]
      * ];
      *
-     * $total = (new Collection(myItems)).sumOf("invoice.total");
+     * $total = (new Collection($items)).sumOf("invoice.total");
      *
      * // Total: 300
      *
@@ -508,12 +511,12 @@ interface ICollection : Iterator, JsonSerializable
      * // Total: 6
      * ```
      *
-     * @param callable|string|null myPath The property name to sum or a function
+     * @param callable|string|null $path The property name to sum or a function
      * If no value is passed, an identity function will be used.
      * that will return the value of the property to sum.
      * @return float|int
      */
-    function sumOf(myPath = null);
+    function sumOf($path = null);
 
     /**
      * Returns a new collection with the elements placed in a random order,
@@ -521,7 +524,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    ICollection shuffle();
+    function shuffle(): ICollection;
 
     /**
      * Returns a new collection with maximum $size random elements
@@ -531,7 +534,7 @@ interface ICollection : Iterator, JsonSerializable
      * take from this collection
      * @return self
      */
-    ICollection sample(int $length = 10);
+    function sample(int $length = 10): ICollection;
 
     /**
      * Returns a new collection with maximum $size elements in the internal
@@ -543,7 +546,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param int $offset A positional offset from where to take the elements
      * @return self
      */
-    ICollection take(int $length = 1, int $offset = 0);
+    function take(int $length = 1, int $offset = 0): ICollection;
 
     /**
      * Returns the last N elements of a collection
@@ -551,9 +554,9 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [1, 2, 3, 4, 5];
+     * $items = [1, 2, 3, 4, 5];
      *
-     * $last = (new Collection(myItems)).takeLast(3);
+     * $last = (new Collection($items)).takeLast(3);
      *
      * // Result will look like this when converted to array
      * [3, 4, 5];
@@ -562,7 +565,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param int $length The number of elements at the end of the collection
      * @return self
      */
-    ICollection takeLast(int $length);
+    function takeLast(int $length): ICollection;
 
     /**
      * Returns a new collection that will skip the specified amount of elements
@@ -571,7 +574,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param int $length The number of elements to skip.
      * @return self
      */
-    ICollection skip(int $length);
+    function skip(int $length): ICollection;
 
     /**
      * Looks through each value in the list, returning a Collection of all the
@@ -580,16 +583,16 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [
-     *  ["comment":["body":"cool", "user":["name":"Mark"]],
-     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
+     * $items = [
+     *  ["comment": ["body": "cool", "user": ["name": "Mark"]],
+     *  ["comment": ["body": "very cool", "user": ["name": "Renan"]]
      * ];
      *
-     * $extracted = (new Collection(myItems)).match(["user.name":"Renan"]);
+     * $extracted = (new Collection($items)).match(["user.name": "Renan"]);
      *
      * // Result will look like this when converted to array
      * [
-     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
+     *  ["comment": ["body": "very cool", "user": ["name": "Renan"]]
      * ]
      * ```
      *
@@ -598,7 +601,7 @@ interface ICollection : Iterator, JsonSerializable
      * and the value the condition against with each element will be matched
      * @return self
      */
-    ICollection match(array $conditions);
+    function match(array $conditions): ICollection;
 
     /**
      * Returns the first result matching all the key-value pairs listed in
@@ -630,36 +633,36 @@ interface ICollection : Iterator, JsonSerializable
      * Returns a new collection as the result of concatenating the list of elements
      * in this collection with the passed list of elements
      *
-     * @param iterable myItems Items list.
+     * @param iterable $items Items list.
      * @return self
      */
-    ICollection append(myItems);
+    function append($items): ICollection;
 
     /**
      * Append a single item creating a new collection.
      *
      * @param mixed $item The item to append.
-     * @param mixed myKey The key to append the item with. If null a key will be generated.
+     * @param mixed $key The key to append the item with. If null a key will be generated.
      * @return self
      */
-    ICollection appendItem($item, myKey = null);
+    function appendItem($item, $key = null): ICollection;
 
     /**
      * Prepend a set of items to a collection creating a new collection
      *
-     * @param mixed myItems The items to prepend.
+     * @param mixed $items The items to prepend.
      * @return self
      */
-    ICollection prepend(myItems);
+    function prepend($items): ICollection;
 
     /**
      * Prepend a single item creating a new collection.
      *
      * @param mixed $item The item to prepend.
-     * @param mixed myKey The key to prepend the item with. If null a key will be generated.
+     * @param mixed $key The key to prepend the item with. If null a key will be generated.
      * @return self
      */
-    ICollection prependItem($item, myKey = null);
+    function prependItem($item, $key = null): ICollection;
 
     /**
      * Returns a new collection where the values extracted based on a value path
@@ -669,13 +672,13 @@ interface ICollection : Iterator, JsonSerializable
      * ### Examples:
      *
      * ```
-     * myItems = [
-     *  ["id":1, "name":"foo", "parent":"a"],
-     *  ["id":2, "name":"bar", "parent":"b"],
-     *  ["id":3, "name":"baz", "parent":"a"],
+     * $items = [
+     *  ["id": 1, "name": "foo", "parent": "a"],
+     *  ["id": 2, "name": "bar", "parent": "b"],
+     *  ["id": 3, "name": "baz", "parent": "a"],
      * ];
      *
-     * $combined = (new Collection(myItems)).combine("id", "name");
+     * $combined = (new Collection($items)).combine("id", "name");
      *
      * // Result will look like this when converted to array
      * [
@@ -684,44 +687,44 @@ interface ICollection : Iterator, JsonSerializable
      *  3: "baz",
      * ];
      *
-     * $combined = (new Collection(myItems)).combine("id", "name", "parent");
+     * $combined = (new Collection($items)).combine("id", "name", "parent");
      *
      * // Result will look like this when converted to array
      * [
-     *  "a":[1: "foo", 3: "baz"],
-     *  "b":[2: "bar"]
+     *  "a": [1: "foo", 3: "baz"],
+     *  "b": [2: "bar"]
      * ];
      * ```
      *
-     * @param callable|string myKeyPath the column name path to use for indexing
+     * @param callable|string aKeyPath the column name path to use for indexing
      * or a function returning the indexing key out of the provided element
-     * @param callable|string myValuePath the column name path to use as the array value
+     * @param callable|string aValuePath the column name path to use as the array value
      * or a function returning the value out of the provided element
-     * @param callable|string|null myGroupPath the column name path to use as the parent
+     * @param callable|string|null $groupPath the column name path to use as the parent
      * grouping key or a function returning the key out of the provided element
      * @return self
      */
-    ICollection combine(myKeyPath, myValuePath, myGroupPath = null);
+    function combine($keyPath, $valuePath, $groupPath = null): ICollection;
 
     /**
      * Returns a new collection where the values are nested in a tree-like structure
      * based on an id property path and a parent id property path.
      *
-     * @param callable|string idPath the column name path to use for determining
+     * @param callable|string $idPath the column name path to use for determining
      * whether an element is parent of another
-     * @param callable|string parentPath the column name path to use for determining
+     * @param callable|string $parentPath the column name path to use for determining
      * whether an element is child of another
-     * @param string nestingKey The key name under which children are nested
+     * @param string $nestingKey The key name under which children are nested
      * @return self
      */
-    ICollection nest($idPath, $parentPath, string nestingKey = "children");
+    function nest($idPath, $parentPath, string $nestingKey = "children"): ICollection;
 
     /**
-     * Returns a new collection containing each of the elements found in `myValues` as
+     * Returns a new collection containing each of the elements found in `$values` as
      * a property inside the corresponding elements in this collection. The property
-     * where the values will be inserted is described by the `myPath` parameter.
+     * where the values will be inserted is described by the `$path` parameter.
      *
-     * The myPath can be a string with a property name or a dot separated path of
+     * The $path can be a string with a property name or a dot separated path of
      * properties that should be followed to get the last one in the path.
      *
      * If a column or property could not be found for a particular element in the
@@ -732,27 +735,27 @@ interface ICollection : Iterator, JsonSerializable
      * Insert ages into a collection containing users:
      *
      * ```
-     * myItems = [
-     *  ["comment":["body":"cool", "user":["name":"Mark"]],
-     *  ["comment":["body":"awesome", "user":["name":"Renan"]]
+     * $items = [
+     *  ["comment": ["body": "cool", "user": ["name": "Mark"]],
+     *  ["comment": ["body": "awesome", "user": ["name": "Renan"]]
      * ];
      * $ages = [25, 28];
-     * $inserted = (new Collection(myItems)).insert("comment.user.age", $ages);
+     * $inserted = (new Collection($items)).insert("comment.user.age", $ages);
      *
      * // Result will look like this when converted to array
      * [
-     *  ["comment":["body":"cool", "user":["name":"Mark", "age":25]],
-     *  ["comment":["body":"awesome", "user":["name":"Renan", "age":28]]
+     *  ["comment": ["body": "cool", "user": ["name": "Mark", "age": 25]],
+     *  ["comment": ["body": "awesome", "user": ["name": "Renan", "age": 28]]
      * ];
      * ```
      *
-     * @param string myPath a dot separated string symbolizing the path to follow
+     * @param string $path a dot separated string symbolizing the path to follow
      * inside the hierarchy of each value so that the value can be inserted
-     * @param mixed myValues The values to be inserted at the specified path,
+     * @param mixed $values The values to be inserted at the specified path,
      * values are matched with the elements in this collection by its positional index.
      * @return self
      */
-    ICollection insert(string myPath, myValues);
+    function insert(string $path, $values): ICollection;
 
     /**
      * Returns an array representation of the results
@@ -761,7 +764,6 @@ interface ICollection : Iterator, JsonSerializable
      * collection as the array keys. Keep in mind that it is valid for iterators
      * to return the same key for different elements, setting this value to false
      * can help getting all items if keys are not important in the result.
-     * @return array
      */
     array toArray(bool shouldKeepKeys = true);
 
@@ -794,8 +796,8 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myCollection.map($mapper).sortBy("age").extract("name");
-     * $compiled = myCollection.compile();
+     * $collection.map($mapper).sortBy("age").extract("name");
+     * $compiled = $collection.compile();
      * $isJohnHere = $compiled.some($johnMatcher);
      * $allButJohn = $compiled.filter($johnMatcher);
      * ```
@@ -807,13 +809,13 @@ interface ICollection : Iterator, JsonSerializable
      * You can think of this method as a way to create save points for complex
      * calculations in a collection.
      *
-     * shouldKeepKeys - Whether to use the keys returned by this
+     * @param bool shouldKeepKeys Whether to use the keys returned by this
      * collection as the array keys. Keep in mind that it is valid for iterators
      * to return the same key for different elements, setting this value to false
      * can help getting all items if keys are not important in the result.
      * @return self
      */
-    ICollection compile(bool shouldKeepKeys = true);
+    function compile(bool shouldKeepKeys = true): ICollection;
 
     /**
      * Returns a new collection where any operations chained after it are guaranteed
@@ -823,7 +825,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    ICollection lazy();
+    function lazy(): ICollection;
 
     /**
      * Returns a new collection where the operations performed by this collection.
@@ -834,7 +836,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    ICollection buffered();
+    function buffered(): ICollection;
 
     /**
      * Returns a new collection with each of the elements of this collection
@@ -863,19 +865,19 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myCollection = new Collection([
-     *  ["id":1, "children":[["id":2, "children":[["id":3]]]]],
-     *  ["id":4, "children":[["id":5]]]
+     * $collection = new Collection([
+     *  ["id": 1, "children": [["id": 2, "children": [["id": 3]]]]],
+     *  ["id": 4, "children": [["id": 5]]]
      * ]);
-     * $flattenedIds = myCollection.listNested().extract("id"); // Yields [1, 2, 3, 4, 5]
+     * $flattenedIds = $collection.listNested().extract("id"); // Yields [1, 2, 3, 4, 5]
      * ```
      *
      * @param string|int $order The order in which to return the elements
-     * @param callable|string nestingKey The key name under which children are nested
+     * @param callable|string $nestingKey The key name under which children are nested
      * or a callable function that will return the children list
      * @return self
      */
-    ICollection listNested($order = "desc", $nestingKey = "children");
+    function listNested($order = "desc", $nestingKey = "children"): ICollection;
 
     /**
      * Creates a new collection that when iterated will stop yielding results if
@@ -891,8 +893,8 @@ interface ICollection : Iterator, JsonSerializable
      * Get an array of lines in a CSV file until the timestamp column is less than a date
      *
      * ```
-     * $lines = (new Collection(myfileLines)).stopWhen(function (myValue, myKey) {
-     *  return (new DateTime(myValue)).format("Y") < 2012;
+     * $lines = (new Collection($fileLines)).stopWhen(function ($value, $key) {
+     *  return (new DateTime($value)).format("Y") < 2012;
      * })
      * .toArray();
      * ```
@@ -900,7 +902,7 @@ interface ICollection : Iterator, JsonSerializable
      * Get elements until the first unapproved message is found:
      *
      * ```
-     * $comments = (new Collection($comments)).stopWhen(["is_approved":false]);
+     * $comments = (new Collection($comments)).stopWhen(["is_approved": false]);
      * ```
      *
      * @param callable|array $condition the method that will receive each of the elements and
@@ -910,7 +912,7 @@ interface ICollection : Iterator, JsonSerializable
      * and the value the condition against with each element will be matched.
      * @return self
      */
-    ICollection stopWhen($condition);
+    function stopWhen($condition): ICollection;
 
     /**
      * Creates a new collection where the items are the
@@ -928,15 +930,15 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems [[1, 2, 3], [4, 5]];
-     * $unfold = (new Collection(myItems)).unfold(); // Returns [1, 2, 3, 4, 5]
+     * $items [[1, 2, 3], [4, 5]];
+     * $unfold = (new Collection($items)).unfold(); // Returns [1, 2, 3, 4, 5]
      * ```
      *
      * Using a transformer
      *
      * ```
-     * myItems [1, 2, 3];
-     * $allItems = (new Collection(myItems)).unfold(function ($page) {
+     * $items [1, 2, 3];
+     * $allItems = (new Collection($items)).unfold(function ($page) {
      *  return $service.fetchPage($page).toArray();
      * });
      * ```
@@ -945,7 +947,7 @@ interface ICollection : Iterator, JsonSerializable
      * the items in the collection and should return an array or Traversable object
      * @return self
      */
-    ICollection unfold(?callable $callback = null);
+    function unfold(?callable $callback = null): ICollection;
 
     /**
      * Passes this collection through a callable as its first argument.
@@ -954,9 +956,9 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [1, 2, 3];
-     * $decorated = (new Collection(myItems)).through(function (myCollection) {
-     *      return new MyCustomCollection(myCollection);
+     * $items = [1, 2, 3];
+     * $decorated = (new Collection($items)).through(function ($collection) {
+     *      return new MyCustomCollection($collection);
      * });
      * ```
      *
@@ -964,7 +966,7 @@ interface ICollection : Iterator, JsonSerializable
      * this collection as first argument.
      * @return self
      */
-    ICollection through(callable $callback);
+    function through(callable $callback): ICollection;
 
     /**
      * Combines the elements of this collection with each of the elements of the
@@ -973,14 +975,14 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myCollection = new Collection([1, 2]);
-     * myCollection.zip([3, 4], [5, 6]).toList(); // returns [[1, 3, 5], [2, 4, 6]]
+     * $collection = new Collection([1, 2]);
+     * $collection.zip([3, 4], [5, 6]).toList(); // returns [[1, 3, 5], [2, 4, 6]]
      * ```
      *
-     * @param iterable ...myItems The collections to zip.
+     * @param iterable ...$items The collections to zip.
      * @return self
      */
-    ICollection zip(iterable myItems);
+    function zip(iterable $items): ICollection;
 
     /**
      * Combines the elements of this collection with each of the elements of the
@@ -991,18 +993,18 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myCollection = new Collection([1, 2]);
-     * $zipped = myCollection.zipWith([3, 4], [5, 6], function (...$args) {
+     * $collection = new Collection([1, 2]);
+     * $zipped = $collection.zipWith([3, 4], [5, 6], function (...$args) {
      *   return array_sum($args);
      * });
      * $zipped.toList(); // returns [9, 12]; [(1 + 3 + 5), (2 + 4 + 6)]
      * ```
      *
-     * @param iterable ...myItems The collections to zip.
+     * @param iterable ...$items The collections to zip.
      * @param callable $callback The function to use for zipping the elements together.
      * @return self
      */
-    ICollection zipWith(iterable myItems, $callback);
+    function zipWith(iterable $items, $callback): ICollection;
 
     /**
      * Breaks the collection into smaller arrays of the given size.
@@ -1010,15 +1012,15 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-     * $chunked = (new Collection(myItems)).chunk(3).toList();
+     * $items [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+     * $chunked = (new Collection($items)).chunk(3).toList();
      * // Returns [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11]]
      * ```
      *
      * @param int $chunkSize The maximum size for each chunk
      * @return self
      */
-    ICollection chunk(int $chunkSize);
+    function chunk(int $chunkSize): ICollection;
 
     /**
      * Breaks the collection into smaller arrays of the given size.
@@ -1026,16 +1028,16 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems ["a":1, "b":2, "c":3, "d":4, "e":5, "f":6];
-     * $chunked = (new Collection(myItems)).chunkWithKeys(3).toList();
-     * // Returns [["a":1, "b":2, "c":3], ["d":4, "e":5, "f":6]]
+     * $items ["a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6];
+     * $chunked = (new Collection($items)).chunkWithKeys(3).toList();
+     * // Returns [["a": 1, "b": 2, "c": 3], ["d": 4, "e": 5, "f": 6]]
      * ```
      *
      * @param int $chunkSize The maximum size for each chunk
-     * shouldKeepKeys - If the keys of the array should be kept
+     * @param bool shouldKeepKeys If the keys of the array should be kept
      * @return self
      */
-    ICollection chunkWithKeys(int $chunkSize, bool shouldKeepKeys = true);
+    function chunkWithKeys(int $chunkSize, bool shouldKeepKeys = true): ICollection;
 
     /**
      * Returns whether there are elements in this collection
@@ -1043,13 +1045,15 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems [1, 2, 3];
-     * (new Collection(myItems)).isEmpty(); // false
+     * $items [1, 2, 3];
+     * (new Collection($items)).isEmpty(); // false
      * ```
      *
      * ```
      * (new Collection([])).isEmpty(); // true
      * ```
+     *
+     * @return bool
      */
     bool isEmpty();
 
@@ -1060,7 +1064,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return \Traversable
      */
-    Traversable unwrap();
+    function unwrap(): Traversable;
 
     /**
      * Transpose rows and columns into columns and rows
@@ -1068,14 +1072,14 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example:
      *
      * ```
-     * myItems = [
+     * $items = [
      *       ["Products", "2012", "2013", "2014"],
      *       ["Product A", "200", "100", "50"],
      *       ["Product B", "300", "200", "100"],
      *       ["Product C", "400", "300", "200"],
      * ]
      *
-     * $transpose = (new Collection(myItems)).transpose().toList();
+     * $transpose = (new Collection($items)).transpose().toList();
      *
      * // Returns
      * // [
@@ -1088,7 +1092,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return self
      */
-    ICollection transpose();
+    function transpose(): ICollection;
 
     /**
      * Returns the amount of elements in the collection.
@@ -1133,7 +1137,6 @@ interface ICollection : Iterator, JsonSerializable
      * for details.
      *
      * @see uim.cake.collections.ICollection::count()
-     * @return int
      */
     int countKeys();
 
@@ -1146,8 +1149,8 @@ interface ICollection : Iterator, JsonSerializable
      * ### Example
      *
      * ```
-     * myCollection = new Collection([["A", "B", "C"], [1, 2, 3]]);
-     * myResult = myCollection.cartesianProduct().toArray();
+     * $collection = new Collection([["A", "B", "C"], [1, 2, 3]]);
+     * $result = $collection.cartesianProduct().toArray();
      * $expected = [
      *     ["A", 1],
      *     ["A", 2],
