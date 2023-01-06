@@ -801,7 +801,7 @@ trait CollectionTrait
     }
 
 
-    int count() {
+    size_t count() {
         myTraversable = this.optimizeUnwrap();
 
         if (is_array(myTraversable)) {

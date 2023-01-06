@@ -51,7 +51,7 @@ class FormContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    function primaryKey(): array
+    array primaryKey()
     {
         deprecationWarning("`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.");
 
@@ -59,7 +59,7 @@ class FormContext : IContext
     }
 
 
-    function getPrimaryKey(): array
+    array getPrimaryKey()
     {
         return [];
     }

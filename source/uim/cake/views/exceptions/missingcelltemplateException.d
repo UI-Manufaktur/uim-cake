@@ -40,7 +40,7 @@ class MissingCellTemplateException : MissingTemplateException {
      * @return array
      * @psalm-return array{name: string, file: string, paths: array}
      */
-    array getAttributes(): array
+    array getAttributes()
     {
         return [
             "name": this.name,

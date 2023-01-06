@@ -93,7 +93,7 @@ class BasicWidget : IWidget {
      * @param uim.cake.View\Form\IContext $context Context instance.
      * @return array<string, mixed> Updated data array.
      */
-    protected auto mergeDefaults(array myData, IContext $context): array
+    protected array mergeDefaults(array myData, IContext $context)
     {
         myData += this.defaults;
 
@@ -112,7 +112,7 @@ class BasicWidget : IWidget {
      * @param string myFieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected auto setRequired(array myData, IContext $context, string myFieldName): array
+    protected array setRequired(array myData, IContext $context, string myFieldName)
     {
         if (
             empty(myData["disabled"])
@@ -138,7 +138,7 @@ class BasicWidget : IWidget {
      * @param string myFieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected auto setMaxLength(array myData, IContext $context, string myFieldName): array
+    protected array setMaxLength(array myData, IContext $context, string myFieldName)
     {
         $maxLength = $context.getMaxLength(myFieldName);
         if ($maxLength  !is null) {
@@ -156,7 +156,7 @@ class BasicWidget : IWidget {
      * @param string myFieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected auto setStep(array myData, IContext $context, string myFieldName): array
+    protected array setStep(array myData, IContext $context, string myFieldName)
     {
         $dbType = $context.type(myFieldName);
         myFieldDef = $context.attributes(myFieldName);
@@ -172,7 +172,7 @@ class BasicWidget : IWidget {
     }
 
 
-    array secureFields(array myData): array
+    array secureFields(array myData)
     {
         if (!isset(myData["name"]) || myData["name"] == "") {
             return [];

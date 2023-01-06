@@ -133,7 +133,7 @@ interface IQuery {
     /**
      * Returns the total amount of results for the query.
      */
-    int count();
+    size_t count();
 
     /**
      * Sets the number of records that should be retrieved from database,

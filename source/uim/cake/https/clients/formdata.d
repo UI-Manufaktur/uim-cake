@@ -163,7 +163,7 @@ class FormData : Countable {
     /**
      * Returns the count of parts inside this object.
      */
-    int count() {
+    size_t count() {
         return count(_parts);
     }
 

@@ -214,7 +214,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      * @return array<array> Array of failed fields
      */
-    array validate(array $data, bool $newRecord = true): array
+    array validate(array $data, bool $newRecord = true)
     {
         $errors = [];
 
@@ -437,7 +437,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns the number of fields having validation rules
      */
-    int count(): int
+    size_t count()
     {
         return count(_fields);
     }

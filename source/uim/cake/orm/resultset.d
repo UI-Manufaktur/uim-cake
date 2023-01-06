@@ -311,7 +311,7 @@ class ResultSet : IResultSet
      *
      * Part of the Countable interface.
      */
-    int count() {
+    size_t count() {
         if (_count  !is null) {
             return _count;
         }

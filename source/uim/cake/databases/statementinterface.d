@@ -150,7 +150,7 @@ interface IStatement
      * Statements can be passed as argument for count()
      * to return the number for affected rows from last execution
      */
-    int count(): int;
+    size_t count();
 
     /**
      * Binds a set of values to statement object with corresponding type

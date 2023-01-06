@@ -858,7 +858,7 @@ trait CollectionTrait
     }
 
 
-    function count(): int
+    size_t count()
     {
         $traversable = this.optimizeUnwrap();
 
@@ -870,7 +870,7 @@ trait CollectionTrait
     }
 
 
-    function countKeys(): int
+    int countKeys()
     {
         return count(this.toArray());
     }

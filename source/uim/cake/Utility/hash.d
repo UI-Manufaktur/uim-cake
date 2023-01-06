@@ -964,7 +964,7 @@ class Hash
      * @return array Sorted array of data
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::sort
      */
-    static array sort(array $data, string $path, $dir = "asc", $type = "regular"): array
+    static array sort(array $data, string $path, $dir = "asc", $type = "regular")
     {
         if (empty($data)) {
             return [];
@@ -1054,7 +1054,7 @@ class Hash
      * @param mixed $key The key for the data.
      * @return array
      */
-    protected static function _squash(array $data, $key = null): array
+    protected static array _squash(array $data, $key = null)
     {
         $stack = [];
         foreach ($data as $k: $r) {
@@ -1083,7 +1083,7 @@ class Hash
      *    The expression for this bool is ($data - $compare) + ($compare - ($data - $compare))
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::diff
      */
-    static function diff(array $data, array $compare): array
+    static array diff(array $data, array $compare)
     {
         if (empty($data)) {
             return $compare;

@@ -1408,7 +1408,7 @@ class View : IEventDispatcher {
      * @return array Element Cache configuration.
      * @psalm-return array{key:string, config:string}
      */
-    protected auto _elementCache(string myName, array myData, array myOptions): array
+    protected array _elementCache(string myName, array myData, array myOptions)
     {
         if (isset(myOptions["cache"]["key"], myOptions["cache"]["config"])) {
             /** @psalm-var array{key:string, config:string}*/

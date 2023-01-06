@@ -879,7 +879,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * modified, and the count has already been performed the cached
      * value is returned
      */
-    int count(): int
+    size_t count()
     {
         if (_resultsCount == null) {
             _resultsCount = _performCount();

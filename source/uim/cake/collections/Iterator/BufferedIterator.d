@@ -141,7 +141,7 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Returns the number or items in this collection
      */
-    int count(): int
+    size_t count()
     {
         if (!_started) {
             this.rewind();

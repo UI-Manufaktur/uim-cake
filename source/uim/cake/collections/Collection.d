@@ -63,7 +63,7 @@ class Collection : IteratorIterator : ICollection, Serializable
     /**
      * {@inheritDoc}
      */
-    int count(): int
+    size_t count()
     {
         $traversable = this.optimizeUnwrap();
 
@@ -77,7 +77,7 @@ class Collection : IteratorIterator : ICollection, Serializable
     /**
      * {@inheritDoc}
      */
-    int countKeys(): int
+    int countKeys()
     {
         return count(this.toArray());
     }

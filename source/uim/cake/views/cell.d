@@ -190,7 +190,7 @@ abstract class Cell : IEventDispatcher
      * @param string|null myTemplate The name of the template to be rendered.
      * @return array The cache configuration.
      */
-    protected auto _cacheConfig(string action, Nullable!string myTemplate = null): array
+    protected array _cacheConfig(string action, Nullable!string myTemplate = null)
     {
         if (empty(_cache)) {
             return [];
@@ -248,7 +248,7 @@ abstract class Cell : IEventDispatcher
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "action": this.action,

@@ -1072,7 +1072,7 @@ class Hash {
      *    The expression for this bool is (myData - $compare) + ($compare - (myData - $compare))
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::diff
      */
-    static array diff(array myData, array $compare): array
+    static array diff(array myData, array $compare)
     {
         if (empty(myData)) {
             return $compare;
@@ -1099,7 +1099,7 @@ class Hash {
      * @return array The merged array.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::mergeDiff
      */
-    static array mergeDiff(array myData, array $compare): array
+    static array mergeDiff(array myData, array $compare)
     {
         if (empty(myData) && !empty($compare)) {
             return $compare;
@@ -1126,7 +1126,7 @@ class Hash {
      * @return array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::normalize
      */
-    static array normalize(array myData, bool $assoc = true): array
+    static array normalize(array myData, bool $assoc = true)
     {
         myKeys = array_keys(myData);
         myCount = count(myKeys);
@@ -1174,7 +1174,7 @@ class Hash {
      * @throws \InvalidArgumentException When providing invalid data.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::nest
      */
-    static array nest(array myData, array myOptions = []): array
+    static array nest(array myData, array myOptions = [])
     {
         if (!myData) {
             return myData;

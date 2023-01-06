@@ -205,7 +205,7 @@ abstract class Cell : IEventDispatcher
      * @param string|null $template The name of the template to be rendered.
      * @return array The cache configuration.
      */
-    protected array _cacheConfig(string $action, ?string $template = null): array
+    protected array _cacheConfig(string $action, ?string $template = null)
     {
         if (empty(_cache)) {
             return [];

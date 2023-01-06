@@ -16,7 +16,7 @@ class ResultSetDecorator : Collection : IResultSet
      * will convert the underlying traversable object into an array and
      * get the count of the underlying data.
      */
-    int count() {
+    size_t count() {
         $iterator = this.getInnerIterator();
         if ($iterator instanceof Countable) {
             return $iterator.count();

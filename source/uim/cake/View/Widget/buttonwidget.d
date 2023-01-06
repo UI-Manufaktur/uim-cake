@@ -61,7 +61,7 @@ class ButtonWidget : WidgetInterface
     }
 
 
-    array secureFields(array $data): array
+    array secureFields(array $data)
     {
         if (!isset($data["name"]) || $data["name"] == "") {
             return [];

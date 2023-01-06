@@ -204,7 +204,7 @@ class BreadcrumbsHelper : Helper
     /**
      * Returns the crumb list.
      */
-    array getCrumbs(): array
+    array getCrumbs()
     {
         return this.crumbs;
     }

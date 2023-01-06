@@ -117,7 +117,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setRequired(array $data, IContext $context, string $fieldName): array
+    protected array setRequired(array $data, IContext $context, string $fieldName)
     {
         if (
             empty($data["disabled"])
@@ -143,7 +143,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected function setMaxLength(array $data, IContext $context, string $fieldName): array
+    protected array setMaxLength(array $data, IContext $context, string $fieldName)
     {
         $maxLength = $context.getMaxLength($fieldName);
         if ($maxLength != null) {
@@ -161,7 +161,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setStep(array $data, IContext $context, string $fieldName): array
+    protected array setStep(array $data, IContext $context, string $fieldName)
     {
         $dbType = $context.type($fieldName);
         $fieldDef = $context.attributes($fieldName);
@@ -177,7 +177,7 @@ class BasicWidget : WidgetInterface
     }
 
 
-    function secureFields(array $data): array
+    array secureFields(array $data)
     {
         if (!isset($data["name"]) || $data["name"] == "") {
             return [];

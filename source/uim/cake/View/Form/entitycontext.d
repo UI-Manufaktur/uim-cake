@@ -670,7 +670,7 @@ class EntityContext : IContext
      * @param string $field A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    function attributes(string $field): array
+    array attributes(string $field)
     {
         $parts = explode(".", $field);
         $table = _getTable($parts);
@@ -700,7 +700,7 @@ class EntityContext : IContext
      * @param string $field A dot separated path to check errors on.
      * @return array An array of errors.
      */
-    function error(string $field): array
+    array error(string $field)
     {
         $parts = explode(".", $field);
         try {

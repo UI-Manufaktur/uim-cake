@@ -510,7 +510,7 @@ class QueryExpression : IExpression, Countable
      * Useful to determine if this expression object is void or it will generate
      * a non-empty string when compiled
      */
-    int count(): int
+    size_t count()
     {
         return count(_conditions);
     }

@@ -411,7 +411,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns the number of fields having validation rules
      */
-    int count() {
+    size_t count() {
         return count(_fields);
     }
 

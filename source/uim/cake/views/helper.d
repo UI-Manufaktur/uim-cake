@@ -151,7 +151,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    array implementedEvents(): array
+    array implementedEvents()
     {
         myEventMap = [
             "View.beforeRenderFile": "beforeRenderFile",
@@ -187,7 +187,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array {
+    array __debugInfo() {
         return [
             "helpers": this.helpers,
             "implementedEvents": this.implementedEvents(),

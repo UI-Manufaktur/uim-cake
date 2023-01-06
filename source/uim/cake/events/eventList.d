@@ -80,7 +80,7 @@ class EventList : ArrayAccess, Countable
      * @link https://secure.php.net/manual/en/countable.count.php
      * @return int The custom count as an integer.
      */
-    int count() {
+    size_t count() {
         return count(_events);
     }
 
