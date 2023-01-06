@@ -1,4 +1,4 @@
-module uim.cake.databases.Driver;
+module uim.cake.databases.drivers;
 
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.databases.expressions.QueryExpression;

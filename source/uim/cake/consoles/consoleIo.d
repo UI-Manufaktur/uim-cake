@@ -8,6 +8,9 @@ module uim.cake.consoles;
 @safe:
 import uim.cake;
 
+use RuntimeException;
+use SplFileObject;
+
 /**
  * A wrapper around the various IO operations shell tasks need to do.
  *
@@ -15,15 +18,28 @@ import uim.cake;
  * consistent interface for shells to use. This class also makes mocking streams
  * easy to do in unit tests.
  */
-class ConsoleIo {
-    // Output constant making verbose shells.
-    const int VERBOSE = 2;
+class ConsoleIo
+{
+    /**
+     * Output constant making verbose shells.
+     *
+     * @var int
+     */
+    const VERBOSE = 2;
 
-    // Output constant for making normal shells.
-    const int NORMAL = 1;
+    /**
+     * Output constant for making normal shells.
+     *
+     * @var int
+     */
+    const NORMAL = 1;
 
-    // Output constants for making quiet shells.
-    const int QUIET = 0;
+    /**
+     * Output constants for making quiet shells.
+     *
+     * @var int
+     */
+    const QUIET = 0;
 
     /**
      * The output stream
@@ -46,29 +62,30 @@ class ConsoleIo {
      */
     protected _in;
 
-    // The helper registry.
-    protected HelperRegistry _helpers;
+    /**
+     * The helper registry.
+     *
+     * @var uim.cake.consoles.HelperRegistry
+     */
+    protected _helpers;
 
-    // The current output level.
+    /**
+     * The current output level.
+     */
     protected int _level = self::NORMAL;
 
     /**
      * The number of bytes last written to the output stream
      * used when overwriting the previous message.
-     *
-     * @var int
      */
-    protected _lastWritten = 0;
+    protected int _lastWritten = 0;
 
     /**
      * Whether files should be overwritten
-     *
-     * @var bool
      */
-    protected forceOverwrite = false;
+    protected bool $forceOverwrite = false;
 
     /**
-     * @var bool
      */
     protected bool $interactive = true;
 
@@ -93,8 +110,11 @@ class ConsoleIo {
         _helpers.setIo(this);
     }
 
-    void setInteractive(bool myValue) {
-        this.interactive = myValue;
+    /**
+     * @param bool $value Value
+     */
+    void setInteractive(bool $value) {
+        this.interactive = $value;
     }
 
     /**
@@ -104,7 +124,7 @@ class ConsoleIo {
      * @return int The current output level.
      */
     int level(Nullable!int $level = null) {
-        if ($level  !is null) {
+        if ($level != null) {
             _level = $level;
         }
 
@@ -114,25 +134,25 @@ class ConsoleIo {
     /**
      * Output at the verbose level.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if current level is less than ConsoleIo::VERBOSE
      */
-    Nullable!int verbose(myMessage, int $newlines = 1) {
-        return this.out(myMessage, $newlines, self::VERBOSE);
+    Nullable!int verbose($message, int $newlines = 1) {
+        return this.out($message, $newlines, self::VERBOSE);
     }
 
     /**
      * Output at all levels.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if current level is less than ConsoleIo::QUIET
      */
-    Nullable!int quiet(myMessage, int $newlines = 1) {
-        return this.out(myMessage, $newlines, self::QUIET);
+    Nullable!int quiet($message, int $newlines = 1) {
+        return this.out($message, $newlines, self::QUIET);
     }
 
     /**
@@ -146,15 +166,15 @@ class ConsoleIo {
      * present in most shells. Using ConsoleIo::QUIET for a message means it will always display.
      * While using ConsoleIo::VERBOSE means it will only display when verbose output is toggled.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
      */
-    Nullable!int out(myMessage = "", int $newlines = 1, int $level = self::NORMAL) {
+    Nullable!int out($message = "", int $newlines = 1, int $level = self::NORMAL) {
         if ($level <= _level) {
-            _lastWritten = _out.write(myMessage, $newlines);
+            _lastWritten = _out.write($message, $newlines);
 
             return _lastWritten;
         }
@@ -165,114 +185,116 @@ class ConsoleIo {
     /**
      * Convenience method for out() that wraps message between <info /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int info(myMessage, int $newlines = 1, int $level = self::NORMAL) {
-        myMessageType = "info";
-        myMessage = this.wrapMessageWithType(myMessageType, myMessage);
+    Nullable!int info($message, int $newlines = 1, int $level = self::NORMAL) {
+        $messageType = "info";
+        $message = this.wrapMessageWithType($messageType, $message);
 
-        return this.out(myMessage, $newlines, $level);
+        return this.out($message, $newlines, $level);
     }
 
     /**
      * Convenience method for out() that wraps message between <comment /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int comment(myMessage, int $newlines = 1, int $level = self::NORMAL) {
-        myMessageType = "comment";
-        myMessage = this.wrapMessageWithType(myMessageType, myMessage);
+    Nullable!int comment($message, int $newlines = 1, int $level = self::NORMAL) {
+        $messageType = "comment";
+        $message = this.wrapMessageWithType($messageType, $message);
 
-        return this.out(myMessage, $newlines, $level);
+        return this.out($message, $newlines, $level);
     }
 
     /**
      * Convenience method for err() that wraps message between <warning /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::err
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    int warning(myMessage, int $newlines = 1) {
-        myMessageType = "warning";
-        myMessage = this.wrapMessageWithType(myMessageType, myMessage);
+    int warning($message, int $newlines = 1) {
+        $messageType = "warning";
+        $message = this.wrapMessageWithType($messageType, $message);
 
-        return this.err(myMessage, $newlines);
+        return this.err($message, $newlines);
     }
 
     /**
      * Convenience method for err() that wraps message between <error /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::err
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    int error(myMessage, int $newlines = 1) {
-        myMessageType = "error";
-        myMessage = this.wrapMessageWithType(myMessageType, myMessage);
+    int error($message, int $newlines = 1) {
+        $messageType = "error";
+        $message = this.wrapMessageWithType($messageType, $message);
 
-        return this.err(myMessage, $newlines);
+        return this.err($message, $newlines);
     }
 
     /**
      * Convenience method for out() that wraps message between <success /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#ConsoleIo::out
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int success(myMessage, int $newlines = 1, int $level = self::NORMAL) {
-        myMessageType = "success";
-        myMessage = this.wrapMessageWithType(myMessageType, myMessage);
+    Nullable!int success($message, int $newlines = 1, int $level = self::NORMAL) {
+        $messageType = "success";
+        $message = this.wrapMessageWithType($messageType, $message);
 
-        return this.out(myMessage, $newlines, $level);
+        return this.out($message, $newlines, $level);
     }
 
     /**
      * Halts the the current process with a StopException.
      *
-     * @param string myMessage Error message.
+     * @param string $message Error message.
      * @param int $code Error code.
+     * @return void
+     * @psalm-return never-return
      * @throws uim.cake.consoles.exceptions.StopException
      */
-    void abort(myMessage, $code = ICommand::CODE_ERROR) {
-        this.error(myMessage);
+    void abort($message, $code = ICommand::CODE_ERROR) {
+        this.error($message);
 
-        throw new StopException(myMessage, $code);
+        throw new StopException($message, $code);
     }
 
     /**
      * Wraps a message with a given message type, e.g. <warning>
      *
-     * @param string myMessageType The message type, e.g~ "warning".
-     * @param array<string>|string myMessage The message to wrap.
-     * @return The message wrapped with the given message type.
+     * @param string $messageType The message type, e.g~ "warning".
+     * @param array<string>|string $message The message to wrap.
+     * @return array<string>|string The message wrapped with the given message type.
      */
-    protected string[] wrapMessageWithType(string myMessageType, myMessage) {
-        if (is_array(myMessage)) {
-            foreach ($k, $v; myMessage) {
-                myMessage[$k] = "<{myMessageType}>{$v}</{myMessageType}>";
+    protected function wrapMessageWithType(string $messageType, $message) {
+        if (is_array($message)) {
+            foreach ($message as $k: $v) {
+                $message[$k] = "<{$messageType}>{$v}</{$messageType}>";
             }
         } else {
-            myMessage = "<{myMessageType}>{myMessage}</{myMessageType}>";
+            $message = "<{$messageType}>{$message}</{$messageType}>";
         }
 
-        return myMessage;
+        return $message;
     }
 
     /**
@@ -283,18 +305,18 @@ class ConsoleIo {
      *
      * **Warning** You cannot overwrite text that contains newlines.
      *
-     * @param array<string>|string myMessage The message to output.
+     * @param array<string>|string $message The message to output.
      * @param int $newlines Number of newlines to append.
      * @param int|null $size The number of bytes to overwrite. Defaults to the
      *    length of the last message output.
      */
-    void overwrite(myMessage, int $newlines = 1, Nullable!int $size = null) {
+    void overwrite($message, int $newlines = 1, Nullable!int $size = null) {
         $size = $size ?: _lastWritten;
 
         // Output backspaces.
         this.out(str_repeat("\x08", $size), 0);
 
-        $newBytes = (int)this.out(myMessage, 0);
+        $newBytes = (int)this.out($message, 0);
 
         // Fill any remaining bytes with spaces.
         $fill = $size - $newBytes;
@@ -317,12 +339,12 @@ class ConsoleIo {
      * Outputs a single or multiple error messages to stderr. If no parameters
      * are passed outputs just a newline.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    int err(myMessage = "", int $newlines = 1) {
-        return _err.write(myMessage, $newlines);
+    int err($message = "", int $newlines = 1) {
+        return _err.write($message, $newlines);
     }
 
     /**
@@ -349,22 +371,23 @@ class ConsoleIo {
     /**
      * Prompts the user for input, and returns it.
      *
-     * @param string prompt Prompt text.
+     * @param string $prompt Prompt text.
      * @param string|null $default Default input value.
-     * @return Either the default value, or the user-provided input.
+     * @return string Either the default value, or the user-provided input.
      */
-    string ask(string prompt, Nullable!string default = null) {
+    string ask(string $prompt, Nullable!string $default = null) {
         return _getInput($prompt, null, $default);
     }
 
     /**
      * Change the output mode of the stdout stream
      *
-     * @param int myMode The output mode.
+     * @param int $mode The output mode.
+     * @return void
      * @see uim.cake.consoles.ConsoleOutput::setOutputAs()
      */
-    void setOutputAs(int myMode) {
-        _out.setOutputAs(myMode);
+    void setOutputAs(int $mode) {
+        _out.setOutputAs($mode);
     }
 
     /**
@@ -380,52 +403,53 @@ class ConsoleIo {
     /**
      * Get defined style.
      *
-     * @param string style The style to get.
+     * @param string $style The style to get.
      * @return array
      * @see uim.cake.consoles.ConsoleOutput::getStyle()
      */
-    array getStyle(string style) {
-      return _out.getStyle($style);
+    array getStyle(string $style) {
+        return _out.getStyle($style);
     }
 
     /**
      * Adds a new output style.
      *
-     * @param string style The style to set.
+     * @param string $style The style to set.
      * @param array $definition The array definition of the style to change or create.
+     * @return void
      * @see uim.cake.consoles.ConsoleOutput::setStyle()
      */
-    void setStyle(string style, array $definition) {
+    void setStyle(string $style, array $definition) {
         _out.setStyle($style, $definition);
     }
 
     /**
      * Prompts the user for input based on a list of options, and returns it.
      *
-     * @param string prompt Prompt text.
-     * @param array<string>|string myOptions Array or string of options.
+     * @param string $prompt Prompt text.
+     * @param array<string>|string $options Array or string of options.
      * @param string|null $default Default input value.
-     * @return Either the default value, or the user-provided input.
+     * @return string Either the default value, or the user-provided input.
      */
-    string askChoice(string prompt, myOptions, Nullable!string default = null) {
-        if (is_string(myOptions)) {
-            if (indexOf(myOptions, ",")) {
-                myOptions = explode(",", myOptions);
-            } elseif (indexOf(myOptions, "/")) {
-                myOptions = explode("/", myOptions);
+    string askChoice(string $prompt, $options, Nullable!string $default = null) {
+        if (is_string($options)) {
+            if (strpos($options, ",")) {
+                $options = explode(",", $options);
+            } elseif (strpos($options, "/")) {
+                $options = explode("/", $options);
             } else {
-                myOptions = [myOptions];
+                $options = [$options];
             }
         }
 
-        $printOptions = "(" ~ implode("/", myOptions) ~ ")";
-        myOptions = array_merge(
-            array_map("strtolower", myOptions),
-            array_map("strtoupper", myOptions),
-            myOptions
+        $printOptions = "(" ~ implode("/", $options) ~ ")";
+        $options = array_merge(
+            array_map("strtolower", $options),
+            array_map("strtoupper", $options),
+            $options
         );
         $in = "";
-        while ($in == "" || !in_array($in, myOptions, true)) {
+        while ($in == "" || !in_array($in, $options, true)) {
             $in = _getInput($prompt, $printOptions, $default);
         }
 
@@ -435,34 +459,34 @@ class ConsoleIo {
     /**
      * Prompts the user for input, and returns it.
      *
-     * @param string prompt Prompt text.
-     * @param string|null myOptions String of options. Pass null to omit.
+     * @param string $prompt Prompt text.
+     * @param string|null $options String of options. Pass null to omit.
      * @param string|null $default Default input value. Pass null to omit.
-     * @return Either the default value, or the user-provided input.
+     * @return string Either the default value, or the user-provided input.
      */
-    protected string _getInput(string prompt, Nullable!string myOptions, Nullable!string default) {
+    protected string _getInput(string $prompt, Nullable!string $options, Nullable!string $default) {
         if (!this.interactive) {
             return (string)$default;
         }
 
-        myOptionsText = "";
-        if (isset(myOptions)) {
-            myOptionsText = " myOptions ";
+        $optionsText = "";
+        if (isset($options)) {
+            $optionsText = " $options ";
         }
 
         $defaultText = "";
-        if ($default  !is null) {
+        if ($default != null) {
             $defaultText = "[$default] ";
         }
-        _out.write("<question>" ~ $prompt ~ "</question>myOptionsText\n$defaultText> ", 0);
-        myResult = _in.read();
+        _out.write("<question>" ~ $prompt ~ "</question>$optionsText\n$defaultText> ", 0);
+        $result = _in.read();
 
-        myResult = myResult is null ? "" : trim(myResult);
-        if ($default  !is null && myResult == "") {
+        $result = $result == null ? "" : trim($result);
+        if ($default != null && $result == "") {
             return $default;
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
@@ -470,35 +494,35 @@ class ConsoleIo {
      *
      * Used to enable or disable logging stream output to stdout and stderr
      * If you don"t wish all log output in stdout or stderr
-     * through Cake"s Log class, call this function with `myEnable=false`.
+     * through Cake"s Log class, call this function with `$enable=false`.
      *
-     * @param int|bool myEnable Use a boolean to enable/toggle all logging. Use
+     * @param int|bool $enable Use a boolean to enable/toggle all logging. Use
      *   one of the verbosity constants (self::VERBOSE, self::QUIET, self::NORMAL)
      *   to control logging levels. VERBOSE enables debug logs, NORMAL does not include debug logs,
      *   QUIET disables notice, info and debug logs.
      */
-    void setLoggers(myEnable) {
+    void setLoggers($enable) {
         Log::drop("stdout");
         Log::drop("stderr");
-        if (myEnable == false) {
+        if ($enable == false) {
             return;
         }
         $outLevels = ["notice", "info"];
-        if (myEnable == static::VERBOSE || myEnable == true) {
+        if ($enable == static::VERBOSE || $enable == true) {
             $outLevels[] = "debug";
         }
-        if (myEnable != static::QUIET) {
+        if ($enable != static::QUIET) {
             $stdout = new ConsoleLog([
-                "types":$outLevels,
-                "stream":_out,
+                "types": $outLevels,
+                "stream": _out,
             ]);
-            Log::setConfig("stdout", ["engine":$stdout]);
+            Log::setConfig("stdout", ["engine": $stdout]);
         }
         $stderr = new ConsoleLog([
-            "types":["emergency", "alert", "critical", "error", "warning"],
-            "stream":_err,
+            "types": ["emergency", "alert", "critical", "error", "warning"],
+            "stream": _err,
         ]);
-        Log::setConfig("stderr", ["engine":$stderr]);
+        Log::setConfig("stderr", ["engine": $stderr]);
     }
 
     /**
@@ -507,14 +531,15 @@ class ConsoleIo {
      * Create and render the output for a helper object. If the helper
      * object has not already been loaded, it will be loaded and constructed.
      *
-     * @param string myName The name of the helper to render
-     * @param array<string, mixed> myConfig Configuration data for the helper.
+     * @param string aName The name of the helper to render
+     * @param array<string, mixed> aConfig Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
-    Helper helper(string myName, array myConfig = []) {
-        myName = ucfirst(myName);
+    function helper(string aName, Json aConfig = []): Helper
+    {
+        $name = ucfirst($name);
 
-        return _helpers.load(myName, myConfig);
+        return _helpers.load($name, aConfig);
     }
 
     /**
@@ -527,62 +552,62 @@ class ConsoleIo {
      * If the user replies `a` subsequent `forceOverwrite` parameters will
      * be coerced to true and all files will be overwritten.
      *
-     * @param string myPath The path to create the file at.
-     * @param string myContentss The contents to put into the file.
+     * @param string $path The path to create the file at.
+     * @param string $contents The contents to put into the file.
      * @param bool $forceOverwrite Whether the file should be overwritten.
      *   If true, no question will be asked about whether to overwrite existing files.
      * @return bool Success.
      * @throws uim.cake.consoles.exceptions.StopException When `q` is given as an answer
      *   to whether a file should be overwritten.
      */
-    function createFile(string myPath, string myContentss, bool $forceOverwrite = false) {
+    bool createFile(string $path, string $contents, bool $forceOverwrite = false) {
         this.out();
         $forceOverwrite = $forceOverwrite || this.forceOverwrite;
 
-        if (file_exists(myPath) && $forceOverwrite == false) {
-            this.warning("File `{myPath}` exists");
-            myKey = this.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
-            myKey = strtolower(myKey);
+        if (file_exists($path) && $forceOverwrite == false) {
+            this.warning("File `{$path}` exists");
+            $key = this.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
+            $key = strtolower($key);
 
-            if (myKey == "q") {
+            if ($key == "q") {
                 this.error("Quitting.", 2);
                 throw new StopException("Not creating file. Quitting.");
             }
-            if (myKey == "a") {
+            if ($key == "a") {
                 this.forceOverwrite = true;
-                myKey = "y";
+                $key = "y";
             }
-            if (myKey != "y") {
-                this.out("Skip `{myPath}`", 2);
+            if ($key != "y") {
+                this.out("Skip `{$path}`", 2);
 
                 return false;
             }
         } else {
-            this.out("Creating file {myPath}");
+            this.out("Creating file {$path}");
         }
 
         try {
             // Create the directory using the current user permissions.
-            $directory = dirname(myPath);
+            $directory = dirname($path);
             if (!file_exists($directory)) {
                 mkdir($directory, 0777 ^ umask(), true);
             }
 
-            myfile = new SplFileObject(myPath, "w");
+            $file = new SplFileObject($path, "w");
         } catch (RuntimeException $e) {
-            this.error("Could not write to `{myPath}`. Permission denied.", 2);
+            this.error("Could not write to `{$path}`. Permission denied.", 2);
 
             return false;
         }
 
-        myfile.rewind();
-        myfile.fwrite(myContentss);
-        if (file_exists(myPath)) {
-            this.out("<success>Wrote</success> `{myPath}`");
+        $file.rewind();
+        $file.fwrite($contents);
+        if (file_exists($path)) {
+            this.out("<success>Wrote</success> `{$path}`");
 
             return true;
         }
-        this.error("Could not write to `{myPath}`.", 2);
+        this.error("Could not write to `{$path}`.", 2);
 
         return false;
     }

@@ -40,17 +40,17 @@ class HelperRegistry : ObjectRegistry
      *
      * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}.
      *
-     * @param string myClass Partial classname to resolve.
+     * @param string $class Partial classname to resolve.
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string
      */
-    protected Nullable!string _resolveClassName(string myClass) {
-      myName = App::className(myClass, "Command/Helper", "Helper");
-      if (myName is null) {
-          return App::className(myClass, "Shell/Helper", "Helper");
-      }
+    protected Nullable!string _resolveClassName(string $class) {
+        $name = App::className($class, "Command/Helper", "Helper");
+        if ($name == null) {
+            return App::className($class, "Shell/Helper", "Helper");
+        }
 
-      return myName;
+        return $name;
     }
 
     /**
@@ -59,15 +59,16 @@ class HelperRegistry : ObjectRegistry
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      * and Cake\Core\ObjectRegistry::unload()
      *
-     * @param string myClass The classname that is missing.
-     * @param string|null myPlugin The plugin the helper is missing in.
+     * @param string $class The classname that is missing.
+     * @param string|null $plugin The plugin the helper is missing in.
+     * @return void
      * @throws uim.cake.consoles.exceptions.MissingHelperException
      */
-    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
-      throw new MissingHelperException([
-          "class":myClass,
-          "plugin":myPlugin,
-      ]);
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
+        throw new MissingHelperException([
+            "class": $class,
+            "plugin": $plugin,
+        ]);
     }
 
     /**
@@ -75,14 +76,15 @@ class HelperRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param string myClass The classname to create.
-     * @param string myAlias The alias of the helper.
-     * @param array<string, mixed> myConfig An array of settings to use for the helper.
+     * @param string $class The classname to create.
+     * @param string $alias The alias of the helper.
+     * @param array<string, mixed> aConfig An array of settings to use for the helper.
      * @return uim.cake.consoles.Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected Helper _create(myClass, string myAlias, array myConfig) {
-      /** @var uim.cake.consoles.Helper */
-      return new myClass(_io, myConfig);
+    protected function _create($class, string $alias, Json aConfig): Helper
+    {
+        /** @var uim.cake.consoles.Helper */
+        return new $class(_io, aConfig);
     }
 }

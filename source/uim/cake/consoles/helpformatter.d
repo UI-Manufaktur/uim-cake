@@ -8,6 +8,8 @@ module uim.cake.consoles;
 @safe:
 import uim.cake;
 
+use SimpleXMLElement;
+
 /**
  * HelpFormatter formats help for console shells. Can format to either
  * text or XML formats. Uses ConsoleOptionParser methods to generate help.
@@ -17,7 +19,8 @@ import uim.cake;
  *
  * Xml output is useful for integration with other tools like IDE"s or other build tools.
  */
-class HelpFormatter {
+class HelpFormatter
+{
     /**
      * The maximum number of arguments shown when generating usage.
      */
@@ -25,10 +28,8 @@ class HelpFormatter {
 
     /**
      * The maximum number of options shown when generating usage.
-     *
-     * @var int
      */
-    protected _maxOptions = 6;
+    protected int _maxOptions = 6;
 
     /**
      * Option parser.
@@ -54,10 +55,10 @@ class HelpFormatter {
     /**
      * Set the alias
      *
-     * @param string myAlias The alias
+     * @param string $alias The alias
      */
-    void setAlias(string myAlias) {
-        _alias = myAlias;
+    void setAlias(string $alias) {
+        _alias = $alias;
     }
 
     /**
@@ -83,9 +84,9 @@ class HelpFormatter {
             $max = _getMaxLength($subcommands) + 2;
             foreach ($subcommands as $command) {
                 $out[] = Text::wrapBlock($command.help($max), [
-                    "width":$width,
-                    "indent":str_repeat(" ", $max),
-                    "indentAt":1,
+                    "width": $width,
+                    "indent": str_repeat(" ", $max),
+                    "indentAt": 1,
                 ]);
             }
             $out[] = "";
@@ -96,16 +97,16 @@ class HelpFormatter {
             $out[] = "";
         }
 
-        myOptions = $parser.options();
-        if (myOptions) {
-            $max = _getMaxLength(myOptions) + 8;
+        $options = $parser.options();
+        if ($options) {
+            $max = _getMaxLength($options) + 8;
             $out[] = "<info>Options:</info>";
             $out[] = "";
-            foreach (myOptions as $option) {
+            foreach ($options as $option) {
                 $out[] = Text::wrapBlock($option.help($max), [
-                    "width":$width,
-                    "indent":str_repeat(" ", $max),
-                    "indentAt":1,
+                    "width": $width,
+                    "indent": str_repeat(" ", $max),
+                    "indentAt": 1,
                 ]);
             }
             $out[] = "";
@@ -118,9 +119,9 @@ class HelpFormatter {
             $out[] = "";
             foreach ($arguments as $argument) {
                 $out[] = Text::wrapBlock($argument.help($max), [
-                    "width":$width,
-                    "indent":str_repeat(" ", $max),
-                    "indentAt":1,
+                    "width": $width,
+                    "indent": str_repeat(" ", $max),
+                    "indentAt": 1,
                 ]);
             }
             $out[] = "";
@@ -145,14 +146,14 @@ class HelpFormatter {
         if (!empty($subcommands)) {
             $usage[] = "[subcommand]";
         }
-        myOptions = [];
+        $options = [];
         foreach (_parser.options() as $option) {
-            myOptions[] = $option.usage();
+            $options[] = $option.usage();
         }
-        if (count(myOptions) > _maxOptions) {
-            myOptions = ["[options]"];
+        if (count($options) > _maxOptions) {
+            $options = ["[options]"];
         }
-        $usage = array_merge($usage, myOptions);
+        $usage = array_merge($usage, $options);
         $args = [];
         foreach (_parser.arguments() as $argument) {
             $args[] = $argument.usage();
@@ -168,12 +169,11 @@ class HelpFormatter {
     /**
      * Iterate over a collection and find the longest named thing.
      *
-     * @param array<uim.cake.consoles.ConsoleInputOption|uim.cake.consoles.ConsoleInputArgument|uim.cake.consoles.ConsoleInputSubcommand> myCollection The collection to find a max length of.
-     * @return int
+     * @param array<uim.cake.consoles.ConsoleInputOption|uim.cake.consoles.ConsoleInputArgument|uim.cake.consoles.ConsoleInputSubcommand> $collection The collection to find a max length of.
      */
-    protected int _getMaxLength(array myCollection) {
+    protected int _getMaxLength(array $collection) {
         $max = 0;
-        foreach (myCollection as $item) {
+        foreach ($collection as $item) {
             $max = strlen($item.name()) > $max ? strlen($item.name()) : $max;
         }
 
@@ -196,9 +196,9 @@ class HelpFormatter {
         foreach ($parser.subcommands() as $command) {
             $command.xml($subcommands);
         }
-        myOptions = $xml.addChild("options");
+        $options = $xml.addChild("options");
         foreach ($parser.options() as $option) {
-            $option.xml(myOptions);
+            $option.xml($options);
         }
         $arguments = $xml.addChild("arguments");
         foreach ($parser.arguments() as $argument) {

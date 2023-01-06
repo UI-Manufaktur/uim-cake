@@ -8,6 +8,8 @@ module uim.cake.consoles;
 @safe:
 import uim.cake;
 
+use InvalidArgumentException;
+
 /**
  * Object wrapper for outputting information from a shell application.
  * Can be connected to any stream resource that can be used with fopen()
@@ -35,17 +37,28 @@ import uim.cake;
  * See ConsoleOutput::styles() to learn more about defining your own styles. Nested styles are not supported
  * at this time.
  */
-class ConsoleOutput {
+class ConsoleOutput
+{
     /**
      * Raw output constant - no modification of output text.
-    */
-    const int RAW = 0;
+     *
+     * @var int
+     */
+    const RAW = 0;
 
-    // Plain output - tags will be stripped.
-    const int PLAIN = 1;
+    /**
+     * Plain output - tags will be stripped.
+     *
+     * @var int
+     */
+    const PLAIN = 1;
 
-    // Color output - Convert known tags in to ANSI color escape codes.
-    const int COLOR = 2;
+    /**
+     * Color output - Convert known tags in to ANSI color escape codes.
+     *
+     * @var int
+     */
+    const COLOR = 2;
 
     /**
      * Constant for a newline.
@@ -63,9 +76,8 @@ class ConsoleOutput {
      * The current output type.
      *
      * @see setOutputAs() For manipulation.
-     * @var int
      */
-    protected _outputAs = self::COLOR;
+    protected int _outputAs = self::COLOR;
 
     /**
      * text colors used in colored output.
@@ -73,14 +85,14 @@ class ConsoleOutput {
      * @var array<string, int>
      */
     protected static _foregroundColors = [
-        "black":30,
-        "red":31,
-        "green":32,
-        "yellow":33,
-        "blue":34,
-        "magenta":35,
-        "cyan":36,
-        "white":37,
+        "black": 30,
+        "red": 31,
+        "green": 32,
+        "yellow": 33,
+        "blue": 34,
+        "magenta": 35,
+        "cyan": 36,
+        "white": 37,
     ];
 
     /**
@@ -89,14 +101,14 @@ class ConsoleOutput {
      * @var array<string, int>
      */
     protected static _backgroundColors = [
-        "black":40,
-        "red":41,
-        "green":42,
-        "yellow":43,
-        "blue":44,
-        "magenta":45,
-        "cyan":46,
-        "white":47,
+        "black": 40,
+        "red": 41,
+        "green": 42,
+        "yellow": 43,
+        "blue": 44,
+        "magenta": 45,
+        "cyan": 46,
+        "white": 47,
     ];
 
     /**
@@ -105,10 +117,10 @@ class ConsoleOutput {
      * @var array<string, int>
      */
     protected static _options = [
-        "bold":1,
-        "underline":4,
-        "blink":5,
-        "reverse":7,
+        "bold": 1,
+        "underline": 4,
+        "blink": 5,
+        "reverse": 7,
     ];
 
     /**
@@ -118,17 +130,17 @@ class ConsoleOutput {
      * @var array<string, array>
      */
     protected static _styles = [
-        "emergency":["text":"red"],
-        "alert":["text":"red"],
-        "critical":["text":"red"],
-        "error":["text":"red"],
-        "warning":["text":"yellow"],
-        "info":["text":"cyan"],
-        "debug":["text":"yellow"],
-        "success":["text":"green"],
-        "comment":["text":"blue"],
-        "question":["text":"magenta"],
-        "notice":["text":"cyan"],
+        "emergency": ["text": "red"],
+        "alert": ["text": "red"],
+        "critical": ["text": "red"],
+        "error": ["text": "red"],
+        "warning": ["text": "yellow"],
+        "info": ["text": "cyan"],
+        "debug": ["text": "yellow"],
+        "success": ["text": "green"],
+        "comment": ["text": "blue"],
+        "question": ["text": "magenta"],
+        "notice": ["text": "cyan"],
     ];
 
     /**
@@ -137,16 +149,16 @@ class ConsoleOutput {
      * Checks for a pretty console environment. Ansicon and ConEmu allows
      *  pretty consoles on Windows, and is supported.
      *
-     * @param string stream The identifier of the stream to write output to.
+     * @param string $stream The identifier of the stream to write output to.
      */
-    this(string stream = "php://stdout") {
+    this(string $stream = "php://stdout") {
         _output = fopen($stream, "wb");
 
         if (
             (
                 DIRECTORY_SEPARATOR == "\\" &&
-                indexOf(strtolower(php_uname("v")), "windows 10") == false &&
-                indexOf(strtolower((string)env("SHELL")), "bash.exe") == false &&
+                strpos(strtolower(php_uname("v")), "windows 10") == false &&
+                strpos(strtolower((string)env("SHELL")), "bash.exe") == false &&
                 !(bool)env("ANSICON") &&
                 env("ConEmuANSI") != "ON"
             ) ||
@@ -155,7 +167,7 @@ class ConsoleOutput {
                 !posix_isatty(_output)
             ) ||
             (
-                env("NO_COLOR")  !is null
+                env("NO_COLOR") != null
             )
         ) {
             _outputAs = self::PLAIN;
@@ -166,25 +178,25 @@ class ConsoleOutput {
      * Outputs a single or multiple messages to stdout or stderr. If no parameters
      * are passed, outputs just a newline.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to output.
      */
-    int write(myMessage, int $newlines = 1) {
-        if (is_array(myMessage)) {
-            myMessage = implode(static::LF, myMessage);
+    function write($message, int $newlines = 1) {
+        if (is_array($message)) {
+            $message = implode(static::LF, $message);
         }
 
-        return _write(this.styleText(myMessage . str_repeat(static::LF, $newlines)));
+        return _write(this.styleText($message . str_repeat(static::LF, $newlines)));
     }
 
     /**
      * Apply styling to text.
      *
-     * @param string text Text with styling tags.
-     * @return String with color codes added.
+     * @param string $text Text with styling tags.
+     * @return string String with color codes added.
      */
-    string styleText(string text) {
+    string styleText(string $text) {
         if (_outputAs == static::RAW) {
             return $text;
         }
@@ -205,6 +217,7 @@ class ConsoleOutput {
      * Replace tags with color codes.
      *
      * @param array<string, string> $matches An array of matches to replace.
+     * @return string
      */
     protected string _replaceTags(array $matches) {
         $style = this.getStyle($matches["tag"]);
@@ -220,8 +233,8 @@ class ConsoleOutput {
             $styleInfo[] = static::_backgroundColors[$style["background"]];
         }
         unset($style["text"], $style["background"]);
-        foreach ($option: myValue; $style) {
-            if (myValue) {
+        foreach ($style as $option: $value) {
+            if ($value) {
                 $styleInfo[] = static::_options[$option];
             }
         }
@@ -232,20 +245,20 @@ class ConsoleOutput {
     /**
      * Writes a message to the output stream.
      *
-     * @param string myMessage Message to write.
-     * @return The number of bytes returned from writing to output.
+     * @param string $message Message to write.
+     * @return int The number of bytes returned from writing to output.
      */
-    protected int _write(string myMessage) {
-        return (int)fwrite(_output, myMessage);
+    protected int _write(string $message) {
+        return (int)fwrite(_output, $message);
     }
 
     /**
      * Gets the current styles offered
      *
-     * @param string style The style to get.
+     * @param string $style The style to get.
      * @return array The style or empty array.
      */
-    auto getStyle(string style) {
+    array getStyle(string $style) {
         return static::_styles[$style] ?? [];
     }
 
@@ -255,7 +268,7 @@ class ConsoleOutput {
      * ### Creates or modifies an existing style.
      *
      * ```
-     * $output.setStyle("annoy", ["text":"purple", "background":"yellow", "blink":true]);
+     * $output.setStyle("annoy", ["text": "purple", "background": "yellow", "blink": true]);
      * ```
      *
      * ### Remove a style
@@ -264,10 +277,10 @@ class ConsoleOutput {
      * this.output.setStyle("annoy", []);
      * ```
      *
-     * @param string style The style to set.
+     * @param string $style The style to set.
      * @param array $definition The array definition of the style to change or create..
      */
-    void setStyle(string style, array $definition) {
+    void setStyle(string $style, array $definition) {
         if (!$definition) {
             unset(static::_styles[$style]);
 
@@ -296,21 +309,22 @@ class ConsoleOutput {
     /**
      * Set the output type on how formatting tags are treated.
      *
-     * @param int myType The output type to use. Should be one of the class constants.
+     * @param int $type The output type to use. Should be one of the class constants.
+     * @return void
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
-    void setOutputAs(int myType) {
-        if (!in_array(myType, [self::RAW, self::PLAIN, self::COLOR], true)) {
-            throw new InvalidArgumentException(sprintf("Invalid output type '%s'.", myType));
+    void setOutputAs(int $type) {
+        if (!in_array($type, [self::RAW, self::PLAIN, self::COLOR], true)) {
+            throw new InvalidArgumentException(sprintf("Invalid output type '%s'.", $type));
         }
 
-        _outputAs = myType;
+        _outputAs = $type;
     }
 
     // Clean up and close handles
-    auto __destruct() {
-      if (is_resource(_output)) {
-        fclose(_output);
-      }
+    function __destruct() {
+        if (is_resource(_output)) {
+            fclose(_output);
+        }
     }
 }

@@ -8,6 +8,8 @@ module uim.cake.consoles;
 @safe:
 import uim.cake;
 
+use LogicException;
+
 /**
  * Handles parsing the ARGV in the command line and provides support
  * for GetOpt compatible option definition. Provides a builder pattern implementation
@@ -30,20 +32,20 @@ import uim.cake;
  * Calling options can be done using syntax similar to most *nix command line tools. Long options
  * cane either include an `=` or leave it out.
  *
- * `cake my_commandName --connection default --name=something`
+ * `cake my_command --connection default --name=something`
  *
  * Short options can be defined singly or in groups.
  *
- * `cake my_commandName -cn`
+ * `cake my_command -cn`
  *
  * Short options can be combined into groups as seen above. Each letter in a group
  * will be treated as a separate option. The previous example is equivalent to:
  *
- * `cake my_commandName -c -n`
+ * `cake my_command -c -n`
  *
  * Short options can also accept values:
  *
- * `cake my_commandName -c default`
+ * `cake my_command -c default`
  *
  * ### Positional arguments
  *
@@ -52,7 +54,7 @@ import uim.cake;
  * declare arguments as optional, by setting the required param to false.
  *
  * ```
- * $parser.addArgument("model", ["required":false]);
+ * $parser.addArgument("model", ["required": false]);
  * ```
  *
  * ### Providing Help text
@@ -60,7 +62,8 @@ import uim.cake;
  * By providing help text for your positional arguments and named arguments, the ConsoleOptionParser
  * can generate a help display for you. You can view the help for shells by using the `--help` or `-h` switch.
  */
-class ConsoleOptionParser {
+class ConsoleOptionParser
+{
     /**
      * Description text - displays before options when help is generated
      *
@@ -108,13 +111,13 @@ class ConsoleOptionParser {
 
     /**
      * Subcommand sorting option
-     *
-     * @var bool
      */
-    protected _subcommandSort = true;
+    protected bool _subcommandSort = true;
 
-    // Command name.
-    protected string _commandName = "";
+    /**
+     * Command name.
+     */
+    protected string _command = "";
 
     /**
      * Array of args (argv).
@@ -127,35 +130,34 @@ class ConsoleOptionParser {
      * Root alias used in help output
      *
      * @see uim.cake.consoles.HelpFormatter::setAlias()
-     * @var string
      */
-    protected rootName = "cake";
+    protected string $rootName = "cake";
 
     /**
      * Construct an OptionParser so you can define its behavior
      *
-     * @param string command The command name this parser is for. The command name is used for generating help.
+     * @param string $command The command name this parser is for. The command name is used for generating help.
      * @param bool $defaultOptions Whether you want the verbose and quiet options set. Setting
      *  this to false will prevent the addition of `--verbose` & `--quiet` options.
      */
-    this(string command = "", bool $defaultOptions = true) {
+    this(string $command = "", bool $defaultOptions = true) {
         this.setCommand($command);
 
         this.addOption("help", [
-            "short":"h",
-            "help":"Display this help.",
-            "boolean":true,
+            "short": "h",
+            "help": "Display this help.",
+            "boolean": true,
         ]);
 
         if ($defaultOptions) {
             this.addOption("verbose", [
-                "short":"v",
-                "help":"Enable verbose output.",
-                "boolean":true,
+                "short": "v",
+                "help": "Enable verbose output.",
+                "boolean": true,
             ]).addOption("quiet", [
-                "short":"q",
-                "help":"Enable quiet output.",
-                "boolean":true,
+                "short": "q",
+                "help": "Enable quiet output.",
+                "boolean": true,
             ]);
         }
     }
@@ -163,11 +165,11 @@ class ConsoleOptionParser {
     /**
      * Static factory method for creating new OptionParsers so you can chain methods off of them.
      *
-     * @param string command The command name this parser is for. The command name is used for generating help.
+     * @param string $command The command name this parser is for. The command name is used for generating help.
      * @param bool $defaultOptions Whether you want the verbose and quiet options set.
      * @return static
      */
-    static function create(string command, bool $defaultOptions = true) {
+    static function create(string $command, bool $defaultOptions = true) {
         return new static($command, $defaultOptions);
     }
 
@@ -176,15 +178,15 @@ class ConsoleOptionParser {
      *
      * ```
      * $spec = [
-     *      "description":"text",
-     *      "epilog":"text",
-     *      "arguments":[
+     *      "description": "text",
+     *      "epilog": "text",
+     *      "arguments": [
      *          // list of arguments compatible with addArguments.
      *      ],
-     *      "options":[
+     *      "options": [
      *          // list of options compatible with addOptions
      *      ],
-     *      "subcommands":[
+     *      "subcommands": [
      *          // list of subcommands to add.
      *      ]
      * ];
@@ -221,16 +223,14 @@ class ConsoleOptionParser {
      * @return array<string, mixed>
      */
     array toArray() {
-        myResult = [
-            "command":_commandName,
-            "arguments":_args,
-            "options":_options,
-            "subcommands":_subcommands,
-            "description":_description,
-            "epilog":_epilog,
+        return [
+            "command": _command,
+            "arguments": _args,
+            "options": _options,
+            "subcommands": _subcommands,
+            "description": _description,
+            "epilog": _epilog,
         ];
-
-        return myResult;
     }
 
     /**
@@ -265,28 +265,32 @@ class ConsoleOptionParser {
     /**
      * Sets the command name for shell/task.
      *
-     * @param string text The text to set.
+     * @param string $text The text to set.
      * @return this
      */
-    auto setCommand(string text) {
-        _commandName = Inflector::underscore($text);
+    function setCommand(string $text) {
+        _command = Inflector::underscore($text);
 
         return this;
     }
 
-    // Gets the command name for shell/task.
+    /**
+     * Gets the command name for shell/task.
+     *
+     * @return string The value of the command.
+     */
     string getCommand() {
-        return _commandName;
+        return _command;
     }
 
     /**
      * Sets the description text for shell/task.
      *
-     * @param array<string>|string text The text to set. If an array the
+     * @param array<string>|string $text The text to set. If an array the
      *   text will be imploded with "\n".
      * @return this
      */
-    auto setDescription($text) {
+    function setDescription($text) {
         if (is_array($text)) {
             $text = implode("\n", $text);
         }
@@ -295,7 +299,11 @@ class ConsoleOptionParser {
         return this;
     }
 
-    // Gets the description text for shell/task.
+    /**
+     * Gets the description text for shell/task.
+     *
+     * @return string The value of the description
+     */
     string getDescription() {
         return _description;
     }
@@ -304,12 +312,11 @@ class ConsoleOptionParser {
      * Sets an epilog to the parser. The epilog is added to the end of
      * the options and arguments listing when help is generated.
      *
-     * @param array<string>|string text The text to set. If an array the text will
+     * @param array<string>|string $text The text to set. If an array the text will
      *   be imploded with "\n".
      * @return this
      */
-    auto setEpilog(stringtext) { 
-    auto setEpilog($text) {
+    function setEpilog($text) {
         if (is_array($text)) {
             $text = implode("\n", $text);
         }
@@ -318,25 +325,31 @@ class ConsoleOptionParser {
         return this;
     }
 
-    // Gets the epilog.
-    string epilog() {
+    /**
+     * Gets the epilog.
+     *
+     * @return string The value of the epilog.
+     */
+    string getEpilog() {
         return _epilog;
     }
 
     /**
      * Enables sorting of subcommands
      *
-     * @param bool myValue Whether to sort subcommands
+     * @param bool $value Whether to sort subcommands
      * @return this
      */
-    function enableSubcommandSort(bool myValue = true) {
-        _subcommandSort = myValue;
+    function enableSubcommandSort(bool $value = true) {
+        _subcommandSort = $value;
 
         return this;
     }
 
     /**
      * Checks whether sorting is enabled for subcommands.
+     *
+     * @return bool
      */
     bool isSubcommandSortEnabled() {
         return _subcommandSort;
@@ -361,41 +374,43 @@ class ConsoleOptionParser {
      * - `choices` A list of valid choices for this option. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param uim.cake.consoles.ConsoleInputOption|string myName The long name you want to the value to be parsed out
+     * @param uim.cake.consoles.ConsoleInputOption|string aName The long name you want to the value to be parsed out
      *   as when options are parsed. Will also accept an instance of ConsoleInputOption.
-     * @param array<string, mixed> myOptions An array of parameters that define the behavior of the option
+     * @param array<string, mixed> $options An array of parameters that define the behavior of the option
      * @return this
      */
-    function addOption(myName, array myOptions = []) {
-        if (myName instanceof ConsoleInputOption) {
-            $option = myName;
-            myName = $option.name();
+    function addOption($name, array $options = []) {
+        if ($name instanceof ConsoleInputOption) {
+            $option = $name;
+            $name = $option.name();
         } else {
             $defaults = [
-                "short":"",
-                "help":"",
-                "default":null,
-                "boolean":false,
-                "multiple":false,
-                "choices":[],
-                "required":false,
+                "short": "",
+                "help": "",
+                "default": null,
+                "boolean": false,
+                "multiple": false,
+                "choices": [],
+                "required": false,
+                "prompt": null,
             ];
-            myOptions += $defaults;
+            $options += $defaults;
             $option = new ConsoleInputOption(
-                myName,
-                myOptions["short"],
-                myOptions["help"],
-                myOptions["boolean"],
-                myOptions["default"],
-                myOptions["choices"],
-                myOptions["multiple"],
-                myOptions["required"]
+                $name,
+                $options["short"],
+                $options["help"],
+                $options["boolean"],
+                $options["default"],
+                $options["choices"],
+                $options["multiple"],
+                $options["required"],
+                $options["prompt"]
             );
         }
-        _options[myName] = $option;
+        _options[$name] = $option;
         asort(_options);
         if ($option.short()) {
-            _shortOptions[$option.short()] = myName;
+            _shortOptions[$option.short()] = $name;
             asort(_shortOptions);
         }
 
@@ -405,11 +420,11 @@ class ConsoleOptionParser {
     /**
      * Remove an option from the option parser.
      *
-     * @param string myName The option name to remove.
+     * @param string aName The option name to remove.
      * @return this
      */
-    function removeOption(string myName) {
-        unset(_options[myName]);
+    function removeOption(string aName) {
+        unset(_options[$name]);
 
         return this;
     }
@@ -427,33 +442,33 @@ class ConsoleOptionParser {
      * - `choices` A list of valid choices for this argument. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param uim.cake.consoles.ConsoleInputArgument|string myName The name of the argument.
+     * @param uim.cake.consoles.ConsoleInputArgument|string aName The name of the argument.
      *   Will also accept an instance of ConsoleInputArgument.
-     * @param array<string, mixed> myParams Parameters for the argument, see above.
+     * @param array<string, mixed> $params Parameters for the argument, see above.
      * @return this
      */
-    function addArgument(myName, array myParams = []) {
-        if (myName instanceof ConsoleInputArgument) {
-            $arg = myName;
+    function addArgument($name, array $params = []) {
+        if ($name instanceof ConsoleInputArgument) {
+            $arg = $name;
             $index = count(_args);
         } else {
             $defaults = [
-                "name":myName,
-                "help":"",
-                "index":count(_args),
-                "required":false,
-                "choices":[],
+                "name": $name,
+                "help": "",
+                "index": count(_args),
+                "required": false,
+                "choices": [],
             ];
-            myOptions = myParams + $defaults;
-            $index = myOptions["index"];
-            unset(myOptions["index"]);
-            $arg = new ConsoleInputArgument(myOptions);
+            $options = $params + $defaults;
+            $index = $options["index"];
+            unset($options["index"]);
+            $arg = new ConsoleInputArgument($options);
         }
         foreach (_args as $a) {
             if ($a.isEqualTo($arg)) {
                 return this;
             }
-            if (!empty(myOptions["required"]) && !$a.isRequired()) {
+            if (!empty($options["required"]) && !$a.isRequired()) {
                 throw new LogicException("A required argument cannot follow an optional one");
             }
         }
@@ -472,12 +487,12 @@ class ConsoleOptionParser {
      * @return this
      */
     function addArguments(array $args) {
-        foreach ($args as myName: myParams) {
-            if (myParams instanceof ConsoleInputArgument) {
-                myName = myParams;
-                myParams = [];
+        foreach ($args as $name: $params) {
+            if ($params instanceof ConsoleInputArgument) {
+                $name = $params;
+                $params = [];
             }
-            this.addArgument(myName, myParams);
+            this.addArgument($name, $params);
         }
 
         return this;
@@ -487,17 +502,17 @@ class ConsoleOptionParser {
      * Add multiple options at once. Takes an array of option definitions.
      * The keys are used as option names, and the values as params for the option.
      *
-     * @param array<string, mixed> myOptions Array of options to add.
+     * @param array<string, mixed> $options Array of options to add.
      * @see uim.cake.consoles.ConsoleOptionParser::addOption()
      * @return this
      */
-    function addOptions(array myOptions) {
-        foreach (myOptions as myName: myParams) {
-            if (myParams instanceof ConsoleInputOption) {
-                myName = myParams;
-                myParams = [];
+    function addOptions(array $options) {
+        foreach ($options as $name: $params) {
+            if ($params instanceof ConsoleInputOption) {
+                $name = $params;
+                $params = [];
             }
-            this.addOption(myName, myParams);
+            this.addOption($name, $params);
         }
 
         return this;
@@ -514,27 +529,27 @@ class ConsoleOptionParser {
      *    specific option parsers. When help is generated for a subcommand, if a parser is present
      *    it will be used.
      *
-     * @param uim.cake.consoles.ConsoleInputSubcommand|string myName Name of the subcommand.
+     * @param uim.cake.consoles.ConsoleInputSubcommand|string aName Name of the subcommand.
      *   Will also accept an instance of ConsoleInputSubcommand.
-     * @param array<string, mixed> myOptions Array of params, see above.
+     * @param array<string, mixed> $options Array of params, see above.
      * @return this
      */
-    function addSubcommand(myName, array myOptions = []) {
-        if (myName instanceof ConsoleInputSubcommand) {
-            $command = myName;
-            myName = $command.name();
+    function addSubcommand($name, array $options = []) {
+        if ($name instanceof ConsoleInputSubcommand) {
+            $command = $name;
+            $name = $command.name();
         } else {
-            myName = Inflector::underscore(myName);
+            $name = Inflector::underscore($name);
             $defaults = [
-                "name":myName,
-                "help":"",
-                "parser":null,
+                "name": $name,
+                "help": "",
+                "parser": null,
             ];
-            myOptions += $defaults;
+            $options += $defaults;
 
-            $command = new ConsoleInputSubcommand(myOptions);
+            $command = new ConsoleInputSubcommand($options);
         }
-        _subcommands[myName] = $command;
+        _subcommands[$name] = $command;
         if (_subcommandSort) {
             asort(_subcommands);
         }
@@ -545,11 +560,11 @@ class ConsoleOptionParser {
     /**
      * Remove a subcommand from the option parser.
      *
-     * @param string myName The subcommand name to remove.
+     * @param string aName The subcommand name to remove.
      * @return this
      */
-    function removeSubcommand(string myName) {
-        unset(_subcommands[myName]);
+    function removeSubcommand(string aName) {
+        unset(_subcommands[$name]);
 
         return this;
     }
@@ -561,12 +576,12 @@ class ConsoleOptionParser {
      * @return this
      */
     function addSubcommands(array $commands) {
-        foreach ($commands as myName: myParams) {
-            if (myParams instanceof ConsoleInputSubcommand) {
-                myName = myParams;
-                myParams = [];
+        foreach ($commands as $name: $params) {
+            if ($params instanceof ConsoleInputSubcommand) {
+                $name = $params;
+                $params = [];
             }
-            this.addSubcommand(myName, myParams);
+            this.addSubcommand($name, $params);
         }
 
         return this;
@@ -581,7 +596,9 @@ class ConsoleOptionParser {
         return _args;
     }
 
-    // Get the list of argument names.
+    /**
+     * Get the list of argument names.
+     */
     string[] argumentNames() {
         $out = [];
         foreach (_args as $arg) {
@@ -615,59 +632,82 @@ class ConsoleOptionParser {
      * to parse the $argv
      *
      * @param array $argv Array of args (argv) to parse.
-     * @return array [myParams, $args]
+     * @param uim.cake.consoles.ConsoleIo|null $io A ConsoleIo instance or null. If null prompt options will error.
+     * @return array [$params, $args]
      * @throws uim.cake.consoles.exceptions.ConsoleException When an invalid parameter is encountered.
      */
-    array parse(array $argv) {
+    array parse(array $argv, ?ConsoleIo $io = null) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         if (isset(_subcommands[$command])) {
             array_shift($argv);
         }
         if (isset(_subcommands[$command]) && _subcommands[$command].parser()) {
             /** @psalm-suppress PossiblyNullReference */
-            return _subcommands[$command].parser().parse($argv);
+            return _subcommands[$command].parser().parse($argv, $io);
         }
-        myParams = $args = [];
+        $params = $args = [];
         _tokens = $argv;
-        while (($token = array_shift(_tokens))  !is null) {
+        while (($token = array_shift(_tokens)) != null) {
             $token = (string)$token;
             if (isset(_subcommands[$token])) {
                 continue;
             }
             if (substr($token, 0, 2) == "--") {
-                myParams = _parseLongOption($token, myParams);
+                $params = _parseLongOption($token, $params);
             } elseif (substr($token, 0, 1) == "-") {
-                myParams = _parseShortOption($token, myParams);
+                $params = _parseShortOption($token, $params);
             } else {
                 $args = _parseArg($token, $args);
             }
         }
+
+        if (isset($params["help"])) {
+            return [$params, $args];
+        }
+
         foreach (_args as $i: $arg) {
-            if ($arg.isRequired() && !isset($args[$i]) && empty(myParams["help"])) {
+            if ($arg.isRequired() && !isset($args[$i])) {
                 throw new ConsoleException(
                     sprintf("Missing required argument. The `%s` argument is required.", $arg.name())
                 );
             }
         }
         foreach (_options as $option) {
-            myName = $option.name();
+            $name = $option.name();
             $isBoolean = $option.isBoolean();
             $default = $option.defaultValue();
 
-            if ($default  !is null && !isset(myParams[myName]) && !$isBoolean) {
-                myParams[myName] = $default;
+            $useDefault = !isset($params[$name]);
+            if ($default != null && $useDefault && !$isBoolean) {
+                $params[$name] = $default;
             }
-            if ($isBoolean && !isset(myParams[myName])) {
-                myParams[myName] = false;
+            if ($isBoolean && $useDefault) {
+                $params[$name] = false;
             }
-            if ($option.isRequired() && !isset(myParams[myName])) {
+            $prompt = $option.prompt();
+            if (!isset($params[$name]) && $prompt) {
+                if (!$io) {
+                    throw new ConsoleException(
+                        "Cannot use interactive option prompts without a ConsoleIo instance~ " ~
+                        "Please provide a `$io` parameter to `parse()`."
+                    );
+                }
+                $choices = $option.choices();
+                if ($choices) {
+                    $value = $io.askChoice($prompt, $choices);
+                } else {
+                    $value = $io.ask($prompt);
+                }
+                $params[$name] = $value;
+            }
+            if ($option.isRequired() && !isset($params[$name])) {
                 throw new ConsoleException(
-                    sprintf("Missing required option. The `%s` option is required and has no default value.", myName)
+                    sprintf("Missing required option. The `%s` option is required and has no default value.", $name)
                 );
             }
         }
 
-        return [myParams, $args];
+        return [$params, $args];
     }
 
     /**
@@ -678,12 +718,12 @@ class ConsoleOptionParser {
      *
      * @param string|null $subcommand If present and a valid subcommand that has a linked parser.
      *    That subcommands help will be shown instead.
-     * @param string format Define the output format, can be text or XML
+     * @param string $format Define the output format, can be text or XML
      * @param int $width The width to format user content to. Defaults to 72
-     * @return  Generated help.
+     * @return string Generated help.
      */
-    string help(Nullable!string subcommand = null, string format = "text", int $width = 72) {
-        if ($subcommand is null) {
+    string help(Nullable!string $subcommand = null, string $format = "text", int $width = 72) {
+        if ($subcommand == null) {
             $formatter = new HelpFormatter(this);
             $formatter.setAlias(this.rootName);
 
@@ -719,7 +759,7 @@ class ConsoleOptionParser {
         }
 
         $rootCommand = this.getCommand();
-        myMessage = sprintf(
+        $message = sprintf(
             "Unable to find the `%s %s` subcommand. See `bin/%s %s --help`.",
             $rootCommand,
             $subcommand,
@@ -727,7 +767,7 @@ class ConsoleOptionParser {
             $rootCommand
         );
         throw new MissingOptionException(
-            myMessage,
+            $message,
             $subcommand,
             array_keys(this.subcommands())
         );
@@ -736,11 +776,11 @@ class ConsoleOptionParser {
     /**
      * Set the root name used in the HelpFormatter
      *
-     * @param string myName The root command name
+     * @param string aName The root command name
      * @return this
      */
-    auto setRootName(string myName) {
-        this.rootName = myName;
+    function setRootName(string aName) {
+        this.rootName = $name;
 
         return this;
     }
@@ -749,18 +789,18 @@ class ConsoleOptionParser {
      * Parse the value for a long option out of _tokens. Will handle
      * options with an `=` in them.
      *
-     * @param string option The option to parse.
-     * @param array<string, mixed> myParams The params to append the parsed value into
+     * @param string $option The option to parse.
+     * @param array<string, mixed> $params The params to append the parsed value into
      * @return array Params with $option added in.
      */
-    protected array _parseLongOption(string option, array myParams) {
-        myName = substr($option, 2);
-        if (indexOf(myName, "=") != false) {
-            [myName, myValue] = explode("=", myName, 2);
-            array_unshift(_tokens, myValue);
+    protected array _parseLongOption(string $option, array $params) {
+        $name = substr($option, 2);
+        if (strpos($name, "=") != false) {
+            [$name, $value] = explode("=", $name, 2);
+            array_unshift(_tokens, $value);
         }
 
-        return _parseOption(myName, myParams);
+        return _parseOption($name, $params);
     }
 
     /**
@@ -768,86 +808,87 @@ class ConsoleOptionParser {
      * If the $option is a combination of multiple shortcuts like -otf
      * they will be shifted onto the token stack and parsed individually.
      *
-     * @param string option The option to parse.
-     * @param array<string, mixed> myParams The params to append the parsed value into
+     * @param string $option The option to parse.
+     * @param array<string, mixed> $params The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
      * @throws uim.cake.consoles.exceptions.ConsoleException When unknown short options are encountered.
      */
-    protected array _parseShortOption(string option, array myParams) {
-        myKey = substr($option, 1);
-        if (strlen(myKey) > 1) {
-            $flags = str_split(myKey);
-            myKey = $flags[0];
+    protected array _parseShortOption(string $option, array $params) {
+        $key = substr($option, 1);
+        if (strlen($key) > 1) {
+            $flags = str_split($key);
+            $key = $flags[0];
             for ($i = 1, $len = count($flags); $i < $len; $i++) {
                 array_unshift(_tokens, "-" ~ $flags[$i]);
             }
         }
-        if (!isset(_shortOptions[myKey])) {
-            myOptions = [];
+        if (!isset(_shortOptions[$key])) {
+            $options = [];
             foreach (_shortOptions as $short: $long) {
-                myOptions[] = "{$short} (short for `--{$long}`)";
+                $options[] = "{$short} (short for `--{$long}`)";
             }
             throw new MissingOptionException(
-                "Unknown short option `{myKey}`.",
-                myKey,
-                myOptions
+                "Unknown short option `{$key}`.",
+                $key,
+                $options
             );
         }
-        myName = _shortOptions[myKey];
+        $name = _shortOptions[$key];
 
-        return _parseOption(myName, myParams);
+        return _parseOption($name, $params);
     }
 
     /**
      * Parse an option by its name index.
      *
-     * @param string myName The name to parse.
-     * @param array<string, mixed> myParams The params to append the parsed value into
+     * @param string aName The name to parse.
+     * @param array<string, mixed> $params The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    protected array _parseOption(string myName, array myParams) {
-        if (myName !in _options) {
+    protected array _parseOption(string aName, array $params) {
+        if (!isset(_options[$name])) {
             throw new MissingOptionException(
-                "Unknown option `{myName}`.",
-                myName,
+                "Unknown option `{$name}`.",
+                $name,
                 array_keys(_options)
             );
         }
-        $option = _options[myName];
+        $option = _options[$name];
         $isBoolean = $option.isBoolean();
         $nextValue = _nextToken();
         $emptyNextValue = (empty($nextValue) && $nextValue != "0");
         if (!$isBoolean && !$emptyNextValue && !_optionExists($nextValue)) {
             array_shift(_tokens);
-            myValue = $nextValue;
+            $value = $nextValue;
         } elseif ($isBoolean) {
-            myValue = true;
+            $value = true;
         } else {
-            myValue = (string)$option.defaultValue();
+            $value = (string)$option.defaultValue();
         }
 
-        $option.validChoice(myValue);
+        $option.validChoice($value);
         if ($option.acceptsMultiple()) {
-            myParams[myName][] = myValue;
+            $params[$name][] = $value;
         } else {
-            myParams[myName] = myValue;
+            $params[$name] = $value;
         }
 
-        return myParams;
+        return $params;
     }
 
     /**
-     * Check to see if myName has an option (short/long) defined for it.
+     * Check to see if $name has an option (short/long) defined for it.
      *
-     * @param string myName The name of the option.
+     * @param string aName The name of the option.
+     * @return bool
      */
-    protected bool _optionExists(string myName) {
-        if (substr(myName, 0, 2) == "--") {
-            return isset(_options[substr(myName, 2)]);
+    protected bool _optionExists(string aName) {
+        if (substr($name, 0, 2) == "--") {
+            return isset(_options[substr($name, 2)]);
         }
-        if (myName[0] == "-" && myName[1] != "-") {
-            return isset(_shortOptions[myName[1]]);
+        if ($name[0] == "-" && $name[1] != "-") {
+            return isset(_shortOptions[$name[1]]);
         }
 
         return false;
@@ -857,12 +898,12 @@ class ConsoleOptionParser {
      * Parse an argument, and ensure that the argument doesn"t exceed the number of arguments
      * and that the argument is a valid choice.
      *
-     * @param string argument The argument to append
+     * @param string $argument The argument to append
      * @param array $args The array of parsed args to append to.
      * @return array<string> Args
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    protected string[] _parseArg(string argument, array $args) {
+    protected array _parseArg(string $argument, array $args) {
         if (empty(_args)) {
             $args[] = $argument;
 
@@ -885,7 +926,7 @@ class ConsoleOptionParser {
     /**
      * Find the next token in the argv set.
      *
-     * @return next token or ""
+     * @return string next token or ""
      */
     protected string _nextToken() {
         return _tokens[0] ?? "";
