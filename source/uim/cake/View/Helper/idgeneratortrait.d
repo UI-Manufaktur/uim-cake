@@ -67,10 +67,10 @@ trait IdGeneratorTrait
     /**
      * Generate an ID suitable for use in an ID attribute.
      *
-     * @param string $value The value to convert into an ID.
+     * @param string aValue The value to convert into an ID.
      * @return string The generated id.
      */
-    protected string _domId(string $value) {
+    protected string _domId(string aValue) {
         $domId = mb_strtolower(Text::slug($value, "-"));
         if (_idPrefix) {
             $domId = _idPrefix ~ "-" ~ $domId;

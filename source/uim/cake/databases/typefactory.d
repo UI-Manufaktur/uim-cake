@@ -1,6 +1,7 @@
 module uim.cake.databases;
 
-module uim.cake.databases;
+@safe:
+import uim.cake;
 
 use InvalidArgumentException;
 

@@ -3,12 +3,6 @@ module uim.cakeuting.router;
 @safe:
 import uim.cake;
 
-/module uim.cake.Routing;
-
-import uim.cake.core.Configure;
-import uim.cake.http.ServerRequest;
-import uim.cake.routings.exceptions.MissingRouteException;
-import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use ReflectionFunction;
 use ReflectionMethod;

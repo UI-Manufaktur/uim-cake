@@ -5,6 +5,9 @@
 **********************************************************************************************************/
 module uim.cake.databases;
 
+@safe:
+import uim.cake;
+
 /**
  * Encapsulates all conversion functions for values coming from a database into PHP and
  * going from PHP into a database.

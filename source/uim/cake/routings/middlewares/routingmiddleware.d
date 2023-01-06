@@ -1,23 +1,8 @@
+module uim.cake.routings.Middleware;
 
+@safe:
+import uim.cake;
 
-
- *
-
-
- * @since         3.3.0
-  */module uim.cake.routings.Middleware;
-
-import uim.cake.caches.Cache;
-import uim.cake.caches.InvalidArgumentException;
-import uim.cake.core.IPluginApplication;
-import uim.cake.http.exceptions.RedirectException;
-import uim.cake.http.MiddlewareQueue;
-import uim.cake.http.Runner;
-import uim.cake.routings.exceptions.FailedRouteCacheException;
-import uim.cake.routings.exceptions.RedirectException as DeprecatedRedirectException;
-import uim.cake.routings.RouteCollection;
-import uim.cake.routings.Router;
-import uim.cake.routings.IRoutingApplication;
 use Exception;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\messages.IResponse;

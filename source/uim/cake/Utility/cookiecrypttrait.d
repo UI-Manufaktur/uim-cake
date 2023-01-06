@@ -35,7 +35,7 @@ trait CookieCryptTrait
     /**
      * Encrypts $value using $type method in Security class
      *
-     * @param array|string $value Value to encrypt
+     * @param array|string aValue Value to encrypt
      * @param string|false $encrypt Encryption mode to use. False
      *   disabled encryption.
      * @param string|null $key Used as the security salt if specified.
@@ -81,7 +81,7 @@ trait CookieCryptTrait
     /**
      * Decrypts $value using $type method in Security class
      *
-     * @param array<string>|string $values Values to decrypt
+     * @param array<string>|string aValues Values to decrypt
      * @param string|false $mode Encryption mode
      * @param string|null $key Used as the security salt if specified.
      * @return array|string Decrypted values
@@ -102,12 +102,12 @@ trait CookieCryptTrait
     /**
      * Decodes and decrypts a single value.
      *
-     * @param string $value The value to decode & decrypt.
+     * @param string aValue The value to decode & decrypt.
      * @param string|false $encrypt The encryption cipher to use.
      * @param string|null $key Used as the security salt if specified.
      * @return array|string Decoded values.
      */
-    protected function _decode(string $value, $encrypt, Nullable!string aKey) {
+    protected function _decode(string aValue, $encrypt, Nullable!string aKey) {
         if (!$encrypt) {
             return _explode($value);
         }

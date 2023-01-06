@@ -1,6 +1,8 @@
 module uim.cake.databases;
 
-module uim.cake.databases;
+@safe:
+import uim.cake;
+
 
 /**
  * Value binder class manages list of values bound to conditions.

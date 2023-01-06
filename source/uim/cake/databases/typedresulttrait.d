@@ -1,5 +1,8 @@
 module uim.cake.databases;
 
+@safe:
+import uim.cake;
+
 /**
  * : the ITypedResult
  */

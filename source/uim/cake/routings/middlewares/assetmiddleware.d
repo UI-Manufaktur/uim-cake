@@ -1,15 +1,8 @@
+module uim.cake.routings.Middleware;
 
+@safe:
+import uim.cake;
 
-
- *
-
-
- * @since         3.3.0
-  */module uim.cake.routings.Middleware;
-
-import uim.cake.core.Plugin;
-import uim.cake.http.Response;
-import uim.cake.utilities.Inflector;
 use Laminas\Diactoros\Stream;
 use Psr\Http\messages.IResponse;
 use Psr\Http\messages.IServerRequest;
