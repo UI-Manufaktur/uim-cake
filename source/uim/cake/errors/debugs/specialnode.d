@@ -3,13 +3,12 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.errors.Debug;
+module uim.cake.errors.debugs;
 
 /**
  * Debug node for special messages like errors or recursion warnings.
  */
-class SpecialNode : INode
-{
+class SpecialNode : INode {
     /**
      * @var string
      */
