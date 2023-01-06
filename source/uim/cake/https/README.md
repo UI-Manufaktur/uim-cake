@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/UIM/http.svg?style=flat-square)](https://packagist.org/packages/UIM/http)
+[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/http.svg?style=flat-square)](https://packagist.org/packages/cakephp/http)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# UIM Http Library
+# CakePHP Http Library
 
 This library provides a PSR-15 Http middleware server, PSR-7 Request and
 Response objects, and a PSR-18 Http Client. Together these classes let you
@@ -12,7 +12,7 @@ handle incoming server requests and send outgoing HTTP requests.
 Sending requests is straight forward. Doing a GET request looks like:
 
 ```php
-import uim.cake.http.clients;
+import uim.cake.http.Client;
 
 $http = new Client();
 
@@ -20,15 +20,15 @@ $http = new Client();
 $response = $http.get("http://example.com/test.html");
 
 // Simple get with querystring
-$response = $http.get("http://example.com/search", ["q":"widget"]);
+$response = $http.get("http://example.com/search", ["q": "widget"]);
 
 // Simple get with querystring & additional headers
-$response = $http.get("http://example.com/search", ["q":"widget"], [
-  "headers":["X-Requested-With":"XMLHttpRequest"],
+$response = $http.get("http://example.com/search", ["q": "widget"], [
+  "headers": ["X-Requested-With": "XMLHttpRequest"],
 ]);
 ```
 
-To learn more read the [Http Client documentation](https://book.UIM.org/4/en/core-libraries/httpclient.html).
+To learn more read the [Http Client documentation](https://book.cakephp.org/4/en/core-libraries/httpclient.html).
 
 ## Using the Http Server
 
@@ -36,11 +36,12 @@ The Http Server allows an `IHttpApplication` to process requests and
 emit responses. To get started first implement the
 `Cake\Http\IHttpApplication`  A minimal example could look like:
 
-```phpmodule App;
+```php
+namespace App;
 
 import uim.cake.core.IHttpApplication;
-import uim.cake.https\MiddlewareQueue;
-import uim.cake.https\Response;
+import uim.cake.http.MiddlewareQueue;
+import uim.cake.http.Response;
 use Psr\Http\messages.IResponse;
 use Psr\Http\messages.IServerRequest;
 
@@ -69,10 +70,10 @@ class Application : IHttpApplication
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request
+     * @param \Psr\Http\messages.IServerRequest $request The request
      * @return \Psr\Http\messages.IResponse
      */
-    function handle(IServerRequest myRequest): IResponse
+    function handle(IServerRequest $request): IResponse
     {
         return new Response(["body"=>"Hello World!"]);
     }
@@ -89,7 +90,7 @@ requests:
 require dirname(__DIR__) ~ "/vendor/autoload.php";
 
 use App\Application;
-import uim.cake.https\Server;
+import uim.cake.http.Server;
 
 // Bind your application to the server.
 $server = new Server(new Application());
@@ -105,4 +106,4 @@ php -S localhost:8765 -t ./webroot ./webroot/index.php
 ```
 
 For more information on middleware, [consult the
-documentation](https://book.UIM.org/4/en/controllers/middleware.html)
+documentation](https://book.cakephp.org/4/en/controllers/middleware.html)
