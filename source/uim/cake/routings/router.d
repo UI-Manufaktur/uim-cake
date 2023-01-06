@@ -202,7 +202,7 @@ class Router
      * @return array Parsed elements from URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a route cannot be handled
      */
-    static array parseRequest(ServerRequest $request): array
+    static array parseRequest(ServerRequest $request)
     {
         return static::$_collection.parseRequest($request);
     }
@@ -316,7 +316,7 @@ class Router
      * @see uim.cake.routings.Router::url()
      * @see uim.cake.routings.Router::addUrlFilter()
      */
-    protected static function _applyUrlFilters(array $url): array
+    protected static array _applyUrlFilters(array $url)
     {
         $request = static::getRequest();
         foreach (static::$_urlFilters as $filter) {
@@ -601,7 +601,7 @@ class Router
      *     Cake\Http\ServerRequest object that needs to be reversed.
      * @return array The URL array ready to be used for redirect or HTML link.
      */
-    static function reverseToArray($params): array
+    static array reverseToArray($params)
     {
         $route = null;
         if ($params instanceof ServerRequest) {
@@ -714,7 +714,7 @@ class Router
      *   Defaults to `true`.
      * @return array<string> Array of extensions Router is configured to parse.
      */
-    static function extensions($extensions = null, $merge = true): array
+    static array extensions($extensions = null, $merge = true)
     {
         $collection = static::$_collection;
         if ($extensions == null) {
@@ -889,7 +889,7 @@ class Router
      *
      * @return array<uim.cake.routings.Route\Route>
      */
-    static function routes(): array
+    static array routes()
     {
         return static::$_collection.routes();
     }
@@ -949,7 +949,7 @@ class Router
      * @param string $url Route path in [Plugin.][Prefix/]Controller::action format
      * @return array<string, string>
      */
-    static function parseRoutePath(string $url): array
+    static array parseRoutePath(string $url)
     {
         if (isset(static::$_routePaths[$url])) {
             return static::$_routePaths[$url];

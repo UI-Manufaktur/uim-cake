@@ -184,7 +184,7 @@ class Hash {
      * @param string token the token being splitted.
      * @return array [token, conditions] with token splitted
      */
-    protected static array _splitConditions(string token): array
+    protected static array _splitConditions(string token)
     {
         $conditions = false;
         $position = indexOf($token, "[");
@@ -293,7 +293,7 @@ class Hash {
      * @return array The data with myValues inserted.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::insert
      */
-    static function insert(array myData, string myPath, myValues = null): array
+    static array insert(array myData, string myPath, myValues = null)
     {
         $noTokens = indexOf(myPath, "[") == false;
         if ($noTokens && indexOf(myPath, ".") == false) {
@@ -339,7 +339,7 @@ class Hash {
      * @param mixed myValues The values to insert when doing inserts.
      * @return array data.
      */
-    protected static auto _simpleOp(string op, array myData, string[] myPath, myValues = null): array
+    protected static array _simpleOp(string op, array myData, string[] myPath, myValues = null)
     {
         $_list = &myData;
 
@@ -385,7 +385,7 @@ class Hash {
      * @return array The modified array.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::remove
      */
-    static function remove(array myData, string myPath): array
+    static array remove(array myData, string myPath)
     {
         $noTokens = indexOf(myPath, "[") == false;
         $noExpansion = indexOf(myPath, "{") == false;
@@ -446,7 +446,7 @@ class Hash {
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::combine
      * @throws \RuntimeException When keys and values count is unequal.
      */
-    static function combine(array myData, myKeyPath, myValuePath = null, Nullable!string myGroupPath = null): array
+    static array combine(array myData, myKeyPath, myValuePath = null, Nullable!string myGroupPath = null)
     {
         if (empty(myData)) {
             return [];
@@ -629,7 +629,7 @@ class Hash {
      * @return array Filtered array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::filter
      */
-    static function filter(array myData, $callback = [Hash::class, "_filter"]): array
+    static array filter(array myData, $callback = [Hash::class, "_filter"])
     {
         foreach (myData as $k: $v) {
             if (is_array($v)) {
@@ -660,7 +660,7 @@ class Hash {
      * @return array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::flatten
      */
-    static function flatten(array myData, string separator = "."): array
+    static array flatten(array myData, string separator = ".")
     {
         myResult = [];
         $stack = [];
@@ -705,7 +705,7 @@ class Hash {
      * @return array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::expand
      */
-    static array expand(array myData, string separator = "."): array
+    static array expand(array myData, string separator = ".")
     {
         myResult = [];
         foreach (myData as $flat: myValue) {
@@ -742,7 +742,7 @@ class Hash {
      * @return array Merged array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::merge
      */
-    static function merge(array myData, myMerge): array
+    static array merge(array myData, myMerge)
     {
         $args = array_slice(func_get_args(), 1);
         $return = myData;
@@ -867,7 +867,7 @@ class Hash {
      * @return array An array of the modified values.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::map
      */
-    static function map(array myData, string myPath, callable $function): array
+    static array map(array myData, string myPath, callable $function)
     {
         myValues = (array)static::extract(myData, myPath);
 
@@ -953,7 +953,7 @@ class Hash {
      * @return array Sorted array of data
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::sort
      */
-    static function sort(array myData, string myPath, $dir = "asc", myType = "regular"): array
+    static array sort(array myData, string myPath, $dir = "asc", myType = "regular")
     {
         if (empty(myData)) {
             return [];
@@ -1043,7 +1043,7 @@ class Hash {
      * @param mixed myKey The key for the data.
      * @return array
      */
-    protected static auto _squash(array myData, myKey = null): array
+    protected static array _squash(array myData, myKey = null)
     {
         $stack = [];
         foreach (myData as $k: $r) {
@@ -1072,7 +1072,7 @@ class Hash {
      *    The expression for this bool is (myData - $compare) + ($compare - (myData - $compare))
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::diff
      */
-    static function diff(array myData, array $compare): array
+    static array diff(array myData, array $compare): array
     {
         if (empty(myData)) {
             return $compare;
@@ -1099,7 +1099,7 @@ class Hash {
      * @return array The merged array.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::mergeDiff
      */
-    static function mergeDiff(array myData, array $compare): array
+    static array mergeDiff(array myData, array $compare): array
     {
         if (empty(myData) && !empty($compare)) {
             return $compare;
@@ -1126,7 +1126,7 @@ class Hash {
      * @return array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::normalize
      */
-    static function normalize(array myData, bool $assoc = true): array
+    static array normalize(array myData, bool $assoc = true): array
     {
         myKeys = array_keys(myData);
         myCount = count(myKeys);
@@ -1174,7 +1174,7 @@ class Hash {
      * @throws \InvalidArgumentException When providing invalid data.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::nest
      */
-    static function nest(array myData, array myOptions = []): array
+    static array nest(array myData, array myOptions = []): array
     {
         if (!myData) {
             return myData;

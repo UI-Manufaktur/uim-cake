@@ -1,4 +1,4 @@
-module uim.cake.console;
+module uim.cake.consoles;
 
 @safe:
 import uim.cake;

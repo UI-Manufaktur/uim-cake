@@ -188,7 +188,7 @@ class Hash
      * @param string $token the token being splitted.
      * @return array [token, conditions] with token splitted
      */
-    protected static function _splitConditions(string $token): array
+    protected static array _splitConditions(string $token): array
     {
         $conditions = false;
         $position = strpos($token, "[");
@@ -450,7 +450,7 @@ class Hash
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::combine
      * @throws \RuntimeException When keys and values count is unequal.
      */
-    static function combine(array $data, $keyPath, $valuePath = null, ?string $groupPath = null): array
+    static array combine(array $data, $keyPath, $valuePath = null, ?string $groupPath = null): array
     {
         if (empty($data)) {
             return [];
@@ -665,7 +665,7 @@ class Hash
      * @return array
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::flatten
      */
-    static function flatten(array $data, string $separator = "."): array
+    static array flatten(array $data, string $separator = "."): array
     {
         $result = [];
         $stack = [];
@@ -710,7 +710,7 @@ class Hash
      * @return array
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::expand
      */
-    static function expand(array $data, string $separator = "."): array
+    static array expand(array $data, string $separator = "."): array
     {
         $hash = [];
         foreach ($data as $path: $value) {
@@ -1111,7 +1111,7 @@ class Hash
      * @return array The merged array.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::mergeDiff
      */
-    static function mergeDiff(array $data, array $compare): array
+    static array mergeDiff(array $data, array $compare): array
     {
         if (empty($data) && !empty($compare)) {
             return $compare;
@@ -1138,7 +1138,7 @@ class Hash
      * @return array
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::normalize
      */
-    static function normalize(array $data, bool $assoc = true): array
+    static array normalize(array $data, bool $assoc = true): array
     {
         $keys = array_keys($data);
         $count = count($keys);
@@ -1186,7 +1186,7 @@ class Hash
      * @throws \InvalidArgumentException When providing invalid data.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::nest
      */
-    static function nest(array $data, array $options = []): array
+    static array nest(array $data, array $options = []): array
     {
         if (!$data) {
             return $data;

@@ -649,7 +649,7 @@ trait IntegrationTestTrait
      * @param string $url The URL
      * @return array Qualified URL, the query parameters, and host data
      */
-    protected array _url(string $url): array
+    protected array _url(string $url)
     {
         $uri = new Uri($url);
         $path = $uri.getPath();

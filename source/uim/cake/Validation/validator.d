@@ -200,7 +200,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<array> Array of failed fields
      * @deprecated 3.9.0 Renamed to {@link validate()}.
      */
-    function errors(array $data, bool $newRecord = true): array
+    array errors(array $data, bool $newRecord = true): array
     {
         deprecationWarning("`Validator::errors()` is deprecated. Use `Validator::validate()` instead.");
 
@@ -214,7 +214,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      * @return array<array> Array of failed fields
      */
-    function validate(array $data, bool $newRecord = true): array
+    array validate(array $data, bool $newRecord = true): array
     {
         $errors = [];
 
@@ -365,7 +365,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<string>
      */
-    static function getDefaultProviders(): array
+    static string getDefaultProviders(): array
     {
         return array_keys(self::$_defaultProviders);
     }

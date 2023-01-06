@@ -93,9 +93,8 @@ class ArrayContext : IContext
     /**
      * Get the fields used in the context as a primary key.
      *
-     * @return array<string>
      */
-    function getPrimaryKey(): array
+    string[] getPrimaryKey(): array
     {
         if (
             empty(_context["schema"]["_constraints"]) ||

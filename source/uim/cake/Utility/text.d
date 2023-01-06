@@ -919,11 +919,9 @@ class Text
     /**
      * Converts a multibyte character string
      * to the decimal value of the character
-     *
      * @param string $string String to convert.
-     * @return array<int>
      */
-    static function utf8(string $string): array
+    static int[] utf8(string $string)
     {
         $map = [];
 

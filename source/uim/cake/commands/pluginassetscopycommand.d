@@ -11,7 +11,6 @@ import uim.cake;
 class PluginAssetsCopyCommand : Command {
     use PluginAssetsTrait;
 
-
     static string defaultName() {
         return "plugin assets copy";
     }
@@ -26,7 +25,7 @@ class PluginAssetsCopyCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    function execute(Arguments $args, ConsoleIo $io): ?int
+    ?int execute(Arguments $args, ConsoleIo $io)
     {
         this.io = $io;
         this.args = $args;

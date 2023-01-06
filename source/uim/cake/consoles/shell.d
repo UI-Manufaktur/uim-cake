@@ -1,7 +1,11 @@
-module uim.cake.console;
+module uim.cake.consoles;
 
 @safe:
 import uim.cake;
+
+use ReflectionException;
+use ReflectionMethod;
+use RuntimeException;
 
 /**
  * Base class for command-line utilities for automating programmer chores.
@@ -11,7 +15,9 @@ import uim.cake;
  * @deprecated 3.6.0 ShellDispatcher and Shell will be removed in 5.0
  * @method int|bool|null|void main(...$args) Main entry method for the shell.
  */
-class Shell {
+#[\AllowDynamicProperties]
+class Shell
+{
     use LocatorAwareTrait;
     use LogTrait;
     use MergeVariablesTrait;
@@ -19,28 +25,38 @@ class Shell {
 
     /**
      * Default error code
-    */
-    const int CODE_ERROR = 1;
+     *
+     * @var int
+     */
+    const CODE_ERROR = 1;
 
     /**
      * Default success code
-    */
-    const int CODE_SUCCESS = 0;
+     *
+     * @var int
+     */
+    const CODE_SUCCESS = 0;
 
     /**
      * Output constant making verbose shells.
-    */
-    const int VERBOSE = ConsoleIo::VERBOSE;
+     *
+     * @var int
+     */
+    const VERBOSE = ConsoleIo::VERBOSE;
 
     /**
      * Output constant for making normal shells.
-    */
-    const int NORMAL = ConsoleIo::NORMAL;
+     *
+     * @var int
+     */
+    const NORMAL = ConsoleIo::NORMAL;
 
     /**
      * Output constants for making quiet shells.
-    */
-    const int QUIET = ConsoleIo::QUIET;
+     *
+     * @var int
+     */
+    const QUIET = ConsoleIo::QUIET;
 
     /**
      * An instance of ConsoleOptionParser that has been configured for this class.
@@ -61,7 +77,7 @@ class Shell {
      *
      * @var array
      */
-    myParams = [];
+    $params = [];
 
     /**
      * The command (method/task) that is being run.
@@ -82,7 +98,7 @@ class Shell {
      *
      * @var string
      */
-    myName;
+    $name;
 
     /**
      * The name of the plugin the shell belongs to.
@@ -90,13 +106,13 @@ class Shell {
      *
      * @var string
      */
-    myPlugin;
+    $plugin;
 
     /**
      * Contains tasks to load and instantiate
      *
      * @var array|bool
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::$tasks
+     * @link https://book.cakephp.org/4/en/console-commands/shells.html#shell-tasks
      */
     $tasks = [];
 
@@ -119,31 +135,31 @@ class Shell {
      *
      * @var array<string, array>
      */
-    protected _taskMap = [];
+    protected $_taskMap = [];
 
     /**
      * ConsoleIo instance.
      *
      * @var uim.cake.consoles.ConsoleIo
      */
-    protected _io;
+    protected $_io;
 
     /**
      * The root command name used when generating help output.
      */
-    protected string rootName = "cake";
+    protected string $rootName = "cake";
 
     /**
      * Constructs this Shell instance.
      *
      * @param uim.cake.consoles.ConsoleIo|null $io An io instance.
      * @param uim.cake.orm.Locator\ILocator|null $locator Table locator instance.
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell
+     * @link https://book.cakephp.org/4/en/console-commands/shells.html
      */
     this(?ConsoleIo $io = null, ?ILocator $locator = null) {
         if (!this.name) {
-            [, myClass] = moduleSplit(static::class);
-            this.name = str_replace(["Shell", "Task"], "", myClass);
+            [, $class] = namespaceSplit(static::class);
+            this.name = str_replace(["Shell", "Task"], "", $class);
         }
         _io = $io ?: new ConsoleIo();
         _tableLocator = $locator;
@@ -153,7 +169,7 @@ class Shell {
 
         _mergeVars(
             ["tasks"],
-            ["associative":["tasks"]]
+            ["associative": ["tasks"]]
         );
 
         if (isset(this.modelClass)) {
@@ -164,11 +180,11 @@ class Shell {
     /**
      * Set the root command name for help output.
      *
-     * @param string myName The name of the root command.
+     * @param string aName The name of the root command.
      * @return this
      */
-    auto setRootName(string myName) {
-        this.rootName = myName;
+    function setRootName(string aName) {
+        this.rootName = $name;
 
         return this;
     }
@@ -178,7 +194,8 @@ class Shell {
      *
      * @return uim.cake.consoles.ConsoleIo The current ConsoleIo object.
      */
-    ConsoleIo getIo() {
+    function getIo(): ConsoleIo
+    {
         return _io;
     }
 
@@ -196,7 +213,8 @@ class Shell {
      * acts as constructor for subclasses
      * allows configuration of tasks prior to shell execution
      *
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::initialize
+     * @return void
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::initialize
      */
     void initialize() {
         this.loadTasks();
@@ -209,7 +227,8 @@ class Shell {
      * Override this method if you want to remove the welcome information,
      * or otherwise modify the pre-command flow.
      *
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::startup
+     * @return void
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::startup
      */
     void startup() {
         if (!this.param("requested")) {
@@ -247,8 +266,8 @@ class Shell {
      */
     protected void _validateTasks() {
         foreach (_taskMap as $taskName: $task) {
-            myClass = App::className($task["class"], "Shell/Task", "Task");
-            if (myClass is null) {
+            $class = App::className($task["class"], "Shell/Task", "Task");
+            if ($class == null) {
                 throw new RuntimeException(sprintf(
                     "Task `%s` not found. Maybe you made a typo or a plugin is missing or not loaded?",
                     $taskName
@@ -260,24 +279,24 @@ class Shell {
     /**
      * Check to see if this shell has a task with the provided name.
      *
-     * @param string task The task name to check.
+     * @param string $task The task name to check.
      * @return bool Success
-     * @link https://book.UIM.org/4/en/console-and-shells.html#shell-tasks
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasTask(string task) {
+    bool hasTask(string $task) {
         return isset(_taskMap[Inflector::camelize($task)]);
     }
 
     /**
      * Check to see if this shell has a callable method by the given name.
      *
-     * @param string myName The method name to check.
+     * @param string aName The method name to check.
      * @return bool
-     * @link https://book.UIM.org/4/en/console-and-shells.html#shell-tasks
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasMethod(string myName) {
+    bool hasMethod(string aName) {
         try {
-            $method = new ReflectionMethod(this, myName);
+            $method = new ReflectionMethod(this, $name);
             if (!$method.isPublic()) {
                 return false;
             }
@@ -317,21 +336,22 @@ class Shell {
      *    parameters will be available in the `param` property of the called `Shell`
      *
      * `return this.dispatchShell([
-     *      "command":"schema create DbAcl",
-     *      "extra":["param":"value"]
+     *      "command": "schema create DbAcl",
+     *      "extra": ["param": "value"]
      * ]);`
      *
      * or
      *
      * `return this.dispatchShell([
-     *      "command":["schema", "create", "DbAcl"],
-     *      "extra":["param":"value"]
+     *      "command": ["schema", "create", "DbAcl"],
+     *      "extra": ["param": "value"]
      * ]);`
      *
      * @return int The CLI command exit code. 0 is success.
-     * @link https://book.UIM.org/4/en/console-and-shells.html#invoking-other-shells-from-your-shell
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#invoking-other-shells-from-your-shell
      */
-    int dispatchShell() {
+    function dispatchShell(): int
+    {
         [$args, $extra] = this.parseDispatchArguments(func_get_args());
 
         $extra["requested"] = $extra["requested"] ?? true;
@@ -400,13 +420,13 @@ class Shell {
      *
      * - `requested` : if used, will prevent the Shell welcome message to be displayed
      * @return int|bool|null
-     * @link https://book.UIM.org/4/en/console-and-shells.html#the-UIM-console
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#the-cakephp-console
      */
     function runCommand(array $argv, bool $autoMethod = false, array $extra = []) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         this.OptionParser = this.getOptionParser();
         try {
-            [this.params, this.args] = this.OptionParser.parse($argv);
+            [this.params, this.args] = this.OptionParser.parse($argv, _io);
         } catch (ConsoleException $e) {
             this.err("Error: " ~ $e.getMessage());
 
@@ -441,7 +461,7 @@ class Shell {
             this.startup();
             array_shift($argv);
 
-            return this.{$method}.runCommand($argv, false, ["requested":true]);
+            return this.{$method}.runCommand($argv, false, ["requested": true]);
         }
 
         if (this.hasMethod("main")) {
@@ -485,7 +505,7 @@ class Shell {
      * @param string|null $command The command to get help for.
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    protected auto _displayHelp(Nullable!string command = null) {
+    protected function _displayHelp(?string $command = null) {
         $format = "text";
         if (!empty(this.args[0]) && this.args[0] == "xml") {
             $format = "xml";
@@ -495,7 +515,7 @@ class Shell {
         }
 
         $subcommands = this.OptionParser.subcommands();
-        if ($command  !is null) {
+        if ($command != null) {
             $command = isset($subcommands[$command]) ? $command : null;
         }
 
@@ -508,11 +528,12 @@ class Shell {
      * By overriding this method you can configure the ConsoleOptionParser before returning it.
      *
      * @return uim.cake.consoles.ConsoleOptionParser
-     * @link https://book.UIM.org/4/en/console-and-shells.html#configuring-options-and-generating-help
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#configuring-options-and-generating-help
      */
-    ConsoleOptionParser getOptionParser() {
-        myName = (this.plugin ? this.plugin ~ "." : "") . this.name;
-        $parser = new ConsoleOptionParser(myName);
+    function getOptionParser(): ConsoleOptionParser
+    {
+        $name = (this.plugin ? this.plugin ~ "." : "") . this.name;
+        $parser = new ConsoleOptionParser($name);
         $parser.setRootName(this.rootName);
 
         return $parser;
@@ -521,47 +542,48 @@ class Shell {
     /**
      * Overload get for lazy building of tasks
      *
-     * @param string myName The task to get.
+     * @param string aName The task to get.
      * @return uim.cake.consoles.Shell Object of Task
      */
-    auto __get(string myName) {
-        if (empty(this.{myName}) && in_array(myName, this.taskNames, true)) {
-            $properties = _taskMap[myName];
-            this.{myName} = this.Tasks.load($properties["class"], $properties["config"]);
-            this.{myName}.args = &this.args;
-            this.{myName}.params = &this.params;
-            this.{myName}.initialize();
-            this.{myName}.loadTasks();
+    function __get(string aName) {
+        if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
+            $properties = _taskMap[$name];
+            this.{$name} = this.Tasks.load($properties["class"], $properties["config"]);
+            this.{$name}.args = &this.args;
+            this.{$name}.params = &this.params;
+            this.{$name}.initialize();
+            this.{$name}.loadTasks();
         }
 
-        return this.{myName};
+        return this.{$name};
     }
 
     /**
      * Safely access the values in this.params.
      *
-     * @param string myName The name of the parameter to get.
+     * @param string aName The name of the parameter to get.
      * @return string|bool|null Value. Will return null if it doesn"t exist.
      */
-    function param(string myName) {
-        return this.params[myName] ?? null;
+    function param(string aName) {
+        return this.params[$name] ?? null;
     }
 
     /**
      * Prompts the user for input, and returns it.
      *
-     * @param string prompt Prompt text.
-     * @param array<string>|string|null myOptions Array or string of options.
+     * @param string $prompt Prompt text.
+     * @param array<string>|string|null $options Array or string of options.
      * @param string|null $default Default input value.
      * @return string|null Either the default value, or the user-provided input.
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::in
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::in
      */
-    Nullable!string in(string prompt, myOptions = null, Nullable!string default = null) {
+    function in(string $prompt, $options = null, ?string $default = null): ?string
+    {
         if (!this.interactive) {
             return $default;
         }
-        if (myOptions) {
-            return _io.askChoice($prompt, myOptions, $default);
+        if ($options) {
+            return _io.askChoice($prompt, $options, $default);
         }
 
         return _io.ask($prompt, $default);
@@ -577,36 +599,38 @@ class Shell {
      * - `wordWrap` Only wrap on words breaks (spaces) Defaults to true.
      * - `indent` Indent the text with the string provided. Defaults to null.
      *
-     * @param string text Text the text to format.
-     * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
-     * @return Wrapped / indented text
+     * @param string $text Text the text to format.
+     * @param array<string, mixed>|int $options Array of options to use, or an integer to wrap the text to.
+     * @return string Wrapped / indented text
      * @see uim.cake.Utility\Text::wrap()
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::wrapText
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::wrapText
      */
-    string wrapText(string text, myOptions = []) {
-        return Text::wrap($text, myOptions);
+    string wrapText(string $text, $options = []) {
+        return Text::wrap($text, $options);
     }
 
     /**
      * Output at the verbose level.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    Nullable!int verbose(myMessage, int $newlines = 1) {
-        return _io.verbose(myMessage, $newlines);
+    function verbose($message, int $newlines = 1): ?int
+    {
+        return _io.verbose($message, $newlines);
     }
 
     /**
      * Output at all levels.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    Nullable!int quiet(myMessage, int $newlines = 1) {
-        return _io.quiet(myMessage, $newlines);
+    function quiet($message, int $newlines = 1): ?int
+    {
+        return _io.quiet($message, $newlines);
     }
 
     /**
@@ -620,64 +644,69 @@ class Shell {
      * present in most shells. Using Shell::QUIET for a message means it will always display.
      * While using Shell::VERBOSE means it will only display when verbose output is toggled.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout.
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::out
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int out(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
-        return _io.out(myMessage, $newlines, $level);
+    function out($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
+    {
+        return _io.out($message, $newlines, $level);
     }
 
     /**
      * Outputs a single or multiple error messages to stderr. If no parameters
      * are passed outputs just a newline.
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    int err(myMessage, int $newlines = 1) {
-        return _io.error(myMessage, $newlines);
+    function err($message, int $newlines = 1): int
+    {
+        return _io.error($message, $newlines);
     }
 
     /**
      * Convenience method for out() that wraps message between <info /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::out
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int info(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
-        return _io.info(myMessage, $newlines, $level);
+    function info($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
+    {
+        return _io.info($message, $newlines, $level);
     }
 
     /**
      * Convenience method for err() that wraps message between <warning /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::err
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::err
      */
-    int warn(myMessage, int $newlines = 1) {
-        return _io.warning(myMessage, $newlines);
+    function warn($message, int $newlines = 1): int
+    {
+        return _io.warning($message, $newlines);
     }
 
     /**
      * Convenience method for out() that wraps message between <success /> tag
      *
-     * @param array<string>|string myMessage A string or an array of strings to output
+     * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
      * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout.
-     * @see https://book.UIM.org/4/en/console-and-shells.html#Shell::out
+     * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int success(myMessage, int $newlines = 1, int $level = Shell::NORMAL) {
-        return _io.success(myMessage, $newlines, $level);
+    function success($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
+    {
+        return _io.success($message, $newlines, $level);
     }
 
     /**
@@ -685,7 +714,7 @@ class Shell {
      *
      * @param int $multiplier Number of times the linefeed sequence should be repeated
      * @return string
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::nl
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::nl
      */
     string nl(int $multiplier = 1) {
         return _io.nl($multiplier);
@@ -696,7 +725,8 @@ class Shell {
      *
      * @param int $newlines Number of newlines to pre- and append
      * @param int $width Width of the line, defaults to 63
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::hr
+     * @return void
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::hr
      */
     void hr(int $newlines = 0, int $width = 63) {
         _io.hr($newlines, $width);
@@ -706,22 +736,23 @@ class Shell {
      * Displays a formatted error message
      * and exits the application with an error code.
      *
-     * @param string myMessage The error message
+     * @param string $message The error message
      * @param int $exitCode The exit code for the shell task.
      * @throws uim.cake.consoles.exceptions.StopException
-     * 
-     * @link https://book.UIM.org/4/en/console-and-shells.html#styling-output
+     * @return void
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
      */
-    void abort(string myMessage, int $exitCode = self::CODE_ERROR) {
-        _io.err("<error>" ~ myMessage ~ "</error>");
-        throw new StopException(myMessage, $exitCode);
+    void abort(string $message, int $exitCode = self::CODE_ERROR) {
+        _io.err("<error>" ~ $message ~ "</error>");
+        throw new StopException($message, $exitCode);
     }
 
     /**
      * Clear the console
      *
-     * @link https://book.UIM.org/4/en/console-and-shells.html#console-output
+     * @return void
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#console-output
      */
     void clear() {
         if (!empty(this.params["noclear"])) {
@@ -738,53 +769,53 @@ class Shell {
     /**
      * Creates a file at given path
      *
-     * @param string myPath Where to put the file.
-     * @param string myContentss Content to put in the file.
+     * @param string $path Where to put the file.
+     * @param string $contents Content to put in the file.
      * @return bool Success
-     * @link https://book.UIM.org/4/en/console-and-shells.html#creating-files
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#creating-files
      */
-    bool createFile(string myPath, string myContentss) {
-        myPath = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, myPath);
+    bool createFile(string $path, string $contents) {
+        $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
 
         _io.out();
 
-        myfileExists = is_file(myPath);
-        if (myfileExists && empty(this.params["force"]) && !this.interactive) {
+        $fileExists = is_file($path);
+        if ($fileExists && empty(this.params["force"]) && !this.interactive) {
             _io.out("<warning>File exists, skipping</warning>.");
 
             return false;
         }
 
-        if (myfileExists && this.interactive && empty(this.params["force"])) {
-            _io.out(sprintf("<warning>File `%s` exists</warning>", myPath));
-            myKey = _io.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
+        if ($fileExists && this.interactive && empty(this.params["force"])) {
+            _io.out(sprintf("<warning>File `%s` exists</warning>", $path));
+            $key = _io.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
 
-            if (strtolower(myKey) == "q") {
+            if (strtolower($key) == "q") {
                 _io.out("<error>Quitting</error>.", 2);
                 _stop();
 
                 return false;
             }
-            if (strtolower(myKey) == "a") {
+            if (strtolower($key) == "a") {
                 this.params["force"] = true;
-                myKey = "y";
+                $key = "y";
             }
-            if (strtolower(myKey) != "y") {
-                _io.out(sprintf("Skip `%s`", myPath), 2);
+            if (strtolower($key) != "y") {
+                _io.out(sprintf("Skip `%s`", $path), 2);
 
                 return false;
             }
         } else {
-            this.out(sprintf("Creating file %s", myPath));
+            this.out(sprintf("Creating file %s", $path));
         }
 
         try {
             $fs = new Filesystem();
-            $fs.dumpFile(myPath, myContentss);
+            $fs.dumpFile($path, $contents);
 
-            _io.out(sprintf("<success>Wrote</success> `%s`", myPath));
+            _io.out(sprintf("<success>Wrote</success> `%s`", $path));
         } catch (CakeException $e) {
-            _io.err(sprintf("<error>Could not write to `%s`</error>.", myPath), 2);
+            _io.err(sprintf("<error>Could not write to `%s`</error>.", $path), 2);
 
             return false;
         }
@@ -795,12 +826,12 @@ class Shell {
     /**
      * Makes absolute file path easier to read
      *
-     * @param string myfile Absolute file path
-     * @return short path
-     * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::shortPath
+     * @param string $file Absolute file path
+     * @return string short path
+     * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::shortPath
      */
-    string shortPath(string absoluteFilePath) {
-        $shortPath = str_replace(ROOT, "", absoluteFilePath);
+    string shortPath(string $file) {
+        $shortPath = str_replace(ROOT, "", $file);
         $shortPath = str_replace(".." ~ DIRECTORY_SEPARATOR, "", $shortPath);
         $shortPath = str_replace(DIRECTORY_SEPARATOR, "/", $shortPath);
 
@@ -813,12 +844,13 @@ class Shell {
      * Create and render the output for a helper object. If the helper
      * object has not already been loaded, it will be loaded and constructed.
      *
-     * @param string myName The name of the helper to render
-     * @param array<string, mixed> myConfig Configuration data for the helper.
+     * @param string aName The name of the helper to render
+     * @param array<string, mixed> $config Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
-    Helper helper(string myName, array myConfig = []) {
-        return _io.helper(myName, myConfig);
+    function helper(string aName, array $config = []): Helper
+    {
+        return _io.helper($name, $config);
     }
 
     /**
@@ -840,13 +872,13 @@ class Shell {
      */
     array __debugInfo() {
         return [
-            "name":this.name,
-            "plugin":this.plugin,
-            "command":this.command,
-            "tasks":this.tasks,
-            "params":this.params,
-            "args":this.args,
-            "interactive":this.interactive,
+            "name": this.name,
+            "plugin": this.plugin,
+            "command": this.command,
+            "tasks": this.tasks,
+            "params": this.params,
+            "args": this.args,
+            "interactive": this.interactive,
         ];
     }
 }

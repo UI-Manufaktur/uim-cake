@@ -151,9 +151,8 @@ class Route
     /**
      * Get the supported extensions for this route.
      *
-     * @return array<string>
      */
-    function getExtensions(): array
+    string[] getExtensions()
     {
         return _extensions;
     }
@@ -537,7 +536,7 @@ class Route
      * @param string $url The url to parse.
      * @return array containing url, extension
      */
-    protected function _parseExtension(string $url): array
+    protected array _parseExtension(string $url)
     {
         if (count(_extensions) && strpos($url, ".") != false) {
             foreach (_extensions as $ext) {
@@ -561,7 +560,7 @@ class Route
      * @param array $context The current route context, which should contain controller/action keys.
      * @return array<string> Array of passed args.
      */
-    protected function _parseArgs(string $args, array $context): array
+    protected array _parseArgs(string $args, array $context)
     {
         $pass = [];
         $args = explode("/", $args);
@@ -586,7 +585,7 @@ class Route
      * @param array $params An array of persistent values to replace persistent ones.
      * @return array An array with persistent parameters applied.
      */
-    protected function _persistParams(array $url, array $params): array
+    protected array _persistParams(array $url, array $params)
     {
         foreach (this.options["persist"] as $persistKey) {
             if (array_key_exists($persistKey, $params) && !isset($url[$persistKey])) {
@@ -889,7 +888,7 @@ class Route
     /**
      * Get the names of the middleware that should be applied to this route.
      */
-    array getMiddleware(): array
+    array getMiddleware()
     {
         return this.middleware;
     }

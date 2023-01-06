@@ -158,7 +158,7 @@ class RouteCollection
      * @return array An array of request parameters parsed from the URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
-    function parseRequest(IServerRequest $request): array
+    array parseRequest(IServerRequest $request)
     {
         $uri = $request.getUri();
         $urlPath = urldecode($uri.getPath());

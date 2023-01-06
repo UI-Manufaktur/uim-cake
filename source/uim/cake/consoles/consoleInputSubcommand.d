@@ -2,10 +2,14 @@
 	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.console;
+**********************************************************************************************************/
+module uim.cake.consoles;
 
 @safe:
 import uim.cake;
+
+use InvalidArgumentException;
+use SimpleXMLElement;
 
 /**
  * An object to represent a single subcommand used in the command line.
@@ -13,48 +17,51 @@ import uim.cake;
  *
  * @see uim.cake.consoles.ConsoleOptionParser::addSubcommand()
  */
-class ConsoleInputSubCommand {
-    // Name of the subcommand
-    protected string _name = "";
+class ConsoleInputSubcommand
+{
+    /**
+     * Name of the subcommand
+     */
+    protected string $_name = "";
 
     /**
      * Help string for the subcommand
      */
-    protected string _help = "";
+    protected string $_help = "";
 
     /**
      * The ConsoleOptionParser for this subcommand.
      *
      * @var uim.cake.consoles.ConsoleOptionParser|null
      */
-    protected _parser;
+    protected $_parser;
 
     /**
      * Make a new Subcommand
      *
-     * @param array<string, mixed>|string myName The long name of the subcommand, or an array with all the properties.
-     * @param string help The help text for this option.
+     * @param array<string, mixed>|string aName The long name of the subcommand, or an array with all the properties.
+     * @param string $help The help text for this option.
      * @param uim.cake.consoles.ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
-    this(myName, $help = "", $parser = null) {
-        if (is_array(myName)) {
-            myData = myName + ["name":null, "help":"", "parser":null];
-            if (empty(myData["name"])) {
+    this($name, $help = "", $parser = null) {
+        if (is_array($name)) {
+            $data = $name + ["name": null, "help": "", "parser": null];
+            if (empty($data["name"])) {
                 throw new InvalidArgumentException(""name" not provided for console option parser");
             }
 
-            myName = myData["name"];
-            $help = myData["help"];
-            $parser = myData["parser"];
+            $name = $data["name"];
+            $help = $data["help"];
+            $parser = $data["parser"];
         }
 
         if (is_array($parser)) {
-            $parser["command"] = myName;
+            $parser["command"] = $name;
             $parser = ConsoleOptionParser::buildFromArray($parser);
         }
 
-        _name = myName;
+        _name = $name;
         _help = $help;
         _parser = $parser;
     }
@@ -81,12 +88,12 @@ class ConsoleInputSubCommand {
      * @param int $width The width to make the name of the subcommand.
      */
     string help(int $width = 0) {
-        myName = _name;
-        if (strlen(myName) < $width) {
-            myName = str_pad(myName, $width, " ");
+        $name = _name;
+        if (strlen($name) < $width) {
+            $name = str_pad($name, $width, " ");
         }
 
-        return myName . _help;
+        return $name . _help;
     }
 
     /**
@@ -94,7 +101,8 @@ class ConsoleInputSubCommand {
      *
      * @return uim.cake.consoles.ConsoleOptionParser|null
      */
-    ?ConsoleOptionParser parser() {
+    function parser(): ?ConsoleOptionParser
+    {
         return _parser;
     }
 
@@ -104,7 +112,8 @@ class ConsoleInputSubCommand {
      * @param \SimpleXMLElement $parent The parent element.
      * @return \SimpleXMLElement The parent with this subcommand appended.
      */
-    SimpleXMLElement xml(SimpleXMLElement $parent) {
+    function xml(SimpleXMLElement $parent): SimpleXMLElement
+    {
         $command = $parent.addChild("command");
         $command.addAttribute("name", _name);
         $command.addAttribute("help", _help);

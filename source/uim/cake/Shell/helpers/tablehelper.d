@@ -26,7 +26,7 @@ class TableHelper : Helper
      * @param array $rows The rows on which the columns width will be calculated on.
      * @return array<int>
      */
-    protected function _calculateWidths(array $rows): array
+    protected array _calculateWidths(array $rows)
     {
         $widths = [];
         foreach ($rows as $line) {

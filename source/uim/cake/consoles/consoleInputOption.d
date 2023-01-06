@@ -3,21 +3,25 @@ module uim.cake.consoles.consoleinputoption;
 @safe:
 import uim.cake;
 
+import uim.cake.consoles.exceptions.ConsoleException;
+use SimpleXMLElement;
+
 /**
  * An object to represent a single option used in the command line.
  * ConsoleOptionParser creates these when you use addOption()
  *
  * @see uim.cake.consoles.ConsoleOptionParser::addOption()
  */
-class ConsoleInputOption {
+class ConsoleInputOption
+{
     // Name of the option
-    protected string _name;
+    protected string $_name;
 
     // Short (1 character) alias for the option.
-    protected string _short;
+    protected string $_short;
 
     // Help text for the option.
-    protected string _help;
+    protected string $_help;
 
     // Is the option a boolean option. Boolean options do not consume a parameter.
     protected bool $_boolean;
@@ -27,7 +31,7 @@ class ConsoleInputOption {
      *
      * @var string|bool|null
      */
-    protected _default;
+    protected $_default;
 
     // Can the option accept multiple value definition.
     protected bool $_multiple;
@@ -37,61 +41,87 @@ class ConsoleInputOption {
      *
      * @var array<string>
      */
-    protected _choices;
+    protected $_choices;
 
-    // Is the option required.
+    /**
+     * The prompt string
+     *
+     * @var string|null
+     */
+    protected $prompt;
+
+    /**
+     * Is the option required.
+     */
     protected bool $required;
 
     /**
      * Make a new Input Option
      *
-     * @param string myName The long name of the option, or an array with all the properties.
-     * @param string short The short alias for this option
-     * @param string help The help text for this option
+     * @param string aName The long name of the option, or an array with all the properties.
+     * @param string $short The short alias for this option
+     * @param string $help The help text for this option
      * @param bool $isBoolean Whether this option is a boolean option. Boolean options don"t consume extra tokens
      * @param string|bool|null $default The default value for this option.
      * @param array<string> $choices Valid choices for this option.
      * @param bool $multiple Whether this option can accept multiple value definition.
      * @param bool $required Whether this option is required or not.
+     * @param string|null $prompt The prompt string.
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     this(
-      string myName,
-      string short = "",
-      string help = "",
-      bool $isBoolean = false,
-      $default = null,
-      array $choices = [],
-      bool $multiple = false,
-      bool $required = false
+        string aName,
+        string $short = "",
+        string $help = "",
+        bool $isBoolean = false,
+        $default = null,
+        array $choices = [],
+        bool $multiple = false,
+        bool $required = false,
+        ?string $prompt = null
     ) {
-        _name = myName;
+        _name = $name;
         _short = $short;
         _help = $help;
         _boolean = $isBoolean;
         _choices = $choices;
         _multiple = $multiple;
         this.required = $required;
+        this.prompt = $prompt;
 
         if ($isBoolean) {
             _default = (bool)$default;
-        } elseif ($default  !is null) {
+        } elseif ($default != null) {
             _default = (string)$default;
         }
 
         if (strlen(_short) > 1) {
-          throw new ConsoleException(
-            sprintf("Short option "%s" is invalid, short options must be one letter.", _short)
-          );
+            throw new ConsoleException(
+                sprintf("Short option "%s" is invalid, short options must be one letter.", _short)
+            );
+        }
+        if (isset(_default) && this.prompt) {
+            throw new ConsoleException(
+                "You cannot set both `prompt` and `default` options~ " ~
+                "Use either a static `default` or interactive `prompt`"
+            );
         }
     }
 
-    // Get the value of the name attribute.
+    /**
+     * Get the value of the name attribute.
+     *
+     * @return string Value of _name.
+     */
     string name() {
         return _name;
     }
 
-    // Get the value of the short attribute.
+    /**
+     * Get the value of the short attribute.
+     *
+     * @return string Value of _short.
+     */
     string short() {
         return _short;
     }
@@ -112,36 +142,36 @@ class ConsoleInputOption {
         if (_short != "") {
             $short = ", -" ~ _short;
         }
-        myName = sprintf("--%s%s", name, $short);
-        if (strlen(myName) < $width) {
-            myName = str_pad(myName, $width, " ");
+        $name = sprintf("--%s%s", _name, $short);
+        if (strlen($name) < $width) {
+            $name = str_pad($name, $width, " ");
         }
         $required = "";
         if (this.isRequired()) {
             $required = " <comment>(required)</comment>";
         }
 
-        return sprintf("%s%s%s%s", myName, _help, $default, $required);
+        return sprintf("%s%s%s%s", $name, _help, $default, $required);
     }
 
     /**
      * Get the usage value for this option
      */
     string usage() {
-        myName = _short == "" ? "--" ~ name : "-" ~ _short;
+        $name = _short == "" ? "--" ~ _name : "-" ~ _short;
         $default = "";
-        if (_default  !is null && !is_bool(_default) && _default != "") {
+        if (_default != null && !is_bool(_default) && _default != "") {
             $default = " " ~ _default;
         }
         if (_choices) {
             $default = " " ~ implode("|", _choices);
         }
-        myTemplate = "[%s%s]";
+        $template = "[%s%s]";
         if (this.isRequired()) {
-            myTemplate = "%s%s";
+            $template = "%s%s";
         }
 
-        return sprintf(myTemplate, myName, $default);
+        return sprintf($template, $name, $default);
     }
 
     /**
@@ -155,18 +185,27 @@ class ConsoleInputOption {
 
     /**
      * Check if this option is required
+     *
+     * @return bool
+     */
     bool isRequired() {
         return this.required;
     }
 
     /**
      * Check if this option is a boolean option
+     *
+     * @return bool
+     */
     bool isBoolean() {
         return _boolean;
     }
 
     /**
      * Check if this option accepts multiple values.
+     *
+     * @return bool
+     */
     bool acceptsMultiple() {
         return _multiple;
     }
@@ -174,25 +213,40 @@ class ConsoleInputOption {
     /**
      * Check that a value is a valid choice for this option.
      *
-     * @param string|bool myValue The choice to validate.
+     * @param string|bool $value The choice to validate.
+     * @return true
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    bool validChoice(myValue) {
+    bool validChoice($value) {
         if (empty(_choices)) {
             return true;
         }
-        if (!in_array(myValue, _choices, true)) {
+        if (!in_array($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     ""%s" is not a valid value for --%s. Please use one of "%s"",
-                    (string)myValue,
-                    name,
+                    (string)$value,
+                    _name,
                     implode(", ", _choices)
                 )
             );
         }
 
         return true;
+    }
+
+    /**
+     * Get the list of choices this option has.
+     */
+    array choices() {
+        return _choices;
+    }
+
+    /**
+     * Get the prompt string
+     */
+    string prompt() {
+        return (string)this.prompt;
     }
 
     /**
@@ -204,7 +258,7 @@ class ConsoleInputOption {
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent.addChild("option");
-        $option.addAttribute("name", "--" ~ name);
+        $option.addAttribute("name", "--" ~ _name);
         $short = "";
         if (_short != "") {
             $short = "-" ~ _short;

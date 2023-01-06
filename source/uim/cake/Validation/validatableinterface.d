@@ -13,5 +13,5 @@ interface ValidatableInterface
      *
      * @param uim.cake.validations.Validator $validator The validator to use when validating the entity.
      */
-    array validate(Validator $validator): array;
+    array validate(Validator $validator);
 }

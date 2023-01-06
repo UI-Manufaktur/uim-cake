@@ -121,7 +121,7 @@ class LinkConstraint
      * @param array $values The condition values.
      * @return array A conditions array combined from the passed fields and values.
      */
-    protected array _buildConditions(array $fields, array $values): array
+    protected array _buildConditions(array $fields, array $values)
     {
         if (count($fields) != count($values)) {
             throw new \InvalidArgumentException(sprintf(

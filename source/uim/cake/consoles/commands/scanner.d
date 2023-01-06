@@ -1,4 +1,4 @@
-module uim.cake.console;
+module uim.cake.consoles;
 
 import uim.cake.core.App;
 import uim.cake.core.Configure;
