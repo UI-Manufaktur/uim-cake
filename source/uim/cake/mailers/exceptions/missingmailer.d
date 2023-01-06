@@ -7,5 +7,5 @@ import uim.cake.core.exceptions.CakeException;
  */
 class MissingMailerException : CakeException {
 
-    protected _messageTemplate = "Mailer class "%s" could not be found.";
+    protected _messageTemplate = "Mailer class '%s' could not be found.";
 }

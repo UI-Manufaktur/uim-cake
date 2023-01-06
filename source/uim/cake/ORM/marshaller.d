@@ -72,7 +72,7 @@ class Marshaller
             if (!_table.hasAssociation($key)) {
                 if (substr($key, 0, 1) != "_") {
                     throw new InvalidArgumentException(sprintf(
-                        "Cannot marshal data for "%s" association. It is not associated with "%s".",
+                        "Cannot marshal data for '%s' association. It is not associated with '%s'.",
                         (string)$key,
                         _table.getAlias()
                     ));

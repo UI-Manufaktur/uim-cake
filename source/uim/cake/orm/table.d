@@ -1419,7 +1419,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             }, $primaryKey);
 
             throw new InvalidPrimaryKeyException(sprintf(
-                "Record not found in table "%s" with primary key [%s]",
+                "Record not found in table '%s' with primary key [%s]",
                 this.getTable(),
                 implode(", ", $primaryKey)
             ));
@@ -1586,7 +1586,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             myQuery = $search;
         } else {
             throw new InvalidArgumentException(sprintf(
-                "Search criteria must be an array, callable or Query. Got "%s"",
+                "Search criteria must be an array, callable or Query. Got '%s'",
                 getTypeName($search)
             ));
         }
@@ -1923,7 +1923,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         $primary = (array)this.getPrimaryKey();
         if (empty($primary)) {
             $msg = sprintf(
-                "Cannot insert row in "%s" table, it has no primary key.",
+                "Cannot insert row in '%s' table, it has no primary key.",
                 this.getTable()
             );
             throw new RuntimeException($msg);
@@ -2408,7 +2408,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         }
 
         throw new BadMethodCallException(sprintf(
-            "Unknown finder method "%s" on %s.",
+            "Unknown finder method '%s' on %s.",
             myType,
             static::class
         ));
@@ -2496,7 +2496,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         }
 
         throw new BadMethodCallException(
-            sprintf("Unknown method "%s" called on %s", $method, static::class)
+            sprintf("Unknown method '%s' called on %s", $method, static::class)
         );
     }
 

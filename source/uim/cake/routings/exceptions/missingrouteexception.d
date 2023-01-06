@@ -9,12 +9,12 @@ use Throwable;
  */
 class MissingRouteException : CakeException {
 
-    protected _messageTemplate = "A route matching "%s" could not be found.";
+    protected _messageTemplate = "A route matching '%s' could not be found.";
 
     /**
      * Message template to use when the requested method is included.
      */
-    protected string _messageTemplateWithMethod = "A "%s" route matching "%s" could not be found.";
+    protected string _messageTemplateWithMethod = "A '%s' route matching '%s' could not be found.";
 
     /**
      * Constructor.

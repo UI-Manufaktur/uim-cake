@@ -19,6 +19,6 @@ import uim.cake.core.exceptions.CakeException;
 class RolledbackTransactionException : CakeException {
     /**
      */
-    protected string _messageTemplate = "The afterSave event in "%s" is aborting the transaction"
+    protected string _messageTemplate = "The afterSave event in '%s' is aborting the transaction"
         ~ " before the save process is done.";
 }

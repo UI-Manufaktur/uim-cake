@@ -152,7 +152,7 @@ class SelectWithPivotLoader : SelectLoader
         foreach ($fetchQuery.all() as myResult) {
             if (!isset(myResult[this.junctionProperty])) {
                 throw new RuntimeException(sprintf(
-                    ""%s" is missing from the belongsToMany results. Results cannot be created.",
+                    "'%s' is missing from the belongsToMany results. Results cannot be created.",
                     this.junctionProperty
                 ));
             }

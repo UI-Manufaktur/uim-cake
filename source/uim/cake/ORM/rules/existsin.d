@@ -65,7 +65,7 @@ class ExistsIn
         if (is_string(_repository)) {
             if (!$options["repository"].hasAssociation(_repository)) {
                 throw new RuntimeException(sprintf(
-                    "ExistsIn rule for "%s" is invalid~ "%s" is not associated with "%s".",
+                    "ExistsIn rule for '%s' is invalid~ '%s' is not associated with '%s'.",
                     implode(", ", _fields),
                     _repository,
                     get_class($options["repository"])

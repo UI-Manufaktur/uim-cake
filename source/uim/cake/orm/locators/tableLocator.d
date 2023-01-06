@@ -112,7 +112,7 @@ class TableLocator : AbstractLocator : ILocator
 
         if (isset(this.instances[myAlias])) {
             throw new RuntimeException(sprintf(
-                "You cannot configure "%s", it has already been constructed.",
+                "You cannot configure '%s', it has already been constructed.",
                 myAlias
             ));
         }

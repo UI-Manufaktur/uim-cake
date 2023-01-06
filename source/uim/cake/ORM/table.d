@@ -1421,7 +1421,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     {
         if ($primaryKey == null) {
             throw new InvalidPrimaryKeyException(sprintf(
-                "Record not found in table "%s" with primary key [NULL]",
+                "Record not found in table '%s' with primary key [NULL]",
                 this.getTable()
             ));
         }
@@ -1441,7 +1441,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             }, $primaryKey);
 
             throw new InvalidPrimaryKeyException(sprintf(
-                "Record not found in table "%s" with primary key [%s]",
+                "Record not found in table '%s' with primary key [%s]",
                 this.getTable(),
                 implode(", ", $primaryKey)
             ));
@@ -1608,7 +1608,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             $query = $search;
         } else {
             throw new InvalidArgumentException(sprintf(
-                "Search criteria must be an array, callable or Query. Got "%s"",
+                "Search criteria must be an array, callable or Query. Got '%s'",
                 getTypeName($search)
             ));
         }
@@ -1949,7 +1949,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         $primary = (array)this.getPrimaryKey();
         if (empty($primary)) {
             $msg = sprintf(
-                "Cannot insert row in "%s" table, it has no primary key.",
+                "Cannot insert row in '%s' table, it has no primary key.",
                 this.getTable()
             );
             throw new RuntimeException($msg);
@@ -2454,7 +2454,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         throw new BadMethodCallException(sprintf(
-            "Unknown finder method "%s" on %s.",
+            "Unknown finder method '%s' on %s.",
             $type,
             static::class
         ));
@@ -2542,7 +2542,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         throw new BadMethodCallException(
-            sprintf("Unknown method "%s" called on %s", $method, static::class)
+            sprintf("Unknown method '%s' called on %s", $method, static::class)
         );
     }
 

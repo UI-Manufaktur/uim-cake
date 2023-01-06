@@ -449,7 +449,7 @@ class RouteCollection
             }
             if (!this.hasMiddleware($name)) {
                 throw new RuntimeException(sprintf(
-                    "The middleware named "%s" has not been registered. Use registerMiddleware() to define it.",
+                    "The middleware named '%s' has not been registered. Use registerMiddleware() to define it.",
                     $name
                 ));
             }

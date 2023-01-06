@@ -78,7 +78,7 @@ class HasMany : Association
      */
     function setSaveStrategy(string $strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
-            $msg = sprintf("Invalid save strategy "%s"", $strategy);
+            $msg = sprintf("Invalid save strategy '%s'", $strategy);
             throw new InvalidArgumentException($msg);
         }
 

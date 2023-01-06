@@ -181,7 +181,7 @@ abstract class Association {
             get_class(_targetTable) != App::className(myClassName, "Model/Table", "Table")
         ) {
             throw new InvalidArgumentException(sprintf(
-                "The class name "%s" doesn\"t match the target table class name of "%s".",
+                "The class name '%s' doesn\"t match the target table class name of '%s'.",
                 myClassName,
                 get_class(_targetTable)
             ));
@@ -261,7 +261,7 @@ abstract class Association {
                 myClassName = App::className(_className, "Model/Table", "Table") ?: Table::class;
 
                 if (!_targetTable instanceof myClassName) {
-                    myErrorMessage = "%s association "%s" of type "%s" to "%s" doesn\"t match the expected class "%s"~ ";
+                    myErrorMessage = "%s association '%s' of type '%s' to '%s' doesn\"t match the expected class '%s'~ ";
                     myErrorMessage .= "You can\"t have an association of the same name with a different target ";
                     myErrorMessage .= ""className" option anywhere in your app.";
 
@@ -427,7 +427,7 @@ abstract class Association {
         if (!_propertyName) {
             _propertyName = _propertyName();
             if (in_array(_propertyName, _sourceTable.getSchema().columns(), true)) {
-                $msg = "Association property name "%s" clashes with field of same name of table "%s"." ~
+                $msg = "Association property name '%s' clashes with field of same name of table '%s'." ~
                     " You should explicitly specify the "propertyName" option.";
                 trigger_error(
                     sprintf($msg, _propertyName, _sourceTable.getTable()),
@@ -460,7 +460,7 @@ abstract class Association {
     auto setStrategy(string myName) {
         if (!in_array(myName, _validStrategies, true)) {
             throw new InvalidArgumentException(sprintf(
-                "Invalid strategy "%s" was provided. Valid options are (%s).",
+                "Invalid strategy '%s' was provided. Valid options are (%s).",
                 myName,
                 implode(", ", _validStrategies)
             ));
@@ -571,7 +571,7 @@ abstract class Association {
             $dummy = myOptions["queryBuilder"]($dummy);
             if (!($dummy instanceof Query)) {
                 throw new RuntimeException(sprintf(
-                    "Query builder for association "%s" did not return a query",
+                    "Query builder for association '%s' did not return a query",
                     this.getName()
                 ));
             }
@@ -898,11 +898,11 @@ abstract class Association {
                 if (this.isOwningSide(this.getSource())) {
                     myTable = this.getSource().getTable();
                 }
-                $msg = "The "%s" table does not define a primary key, and cannot have join conditions generated.";
+                $msg = "The '%s' table does not define a primary key, and cannot have join conditions generated.";
                 throw new RuntimeException(sprintf($msg, myTable));
             }
 
-            $msg = "Cannot match provided foreignKey for "%s", got "(%s)" but expected foreign key for "(%s)"";
+            $msg = "Cannot match provided foreignKey for '%s', got "(%s)" but expected foreign key for "(%s)"";
             throw new RuntimeException(sprintf(
                 $msg,
                 _name,

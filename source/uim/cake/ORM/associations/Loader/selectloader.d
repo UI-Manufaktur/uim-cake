@@ -244,7 +244,7 @@ class SelectLoader
         if ($missingFields) {
             throw new InvalidArgumentException(
                 sprintf(
-                    "You are required to select the "%s" field(s)",
+                    "You are required to select the '%s' field(s)",
                     implode(", ", $key)
                 )
             );

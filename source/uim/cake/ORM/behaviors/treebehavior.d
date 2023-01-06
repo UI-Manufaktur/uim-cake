@@ -242,7 +242,7 @@ class TreeBehavior : Behavior
 
         if ($parentLeft > $left && $parentLeft < $right) {
             throw new RuntimeException(sprintf(
-                "Cannot use node "%s" as parent for entity "%s"",
+                "Cannot use node '%s' as parent for entity '%s'",
                 $parent,
                 $entity.get(_getPrimaryKey())
             ));

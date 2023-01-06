@@ -146,7 +146,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
             if (isset(_finderMap[myFinder]) && this.has(_finderMap[myFinder][0])) {
                 $duplicate = _finderMap[myFinder];
                 myError = sprintf(
-                    "%s contains duplicate finder "%s" which is already provided by "%s"",
+                    "%s contains duplicate finder '%s' which is already provided by '%s'",
                     myClass,
                     myFinder,
                     $duplicate[0]
@@ -160,7 +160,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
             if (isset(_methodMap[$method]) && this.has(_methodMap[$method][0])) {
                 $duplicate = _methodMap[$method];
                 myError = sprintf(
-                    "%s contains duplicate method "%s" which is already provided by "%s"",
+                    "%s contains duplicate method '%s' which is already provided by '%s'",
                     myClass,
                     $method,
                     $duplicate[0]
@@ -218,7 +218,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
         }
 
         throw new BadMethodCallException(
-            sprintf("Cannot call "%s" it does not belong to any attached behavior.", $method)
+            sprintf("Cannot call '%s' it does not belong to any attached behavior.", $method)
         );
     }
 
@@ -242,7 +242,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
         }
 
         throw new BadMethodCallException(
-            sprintf("Cannot call finder "%s" it does not belong to any attached behavior.", myType)
+            sprintf("Cannot call finder '%s' it does not belong to any attached behavior.", myType)
         );
     }
 }

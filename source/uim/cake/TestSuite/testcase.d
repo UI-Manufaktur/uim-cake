@@ -344,7 +344,7 @@ abstract class TestCase : BaseTestCase
             /** @var uim.cake.routings.IRoutingApplication $app */
             $app = $reflect.newInstanceArgs($appArgs);
         } catch (ReflectionException $e) {
-            throw new LogicException(sprintf("Cannot load "%s" to load routes from.", $className), 0, $e);
+            throw new LogicException(sprintf("Cannot load '%s' to load routes from.", $className), 0, $e);
         }
         $builder = Router::createRouteBuilder("/");
         $app.routes($builder);
@@ -694,7 +694,7 @@ abstract class TestCase : BaseTestCase
                     $type = "Text equals";
                 }
                 $regex[] = [
-                    sprintf("%s "%s"", $type, $tags),
+                    sprintf("%s '%s'", $type, $tags),
                     $tags,
                     $i,
                 ];
@@ -716,7 +716,7 @@ abstract class TestCase : BaseTestCase
                 foreach ($attributes as $attr: $val) {
                     if (is_numeric($attr) && preg_match("/^preg\:\/(.+)\/$/i", (string)$val, $matches)) {
                         $attrs[] = $matches[1];
-                        $explanations[] = sprintf("Regex "%s" matches", $matches[1]);
+                        $explanations[] = sprintf("Regex '%s' matches", $matches[1]);
                         continue;
                     }
                     $val = (string)$val;
@@ -725,7 +725,7 @@ abstract class TestCase : BaseTestCase
                     if (is_numeric($attr)) {
                         $attr = $val;
                         $val = ".+?";
-                        $explanations[] = sprintf("Attribute "%s" present", $attr);
+                        $explanations[] = sprintf("Attribute '%s' present", $attr);
                     } elseif (!empty($val) && preg_match("/^preg\:\/(.+)\/$/i", $val, $matches)) {
                         $val = str_replace(
                             [".*", ".+"],
@@ -734,9 +734,9 @@ abstract class TestCase : BaseTestCase
                         );
                         $quotes = $val != $matches[1] ? "["\"]" : "["\"]?";
 
-                        $explanations[] = sprintf("Attribute "%s" matches "%s"", $attr, $val);
+                        $explanations[] = sprintf("Attribute '%s' matches '%s'", $attr, $val);
                     } else {
-                        $explanations[] = sprintf("Attribute "%s" == "%s"", $attr, $val);
+                        $explanations[] = sprintf("Attribute '%s' == '%s'", $attr, $val);
                         $val = preg_quote($val, "/");
                     }
                     $attrs[] = "[\s]+" ~ preg_quote($attr, "/") ~ "=" ~ $quotes . $val . $quotes;
@@ -797,7 +797,7 @@ abstract class TestCase : BaseTestCase
             }
         }
 
-        this.assertTrue(true, "%s");
+        this.assertTrue(true, '%s');
 
         return true;
     }
