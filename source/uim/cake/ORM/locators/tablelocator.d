@@ -128,7 +128,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    array getConfig(?string $alias = null) {
+    array getConfig(Nullable!string $alias = null) {
         if ($alias == null) {
             return _config;
         }

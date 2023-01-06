@@ -148,7 +148,7 @@ class SecurityHeadersMiddleware : IMiddleware
      * @param string|null $url URL if mode is `allow-from`
      * @return this
      */
-    function setXFrameOptions(string $option = self::SAMEORIGIN, ?string $url = null) {
+    function setXFrameOptions(string $option = self::SAMEORIGIN, Nullable!string $url = null) {
         this.checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
         if ($option == self::ALLOW_FROM) {

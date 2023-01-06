@@ -219,7 +219,7 @@ class Number
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
-    static string currency($value, ?string $currency = null, array $options = []) {
+    static string currency($value, Nullable!string $currency = null, array $options = []) {
         $value = (float)$value;
         $currency = $currency ?: static::getDefaultCurrency();
 
@@ -295,7 +295,7 @@ class Number
      * if $currency argument is not provided. If null is passed, it will clear the
      * currently stored value
      */
-    static void setDefaultCurrency(?string $currency = null) {
+    static void setDefaultCurrency(Nullable!string $currency = null) {
         static::_defaultCurrency = $currency;
     }
 

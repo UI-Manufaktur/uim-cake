@@ -1359,7 +1359,7 @@ class BelongsToMany : Association
      *
      * @param string|null $name The name of the junction table.
      */
-    protected string _junctionTableName(?string aName = null) {
+    protected string _junctionTableName(Nullable!string aName = null) {
         if ($name == null) {
             if (empty(_junctionTableName)) {
                 $tablesNames = array_map("Cake\Utility\Inflector::underscore", [

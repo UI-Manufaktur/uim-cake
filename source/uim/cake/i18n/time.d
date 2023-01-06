@@ -254,7 +254,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @return array List of timezone identifiers
      * @since 2.2
      */
-    static array listTimezones($filter = null, ?string $country = null, $options = []) {
+    static array listTimezones($filter = null, Nullable!string $country = null, $options = []) {
         if (is_bool($options)) {
             $options = [
                 "group": $options,

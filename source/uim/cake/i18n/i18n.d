@@ -97,7 +97,7 @@ class I18n
      *   constructing a translations package instance.
      * @param string|null $locale The locale for the translator.
      */
-    static void setTranslator(string aName, callable $loader, ?string $locale = null) {
+    static void setTranslator(string aName, callable $loader, Nullable!string $locale = null) {
         $locale = $locale ?: static::getLocale();
 
         $translators = static::translators();
@@ -116,7 +116,7 @@ class I18n
      * @return uim.cake.I18n\Translator The configured translator.
      * @throws uim.cake.I18n\exceptions.I18nException
      */
-    static function getTranslator(string aName = "default", ?string $locale = null): Translator
+    static function getTranslator(string aName = "default", Nullable!string $locale = null): Translator
     {
         $translators = static::translators();
 

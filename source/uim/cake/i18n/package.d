@@ -41,7 +41,7 @@ class Package
      */
     this(
         string $formatter = "default",
-        ?string $fallback = null,
+        Nullable!string $fallback = null,
         array $messages = []
     ) {
         this.formatter = $formatter;
@@ -117,7 +117,7 @@ class Package
      *
      * @param string|null $fallback The fallback package name.
      */
-    void setFallback(?string $fallback) {
+    void setFallback(Nullable!string $fallback) {
         this.fallback = $fallback;
     }
 

@@ -714,7 +714,7 @@ class EagerLoader
         string $alias,
         Association $assoc,
         bool $asMatching = false,
-        ?string $targetProperty = null
+        Nullable!string $targetProperty = null
     ) {
         _joinsMap[$alias] = new EagerLoadable($alias, [
             "aliasPath": $alias,

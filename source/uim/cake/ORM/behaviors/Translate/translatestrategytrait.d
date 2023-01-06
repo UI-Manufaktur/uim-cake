@@ -57,7 +57,7 @@ trait TranslateStrategyTrait
      *   the behavior fall back to using the globally configured locale.
      * @return this
      */
-    function setLocale(?string $locale) {
+    function setLocale(Nullable!string $locale) {
         this.locale = $locale;
 
         return this;

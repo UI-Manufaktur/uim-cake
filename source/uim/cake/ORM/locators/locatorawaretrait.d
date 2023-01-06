@@ -62,7 +62,7 @@ trait LocatorAwareTrait
      * @see uim.cake.orm.TableLocator::get()
      * @since 4.3.0
      */
-    function fetchTable(?string $alias = null, array $options = []): Table
+    function fetchTable(Nullable!string $alias = null, array $options = []): Table
     {
         $alias = $alias ?? this.defaultTable;
         if (empty($alias)) {

@@ -114,7 +114,7 @@ use InvalidArgumentException;
  * @method this setAttachments($attachments) Add attachments to the email message. {@see uim.cake.mailers.Message::setAttachments()}
  * @method array getAttachments() Gets attachments to the email message. {@see uim.cake.mailers.Message::getAttachments()}
  * @method this addAttachments($attachments) Add attachments. {@see uim.cake.mailers.Message::addAttachments()}
- * @method array|string getBody(?string $type = null) Get generated message body as array.
+ * @method array|string getBody(Nullable!string $type = null) Get generated message body as array.
  *   {@see uim.cake.mailers.Message::getBody()}
  */
 #[\AllowDynamicProperties]
@@ -319,7 +319,7 @@ class Mailer : IEventListener
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
-    array send(?string $action = null, array $args = [], array $headers = []) {
+    array send(Nullable!string $action = null, array $args = [], array $headers = []) {
         if ($action == null) {
             return this.deliver();
         }

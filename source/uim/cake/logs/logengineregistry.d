@@ -40,7 +40,7 @@ class LogEngineRegistry : ObjectRegistry
      * @return void
      * @throws \RuntimeException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new RuntimeException(sprintf("Could not load class %s", $class));
     }
 

@@ -486,7 +486,7 @@ class SmtpTransport : AbstractTransport
      * @return string|null The matched code, or null if nothing matched
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected Nullable!string _smtpSend(?string $data, $checkCode = "250") {
+    protected Nullable!string _smtpSend(Nullable!string $data, $checkCode = "250") {
         _lastResponse = [];
 
         if ($data != null) {

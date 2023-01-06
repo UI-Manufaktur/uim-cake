@@ -152,7 +152,7 @@ class TranslatorRegistry
      * @throws uim.cake.I18n\exceptions.I18nException If no translator with that name could be found
      * for the given locale.
      */
-    function get(string aName, ?string $locale = null): ?Translator
+    function get(string aName, Nullable!string $locale = null): ?Translator
     {
         if ($locale == null) {
             $locale = this.getLocale();
@@ -251,7 +251,7 @@ class TranslatorRegistry
      * @param string|null $name The name of the formatter to use.
      * @return string The name of the formatter.
      */
-    string defaultFormatter(?string aName = null) {
+    string defaultFormatter(Nullable!string aName = null) {
         if ($name == null) {
             return _defaultFormatter;
         }

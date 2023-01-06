@@ -35,7 +35,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      *   the behavior fall back to using the globally configured locale.
      * @return this
      */
-    function setLocale(?string $locale);
+    function setLocale(Nullable!string $locale);
 
     /**
      * Returns the current locale.

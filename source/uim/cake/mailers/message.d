@@ -288,7 +288,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setFrom($email, ?string aName = null) {
+    function setFrom($email, Nullable!string aName = null) {
         return this.setEmailSingle("from", $email, $name, "From requires only 1 email address.");
     }
 
@@ -309,7 +309,7 @@ class Message : JsonSerializable, Serializable {
      * @throws \InvalidArgumentException
      * @link https://tools.ietf.org/html/rfc2822.html#section-3.6.2
      */
-    function setSender($email, ?string aName = null) {
+    function setSender($email, Nullable!string aName = null) {
         return this.setEmailSingle("sender", $email, $name, "Sender requires only 1 email address.");
     }
 
@@ -332,7 +332,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setReplyTo($email, ?string aName = null) {
+    function setReplyTo($email, Nullable!string aName = null) {
         return this.setEmail("replyTo", $email, $name);
     }
 
@@ -351,7 +351,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $name Name
      * @return this
      */
-    function addReplyTo($email, ?string aName = null) {
+    function addReplyTo($email, Nullable!string aName = null) {
         return this.addEmail("replyTo", $email, $name);
     }
 
@@ -364,7 +364,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setReadReceipt($email, ?string aName = null) {
+    function setReadReceipt($email, Nullable!string aName = null) {
         return this.setEmailSingle(
             "readReceipt",
             $email,
@@ -389,7 +389,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setReturnPath($email, ?string aName = null) {
+    function setReturnPath($email, Nullable!string aName = null) {
         return this.setEmailSingle("returnPath", $email, $name, "Return-Path requires only 1 email address.");
     }
 
@@ -408,7 +408,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $name Name
      * @return this
      */
-    function setTo($email, ?string aName = null) {
+    function setTo($email, Nullable!string aName = null) {
         return this.setEmail("to", $email, $name);
     }
 
@@ -427,7 +427,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $name Name
      * @return this
      */
-    function addTo($email, ?string aName = null) {
+    function addTo($email, Nullable!string aName = null) {
         return this.addEmail("to", $email, $name);
     }
 
@@ -439,7 +439,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $name Name
      * @return this
      */
-    function setCc($email, ?string aName = null) {
+    function setCc($email, Nullable!string aName = null) {
         return this.setEmail("cc", $email, $name);
     }
 
@@ -458,7 +458,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $name Name
      * @return this
      */
-    function addCc($email, ?string aName = null) {
+    function addCc($email, Nullable!string aName = null) {
         return this.addEmail("cc", $email, $name);
     }
 
@@ -470,7 +470,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $name Name
      * @return this
      */
-    function setBcc($email, ?string aName = null) {
+    function setBcc($email, Nullable!string aName = null) {
         return this.setEmail("bcc", $email, $name);
     }
 
@@ -489,7 +489,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $name Name
      * @return this
      */
-    function addBcc($email, ?string aName = null) {
+    function addBcc($email, Nullable!string aName = null) {
         return this.addEmail("bcc", $email, $name);
     }
 
@@ -520,7 +520,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $charset Character set.
      * @return this
      */
-    function setHeaderCharset(?string $charset) {
+    function setHeaderCharset(Nullable!string $charset) {
         this.headerCharset = $charset;
 
         return this;
@@ -542,7 +542,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setTransferEncoding(?string $encoding) {
+    function setTransferEncoding(Nullable!string $encoding) {
         if ($encoding != null) {
             $encoding = strtolower($encoding);
             if (!in_array($encoding, this.transferEncodingAvailable, true)) {
@@ -576,7 +576,7 @@ class Message : JsonSerializable, Serializable {
      *   null to unset the pattern and make use of filter_var() instead.
      * @return this
      */
-    function setEmailPattern(?string $regex) {
+    function setEmailPattern(Nullable!string $regex) {
         this.emailPattern = $regex;
 
         return this;
@@ -600,7 +600,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    protected function setEmail(string $varName, $email, ?string aName) {
+    protected function setEmail(string $varName, $email, Nullable!string aName) {
         if (!is_array($email)) {
             this.validateEmail($email, $varName);
             this.{$varName} = [$email: $name ?? $email];
@@ -655,7 +655,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    protected function setEmailSingle(string $varName, $email, ?string aName, string $throwMessage) {
+    protected function setEmailSingle(string $varName, $email, Nullable!string aName, string $throwMessage) {
         if ($email == []) {
             this.{$varName} = $email;
 
@@ -682,7 +682,7 @@ class Message : JsonSerializable, Serializable {
      * @return this
      * @throws \InvalidArgumentException
      */
-    protected function addEmail(string $varName, $email, ?string aName) {
+    protected function addEmail(string $varName, $email, Nullable!string aName) {
         if (!is_array($email)) {
             this.validateEmail($email, $varName);
             if ($name == null) {
@@ -1262,7 +1262,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $boundary Boundary to use. If null, will default to this.boundary
      * @return array<string> An array of lines to add to the message
      */
-    protected array attachFiles(?string $boundary = null) {
+    protected array attachFiles(Nullable!string $boundary = null) {
         if ($boundary == null) {
             /** @var string $boundary */
             $boundary = this.boundary;
@@ -1301,7 +1301,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $boundary Boundary to use. If null, will default to this.boundary
      * @return array<string> An array of lines to add to the message
      */
-    protected array attachInlineFiles(?string $boundary = null) {
+    protected array attachInlineFiles(Nullable!string $boundary = null) {
         if ($boundary == null) {
             /** @var string $boundary */
             $boundary = this.boundary;
@@ -1468,7 +1468,7 @@ class Message : JsonSerializable, Serializable {
      * @param int $wrapLength The line length
      * @return array<string> Wrapped message
      */
-    protected array wrap(?string $message = null, int $wrapLength = self::LINE_LENGTH_MUST) {
+    protected array wrap(Nullable!string $message = null, int $wrapLength = self::LINE_LENGTH_MUST) {
         if ($message == null || $message == "") {
             return [""];
         }

@@ -35,7 +35,7 @@ class TransportRegistry : ObjectRegistry
      * @return void
      * @throws \BadMethodCallException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new BadMethodCallException(sprintf("Mailer transport %s is not available.", $class));
     }
 

@@ -121,7 +121,7 @@ class RulesChecker : BaseRulesChecker
      * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
-    bool isLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
+    bool isLinkedTo($association, Nullable!string $field = null, Nullable!string $message = null): RuleInvoker
     {
         return _addLinkConstraintRule(
             $association,
@@ -151,7 +151,7 @@ class RulesChecker : BaseRulesChecker
      * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
-    bool isNotLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
+    bool isNotLinkedTo($association, Nullable!string $field = null, Nullable!string $message = null): RuleInvoker
     {
         return _addLinkConstraintRule(
             $association,
@@ -181,8 +181,8 @@ class RulesChecker : BaseRulesChecker
      */
     protected function _addLinkConstraintRule(
         $association,
-        ?string $errorField,
-        ?string $message,
+        Nullable!string $errorField,
+        Nullable!string $message,
         string $linkStatus,
         string $ruleName
     ): RuleInvoker {
@@ -247,7 +247,7 @@ class RulesChecker : BaseRulesChecker
         string $field,
         int $count = 0,
         string $operator = ">",
-        ?string $message = null
+        Nullable!string $message = null
     ): RuleInvoker {
         if (!$message) {
             if (_useI18n) {

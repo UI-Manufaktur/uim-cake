@@ -98,7 +98,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return void
      * @throws uim.cake.orm.exceptions.MissingBehaviorException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new MissingBehaviorException([
             "class": $class ~ "Behavior",
             "plugin": $plugin,

@@ -250,7 +250,7 @@ class Email : JsonSerializable, Serializable
      * @param string|null $type Use MESSAGE_* constants or null to return the full message as array
      * @return array|string String if type is given, array if type is null
      */
-    function message(?string $type = null) {
+    function message(Nullable!string $type = null) {
         if ($type == null) {
             return this.message.getBody();
         }
@@ -456,7 +456,7 @@ class Email : JsonSerializable, Serializable
      */
     static function deliver(
         $to = null,
-        ?string $subject = null,
+        Nullable!string $subject = null,
         $message = null,
         aConfig = "default",
         bool $send = true

@@ -55,7 +55,7 @@ trait DateFormatTrait
      *
      * @param string|null $locale The default locale string to be used.
      */
-    static void setDefaultLocale(?string $locale = null) {
+    static void setDefaultLocale(Nullable!string $locale = null) {
         static::$defaultLocale = $locale;
     }
 
@@ -175,7 +175,7 @@ trait DateFormatTrait
      * @param array<int>|string|int $format Format.
      * @param string|null $locale The locale name in which the date should be displayed.
      */
-    protected string _formatObject($date, $format, ?string $locale) {
+    protected string _formatObject($date, $format, Nullable!string $locale) {
         $pattern = "";
 
         if (is_array($format)) {

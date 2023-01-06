@@ -21,7 +21,7 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      *
      * @param string|null $locale The default locale string to be used or null.
      */
-    static void setDefaultLocale(?string $locale = null);
+    static void setDefaultLocale(Nullable!string $locale = null);
 
     /**
      * Returns a nicely formatted date string for this object.

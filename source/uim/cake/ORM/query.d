@@ -1214,7 +1214,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param string|null $table Unused parameter.
      * @return this
      */
-    function delete(?string $table = null) {
+    function delete(Nullable!string $table = null) {
         $repository = this.getRepository();
         this.from([$repository.getAlias(): $repository.getTable()]);
 
