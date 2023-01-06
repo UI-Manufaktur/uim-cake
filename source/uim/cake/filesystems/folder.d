@@ -114,7 +114,7 @@ class Folder
      * @param bool $create Create folder if not found
      * @param int|null $mode Mode (CHMOD) to apply to created folder, false to ignore
      */
-    this(?string $path = null, bool $create = false, Nullable!int $mode = null) {
+    this(Nullable!string $path = null, bool $create = false, Nullable!int $mode = null) {
         if (empty($path)) {
             $path = TMP;
         }
@@ -461,7 +461,7 @@ class Folder
      * @param bool $fullPath Whether to return the full path or only the directory name.
      * @return array Array of subdirectories for the provided or current path.
      */
-    array subdirectories(?string $path = null, bool $fullPath = true) {
+    array subdirectories(Nullable!string $path = null, bool $fullPath = true) {
         if (!$path) {
             $path = this.path;
         }
@@ -492,7 +492,7 @@ class Folder
      * @param string|null $type either "file" or "dir". Null returns both files and directories
      * @return array Array of nested directories and files in each directory
      */
-    array tree(?string $path = null, $exceptions = false, ?string $type = null) {
+    array tree(Nullable!string $path = null, $exceptions = false, Nullable!string $type = null) {
         if (!$path) {
             $path = this.path;
         }
@@ -662,7 +662,7 @@ class Folder
      * @param string|null $path Path of directory to delete
      * @return bool Success
      */
-    bool delete(?string $path = null) {
+    bool delete(Nullable!string $path = null) {
         if (!$path) {
             $path = this.pwd();
         }

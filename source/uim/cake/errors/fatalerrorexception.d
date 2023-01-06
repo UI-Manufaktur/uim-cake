@@ -19,7 +19,7 @@ class FatalErrorException : CakeException {
     this(
         string $message,
         Nullable!int $code = null,
-        ?string $file = null,
+        Nullable!string $file = null,
         Nullable!int $line = null,
         ?Throwable $previous = null
     ) {

@@ -35,7 +35,7 @@ class ConnectionRegistry : ObjectRegistry
      * @return void
      * @throws uim.cake.Datasource\exceptions.MissingDatasourceException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new MissingDatasourceException([
             "class": $class,
             "plugin": $plugin,

@@ -24,7 +24,7 @@ trait ExpressionTypeCasterTrait
      * @param string|null $type The type name
      * @return mixed
      */
-    protected function _castToExpression($value, ?string $type = null) {
+    protected function _castToExpression($value, Nullable!string $type = null) {
         if ($type == null) {
             return $value;
         }

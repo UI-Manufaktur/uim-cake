@@ -184,7 +184,7 @@ class WhenThenExpression : IExpression
      *  result value.
      * @return this
      */
-    function then($result, ?string $type = null) {
+    function then($result, Nullable!string $type = null) {
         if (
             $result != null &&
             !is_scalar($result) &&

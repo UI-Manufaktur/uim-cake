@@ -289,7 +289,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param string|null $column the name of the column representing the primary key
      * @return string|int
      */
-    function lastInsertId(?string $table = null, ?string $column = null) {
+    function lastInsertId(Nullable!string $table = null, Nullable!string $column = null) {
         if ($column && this.columnCount()) {
             $row = this.fetch(static::FETCH_TYPE_ASSOC);
 

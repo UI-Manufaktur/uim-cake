@@ -1381,7 +1381,7 @@ class Response : IResponse
      * @param string|null $string The string to be sent
      * @return static
      */
-    function withStringBody(?string $string) {
+    function withStringBody(Nullable!string $string) {
         $new = clone this;
         $new._createStream();
         $new.stream.write((string)$string);

@@ -101,7 +101,7 @@ class ErrorTrap
     bool handleError(
         int $code,
         string $description,
-        ?string $file = null,
+        Nullable!string $file = null,
         Nullable!int $line = null
     ) {
         if (!(error_reporting() & $code)) {

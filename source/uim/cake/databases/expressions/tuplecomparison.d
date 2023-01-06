@@ -135,7 +135,7 @@ class TupleComparison : ComparisonExpression
     }
 
 
-    protected string _bindValue($value, ValueBinder aBinder, ?string $type = null) {
+    protected string _bindValue($value, ValueBinder aBinder, Nullable!string $type = null) {
         $placeholder = $binder.placeholder("tuple");
         $binder.bind($placeholder, $value, $type);
 

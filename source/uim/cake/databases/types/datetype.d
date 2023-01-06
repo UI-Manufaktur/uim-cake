@@ -27,7 +27,7 @@ class DateType : DateTimeType
     protected bool $setToDateStart = true;
 
 
-    this(?string aName = null) {
+    this(Nullable!string aName = null) {
         super(($name);
 
         _setClassName(FrozenDate::class, DateTimeImmutable::class);

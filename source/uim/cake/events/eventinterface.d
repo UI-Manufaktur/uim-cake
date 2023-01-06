@@ -64,7 +64,7 @@ interface IEvent
      * @return mixed|array|null The data payload if $key is null, or the data value for the given $key.
      *   If the $key does not exist a null value is returned.
      */
-    function getData(?string aKey = null);
+    function getData(Nullable!string aKey = null);
 
     /**
      * Assigns a value to the data/payload of this event.

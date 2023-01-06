@@ -99,7 +99,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      *
      * @param string|null $name The name identifying this type
      */
-    this(?string aName = null) {
+    this(Nullable!string aName = null) {
         super(($name);
 
         this.defaultTimezone = new DateTimeZone(date_default_timezone_get());

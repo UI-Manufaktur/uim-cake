@@ -195,7 +195,7 @@ class Debugger
      * @param string|null $class Class name.
      * @return static
      */
-    static function getInstance(?string $class = null) {
+    static function getInstance(Nullable!string $class = null) {
         static $instance = [];
         if (!empty($class)) {
             if (!$instance || strtolower($class) != strtolower(get_class($instance[0]))) {

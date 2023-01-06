@@ -381,7 +381,7 @@ class Session
      * @param string|null $name Variable name to check for
      * @return bool True if variable is there
      */
-    bool check(?string aName = null) {
+    bool check(Nullable!string aName = null) {
         if (_hasSession() && !this.started()) {
             this.start();
         }
@@ -405,7 +405,7 @@ class Session
      * @return mixed|null The value of the session variable, or default value if a session
      *   is not available, can"t be started, or provided $name is not found in the session.
      */
-    function read(?string aName = null, $default = null) {
+    function read(Nullable!string aName = null, $default = null) {
         if (_hasSession() && !this.started()) {
             this.start();
         }
@@ -494,7 +494,7 @@ class Session
      * @param string|null $id Id to replace the current session id
      * @return string Session id
      */
-    string id(?string $id = null) {
+    string id(Nullable!string $id = null) {
         if ($id != null && !headers_sent()) {
             session_id($id);
         }

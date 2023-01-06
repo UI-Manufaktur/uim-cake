@@ -326,7 +326,7 @@ class File
      * @param string|null $ext The name of the extension
      * @return string the file basename.
      */
-    protected static string _basename(string $path, ?string $ext = null) {
+    protected static string _basename(string $path, Nullable!string $ext = null) {
         // check for multibyte string and use basename() if not found
         if (mb_strlen($path) == strlen($path)) {
             return $ext == null ? basename($path) : basename($path, $ext);
@@ -352,7 +352,7 @@ class File
      * @param string|null $ext The name of the extension to make safe if different from this.ext
      * @return string The extension of the file
      */
-    string safe(?string aName = null, ?string $ext = null) {
+    string safe(Nullable!string aName = null, Nullable!string $ext = null) {
         if (!$name) {
             $name = (string)this.name;
         }

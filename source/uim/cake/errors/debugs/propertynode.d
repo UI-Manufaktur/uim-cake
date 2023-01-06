@@ -34,7 +34,7 @@ class PropertyNode : INode
      * @param string|null $visibility The visibility of the property.
      * @param uim.cake.errors.debugs.INode $value The property value node.
      */
-    this(string aName, ?string $visibility, INode $value) {
+    this(string aName, Nullable!string $visibility, INode $value) {
         this.name = $name;
         this.visibility = $visibility;
         this.value = $value;

@@ -65,7 +65,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param string|null $field The field to check the status for. Null for the whole entity.
      * @return bool Whether the field was changed or not
      */
-    bool isDirty(?string $field = null);
+    bool isDirty(Nullable!string $field = null);
 
     /**
      * Gets the dirty fields.

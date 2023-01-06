@@ -29,7 +29,7 @@ class IdentifierExpression : IExpression
      * @param string $identifier The identifier this expression represents
      * @param string|null $collation The identifier collation
      */
-    this(string $identifier, ?string $collation = null) {
+    this(string $identifier, Nullable!string $collation = null) {
         _identifier = $identifier;
         this.collation = $collation;
     }

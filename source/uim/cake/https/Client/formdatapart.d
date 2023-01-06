@@ -78,7 +78,7 @@ class FormDataPart
      * @param string $disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    this(string aName, string $value, string $disposition = "form-data", ?string $charset = null) {
+    this(string aName, string $value, string $disposition = "form-data", Nullable!string $charset = null) {
         _name = $name;
         _value = $value;
         _disposition = $disposition;
@@ -93,7 +93,7 @@ class FormDataPart
      *
      * @param string|null $disposition Use null to get/string to set.
      */
-    string disposition(?string $disposition = null) {
+    string disposition(Nullable!string $disposition = null) {
         if ($disposition == null) {
             return _disposition;
         }
@@ -106,7 +106,7 @@ class FormDataPart
      *
      * @param string|null $id The content id.
      */
-    Nullable!string contentId(?string $id = null) {
+    Nullable!string contentId(Nullable!string $id = null) {
         if ($id == null) {
             return _contentId;
         }
@@ -122,7 +122,7 @@ class FormDataPart
      *
      * @param string|null $filename Use null to get/string to set.
      */
-    Nullable!string filename(?string $filename = null) {
+    Nullable!string filename(Nullable!string $filename = null) {
         if ($filename == null) {
             return _filename;
         }
@@ -135,7 +135,7 @@ class FormDataPart
      *
      * @param string|null $type Use null to get/string to set.
      */
-    Nullable!string type(?string $type) {
+    Nullable!string type(Nullable!string $type) {
         if ($type == null) {
             return _type;
         }
@@ -150,7 +150,7 @@ class FormDataPart
      *
      * @param string|null $type The type of encoding the value has.
      */
-    Nullable!string transferEncoding(?string $type) {
+    Nullable!string transferEncoding(Nullable!string $type) {
         if ($type == null) {
             return _transferEncoding;
         }

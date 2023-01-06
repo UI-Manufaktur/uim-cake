@@ -78,7 +78,7 @@ trait ModelAwareTrait
      *   and ModelAwareTrait::$modelClass property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.
      */
-    function loadModel(?string $modelClass = null, ?string $modelType = null): IRepository
+    function loadModel(Nullable!string $modelClass = null, Nullable!string $modelType = null): IRepository
     {
         $modelClass = $modelClass ?? this.modelClass;
         if (empty($modelClass)) {

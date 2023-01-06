@@ -127,7 +127,7 @@ abstract class BaseErrorHandler
     bool handleError(
         int $code,
         string $description,
-        ?string $file = null,
+        Nullable!string $file = null,
         Nullable!int $line = null,
         ?array $context = null
     ) {

@@ -129,11 +129,11 @@ class Cookie : CookieInterface
         string aName,
         $value = "",
         ?DateTimeInterface $expiresAt = null,
-        ?string $path = null,
-        ?string $domain = null,
+        Nullable!string $path = null,
+        Nullable!string $domain = null,
         ?bool $secure = null,
         ?bool $httpOnly = null,
-        ?string $sameSite = null
+        Nullable!string $sameSite = null
     ) {
         this.validateName($name);
         this.name = $name;
@@ -539,7 +539,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withSameSite(?string $sameSite) {
+    function withSameSite(Nullable!string $sameSite) {
         if ($sameSite != null) {
             this.validateSameSiteValue($sameSite);
         }
@@ -631,7 +631,7 @@ class Cookie : CookieInterface
      * @param string|null $path Path to read the data from
      * @return mixed
      */
-    function read(?string $path = null) {
+    function read(Nullable!string $path = null) {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             this.value = _expand(this.value);

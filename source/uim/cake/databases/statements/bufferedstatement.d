@@ -133,7 +133,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function lastInsertId(?string $table = null, ?string $column = null) {
+    function lastInsertId(Nullable!string $table = null, Nullable!string $column = null) {
         return this.statement.lastInsertId($table, $column);
     }
 

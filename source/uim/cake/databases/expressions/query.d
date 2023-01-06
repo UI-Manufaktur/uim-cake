@@ -121,7 +121,7 @@ class QueryExpression : IExpression, Countable
      * will be created, one per each value in the array.
      * @return this
      */
-    function eq($field, $value, ?string $type = null) {
+    function eq($field, $value, Nullable!string $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -333,7 +333,7 @@ class QueryExpression : IExpression, Countable
      *  from the value.
      * @return uim.cake.databases.Expression\CaseStatementExpression
      */
-    function case($value = null, ?string $type = null): CaseStatementExpression
+    function case($value = null, Nullable!string $type = null): CaseStatementExpression
     {
         if (func_num_args() > 0) {
             $expression = new CaseStatementExpression($value, $type);
@@ -373,7 +373,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function notInOrNull($field, $values, ?string $type = null) {
+    function notInOrNull($field, $values, Nullable!string $type = null) {
         $or = new static([], [], "OR");
         $or
             .notIn($field, $values, $type)

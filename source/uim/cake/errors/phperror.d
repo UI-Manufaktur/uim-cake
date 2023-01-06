@@ -82,7 +82,7 @@ class PhpError
     this(
         int $code,
         string $message,
-        ?string $file = null,
+        Nullable!string $file = null,
         Nullable!int $line = null,
         array $trace = []
     ) {

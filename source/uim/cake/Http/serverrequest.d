@@ -1042,7 +1042,7 @@ class ServerRequest : IServerRequest
      * @return array<string>|bool Either an array of all the types the client accepts or a boolean if they accept the
      *   provided type.
      */
-    string[] accepts(?string $type = null) {
+    string[] accepts(Nullable!string $type = null) {
         $content = new ContentTypeNegotiation();
         if ($type) {
             return $content.preferredType(this, [$type]) != null;
@@ -1084,7 +1084,7 @@ class ServerRequest : IServerRequest
      * @param string|null $language The language to test.
      * @return array|bool If a $language is provided, a boolean. Otherwise, the array of accepted languages.
      */
-    function acceptLanguage(?string $language = null) {
+    function acceptLanguage(Nullable!string $language = null) {
         $content = new ContentTypeNegotiation();
         if ($language != null) {
             return $content.acceptLanguage(this, $language);
@@ -1110,7 +1110,7 @@ class ServerRequest : IServerRequest
      * @return array|string|null Query data.
      * @see ServerRequest::getQueryParams()
      */
-    function getQuery(?string aName = null, $default = null) {
+    function getQuery(Nullable!string aName = null, $default = null) {
         if ($name == null) {
             return this.query;
         }
@@ -1150,7 +1150,7 @@ class ServerRequest : IServerRequest
      * @param mixed $default The default data.
      * @return mixed The value being read.
      */
-    function getData(?string aName = null, $default = null) {
+    function getData(Nullable!string aName = null, $default = null) {
         if ($name == null) {
             return this.data;
         }
@@ -1355,7 +1355,7 @@ class ServerRequest : IServerRequest
      *   variable"s value that does not exist.
      * @return string|null Either the environment value, or null if the value doesn"t exist.
      */
-    Nullable!string getEnv(string aKey, ?string $default = null) {
+    Nullable!string getEnv(string aKey, Nullable!string $default = null) {
         $key = strtoupper($key);
         if (!array_key_exists($key, _environment)) {
             _environment[$key] = env($key);

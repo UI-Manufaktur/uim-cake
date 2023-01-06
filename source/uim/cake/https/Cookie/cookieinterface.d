@@ -206,7 +206,7 @@ interface CookieInterface
      *   One of CookieInterface::SAMESITE_* constants.
      * @return static
      */
-    function withSameSite(?string $sameSite);
+    function withSameSite(Nullable!string $sameSite);
 
     /**
      * Get cookie options

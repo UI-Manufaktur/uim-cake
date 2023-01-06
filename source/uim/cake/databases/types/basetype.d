@@ -20,7 +20,7 @@ abstract class BaseType : TypeInterface
      *
      * @param string|null $name The name identifying this type
      */
-    this(?string aName = null) {
+    this(Nullable!string aName = null) {
         _name = $name;
     }
 
