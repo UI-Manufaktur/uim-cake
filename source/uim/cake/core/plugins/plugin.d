@@ -1,5 +1,8 @@
 module uim.cake.core;
 
+@safe:
+import uim.cake;
+
 /**
  * Plugin is used to load and locate plugins.
  *

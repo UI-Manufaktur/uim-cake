@@ -33,25 +33,17 @@ abstract class BaseCommand : ICommand {
         return this;
     }
 
-    /**
-     * Get the command name.
-     */
+    // Get the command name.
     string getName() {
         return this.name;
     }
 
-    /**
-     * Get the command description.
-     *
-     * @return string
-     */
+    // Get the command description.
     static string getDescription() {
         return "";
     }
 
-    /**
-     * Get the root command name.
-     */
+    // Get the root command name.
     string getRootName() {
         [$root] = explode(" ", this.name);
 

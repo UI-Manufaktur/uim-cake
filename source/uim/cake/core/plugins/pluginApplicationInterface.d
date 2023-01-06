@@ -1,9 +1,7 @@
 module uim.cake.core;
 
-import uim.cake.consoles.CommandCollection;
-import uim.cake.events.IEventDispatcher;
-import uim.cake.http.MiddlewareQueue;
-import uim.cake.routings.RouteBuilder;
+@safe:
+import uim.cake;
 
 /**
  * Interface for Applications that leverage plugins & events.

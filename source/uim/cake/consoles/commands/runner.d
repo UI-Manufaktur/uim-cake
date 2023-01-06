@@ -3,44 +3,57 @@ module uim.cake.consoles;
 @safe:
 import uim.cake;
 
-// Run CLI commands for the provided application.
-class CommandRunner : IEventDispatcher {
+use InvalidArgumentException;
+use RuntimeException;
+
+/**
+ * Run CLI commands for the provided application.
+ */
+class CommandRunner : IEventDispatcher
+{
     use EventDispatcherTrait;
 
-    // The application console commands are being run for.
-    protected IConsoleApplication _app;
-
-    // The application console commands are being run for.
+    /**
+     * The application console commands are being run for.
+     *
+     * @var uim.cake.Core\IConsoleApplication
      */
-    protected ICommandFactory _factory;
-
-    // The root command name. Defaults to `cake`.
-    protected string root;
+    protected $app;
 
     /**
-     * Alias mappings.
+     * The application console commands are being run for.
+     *
+     * @var uim.cake.consoles.ICommandFactory|null
      */
-    protected string[] myAliases;
+    protected $factory;
+
+    /**
+     * The root command name. Defaults to `cake`.
+     */
+    protected string $root;
+
+    // Alias mappings.
+    protected string[] $aliases = [];
 
     /**
      * Constructor
      *
-     * @param uim.cake.Core\IConsoleApplication _app The application to run CLI commands for.
-     * @param string root The root command name to be removed from argv.
-     * @param uim.cake.consoles.ICommandFactory|null _factory Command factory instance.
+     * @param uim.cake.Core\IConsoleApplication $app The application to run CLI commands for.
+     * @param string $root The root command name to be removed from argv.
+     * @param uim.cake.consoles.ICommandFactory|null $factory Command factory instance.
      */
     this(
-        IConsoleApplication _app,
-        string root = "cake",
-        ?ICommandFactory _factory = null
+        IConsoleApplication $app,
+        string $root = "cake",
+        ?ICommandFactory $factory = null
     ) {
-        this.app = _app;
+        this.app = $app;
         this.root = $root;
-        this.factory = _factory;
+        this.factory = $factory;
         this.aliases = [
-            "--version":"version",
-            "--help":"help",
-            "-h":"help",
+            "--version": "version",
+            "--help": "help",
+            "-h": "help",
         ];
     }
 
@@ -54,14 +67,14 @@ class CommandRunner : IEventDispatcher {
      * ### Usage
      *
      * ```
-     * $runner.setAliases(["--version":"version"]);
+     * $runner.setAliases(["--version": "version"]);
      * ```
      *
-     * @param myAliases The map of aliases to replace.
+     * @param array<string> $aliases The map of aliases to replace.
      * @return this
      */
-    auto setAliases(string[] myAliases) {
-        this.aliases = myAliases;
+    function setAliases(array $aliases) {
+        this.aliases = $aliases;
 
         return this;
     }
@@ -85,7 +98,7 @@ class CommandRunner : IEventDispatcher {
         this.bootstrap();
 
         $commands = new CommandCollection([
-            "help":HelpCommand::class,
+            "help": HelpCommand::class,
         ]);
         if (class_exists(VersionCommand::class)) {
             $commands.add("version", VersionCommand::class);
@@ -95,7 +108,7 @@ class CommandRunner : IEventDispatcher {
         if (this.app instanceof IPluginApplication) {
             $commands = this.app.pluginConsole($commands);
         }
-        this.dispatchEvent("Console.buildCommands", ["commands":$commands]);
+        this.dispatchEvent("Console.buildCommands", ["commands": $commands]);
         this.loadRoutes();
 
         if (empty($argv)) {
@@ -107,28 +120,28 @@ class CommandRunner : IEventDispatcher {
         $io = $io ?: new ConsoleIo();
 
         try {
-            [myName, $argv] = this.longestCommandName($commands, $argv);
-            myName = this.resolveName($commands, $io, myName);
+            [$name, $argv] = this.longestCommandName($commands, $argv);
+            $name = this.resolveName($commands, $io, $name);
         } catch (MissingOptionException $e) {
             $io.error($e.getFullMessage());
 
             return ICommand::CODE_ERROR;
         }
 
-        myResult = ICommand::CODE_ERROR;
-        myShell = this.getCommand($io, $commands, myName);
-        if (myShell instanceof Shell) {
-            myResult = this.runShell(myShell, $argv);
+        $result = ICommand::CODE_ERROR;
+        $shell = this.getCommand($io, $commands, $name);
+        if ($shell instanceof Shell) {
+            $result = this.runShell($shell, $argv);
         }
-        if (myShell instanceof ICommand) {
-            myResult = this.runCommand(myShell, $argv, $io);
+        if ($shell instanceof ICommand) {
+            $result = this.runCommand($shell, $argv, $io);
         }
 
-        if (myResult is null || myResult == true) {
+        if ($result == null || $result == true) {
             return ICommand::CODE_SUCCESS;
         }
-        if (is_int(myResult) && myResult >= 0 && myResult <= 255) {
-            return myResult;
+        if (is_int($result) && $result >= 0 && $result <= 255) {
+            return $result;
         }
 
         return ICommand::CODE_ERROR;
@@ -149,8 +162,11 @@ class CommandRunner : IEventDispatcher {
 
     /**
      * Get the application"s event manager or the global one.
+     *
+     * @return uim.cake.events.IEventManager
      */
-    IEventManager getEventManager() {
+    function getEventManager(): IEventManager
+    {
         if (this.app instanceof IPluginApplication) {
             return this.app.getEventManager();
         }
@@ -164,13 +180,13 @@ class CommandRunner : IEventDispatcher {
      * If the application does not support events and this method is used as
      * a setter, an exception will be raised.
      *
-     * @param myEventManager The event manager to set.
+     * @param uim.cake.events.IEventManager $eventManager The event manager to set.
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setEventManager(IEventManager myEventManager) {
+    function setEventManager(IEventManager $eventManager) {
         if (this.app instanceof IPluginApplication) {
-            this.app.setEventManager(myEventManager);
+            this.app.setEventManager($eventManager);
 
             return this;
         }
@@ -183,11 +199,11 @@ class CommandRunner : IEventDispatcher {
      *
      * @param uim.cake.consoles.ConsoleIo $io The IO wrapper for the created shell class.
      * @param uim.cake.consoles.CommandCollection $commands The command collection to find the shell in.
-     * @param string myName The command name to find
+     * @param string aName The command name to find
      * @return uim.cake.consoles.ICommand|uim.cake.consoles.Shell
      */
-    protected auto getCommand(ConsoleIo $io, CommandCollection $commands, string myName) {
-        $instance = $commands.get(myName);
+    protected function getCommand(ConsoleIo $io, CommandCollection $commands, string aName) {
+        $instance = $commands.get($name);
         if (is_string($instance)) {
             $instance = this.createCommand($instance, $io);
         }
@@ -195,9 +211,9 @@ class CommandRunner : IEventDispatcher {
             $instance.setRootName(this.root);
         }
         if ($instance instanceof ICommand) {
-            $instance.setName("{this.root} {myName}");
+            $instance.setName("{this.root} {$name}");
         }
-        if ($instance instanceof ICommandCollectionAware) {
+        if ($instance instanceof CommandCollectionAwareInterface) {
             $instance.setCommandCollection($commands);
         }
 
@@ -215,16 +231,16 @@ class CommandRunner : IEventDispatcher {
      * @return array An array of the resolved name and modified argv.
      */
     protected array longestCommandName(CommandCollection $commands, array $argv) {
-      for ($i = 3; $i > 1; $i--) {
-        $parts = array_slice($argv, 0, $i);
-        myName = implode(" ", $parts);
-        if ($commands.has(myName)) {
-          return [myName, array_slice($argv, $i)];
+        for ($i = 3; $i > 1; $i--) {
+            $parts = array_slice($argv, 0, $i);
+            $name = implode(" ", $parts);
+            if ($commands.has($name)) {
+                return [$name, array_slice($argv, $i)];
+            }
         }
-      }
-      myName = array_shift($argv);
+        $name = array_shift($argv);
 
-      return [myName, $argv];
+        return [$name, $argv];
     }
 
     /**
@@ -237,29 +253,29 @@ class CommandRunner : IEventDispatcher {
      *
      * @param uim.cake.consoles.CommandCollection $commands The command collection to check.
      * @param uim.cake.consoles.ConsoleIo $io ConsoleIo object for errors.
-     * @param string|null myName The name from the CLI args.
+     * @param string|null $name The name from the CLI args.
      * @return string The resolved name.
      * @throws uim.cake.consoles.exceptions.MissingOptionException
      */
-    protected string resolveName(CommandCollection $commands, ConsoleIo $io, Nullable!string myName) {
-      if (!myName) {
-        $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);
-        myName = "help";
-      }
-      myName = this.aliases[myName] ?? myName;
-      if (!$commands.has(myName)) {
-          myName = Inflector::underscore(myName);
-      }
-      if (!$commands.has(myName)) {
-          throw new MissingOptionException(
-              "Unknown command `{this.root} {myName}`~ " ~
-              "Run `{this.root} --help` to get the list of commands.",
-              myName,
-              $commands.keys()
-          );
-      }
+    protected string resolveName(CommandCollection $commands, ConsoleIo $io, Nullable!string aName) {
+        if (!$name) {
+            $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);
+            $name = "help";
+        }
+        $name = this.aliases[$name] ?? $name;
+        if (!$commands.has($name)) {
+            $name = Inflector::underscore($name);
+        }
+        if (!$commands.has($name)) {
+            throw new MissingOptionException(
+                "Unknown command `{this.root} {$name}`~ " ~
+                "Run `{this.root} --help` to get the list of commands.",
+                $name,
+                $commands.keys()
+            );
+        }
 
-      return myName;
+        return $name;
     }
 
     /**
@@ -271,25 +287,25 @@ class CommandRunner : IEventDispatcher {
      * @return int|null Exit code
      */
     protected Nullable!int runCommand(ICommand $command, array $argv, ConsoleIo $io) {
-      try {
-          return $command.run($argv, $io);
-      } catch (StopException $e) {
-          return $e.getCode();
-      }
+        try {
+            return $command.run($argv, $io);
+        } catch (StopException $e) {
+            return $e.getCode();
+        }
     }
 
     /**
      * Execute a Shell class.
      *
-     * @param uim.cake.consoles.Shell myShell The shell to run.
+     * @param uim.cake.consoles.Shell $shell The shell to run.
      * @param array $argv The CLI arguments to invoke.
      * @return int|bool|null Exit code
      */
-    protected auto runShell(Shell myShell, array $argv) {
+    protected function runShell(Shell $shell, array $argv) {
         try {
-            myShell.initialize();
+            $shell.initialize();
 
-            return myShell.runCommand($argv, true);
+            return $shell.runCommand($argv, true);
         } catch (StopException $e) {
             return $e.getCode();
         }
@@ -298,25 +314,25 @@ class CommandRunner : IEventDispatcher {
     /**
      * The wrapper for creating shell instances.
      *
-     * @param string myClassName Shell class name.
+     * @param string $className Shell class name.
      * @param uim.cake.consoles.ConsoleIo $io The IO wrapper for the created shell class.
      * @return uim.cake.consoles.ICommand|uim.cake.consoles.Shell
      */
-    protected auto createCommand(string myClassName, ConsoleIo $io) {
+    protected function createCommand(string $className, ConsoleIo $io) {
         if (!this.factory) {
-            myContainer = null;
+            $container = null;
             if (this.app instanceof IContainerApplication) {
-                myContainer = this.app.getContainer();
+                $container = this.app.getContainer();
             }
-            this.factory = new CommandFactory(myContainer);
+            this.factory = new CommandFactory($container);
         }
 
-        myShell = this.factory.create(myClassName);
-        if (myShell instanceof Shell) {
-            myShell.setIo($io);
+        $shell = this.factory.create($className);
+        if ($shell instanceof Shell) {
+            $shell.setIo($io);
         }
 
-        return myShell;
+        return $shell;
     }
 
     /**
@@ -328,11 +344,11 @@ class CommandRunner : IEventDispatcher {
         if (!(this.app instanceof IRoutingApplication)) {
             return;
         }
-        myBuilder = Router::createRouteBuilder("/");
+        $builder = Router::createRouteBuilder("/");
 
-        this.app.routes(myBuilder);
+        this.app.routes($builder);
         if (this.app instanceof IPluginApplication) {
-            this.app.pluginRoutes(myBuilder);
+            this.app.pluginRoutes($builder);
         }
     }
 }

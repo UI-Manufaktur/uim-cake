@@ -9,34 +9,34 @@ class MissingOptionException : ConsoleException {
     /**
      * The requested thing that was not found.
      */
-    protected string myRequested = "";
+    protected string $requested = "";
 
     /**
      * The valid suggestions.
      *
      * @var array<string>
      */
-    protected suggestions = [];
+    protected $suggestions = [];
 
     /**
      * Constructor.
      *
-     * @param string myMessage The string message.
-     * @param string myRequested The requested value.
-     * @param $suggestions The list of potential values that were valid.
+     * @param string $message The string message.
+     * @param string $requested The requested value.
+     * @param array<string> $suggestions The list of potential values that were valid.
      * @param int|null $code The exception code if relevant.
      * @param \Throwable|null $previous the previous exception.
      */
     this(
-        string myMessage,
-        string myRequested = "",
-        string[] $suggestions = [],
+        string $message,
+        string $requested = "",
+        array $suggestions = [],
         Nullable!int $code = null,
         ?Throwable $previous = null
     ) {
         this.suggestions = $suggestions;
-        this.requested = myRequested;
-        super.this(myMessage, $code, $previous);
+        this.requested = $requested;
+        super(($message, $code, $previous);
     }
 
     /**
@@ -65,14 +65,14 @@ class MissingOptionException : ConsoleException {
     /**
      * Find the best match for requested in suggestions
      *
-     * @param string needle Unknown option name trying to be used.
-     * @param $haystack Suggestions to look through.
+     * @param string $needle Unknown option name trying to be used.
+     * @param array<string> $haystack Suggestions to look through.
      * @return string The best match
      */
-    protected Nullable!string findClosestItem($needle, string[] $haystack) {
+    protected Nullable!string findClosestItem($needle, $haystack) {
         $bestGuess = null;
         foreach ($haystack as $item) {
-            if (preg_match("/^" ~ $needle ~ "/", $item)) {
+            if (strpos($item, $needle) == 0) {
                 return $item;
             }
         }
@@ -90,3 +90,4 @@ class MissingOptionException : ConsoleException {
         return $bestGuess;
     }
 }
+

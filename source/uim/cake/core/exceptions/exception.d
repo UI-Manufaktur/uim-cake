@@ -3,6 +3,8 @@ module uim.cake.core.exceptions.exception;
 @safe:
 import uim.cake;
 
+use RuntimeException;
+use Throwable;
 /**
  * Base class that all UIM Exceptions extend.
  *

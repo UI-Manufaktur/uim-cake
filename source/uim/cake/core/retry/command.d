@@ -3,8 +3,6 @@ module uim.cake.core.retry.commandretry;
 @safe:
 import uim.cake;
 
-module uim.cake.core.Retry;
-
 use Exception;
 
 /**

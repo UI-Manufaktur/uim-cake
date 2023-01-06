@@ -15,11 +15,12 @@ import uim.cakeilities.Inflector;
 class CommandScanner
 {
     /**
-     * Scan UIM internals for shells & commands.
+     * Scan CakePHP internals for shells & commands.
      *
      * @return array A list of command metadata.
      */
-    array scanCore() {
+    array scanCore() array
+    {
         $coreShells = this.scanDir(
             dirname(__DIR__) . DIRECTORY_SEPARATOR ~ "Shell" ~ DIRECTORY_SEPARATOR,
             "Cake\Shell\\",
@@ -41,17 +42,18 @@ class CommandScanner
      *
      * @return array A list of command metadata.
      */
-    array scanApp() {
-        $appmodule = Configure::read("App.module");
+    array scanApp() array
+    {
+        $appNamespace = Configure::read("App.namespace");
         $appShells = this.scanDir(
             App::classPath("Shell")[0],
-            $appmodule ~ "\Shell\\",
+            $appNamespace ~ "\Shell\\",
             "",
             []
         );
         $appCommands = this.scanDir(
             App::classPath("Command")[0],
-            $appmodule ~ "\Command\\",
+            $appNamespace ~ "\Command\\",
             "",
             []
         );
@@ -62,76 +64,77 @@ class CommandScanner
     /**
      * Scan the named plugin for shells and commands
      *
-     * @param string myPlugin The named plugin.
+     * @param string $plugin The named plugin.
      * @return array A list of command metadata.
      */
-    array scanPlugin(string myPlugin) {
-        if (!Plugin::isLoaded(myPlugin)) {
+    array scanPlugin(string $plugin) array
+    {
+        if (!Plugin::isLoaded($plugin)) {
             return [];
         }
-        myPath = Plugin::classPath(myPlugin);
-        $module = str_replace("/", "\\", myPlugin);
-        $prefix = Inflector::underscore(myPlugin) ~ ".";
+        $path = Plugin::classPath($plugin);
+        $namespace = str_replace("/", "\\", $plugin);
+        $prefix = Inflector::underscore($plugin) ~ ".";
 
-        $commands = this.scanDir(myPath ~ "Command", $module ~ "\Command\\", $prefix, []);
-        myShells = this.scanDir(myPath ~ "Shell", $module ~ "\Shell\\", $prefix, []);
+        $commands = this.scanDir($path ~ "Command", $namespace ~ "\Command\\", $prefix, []);
+        $shells = this.scanDir($path ~ "Shell", $namespace ~ "\Shell\\", $prefix, []);
 
-        return array_merge(myShells, $commands);
+        return array_merge($shells, $commands);
     }
 
     /**
      * Scan a directory for .php files and return the class names that
      * should be within them.
      *
-     * @param string myPath The directory to read.
-     * @param string module The module the shells live in.
-     * @param string prefix The prefix to apply to commands for their full name.
-     * @param $hide A list of command names to hide as they are internal commands.
+     * @param string $path The directory to read.
+     * @param string aNamespace The namespace the shells live in.
+     * @param string $prefix The prefix to apply to commands for their full name.
+     * @param array<string> $hide A list of command names to hide as they are internal commands.
      * @return array The list of shell info arrays based on scanning the filesystem and inflection.
      */
-    protected array scanDir(string myPath, string module, string prefix, string[] $hide) {
-        if (!is_dir(myPath)) {
+    protected string[] scanDir(string $path, string aNamespace, string $prefix, array $hide) {
+        if (!is_dir($path)) {
             return [];
         }
 
         // This ensures `Command` class is not added to the list.
         $hide[] = "";
 
-        myClassPattern = "/(Shell|Command)\.php$/";
+        $classPattern = "/(Shell|Command)\.php$/";
         $fs = new Filesystem();
-        /** @var array<\SplFileInfo> myfiles */
-        myfiles = $fs.find(myPath, myClassPattern);
+        /** @var array<\SplFileInfo> $files */
+        $files = $fs.find($path, $classPattern);
 
-        myShells = [];
-        foreach (myfiles as myfileInfo) {
-            myfile = myfileInfo.getFilename();
+        $shells = [];
+        foreach ($files as $fileInfo) {
+            $file = $fileInfo.getFilename();
 
-            myName = Inflector::underscore(preg_replace(myClassPattern, "", myfile));
-            if (in_array(myName, $hide, true)) {
+            $name = Inflector::underscore(preg_replace($classPattern, "", $file));
+            if (in_array($name, $hide, true)) {
                 continue;
             }
 
-            myClass = $module . myfileInfo.getBasename(".php");
+            $class = $namespace . $fileInfo.getBasename(".php");
             /** @psalm-suppress DeprecatedClass */
             if (
-                !is_subclass_of(myClass, Shell::class)
-                && !is_subclass_of(myClass, ICommand::class)
+                !is_subclass_of($class, Shell::class)
+                && !is_subclass_of($class, ICommand::class)
             ) {
                 continue;
             }
-            if (is_subclass_of(myClass, BaseCommand::class)) {
-                myName = myClass::defaultName();
+            if (is_subclass_of($class, BaseCommand::class)) {
+                $name = $class::defaultName();
             }
-            myShells[myPath . myfile] = [
-                "file":myPath . myfile,
-                "fullName":$prefix . myName,
-                "name":myName,
-                "class":myClass,
+            $shells[$path . $file] = [
+                "file": $path . $file,
+                "fullName": $prefix . $name,
+                "name": $name,
+                "class": $class,
             ];
         }
 
-        ksort(myShells);
+        ksort($shells);
 
-        return array_values(myShells);
+        return array_values($shells);
     }
 }

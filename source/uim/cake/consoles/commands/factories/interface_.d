@@ -1,4 +1,7 @@
-module uim.cake.Console;
+module uim.cake.consoles;
+
+@safe:
+import uim.cake;
 
 /**
  * An interface for abstracting creation of command and shell instances.

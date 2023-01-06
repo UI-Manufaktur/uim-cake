@@ -1,9 +1,7 @@
 module uim.cake.core.retry.interface_;
 
 @safe:
-import uim.cake;;
-
-module uim.cake.core.Retry;
+import uim.cake;
 
 use Exception;
 

@@ -7,7 +7,11 @@
 @safe:
 import uim.cake;
 
-// Used when a Task cannot be found.
+/**
+ * Used when a Task cannot be found.
+ */
 class MissingTaskException : ConsoleException {
+    /**
+     */
     protected string _messageTemplate = "Task class %s could not be found.";
 }

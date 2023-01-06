@@ -1,8 +1,7 @@
 module uim.cake.core;
 
-import uim.cake.consoles.CommandCollection;
-import uim.cake.http.MiddlewareQueue;
-import uim.cake.routings.RouteBuilder;
+@safe:
+import uim.cake;
 
 /**
  * Plugin Interface

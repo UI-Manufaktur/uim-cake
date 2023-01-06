@@ -31,16 +31,16 @@ class FormContext : IContext
 
     /**
      * Get the fields used in the context as a primary key.
-     * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
+     * @deprecated 4.0.0 Renamed to {@link getPrimaryKeys()}.
      */
     string[] primaryKey() {
-        deprecationWarning("`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.");
+        deprecationWarning("`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKeys()`.");
 
         return [];
     }
 
 
-    auto getPrimaryKey() {
+    auto getPrimaryKeys() {
         return [];
     }
 

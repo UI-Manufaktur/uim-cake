@@ -3,33 +3,42 @@ module uim.cake.consoles;
 @safe:
 import uim.cake;
 
+use InvalidArgumentException;
+
 /**
  * This is a factory for creating Command and Shell instances.
  *
  * This factory can be replaced or extended if you need to customize building
  * your command and shell objects.
  */
-class CommandFactory : ICommandFactory {
-  protected IContainer myContainer;
+class CommandFactory : ICommandFactory
+{
+    /**
+     * @var uim.cake.Core\IContainer|null
+     */
+    protected $container;
 
-  // aContainer - The container to use if available.
-  this(IContainer aContainer = null) {
-    this.container = aContainer;
-  }
+    /**
+     * Constructor
+     *
+     * @param uim.cake.Core\IContainer|null $container The container to use if available.
+     */
+    this(?IContainer $container = null) {
+        this.container = $container;
+    }
 
-
-    function create(string myClassName) {
-        if (this.container && this.container.has(myClassName)) {
-            $command = this.container.get(myClassName);
+    function create(string $className) {
+        if (this.container && this.container.has($className)) {
+            $command = this.container.get($className);
         } else {
-            $command = new myClassName();
+            $command = new $className();
         }
 
         if (!($command instanceof ICommand) && !($command instanceof Shell)) {
             /** @psalm-suppress DeprecatedClass */
             $valid = implode("` or `", [Shell::class, ICommand::class]);
-            myMessage = sprintf("Class `%s` must be an instance of `%s`.", myClassName, $valid);
-            throw new InvalidArgumentException(myMessage);
+            $message = sprintf("Class `%s` must be an instance of `%s`.", $className, $valid);
+            throw new InvalidArgumentException($message);
         }
 
         return $command;

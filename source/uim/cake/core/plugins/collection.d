@@ -1,6 +1,8 @@
 module uim.cake.core;
 
-import uim.cake.core.exceptions.MissingPluginException;
+@safe:
+import uim.cake;
+
 use Countable;
 use Generator;
 use InvalidArgumentException;

@@ -15,7 +15,8 @@ import uim.cake;
  * of Console output logic. For example creating tables,
  * progress bars or ascii art.
  */
-abstract class Helper {
+abstract class Helper
+{
     use InstanceConfigTrait;
 
     /**
@@ -23,7 +24,7 @@ abstract class Helper {
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * ConsoleIo instance.
@@ -36,17 +37,18 @@ abstract class Helper {
      * Constructor.
      *
      * @param uim.cake.consoles.ConsoleIo $io The ConsoleIo instance to use.
-     * @param array<string, mixed> myConfig The settings for this helper.
+     * @param array<string, mixed> aConfig The settings for this helper.
      */
-    this(ConsoleIo $io, array myConfig = []) {
+    this(ConsoleIo $io, Json aConfig = []) {
         _io = $io;
-        this.setConfig(myConfig);
+        this.setConfig(aConfig);
     }
 
     /**
      * This method should output content using `_io`.
      *
      * @param array $args The arguments for the helper.
+     * @return void
      */
     abstract void output(array $args);
 }

@@ -3,10 +3,30 @@ module uim.cake.console.commands.help;
 @safe:
 import uim.cake;
 
-// Print out command list
-class HelpCommand : BaseCommand : ICommandCollectionAware {
-    // The command collection to get help on.
-    protected CommandCollection commands;
+use ArrayIterator;
+import uim.cake.consoles.Arguments;
+import uim.cake.consoles.BaseCommand;
+import uim.cake.consoles.CommandCollection;
+import uim.cake.consoles.CommandCollectionAwareInterface;
+import uim.cake.consoles.ConsoleIo;
+import uim.cake.consoles.ConsoleOptionParser;
+import uim.cake.consoles.ConsoleOutput;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
+use SimpleXMLElement;
+
+/**
+ * Print out command list
+ */
+class HelpCommand : BaseCommand : CommandCollectionAwareInterface
+{
+    /**
+     * The command collection to get help on.
+     *
+     * @var uim.cake.consoles.CommandCollection
+     */
+    protected $commands;
+
 
     void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;
@@ -17,7 +37,6 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      *
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
-     * @return int
      */
     Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $commands = this.commands.getIterator();
@@ -44,47 +63,53 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      */
     protected void asText(ConsoleIo $io, iterable $commands) {
         $invert = [];
-        foreach ($commands as myName: myClass) {
-            if (is_object(myClass)) {
-                myClass = get_class(myClass);
+        foreach ($commands as $name: $class) {
+            if (is_object($class)) {
+                $class = get_class($class);
             }
-            if (!isset($invert[myClass])) {
-                $invert[myClass] = [];
+            if (!isset($invert[$class])) {
+                $invert[$class] = [];
             }
-            $invert[myClass][] = myName;
+            $invert[$class][] = $name;
         }
-        myGrouped = [];
-        myPlugins = Plugin::loaded();
-        foreach ($invert as myClass: myNames) {
-            preg_match("/^(.+)\\\\(Command|Shell)\\\\/", myClass, $matches);
+        $grouped = [];
+        $plugins = Plugin::loaded();
+        foreach ($invert as $class: $names) {
+            preg_match("/^(.+)\\\\(Command|Shell)\\\\/", $class, $matches);
             // Probably not a useful class
             if (empty($matches)) {
                 continue;
             }
-            $module = str_replace("\\", "/", $matches[1]);
+            $namespace = str_replace("\\", "/", $matches[1]);
             $prefix = "App";
-            if ($module == "Cake") {
+            if ($namespace == "Cake") {
                 $prefix = "CakePHP";
-            } elseif (in_array($module, myPlugins, true)) {
-                $prefix = $module;
+            } elseif (in_array($namespace, $plugins, true)) {
+                $prefix = $namespace;
             }
-            $shortestName = this.getShortestName(myNames);
-            if (indexOf($shortestName, ".") != false) {
+            $shortestName = this.getShortestName($names);
+            if (strpos($shortestName, ".") != false) {
                 [, $shortestName] = explode(".", $shortestName, 2);
             }
 
-            myGrouped[$prefix][] = $shortestName;
+            $grouped[$prefix][] = [
+                "name": $shortestName,
+                "description": is_subclass_of($class, BaseCommand::class) ? $class::getDescription() : "",
+            ];
         }
-        ksort(myGrouped);
+        ksort($grouped);
 
         this.outputPaths($io);
         $io.out("<info>Available Commands:</info>", 2);
 
-        foreach (myGrouped as $prefix: myNames) {
+        foreach ($grouped as $prefix: $names) {
             $io.out("<info>{$prefix}</info>:");
-            sort(myNames);
-            foreach (myNames as myName) {
-                $io.out(" - " ~ myName);
+            sort($names);
+            foreach ($names as $data) {
+                $io.out(" - " ~ $data["name"]);
+                if ($data["description"]) {
+                    $io.info(str_pad(" \u{2514}", 13, "\u{2500}") ~ " " ~ $data["description"]);
+                }
             }
             $io.out("");
         }
@@ -100,42 +125,41 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      * @param uim.cake.consoles.ConsoleIo $io IO object.
      */
     protected void outputPaths(ConsoleIo $io) {
-        myPaths = [];
+        $paths = [];
         if (Configure::check("App.dir")) {
             $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             // Extra space is to align output
-            myPaths["app"] = " " ~ $appPath;
+            $paths["app"] = " " ~ $appPath;
         }
         if (defined("ROOT")) {
-            myPaths["root"] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+            $paths["root"] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
         if (defined("CORE_PATH")) {
-            myPaths["core"] = rtrim(CORE_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+            $paths["core"] = rtrim(CORE_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
-        if (!count(myPaths)) {
+        if (!count($paths)) {
             return;
         }
         $io.out("<info>Current Paths:</info>", 2);
-        foreach (myPaths as myKey: myValue) {
-            $io.out("* {myKey}: {myValue}");
+        foreach ($paths as $key: $value) {
+            $io.out("* {$key}: {$value}");
         }
         $io.out("");
     }
 
     /**
-     * @param array<string> myNames Names
-     * @return string
+     * @param array<string> $names Names
      */
-    protected string getShortestName(array myNames) {
-        if (count(myNames) <= 1) {
-            return array_shift(myNames);
+    protected string getShortestName(array $names) {
+        if (count($names) <= 1) {
+            return array_shift($names);
         }
 
-        usort(myNames, function ($a, $b) {
+        usort($names, function ($a, $b) {
             return strlen($a) - strlen($b);
         });
 
-        return array_shift(myNames);
+        return array_shift($names);
     }
 
     /**
@@ -145,19 +169,19 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      * @param iterable $commands The command collection to output
      */
     protected void asXml(ConsoleIo $io, iterable $commands) {
-        myShells = new SimpleXMLElement("<shells></shells>");
-        foreach ($commands as myName: myClass) {
-            if (is_object(myClass)) {
-                myClass = get_class(myClass);
+        $shells = new SimpleXMLElement("<shells></shells>");
+        foreach ($commands as $name: $class) {
+            if (is_object($class)) {
+                $class = get_class($class);
             }
-            myShell = myShells.addChild("shell");
-            myShell.addAttribute("name", myName);
-            myShell.addAttribute("call_as", myName);
-            myShell.addAttribute("provider", myClass);
-            myShell.addAttribute("help", myName ~ " -h");
+            $shell = $shells.addChild("shell");
+            $shell.addAttribute("name", $name);
+            $shell.addAttribute("call_as", $name);
+            $shell.addAttribute("provider", $class);
+            $shell.addAttribute("help", $name ~ " -h");
         }
         $io.setOutputAs(ConsoleOutput::RAW);
-        $io.out(myShells.saveXML());
+        $io.out($shells.saveXML());
     }
 
     /**
@@ -166,12 +190,13 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      * @param uim.cake.consoles.ConsoleOptionParser $parser The parser to build
      * @return uim.cake.consoles.ConsoleOptionParser
      */
-    protected ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    {
         $parser.setDescription(
             "Get the list of available commands for this application."
         ).addOption("xml", [
-            "help":"Get the listing as XML.",
-            "boolean":true,
+            "help": "Get the listing as XML.",
+            "boolean": true,
         ]);
 
         return $parser;
