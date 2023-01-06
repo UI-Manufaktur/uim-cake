@@ -145,7 +145,7 @@ class BreadcrumbsHelper : Helper
      */
     function insertAt(int $index, string $title, $url = null, array $options = []) {
         if (!isset(this.crumbs[$index]) && $index != count(this.crumbs)) {
-            throw new LogicException(sprintf("No crumb could be found at index "%s"", $index));
+            throw new LogicException(sprintf("No crumb could be found at index '%s'", $index));
         }
 
         array_splice(this.crumbs, $index, 0, [compact("title", "url", "options")]);
@@ -176,7 +176,7 @@ class BreadcrumbsHelper : Helper
         $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
-            throw new LogicException(sprintf("No crumb matching "%s" could be found.", $matchingTitle));
+            throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
         }
 
         return this.insertAt($key, $title, $url, $options);
@@ -205,7 +205,7 @@ class BreadcrumbsHelper : Helper
         $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
-            throw new LogicException(sprintf("No crumb matching "%s" could be found.", $matchingTitle));
+            throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
         }
 
         return this.insertAt($key + 1, $title, $url, $options);

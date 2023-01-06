@@ -1418,7 +1418,7 @@ class Validation {
         ];
         if (myOptions["type"] != "latLong") {
             throw new RuntimeException(sprintf(
-                "Unsupported coordinate type "%s". Use "latLong" instead.",
+                "Unsupported coordinate type '%s'. Use "latLong" instead.",
                 myOptions["type"]
             ));
         }

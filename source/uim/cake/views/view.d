@@ -968,7 +968,7 @@ class View : IEventDispatcher {
 
         if ($initialBlocks != $remainingBlocks) {
             throw new LogicException(sprintf(
-                "The "%s" block was left open. Blocks are not allowed to cross files.",
+                "The '%s' block was left open. Blocks are not allowed to cross files.",
                 (string)this.Blocks.active()
             ));
         }
@@ -1192,7 +1192,7 @@ class View : IEventDispatcher {
         $absolute = realpath(myfile);
         if (indexOf($absolute, myPath) != 0) {
             throw new InvalidArgumentException(sprintf(
-                "Cannot use "%s" as a template, it is not within any view template path.",
+                "Cannot use '%s' as a template, it is not within any view template path.",
                 myfile
             ));
         }

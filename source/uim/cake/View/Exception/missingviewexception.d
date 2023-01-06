@@ -7,5 +7,5 @@ import uim.cake.core.exceptions.CakeException;
  */
 class MissingViewException : CakeException {
 
-    protected _messageTemplate = "View class "%s" is missing.";
+    protected _messageTemplate = "View class '%s' is missing.";
 }

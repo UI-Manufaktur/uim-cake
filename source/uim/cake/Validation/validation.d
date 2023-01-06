@@ -1438,7 +1438,7 @@ class Validation
         ];
         if ($options["type"] != "latLong") {
             throw new RuntimeException(sprintf(
-                "Unsupported coordinate type "%s". Use "latLong" instead.",
+                "Unsupported coordinate type '%s'. Use "latLong" instead.",
                 $options["type"]
             ));
         }

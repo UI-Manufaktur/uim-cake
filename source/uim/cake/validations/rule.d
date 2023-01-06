@@ -105,7 +105,7 @@ class ValidationRule
         if (!$isCallable) {
             /** @psalm-suppress PossiblyInvalidArgument */
             myMessage = sprintf(
-                "Unable to call method "%s" in "%s" provider for field "%s"",
+                "Unable to call method '%s' in '%s' provider for field '%s'",
                 _rule,
                 _provider,
                 $context["field"]

@@ -92,7 +92,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
             $connection = this.connection;
             if (strpos($connection, "test") != 0) {
                 $message = sprintf(
-                    "Invalid datasource name "%s" for "%s" fixture. Fixture datasource names must begin with "test".",
+                    "Invalid datasource name '%s' for '%s' fixture. Fixture datasource names must begin with "test".",
                     $connection,
                     static::class
                 );
@@ -257,7 +257,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
             }
         } catch (Exception $e) {
             $msg = sprintf(
-                "Fixture creation for "%s" failed "%s"",
+                "Fixture creation for '%s' failed '%s'",
                 this.table,
                 $e.getMessage()
             );

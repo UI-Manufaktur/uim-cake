@@ -142,7 +142,7 @@ abstract class Cell : IEventDispatcher
                 $reflect.invokeArgs(this, this.args);
             } catch (ReflectionException $e) {
                 throw new BadMethodCallException(sprintf(
-                    "Class %s does not have a "%s" method.",
+                    "Class %s does not have a '%s' method.",
                     static::class,
                     this.action
                 ));

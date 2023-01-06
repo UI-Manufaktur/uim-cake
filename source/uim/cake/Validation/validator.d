@@ -1093,7 +1093,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
         }
         if (!is_array($settings)) {
             throw new InvalidArgumentException(
-                sprintf("Invalid settings for "%s". Settings must be an array.", $fieldName)
+                sprintf("Invalid settings for '%s'. Settings must be an array.", $fieldName)
             );
         }
         $settings += $defaults;

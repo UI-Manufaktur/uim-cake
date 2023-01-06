@@ -354,7 +354,7 @@ class EntityContext : IContext
             $entity = $next;
         }
         throw new RuntimeException(sprintf(
-            "Unable to fetch property "%s"",
+            "Unable to fetch property '%s'",
             implode(".", $path)
         ));
     }
@@ -379,7 +379,7 @@ class EntityContext : IContext
         $oneElement = count($path) == 1;
         if ($oneElement && _isCollection) {
             throw new RuntimeException(sprintf(
-                "Unable to fetch property "%s"",
+                "Unable to fetch property '%s'",
                 implode(".", $path)
             ));
         }
@@ -420,7 +420,7 @@ class EntityContext : IContext
             $entity = $next;
         }
         throw new RuntimeException(sprintf(
-            "Unable to fetch property "%s"",
+            "Unable to fetch property '%s'",
             implode(".", $path)
         ));
     }

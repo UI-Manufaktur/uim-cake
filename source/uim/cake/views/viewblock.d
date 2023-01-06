@@ -65,7 +65,7 @@ class ViewBlock
      */
     void start(string myName, string myMode = ViewBlock::OVERRIDE) {
         if (array_key_exists(myName, _active)) {
-            throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", myName));
+            throw new CakeException(sprintf("A view block with the name '%s' is already/still open.", myName));
         }
         _active[myName] = myMode;
         ob_start();

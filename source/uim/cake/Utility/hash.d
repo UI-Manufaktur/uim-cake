@@ -185,10 +185,10 @@ class Hash
     /**
      * Split token conditions
      *
-     * @param string $token the token being splitted.
+     * @param string aToken the token being splitted.
      * @return array [token, conditions] with token splitted
      */
-    protected static array _splitConditions(string $token) {
+    protected static array _splitConditions(string aToken) {
         $conditions = false;
         $position = strpos($token, "[");
         if ($position != false) {
@@ -203,10 +203,10 @@ class Hash
      * Check a key against a token.
      *
      * @param mixed $key The key in the array being searched.
-     * @param string $token The token being matched.
+     * @param string aToken The token being matched.
      * @return bool
      */
-    protected static bool _matchToken($key, string $token) {
+    protected static bool _matchToken($key, string aToken) {
         switch ($token) {
             case "{n}":
                 return is_numeric($key);
