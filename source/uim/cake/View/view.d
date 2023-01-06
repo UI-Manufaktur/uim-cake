@@ -1,28 +1,8 @@
+module uim.cake.View;
 
+@safe:
+import uim.cake;
 
-
- *
-
-
- * @since         0.10.0
-
- */module uim.cake.View;
-
-import uim.cake.caches.Cache;
-import uim.cake.core.App;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.core.Plugin;
-import uim.cake.events.IEventDispatcher;
-import uim.cake.events.EventDispatcherTrait;
-import uim.cake.events.EventManager;
-import uim.cake.http.Response;
-import uim.cake.http.ServerRequest;
-import uim.cake.logs.LogTrait;
-import uim.cake.routings.Router;
-import uim.cake.utilities.Inflector;
-import uim.cake.View\exceptions.MissingElementException;
-import uim.cake.View\exceptions.MissingLayoutException;
-import uim.cake.View\exceptions.MissingTemplateException;
 use InvalidArgumentException;
 use LogicException;
 use RuntimeException;
@@ -168,7 +148,7 @@ class View : IEventDispatcher
      *
      * @var uim.cake.http.ServerRequest
      */
-    protected $request;
+    protected myServerRequest;
 
     /**
      * Reference to the Response object
@@ -285,14 +265,14 @@ class View : IEventDispatcher
     /**
      * Constructor
      *
-     * @param uim.cake.http.ServerRequest|null $request Request instance.
+     * @param uim.cake.http.ServerRequest|null myServerRequest Request instance.
      * @param uim.cake.http.Response|null $response Response instance.
      * @param uim.cake.events.EventManager|null $eventManager Event manager instance.
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
      */
     this(
-        ?ServerRequest $request = null,
+        ?ServerRequest myServerRequest = null,
         ?Response $response = null,
         ?EventManager $eventManager = null,
         array $viewOptions = []
@@ -310,10 +290,10 @@ class View : IEventDispatcher
         if ($eventManager != null) {
             this.setEventManager($eventManager);
         }
-        if ($request == null) {
-            $request = Router::getRequest() ?: new ServerRequest(["base": "", "url": "", "webroot": "/"]);
+        if (myServerRequest == null) {
+            myServerRequest = Router::getRequest() ?: new ServerRequest(["base": "", "url": "", "webroot": "/"]);
         }
-        this.request = $request;
+        this.request = myServerRequest;
         this.response = $response ?: new Response();
         this.Blocks = new _viewBlockClass();
         this.initialize();
@@ -372,15 +352,15 @@ class View : IEventDispatcher
      * Sets the request objects and configures a number of controller properties
      * based on the contents of the request. The properties that get set are:
      *
-     * - this.request - To the $request parameter
-     * - this.plugin - To the value returned by $request.getParam("plugin")
+     * - this.request - To the myServerRequest parameter
+     * - this.plugin - To the value returned by myServerRequest.getParam("plugin")
      *
-     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @return this
      */
-    function setRequest(ServerRequest $request) {
-        this.request = $request;
-        this.plugin = $request.getParam("plugin");
+    function setRequest(ServerRequest myServerRequest) {
+        this.request = myServerRequest;
+        this.plugin = myServerRequest.getParam("plugin");
 
         return this;
     }

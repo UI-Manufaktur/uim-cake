@@ -316,7 +316,7 @@ class BreadcrumbsHelper : Helper
      * @param string $title Title to find.
      * @return int|null Index of the crumb found, or null if it can not be found.
      */
-    protected function findCrumb(string $title): ?int
+    protected Nullable!int findCrumb(string $title)
     {
         foreach (this.crumbs as $key: $crumb) {
             if ($crumb["title"] == $title) {

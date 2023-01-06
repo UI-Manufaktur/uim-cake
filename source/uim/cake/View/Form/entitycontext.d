@@ -505,7 +505,7 @@ class EntityContext : IContext
      *
      * @param string $field The dot separated path to the field you want to check.
      */
-    Nullable!int getMaxLength(string $field): ?int
+    Nullable!int getMaxLength(string $field)
     {
         $parts = explode(".", $field);
         $validator = _getValidator($parts);

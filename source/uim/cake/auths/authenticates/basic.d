@@ -45,23 +45,23 @@ class BasicAuthenticate : BaseAuthenticate
      * Authenticate a user using HTTP auth. Will use the configured User model and attempt a
      * login using HTTP auth.
      *
-     * @param uim.cake.http.ServerRequest $request The request to authenticate with.
+     * @param uim.cake.http.ServerRequest myServerRequest The request to authenticate with.
      * @param uim.cake.http.Response $response The response to add headers to.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
-    function authenticate(ServerRequest $request, Response $response) {
-        return this.getUser($request);
+    function authenticate(ServerRequest myServerRequest, Response $response) {
+        return this.getUser(myServerRequest);
     }
 
     /**
      * Get a user based on information in the request. Used by cookie-less auth for stateless clients.
      *
-     * @param uim.cake.http.ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest myServerRequest Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    function getUser(ServerRequest $request) {
-        $username = $request.getEnv("PHP_AUTH_USER");
-        $pass = $request.getEnv("PHP_AUTH_PW");
+    function getUser(ServerRequest myServerRequest) {
+        $username = myServerRequest.getEnv("PHP_AUTH_USER");
+        $pass = myServerRequest.getEnv("PHP_AUTH_PW");
 
         if (!is_string($username) || $username == "" || !is_string($pass) || $pass == "") {
             return false;
@@ -73,14 +73,14 @@ class BasicAuthenticate : BaseAuthenticate
     /**
      * Handles an unauthenticated access attempt by sending appropriate login headers
      *
-     * @param uim.cake.http.ServerRequest $request A request object.
+     * @param uim.cake.http.ServerRequest myServerRequest A request object.
      * @param uim.cake.http.Response $response A response object.
      * @return uim.cake.http.Response|null|void
      * @throws uim.cake.http.exceptions.UnauthorizedException
      */
-    function unauthenticated(ServerRequest $request, Response $response) {
+    function unauthenticated(ServerRequest myServerRequest, Response $response) {
         $unauthorizedException = new UnauthorizedException();
-        $unauthorizedException.setHeaders(this.loginHeaders($request));
+        $unauthorizedException.setHeaders(this.loginHeaders(myServerRequest));
 
         throw $unauthorizedException;
     }
@@ -88,11 +88,11 @@ class BasicAuthenticate : BaseAuthenticate
     /**
      * Generate the login headers
      *
-     * @param uim.cake.http.ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest myServerRequest Request object.
      * @return array<string, string> Headers for logging in.
      */
-    STRINGAA loginHeaders(ServerRequest $request) {
-        $realm = this.getConfig("realm") ?: $request.getEnv("SERVER_NAME");
+    STRINGAA loginHeaders(ServerRequest myServerRequest) {
+        $realm = this.getConfig("realm") ?: myServerRequest.getEnv("SERVER_NAME");
 
         return [
             "WWW-Authenticate": sprintf("Basic realm="%s"", $realm),

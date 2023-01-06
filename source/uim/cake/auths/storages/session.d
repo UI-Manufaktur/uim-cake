@@ -53,7 +53,7 @@ class SessionStorage : IStorage
     /**
      * Constructor.
      *
-     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @param uim.cake.http.Response $response Response instance.
      * @param array<string, mixed> $config Configuration list.
      */

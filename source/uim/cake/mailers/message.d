@@ -1350,7 +1350,7 @@ class Message : JsonSerializable, Serializable {
      * Gets priority.
      *
      */
-    Nullable!int getPriority(): ?int
+    Nullable!int getPriority()
     {
         return this.priority;
     }

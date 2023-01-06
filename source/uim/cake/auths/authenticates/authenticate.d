@@ -183,20 +183,20 @@ abstract class BaseAuthenticate : IEventListener {
     /**
      * Authenticate a user based on the request information.
      *
-     * @param uim.cake.http.ServerRequest $request Request to get authentication information from.
+     * @param uim.cake.http.ServerRequest myServerRequest Request to get authentication information from.
      * @param uim.cake.http.Response $response A response object that can have headers added.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
-    abstract function authenticate(ServerRequest $request, Response $response);
+    abstract function authenticate(ServerRequest myServerRequest, Response $response);
 
     /**
      * Get a user based on information in the request. Primarily used by stateless authentication
      * systems like basic and digest auth.
      *
-     * @param uim.cake.http.ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest myServerRequest Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    function getUser(ServerRequest $request) {
+    function getUser(ServerRequest myServerRequest) {
         return false;
     }
 
@@ -208,11 +208,11 @@ abstract class BaseAuthenticate : IEventListener {
      * - uim.cake.Http\Response - A response object, which will cause AuthComponent to
      *   simply return that response.
      *
-     * @param uim.cake.http.ServerRequest $request A request object.
+     * @param uim.cake.http.ServerRequest myServerRequest A request object.
      * @param uim.cake.http.Response $response A response object.
      * @return uim.cake.http.Response|null|void
      */
-    function unauthenticated(ServerRequest $request, Response $response) {
+    function unauthenticated(ServerRequest myServerRequest, Response $response) {
     }
 
     /**
@@ -231,7 +231,7 @@ abstract class BaseAuthenticate : IEventListener {
      *
      * @return array<string, mixed> List of events this class listens to. Defaults to `[]`.
      */
-    array implementedEvents(): 
+    array implementedEvents()
     {
         return [];
     }

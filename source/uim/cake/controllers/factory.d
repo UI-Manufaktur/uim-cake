@@ -46,20 +46,20 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Create a controller for a given request.
      *
-     * @param \Psr\Http\messages.IServerRequest $request The request to build a controller for.
+     * @param \Psr\Http\messages.IServerRequest myServerRequest The request to build a controller for.
      * @return uim.cake.controllers.Controller
      * @throws uim.cake.http.exceptions.MissingControllerException
      */
-    function create(IServerRequest $request): Controller
+    function create(IServerRequest myServerRequest): Controller
     {
-        $className = this.getControllerClass($request);
+        $className = this.getControllerClass(myServerRequest);
         if ($className == null) {
-            throw this.missingController($request);
+            throw this.missingController(myServerRequest);
         }
 
         $reflection = new ReflectionClass($className);
         if ($reflection.isAbstract()) {
-            throw this.missingController($request);
+            throw this.missingController(myServerRequest);
         }
 
         // Get the controller from the container if defined.
@@ -67,7 +67,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
         if (this.container.has($className)) {
             $controller = this.container.get($className);
         } else {
-            $controller = $reflection.newInstance($request);
+            $controller = $reflection.newInstance(myServerRequest);
         }
 
         return $controller;
@@ -100,14 +100,14 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Invoke the action.
      *
-     * @param \Psr\Http\messages.IServerRequest $request Request instance.
+     * @param \Psr\Http\messages.IServerRequest myServerRequest Request instance.
      * @return \Psr\Http\messages.IResponse
      */
-    function handle(IServerRequest $request): IResponse
+    function handle(IServerRequest myServerRequest): IResponse
     {
         $controller = this.controller;
         /** @psalm-suppress ArgumentTypeCoercion */
-        $controller.setRequest($request);
+        $controller.setRequest(myServerRequest);
 
         $result = $controller.startupProcess();
         if ($result instanceof IResponse) {
@@ -262,20 +262,20 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Determine the controller class name based on current request and controller param
      *
-     * @param uim.cake.http.ServerRequest $request The request to build a controller for.
+     * @param uim.cake.http.ServerRequest myServerRequest The request to build a controller for.
      * @return string|null
      * @psalm-return class-string<uim.cake.Controller\Controller>|null
      */
-    Nullable!string getControllerClass(ServerRequest $request)
+    Nullable!string getControllerClass(ServerRequest myServerRequest)
     {
         $pluginPath = "";
         $namespace = "Controller";
-        $controller = $request.getParam("controller", "");
-        if ($request.getParam("plugin")) {
-            $pluginPath = $request.getParam("plugin") ~ ".";
+        $controller = myServerRequest.getParam("controller", "");
+        if (myServerRequest.getParam("plugin")) {
+            $pluginPath = myServerRequest.getParam("plugin") ~ ".";
         }
-        if ($request.getParam("prefix")) {
-            $prefix = $request.getParam("prefix");
+        if (myServerRequest.getParam("prefix")) {
+            $prefix = myServerRequest.getParam("prefix");
 
             $firstChar = substr($prefix, 0, 1);
             if ($firstChar != strtoupper($firstChar)) {
@@ -311,7 +311,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
             strpos($controller, ".") != false ||
             $firstChar == strtolower($firstChar)
         ) {
-            throw this.missingController($request);
+            throw this.missingController(myServerRequest);
         }
 
         /** @var class-string<uim.cake.Controller\Controller>|null */
@@ -321,15 +321,15 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Throws an exception when a controller is missing.
      *
-     * @param uim.cake.http.ServerRequest $request The request.
+     * @param uim.cake.http.ServerRequest myServerRequest The request.
      * @return uim.cake.http.exceptions.MissingControllerException
      */
-    protected function missingController(ServerRequest $request) {
+    protected function missingController(ServerRequest myServerRequest) {
         return new MissingControllerException([
-            "class": $request.getParam("controller"),
-            "plugin": $request.getParam("plugin"),
-            "prefix": $request.getParam("prefix"),
-            "_ext": $request.getParam("_ext"),
+            "class": myServerRequest.getParam("controller"),
+            "plugin": myServerRequest.getParam("plugin"),
+            "prefix": myServerRequest.getParam("prefix"),
+            "_ext": myServerRequest.getParam("_ext"),
         ]);
     }
 }

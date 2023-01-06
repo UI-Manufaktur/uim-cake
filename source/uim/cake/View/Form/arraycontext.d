@@ -232,7 +232,7 @@ class ArrayContext : IContext
      *
      * @param string $field A dot separated path to check required-ness for.
      */
-    Nullable!int getMaxLength(string $field): ?int
+    Nullable!int getMaxLength(string $field)
     {
         if (!is_array(_context["schema"])) {
             return null;

@@ -63,7 +63,7 @@ class NullContext : IContext
     }
 
 
-    function getMaxLength(string $field): ?int
+    Nullable!int getMaxLength(string $field)
     {
         return null;
     }

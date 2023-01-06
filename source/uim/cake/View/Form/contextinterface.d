@@ -66,7 +66,7 @@ interface IContext
      *
      * @param string $field Field name.
      */
-    Nullable!int getMaxLength(string $field): ?int;
+    Nullable!int getMaxLength(string $field);
 
     /**
      * Get the field names of the top level object in this context.

@@ -491,7 +491,7 @@ class Cookie : CookieInterface
     }
 
 
-    function getExpiresTimestamp(): ?int
+    Nullable!int getExpiresTimestamp()
     {
         if (!this.expiresAt) {
             return null;

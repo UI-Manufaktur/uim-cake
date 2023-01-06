@@ -62,7 +62,7 @@ class ControllerAuthorize : BaseAuthorize
      * Checks user authorization using a controller callback.
      *
      * @param \ArrayAccess|array $user Active user data
-     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @throws uim.cake.Core\exceptions.CakeException If controller does not have method `isAuthorized()`.
      */
     bool authorize($user, ServerRequest $request) {

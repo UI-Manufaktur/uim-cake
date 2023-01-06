@@ -1,17 +1,9 @@
 module uim.cake.View;
 
+@safe:
+import uim.cake;
+
 use BadMethodCallException;
-import uim.cake.caches.Cache;
-import uim.cake.datasources.ModelAwareTrait;
-import uim.cake.events.IEventDispatcher;
-import uim.cake.events.EventDispatcherTrait;
-import uim.cake.events.IEventManager;
-import uim.cake.http.Response;
-import uim.cake.http.ServerRequest;
-import uim.cake.orm.locators.LocatorAwareTrait;
-import uim.cake.utilities.Inflector;
-import uim.cake.View\exceptions.MissingCellTemplateException;
-import uim.cake.View\exceptions.MissingTemplateException;
 use Error;
 use Exception;
 use ReflectionException;
@@ -48,7 +40,7 @@ abstract class Cell : IEventDispatcher
      *
      * @var uim.cake.http.ServerRequest
      */
-    protected $request;
+    protected myServerRequest;
 
     /**
      * An instance of a Response object that contains information about the impending response
@@ -88,13 +80,13 @@ abstract class Cell : IEventDispatcher
     /**
      * Constructor.
      *
-     * @param uim.cake.http.ServerRequest $request The request to use in the cell.
+     * @param uim.cake.http.ServerRequest myServerRequest The request to use in the cell.
      * @param uim.cake.http.Response $response The response to use in the cell.
      * @param uim.cake.events.IEventManager|null $eventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */
     this(
-        ServerRequest $request,
+        ServerRequest myServerRequest,
         Response $response,
         ?IEventManager $eventManager = null,
         array $cellOptions = []
@@ -102,7 +94,7 @@ abstract class Cell : IEventDispatcher
         if ($eventManager != null) {
             this.setEventManager($eventManager);
         }
-        this.request = $request;
+        this.request = myServerRequest;
         this.response = $response;
         this.modelFactory("Table", [this.getTableLocator(), "get"]);
 

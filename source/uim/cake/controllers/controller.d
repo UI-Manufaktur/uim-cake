@@ -87,7 +87,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @var uim.cake.http.ServerRequest
      * @link https://book.cakephp.org/4/en/controllers/request-response.html#request
      */
-    protected $request;
+    protected myServerRequest;
 
     /**
      * An instance of a Response object that contains information about the impending response
@@ -141,7 +141,7 @@ class Controller : IEventListener, IEventDispatcher {
      * Sets a number of properties based on conventions if they are empty. To override the
      * conventions CakePHP uses you can define properties in your class declaration.
      *
-     * @param uim.cake.http.ServerRequest|null $request Request object for this controller. Can be null for testing,
+     * @param uim.cake.http.ServerRequest|null myServerRequest Request object for this controller. Can be null for testing,
      *   but expect that features that use the request parameters will not work.
      * @param uim.cake.http.Response|null $response Response object for this controller.
      * @param string|null $name Override the name useful in testing when using mocks.
@@ -149,7 +149,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @param uim.cake.controllers.ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
     this(
-        ?ServerRequest $request = null,
+        ?ServerRequest myServerRequest = null,
         ?Response $response = null,
         ?string aName = null,
         ?IEventManager $eventManager = null,
@@ -157,8 +157,8 @@ class Controller : IEventListener, IEventDispatcher {
     ) {
         if ($name != null) {
             this.name = $name;
-        } elseif (this.name == null && $request) {
-            this.name = $request.getParam("controller");
+        } elseif (this.name == null && myServerRequest) {
+            this.name = myServerRequest.getParam("controller");
         }
 
         if (this.name == null) {
@@ -166,7 +166,7 @@ class Controller : IEventListener, IEventDispatcher {
             this.name = substr($name, 0, -10);
         }
 
-        this.setRequest($request ?: new ServerRequest());
+        this.setRequest(myServerRequest ?: new ServerRequest());
         this.response = $response ?: new Response();
 
         if ($eventManager != null) {
@@ -426,14 +426,14 @@ class Controller : IEventListener, IEventDispatcher {
      * based on the contents of the request. Controller acts as a proxy for certain View variables
      * which must also be updated here. The properties that get set are:
      *
-     * - this.request - To the $request parameter
+     * - this.request - To the myServerRequest parameter
      *
-     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @return this
      */
-    function setRequest(ServerRequest $request) {
-        this.request = $request;
-        this.plugin = $request.getParam("plugin") ?: null;
+    function setRequest(ServerRequest myServerRequest) {
+        this.request = myServerRequest;
+        this.plugin = myServerRequest.getParam("plugin") ?: null;
 
         return this;
     }
@@ -470,15 +470,15 @@ class Controller : IEventListener, IEventDispatcher {
      */
     function getAction(): Closure
     {
-        $request = this.request;
-        $action = $request.getParam("action");
+        myServerRequest = this.request;
+        $action = myServerRequest.getParam("action");
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
                 "controller": this.name ~ "Controller",
-                "action": $request.getParam("action"),
-                "prefix": $request.getParam("prefix") ?: "",
-                "plugin": $request.getParam("plugin"),
+                "action": myServerRequest.getParam("action"),
+                "prefix": myServerRequest.getParam("prefix") ?: "",
+                "plugin": myServerRequest.getParam("plugin"),
             ]);
         }
 
@@ -760,10 +760,10 @@ class Controller : IEventListener, IEventDispatcher {
                 $typeMap[$viewContentType] = $class;
             }
         }
-        $request = this.getRequest();
+        myServerRequest = this.getRequest();
 
         // Prefer the _ext route parameter if it is defined.
-        $ext = $request.getParam("_ext");
+        $ext = myServerRequest.getParam("_ext");
         if ($ext) {
             $extTypes = (array)(this.response.getMimeType($ext) ?: []);
             foreach ($extTypes as $extType) {
@@ -777,7 +777,7 @@ class Controller : IEventListener, IEventDispatcher {
 
         // Use accept header based negotiation.
         $contentType = new ContentTypeNegotiation();
-        $preferredType = $contentType.preferredType($request, array_keys($typeMap));
+        $preferredType = $contentType.preferredType(myServerRequest, array_keys($typeMap));
         if ($preferredType) {
             return $typeMap[$preferredType];
         }

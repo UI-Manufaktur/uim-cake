@@ -127,7 +127,7 @@ interface CookieInterface
      *
      * @return int|null The expiry time as an integer.
      */
-    function getExpiresTimestamp(): ?int;
+    Nullable!int getExpiresTimestamp();
 
     /**
      * Builds the expiration value part of the header string

@@ -198,27 +198,27 @@ class Router
     /**
      * Get the routing parameters for the request if possible.
      *
-     * @param uim.cake.http.ServerRequest $request The request to parse request data from.
+     * @param uim.cake.http.ServerRequest myServerRequest The request to parse request data from.
      * @return array Parsed elements from URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a route cannot be handled
      */
-    static array parseRequest(ServerRequest $request)
+    static array parseRequest(ServerRequest myServerRequest)
     {
-        return static::$_collection.parseRequest($request);
+        return static::$_collection.parseRequest(myServerRequest);
     }
 
     /**
      * Set current request instance.
      *
-     * @param uim.cake.http.ServerRequest $request request object.
+     * @param uim.cake.http.ServerRequest myServerRequest request object.
      */
-    static void setRequest(ServerRequest $request) {
-        static::$_request = $request;
+    static void setRequest(ServerRequest myServerRequest) {
+        static::$_request = myServerRequest;
 
-        static::$_requestContext["_base"] = $request.getAttribute("base");
-        static::$_requestContext["params"] = $request.getAttribute("params", []);
+        static::$_requestContext["_base"] = myServerRequest.getAttribute("base");
+        static::$_requestContext["params"] = myServerRequest.getAttribute("params", []);
 
-        $uri = $request.getUri();
+        $uri = myServerRequest.getUri();
         static::$_requestContext += [
             "_scheme": $uri.getScheme(),
             "_host": $uri.getHost(),
@@ -285,7 +285,7 @@ class Router
      * Callback functions should expect the following parameters:
      *
      * - `$params` The URL params being processed.
-     * - `$request` The current request.
+     * - `myServerRequest` The current request.
      *
      * The URL filter function should *always* return the params even if unmodified.
      *
@@ -294,9 +294,9 @@ class Router
      * URL filters allow you to easily implement features like persistent parameters.
      *
      * ```
-     * Router::addUrlFilter(function ($params, $request) {
-     *  if ($request.getParam("lang") && !isset($params["lang"])) {
-     *    $params["lang"] = $request.getParam("lang");
+     * Router::addUrlFilter(function ($params, myServerRequest) {
+     *  if (myServerRequest.getParam("lang") && !isset($params["lang"])) {
+     *    $params["lang"] = myServerRequest.getParam("lang");
      *  }
      *  return $params;
      * });
@@ -318,10 +318,10 @@ class Router
      */
     protected static array _applyUrlFilters(array $url)
     {
-        $request = static::getRequest();
+        myServerRequest = static::getRequest();
         foreach (static::$_urlFilters as $filter) {
             try {
-                $url = $filter($url, $request);
+                $url = $filter($url, myServerRequest);
             } catch (Throwable $e) {
                 if (is_array($filter)) {
                     $ref = new ReflectionMethod($filter[0], $filter[1]);
@@ -382,12 +382,12 @@ class Router
      */
     static string url($url = null, bool $full = false) {
         $context = static::$_requestContext;
-        $request = static::getRequest();
+        myServerRequest = static::getRequest();
 
         $context["_base"] = $context["_base"] ?? Configure::read("App.base") ?: "";
 
         if (empty($url)) {
-            $here = $request ? $request.getRequestTarget() : "/";
+            $here = myServerRequest ? myServerRequest.getRequestTarget() : "/";
             $output = $context["_base"] . $here;
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
@@ -672,10 +672,10 @@ class Router
         if (preg_match("/^[a-z\-]+:\/\//", $url)) {
             return $url;
         }
-        $request = static::getRequest();
+        myServerRequest = static::getRequest();
 
-        if ($request) {
-            $base = $request.getAttribute("base", "");
+        if (myServerRequest) {
+            $base = myServerRequest.getAttribute("base", "");
             if ($base != "" && stristr($url, $base)) {
                 $url = preg_replace("/^" ~ preg_quote($base, "/") ~ "/", "", $url, 1);
             }

@@ -298,7 +298,7 @@ class CommandRunner : IEventDispatcher
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null Exit code
      */
-    protected function runCommand(ICommand $command, array $argv, ConsoleIo $io): ?int
+    protected Nullable!int runCommand(ICommand $command, array $argv, ConsoleIo $io)
     {
         try {
             return $command.run($argv, $io);

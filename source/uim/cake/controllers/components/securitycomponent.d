@@ -80,9 +80,9 @@ class SecurityComponent : Component
     {
         /** @var uim.cake.controllers.Controller $controller */
         $controller = $event.getSubject();
-        $request = $controller.getRequest();
-        _action = $request.getParam("action");
-        $hasData = ($request.getData() || $request.is(["put", "post", "delete", "patch"]));
+        myServerRequest = $controller.getRequest();
+        _action = myServerRequest.getParam("action");
+        $hasData = (myServerRequest.getData() || myServerRequest.is(["put", "post", "delete", "patch"]));
         try {
             _secureRequired($controller);
 
@@ -104,11 +104,11 @@ class SecurityComponent : Component
             return this.blackHole($controller, $se.getType(), $se);
         }
 
-        $request = this.generateToken($request);
+        myServerRequest = this.generateToken(myServerRequest);
         if ($hasData && is_array($controller.getRequest().getData())) {
-            $request = $request.withoutData("_Token");
+            myServerRequest = myServerRequest.withoutData("_Token");
         }
-        $controller.setRequest($request);
+        $controller.setRequest(myServerRequest);
 
         return null;
     }
@@ -267,18 +267,18 @@ class SecurityComponent : Component
      * @param uim.cake.controllers.Controller $controller Instantiating controller
      */
     protected string[] _hashParts(Controller $controller) {
-        $request = $controller.getRequest();
+        myServerRequest = $controller.getRequest();
 
         // Start the session to ensure we get the correct session id.
-        $session = $request.getSession();
+        $session = myServerRequest.getSession();
         $session.start();
 
-        $data = (array)$request.getData();
+        $data = (array)myServerRequest.getData();
         $fieldList = _fieldsList($data);
         $unlocked = _sortedUnlocked($data);
 
         return [
-            Router::url($request.getRequestTarget()),
+            Router::url(myServerRequest.getRequestTarget()),
             serialize($fieldList),
             $unlocked,
             $session.id(),
@@ -456,16 +456,16 @@ class SecurityComponent : Component
      * Manually add form tampering prevention token information into the provided
      * request object.
      *
-     * @param uim.cake.http.ServerRequest $request The request object to add into.
+     * @param uim.cake.http.ServerRequest myServerRequest The request object to add into.
      * @return uim.cake.http.ServerRequest The modified request.
      */
-    function generateToken(ServerRequest $request): ServerRequest
+    function generateToken(ServerRequest myServerRequest): ServerRequest
     {
         $token = [
             "unlockedFields": _config["unlockedFields"],
         ];
 
-        return $request.withAttribute("formTokenData", [
+        return myServerRequest.withAttribute("formTokenData", [
             "unlockedFields": $token["unlockedFields"],
         ]);
     }

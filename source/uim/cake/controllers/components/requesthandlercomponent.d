@@ -7,21 +7,6 @@
 @safe:
 import uim.cake;
 
-module uim.cake.controllers.Component;
-
-import uim.cake.controllers.Component;
-import uim.cake.controllers.ComponentRegistry;
-import uim.cake.controllers.Controller;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.events.IEvent;
-import uim.cake.http.ContentTypeNegotiation;
-import uim.cake.http.exceptions.NotFoundException;
-import uim.cake.http.Response;
-import uim.cake.http.ServerRequest;
-import uim.cake.routings.Router;
-import uim.cake.utilities.Inflector;
-
 /**
  * Request object handling for alternative HTTP requests.
  *
@@ -109,12 +94,12 @@ class RequestHandlerComponent : Component
      * If html is one of the preferred types, no content type will be set, this
      * is to avoid issues with browsers that prefer HTML and several other content types.
      *
-     * @param uim.cake.http.ServerRequest $request The request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest The request instance.
      * @param uim.cake.http.Response $response The response instance.
      */
-    protected void _setExtension(ServerRequest $request, Response $response) {
+    protected void _setExtension(ServerRequest myServerRequest, Response $response) {
         $content = new ContentTypeNegotiation();
-        $accept = $content.parseAccept($request);
+        $accept = $content.parseAccept(myServerRequest);
 
         if (empty($accept) || current($accept)[0] == 'text/html') {
             return;
@@ -150,16 +135,16 @@ class RequestHandlerComponent : Component
      */
     void startup(IEvent $event) {
         $controller = this.getController();
-        $request = $controller.getRequest();
+        myServerRequest = $controller.getRequest();
         $response = $controller.getResponse();
 
-        this.ext = $request.getParam('_ext');
+        this.ext = myServerRequest.getParam('_ext');
         if (!this.ext || in_array(this.ext, ['html', 'htm'], true)) {
-            _setExtension($request, $response);
+            _setExtension(myServerRequest, $response);
         }
 
-        $isAjax = $request.is('ajax');
-        $controller.setRequest($request.withAttribute('isAjax', $isAjax));
+        $isAjax = myServerRequest.is('ajax');
+        $controller.setRequest(myServerRequest.withAttribute('isAjax', $isAjax));
 
         if (!this.ext && $isAjax) {
             this.ext = 'ajax';
@@ -205,8 +190,8 @@ class RequestHandlerComponent : Component
             $response = $response.withCharset(Configure::read('App.encoding'));
         }
 
-        $request = $controller.getRequest();
-        if (_config['checkHttpCache'] && $response.isNotModified($request)) {
+        myServerRequest = $controller.getRequest();
+        if (_config['checkHttpCache'] && $response.isNotModified(myServerRequest)) {
             $response = $response.withNotModified();
             $event.stopPropagation();
         }
@@ -278,13 +263,13 @@ class RequestHandlerComponent : Component
      */
     function requestedWith($type = null) {
         $controller = this.getController();
-        $request = $controller.getRequest();
+        myServerRequest = $controller.getRequest();
 
         if (
-            !$request.is('post') &&
-            !$request.is('put') &&
-            !$request.is('patch') &&
-            !$request.is('delete')
+            !myServerRequest.is('post') &&
+            !myServerRequest.is('put') &&
+            !myServerRequest.is('patch') &&
+            !myServerRequest.is('delete')
         ) {
             return null;
         }
@@ -298,7 +283,7 @@ class RequestHandlerComponent : Component
             return false;
         }
 
-        [$contentType] = explode(';', $request.contentType() ?? '');
+        [$contentType] = explode(';', myServerRequest.contentType() ?? '');
         if ($type == null) {
             return $controller.getResponse().mapType($contentType);
         }
@@ -329,10 +314,10 @@ class RequestHandlerComponent : Component
      */
     function prefers($type = null) {
         $controller = this.getController();
-        $request = $controller.getRequest();
+        myServerRequest = $controller.getRequest();
         $content = new ContentTypeNegotiation();
 
-        $acceptRaw = $content.parseAccept($request);
+        $acceptRaw = $content.parseAccept(myServerRequest);
         if (empty($acceptRaw)) {
             return $type ? $type == this.ext : this.ext;
         }

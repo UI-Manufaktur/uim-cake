@@ -41,7 +41,7 @@ class ContextFactory
         $providers = [
             [
                 "type": "orm",
-                "callable": function ($request, $data) {
+                "callable": function (myServerRequest, $data) {
                     if ($data["entity"] instanceof IEntity) {
                         return new EntityContext($data);
                     }
@@ -60,7 +60,7 @@ class ContextFactory
             ],
             [
                 "type": "form",
-                "callable": function ($request, $data) {
+                "callable": function (myServerRequest, $data) {
                     if ($data["entity"] instanceof Form) {
                         return new FormContext($data);
                     }
@@ -68,7 +68,7 @@ class ContextFactory
             ],
             [
                 "type": "array",
-                "callable": function ($request, $data) {
+                "callable": function (myServerRequest, $data) {
                     if (is_array($data["entity"]) && isset($data["entity"]["schema"])) {
                         return new ArrayContext($data["entity"]);
                     }
@@ -76,7 +76,7 @@ class ContextFactory
             ],
             [
                 "type": "null",
-                "callable": function ($request, $data) {
+                "callable": function (myServerRequest, $data) {
                     if ($data["entity"] == null) {
                         return new NullContext($data);
                     }
@@ -114,18 +114,18 @@ class ContextFactory
      *
      * If no type can be matched a NullContext will be returned.
      *
-     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @param array<string, mixed> $data The data to get a context provider for.
      * @return uim.cake.View\Form\IContext Context provider.
      * @throws \RuntimeException When a context instance cannot be generated for given entity.
      */
-    function get(ServerRequest $request, array $data = []): IContext
+    function get(ServerRequest myServerRequest, array $data = []): IContext
     {
         $data += ["entity": null];
 
         foreach (this.providers as $provider) {
             $check = $provider["callable"];
-            $context = $check($request, $data);
+            $context = $check(myServerRequest, $data);
             if ($context) {
                 break;
             }

@@ -69,7 +69,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         ];
         $session = Session::create($sessionConfig);
 
-        $request = new ServerRequest([
+        myServerRequest = new ServerRequest([
             "environment": $server,
             "uri": $uri,
             "cookies": $cookies ?: $_COOKIE,
@@ -80,15 +80,15 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             "input": $server["CAKEPHP_INPUT"] ?? null,
         ]);
 
-        $request = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, $request);
+        myServerRequest = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, myServerRequest);
         // This is required as `ServerRequest::scheme()` ignores the value of
         // `HTTP_X_FORWARDED_PROTO` unless `trustProxy` is enabled, while the
         // `Uri` instance intially created always takes values of `HTTP_X_FORWARDED_PROTO`
         // into account.
-        $uri = $request.getUri().withScheme($request.scheme());
-        $request = $request.withUri($uri, true);
+        $uri = myServerRequest.getUri().withScheme(myServerRequest.scheme());
+        myServerRequest = myServerRequest.withUri($uri, true);
 
-        return static::marshalFiles($files ?? $_FILES, $request);
+        return static::marshalFiles($files ?? $_FILES, myServerRequest);
     }
 
     /**
@@ -100,58 +100,58 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * into array for PUT/PATCH/DELETE requests.
      *
      * @param array $parsedBody Parsed body.
-     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @return uim.cake.http.ServerRequest
      */
-    protected static function marshalBodyAndRequestMethod(array $parsedBody, ServerRequest $request): ServerRequest
+    protected static function marshalBodyAndRequestMethod(array $parsedBody, ServerRequest myServerRequest): ServerRequest
     {
-        $method = $request.getMethod();
+        $method = myServerRequest.getMethod();
         $override = false;
 
         if (
             in_array($method, ["PUT", "DELETE", "PATCH"], true) &&
-            strpos((string)$request.contentType(), "application/x-www-form-urlencoded") == 0
+            strpos((string)myServerRequest.contentType(), "application/x-www-form-urlencoded") == 0
         ) {
-            $data = (string)$request.getBody();
+            $data = (string)myServerRequest.getBody();
             parse_str($data, $parsedBody);
         }
-        if ($request.hasHeader("X-Http-Method-Override")) {
-            $parsedBody["_method"] = $request.getHeaderLine("X-Http-Method-Override");
+        if (myServerRequest.hasHeader("X-Http-Method-Override")) {
+            $parsedBody["_method"] = myServerRequest.getHeaderLine("X-Http-Method-Override");
             $override = true;
         }
 
-        $request = $request.withEnv("ORIGINAL_REQUEST_METHOD", $method);
+        myServerRequest = myServerRequest.withEnv("ORIGINAL_REQUEST_METHOD", $method);
         if (isset($parsedBody["_method"])) {
-            $request = $request.withEnv("REQUEST_METHOD", $parsedBody["_method"]);
+            myServerRequest = myServerRequest.withEnv("REQUEST_METHOD", $parsedBody["_method"]);
             unset($parsedBody["_method"]);
             $override = true;
         }
 
         if (
             $override &&
-            !in_array($request.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
+            !in_array(myServerRequest.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
         ) {
             $parsedBody = [];
         }
 
-        return $request.withParsedBody($parsedBody);
+        return myServerRequest.withParsedBody($parsedBody);
     }
 
     /**
      * Process uploaded files and move things onto the parsed body.
      *
      * @param array $files Files array for normalization and merging in parsed body.
-     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @return uim.cake.http.ServerRequest
      */
-    protected static function marshalFiles(array $files, ServerRequest $request): ServerRequest
+    protected static function marshalFiles(array $files, ServerRequest myServerRequest): ServerRequest
     {
         $files = normalizeUploadedFiles($files);
-        $request = $request.withUploadedFiles($files);
+        myServerRequest = myServerRequest.withUploadedFiles($files);
 
-        $parsedBody = $request.getParsedBody();
+        $parsedBody = myServerRequest.getParsedBody();
         if (!is_array($parsedBody)) {
-            return $request;
+            return myServerRequest;
         }
 
         if (Configure::read("App.uploadedFilesAsObjects", true)) {
@@ -175,7 +175,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             }
         }
 
-        return $request.withParsedBody($parsedBody);
+        return myServerRequest.withParsedBody($parsedBody);
     }
 
     /**

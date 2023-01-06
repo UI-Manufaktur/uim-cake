@@ -87,11 +87,11 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Get a user based on information in the request. Used by cookie-less auth for stateless clients.
      *
-     * @param uim.cake.http.ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest myServerRequest Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    function getUser(ServerRequest $request) {
-        $digest = _getDigest($request);
+    function getUser(ServerRequest myServerRequest) {
+        $digest = _getDigest(myServerRequest);
         if (empty($digest)) {
             return false;
         }
@@ -109,7 +109,7 @@ class DigestAuthenticate : BasicAuthenticate
         $password = $user[$field];
         unset($user[$field]);
 
-        $requestMethod = $request.getEnv("ORIGINAL_REQUEST_METHOD") ?: $request.getMethod();
+        $requestMethod = myServerRequest.getEnv("ORIGINAL_REQUEST_METHOD") ?: myServerRequest.getMethod();
         $hash = this.generateResponseHash(
             $digest,
             $password,
@@ -125,12 +125,11 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Gets the digest headers from the request/environment.
      *
-     * @param uim.cake.http.ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest myServerRequest Request object.
      * @return array<string, mixed>|null Array of digest information.
      */
-    protected function _getDigest(ServerRequest $request): ?array
-    {
-        $digest = $request.getEnv("PHP_AUTH_DIGEST");
+    protected array _getDigest(ServerRequest myServerRequest) {
+        $digest = myServerRequest.getEnv("PHP_AUTH_DIGEST");
         if (empty($digest) && function_exists("apache_request_headers")) {
             $headers = apache_request_headers();
             if (!empty($headers["Authorization"]) && substr($headers["Authorization"], 0, 7) == "Digest ") {
@@ -202,7 +201,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Generate the login headers
      *
-     * @param uim.cake.http.ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest myServerRequest Request object.
      * @return array<string, string> Headers for logging in.
      */
     STRINGAA loginHeaders(ServerRequest $request) {

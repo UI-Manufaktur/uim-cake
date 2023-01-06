@@ -210,9 +210,8 @@ class AuthComponent : Component : IEventDispatcher
      * Callback for Controller.startup event.
      *
      * @param uim.cake.events.IEvent $event Event instance.
-     * @return uim.cake.http.Response|null
      */
-    function startup(IEvent $event): ?Response
+    Response startup(IEvent $event): ?
     {
         return this.authCheck($event);
     }

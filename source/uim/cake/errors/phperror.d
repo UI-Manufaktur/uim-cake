@@ -138,7 +138,7 @@ class PhpError
      * Get the error line number.
      *
      */
-    Nullable!int getLine(): ?int
+    Nullable!int getLine()
     {
         return this.line;
     }

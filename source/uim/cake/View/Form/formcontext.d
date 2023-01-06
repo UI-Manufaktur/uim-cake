@@ -142,7 +142,7 @@ class FormContext : IContext
     }
 
 
-    function getMaxLength(string $field): ?int
+    Nullable!int getMaxLength(string $field)
     {
         $validator = _form.getValidator(_validator);
         if (!$validator.hasField($field)) {

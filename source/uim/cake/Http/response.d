@@ -1,9 +1,8 @@
 module uim.cake.Http;
 
-import uim.cake.core.Configure;
-import uim.cake.http.Cookie\CookieCollection;
-import uim.cake.http.Cookie\CookieInterface;
-import uim.cake.http.exceptions.NotFoundException;
+@safe:
+import uim.cake; 
+
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
@@ -1129,18 +1128,18 @@ class Response : IResponse
      * You need to set at least one of the `Last-Modified` or `Etag` response headers
      * before calling this method. Otherwise, a comparison will not be possible.
      *
-     * @param uim.cake.http.ServerRequest $request Request object
+     * @param uim.cake.http.ServerRequest myServerRequest Request object
      * @return bool Whether the response is "modified" based on cache headers.
      */
-    bool isNotModified(ServerRequest $request) {
-        $etags = preg_split("/\s*,\s*/", $request.getHeaderLine("If-None-Match"), 0, PREG_SPLIT_NO_EMPTY);
+    bool isNotModified(ServerRequest myServerRequest) {
+        $etags = preg_split("/\s*,\s*/", myServerRequest.getHeaderLine("If-None-Match"), 0, PREG_SPLIT_NO_EMPTY);
         $responseTag = this.getHeaderLine("Etag");
         $etagMatches = null;
         if ($responseTag) {
             $etagMatches = in_array("*", $etags, true) || in_array($responseTag, $etags, true);
         }
 
-        $modifiedSince = $request.getHeaderLine("If-Modified-Since");
+        $modifiedSince = myServerRequest.getHeaderLine("If-Modified-Since");
         $timeMatches = null;
         if ($modifiedSince && this.hasHeader("Last-Modified")) {
             $timeMatches = strtotime(this.getHeaderLine("Last-Modified")) == strtotime($modifiedSince);
@@ -1164,16 +1163,16 @@ class Response : IResponse
      *
      * *Warning* This method mutates the response in-place and should be avoided.
      *
-     * @param uim.cake.http.ServerRequest $request Request object
+     * @param uim.cake.http.ServerRequest myServerRequest Request object
      * @return bool Whether the response was marked as not modified or not.
      * @deprecated 4.4.0 Use `isNotModified()` and `withNotModified()` instead.
      */
-    bool checkNotModified(ServerRequest $request) {
+    bool checkNotModified(ServerRequest myServerRequest) {
         deprecationWarning(
             "The `checkNotModified()` method is deprecated~ " ~
             "Use `isNotModified() instead and `withNoModified()` instead."
         );
-        if (this.isNotModified($request)) {
+        if (this.isNotModified(myServerRequest)) {
             this.notModified();
 
             return true;
@@ -1297,14 +1296,14 @@ class Response : IResponse
     /**
      * Get a CorsBuilder instance for defining CORS headers.
      *
-     * @param uim.cake.http.ServerRequest $request Request object
+     * @param uim.cake.http.ServerRequest myServerRequest Request object
      * @return uim.cake.http.CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */
-    function cors(ServerRequest $request): CorsBuilder
+    function cors(ServerRequest myServerRequest): CorsBuilder
     {
-        $origin = $request.getHeaderLine("Origin");
-        $ssl = $request.is("ssl");
+        $origin = myServerRequest.getHeaderLine("Origin");
+        $ssl = myServerRequest.is("ssl");
 
         return new CorsBuilder(this, $origin, $ssl);
     }
