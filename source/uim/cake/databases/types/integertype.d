@@ -31,9 +31,8 @@ class IntegerType : BaseType : BatchCastingInterface
      *
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
-     * @return int|null
      */
-    function toDatabase($value, IDriver $driver): ?int
+    Nullable!int toDatabase($value, IDriver $driver): ?int
     {
         if ($value == null || $value == "") {
             return null;
@@ -49,9 +48,8 @@ class IntegerType : BaseType : BatchCastingInterface
      *
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
-     * @return int|null
      */
-    function toPHP($value, IDriver $driver): ?int
+    Nullable!int toPHP($value, IDriver $driver): ?int
     {
         if ($value == null) {
             return null;

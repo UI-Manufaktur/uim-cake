@@ -128,9 +128,8 @@ class PhpError
     /**
      * Get the error file
      *
-     * @return string|null
      */
-    function getFile(): ?string
+    Nullable!string getFile(): ?string
     {
         return this.file;
     }
@@ -138,9 +137,8 @@ class PhpError
     /**
      * Get the error line number.
      *
-     * @return int|null
      */
-    function getLine(): ?int
+    Nullable!int getLine(): ?int
     {
         return this.line;
     }

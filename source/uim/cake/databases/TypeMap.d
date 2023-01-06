@@ -120,7 +120,7 @@ class TypeMap
      * @param string|int $column The type for a given column
      * @return string|null
      */
-    function type($column): ?string
+    Nullable!string type($column)
     {
         return _types[$column] ?? _defaults[$column] ?? null;
     }

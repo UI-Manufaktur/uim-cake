@@ -358,7 +358,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @return string|null
 
      */
-    function getPlugin(): ?string
+    Nullable!string getPlugin()
     {
         return this.plugin;
     }
@@ -741,7 +741,7 @@ class Controller : IEventListener, IEventDispatcher {
      *
      * @return string|null The chosen view class or null for no decision.
      */
-    protected function chooseViewClass(): ?string
+    protected Nullable!string chooseViewClass()
     {
         $possibleViewClasses = this.viewClasses();
         if (empty($possibleViewClasses)) {

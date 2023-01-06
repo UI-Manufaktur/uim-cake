@@ -110,9 +110,8 @@ class FormDataPart
      * Get/set the contentId for a part.
      *
      * @param string|null $id The content id.
-     * @return string|null
      */
-    function contentId(?string $id = null): ?string
+    Nullable!string contentId(?string $id = null): ?string
     {
         if ($id == null) {
             return _contentId;
@@ -128,9 +127,8 @@ class FormDataPart
      * generated output.
      *
      * @param string|null $filename Use null to get/string to set.
-     * @return string|null
      */
-    function filename(?string $filename = null): ?string
+    Nullable!string filename(?string $filename = null): ?string
     {
         if ($filename == null) {
             return _filename;
@@ -143,9 +141,8 @@ class FormDataPart
      * Get/set the content type.
      *
      * @param string|null $type Use null to get/string to set.
-     * @return string|null
      */
-    function type(?string $type): ?string
+    Nullable!string type(?string $type): ?string
     {
         if ($type == null) {
             return _type;
@@ -160,9 +157,8 @@ class FormDataPart
      * Useful when content bodies are in encodings like base64.
      *
      * @param string|null $type The type of encoding the value has.
-     * @return string|null
      */
-    function transferEncoding(?string $type): ?string
+    Nullable!string transferEncoding(?string $type): ?string
     {
         if ($type == null) {
             return _transferEncoding;

@@ -266,7 +266,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * @return string|null
      * @psalm-return class-string<uim.cake.Controller\Controller>|null
      */
-    function getControllerClass(ServerRequest $request): ?string
+    Nullable!string getControllerClass(ServerRequest $request)
     {
         $pluginPath = "";
         $namespace = "Controller";

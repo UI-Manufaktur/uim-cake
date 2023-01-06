@@ -577,7 +577,7 @@ class Shell
      * @return string|null Either the default value, or the user-provided input.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::in
      */
-    function in(string $prompt, $options = null, ?string $default = null): ?string
+    Nullable!string in(string $prompt, $options = null, ?string $default = null)
     {
         if (!this.interactive) {
             return $default;

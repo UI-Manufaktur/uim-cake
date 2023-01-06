@@ -79,7 +79,7 @@ class ShellDispatcher
      * @param string|null $original The original full name for the shell.
      * @return string|null The aliased class name, or null if the alias does not exist
      */
-    static function alias(string $short, ?string $original = null): ?string
+    static Nullable!string alias(string $short, ?string $original = null)
     {
         $short = Inflector::camelize($short);
         if ($original) {
@@ -329,7 +329,7 @@ class ShellDispatcher
      * @param string $shell The shell name to look for.
      * @return string|null Either the classname or null.
      */
-    protected function _shellExists(string $shell): ?string
+    protected Nullable!string _shellExists(string $shell)
     {
         $class = App::className($shell, "Shell", "Shell");
         if ($class) {

@@ -259,9 +259,8 @@ class Response : Message : IResponse
     /**
      * Get the encoding if it was set.
      *
-     * @return string|null
      */
-    function getEncoding(): ?string
+    Nullable!string getEncoding(): ?string
     {
         $content = this.getHeaderLine("content-type");
         if (!$content) {

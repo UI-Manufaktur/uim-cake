@@ -58,14 +58,14 @@ interface TypeInterface
      *
      * @return string|null The base type name that this class is inheriting.
      */
-    function getBaseType(): ?string;
+    Nullable!string getBaseType();
 
     /**
      * Returns type identifier name for this object.
      *
      * @return string|null The type identifier name for this object.
      */
-    function getName(): ?string;
+    Nullable!string getName();
 
     /**
      * Generate a new primary key value for a given type.

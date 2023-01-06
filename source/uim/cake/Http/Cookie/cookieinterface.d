@@ -196,9 +196,8 @@ interface CookieInterface
     /**
      * Get the SameSite attribute.
      *
-     * @return string|null
      */
-    function getSameSite(): ?string;
+    Nullable!string getSameSite(): ?string;
 
     /**
      * Create a cookie with an updated SameSite option.

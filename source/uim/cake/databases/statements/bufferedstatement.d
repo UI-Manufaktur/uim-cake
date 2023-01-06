@@ -66,9 +66,8 @@ class BufferedStatement : Iterator, IStatement
      * Magic getter to return $queryString as read-only.
      *
      * @param string $property internal property to get
-     * @return string|null
      */
-    function __get(string $property) {
+    Nullable!string __get(string $property) {
         if ($property == "queryString") {
             /** @psalm-suppress NoInterfaceProperties */
             return this.statement.queryString;

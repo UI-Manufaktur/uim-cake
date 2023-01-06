@@ -308,9 +308,8 @@ class ServerRequest : IServerRequest
     /**
      * Get the content type used in this request.
      *
-     * @return string|null
      */
-    function contentType(): ?string
+    Nullable!string contentType(): ?string
     {
         $type = this.getEnv("CONTENT_TYPE");
         if ($type) {
@@ -951,9 +950,8 @@ class ServerRequest : IServerRequest
     /**
      * Get the host that the request was handled on.
      *
-     * @return string|null
      */
-    function host(): ?string
+    Nullable!string host(): ?string
     {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_HOST")) {
             return this.getEnv("HTTP_X_FORWARDED_HOST");
@@ -965,9 +963,8 @@ class ServerRequest : IServerRequest
     /**
      * Get the port the request was handled on.
      *
-     * @return string|null
      */
-    function port(): ?string
+    Nullable!string port(): ?string
     {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_PORT")) {
             return this.getEnv("HTTP_X_FORWARDED_PORT");

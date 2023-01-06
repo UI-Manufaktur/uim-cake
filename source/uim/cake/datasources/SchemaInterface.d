@@ -73,9 +73,8 @@ interface ISchema {
      * Returns column type or null if a column does not exist.
      *
      * @param string aName The column to get the type of.
-     * @return string|null
      */
-    function getColumnType(string aName): ?string;
+    Nullable!string getColumnType(string aName): ?string;
 
     /**
      * Sets the type of a column.

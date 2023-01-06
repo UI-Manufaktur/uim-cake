@@ -33,9 +33,8 @@ class PDOStatement : StatementDecorator
      * Magic getter to return PDOStatement::$queryString as read-only.
      *
      * @param string $property internal property to get
-     * @return string|null
      */
-    function __get(string $property) {
+    Nullable!string __get(string $property) {
         if ($property == "queryString" && isset(_statement.queryString)) {
             /** @psalm-suppress NoInterfaceProperties */
             return _statement.queryString;

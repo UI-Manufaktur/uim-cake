@@ -23,7 +23,7 @@ trait CaseExpressionTrait
      * @param mixed $value The value for which to infer the type.
      * @return string|null The abstract type, or `null` if it could not be inferred.
      */
-    protected function inferType($value): ?string
+    protected Nullable!string inferType($value)
     {
         $type = null;
 

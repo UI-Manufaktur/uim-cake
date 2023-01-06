@@ -183,9 +183,8 @@ class FormProtector
     /**
      * Get validation error message.
      *
-     * @return string|null
      */
-    function getError(): ?string
+    Nullable!string getError(): ?string
     {
         return this.debugMessage;
     }

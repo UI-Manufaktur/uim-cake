@@ -69,9 +69,8 @@ class DecimalType : BaseType : BatchCastingInterface
      *
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
-     * @return string|null
      */
-    function toPHP($value, IDriver $driver): ?string
+    Nullable!string toPHP($value, IDriver $driver): ?string
     {
         if ($value == null) {
             return null;

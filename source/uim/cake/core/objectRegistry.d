@@ -153,7 +153,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return string|null The resolved name or null for failure.
      * @psalm-return class-string|null
      */
-    abstract protected function _resolveClassName(string $class): ?string;
+    abstract protected Nullable!string _resolveClassName(string $class);
 
     /**
      * Throw an exception when the requested object name is missing.

@@ -23,9 +23,8 @@ class StringType : BaseType : OptionalConvertInterface
      *
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
-     * @return string|null
      */
-    function toDatabase($value, IDriver $driver): ?string
+    Nullable!string toDatabase($value, IDriver $driver): ?string
     {
         if ($value == null || is_string($value)) {
             return $value;
@@ -50,9 +49,8 @@ class StringType : BaseType : OptionalConvertInterface
      *
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
-     * @return string|null
      */
-    function toPHP($value, IDriver $driver): ?string
+    Nullable!string toPHP($value, IDriver $driver): ?string
     {
         if ($value == null) {
             return null;
