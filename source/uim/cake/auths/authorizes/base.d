@@ -21,14 +21,14 @@ abstract class BaseAuthorize {
      *
      * @var uim.cake.controllers.ComponentRegistry
      */
-    protected $_registry;
+    protected _registry;
 
     /**
      * Default config for authorize objects.
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * Constructor

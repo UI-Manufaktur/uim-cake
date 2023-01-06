@@ -13,7 +13,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * Default config for this object.
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "hashers": [],
     ];
 
@@ -22,7 +22,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      *
      * @var array<uim.cake.Auth\AbstractPasswordHasher>
      */
-    protected $_hashers = [];
+    protected _hashers = [];
 
     /**
      * Constructor

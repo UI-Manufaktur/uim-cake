@@ -66,7 +66,7 @@ class Cache {
      * @var array<string, string>
      * @psalm-var array<string, class-string>
      */
-    protected static $_dsnClassMap = [
+    protected static _dsnClassMap = [
         "array": Engine\ArrayEngine::class,
         "apcu": Engine\ApcuEngine::class,
         "file": Engine\FileEngine::class,
@@ -79,21 +79,21 @@ class Cache {
     /**
      * Flag for tracking whether caching is enabled.
      */
-    protected static bool $_enabled = true;
+    protected static bool _enabled = true;
 
     /**
      * Group to Config mapping
      *
      * @var array<string, array>
      */
-    protected static $_groups = [];
+    protected static _groups = [];
 
     /**
      * Cache Registry used for creating and using cache adapters.
      *
      * @var uim.cake.Cache\CacheRegistry|null
      */
-    protected static $_registry;
+    protected static _registry;
 
     /**
      * Returns the Cache Registry instance used for creating and using cache adapters.
@@ -101,11 +101,11 @@ class Cache {
      * @return uim.cake.Cache\CacheRegistry
      */
     static CacheRegistry getRegistry() {
-        if (static::$_registry == null) {
-            static::$_registry = new CacheRegistry();
+        if (static::_registry == null) {
+            static::_registry = new CacheRegistry();
         }
 
-        return static::$_registry;
+        return static::_registry;
     }
 
     /**
@@ -116,7 +116,7 @@ class Cache {
      * @param uim.cake.Cache\CacheRegistry $registry Injectable registry object.
      */
     static void setRegistry(CacheRegistry $registry) {
-        static::$_registry = $registry;
+        static::_registry = $registry;
     }
 
     /**
@@ -130,14 +130,14 @@ class Cache {
     protected static void _buildEngine(string aName) {
         $registry = static::getRegistry();
 
-        if (empty(static::$_config[$name]["className"])) {
+        if (empty(static::_config[$name]["className"])) {
             throw new InvalidArgumentException(
                 sprintf("The "%s" cache configuration does not exist.", $name)
             );
         }
 
         /** @var Json aConfig */
-        aConfig = static::$_config[$name];
+        aConfig = static::_config[$name];
 
         try {
             $registry.load($name, aConfig);
@@ -176,9 +176,9 @@ class Cache {
 
         if (!empty(aConfig["groups"])) {
             foreach (aConfig["groups"] as $group) {
-                static::$_groups[$group][] = $name;
-                static::$_groups[$group] = array_unique(static::$_groups[$group]);
-                sort(static::$_groups[$group]);
+                static::_groups[$group][] = $name;
+                static::_groups[$group] = array_unique(static::_groups[$group]);
+                sort(static::_groups[$group]);
             }
         }
     }
@@ -203,7 +203,7 @@ class Cache {
      * @return \Psr\SimpleCache\ICache &uim.cake.Cache\ICacheEngine
      */
     static function pool(string aConfig) {
-        if (!static::$_enabled) {
+        if (!static::_enabled) {
             return new NullEngine();
         }
 
@@ -485,11 +485,11 @@ class Cache {
             static::pool(aConfig);
         }
         if ($group == null) {
-            return static::$_groups;
+            return static::_groups;
         }
 
-        if (isset(self::$_groups[$group])) {
-            return [$group: self::$_groups[$group]];
+        if (isset(self::_groups[$group])) {
+            return [$group: self::_groups[$group]];
         }
 
         throw new InvalidArgumentException(sprintf("Invalid cache group %s", $group));
@@ -501,7 +501,7 @@ class Cache {
      * If caching has been disabled with Cache::disable() this method will reverse that effect.
      */
     static void enable() {
-        static::$_enabled = true;
+        static::_enabled = true;
     }
 
     /**
@@ -510,7 +510,7 @@ class Cache {
      * When disabled all cache operations will return null.
      */
     static void disable() {
-        static::$_enabled = false;
+        static::_enabled = false;
     }
 
     /**
@@ -519,7 +519,7 @@ class Cache {
      * @return bool
      */
     static bool enabled() {
-        return static::$_enabled;
+        return static::_enabled;
     }
 
     /**

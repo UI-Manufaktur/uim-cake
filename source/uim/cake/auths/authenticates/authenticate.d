@@ -28,7 +28,7 @@ abstract class BaseAuthenticate : IEventListener {
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "fields": [
             "username": "username",
             "password": "password",
@@ -43,20 +43,20 @@ abstract class BaseAuthenticate : IEventListener {
      *
      * @var uim.cake.controllers.ComponentRegistry
      */
-    protected $_registry;
+    protected _registry;
 
     /**
      * Password hasher instance.
      *
      * @var uim.cake.auths.AbstractPasswordHasher|null
      */
-    protected $_passwordHasher;
+    protected _passwordHasher;
 
     /**
      * Whether the user authenticated by this class
      * requires their password to be rehashed with another algorithm.
      */
-    protected bool $_needsPasswordRehash = false;
+    protected bool _needsPasswordRehash = false;
 
     /**
      * Constructor

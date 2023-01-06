@@ -13,7 +13,7 @@ class ConsoleInput
      *
      * @var resource
      */
-    protected $_input;
+    protected _input;
 
     /**
      * Can this instance use readline?
@@ -22,7 +22,7 @@ class ConsoleInput
      * 2. Handle we are attached to must be stdin.
      * Allows rich editing with arrow keys and history when inputting a string.
      */
-    protected bool $_canReadline;
+    protected bool _canReadline;
 
     /**
      * Constructor

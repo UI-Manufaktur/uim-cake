@@ -16,14 +16,14 @@ class ReplaceIterator : Collection
      *
      * @var callable
      */
-    protected $_callback;
+    protected _callback;
 
     /**
      * A reference to the internal iterator this object is wrapping.
      *
      * @var \Traversable
      */
-    protected $_innerIterator;
+    protected _innerIterator;
 
     /**
      * Creates an iterator from another iterator that will modify each of the values

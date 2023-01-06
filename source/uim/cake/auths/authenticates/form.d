@@ -30,7 +30,7 @@ import uim.cake;
  * ```
  *
  * When configuring FormAuthenticate you can pass in config to which fields, model and finder
- * are used. See `BaseAuthenticate::$_defaultConfig` for more information.
+ * are used. See `BaseAuthenticate::_defaultConfig` for more information.
  *
  * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
  */

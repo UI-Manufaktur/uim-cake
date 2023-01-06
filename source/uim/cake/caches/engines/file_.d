@@ -22,7 +22,7 @@ class FileEngine : CacheEngine
      *
      * @var \SplFileObject|null
      */
-    protected $_File;
+    protected _File;
 
     /**
      * The default config used unless overridden by runtime configuration
@@ -40,7 +40,7 @@ class FileEngine : CacheEngine
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "duration": 3600,
         "groups": [],
         "lock": true,
@@ -53,7 +53,7 @@ class FileEngine : CacheEngine
     /**
      * True unless FileEngine::__active(); fails
      */
-    protected bool $_init = true;
+    protected bool _init = true;
 
     /**
      * Initialize File Cache Engine

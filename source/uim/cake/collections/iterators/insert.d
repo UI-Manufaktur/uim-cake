@@ -20,13 +20,13 @@ class InsertIterator : Collection {
     /**
      * Holds whether the values collection is still valid. (has more records)
      */
-    protected bool $_validValues = true;
+    protected bool _validValues = true;
 
     /**
      * An array containing each of the properties to be traversed to reach the
      * point where the values should be inserted.
      */
-    protected string[] $_path;
+    protected string[] _path;
 
     /**
      * The property name to which values will be assigned

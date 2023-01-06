@@ -36,7 +36,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "duration": 3600,
         "groups": [],
         "prefix": "cake_",
@@ -47,7 +47,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Contains the compiled string with all group
      * prefixes to be prepended to every key in this cache engine
      */
-    protected string $_groupPrefix = "";
+    protected string _groupPrefix = "";
 
     /**
      * Initialize the cache engine

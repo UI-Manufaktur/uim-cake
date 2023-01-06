@@ -20,7 +20,7 @@ class WincacheEngine : CacheEngine {
      *
      * @var array<string>
      */
-    protected $_compiledGroupNames = [];
+    protected _compiledGroupNames = [];
 
     /**
      * Initialize the Cache Engine

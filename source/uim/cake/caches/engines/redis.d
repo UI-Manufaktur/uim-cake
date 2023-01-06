@@ -15,7 +15,7 @@ class RedisEngine : CacheEngine {
      *
      * @var \Redis
      */
-    protected $_Redis;
+    protected _Redis;
 
     /**
      * The default config used unless overridden by runtime configuration
@@ -36,7 +36,7 @@ class RedisEngine : CacheEngine {
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "database": 0,
         "duration": 3600,
         "groups": [],

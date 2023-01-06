@@ -26,14 +26,14 @@ class SessionStorage : IStorage
      *
      * @var \ArrayAccess|array|false|null
      */
-    protected $_user;
+    protected _user;
 
     /**
      * Session object.
      *
      * @var uim.cake.http.Session
      */
-    protected $_session;
+    protected _session;
 
     /**
      * Default configuration for this class.
@@ -45,7 +45,7 @@ class SessionStorage : IStorage
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "key": "Auth.User",
         "redirect": "Auth.redirect",
     ];

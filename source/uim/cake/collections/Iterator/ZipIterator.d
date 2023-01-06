@@ -37,14 +37,14 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      *
      * @var callable|null
      */
-    protected $_callback;
+    protected _callback;
 
     /**
      * Contains the original iterator objects that were attached
      *
      * @var array
      */
-    protected $_iterators = [];
+    protected _iterators = [];
 
     /**
      * Creates the iterator to merge together the values by for all the passed

@@ -57,7 +57,7 @@ class DigestAuthenticate : BasicAuthenticate {
     /**
      * Constructor
      *
-     * Besides the keys specified in BaseAuthenticate::$_defaultConfig,
+     * Besides the keys specified in BaseAuthenticate::_defaultConfig,
      * DigestAuthenticate uses the following extra keys:
      *
      * - `secret` The secret to use for nonce validation. Defaults to Security::getSalt().

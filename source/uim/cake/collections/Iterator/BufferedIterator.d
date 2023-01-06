@@ -16,37 +16,37 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @var \SplDoublyLinkedList
      */
-    protected $_buffer;
+    protected _buffer;
 
     /**
      * Points to the next record number that should be fetched
      */
-    protected int $_index = 0;
+    protected int _index = 0;
 
     /**
      * Last record fetched from the inner iterator
      *
      * @var mixed
      */
-    protected $_current;
+    protected _current;
 
     /**
      * Last key obtained from the inner iterator
      *
      * @var mixed
      */
-    protected $_key;
+    protected _key;
 
     /**
      * Whether the internal iterator"s rewind method was already
      * called
      */
-    protected bool $_started = false;
+    protected bool _started = false;
 
     /**
      * Whether the internal iterator has reached its end.
      */
-    protected bool $_finished = false;
+    protected bool _finished = false;
 
     /**
      * Maintains an in-memory cache of the results yielded by the internal

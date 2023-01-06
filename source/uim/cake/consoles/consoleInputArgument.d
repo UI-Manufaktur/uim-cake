@@ -14,18 +14,18 @@ use SimpleXMLElement;
  */
 class ConsoleInputArgument {
     // Name of the argument.
-    protected string $_name;
+    protected string _name;
 
     // Help string
-    protected string $_help;
+    protected string _help;
 
     // Is this option required?
-    protected bool $_required;
+    protected bool _required;
 
     /**
      * An array of valid choices for this argument.
      */
-    protected string[] $_choices;
+    protected string[] _choices;
 
     /**
      * Make a new Input Argument

@@ -35,7 +35,7 @@ class ControllerAuthorize : BaseAuthorize
      *
      * @var uim.cake.controllers.Controller
      */
-    protected $_Controller;
+    protected _Controller;
 
 
     this(ComponentRegistry $registry, Json aConfig = []) {

@@ -14,7 +14,7 @@ class ApcuEngine : CacheEngine {
      * Contains the compiled group names
      * (prefixed with the global configuration prefix)
      */
-    protected string[] $_compiledGroupNames = [];
+    protected string[] _compiledGroupNames = [];
 
     /**
      * Initialize the Cache Engine
