@@ -14,8 +14,7 @@ class I18nCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $io.out("<info>I18n Shell</info>");
         $io.hr();
         $io.out("[E]xtract POT file from sources");

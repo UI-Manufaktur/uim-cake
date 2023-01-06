@@ -8,8 +8,7 @@ import uim.cake;
  */
 class RoutesCheckCommand : Command {
 
-    static string defaultName()
-    {
+    static string defaultName() {
         return "routes check";
     }
 
@@ -20,8 +19,7 @@ class RoutesCheckCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $url = $args.getArgument("url");
         try {
             $request = new ServerRequest(["url": $url]);

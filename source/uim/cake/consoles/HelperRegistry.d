@@ -40,8 +40,7 @@ class HelperRegistry : ObjectRegistry
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string
      */
-    protected Nullable!string _resolveClassName(string $class)
-    {
+    protected Nullable!string _resolveClassName(string $class) {
         $name = App::className($class, "Command/Helper", "Helper");
         if ($name == null) {
             return App::className($class, "Shell/Helper", "Helper");

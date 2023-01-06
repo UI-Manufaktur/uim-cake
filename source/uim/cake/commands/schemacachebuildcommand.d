@@ -13,8 +13,7 @@ class SchemacacheBuildCommand : Command {
      *
      * @return string
      */
-    static string defaultName()
-    {
+    static string defaultName() {
         return "schema_cache build";
     }
 
@@ -25,8 +24,7 @@ class SchemacacheBuildCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         try {
             /** @var uim.cake.databases.Connection $connection */
             $connection = ConnectionManager::get((string)$args.getOption("connection"));

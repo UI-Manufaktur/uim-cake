@@ -10,8 +10,7 @@ use DirectoryIterator;
  */
 class I18nInitCommand : Command {
 
-    static string defaultName()
-    {
+    static string defaultName() {
         return "i18n init";
     }
 
@@ -22,8 +21,7 @@ class I18nInitCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $language = $args.getArgument("language");
         if (!$language) {
             $language = $io.ask("Please specify language code, e.g. `en`, `eng`, `en_US` etc.");

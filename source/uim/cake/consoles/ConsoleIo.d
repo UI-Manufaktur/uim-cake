@@ -118,8 +118,7 @@ class ConsoleIo
      * @param int|null $level The current output level.
      * @return int The current output level.
      */
-    int level(?int $level = null)
-    {
+    int level(?int $level = null) {
         if ($level != null) {
             _level = $level;
         }
@@ -135,8 +134,7 @@ class ConsoleIo
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if current level is less than ConsoleIo::VERBOSE
      */
-    Nullable!int verbose($message, int $newlines = 1)
-    {
+    Nullable!int verbose($message, int $newlines = 1) {
         return this.out($message, $newlines, self::VERBOSE);
     }
 
@@ -148,8 +146,7 @@ class ConsoleIo
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if current level is less than ConsoleIo::QUIET
      */
-    Nullable!int quiet($message, int $newlines = 1)
-    {
+    Nullable!int quiet($message, int $newlines = 1) {
         return this.out($message, $newlines, self::QUIET);
     }
 
@@ -170,8 +167,7 @@ class ConsoleIo
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
      */
-    Nullable!int out($message = "", int $newlines = 1, int $level = self::NORMAL)
-    {
+    Nullable!int out($message = "", int $newlines = 1, int $level = self::NORMAL) {
         if ($level <= _level) {
             _lastWritten = _out.write($message, $newlines);
 
@@ -191,8 +187,7 @@ class ConsoleIo
      *   or null if provided $level is greater than current level.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int info($message, int $newlines = 1, int $level = self::NORMAL)
-    {
+    Nullable!int info($message, int $newlines = 1, int $level = self::NORMAL) {
         $messageType = "info";
         $message = this.wrapMessageWithType($messageType, $message);
 
@@ -209,8 +204,7 @@ class ConsoleIo
      *   or null if provided $level is greater than current level.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int comment($message, int $newlines = 1, int $level = self::NORMAL)
-    {
+    Nullable!int comment($message, int $newlines = 1, int $level = self::NORMAL) {
         $messageType = "comment";
         $message = this.wrapMessageWithType($messageType, $message);
 
@@ -225,8 +219,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    int warning($message, int $newlines = 1)
-    {
+    int warning($message, int $newlines = 1) {
         $messageType = "warning";
         $message = this.wrapMessageWithType($messageType, $message);
 
@@ -241,8 +234,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    int error($message, int $newlines = 1)
-    {
+    int error($message, int $newlines = 1) {
         $messageType = "error";
         $message = this.wrapMessageWithType($messageType, $message);
 
@@ -259,8 +251,7 @@ class ConsoleIo
      *   or null if provided $level is greater than current level.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
-    Nullable!int success($message, int $newlines = 1, int $level = self::NORMAL)
-    {
+    Nullable!int success($message, int $newlines = 1, int $level = self::NORMAL) {
         $messageType = "success";
         $message = this.wrapMessageWithType($messageType, $message);
 
@@ -347,8 +338,7 @@ class ConsoleIo
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    int err($message = "", int $newlines = 1)
-    {
+    int err($message = "", int $newlines = 1) {
         return _err.write($message, $newlines);
     }
 

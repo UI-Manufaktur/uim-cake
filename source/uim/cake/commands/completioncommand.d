@@ -75,8 +75,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $mode = $args.getArgument("mode");
         switch ($mode) {
             case "commands":
@@ -100,8 +99,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    protected int getCommands(Arguments $args, ConsoleIo $io)
-    {
+    protected int getCommands(Arguments $args, ConsoleIo $io) {
         $options = [];
         foreach (this.commands as $key: $value) {
             $parts = explode(" ", $key);
@@ -119,8 +117,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    protected int getSubcommands(Arguments $args, ConsoleIo $io)
-    {
+    protected int getSubcommands(Arguments $args, ConsoleIo $io) {
         $name = $args.getArgument("command");
         if ($name == null || $name == "") {
             return static::CODE_SUCCESS;
@@ -198,8 +195,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    protected Nullable!int getOptions(Arguments $args, ConsoleIo $io)
-    {
+    protected Nullable!int getOptions(Arguments $args, ConsoleIo $io) {
         $name = $args.getArgument("command");
         $subcommand = $args.getArgument("subcommand");
 

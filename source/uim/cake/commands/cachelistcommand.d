@@ -8,8 +8,7 @@ import uim.cake;
  */
 class CacheListCommand : Command {
 
-    static string defaultName()
-    {
+    static string defaultName() {
         return "cache list";
     }
 
@@ -35,8 +34,7 @@ class CacheListCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $engines = Cache::configured();
         foreach ($engines as $engine) {
             $io.out("- $engine");

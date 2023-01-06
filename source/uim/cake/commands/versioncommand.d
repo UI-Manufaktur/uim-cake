@@ -13,8 +13,7 @@ class VersionCommand : Command {
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $io.out(Configure::version());
 
         return static::CODE_SUCCESS;

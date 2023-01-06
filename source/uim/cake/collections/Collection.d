@@ -63,8 +63,7 @@ class Collection : IteratorIterator : ICollection, Serializable
     /**
      * {@inheritDoc}
      */
-    size_t count()
-    {
+    size_t count() {
         $traversable = this.optimizeUnwrap();
 
         if (is_array($traversable)) {
@@ -77,8 +76,7 @@ class Collection : IteratorIterator : ICollection, Serializable
     /**
      * {@inheritDoc}
      */
-    int countKeys()
-    {
+    int countKeys() {
         return count(this.toArray());
     }
 

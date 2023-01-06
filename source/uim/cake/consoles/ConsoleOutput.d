@@ -174,8 +174,7 @@ class ConsoleOutput
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to output.
      */
-    function write($message, int $newlines = 1)
-    {
+    function write($message, int $newlines = 1) {
         if (is_array($message)) {
             $message = implode(static::LF, $message);
         }
@@ -241,8 +240,7 @@ class ConsoleOutput
      * @param string $message Message to write.
      * @return int The number of bytes returned from writing to output.
      */
-    protected int _write(string $message)
-    {
+    protected int _write(string $message) {
         return (int)fwrite(_output, $message);
     }
 
@@ -296,8 +294,7 @@ class ConsoleOutput
     /**
      * Get the output type on how formatting tags are treated.
      */
-    int getOutputAs()
-    {
+    int getOutputAs() {
         return _outputAs;
     }
 

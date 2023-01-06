@@ -79,8 +79,7 @@ class ShellDispatcher
      * @param string|null $original The original full name for the shell.
      * @return string|null The aliased class name, or null if the alias does not exist
      */
-    static Nullable!string alias(string $short, ?string $original = null)
-    {
+    static Nullable!string alias(string $short, ?string $original = null) {
         $short = Inflector::camelize($short);
         if ($original) {
             static::_aliases[$short] = $original;
@@ -103,8 +102,7 @@ class ShellDispatcher
      * @param array $extra Extra parameters
      * @return int The exit code of the shell process.
      */
-    static int run(array $argv, array $extra = [])
-    {
+    static int run(array $argv, array $extra = []) {
         $dispatcher = new ShellDispatcher($argv);
 
         return $dispatcher.dispatch($extra);
@@ -150,8 +148,7 @@ class ShellDispatcher
      * - `requested` : if used, will prevent the Shell welcome message to be displayed
      * @return int The CLI command exit code. 0 is success.
      */
-    int dispatch(array $extra = [])
-    {
+    int dispatch(array $extra = []) {
         try {
             $result = _dispatch($extra);
         } catch (StopException $e) {
@@ -329,8 +326,7 @@ class ShellDispatcher
      * @param string $shell The shell name to look for.
      * @return string|null Either the classname or null.
      */
-    protected Nullable!string _shellExists(string $shell)
-    {
+    protected Nullable!string _shellExists(string $shell) {
         $class = App::className($shell, "Shell", "Shell");
         if ($class) {
             return $class;

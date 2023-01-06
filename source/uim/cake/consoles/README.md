@@ -99,8 +99,7 @@ class HelloCommand : BaseCommand {
         return $parser;
     }
 
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $color = $args.getOption("color");
         if ($color == "none") {
             $io.out("Hello {$args.getArgument("name")}");

@@ -350,8 +350,7 @@ class Shell
      * @return int The CLI command exit code. 0 is success.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#invoking-other-shells-from-your-shell
      */
-    int dispatchShell()
-    {
+    int dispatchShell() {
         [$args, $extra] = this.parseDispatchArguments(func_get_args());
 
         $extra["requested"] = $extra["requested"] ?? true;
@@ -577,8 +576,7 @@ class Shell
      * @return string|null Either the default value, or the user-provided input.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::in
      */
-    Nullable!string in(string $prompt, $options = null, ?string $default = null)
-    {
+    Nullable!string in(string $prompt, $options = null, ?string $default = null) {
         if (!this.interactive) {
             return $default;
         }
@@ -616,8 +614,7 @@ class Shell
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    Nullable!int verbose($message, int $newlines = 1)
-    {
+    Nullable!int verbose($message, int $newlines = 1) {
         return _io.verbose($message, $newlines);
     }
 
@@ -628,8 +625,7 @@ class Shell
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    Nullable!int quiet($message, int $newlines = 1)
-    {
+    Nullable!int quiet($message, int $newlines = 1) {
         return _io.quiet($message, $newlines);
     }
 
@@ -650,8 +646,7 @@ class Shell
      * @return int|null The number of bytes returned from writing to stdout.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int out($message, int $newlines = 1, int $level = Shell::NORMAL)
-    {
+    Nullable!int out($message, int $newlines = 1, int $level = Shell::NORMAL) {
         return _io.out($message, $newlines, $level);
     }
 
@@ -663,8 +658,7 @@ class Shell
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    int err($message, int $newlines = 1)
-    {
+    int err($message, int $newlines = 1) {
         return _io.error($message, $newlines);
     }
 
@@ -677,8 +671,7 @@ class Shell
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int info($message, int $newlines = 1, int $level = Shell::NORMAL)
-    {
+    Nullable!int info($message, int $newlines = 1, int $level = Shell::NORMAL) {
         return _io.info($message, $newlines, $level);
     }
 
@@ -690,8 +683,7 @@ class Shell
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::err
      */
-    function warn($message, int $newlines = 1)
-    {
+    function warn($message, int $newlines = 1) {
         return _io.warning($message, $newlines);
     }
 
@@ -704,8 +696,7 @@ class Shell
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    Nullable!int success($message, int $newlines = 1, int $level = Shell::NORMAL)
-    {
+    Nullable!int success($message, int $newlines = 1, int $level = Shell::NORMAL) {
         return _io.success($message, $newlines, $level);
     }
 

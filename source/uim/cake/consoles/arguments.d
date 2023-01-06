@@ -59,8 +59,7 @@ class Arguments
      * @param int $index The argument index to access.
      * @return string|null The argument value or null
      */
-    Nullable!string getArgumentAt(int $index)
-    {
+    Nullable!string getArgumentAt(int $index) {
         if (this.hasArgumentAt($index)) {
             return this.args[$index];
         }
@@ -99,8 +98,7 @@ class Arguments
      * @param string aName The argument name to check.
      * @return string|null
      */
-    Nullable!string getArgument(string aName)
-    {
+    Nullable!string getArgument(string aName) {
         $offset = array_search($name, this.argNames, true);
         if ($offset == false || !isset(this.args[$offset])) {
             return null;

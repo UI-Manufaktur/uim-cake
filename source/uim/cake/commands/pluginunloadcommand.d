@@ -19,8 +19,7 @@ class PluginUnloadCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $plugin = $args.getArgument("plugin");
         if (!$plugin) {
             $io.err("You must provide a plugin name in CamelCase format.");

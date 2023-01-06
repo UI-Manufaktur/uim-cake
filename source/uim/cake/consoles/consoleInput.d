@@ -39,8 +39,7 @@ class ConsoleInput
      *
      * @return string|null The value of the stream. Null on EOF.
      */
-    Nullable!string read()
-    {
+    Nullable!string read() {
         if (_canReadline) {
             $line = readline("");
 

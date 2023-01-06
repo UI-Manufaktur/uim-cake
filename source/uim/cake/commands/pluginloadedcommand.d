@@ -6,8 +6,7 @@ import uim.cake;
 // Displays all currently loaded plugins.
 class PluginLoadedCommand : Command {
 
-    static string defaultName()
-    {
+    static string defaultName() {
         return "plugin loaded";
     }
 
@@ -18,8 +17,7 @@ class PluginLoadedCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $loaded = Plugin::loaded();
         $io.out($loaded);
 

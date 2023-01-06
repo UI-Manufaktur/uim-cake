@@ -164,8 +164,7 @@ class HelpFormatter
      *
      * @param array<uim.cake.consoles.ConsoleInputOption|uim.cake.consoles.ConsoleInputArgument|uim.cake.consoles.ConsoleInputSubcommand> $collection The collection to find a max length of.
      */
-    protected int _getMaxLength(array $collection)
-    {
+    protected int _getMaxLength(array $collection) {
         $max = 0;
         foreach ($collection as $item) {
             $max = strlen($item.name()) > $max ? strlen($item.name()) : $max;

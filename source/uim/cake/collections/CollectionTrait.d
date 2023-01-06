@@ -858,8 +858,7 @@ trait CollectionTrait
     }
 
 
-    size_t count()
-    {
+    size_t count() {
         $traversable = this.optimizeUnwrap();
 
         if (is_array($traversable)) {
@@ -870,8 +869,7 @@ trait CollectionTrait
     }
 
 
-    int countKeys()
-    {
+    int countKeys() {
         return count(this.toArray());
     }
 
