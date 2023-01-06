@@ -23,7 +23,7 @@ class LegacySyslogFormatter : AbstractFormatter
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "format": "%s: %s",
     ];
 

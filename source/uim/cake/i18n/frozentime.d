@@ -30,7 +30,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\FrozenTime::i18nFormat()
      */
-    protected static $_toStringFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::SHORT];
+    protected static _toStringFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::SHORT];
 
     /**
      * The format to use when converting this object to JSON.
@@ -46,7 +46,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var \Closure|array<int>|string|int
      * @see uim.cake.I18n\Time::i18nFormat()
      */
-    protected static $_jsonEncodeFormat = "yyyy-MM-dd"T"HH":"mm":"ssxxx";
+    protected static _jsonEncodeFormat = "yyyy-MM-dd"T"HH":"mm":"ssxxx";
 
     /**
      * The format to use when formatting a time using `Cake\I18n\FrozenTime::nice()`

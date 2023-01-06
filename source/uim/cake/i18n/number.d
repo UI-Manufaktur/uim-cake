@@ -47,21 +47,21 @@ class Number
      *
      * @var array<string, array<int, mixed>>
      */
-    protected static $_formatters = [];
+    protected static _formatters = [];
 
     /**
      * Default currency used by Number::currency()
      *
      * @var string|null
      */
-    protected static $_defaultCurrency;
+    protected static _defaultCurrency;
 
     /**
      * Default currency format used by Number::currency()
      *
      * @var string|null
      */
-    protected static $_defaultCurrencyFormat;
+    protected static _defaultCurrencyFormat;
 
     /**
      * Formats a number with a level of precision.
@@ -280,13 +280,13 @@ class Number
      * @return string Currency
      */
     static string getDefaultCurrency() {
-        if (static::$_defaultCurrency == null) {
+        if (static::_defaultCurrency == null) {
             $locale = ini_get("intl.default_locale") ?: static::DEFAULT_LOCALE;
             $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-            static::$_defaultCurrency = $formatter.getTextAttribute(NumberFormatter::CURRENCY_CODE);
+            static::_defaultCurrency = $formatter.getTextAttribute(NumberFormatter::CURRENCY_CODE);
         }
 
-        return static::$_defaultCurrency;
+        return static::_defaultCurrency;
     }
 
     /**
@@ -297,7 +297,7 @@ class Number
      * currently stored value
      */
     static void setDefaultCurrency(?string $currency = null) {
-        static::$_defaultCurrency = $currency;
+        static::_defaultCurrency = $currency;
     }
 
     /**
@@ -306,11 +306,11 @@ class Number
      * @return string Currency Format
      */
     static string getDefaultCurrencyFormat() {
-        if (static::$_defaultCurrencyFormat == null) {
-            static::$_defaultCurrencyFormat = static::FORMAT_CURRENCY;
+        if (static::_defaultCurrencyFormat == null) {
+            static::_defaultCurrencyFormat = static::FORMAT_CURRENCY;
         }
 
-        return static::$_defaultCurrencyFormat;
+        return static::_defaultCurrencyFormat;
     }
 
     /**
@@ -321,7 +321,7 @@ class Number
      * currently stored value
      */
     static void setDefaultCurrencyFormat($currencyFormat = null) {
-        static::$_defaultCurrencyFormat = $currencyFormat;
+        static::_defaultCurrencyFormat = $currencyFormat;
     }
 
     /**
@@ -366,12 +366,12 @@ class Number
             }
         }
 
-        if (!isset(static::$_formatters[$locale][$type])) {
-            static::$_formatters[$locale][$type] = new NumberFormatter($locale, $type);
+        if (!isset(static::_formatters[$locale][$type])) {
+            static::_formatters[$locale][$type] = new NumberFormatter($locale, $type);
         }
 
         /** @var \NumberFormatter $formatter */
-        $formatter = static::$_formatters[$locale][$type];
+        $formatter = static::_formatters[$locale][$type];
 
         // PHP 8.0.0 - 8.0.6 throws an exception when cloning NumberFormatter after a failed parse
         if (version_compare(PHP_VERSION, "8.0.6", ">") || version_compare(PHP_VERSION, "8.0.0", "<")) {
@@ -399,7 +399,7 @@ class Number
      * @param array<string, mixed> $options See Number::formatter() for possible options.
      */
     static void config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []) {
-        static::$_formatters[$locale][$type] = static::_setAttributes(
+        static::_formatters[$locale][$type] = static::_setAttributes(
             new NumberFormatter($locale, $type),
             $options
         );

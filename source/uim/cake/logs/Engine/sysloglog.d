@@ -48,7 +48,7 @@ class SyslogLog : BaseLog
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "levels": [],
         "scopes": [],
         "flag": LOG_ODELAY,
@@ -65,7 +65,7 @@ class SyslogLog : BaseLog
      *
      * @var array<int>
      */
-    protected $_levelMap = [
+    protected _levelMap = [
         "emergency": LOG_EMERG,
         "alert": LOG_ALERT,
         "critical": LOG_CRIT,
@@ -79,7 +79,7 @@ class SyslogLog : BaseLog
     /**
      * Whether the logger connection is open or not
      */
-    protected bool $_open = false;
+    protected bool _open = false;
 
 
     this(Json aConfig = []) {
@@ -108,7 +108,7 @@ class SyslogLog : BaseLog
      * @param string $message The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void
-     * @see uim.cake.logs.Log::$_levels
+     * @see uim.cake.logs.Log::_levels
      */
     void log($level, $message, array $context = []) {
         if (!_open) {

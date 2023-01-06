@@ -21,14 +21,14 @@ class I18n
      *
      * @var uim.cake.I18n\TranslatorRegistry|null
      */
-    protected static $_collection;
+    protected static _collection;
 
     /**
      * The environment default locale
      *
      * @var string|null
      */
-    protected static $_defaultLocale;
+    protected static _defaultLocale;
 
     /**
      * Returns the translators collection instance. It can be used
@@ -39,11 +39,11 @@ class I18n
      */
     static function translators(): TranslatorRegistry
     {
-        if (static::$_collection != null) {
-            return static::$_collection;
+        if (static::_collection != null) {
+            return static::_collection;
         }
 
-        static::$_collection = new TranslatorRegistry(
+        static::_collection = new TranslatorRegistry(
             new PackageLocator(),
             new FormatterLocator([
                 "default": IcuFormatter::class,
@@ -53,10 +53,10 @@ class I18n
         );
 
         if (class_exists(Cache::class)) {
-            static::$_collection.setCacher(Cache::pool("_cake_core_"));
+            static::_collection.setCacher(Cache::pool("_cake_core_"));
         }
 
-        return static::$_collection;
+        return static::_collection;
     }
 
     /**
@@ -195,7 +195,7 @@ class I18n
     static void setLocale(string $locale) {
         static::getDefaultLocale();
         Locale::setDefault($locale);
-        if (isset(static::$_collection)) {
+        if (isset(static::_collection)) {
             static::translators().setLocale($locale);
         }
     }
@@ -226,11 +226,11 @@ class I18n
      *
      */
     static string getDefaultLocale() {
-        if (static::$_defaultLocale == null) {
-            static::$_defaultLocale = Locale::getDefault() ?: static::DEFAULT_LOCALE;
+        if (static::_defaultLocale == null) {
+            static::_defaultLocale = Locale::getDefault() ?: static::DEFAULT_LOCALE;
         }
 
-        return static::$_defaultLocale;
+        return static::_defaultLocale;
     }
 
     /**
@@ -267,6 +267,6 @@ class I18n
      * collection.
      */
     static void clear() {
-        static::$_collection = null;
+        static::_collection = null;
     }
 }

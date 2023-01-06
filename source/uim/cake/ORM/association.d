@@ -64,26 +64,26 @@ abstract class Association
      * Name given to the association, it usually represents the alias
      * assigned to the target associated table
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * The class name of the target table object
      */
-    protected string $_className;
+    protected string _className;
 
     /**
      * The field name in the owning side table that is used to match with the foreignKey
      *
      * @var array<string>|string|null
      */
-    protected $_bindingKey;
+    protected _bindingKey;
 
     /**
      * The name of the field representing the foreign key to the table to load
      *
      * @var array<string>|string
      */
-    protected $_foreignKey;
+    protected _foreignKey;
 
     /**
      * A list of conditions to be always included when fetching records from
@@ -91,50 +91,50 @@ abstract class Association
      *
      * @var \Closure|array
      */
-    protected $_conditions = [];
+    protected _conditions = [];
 
     /**
      * Whether the records on the target table are dependent on the source table,
      * often used to indicate that records should be removed if the owning record in
      * the source table is deleted.
      */
-    protected bool $_dependent = false;
+    protected bool _dependent = false;
 
     /**
      * Whether cascaded deletes should also fire callbacks.
      */
-    protected bool $_cascadeCallbacks = false;
+    protected bool _cascadeCallbacks = false;
 
     /**
      * Source table instance
      *
      * @var uim.cake.orm.Table
      */
-    protected $_sourceTable;
+    protected _sourceTable;
 
     /**
      * Target table instance
      *
      * @var uim.cake.orm.Table
      */
-    protected $_targetTable;
+    protected _targetTable;
 
     /**
      * The type of join to be used when adding the association to a query
      */
-    protected string $_joinType = Query::JOIN_TYPE_LEFT;
+    protected string _joinType = Query::JOIN_TYPE_LEFT;
 
     /**
      * The property name that should be filled with data from the target table
      * in the source table record.
      */
-    protected string $_propertyName;
+    protected string _propertyName;
 
     /**
      * The strategy name to be used to fetch associated records. Some association
      * types might not implement but one strategy to fetch records.
      */
-    protected string $_strategy = self::STRATEGY_JOIN;
+    protected string _strategy = self::STRATEGY_JOIN;
 
     /**
      * The default finder name to use for fetching rows from the target table
@@ -142,14 +142,14 @@ abstract class Association
      *
      * @var array|string
      */
-    protected $_finder = "all";
+    protected _finder = "all";
 
     /**
      * Valid strategies for this association. Subclasses can narrow this down.
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected _validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
         self::STRATEGY_SUBQUERY,

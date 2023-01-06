@@ -42,7 +42,7 @@ class FileLog : BaseLog
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "path": null,
         "file": null,
         "types": null,
@@ -59,7 +59,7 @@ class FileLog : BaseLog
     /**
      * Path to save log files on.
      */
-    protected string $_path;
+    protected string _path;
 
     /**
      * The name of the file to save logs into.
@@ -72,7 +72,7 @@ class FileLog : BaseLog
      *
      * @var int|null
      */
-    protected $_size;
+    protected _size;
 
     /**
      * Sets protected properties based on config provided
@@ -115,7 +115,7 @@ class FileLog : BaseLog
      * @param string $message The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void
-     * @see uim.cake.logs.Log::$_levels
+     * @see uim.cake.logs.Log::_levels
      */
     void log($level, $message, array $context = []) {
         $message = _format($message, $context);

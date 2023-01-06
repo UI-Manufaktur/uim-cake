@@ -22,7 +22,7 @@ class Socket
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "persistent": false,
         "host": "localhost",
         "protocol": "tcp",
@@ -59,7 +59,7 @@ class Socket
      *
      * @var array<string, int>
      */
-    protected $_encryptMethods = [
+    protected _encryptMethods = [
         "sslv23_client": STREAM_CRYPTO_METHOD_SSLv23_CLIENT,
         "tls_client": STREAM_CRYPTO_METHOD_TLS_CLIENT,
         "tlsv10_client": STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT,
@@ -78,13 +78,13 @@ class Socket
      *
      * @var array<string>
      */
-    protected $_connectionErrors = [];
+    protected _connectionErrors = [];
 
     /**
      * Constructor.
      *
      * @param array<string, mixed> aConfig Socket configuration, which will be merged with the base configuration
-     * @see uim.cake.Network\Socket::$_defaultConfig
+     * @see uim.cake.Network\Socket::_defaultConfig
      */
     this(Json aConfig = []) {
         this.setConfig(aConfig);

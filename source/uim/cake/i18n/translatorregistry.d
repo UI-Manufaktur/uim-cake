@@ -45,18 +45,18 @@ class TranslatorRegistry
      *
      * @var array<callable>
      */
-    protected $_loaders = [];
+    protected _loaders = [];
 
     /**
      * The name of the default formatter to use for newly created
      * translators from the fallback loader
      */
-    protected string $_defaultFormatter = "default";
+    protected string _defaultFormatter = "default";
 
     /**
      * Use fallback-domain for translation loaders.
      */
-    protected bool $_useFallback = true;
+    protected bool _useFallback = true;
 
     /**
      * A CacheEngine object that is used to remember translator across
@@ -64,7 +64,7 @@ class TranslatorRegistry
      *
      * @var (\Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine)|null
      */
-    protected $_cacher;
+    protected _cacher;
 
     /**
      * Constructor.

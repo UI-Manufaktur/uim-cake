@@ -34,7 +34,7 @@ abstract class BaseLog : AbstractLogger
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "levels": [],
         "scopes": [],
         "formatter": DefaultFormatter::class,

@@ -107,7 +107,7 @@ class Log
      * @var array<string, string>
      * @psalm-var array<string, class-string>
      */
-    protected static $_dsnClassMap = [
+    protected static _dsnClassMap = [
         "console": Engine\ConsoleLog::class,
         "file": Engine\FileLog::class,
         "syslog": Engine\SyslogLog::class,
@@ -116,21 +116,21 @@ class Log
     /**
      * Internal flag for tracking whether configuration has been changed.
      */
-    protected static bool $_dirtyConfig = false;
+    protected static bool _dirtyConfig = false;
 
     /**
      * LogEngineRegistry class
      *
      * @var uim.cake.logs.LogEngineRegistry
      */
-    protected static $_registry;
+    protected static _registry;
 
     /**
      * Handled log levels
      *
      * @var array<string>
      */
-    protected static $_levels = [
+    protected static _levels = [
         "emergency",
         "alert",
         "critical",
@@ -147,7 +147,7 @@ class Log
      *
      * @var array<string, int>
      */
-    protected static $_levelMap = [
+    protected static _levelMap = [
         "emergency": LOG_EMERG,
         "alert": LOG_ALERT,
         "critical": LOG_CRIT,
@@ -165,13 +165,13 @@ class Log
      */
     protected static void _init() {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
-        if (!isset(static::$_registry)) {
-            static::$_registry = new LogEngineRegistry();
+        if (!isset(static::_registry)) {
+            static::_registry = new LogEngineRegistry();
         }
-        if (static::$_dirtyConfig) {
+        if (static::_dirtyConfig) {
             static::_loadConfig();
         }
-        static::$_dirtyConfig = false;
+        static::_dirtyConfig = false;
     }
 
     /**
@@ -181,12 +181,12 @@ class Log
      * @return void
      */
     protected static void _loadConfig() {
-        foreach (static::$_config as $name: $properties) {
+        foreach (static::_config as $name: $properties) {
             if (isset($properties["engine"])) {
                 $properties["className"] = $properties["engine"];
             }
-            if (!static::$_registry.has((string)$name)) {
-                static::$_registry.load((string)$name, $properties);
+            if (!static::_registry.has((string)$name)) {
+                static::_registry.load((string)$name, $properties);
             }
         }
     }
@@ -201,11 +201,11 @@ class Log
      */
     static void reset() {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
-        if (isset(static::$_registry)) {
-            static::$_registry.reset();
+        if (isset(static::_registry)) {
+            static::_registry.reset();
         }
-        static::$_config = [];
-        static::$_dirtyConfig = true;
+        static::_config = [];
+        static::_dirtyConfig = true;
     }
 
     /**
@@ -217,7 +217,7 @@ class Log
      * @return array<string> Active log levels
      */
     static array levels() {
-        return static::$_levels;
+        return static::_levels;
     }
 
     /**
@@ -262,7 +262,7 @@ class Log
      */
     static void setConfig($key, aConfig = null) {
         static::_setConfig($key, aConfig);
-        static::$_dirtyConfig = true;
+        static::_dirtyConfig = true;
     }
 
     /**
@@ -274,8 +274,8 @@ class Log
     static function engine(string aName): ?LoggerInterface
     {
         static::_init();
-        if (static::$_registry.{$name}) {
-            return static::$_registry.{$name};
+        if (static::_registry.{$name}) {
+            return static::_registry.{$name};
         }
 
         return null;
@@ -337,11 +337,11 @@ class Log
      */
     static bool write($level, string $message, $context = []) {
         static::_init();
-        if (is_int($level) && in_array($level, static::$_levelMap, true)) {
-            $level = array_search($level, static::$_levelMap, true);
+        if (is_int($level) && in_array($level, static::_levelMap, true)) {
+            $level = array_search($level, static::_levelMap, true);
         }
 
-        if (!in_array($level, static::$_levels, true)) {
+        if (!in_array($level, static::_levels, true)) {
             /** @psalm-suppress PossiblyFalseArgument */
             throw new InvalidArgumentException(sprintf("Invalid log level `%s`", $level));
         }
@@ -353,8 +353,8 @@ class Log
         }
         $context += ["scope": []];
 
-        foreach (static::$_registry.loaded() as $streamName) {
-            $logger = static::$_registry.{$streamName};
+        foreach (static::_registry.loaded() as $streamName) {
+            $logger = static::_registry.{$streamName};
             $levels = $scopes = null;
 
             if ($logger instanceof BaseLog) {

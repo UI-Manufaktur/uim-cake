@@ -12,7 +12,7 @@ use RuntimeException;
 /**
  * Trait for date formatting methods shared by both Time & Date.
  *
- * This trait expects that the implementing class define static::$_toStringFormat.
+ * This trait expects that the implementing class define static::_toStringFormat.
  */
 trait DateFormatTrait
 {
@@ -37,7 +37,7 @@ trait DateFormatTrait
      *
      * @var array<\IntlDateFormatter>
      */
-    protected static $_formatters = [];
+    protected static _formatters = [];
 
     /**
      * Gets the default locale.
@@ -162,7 +162,7 @@ trait DateFormatTrait
             $time = $time.timezone($timezone);
         }
 
-        $format = $format ?? static::$_toStringFormat;
+        $format = $format ?? static::_toStringFormat;
         $locale = $locale ?: static::$defaultLocale;
 
         return _formatObject($time, $format, $locale);
@@ -206,7 +206,7 @@ trait DateFormatTrait
         $timezone = $date.getTimezone().getName();
         $key = "{$locale}.{$dateFormat}.{$timeFormat}.{$timezone}.{$calendar}.{$pattern}";
 
-        if (!isset(static::$_formatters[$key])) {
+        if (!isset(static::_formatters[$key])) {
             if ($timezone == "+00:00" || $timezone == "Z") {
                 $timezone = "UTC";
             } elseif ($timezone[0] == "+" || $timezone[0] == "-") {
@@ -226,10 +226,10 @@ trait DateFormatTrait
                     "`$key`. You should try to upgrade libicu and the intl extension."
                 );
             }
-            static::$_formatters[$key] = $formatter;
+            static::_formatters[$key] = $formatter;
         }
 
-        return static::$_formatters[$key].format($date.format("U"));
+        return static::_formatters[$key].format($date.format("U"));
     }
 
 
@@ -259,12 +259,12 @@ trait DateFormatTrait
      * @param array<int>|string|int $format Format.
      */
     static void setToStringFormat($format) {
-        static::$_toStringFormat = $format;
+        static::_toStringFormat = $format;
     }
 
 
     static void setJsonEncodeFormat($format) {
-        static::$_jsonEncodeFormat = $format;
+        static::_jsonEncodeFormat = $format;
     }
 
     /**
@@ -295,7 +295,7 @@ trait DateFormatTrait
      * @return static|null
      */
     static function parseDateTime(string $time, $format = null, $tz = null) {
-        $format = $format ?? static::$_toStringFormat;
+        $format = $format ?? static::_toStringFormat;
         $pattern = "";
 
         if (is_array($format)) {
@@ -403,11 +403,11 @@ trait DateFormatTrait
      */
     #[\ReturnTypeWillChange]
     function jsonSerialize() {
-        if (static::$_jsonEncodeFormat instanceof Closure) {
-            return call_user_func(static::$_jsonEncodeFormat, this);
+        if (static::_jsonEncodeFormat instanceof Closure) {
+            return call_user_func(static::_jsonEncodeFormat, this);
         }
 
-        return this.i18nFormat(static::$_jsonEncodeFormat);
+        return this.i18nFormat(static::_jsonEncodeFormat);
     }
 
     /**

@@ -20,7 +20,7 @@ class SmtpTransport : AbstractTransport
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "host": "localhost",
         "port": 25,
         "timeout": 30,
@@ -36,21 +36,21 @@ class SmtpTransport : AbstractTransport
      *
      * @var uim.cake.Network\Socket|null
      */
-    protected $_socket;
+    protected _socket;
 
     /**
      * Content of email to return
      *
      * @var array<string, string>
      */
-    protected $_content = [];
+    protected _content = [];
 
     /**
      * The response of the last sent SMTP command.
      *
      * @var array
      */
-    protected $_lastResponse = [];
+    protected _lastResponse = [];
 
     /**
      * Detected authentication type.

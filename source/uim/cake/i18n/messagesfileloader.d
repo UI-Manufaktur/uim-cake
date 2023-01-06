@@ -17,17 +17,17 @@ class MessagesFileLoader
     /**
      * The package (domain) name.
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * The locale to load for the given package.
      */
-    protected string $_locale;
+    protected string _locale;
 
     /**
      * The extension name.
      */
-    protected string $_extension;
+    protected string _extension;
 
     /**
      * Creates a translation file loader. The file to be loaded corresponds to

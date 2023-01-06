@@ -27,7 +27,7 @@ class ConsoleLog : BaseLog
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "stream": "php://stderr",
         "levels": null,
         "scopes": [],
@@ -43,7 +43,7 @@ class ConsoleLog : BaseLog
      *
      * @var uim.cake.consoles.ConsoleOutput
      */
-    protected $_output;
+    protected _output;
 
     /**
      * Constructs a new Console Logger.
@@ -88,7 +88,7 @@ class ConsoleLog : BaseLog
      * @param string $message The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void success of write.
-     * @see uim.cake.logs.Log::$_levels
+     * @see uim.cake.logs.Log::_levels
      */
     function log($level, $message, array $context = []) {
         $message = _format($message, $context);

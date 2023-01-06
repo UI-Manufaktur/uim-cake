@@ -105,7 +105,7 @@ class Behavior : IEventListener
      *
      * @var uim.cake.orm.Table
      */
-    protected $_table;
+    protected _table;
 
     /**
      * Reflection method cache for behaviors.
@@ -115,7 +115,7 @@ class Behavior : IEventListener
      *
      * @var array<string, array>
      */
-    protected static $_reflectionCache = [];
+    protected static _reflectionCache = [];
 
     /**
      * Default configuration
@@ -124,7 +124,7 @@ class Behavior : IEventListener
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * Constructor
@@ -365,8 +365,8 @@ class Behavior : IEventListener
      */
     protected array _reflectionCache() {
         $class = static::class;
-        if (isset(self::$_reflectionCache[$class])) {
-            return self::$_reflectionCache[$class];
+        if (isset(self::_reflectionCache[$class])) {
+            return self::_reflectionCache[$class];
         }
 
         $events = this.implementedEvents();
@@ -381,11 +381,11 @@ class Behavior : IEventListener
         }
 
         $baseClass = self::class;
-        if (isset(self::$_reflectionCache[$baseClass])) {
-            $baseMethods = self::$_reflectionCache[$baseClass];
+        if (isset(self::_reflectionCache[$baseClass])) {
+            $baseMethods = self::_reflectionCache[$baseClass];
         } else {
             $baseMethods = get_class_methods($baseClass);
-            self::$_reflectionCache[$baseClass] = $baseMethods;
+            self::_reflectionCache[$baseClass] = $baseMethods;
         }
 
         $return = [
@@ -411,6 +411,6 @@ class Behavior : IEventListener
             }
         }
 
-        return self::$_reflectionCache[$class] = $return;
+        return self::_reflectionCache[$class] = $return;
     }
 }

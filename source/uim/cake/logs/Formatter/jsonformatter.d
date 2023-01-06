@@ -20,7 +20,7 @@ class JsonFormatter : AbstractFormatter
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "dateFormat": DATE_ATOM,
         "flags": JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
         "appendNewline": true,

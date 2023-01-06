@@ -112,7 +112,7 @@ class Behavior : IEventListener
      *
      * @var array<string, array>
      */
-    protected static $_reflectionCache = [];
+    protected static _reflectionCache = [];
 
     /**
      * Default configuration
@@ -362,8 +362,8 @@ class Behavior : IEventListener
      */
     protected array _reflectionCache() {
       myClass = static::class;
-      if (isset(self::$_reflectionCache[myClass])) {
-          return self::$_reflectionCache[myClass];
+      if (isset(self::_reflectionCache[myClass])) {
+          return self::_reflectionCache[myClass];
       }
 
       myEvents = this.implementedEvents();
@@ -378,11 +378,11 @@ class Behavior : IEventListener
       }
 
       $baseClass = self::class;
-      if (isset(self::$_reflectionCache[$baseClass])) {
-          $baseMethods = self::$_reflectionCache[$baseClass];
+      if (isset(self::_reflectionCache[$baseClass])) {
+          $baseMethods = self::_reflectionCache[$baseClass];
       } else {
           $baseMethods = get_class_methods($baseClass);
-          self::$_reflectionCache[$baseClass] = $baseMethods;
+          self::_reflectionCache[$baseClass] = $baseMethods;
       }
 
       $return = [
@@ -408,6 +408,6 @@ class Behavior : IEventListener
           }
       }
 
-      return self::$_reflectionCache[myClass] = $return;
+      return self::_reflectionCache[myClass] = $return;
     }
 }

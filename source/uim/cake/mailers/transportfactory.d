@@ -15,7 +15,7 @@ class TransportFactory
      *
      * @var uim.cake.mailers.TransportRegistry|null
      */
-    protected static $_registry;
+    protected static _registry;
 
     /**
      * An array mapping url schemes to fully qualified Transport class names
@@ -23,7 +23,7 @@ class TransportFactory
      * @var array<string, string>
      * @psalm-var array<string, class-string>
      */
-    protected static $_dsnClassMap = [
+    protected static _dsnClassMap = [
         "debug": Transport\DebugTransport::class,
         "mail": Transport\MailTransport::class,
         "smtp": Transport\SmtpTransport::class,
@@ -36,11 +36,11 @@ class TransportFactory
      */
     static function getRegistry(): TransportRegistry
     {
-        if (static::$_registry == null) {
-            static::$_registry = new TransportRegistry();
+        if (static::_registry == null) {
+            static::_registry = new TransportRegistry();
         }
 
-        return static::$_registry;
+        return static::_registry;
     }
 
     /**
@@ -51,7 +51,7 @@ class TransportFactory
      * @param uim.cake.mailers.TransportRegistry $registry Injectable registry object.
      */
     static void setRegistry(TransportRegistry $registry) {
-        static::$_registry = $registry;
+        static::_registry = $registry;
     }
 
     /**
@@ -62,20 +62,20 @@ class TransportFactory
      * @throws \InvalidArgumentException When a tranport cannot be created.
      */
     protected static void _buildTransport(string aName) {
-        if (!isset(static::$_config[$name])) {
+        if (!isset(static::_config[$name])) {
             throw new InvalidArgumentException(
                 sprintf("The "%s" transport configuration does not exist", $name)
             );
         }
 
-        if (is_array(static::$_config[$name]) && empty(static::$_config[$name]["className"])) {
+        if (is_array(static::_config[$name]) && empty(static::_config[$name]["className"])) {
             throw new InvalidArgumentException(
                 sprintf("Transport config "%s" is invalid, the required `className` option is missing", $name)
             );
         }
 
         /** @phpstan-ignore-next-line */
-        static::getRegistry().load($name, static::$_config[$name]);
+        static::getRegistry().load($name, static::_config[$name]);
     }
 
     /**

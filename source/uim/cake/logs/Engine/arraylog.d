@@ -29,7 +29,7 @@ class ArrayLog : BaseLog
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "levels": [],
         "scopes": [],
         "formatter": [
@@ -52,7 +52,7 @@ class ArrayLog : BaseLog
      * @param string $message The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void success of write.
-     * @see uim.cake.logs.Log::$_levels
+     * @see uim.cake.logs.Log::_levels
      */
     function log($level, $message, array $context = []) {
         $message = _format($message, $context);

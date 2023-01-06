@@ -178,7 +178,7 @@ class Mailer : IEventListener
      * @var array<string, string>
      * @psalm-var array<string, class-string>
      */
-    protected static $_dsnClassMap = [];
+    protected static _dsnClassMap = [];
 
     /**
      * @var array|null

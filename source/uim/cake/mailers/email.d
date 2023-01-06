@@ -64,7 +64,7 @@ class Email : JsonSerializable, Serializable
      *
      * @var uim.cake.mailers.AbstractTransport|null
      */
-    protected $_transport;
+    protected _transport;
 
     /**
      * Email Renderer
@@ -79,7 +79,7 @@ class Email : JsonSerializable, Serializable
      *
      * @var array<string, mixed>
      */
-    protected $_profile = [];
+    protected _profile = [];
 
     /**
      * Message class name.

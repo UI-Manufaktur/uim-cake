@@ -17,7 +17,7 @@ class PluralRules
      *
      * @var array<string, int>
      */
-    protected static $_rulesMap = [
+    protected static _rulesMap = [
         "af": 1,
         "am": 2,
         "ar": 13,
@@ -129,15 +129,15 @@ class PluralRules
     {
         $locale = Locale::canonicalize($locale);
 
-        if (!isset(static::$_rulesMap[$locale])) {
+        if (!isset(static::_rulesMap[$locale])) {
             $locale = explode("_", $locale)[0];
         }
 
-        if (!isset(static::$_rulesMap[$locale])) {
+        if (!isset(static::_rulesMap[$locale])) {
             return 0;
         }
 
-        switch (static::$_rulesMap[$locale]) {
+        switch (static::_rulesMap[$locale]) {
             case 0:
                 return 0;
             case 1:

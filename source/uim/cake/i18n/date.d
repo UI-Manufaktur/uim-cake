@@ -29,7 +29,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\DateFormatTrait::i18nFormat()
      */
-    protected static $_toStringFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
+    protected static _toStringFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
     /**
      * The format to use when converting this object to JSON.
@@ -45,7 +45,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @var \Closure|array<int>|string|int
      * @see uim.cake.I18n\Time::i18nFormat()
      */
-    protected static $_jsonEncodeFormat = "yyyy-MM-dd";
+    protected static _jsonEncodeFormat = "yyyy-MM-dd";
 
     /**
      * The format to use when formatting a time using `Cake\I18n\Date::timeAgoInWords()`

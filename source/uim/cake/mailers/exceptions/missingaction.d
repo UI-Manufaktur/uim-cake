@@ -8,5 +8,5 @@ import uim.cake.core.exceptions.CakeException;
 class MissingActionException : CakeException
 {
 
-    protected $_messageTemplate = "Mail %s::%s() could not be found, or is not accessible.";
+    protected _messageTemplate = "Mail %s::%s() could not be found, or is not accessible.";
 }

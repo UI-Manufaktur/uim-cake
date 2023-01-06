@@ -24,7 +24,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @var array<uim.cake.orm.Association>
      */
-    protected $_items = [];
+    protected _items = [];
 
     /**
      * Constructor.

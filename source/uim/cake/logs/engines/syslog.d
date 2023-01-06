@@ -98,7 +98,7 @@ class SyslogLog : BaseLog {
      * @param string myMessage The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void
-     * @see uim.cake.logs.Log::$_levels
+     * @see uim.cake.logs.Log::_levels
      */
     void log($level, myMessage, array $context = []) {
         if (!_open) {
