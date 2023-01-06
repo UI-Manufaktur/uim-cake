@@ -28,10 +28,10 @@ class ErrorLogger : ErrorLoggerInterface
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config Config array.
+     * @param array<string, mixed> aConfig Config array.
      */
     this(Json aConfig = []) {
-        this.setConfig($config);
+        this.setConfig(aConfig);
     }
 
     /**

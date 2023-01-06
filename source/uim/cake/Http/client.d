@@ -177,11 +177,11 @@ class Client : ClientInterface
      *   You can use the `type` key to define the authentication adapter classname
      *   to use. Short class names are resolved to the `Http\Client\Auth` namespace.
      *
-     * @param array<string, mixed> $config Config options for scoped clients.
+     * @param array<string, mixed> aConfig Config options for scoped clients.
      * @throws \InvalidArgumentException
      */
     this(Json aConfig = []) {
-        this.setConfig($config);
+        this.setConfig(aConfig);
 
         $adapter = _config["adapter"];
         if ($adapter == null) {
@@ -228,18 +228,18 @@ class Client : ClientInterface
             throw new InvalidArgumentException("String " ~ $url ~ " did not parse");
         }
 
-        $config = array_intersect_key($parts, ["scheme": "", "port": "", "host": "", "path": ""]);
+        aConfig = array_intersect_key($parts, ["scheme": "", "port": "", "host": "", "path": ""]);
 
-        if (empty($config["scheme"]) || empty($config["host"])) {
+        if (empty(aConfig["scheme"]) || empty(aConfig["host"])) {
             throw new InvalidArgumentException("The URL was parsed but did not contain a scheme or host");
         }
 
-        if (isset($config["path"])) {
-            $config["basePath"] = $config["path"];
-            unset($config["path"]);
+        if (isset(aConfig["path"])) {
+            aConfig["basePath"] = aConfig["path"];
+            unset(aConfig["path"]);
         }
 
-        return new static($config);
+        return new static(aConfig);
     }
 
     /**

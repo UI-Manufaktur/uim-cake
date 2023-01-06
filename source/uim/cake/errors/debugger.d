@@ -144,8 +144,8 @@ class Debugger
             define('E_RECOVERABLE_ERROR', 4096);
         }
 
-        $config = array_intersect_key((array)Configure::read('Debugger'), _defaultConfig);
-        this.setConfig($config);
+        aConfig = array_intersect_key((array)Configure::read('Debugger'), _defaultConfig);
+        this.setConfig(aConfig);
 
         $e = '<pre class="cake-error">';
         $e .= '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-trace\')';

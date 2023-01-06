@@ -41,12 +41,12 @@ class FlashMessage
      * Constructor
      *
      * @param uim.cake.http.Session $session Session instance.
-     * @param array<string, mixed> $config Config array.
+     * @param array<string, mixed> aConfig Config array.
      * @see FlashMessage::set() For list of valid config keys.
      */
     this(Session $session, Json aConfig = []) {
         this.session = $session;
-        this.setConfig($config);
+        this.setConfig(aConfig);
     }
 
     /**

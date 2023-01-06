@@ -38,8 +38,8 @@ class ConsoleErrorRenderer : ErrorRendererInterface
      * @param Json aConfig Error handling configuration.
      */
     this(Json aConfig) {
-        this.output = $config["stderr"] ?? new ConsoleOutput("php://stderr");
-        this.trace = (bool)($config["trace"] ?? false);
+        this.output = aConfig["stderr"] ?? new ConsoleOutput("php://stderr");
+        this.trace = (bool)(aConfig["trace"] ?? false);
     }
 
 

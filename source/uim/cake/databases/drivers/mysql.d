@@ -102,45 +102,45 @@ class Mysql : Driver
         if (_connection) {
             return true;
         }
-        $config = _config;
+        aConfig = _config;
 
-        if ($config["timezone"] == "UTC") {
-            $config["timezone"] = "+0:00";
+        if (aConfig["timezone"] == "UTC") {
+            aConfig["timezone"] = "+0:00";
         }
 
-        if (!empty($config["timezone"])) {
-            $config["init"][] = sprintf("SET time_zone = "%s"", $config["timezone"]);
+        if (!empty(aConfig["timezone"])) {
+            aConfig["init"][] = sprintf("SET time_zone = "%s"", aConfig["timezone"]);
         }
 
-        $config["flags"] += [
-            PDO::ATTR_PERSISTENT: $config["persistent"],
+        aConfig["flags"] += [
+            PDO::ATTR_PERSISTENT: aConfig["persistent"],
             PDO::MYSQL_ATTR_USE_BUFFERED_QUERY: true,
             PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
 
-        if (!empty($config["ssl_key"]) && !empty($config["ssl_cert"])) {
-            $config["flags"][PDO::MYSQL_ATTR_SSL_KEY] = $config["ssl_key"];
-            $config["flags"][PDO::MYSQL_ATTR_SSL_CERT] = $config["ssl_cert"];
+        if (!empty(aConfig["ssl_key"]) && !empty(aConfig["ssl_cert"])) {
+            aConfig["flags"][PDO::MYSQL_ATTR_SSL_KEY] = aConfig["ssl_key"];
+            aConfig["flags"][PDO::MYSQL_ATTR_SSL_CERT] = aConfig["ssl_cert"];
         }
-        if (!empty($config["ssl_ca"])) {
-            $config["flags"][PDO::MYSQL_ATTR_SSL_CA] = $config["ssl_ca"];
+        if (!empty(aConfig["ssl_ca"])) {
+            aConfig["flags"][PDO::MYSQL_ATTR_SSL_CA] = aConfig["ssl_ca"];
         }
 
-        if (empty($config["unix_socket"])) {
-            $dsn = "mysql:host={$config["host"]};port={$config["port"]};dbname={$config["database"]}";
+        if (empty(aConfig["unix_socket"])) {
+            $dsn = "mysql:host={aConfig["host"]};port={aConfig["port"]};dbname={aConfig["database"]}";
         } else {
-            $dsn = "mysql:unix_socket={$config["unix_socket"]};dbname={$config["database"]}";
+            $dsn = "mysql:unix_socket={aConfig["unix_socket"]};dbname={aConfig["database"]}";
         }
 
-        if (!empty($config["encoding"])) {
-            $dsn .= ";charset={$config["encoding"]}";
+        if (!empty(aConfig["encoding"])) {
+            $dsn .= ";charset={aConfig["encoding"]}";
         }
 
-        _connect($dsn, $config);
+        _connect($dsn, aConfig);
 
-        if (!empty($config["init"])) {
+        if (!empty(aConfig["init"])) {
             $connection = this.getConnection();
-            foreach ((array)$config["init"] as $command) {
+            foreach ((array)aConfig["init"] as $command) {
                 $connection.exec($command);
             }
         }

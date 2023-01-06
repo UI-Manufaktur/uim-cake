@@ -101,50 +101,50 @@ class Sqlite : Driver
         if (_connection) {
             return true;
         }
-        $config = _config;
-        $config["flags"] += [
-            PDO::ATTR_PERSISTENT: $config["persistent"],
+        aConfig = _config;
+        aConfig["flags"] += [
+            PDO::ATTR_PERSISTENT: aConfig["persistent"],
             PDO::ATTR_EMULATE_PREPARES: false,
             PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
-        if (!is_string($config["database"]) || $config["database"] == "") {
-            $name = $config["name"] ?? "unknown";
+        if (!is_string(aConfig["database"]) || aConfig["database"] == "") {
+            $name = aConfig["name"] ?? "unknown";
             throw new InvalidArgumentException(
                 "The `database` key for the `{$name}` SQLite connection needs to be a non-empty string."
             );
         }
 
         $chmodFile = false;
-        if ($config["database"] != ":memory:" && $config["mode"] != "memory") {
-            $chmodFile = !file_exists($config["database"]);
+        if (aConfig["database"] != ":memory:" && aConfig["mode"] != "memory") {
+            $chmodFile = !file_exists(aConfig["database"]);
         }
 
         $params = [];
-        if ($config["cache"]) {
-            $params[] = "cache=" ~ $config["cache"];
+        if (aConfig["cache"]) {
+            $params[] = "cache=" ~ aConfig["cache"];
         }
-        if ($config["mode"]) {
-            $params[] = "mode=" ~ $config["mode"];
+        if (aConfig["mode"]) {
+            $params[] = "mode=" ~ aConfig["mode"];
         }
 
         if ($params) {
             if (PHP_VERSION_ID < 80100) {
                 throw new RuntimeException("SQLite URI support requires PHP 8.1.");
             }
-            $dsn = "sqlite:file:" ~ $config["database"] ~ "?" ~ implode("&", $params);
+            $dsn = "sqlite:file:" ~ aConfig["database"] ~ "?" ~ implode("&", $params);
         } else {
-            $dsn = "sqlite:" ~ $config["database"];
+            $dsn = "sqlite:" ~ aConfig["database"];
         }
 
-        _connect($dsn, $config);
+        _connect($dsn, aConfig);
         if ($chmodFile) {
             // phpcs:disable
-            @chmod($config["database"], $config["mask"]);
+            @chmod(aConfig["database"], aConfig["mask"]);
             // phpcs:enable
         }
 
-        if (!empty($config["init"])) {
-            foreach ((array)$config["init"] as $command) {
+        if (!empty(aConfig["init"])) {
+            foreach ((array)aConfig["init"] as $command) {
                 this.getConnection().exec($command);
             }
         }

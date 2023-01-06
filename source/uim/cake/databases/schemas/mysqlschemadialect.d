@@ -20,24 +20,24 @@ class MysqlSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to list the tables and views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
     array listTablesSql(Json aConfig) {
-        return ["SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"]), []];
+        return ["SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier(aConfig["database"]), []];
     }
 
     /**
      * Generate the SQL to list the tables, excluding all views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
     array listTablesWithoutViewsSql(Json aConfig) {
         return [
-            "SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"])
+            "SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier(aConfig["database"])
             ~ " WHERE TABLE_TYPE = "BASE TABLE""
         , []];
     }
@@ -257,7 +257,7 @@ class MysqlSchemaDialect : SchemaDialect
             WHERE kcu.TABLE_SCHEMA = ? AND kcu.TABLE_NAME = ? AND rc.TABLE_NAME = ?
             ORDER BY kcu.ORDINAL_POSITION ASC";
 
-        return [$sql, [$config["database"], $tableName, $tableName]];
+        return [$sql, [aConfig["database"], $tableName, $tableName]];
     }
 
 

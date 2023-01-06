@@ -90,14 +90,14 @@ class ErrorHandler : BaseErrorHandler
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config The options for error handling.
+     * @param array<string, mixed> aConfig The options for error handling.
      */
     this(Json aConfig = []) {
-        $config += [
+        aConfig += [
             "exceptionRenderer": ExceptionRenderer::class,
         ];
 
-        this.setConfig($config);
+        this.setConfig(aConfig);
     }
 
     /**

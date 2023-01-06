@@ -66,33 +66,33 @@ class Postgres : Driver
         if (_connection) {
             return true;
         }
-        $config = _config;
-        $config["flags"] += [
-            PDO::ATTR_PERSISTENT: $config["persistent"],
+        aConfig = _config;
+        aConfig["flags"] += [
+            PDO::ATTR_PERSISTENT: aConfig["persistent"],
             PDO::ATTR_EMULATE_PREPARES: false,
             PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
-        if (empty($config["unix_socket"])) {
-            $dsn = "pgsql:host={$config["host"]};port={$config["port"]};dbname={$config["database"]}";
+        if (empty(aConfig["unix_socket"])) {
+            $dsn = "pgsql:host={aConfig["host"]};port={aConfig["port"]};dbname={aConfig["database"]}";
         } else {
-            $dsn = "pgsql:dbname={$config["database"]}";
+            $dsn = "pgsql:dbname={aConfig["database"]}";
         }
 
-        _connect($dsn, $config);
+        _connect($dsn, aConfig);
         _connection = $connection = this.getConnection();
-        if (!empty($config["encoding"])) {
-            this.setEncoding($config["encoding"]);
+        if (!empty(aConfig["encoding"])) {
+            this.setEncoding(aConfig["encoding"]);
         }
 
-        if (!empty($config["schema"])) {
-            this.setSchema($config["schema"]);
+        if (!empty(aConfig["schema"])) {
+            this.setSchema(aConfig["schema"]);
         }
 
-        if (!empty($config["timezone"])) {
-            $config["init"][] = sprintf("SET timezone = %s", $connection.quote($config["timezone"]));
+        if (!empty(aConfig["timezone"])) {
+            aConfig["init"][] = sprintf("SET timezone = %s", $connection.quote(aConfig["timezone"]));
         }
 
-        foreach ($config["init"] as $command) {
+        foreach (aConfig["init"] as $command) {
             $connection.exec($command);
         }
 

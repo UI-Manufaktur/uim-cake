@@ -12,14 +12,14 @@ class PostgresSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to list the tables and views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
     array listTablesSql(Json aConfig) {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? ORDER BY name";
-        $schema = empty($config["schema"]) ? "public" : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? "public" : aConfig["schema"];
 
         return [$sql, [$schema]];
     }
@@ -27,14 +27,14 @@ class PostgresSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to list the tables, excluding all views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
     array listTablesWithoutViewsSql(Json aConfig) {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? AND table_type = \"BASE TABLE\" ORDER BY name";
-        $schema = empty($config["schema"]) ? "public" : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? "public" : aConfig["schema"];
 
         return [$sql, [$schema]];
     }
@@ -62,9 +62,9 @@ class PostgresSchemaDialect : SchemaDialect
         WHERE table_name = ? AND table_schema = ? AND table_catalog = ?
         ORDER BY ordinal_position";
 
-        $schema = empty($config["schema"]) ? "public" : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? "public" : aConfig["schema"];
 
-        return [$sql, [$tableName, $schema, $config["database"]]];
+        return [$sql, [$tableName, $schema, aConfig["database"]]];
     }
 
     /**
@@ -251,8 +251,8 @@ class PostgresSchemaDialect : SchemaDialect
         ORDER BY i.indisprimary DESC, i.indisunique DESC, c.relname, a.attnum";
 
         $schema = "public";
-        if (!empty($config["schema"])) {
-            $schema = $config["schema"];
+        if (!empty(aConfig["schema"])) {
+            $schema = aConfig["schema"];
         }
 
         return [$sql, [$schema, $tableName]];
@@ -326,7 +326,7 @@ class PostgresSchemaDialect : SchemaDialect
         ORDER BY name, a.attnum, ab.attnum DESC";
         // phpcs:enable Generic.Files.LineLength
 
-        $schema = empty($config["schema"]) ? "public" : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? "public" : aConfig["schema"];
 
         return [$sql, [$schema, $tableName]];
     }

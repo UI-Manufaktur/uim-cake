@@ -112,7 +112,7 @@ abstract class BaseApplication implements
 
     function addPlugin($name, Json aConfig = []) {
         if (is_string($name)) {
-            $plugin = this.plugins.create($name, $config);
+            $plugin = this.plugins.create($name, aConfig);
         } else {
             $plugin = $name;
         }
@@ -127,12 +127,12 @@ abstract class BaseApplication implements
      * If it isn"t available, ignore it.
      *
      * @param uim.cake.Core\IPlugin|string aName The plugin name or plugin object.
-     * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
+     * @param array<string, mixed> aConfig The configuration data for the plugin if using a string for $name
      * @return this
      */
     function addOptionalPlugin($name, Json aConfig = []) {
         try {
-            this.addPlugin($name, $config);
+            this.addPlugin($name, aConfig);
         } catch (MissingPluginException $e) {
             // Do not halt if the plugin is missing
         }

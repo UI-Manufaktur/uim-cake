@@ -14,13 +14,13 @@ class QueryLogger : BaseLog
     /**
      * Constructor.
      *
-     * @param array<string, mixed> $config Configuration array
+     * @param array<string, mixed> aConfig Configuration array
      */
     this(Json aConfig = []) {
         _defaultConfig["scopes"] = ["queriesLog"];
         _defaultConfig["connection"] = "";
 
-        super(($config);
+        super((aConfig);
     }
 
 

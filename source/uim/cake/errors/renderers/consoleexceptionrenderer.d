@@ -47,8 +47,8 @@ class ConsoleExceptionRenderer
      */
     this(Throwable $error, ?IServerRequest $request, Json aConfig) {
         this.error = $error;
-        this.output = $config["stderr"] ?? new ConsoleOutput("php://stderr");
-        this.trace = $config["trace"] ?? true;
+        this.output = aConfig["stderr"] ?? new ConsoleOutput("php://stderr");
+        this.trace = aConfig["trace"] ?? true;
     }
 
     /**

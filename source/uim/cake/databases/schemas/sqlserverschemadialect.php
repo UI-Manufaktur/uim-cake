@@ -14,7 +14,7 @@ class SqlserverSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to list the tables and views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
@@ -24,7 +24,7 @@ class SqlserverSchemaDialect : SchemaDialect
             WHERE TABLE_SCHEMA = ?
             AND (TABLE_TYPE = "BASE TABLE" OR TABLE_TYPE = "VIEW")
             ORDER BY TABLE_NAME";
-        $schema = empty($config["schema"]) ? static::DEFAULT_SCHEMA_NAME : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? static::DEFAULT_SCHEMA_NAME : aConfig["schema"];
 
         return [$sql, [$schema]];
     }
@@ -32,7 +32,7 @@ class SqlserverSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to list the tables, excluding all views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
@@ -42,7 +42,7 @@ class SqlserverSchemaDialect : SchemaDialect
             WHERE TABLE_SCHEMA = ?
             AND (TABLE_TYPE = "BASE TABLE")
             ORDER BY TABLE_NAME";
-        $schema = empty($config["schema"]) ? static::DEFAULT_SCHEMA_NAME : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? static::DEFAULT_SCHEMA_NAME : aConfig["schema"];
 
         return [$sql, [$schema]];
     }
@@ -67,7 +67,7 @@ class SqlserverSchemaDialect : SchemaDialect
             WHERE T.[name] = ? AND S.[name] = ?
             ORDER BY column_id";
 
-        $schema = empty($config["schema"]) ? static::DEFAULT_SCHEMA_NAME : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? static::DEFAULT_SCHEMA_NAME : aConfig["schema"];
 
         return [$sql, [$tableName, $schema]];
     }
@@ -259,7 +259,7 @@ class SqlserverSchemaDialect : SchemaDialect
             WHERE T.[is_ms_shipped] = 0 AND I.[type_desc] <> "HEAP" AND T.[name] = ? AND S.[name] = ?
             ORDER BY I.[index_id], IC.[index_column_id]";
 
-        $schema = empty($config["schema"]) ? static::DEFAULT_SCHEMA_NAME : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? static::DEFAULT_SCHEMA_NAME : aConfig["schema"];
 
         return [$sql, [$tableName, $schema]];
     }
@@ -317,7 +317,7 @@ class SqlserverSchemaDialect : SchemaDialect
             ORDER BY FKC.constraint_column_id";
         // phpcs:enable Generic.Files.LineLength
 
-        $schema = empty($config["schema"]) ? static::DEFAULT_SCHEMA_NAME : $config["schema"];
+        $schema = empty(aConfig["schema"]) ? static::DEFAULT_SCHEMA_NAME : aConfig["schema"];
 
         return [$sql, [$tableName, $schema]];
     }

@@ -89,22 +89,22 @@ class Connection : IConnection {
      *    If set to a string it will be used as the name of cache config to use.
      * - `cacheKeyPrefix` Custom prefix to use when generation cache keys. Defaults to connection name.
      *
-     * @param array<string, mixed> $config Configuration array.
+     * @param array<string, mixed> aConfig Configuration array.
      */
     this(Json aConfig) {
-        _config = $config;
+        _config = aConfig;
 
-        $driverConfig = array_diff_key($config, array_flip([
+        $driverConfig = array_diff_key(aConfig, array_flip([
             'name',
             'driver',
             'log',
             'cacheMetaData',
             'cacheKeyPrefix',
         ]));
-        _driver = this.createDriver($config['driver'] ?? '', $driverConfig);
+        _driver = this.createDriver(aConfig['driver'] ?? '', $driverConfig);
 
-        if (!empty($config['log'])) {
-            this.enableQueryLogging((bool)$config['log']);
+        if (!empty(aConfig['log'])) {
+            this.enableQueryLogging((bool)aConfig['log']);
         }
     }
 
@@ -134,16 +134,16 @@ class Connection : IConnection {
      * as a class name and will be instantiated.
      *
      * @param uim.cake.databases.IDriver|string $driver The driver instance to use.
-     * @param array<string, mixed> $config Config for a new driver.
+     * @param array<string, mixed> aConfig Config for a new driver.
      * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.
      * @throws uim.cake.databases.exceptions.MissingExtensionException When a driver's PHP extension is missing.
      * @return this
      * @deprecated 4.4.0 Setting the driver is deprecated. Use the connection config instead.
      */
-    function setDriver($driver, $config = []) {
+    function setDriver($driver, aConfig = []) {
         deprecationWarning('Setting the driver is deprecated. Use the connection config instead.');
 
-        _driver = this.createDriver($driver, $config);
+        _driver = this.createDriver($driver, aConfig);
 
         return this;
     }
@@ -166,7 +166,7 @@ class Connection : IConnection {
             if ($className == null) {
                 throw new MissingDriverException(['driver': $driver, 'connection': this.configName()]);
             }
-            $driver = new $className($config);
+            $driver = new $className(aConfig);
         }
 
         if (!$driver.enabled()) {
@@ -860,10 +860,10 @@ class Connection : IConnection {
             'port': '*****',
         ];
         $replace = array_intersect_key($secrets, _config);
-        $config = $replace + _config;
+        aConfig = $replace + _config;
 
         return [
-            'config': $config,
+            'config': aConfig,
             'driver': _driver,
             'transactionLevel': _transactionLevel,
             'transactionStarted': _transactionStarted,

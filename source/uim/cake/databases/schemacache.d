@@ -93,8 +93,8 @@ class SchemaCache
      */
     function getSchema(Connection $connection): CachedCollection
     {
-        $config = $connection.config();
-        if (empty($config["cacheMetadata"])) {
+        aConfig = $connection.config();
+        if (empty(aConfig["cacheMetadata"])) {
             $connection.cacheMetadata(true);
         }
 

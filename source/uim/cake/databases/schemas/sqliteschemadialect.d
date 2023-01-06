@@ -135,7 +135,7 @@ class SqliteSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to list the tables and views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
@@ -151,7 +151,7 @@ class SqliteSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to list the tables, excluding all views.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */

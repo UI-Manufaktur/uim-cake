@@ -161,7 +161,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL to list the tables.
      *
-     * @param array<string, mixed> $config The connection configuration to use for
+     * @param array<string, mixed> aConfig The connection configuration to use for
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
@@ -171,7 +171,7 @@ abstract class SchemaDialect
      * Generate the SQL to describe a table.
      *
      * @param string $tableName The table name to get information on.
-     * @param array<string, mixed> $config The connection configuration.
+     * @param array<string, mixed> aConfig The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
     abstract array describeColumnSql(string $tableName, Json aConfig);
@@ -180,7 +180,7 @@ abstract class SchemaDialect
      * Generate the SQL to describe the indexes in a table.
      *
      * @param string $tableName The table name to get information on.
-     * @param array<string, mixed> $config The connection configuration.
+     * @param array<string, mixed> aConfig The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
     abstract array describeIndexSql(string $tableName, Json aConfig);
@@ -189,7 +189,7 @@ abstract class SchemaDialect
      * Generate the SQL to describe the foreign keys in a table.
      *
      * @param string $tableName The table name to get information on.
-     * @param array<string, mixed> $config The connection configuration.
+     * @param array<string, mixed> aConfig The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
     abstract array describeForeignKeySql(string $tableName, Json aConfig);
@@ -198,7 +198,7 @@ abstract class SchemaDialect
      * Generate the SQL to describe table options
      *
      * @param string $tableName Table name.
-     * @param array<string, mixed> $config The connection configuration.
+     * @param array<string, mixed> aConfig The connection configuration.
      * @return array SQL statements to get options for a table.
      */
     array describeOptionsSql(string $tableName, Json aConfig) {

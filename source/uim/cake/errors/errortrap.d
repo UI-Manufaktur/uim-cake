@@ -59,9 +59,9 @@ class ErrorTrap
      * @return class-string<uim.cake.errors.ErrorRendererInterface>
      */
     string function chooseErrorRenderer() {
-        $config = this.getConfig("errorRenderer");
-        if ($config != null) {
-            return $config;
+        aConfig = this.getConfig("errorRenderer");
+        if (aConfig != null) {
+            return aConfig;
         }
 
         /** @var class-string<uim.cake.errors.ErrorRendererInterface> */

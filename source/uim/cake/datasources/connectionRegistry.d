@@ -53,7 +53,7 @@ class ConnectionRegistry : ObjectRegistry
      *
      * @param uim.cake.Datasource\IConnection|callable|string $class The classname or object to make.
      * @param string $alias The alias of the object.
-     * @param array<string, mixed> $config An array of settings to use for the datasource.
+     * @param array<string, mixed> aConfig An array of settings to use for the datasource.
      * @return uim.cake.Datasource\IConnection A connection with the correct settings.
      */
     protected function _create($class, string $alias, Json aConfig) {
@@ -65,10 +65,10 @@ class ConnectionRegistry : ObjectRegistry
             return $class;
         }
 
-        unset($config["className"]);
+        unset(aConfig["className"]);
 
         /** @var uim.cake.datasources.IConnection */
-        return new $class($config);
+        return new $class(aConfig);
     }
 
     /**

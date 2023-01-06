@@ -91,64 +91,64 @@ class Sqlserver : Driver
         if (_connection) {
             return true;
         }
-        $config = _config;
+        aConfig = _config;
 
-        if (isset($config["persistent"]) && $config["persistent"]) {
+        if (isset(aConfig["persistent"]) && aConfig["persistent"]) {
             throw new InvalidArgumentException(
                 "Config setting "persistent" cannot be set to true, "
                 ~ "as the Sqlserver PDO driver does not support PDO::ATTR_PERSISTENT"
             );
         }
 
-        $config["flags"] += [
+        aConfig["flags"] += [
             PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
 
-        if (!empty($config["encoding"])) {
-            $config["flags"][PDO::SQLSRV_ATTR_ENCODING] = $config["encoding"];
+        if (!empty(aConfig["encoding"])) {
+            aConfig["flags"][PDO::SQLSRV_ATTR_ENCODING] = aConfig["encoding"];
         }
         $port = "";
-        if ($config["port"]) {
-            $port = "," ~ $config["port"];
+        if (aConfig["port"]) {
+            $port = "," ~ aConfig["port"];
         }
 
-        $dsn = "sqlsrv:Server={$config["host"]}{$port};Database={$config["database"]};MultipleActiveResultSets=false";
-        if ($config["app"] != null) {
-            $dsn .= ";APP={$config["app"]}";
+        $dsn = "sqlsrv:Server={aConfig["host"]}{$port};Database={aConfig["database"]};MultipleActiveResultSets=false";
+        if (aConfig["app"] != null) {
+            $dsn .= ";APP={aConfig["app"]}";
         }
-        if ($config["connectionPooling"] != null) {
-            $dsn .= ";ConnectionPooling={$config["connectionPooling"]}";
+        if (aConfig["connectionPooling"] != null) {
+            $dsn .= ";ConnectionPooling={aConfig["connectionPooling"]}";
         }
-        if ($config["failoverPartner"] != null) {
-            $dsn .= ";Failover_Partner={$config["failoverPartner"]}";
+        if (aConfig["failoverPartner"] != null) {
+            $dsn .= ";Failover_Partner={aConfig["failoverPartner"]}";
         }
-        if ($config["loginTimeout"] != null) {
-            $dsn .= ";LoginTimeout={$config["loginTimeout"]}";
+        if (aConfig["loginTimeout"] != null) {
+            $dsn .= ";LoginTimeout={aConfig["loginTimeout"]}";
         }
-        if ($config["multiSubnetFailover"] != null) {
-            $dsn .= ";MultiSubnetFailover={$config["multiSubnetFailover"]}";
+        if (aConfig["multiSubnetFailover"] != null) {
+            $dsn .= ";MultiSubnetFailover={aConfig["multiSubnetFailover"]}";
         }
-        if ($config["encrypt"] != null) {
-            $dsn .= ";Encrypt={$config["encrypt"]}";
+        if (aConfig["encrypt"] != null) {
+            $dsn .= ";Encrypt={aConfig["encrypt"]}";
         }
-        if ($config["trustServerCertificate"] != null) {
-            $dsn .= ";TrustServerCertificate={$config["trustServerCertificate"]}";
+        if (aConfig["trustServerCertificate"] != null) {
+            $dsn .= ";TrustServerCertificate={aConfig["trustServerCertificate"]}";
         }
-        _connect($dsn, $config);
+        _connect($dsn, aConfig);
 
         $connection = this.getConnection();
-        if (!empty($config["init"])) {
-            foreach ((array)$config["init"] as $command) {
+        if (!empty(aConfig["init"])) {
+            foreach ((array)aConfig["init"] as $command) {
                 $connection.exec($command);
             }
         }
-        if (!empty($config["settings"]) && is_array($config["settings"])) {
-            foreach ($config["settings"] as $key: $value) {
+        if (!empty(aConfig["settings"]) && is_array(aConfig["settings"])) {
+            foreach (aConfig["settings"] as $key: $value) {
                 $connection.exec("SET {$key} {$value}");
             }
         }
-        if (!empty($config["attributes"]) && is_array($config["attributes"])) {
-            foreach ($config["attributes"] as $key: $value) {
+        if (!empty(aConfig["attributes"]) && is_array(aConfig["attributes"])) {
+            foreach (aConfig["attributes"] as $key: $value) {
                 $connection.setAttribute($key, $value);
             }
         }

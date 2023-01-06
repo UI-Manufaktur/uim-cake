@@ -62,17 +62,17 @@ class ConnectionManager
      * The connection will not be constructed until it is first used.
      *
      * @param array<string, mixed>|string aKey The name of the connection config, or an array of multiple configs.
-     * @param array<string, mixed>|null $config An array of name: config data for adapter.
+     * @param array<string, mixed>|null aConfig An array of name: config data for adapter.
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException When trying to modify an existing config.
      * @see uim.cake.Core\StaticConfigTrait::config()
      */
-    static void setConfig($key, $config = null) {
-        if (is_array($config)) {
-            $config["name"] = $key;
+    static void setConfig($key, aConfig = null) {
+        if (is_array(aConfig)) {
+            aConfig["name"] = $key;
         }
 
-        static::_setConfig($key, $config);
+        static::_setConfig($key, aConfig);
     }
 
     /**
@@ -83,13 +83,13 @@ class ConnectionManager
      *
      * ```
      * $dsn = "mysql://user:pass@localhost/database";
-     * $config = ConnectionManager::parseDsn($dsn);
+     * aConfig = ConnectionManager::parseDsn($dsn);
      *
      * $dsn = "Cake\databases.Driver\Mysql://localhost:3306/database?className=Cake\databases.Connection";
-     * $config = ConnectionManager::parseDsn($dsn);
+     * aConfig = ConnectionManager::parseDsn($dsn);
      *
      * $dsn = "Cake\databases.Connection://localhost:3306/database?driver=Cake\databases.Driver\Mysql";
-     * $config = ConnectionManager::parseDsn($dsn);
+     * aConfig = ConnectionManager::parseDsn($dsn);
      * ```
      *
      * For all classes, the value of `scheme` is set as the value of both the `className` and `driver`
@@ -97,24 +97,24 @@ class ConnectionManager
      *
      * Note that query-string arguments are also parsed and set as values in the returned configuration.
      *
-     * @param string $config The DSN string to convert to a configuration array
+     * @param string aConfig The DSN string to convert to a configuration array
      * @return array<string, mixed> The configuration array to be stored after parsing the DSN
      */
-    static array parseDsn(string $config) {
-        $config = static::_parseDsn($config);
+    static array parseDsn(string aConfig) {
+        aConfig = static::_parseDsn(aConfig);
 
-        if (isset($config["path"]) && empty($config["database"])) {
-            $config["database"] = substr($config["path"], 1);
+        if (isset(aConfig["path"]) && empty(aConfig["database"])) {
+            aConfig["database"] = substr(aConfig["path"], 1);
         }
 
-        if (empty($config["driver"])) {
-            $config["driver"] = $config["className"];
-            $config["className"] = Connection::class;
+        if (empty(aConfig["driver"])) {
+            aConfig["driver"] = aConfig["className"];
+            aConfig["className"] = Connection::class;
         }
 
-        unset($config["path"]);
+        unset(aConfig["path"]);
 
-        return $config;
+        return aConfig;
     }
 
     /**

@@ -90,20 +90,20 @@ class Collection : ICollection
      */
     function describe(string aName, array $options = []): TableISchema
     {
-        $config = _connection.config();
+        aConfig = _connection.config();
         if (strpos($name, ".")) {
-            [$config["schema"], $name] = explode(".", $name);
+            [aConfig["schema"], $name] = explode(".", $name);
         }
         $table = _connection.getDriver().newTableSchema($name);
 
-        _reflect("Column", $name, $config, $table);
+        _reflect("Column", $name, aConfig, $table);
         if (count($table.columns()) == 0) {
             throw new DatabaseException(sprintf("Cannot describe %s. It has 0 columns.", $name));
         }
 
-        _reflect("Index", $name, $config, $table);
-        _reflect("ForeignKey", $name, $config, $table);
-        _reflect("Options", $name, $config, $table);
+        _reflect("Index", $name, aConfig, $table);
+        _reflect("ForeignKey", $name, aConfig, $table);
+        _reflect("Options", $name, aConfig, $table);
 
         return $table;
     }
@@ -113,7 +113,7 @@ class Collection : ICollection
      *
      * @param string $stage The stage name.
      * @param string aName The table name.
-     * @param array<string, mixed> $config The config data.
+     * @param array<string, mixed> aConfig The config data.
      * @param uim.cake.databases.Schema\TableSchema $schema The table schema instance.
      * @return void
      * @throws uim.cake.databases.exceptions.DatabaseException on query failure.
@@ -130,7 +130,7 @@ class Collection : ICollection
         $describeMethod = "describe{$stage}Sql";
         $convertMethod = "convert{$stage}Description";
 
-        [$sql, $params] = _dialect.{$describeMethod}($name, $config);
+        [$sql, $params] = _dialect.{$describeMethod}($name, aConfig);
         if (empty($sql)) {
             return;
         }

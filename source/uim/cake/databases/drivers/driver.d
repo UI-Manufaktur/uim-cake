@@ -62,18 +62,18 @@ abstract class Driver : IDriver
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config The configuration for the driver.
+     * @param array<string, mixed> aConfig The configuration for the driver.
      * @throws \InvalidArgumentException
      */
     this(Json aConfig = []) {
-        if (empty($config["username"]) && !empty($config["login"])) {
+        if (empty(aConfig["username"]) && !empty(aConfig["login"])) {
             throw new InvalidArgumentException(
                 "Please pass "username" instead of "login" for connecting to the database"
             );
         }
-        $config += _baseConfig;
-        _config = $config;
-        if (!empty($config["quoteIdentifiers"])) {
+        aConfig += _baseConfig;
+        _config = aConfig;
+        if (!empty(aConfig["quoteIdentifiers"])) {
             this.enableAutoQuoting();
         }
     }
@@ -82,16 +82,16 @@ abstract class Driver : IDriver
      * Establishes a connection to the database server
      *
      * @param string $dsn A Driver-specific PDO-DSN
-     * @param array<string, mixed> $config configuration to be used for creating connection
+     * @param array<string, mixed> aConfig configuration to be used for creating connection
      * @return bool true on success
      */
     protected bool _connect(string $dsn, Json aConfig) {
-        $action = function () use ($dsn, $config) {
+        $action = function () use ($dsn, aConfig) {
             this.setConnection(new PDO(
                 $dsn,
-                $config["username"] ?: null,
-                $config["password"] ?: null,
-                $config["flags"]
+                aConfig["username"] ?: null,
+                aConfig["password"] ?: null,
+                aConfig["flags"]
             ));
         };
 
