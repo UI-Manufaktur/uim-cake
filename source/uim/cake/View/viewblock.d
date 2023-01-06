@@ -173,7 +173,7 @@ class ViewBlock
      *
      * @return array<string> An array containing the blocks.
      */
-    function keys(): array
+    string[] keys()
     {
         return array_keys(_blocks);
     }
@@ -195,7 +195,7 @@ class ViewBlock
      *
      * @return array<string> An array of unclosed blocks.
      */
-    function unclosed(): array
+    string[] unclosed()
     {
         return _active;
     }

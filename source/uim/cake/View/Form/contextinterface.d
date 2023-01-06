@@ -10,12 +10,8 @@ interface IContext
      */
     const VALID_ATTRIBUTES = ["length", "precision", "comment", "null", "default"];
 
-    /**
-     * Get the fields used in the context as a primary key.
-     *
-     * @return array<string>
-     */
-    function getPrimaryKey(): array;
+    // Get the fields used in the context as a primary key.
+    string[] getPrimaryKey();
 
     /**
      * Returns true if the passed field name is part of the primary key for this context
@@ -79,7 +75,7 @@ interface IContext
      *
      * @return array<string> A list of the field names in the context.
      */
-    function fieldNames(): array;
+    array fieldNames();
 
     /**
      * Get the abstract field type for a given field name.
@@ -96,7 +92,7 @@ interface IContext
      * @param string $field A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    function attributes(string $field): array;
+    array attributes(string $field);
 
     /**
      * Check whether a field has an error attached to it
@@ -113,5 +109,5 @@ interface IContext
      * @return array An array of errors, an empty array will be returned when the
      *    context has no errors.
      */
-    function error(string $field): array;
+    array error(string $field);
 }

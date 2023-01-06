@@ -36,13 +36,8 @@ class MissingCellTemplateException : MissingTemplateException
         super(($file, $paths, $code, $previous);
     }
 
-    /**
-     * Get the passed in attributes
-     *
-     * @return array
-     * @psalm-return array{name: string, file: string, paths: array}
-     */
-    function getAttributes(): array
+    // Get the passed in attributes
+    array getAttributes()
     {
         return [
             "name": this.name,

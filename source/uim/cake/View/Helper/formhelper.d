@@ -1189,7 +1189,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return array<string, mixed> Options
      */
-    protected function _parseOptions(string $fieldName, array $options): array
+    protected array _parseOptions(string $fieldName, array $options)
     {
         $needsMagicType = false;
         if (empty($options["type"])) {
@@ -1255,7 +1255,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return array<string, mixed>
      */
-    protected function _optionsOptions(string $fieldName, array $options): array
+    protected array _optionsOptions(string $fieldName, array $options)
     {
         if (isset($options["options"])) {
             return $options;
@@ -1294,7 +1294,7 @@ class FormHelper : Helper
      * overwrite the "type" key in options.
      * @return array<string, mixed>
      */
-    protected array _magicOptions(string $fieldName, array $options, bool $allowOverride): array
+    protected array _magicOptions(string $fieldName, array $options, bool $allowOverride)
     {
         $options += [
             "templateVars": [],
@@ -2231,7 +2231,7 @@ class FormHelper : Helper
      * @param array<string, mixed>|array<string> $options Array of options to append options into.
      * @return array<string, mixed> Array of options for the input.
      */
-    protected function _initInputField(string $field, array $options = []): array
+    protected array _initInputField(string $field, array $options = [])
     {
         $options += ["fieldName": $field];
 
@@ -2440,7 +2440,7 @@ class FormHelper : Helper
      *
      * @return array<string, mixed>
      */
-    array implementedEvents(): array
+    array implementedEvents()
     {
         return [];
     }
@@ -2452,7 +2452,7 @@ class FormHelper : Helper
      *
      * @return array<string> List of value sources.
      */
-    function getValueSources(): array
+    array getValueSources()
     {
         return _valueSources;
     }

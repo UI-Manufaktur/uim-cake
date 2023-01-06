@@ -148,7 +148,7 @@ class EntityContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    function primaryKey(): array
+    array primaryKey()
     {
         deprecationWarning("`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.");
 
@@ -535,7 +535,7 @@ class EntityContext : IContext
      *
      * @return array<string> Array of field names in the table/entity.
      */
-    function fieldNames(): array
+    string[] fieldNames()
     {
         $table = _getTable("0");
         if (!$table) {

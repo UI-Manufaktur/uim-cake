@@ -163,7 +163,7 @@ class FormContext : IContext
     }
 
 
-    array fieldNames(): array
+    array fieldNames()
     {
         return _form.getSchema().fields();
     }
@@ -175,7 +175,7 @@ class FormContext : IContext
     }
 
 
-    array attributes(string $field): array
+    array attributes(string $field)
     {
         return array_intersect_key(
             (array)_form.getSchema().field($field),
@@ -191,7 +191,7 @@ class FormContext : IContext
     }
 
 
-    function error(string $field): array
+    array error(string $field)
     {
         return (array)Hash::get(_form.getErrors(), $field, []);
     }

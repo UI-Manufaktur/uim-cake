@@ -98,7 +98,7 @@ class BasicWidget : WidgetInterface
      * @param uim.cake.View\Form\IContext $context Context instance.
      * @return array<string, mixed> Updated data array.
      */
-    protected function mergeDefaults(array $data, IContext $context): array
+    protected array mergeDefaults(array $data, IContext $context)
     {
         $data += this.defaults;
 
@@ -117,7 +117,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected function setRequired(array $data, IContext $context, string $fieldName): array
+    protected array setRequired(array $data, IContext $context, string $fieldName): array
     {
         if (
             empty($data["disabled"])

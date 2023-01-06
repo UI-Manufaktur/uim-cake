@@ -129,7 +129,7 @@ class Helper : IEventListener
      * @param string aKey the key to use for class. Defaults to `"class"`.
      * @return array<string, mixed> Array of options with $key set.
      */
-    function addClass(array $options, string $class, string aKey = "class"): array
+    array addClass(array $options, string $class, string aKey = "class")
     {
         if (isset($options[$key]) && is_array($options[$key])) {
             $options[$key][] = $class;
@@ -153,7 +153,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    array implementedEvents(): array
+    array implementedEvents()
     {
         $eventMap = [
             "View.beforeRenderFile": "beforeRenderFile",
@@ -189,7 +189,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "helpers": this.helpers,

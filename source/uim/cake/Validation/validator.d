@@ -200,7 +200,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<array> Array of failed fields
      * @deprecated 3.9.0 Renamed to {@link validate()}.
      */
-    array errors(array $data, bool $newRecord = true): array
+    array errors(array $data, bool $newRecord = true)
     {
         deprecationWarning("`Validator::errors()` is deprecated. Use `Validator::validate()` instead.");
 
@@ -362,10 +362,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
     /**
      * Get the list of default providers.
-     *
-     * @return array<string>
      */
-    static string getDefaultProviders(): array
+    static string[] getDefaultProviders()
     {
         return array_keys(self::$_defaultProviders);
     }
@@ -375,7 +373,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<string>
      */
-    function providers(): array
+    string[] providers()
     {
         return array_keys(_providers);
     }
@@ -1093,7 +1091,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<array>
      * @throws \InvalidArgumentException
      */
-    protected function _convertValidatorToArray($fieldName, array $defaults = [], $settings = []): array
+    protected array _convertValidatorToArray($fieldName, array $defaults = [], $settings = [])
     {
         if (is_string($settings)) {
             $fieldName = $settings;
@@ -2573,7 +2571,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param bool $newRecord whether is it a new record or an existing one
      * @return array<string, mixed>
      */
-    protected function _processRules(string $field, ValidationSet $rules, array $data, bool $newRecord): array
+    protected array _processRules(string $field, ValidationSet $rules, array $data, bool $newRecord)
     {
         $errors = [];
         // Loading default provider in case there is none
@@ -2614,7 +2612,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         $fields = [];
         foreach (_fields as $name: $fieldSet) {

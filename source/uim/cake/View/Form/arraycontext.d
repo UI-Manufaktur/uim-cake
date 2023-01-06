@@ -83,7 +83,7 @@ class ArrayContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    function primaryKey(): array
+    array primaryKey()
     {
         deprecationWarning("`ArrayContext::primaryKey()` is deprecated. Use `ArrayContext::getPrimaryKey()`.");
 
@@ -94,7 +94,7 @@ class ArrayContext : IContext
      * Get the fields used in the context as a primary key.
      *
      */
-    string[] getPrimaryKey(): array
+    string[] getPrimaryKey()
     {
         if (
             empty(_context["schema"]["_constraints"]) ||
@@ -243,7 +243,7 @@ class ArrayContext : IContext
     }
 
 
-    function fieldNames(): array
+    array fieldNames()
     {
         $schema = _context["schema"];
         unset($schema["_constraints"], $schema["_indexes"]);
@@ -278,7 +278,7 @@ class ArrayContext : IContext
      * @param string $field A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    function attributes(string $field): array
+    array attributes(string $field)
     {
         if (!is_array(_context["schema"])) {
             return [];
@@ -315,7 +315,7 @@ class ArrayContext : IContext
      * @return array An array of errors, an empty array will be returned when the
      *    context has no errors.
      */
-    function error(string $field): array
+    array error(string $field)
     {
         if (empty(_context["errors"])) {
             return [];

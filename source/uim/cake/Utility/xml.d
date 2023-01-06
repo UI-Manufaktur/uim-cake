@@ -418,7 +418,7 @@ class Xml
      * @return array Array representation of the XML structure.
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static array toArray($obj): array
+    static array toArray($obj)
     {
         if ($obj instanceof DOMNode) {
             $obj = simplexml_import_dom($obj);

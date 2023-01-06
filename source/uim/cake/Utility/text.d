@@ -77,12 +77,12 @@ class Text
      * @param string $rightBound The right boundary to ignore separators in.
      * @return array<string> Array of tokens in $data.
      */
-    static function tokenize(
+    static array tokenize(
         string $data,
         string $separator = ",",
         string $leftBound = "(",
         string $rightBound = ")"
-    ): array {
+    ) {
         if (empty($data)) {
             return [];
         }

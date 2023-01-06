@@ -3,11 +3,7 @@ module uim.cake.commands;
 @safe:
 import uim.cake;
 
-/**
- * Command for copying plugin assets to app"s webroot.
- *
- * @psalm-suppress PropertyNotSetInConstructor
- */
+// Command for copying plugin assets to app"s webroot.
 class PluginAssetsCopyCommand : Command {
     use PluginAssetsTrait;
 

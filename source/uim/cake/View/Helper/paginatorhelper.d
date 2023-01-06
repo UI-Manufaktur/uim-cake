@@ -102,7 +102,7 @@ class PaginatorHelper : Helper
      * @param string|null $model Optional model name. Uses the default if none is specified.
      * @return array The array of paging parameters for the paginated resultset.
      */
-    function params(?string $model = null): array
+    array params(?string $model = null)
     {
         $request = _View.getRequest();
 
@@ -495,7 +495,7 @@ class PaginatorHelper : Helper
      * @param array $url URL.
      * @return array An array of URL parameters
      */
-    function generateUrlParams(array $options = [], ?string $model = null, array $url = []): array
+    array generateUrlParams(array $options = [], ?string $model = null, array $url = [])
     {
         $paging = this.params($model);
         $paging += ["page": null, "sort": null, "direction": null, "limit": null];
@@ -785,9 +785,8 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $params Params from the numbers() method.
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return array An array with the start and end numbers.
-     * @psalm-return array{0: int, 1: int}
      */
-    protected function _getNumbersStartAndEnd(array $params, array $options): array
+    protected array _getNumbersStartAndEnd(array $params, array $options)
     {
         $half = (int)($options["modulus"] / 2);
         $end = max(1 + $options["modulus"], $params["page"] + $half);
@@ -1178,7 +1177,7 @@ class PaginatorHelper : Helper
      *
      * @return array<string, mixed>
      */
-    array implementedEvents(): array
+    array implementedEvents()
     {
         return [];
     }
