@@ -117,7 +117,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<string, uim.cake.validations.ValidationSet>
      */
-    protected $_fields = [];
+    protected _fields = [];
 
     /**
      * An associative array of objects or classes containing methods
@@ -126,7 +126,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @var array<string, object|string>
      * @psalm-var array<string, object|class-string>
      */
-    protected $_providers = [];
+    protected _providers = [];
 
     /**
      * An associative array of objects or classes used as a default provider list
@@ -134,7 +134,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @var array<string, object|string>
      * @psalm-var array<string, object|class-string>
      */
-    protected static $_defaultProviders = [];
+    protected static _defaultProviders = [];
 
     /**
      * Contains the validation messages associated with checking the presence
@@ -142,12 +142,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<string, string>
      */
-    protected $_presenceMessages = [];
+    protected _presenceMessages = [];
 
     /**
      * Whether to use I18n functions for translating default error messages
      */
-    protected bool $_useI18n = false;
+    protected bool _useI18n = false;
 
     /**
      * Contains the validation messages associated with checking the emptiness
@@ -155,26 +155,26 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<string, string>
      */
-    protected $_allowEmptyMessages = [];
+    protected _allowEmptyMessages = [];
 
     /**
      * Contains the flags which specify what is empty for each corresponding field.
      *
      * @var array<string, int>
      */
-    protected $_allowEmptyFlags = [];
+    protected _allowEmptyFlags = [];
 
     /**
      * Whether to apply last flag to generated rule(s).
      */
-    protected bool $_stopOnFailure = false;
+    protected bool _stopOnFailure = false;
 
     /**
      * Constructor
      */
     this() {
         _useI18n = function_exists("__d");
-        _providers = self::$_defaultProviders;
+        _providers = self::_defaultProviders;
     }
 
     /**
@@ -339,7 +339,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @psalm-return object|class-string|null
      */
     static function getDefaultProvider(string aName) {
-        return self::$_defaultProviders[$name] ?? null;
+        return self::_defaultProviders[$name] ?? null;
     }
 
     /**
@@ -357,7 +357,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
             ));
         }
 
-        self::$_defaultProviders[$name] = $object;
+        self::_defaultProviders[$name] = $object;
     }
 
     /**
@@ -365,7 +365,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      */
     static string[] getDefaultProviders()
     {
-        return array_keys(self::$_defaultProviders);
+        return array_keys(self::_defaultProviders);
     }
 
     /**

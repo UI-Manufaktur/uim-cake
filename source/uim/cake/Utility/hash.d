@@ -139,16 +139,16 @@ class Hash
             $tokens = Text::tokenize($path, ".", "[", "]");
         }
 
-        $_key = "__set_item__";
+        _key = "__set_item__";
 
-        $context = [$_key: [$data]];
+        $context = [_key: [$data]];
 
         foreach ($tokens as $token) {
             $next = [];
 
             [$token, $conditions] = self::_splitConditions($token);
 
-            foreach ($context[$_key] as $item) {
+            foreach ($context[_key] as $item) {
                 if (is_object($item) && method_exists($item, "toArray")) {
                     /** @var uim.cake.datasources.IEntity $item */
                     $item = $item.toArray();
@@ -176,10 +176,10 @@ class Hash
                 }
                 $next = $filter;
             }
-            $context = [$_key: $next];
+            $context = [_key: $next];
         }
 
-        return $context[$_key];
+        return $context[_key];
     }
 
     /**
@@ -345,34 +345,34 @@ class Hash
      */
     protected static array _simpleOp(string $op, array $data, array $path, $values = null)
     {
-        $_list = &$data;
+        _list = &$data;
 
         $count = count($path);
         $last = $count - 1;
         foreach ($path as $i: $key) {
             if ($op == "insert") {
                 if ($i == $last) {
-                    $_list[$key] = $values;
+                    _list[$key] = $values;
 
                     return $data;
                 }
-                $_list[$key] = $_list[$key] ?? [];
-                $_list = &$_list[$key];
-                if (!is_array($_list)) {
-                    $_list = [];
+                _list[$key] = _list[$key] ?? [];
+                _list = &_list[$key];
+                if (!is_array(_list)) {
+                    _list = [];
                 }
             } elseif ($op == "remove") {
                 if ($i == $last) {
-                    if (is_array($_list)) {
-                        unset($_list[$key]);
+                    if (is_array(_list)) {
+                        unset(_list[$key]);
                     }
 
                     return $data;
                 }
-                if (!isset($_list[$key])) {
+                if (!isset(_list[$key])) {
                     return $data;
                 }
-                $_list = &$_list[$key];
+                _list = &_list[$key];
             }
         }
 

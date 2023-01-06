@@ -73,14 +73,14 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      * @var uim.cake.databases.Schema\TableISchema&uim.cake.databases.Schema\SqlGeneratorInterface
      * @psalm-suppress PropertyNotSetInConstructor
      */
-    protected $_schema;
+    protected _schema;
 
     /**
      * Fixture constraints to be created.
      *
      * @var array<string, mixed>
      */
-    protected $_constraints = [];
+    protected _constraints = [];
 
     /**
      * Instantiate the fixture.

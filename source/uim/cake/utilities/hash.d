@@ -135,16 +135,16 @@ class Hash {
             $tokens = Text::tokenize(myPath, ".", "[", "]");
         }
 
-        $_key = "__set_item__";
+        _key = "__set_item__";
 
-        $context = [$_key: [myData]];
+        $context = [_key: [myData]];
 
         foreach ($tokens as $token) {
             $next = [];
 
             [$token, $conditions] = self::_splitConditions($token);
 
-            foreach ($context[$_key] as $item) {
+            foreach ($context[_key] as $item) {
                 if (is_object($item) && method_exists($item, "toArray")) {
                     /** @var uim.cake.datasources.IEntity $item */
                     $item = $item.toArray();
@@ -172,10 +172,10 @@ class Hash {
                 }
                 $next = $filter;
             }
-            $context = [$_key: $next];
+            $context = [_key: $next];
         }
 
-        return $context[$_key];
+        return $context[_key];
     }
 
     /**
@@ -341,34 +341,34 @@ class Hash {
      */
     protected static array _simpleOp(string op, array myData, string[] myPath, myValues = null)
     {
-        $_list = &myData;
+        _list = &myData;
 
         myCount = count(myPath);
         $last = myCount - 1;
         foreach (myPath as $i: myKey) {
             if ($op == "insert") {
                 if ($i == $last) {
-                    $_list[myKey] = myValues;
+                    _list[myKey] = myValues;
 
                     return myData;
                 }
-                $_list[myKey] = $_list[myKey] ?? [];
-                $_list = &$_list[myKey];
-                if (!is_array($_list)) {
-                    $_list = [];
+                _list[myKey] = _list[myKey] ?? [];
+                _list = &_list[myKey];
+                if (!is_array(_list)) {
+                    _list = [];
                 }
             } elseif ($op == "remove") {
                 if ($i == $last) {
-                    if (is_array($_list)) {
-                        unset($_list[myKey]);
+                    if (is_array(_list)) {
+                        unset(_list[myKey]);
                     }
 
                     return myData;
                 }
-                if (!isset($_list[myKey])) {
+                if (!isset(_list[myKey])) {
                     return myData;
                 }
-                $_list = &$_list[myKey];
+                _list = &_list[myKey];
             }
         }
 

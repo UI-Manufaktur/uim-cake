@@ -18,19 +18,19 @@ class EventFiredWith : Constraint
      *
      * @var uim.cake.events.EventManager
      */
-    protected $_eventManager;
+    protected _eventManager;
 
     /**
      * Event data key
      */
-    protected string $_dataKey;
+    protected string _dataKey;
 
     /**
      * Event data value
      *
      * @var mixed
      */
-    protected $_dataValue;
+    protected _dataValue;
 
     /**
      * Constructor

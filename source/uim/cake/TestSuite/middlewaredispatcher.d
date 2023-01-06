@@ -91,7 +91,7 @@ class MiddlewareDispatcher
             $spec["environment"]["CAKEPHP_INPUT"] = $spec["input"];
         }
         $environment = array_merge(
-            array_merge($_SERVER, ["REQUEST_URI": $spec["url"]]),
+            array_merge(_SERVER, ["REQUEST_URI": $spec["url"]]),
             $spec["environment"]
         );
         if (strpos($environment["PHP_SELF"], "phpunit") != false) {

@@ -24,21 +24,21 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<uim.cake.validations.ValidationRule>
      */
-    protected $_rules = [];
+    protected _rules = [];
 
     /**
      * Denotes whether the fieldname key must be present in data array
      *
      * @var callable|string|bool
      */
-    protected $_validatePresent = false;
+    protected _validatePresent = false;
 
     /**
      * Denotes if a field is allowed to be empty
      *
      * @var callable|string|bool
      */
-    protected $_allowEmpty = false;
+    protected _allowEmpty = false;
 
     /**
      * Returns whether a field can be left out.

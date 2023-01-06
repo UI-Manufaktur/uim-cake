@@ -53,7 +53,7 @@ class Route
      * Is this route a greedy route? Greedy routes have a `/*` in their
      * template
      */
-    protected bool $_greedy = false;
+    protected bool _greedy = false;
 
     /**
      * The compiled route regular expression
@@ -72,7 +72,7 @@ class Route
      *
      * @var array<string>
      */
-    protected $_extensions = [];
+    protected _extensions = [];
 
     /**
      * List of middleware that should be applied.

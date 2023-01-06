@@ -23,7 +23,7 @@ trait CookieCryptTrait
      *
      * @var array<string>
      */
-    protected $_validCiphers = ["aes"];
+    protected _validCiphers = ["aes"];
 
     /**
      * Returns the encryption key to be used.

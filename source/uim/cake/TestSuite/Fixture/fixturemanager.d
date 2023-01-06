@@ -21,41 +21,41 @@ class FixtureManager
     /**
      * Was this instance already initialized?
      */
-    protected bool $_initialized = false;
+    protected bool _initialized = false;
 
     /**
      * Holds the fixture classes that where instantiated
      *
      * @var array<uim.cake.Datasource\IFixture>
      */
-    protected $_loaded = [];
+    protected _loaded = [];
 
     /**
      * Holds the fixture classes that where instantiated indexed by class name
      *
      * @var array<uim.cake.Datasource\IFixture>
      */
-    protected $_fixtureMap = [];
+    protected _fixtureMap = [];
 
     /**
      * A map of connection names and the fixture currently in it.
      *
      * @var array<string, array<uim.cake.Datasource\IFixture>>
      */
-    protected $_insertionMap = [];
+    protected _insertionMap = [];
 
     /**
      * List of TestCase class name that have been processed
      *
      * @var array<string, bool>
      */
-    protected $_processed = [];
+    protected _processed = [];
 
     /**
      * Is the test runner being run with `--debug` enabled.
      * When true, fixture SQL will also be logged.
      */
-    protected bool $_debug = false;
+    protected bool _debug = false;
 
     /**
      * Modify the debug mode.

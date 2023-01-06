@@ -20,5 +20,5 @@ import uim.cake.core.exceptions.CakeException;
 class RedirectException : CakeException
 {
 
-    protected $_defaultCode = 302;
+    protected _defaultCode = 302;
 }

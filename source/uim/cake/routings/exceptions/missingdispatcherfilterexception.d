@@ -8,5 +8,5 @@ import uim.cake.core.exceptions.CakeException;
 class MissingDispatcherFilterException : CakeException
 {
 
-    protected $_messageTemplate = "Dispatcher filter %s could not be found.";
+    protected _messageTemplate = "Dispatcher filter %s could not be found.";
 }

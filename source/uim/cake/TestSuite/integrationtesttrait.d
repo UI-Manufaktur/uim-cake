@@ -72,84 +72,84 @@ trait IntegrationTestTrait
      *
      * @var array
      */
-    protected $_request = [];
+    protected _request = [];
 
     /**
      * The response for the most recent request.
      *
      * @var \Psr\Http\messages.IResponse|null
      */
-    protected $_response;
+    protected _response;
 
     /**
      * The exception being thrown if the case.
      *
      * @var \Throwable|null
      */
-    protected $_exception;
+    protected _exception;
 
     /**
      * Session data to use in the next request.
      *
      * @var array
      */
-    protected $_session = [];
+    protected _session = [];
 
     /**
      * Cookie data to use in the next request.
      *
      * @var array
      */
-    protected $_cookie = [];
+    protected _cookie = [];
 
     /**
      * The controller used in the last request.
      *
      * @var uim.cake.controllers.Controller|null
      */
-    protected $_controller;
+    protected _controller;
 
     /**
      * The last rendered view
      */
-    protected string $_viewName;
+    protected string _viewName;
 
     /**
      * The last rendered layout
      */
-    protected string $_layoutName;
+    protected string _layoutName;
 
     /**
      * The session instance from the last request
      *
      * @var uim.cake.http.Session
      */
-    protected $_requestSession;
+    protected _requestSession;
 
     /**
      * Boolean flag for whether the request should have
      * a SecurityComponent token added.
      */
-    protected bool $_securityToken = false;
+    protected bool _securityToken = false;
 
     /**
      * Boolean flag for whether the request should have
      * a CSRF token added.
      */
-    protected bool $_csrfToken = false;
+    protected bool _csrfToken = false;
 
     /**
      * Boolean flag for whether the request should re-store
      * flash messages
      */
-    protected bool $_retainFlashMessages = false;
+    protected bool _retainFlashMessages = false;
 
     /**
      * Stored flash messages before render
      *
      * @var array
      */
-    protected $_flashMessages = [];
+    protected _flashMessages = [];
 
     /**
      */
@@ -160,12 +160,12 @@ trait IntegrationTestTrait
      *
      * @var array<string>
      */
-    protected $_unlockedFields = [];
+    protected _unlockedFields = [];
 
     /**
      * The name that will be used when retrieving the csrf token.
      */
-    protected string $_csrfKeyName = "csrfToken";
+    protected string _csrfKeyName = "csrfToken";
 
     /**
      * Clears the state used for requests.
@@ -1239,6 +1239,6 @@ trait IntegrationTestTrait
     protected function getSession(): TestSession
     {
         /** @psalm-suppress InvalidScalarArgument */
-        return new TestSession($_SESSION);
+        return new TestSession(_SESSION);
     }
 }

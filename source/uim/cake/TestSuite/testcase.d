@@ -81,7 +81,7 @@ abstract class TestCase : BaseTestCase
      *
      * @var array
      */
-    protected $_configure = [];
+    protected _configure = [];
 
     /**
      * Asserts that a string matches a given regular expression.

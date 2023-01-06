@@ -29,14 +29,14 @@ class Security
      *
      * @var string|null
      */
-    protected static $_salt;
+    protected static _salt;
 
     /**
      * The crypto implementation to use.
      *
      * @var object|null
      */
-    protected static $_instance;
+    protected static _instance;
 
     /**
      * Create a hash from string using given method.
@@ -148,14 +148,14 @@ class Security
      */
     static function engine($instance = null) {
         if ($instance) {
-            return static::$_instance = $instance;
+            return static::_instance = $instance;
         }
-        if (isset(static::$_instance)) {
+        if (isset(static::_instance)) {
             /** @psalm-suppress LessSpecificReturnStatement */
-            return static::$_instance;
+            return static::_instance;
         }
         if (extension_loaded("openssl")) {
-            return static::$_instance = new OpenSsl();
+            return static::_instance = new OpenSsl();
         }
         throw new InvalidArgumentException(
             "No compatible crypto engine available~ " ~
@@ -266,13 +266,13 @@ class Security
      * @return string The currently configured salt
      */
     static string getSalt() {
-        if (static::$_salt == null) {
+        if (static::_salt == null) {
             throw new RuntimeException(
                 "Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`."
             );
         }
 
-        return static::$_salt;
+        return static::_salt;
     }
 
     /**
@@ -282,6 +282,6 @@ class Security
      * @param string $salt The salt to use for encryption routines.
      */
     static void setSalt(string $salt) {
-        static::$_salt = $salt;
+        static::_salt = $salt;
     }
 }

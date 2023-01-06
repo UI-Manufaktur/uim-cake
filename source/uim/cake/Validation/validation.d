@@ -82,7 +82,7 @@ class Validation
      *
      * @var array<string, string>
      */
-    protected static $_pattern = [
+    protected static _pattern = [
         "hostname": "(?:[_\p{L}0-9][-_\p{L}0-9]*\.)*(?:[\p{L}0-9][-\p{L}0-9]{0,62})\.(?:(?:[a-z]{2}\.)?[a-z]{2,})",
         "latitude": "[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)",
         "longitude": "[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)",
@@ -761,14 +761,14 @@ class Validation
 
         if ($regex == null) {
             // phpcs:ignore Generic.Files.LineLength
-            $regex = "/^[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+(?:\.[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+)*@" ~ self::$_pattern["hostname"] ~ "$/ui";
+            $regex = "/^[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+(?:\.[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]+)*@" ~ self::_pattern["hostname"] ~ "$/ui";
         }
         $return = static::_check($check, $regex);
         if ($deep == false || $deep == null) {
             return $return;
         }
 
-        if ($return == true && preg_match("/@(" ~ static::$_pattern["hostname"] ~ ")$/i", $check, $regs)) {
+        if ($return == true && preg_match("/@(" ~ static::_pattern["hostname"] ~ ")$/i", $check, $regs)) {
             if (function_exists("getmxrr") && getmxrr($regs[1], $mxhosts)) {
                 return true;
             }
@@ -1056,7 +1056,7 @@ class Validation
         $fragmentAndQuery = "([\?" ~ $subDelimiters . $alpha ~ "]|" ~ $hex ~ ")";
         // phpcs:disable Generic.Files.LineLength
         $regex = "/^(?:(?:https?|ftps?|sftp|file|news|gopher):\/\/)" ~ ($strict ? "" : "?") .
-            "(?:" ~ static::$_pattern["IPv4"] ~ "|\[" ~ static::$_pattern["IPv6"] ~ "\]|" ~ static::$_pattern["hostname"] ~ ")(?::[1-9][0-9]{0,4})?" ~
+            "(?:" ~ static::_pattern["IPv4"] ~ "|\[" ~ static::_pattern["IPv6"] ~ "\]|" ~ static::_pattern["hostname"] ~ ")(?::[1-9][0-9]{0,4})?" ~
             "(?:\/" ~ $path ~ "*)?" ~
             "(?:\?" ~ $fragmentAndQuery ~ "*)?" ~
             "(?:#" ~ $fragmentAndQuery ~ "*)?$/iu";
@@ -1442,12 +1442,12 @@ class Validation
                 $options["type"]
             ));
         }
-        $pattern = "/^" ~ self::$_pattern["latitude"] ~ ",\s*" ~ self::$_pattern["longitude"] ~ "$/";
+        $pattern = "/^" ~ self::_pattern["latitude"] ~ ",\s*" ~ self::_pattern["longitude"] ~ "$/";
         if ($options["format"] == "long") {
-            $pattern = "/^" ~ self::$_pattern["longitude"] ~ "$/";
+            $pattern = "/^" ~ self::_pattern["longitude"] ~ "$/";
         }
         if ($options["format"] == "lat") {
-            $pattern = "/^" ~ self::$_pattern["latitude"] ~ "$/";
+            $pattern = "/^" ~ self::_pattern["latitude"] ~ "$/";
         }
 
         return (bool)preg_match($pattern, (string)$value);
@@ -1666,7 +1666,7 @@ class Validation
      */
     protected static void _populateIp() {
         // phpcs:disable Generic.Files.LineLength
-        if (!isset(static::$_pattern["IPv6"])) {
+        if (!isset(static::_pattern["IPv6"])) {
             $pattern = "((([0-9A-Fa-f]{1,4}:){7}(([0-9A-Fa-f]{1,4})|:))|(([0-9A-Fa-f]{1,4}:){6}";
             $pattern .= "(:|((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})";
             $pattern .= "|(:[0-9A-Fa-f]{1,4})))|(([0-9A-Fa-f]{1,4}:){5}((:((25[0-5]|2[0-4]\d|[01]?\d{1,2})";
@@ -1682,11 +1682,11 @@ class Validation
             $pattern .= "\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})?)|((:[0-9A-Fa-f]{1,4})";
             $pattern .= "{1,2})))|(((25[0-5]|2[0-4]\d|[01]?\d{1,2})(\.(25[0-5]|2[0-4]\d|[01]?\d{1,2})){3})))(%.+)?";
 
-            static::$_pattern["IPv6"] = $pattern;
+            static::_pattern["IPv6"] = $pattern;
         }
-        if (!isset(static::$_pattern["IPv4"])) {
+        if (!isset(static::_pattern["IPv4"])) {
             $pattern = "(?:(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|(?:(?:1[0-9])?|[1-9]?)[0-9])";
-            static::$_pattern["IPv4"] = $pattern;
+            static::_pattern["IPv4"] = $pattern;
         }
         // phpcs:enable Generic.Files.LineLength
     }

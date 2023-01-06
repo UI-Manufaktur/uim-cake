@@ -30,37 +30,37 @@ class ValidationRule
      *
      * @var callable|string
      */
-    protected $_rule;
+    protected _rule;
 
     /**
      * The "on" key
      *
      * @var callable|string
      */
-    protected $_on;
+    protected _on;
 
     /**
      * The "last" key
      */
-    protected bool $_last = false;
+    protected bool _last = false;
 
     /**
      * The "message" key
      */
-    protected string $_message;
+    protected string _message;
 
     /**
      * Key under which the object or class where the method to be used for
      * validation will be found
      */
-    protected string $_provider = "default";
+    protected string _provider = "default";
 
     /**
      * Extra arguments to be passed to the validation method
      *
      * @var array
      */
-    protected $_pass = [];
+    protected _pass = [];
 
     /**
      * Constructor

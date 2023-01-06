@@ -15,7 +15,7 @@ class Inflector
      *
      * @var array<string, string>
      */
-    protected static $_plural = [
+    protected static _plural = [
         "/(s)tatus$/i": "\1tatuses",
         "/(quiz)$/i": "\1zes",
         "/^(ox)$/i": "\1\2en",
@@ -46,7 +46,7 @@ class Inflector
      *
      * @var array<string, string>
      */
-    protected static $_singular = [
+    protected static _singular = [
         "/(s)tatuses$/i": "\1\2tatus",
         "/^(.*)(menu)s$/i": "\1\2",
         "/(quiz)zes$/i": "\\1",
@@ -89,7 +89,7 @@ class Inflector
      *
      * @var array<string, string>
      */
-    protected static $_irregular = [
+    protected static _irregular = [
         "atlas": "atlases",
         "beef": "beefs",
         "brief": "briefs",
@@ -139,7 +139,7 @@ class Inflector
      *
      * @var array<string>
      */
-    protected static $_uninflected = [
+    protected static _uninflected = [
         ".*[nrlm]ese", ".*data", ".*deer", ".*fish", ".*measles", ".*ois",
         ".*pox", ".*sheep", "people", "feedback", "stadia", ".*?media",
         "chassis", "clippers", "debris", "diabetes", "equipment", "gallows",
@@ -152,14 +152,14 @@ class Inflector
      *
      * @var array
      */
-    protected static $_cache = [];
+    protected static _cache = [];
 
     /**
      * The initial state of Inflector so reset() works.
      *
      * @var array
      */
-    protected static $_initialState = [];
+    protected static _initialState = [];
 
     /**
      * Cache inflected values, and return if already available
@@ -173,15 +173,15 @@ class Inflector
         myKey = "_" ~ myKey;
         myType = "_" ~ myType;
         if (myValue != false) {
-            static::$_cache[myType][myKey] = myValue;
+            static::_cache[myType][myKey] = myValue;
 
             return myValue;
         }
-        if (!isset(static::$_cache[myType][myKey])) {
+        if (!isset(static::_cache[myType][myKey])) {
             return false;
         }
 
-        return static::$_cache[myType][myKey];
+        return static::_cache[myType][myKey];
     }
 
     /**
@@ -189,12 +189,12 @@ class Inflector
      * rules to the initial values.
      */
     static void reset() {
-        if (empty(static::$_initialState)) {
-            static::$_initialState = get_class_vars(self::class);
+        if (empty(static::_initialState)) {
+            static::_initialState = get_class_vars(self::class);
 
             return;
         }
-        foreach (static::$_initialState as myKey: $val) {
+        foreach (static::_initialState as myKey: $val) {
             if (myKey != "_initialState") {
                 static::${myKey} = $val;
             }
@@ -225,15 +225,15 @@ class Inflector
         if ($reset) {
             static::${$var} = $rules;
         } elseif (myType == "uninflected") {
-            static::$_uninflected = array_merge(
+            static::_uninflected = array_merge(
                 $rules,
-                static::$_uninflected
+                static::_uninflected
             );
         } else {
             static::${$var} = $rules + static::${$var};
         }
 
-        static::$_cache = [];
+        static::_cache = [];
     }
 
     /**
@@ -244,43 +244,43 @@ class Inflector
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
     static string pluralize(string word) {
-        if (isset(static::$_cache["pluralize"][$word])) {
-            return static::$_cache["pluralize"][$word];
+        if (isset(static::_cache["pluralize"][$word])) {
+            return static::_cache["pluralize"][$word];
         }
 
-        if (!isset(static::$_cache["irregular"]["pluralize"])) {
-            $words = array_keys(static::$_irregular);
-            static::$_cache["irregular"]["pluralize"] = "/(.*?(?:\\b|_))(" ~ implode("|", $words) ~ ")$/i";
+        if (!isset(static::_cache["irregular"]["pluralize"])) {
+            $words = array_keys(static::_irregular);
+            static::_cache["irregular"]["pluralize"] = "/(.*?(?:\\b|_))(" ~ implode("|", $words) ~ ")$/i";
 
             $upperWords = array_map("ucfirst", $words);
-            static::$_cache["irregular"]["upperPluralize"] = "/(.*?(?:\\b|[a-z]))(" ~ implode("|", $upperWords) ~ ")$/";
+            static::_cache["irregular"]["upperPluralize"] = "/(.*?(?:\\b|[a-z]))(" ~ implode("|", $upperWords) ~ ")$/";
         }
 
         if (
-            preg_match(static::$_cache["irregular"]["pluralize"], $word, $regs) ||
-            preg_match(static::$_cache["irregular"]["upperPluralize"], $word, $regs)
+            preg_match(static::_cache["irregular"]["pluralize"], $word, $regs) ||
+            preg_match(static::_cache["irregular"]["upperPluralize"], $word, $regs)
         ) {
-            static::$_cache["pluralize"][$word] = $regs[1] . substr($regs[2], 0, 1) .
-                substr(static::$_irregular[strtolower($regs[2])], 1);
+            static::_cache["pluralize"][$word] = $regs[1] . substr($regs[2], 0, 1) .
+                substr(static::_irregular[strtolower($regs[2])], 1);
 
-            return static::$_cache["pluralize"][$word];
+            return static::_cache["pluralize"][$word];
         }
 
-        if (!isset(static::$_cache["uninflected"])) {
-            static::$_cache["uninflected"] = "/^(" ~ implode("|", static::$_uninflected) ~ ")$/i";
+        if (!isset(static::_cache["uninflected"])) {
+            static::_cache["uninflected"] = "/^(" ~ implode("|", static::_uninflected) ~ ")$/i";
         }
 
-        if (preg_match(static::$_cache["uninflected"], $word, $regs)) {
-            static::$_cache["pluralize"][$word] = $word;
+        if (preg_match(static::_cache["uninflected"], $word, $regs)) {
+            static::_cache["pluralize"][$word] = $word;
 
             return $word;
         }
 
-        foreach (static::$_plural as $rule: $replacement) {
+        foreach (static::_plural as $rule: $replacement) {
             if (preg_match($rule, $word)) {
-                static::$_cache["pluralize"][$word] = preg_replace($rule, $replacement, $word);
+                static::_cache["pluralize"][$word] = preg_replace($rule, $replacement, $word);
 
-                return static::$_cache["pluralize"][$word];
+                return static::_cache["pluralize"][$word];
             }
         }
 
@@ -295,49 +295,49 @@ class Inflector
      * @link https://book.UIM.org/4/en/core-libraries/inflector.html#creating-plural-singular-forms
      */
     static string singularize(string word) {
-        if (isset(static::$_cache["singularize"][$word])) {
-            return static::$_cache["singularize"][$word];
+        if (isset(static::_cache["singularize"][$word])) {
+            return static::_cache["singularize"][$word];
         }
 
-        if (!isset(static::$_cache["irregular"]["singular"])) {
-            $wordList = array_values(static::$_irregular);
-            static::$_cache["irregular"]["singular"] = "/(.*?(?:\\b|_))(" ~ implode("|", $wordList) ~ ")$/i";
+        if (!isset(static::_cache["irregular"]["singular"])) {
+            $wordList = array_values(static::_irregular);
+            static::_cache["irregular"]["singular"] = "/(.*?(?:\\b|_))(" ~ implode("|", $wordList) ~ ")$/i";
 
             $upperWordList = array_map("ucfirst", $wordList);
-            static::$_cache["irregular"]["singularUpper"] = "/(.*?(?:\\b|[a-z]))(" ~
+            static::_cache["irregular"]["singularUpper"] = "/(.*?(?:\\b|[a-z]))(" ~
                 implode("|", $upperWordList) .
                 ")$/";
         }
 
         if (
-            preg_match(static::$_cache["irregular"]["singular"], $word, $regs) ||
-            preg_match(static::$_cache["irregular"]["singularUpper"], $word, $regs)
+            preg_match(static::_cache["irregular"]["singular"], $word, $regs) ||
+            preg_match(static::_cache["irregular"]["singularUpper"], $word, $regs)
         ) {
-            $suffix = array_search(strtolower($regs[2]), static::$_irregular, true);
+            $suffix = array_search(strtolower($regs[2]), static::_irregular, true);
             $suffix = $suffix ? substr($suffix, 1) : "";
-            static::$_cache["singularize"][$word] = $regs[1] . substr($regs[2], 0, 1) . $suffix;
+            static::_cache["singularize"][$word] = $regs[1] . substr($regs[2], 0, 1) . $suffix;
 
-            return static::$_cache["singularize"][$word];
+            return static::_cache["singularize"][$word];
         }
 
-        if (!isset(static::$_cache["uninflected"])) {
-            static::$_cache["uninflected"] = "/^(" ~ implode("|", static::$_uninflected) ~ ")$/i";
+        if (!isset(static::_cache["uninflected"])) {
+            static::_cache["uninflected"] = "/^(" ~ implode("|", static::_uninflected) ~ ")$/i";
         }
 
-        if (preg_match(static::$_cache["uninflected"], $word, $regs)) {
-            static::$_cache["pluralize"][$word] = $word;
+        if (preg_match(static::_cache["uninflected"], $word, $regs)) {
+            static::_cache["pluralize"][$word] = $word;
 
             return $word;
         }
 
-        foreach (static::$_singular as $rule: $replacement) {
+        foreach (static::_singular as $rule: $replacement) {
             if (preg_match($rule, $word)) {
-                static::$_cache["singularize"][$word] = preg_replace($rule, $replacement, $word);
+                static::_cache["singularize"][$word] = preg_replace($rule, $replacement, $word);
 
-                return static::$_cache["singularize"][$word];
+                return static::_cache["singularize"][$word];
             }
         }
-        static::$_cache["singularize"][$word] = $word;
+        static::_cache["singularize"][$word] = $word;
 
         return $word;
     }

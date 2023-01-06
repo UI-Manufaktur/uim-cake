@@ -21,14 +21,14 @@ class FixtureInjector : TestListener
      *
      * @var uim.cake.TestSuite\Fixture\FixtureManager
      */
-    protected $_fixtureManager;
+    protected _fixtureManager;
 
     /**
      * Holds a reference to the container test suite
      *
      * @var \PHPUnit\Framework\TestSuite|null
      */
-    protected $_first;
+    protected _first;
 
     /**
      * Constructor. Save internally the reference to the passed fixture manager
@@ -36,8 +36,8 @@ class FixtureInjector : TestListener
      * @param uim.cake.TestSuite\Fixture\FixtureManager $manager The fixture manager
      */
     this(FixtureManager $manager) {
-        if (isset($_SERVER["argv"])) {
-            $manager.setDebug(in_array("--debug", $_SERVER["argv"], true));
+        if (isset(_SERVER["argv"])) {
+            $manager.setDebug(in_array("--debug", _SERVER["argv"], true));
         }
         _fixtureManager = $manager;
         _fixtureManager.shutDown();

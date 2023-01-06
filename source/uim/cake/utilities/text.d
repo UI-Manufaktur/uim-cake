@@ -10,14 +10,14 @@ class Text {
      *
      * @var \Transliterator|null Transliterator instance.
      */
-    protected static $_defaultTransliterator;
+    protected static _defaultTransliterator;
 
     /**
      * Default transliterator id string.
      *
      * @var string _defaultTransliteratorId Transliterator identifier string.
      */
-    protected static $_defaultTransliteratorId = "Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove";
+    protected static _defaultTransliteratorId = "Any-Latin; Latin-ASCII; [\u0080-\u7fff] remove";
 
     // Default HTML tags which must not be counted for truncating text.
     protected static string[] _defaultHtmlNoCount = [
@@ -1024,7 +1024,7 @@ class Text {
      */
     static auto getTransliterator(): ?Transliterator
     {
-        return static::$_defaultTransliterator;
+        return static::_defaultTransliterator;
     }
 
     /**
@@ -1033,7 +1033,7 @@ class Text {
      * @param \Transliterator $transliterator A `Transliterator` instance.
      */
     static void setTransliterator(Transliterator $transliterator) {
-        static::$_defaultTransliterator = $transliterator;
+        static::_defaultTransliterator = $transliterator;
     }
 
     /**
@@ -1042,7 +1042,7 @@ class Text {
      * @return string Transliterator identifier.
      */
     static string getTransliteratorId() {
-        return static::$_defaultTransliteratorId;
+        return static::_defaultTransliteratorId;
     }
 
     /**
@@ -1057,7 +1057,7 @@ class Text {
         }
 
         static::setTransliterator($transliterator);
-        static::$_defaultTransliteratorId = $transliteratorId;
+        static::_defaultTransliteratorId = $transliteratorId;
     }
 
     /**
@@ -1073,7 +1073,7 @@ class Text {
      */
     static string transliterate(string string, $transliterator = null) {
         if (empty($transliterator)) {
-            $transliterator = static::$_defaultTransliterator ?: static::$_defaultTransliteratorId;
+            $transliterator = static::_defaultTransliterator ?: static::_defaultTransliteratorId;
         }
 
         $return = transliterator_transliterate($transliterator, $string);

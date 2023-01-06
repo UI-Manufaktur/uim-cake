@@ -20,7 +20,7 @@ class EventFired : Constraint
      *
      * @var uim.cake.events.EventManager
      */
-    protected $_eventManager;
+    protected _eventManager;
 
     /**
      * Constructor

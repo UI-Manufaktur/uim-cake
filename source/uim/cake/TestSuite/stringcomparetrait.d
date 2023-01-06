@@ -3,7 +3,7 @@ module uim.cake.TestSuite;
 /**
  * Compare a string to the contents of a file
  *
- * Implementing objects are expected to modify the `$_compareBasePath` property
+ * Implementing objects are expected to modify the `_compareBasePath` property
  * before use.
  */
 trait StringCompareTrait
@@ -13,14 +13,14 @@ trait StringCompareTrait
      *
      * Must be initialized before use
      */
-    protected string $_compareBasePath = "";
+    protected string _compareBasePath = "";
 
     /**
      * Update comparisons to match test changes
      *
      * Initialized with the env variable UPDATE_TEST_COMPARISON_FILES
      */
-    protected bool $_updateComparisons;
+    protected bool _updateComparisons;
 
     /**
      * Compare the result to the contents of the file

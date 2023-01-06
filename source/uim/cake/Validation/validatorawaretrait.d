@@ -34,14 +34,14 @@ trait ValidatorAwareTrait
     /**
      * Validator class.
      */
-    protected string $_validatorClass = Validator::class;
+    protected string _validatorClass = Validator::class;
 
     /**
      * A list of validation objects indexed by name
      *
      * @var array<uim.cake.validations.Validator>
      */
-    protected $_validators = [];
+    protected _validators = [];
 
     /**
      * Returns the validation rules tagged with $name. It is possible to have
