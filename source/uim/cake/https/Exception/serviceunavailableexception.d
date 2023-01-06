@@ -14,23 +14,23 @@
 use Throwable;
 
 /**
- * Represents an HTTP 406 error.
+ * Represents an HTTP 503 error.
  */
-class NotAcceptableException : HttpException
+class ServiceUnavailableException : HttpException
 {
 
-    protected _defaultCode = 406;
+    protected _defaultCode = 503;
 
     /**
      * Constructor
      *
-     * @param string|null $message If no message is given "Not Acceptable" will be the message
-     * @param int|null $code Status code, defaults to 406
+     * @param string|null $message If no message is given "Service Unavailable" will be the message
+     * @param int|null $code Status code, defaults to 503
      * @param \Throwable|null $previous The previous exception.
      */
     this(?string $message = null, ?int $code = null, ?Throwable $previous = null) {
         if (empty($message)) {
-            $message = "Not Acceptable";
+            $message = "Service Unavailable";
         }
         super(($message, $code, $previous);
     }

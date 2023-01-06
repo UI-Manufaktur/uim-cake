@@ -19,7 +19,7 @@ use Throwable;
 class ConflictException : HttpException
 {
 
-    protected $_defaultCode = 409;
+    protected _defaultCode = 409;
 
     /**
      * Constructor

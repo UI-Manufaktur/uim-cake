@@ -22,11 +22,11 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * order to marshal the request URI and headers.
      *
      * @see fromServer()
-     * @param array|null $server $_SERVER superglobal
-     * @param array|null myQuery $_GET superglobal
-     * @param array|null $parsedBody $_POST superglobal
-     * @param array|null $cookies $_COOKIE superglobal
-     * @param array|null myfiles $_FILES superglobal
+     * @param array|null $server _SERVER superglobal
+     * @param array|null myQuery _GET superglobal
+     * @param array|null $parsedBody _POST superglobal
+     * @param array|null $cookies _COOKIE superglobal
+     * @param array|null myfiles _FILES superglobal
      * @return uim.cake.http.ServerRequest
      * @throws \InvalidArgumentException for invalid file values
      */
@@ -37,7 +37,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         ?array $cookies = null,
         ?array myfiles = null
     ): ServerRequest {
-        $server = normalizeServer($server ?: $_SERVER);
+        $server = normalizeServer($server ?: _SERVER);
         $uri = static::createUri($server);
 
         /** @psalm-suppress NoInterfaceProperties */
@@ -52,8 +52,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 <<<<<<< HEAD
             "environment":$server,
             "uri":$uri,
-            "cookies":$cookies ?: $_COOKIE,
-            "query":myQuery ?: $_GET,
+            "cookies":$cookies ?: _COOKIE,
+            "query":myQuery ?: _GET,
             "webroot":$uri.webroot,
             "base":$uri.base,
             "session":$session,
@@ -61,8 +61,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 !==
             "environment": $server,
             "uri": $uri,
-            "cookies": $cookies ?: $_COOKIE,
-            "query": myQuery ?: $_GET,
+            "cookies": $cookies ?: _COOKIE,
+            "query": myQuery ?: _GET,
             "webroot": $uri.webroot,
             "base": $uri.base,
             "session": $session,
@@ -70,8 +70,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
         ]);
 
-        myRequest = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, myRequest);
-        myRequest = static::marshalFiles(myfiles ?? $_FILES, myRequest);
+        myRequest = static::marshalBodyAndRequestMethod($parsedBody ?? _POST, myRequest);
+        myRequest = static::marshalFiles(myfiles ?? _FILES, myRequest);
 
         return myRequest;
     }
@@ -196,12 +196,12 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * Create a new Uri instance from the provided server data.
      *
      * @param array $server Array of server data to build the Uri from.
-     *   $_SERVER will be added into the $server parameter.
+     *   _SERVER will be added into the $server parameter.
      * @return \Psr\Http\messages.UriInterface New instance.
      */
     static function createUri(array $server = []): UriInterface
     {
-        $server += $_SERVER;
+        $server += _SERVER;
         $server = normalizeServer($server);
         $headers = marshalHeadersFromSapi($server);
 

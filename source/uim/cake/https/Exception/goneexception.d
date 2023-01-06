@@ -19,7 +19,7 @@ use Throwable;
 class GoneException : HttpException
 {
 
-    protected $_defaultCode = 410;
+    protected _defaultCode = 410;
 
     /**
      * Constructor

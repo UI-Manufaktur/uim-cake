@@ -8,7 +8,7 @@ use Throwable;
 class MethodNotAllowedException : HttpException
 {
 
-    protected $_defaultCode = 405;
+    protected _defaultCode = 405;
 
     /**
      * Constructor

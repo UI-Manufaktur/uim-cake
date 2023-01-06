@@ -8,7 +8,7 @@ use Throwable;
 class ForbiddenException : HttpException
 {
 
-    protected $_defaultCode = 403;
+    protected _defaultCode = 403;
 
     /**
      * Constructor

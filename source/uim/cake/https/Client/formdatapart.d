@@ -28,12 +28,12 @@ class FormDataPart
     /**
      * Name of the value.
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * Value to send.
      */
-    protected string $_value;
+    protected string _value;
 
     /**
      * Content type to use
@@ -44,7 +44,7 @@ class FormDataPart
     /**
      * Disposition to send
      */
-    protected string $_disposition;
+    protected string _disposition;
 
     /**
      * Filename to send if using files.

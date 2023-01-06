@@ -314,7 +314,7 @@ class Session
         }
 
         if (_isCLI) {
-            $_SESSION = [];
+            _SESSION = [];
             this.id("cli");
 
             return _started = true;
@@ -388,15 +388,15 @@ class Session
             this.start();
         }
 
-        if (!isset($_SESSION)) {
+        if (!isset(_SESSION)) {
             return false;
         }
 
         if (myName is null) {
-            return (bool)$_SESSION;
+            return (bool)_SESSION;
         }
 
-        return Hash::get($_SESSION, myName)  !is null;
+        return Hash::get(_SESSION, myName)  !is null;
     }
 
     /**
@@ -412,15 +412,15 @@ class Session
             this.start();
         }
 
-        if (!isset($_SESSION)) {
+        if (!isset(_SESSION)) {
             return $default;
         }
 
         if (myName is null) {
-            return $_SESSION ?: [];
+            return _SESSION ?: [];
         }
 
-        return Hash::get($_SESSION, myName, $default);
+        return Hash::get(_SESSION, myName, $default);
     }
 
     /**
@@ -451,7 +451,7 @@ class Session
         }
         myValue = this.read(myName);
         if (myValue  !is null) {
-            _overwrite($_SESSION, Hash::remove($_SESSION, myName));
+            _overwrite(_SESSION, Hash::remove(_SESSION, myName));
         }
 
         return myValue;
@@ -472,13 +472,13 @@ class Session
             myName = [myName: myValue];
         }
 
-        myData = $_SESSION ?? [];
+        myData = _SESSION ?? [];
         foreach (myName as myKey: $val) {
             myData = Hash::insert(myData, myKey, $val);
         }
 
         /** @psalm-suppress PossiblyNullArgument */
-        _overwrite($_SESSION, myData);
+        _overwrite(_SESSION, myData);
     }
 
     /**
@@ -510,7 +510,7 @@ class Session
      */
     void delete(string myName) {
         if (this.check(myName)) {
-            _overwrite($_SESSION, Hash::remove($_SESSION, myName));
+            _overwrite(_SESSION, Hash::remove(_SESSION, myName));
         }
     }
 
@@ -545,7 +545,7 @@ class Session
             session_destroy();
         }
 
-        $_SESSION = [];
+        _SESSION = [];
         _started = false;
     }
 
@@ -557,7 +557,7 @@ class Session
      * @param bool $renew If session should be renewed, as well. Defaults to false.
      */
     void clear(bool $renew = false) {
-        $_SESSION = [];
+        _SESSION = [];
         if ($renew) {
             this.renew();
         }
@@ -566,9 +566,9 @@ class Session
     // Returns whether a session exists
     protected bool _hasSession() {
         return !ini_get("session.use_cookies")
-            || isset($_COOKIE[session_name()])
+            || isset(_COOKIE[session_name()])
             || _isCLI
-            || (ini_get("session.use_trans_sid") && isset($_GET[session_name()]));
+            || (ini_get("session.use_trans_sid") && isset(_GET[session_name()]));
     }
 
     /**

@@ -1,17 +1,17 @@
-module uim.cake.https\Middleware;
+module uim.cake.http.Middleware;
 
 use ArrayAccess;
-import uim.cake.https\Cookie\Cookie;
-import uim.cake.https\Cookie\ICookie;
-import uim.cake.https\exceptions.InvalidCsrfTokenException;
-import uim.cake.https\Response;
+import uim.cake.http.Cookie\Cookie;
+import uim.cake.http.Cookie\CookieInterface;
+import uim.cake.http.exceptions.InvalidCsrfTokenException;
+import uim.cake.http.Response;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use InvalidArgumentException;
 use Psr\Http\messages.IResponse;
 use Psr\Http\messages.IServerRequest;
 use Psr\Http\servers.IMiddleware;
-use Psr\Http\servers.IRequestHandler;
+use Psr\Http\servers.RequestHandlerInterface;
 use RuntimeException;
 
 /**
@@ -41,20 +41,20 @@ class CsrfProtectionMiddleware : IMiddleware
      *  - `secure` Whether the cookie will be set with the Secure flag. Defaults to false.
      *  - `httponly` Whether the cookie will be set with the HttpOnly flag. Defaults to false.
      *  - `samesite` "SameSite" attribute for cookies. Defaults to `null`.
-     *    Valid values: `ICookie::SAMESITE_LAX`, `ICookie::SAMESITE_STRICT`,
-     *    `ICookie::SAMESITE_NONE` or `null`.
+     *    Valid values: `CookieInterface::SAMESITE_LAX`, `CookieInterface::SAMESITE_STRICT`,
+     *    `CookieInterface::SAMESITE_NONE` or `null`.
      *  - `field` The form field to check. Changing this will also require configuring
      *    FormHelper.
      *
      * @var array<string, mixed>
      */
     protected _config = [
-        "cookieName":"csrfToken",
-        "expiry":0,
-        "secure":false,
-        "httponly":false,
-        "samesite":null,
-        "field":"_csrfToken",
+        "cookieName": "csrfToken",
+        "expiry": 0,
+        "secure": false,
+        "httponly": false,
+        "samesite": null,
+        "field": "_csrfToken",
     ];
 
     /**
@@ -64,7 +64,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @var callable|null
      */
-    protected skipCheckCallback;
+    protected $skipCheckCallback;
 
     /**
      * @var int
@@ -79,46 +79,48 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * We are currently using sha1 for the hmac which
      * creates 40 bytes.
-    */
-    const int TOKEN_WITH_CHECKSUM_LENGTH = 56;
+     *
+     * @var int
+     */
+    const TOKEN_WITH_CHECKSUM_LENGTH = 56;
 
     /**
      * Constructor
      *
-     * @param array<string, mixed> myConfig Config options. See _config for valid keys.
+     * @param array<string, mixed> aConfig Config options. See _config for valid keys.
      */
-    this(array myConfig = []) {
-        if (array_key_exists("httpOnly", myConfig)) {
-            myConfig["httponly"] = myConfig["httpOnly"];
+    this(Json aConfig = []) {
+        if (array_key_exists("httpOnly", aConfig)) {
+            aConfig["httponly"] = aConfig["httpOnly"];
             deprecationWarning("Option `httpOnly` is deprecated. Use lowercased `httponly` instead.");
         }
 
-        _config = myConfig + _config;
+        _config = aConfig + _config;
     }
 
     /**
      * Checks and sets the CSRF token depending on the HTTP verb.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request.
-     * @param \Psr\Http\servers.IRequestHandler $handler The request handler.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\messages.IResponse A response.
      */
-    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        $method = myRequest.getMethod();
+        $method = $request.getMethod();
         $hasData = in_array($method, ["PUT", "POST", "DELETE", "PATCH"], true)
-            || myRequest.getParsedBody();
+            || $request.getParsedBody();
 
         if (
             $hasData
-            && this.skipCheckCallback  !is null
-            && call_user_func(this.skipCheckCallback, myRequest) == true
+            && this.skipCheckCallback != null
+            && call_user_func(this.skipCheckCallback, $request) == true
         ) {
-            myRequest = _unsetTokenField(myRequest);
+            $request = _unsetTokenField($request);
 
-            return $handler.handle(myRequest);
+            return $handler.handle($request);
         }
-        if (myRequest.getAttribute("csrfToken")) {
+        if ($request.getAttribute("csrfToken")) {
             throw new RuntimeException(
                 "A CSRF token is already set in the request." ~
                 "\n" ~
@@ -127,32 +129,32 @@ class CsrfProtectionMiddleware : IMiddleware
             );
         }
 
-        $cookies = myRequest.getCookieParams();
+        $cookies = $request.getCookieParams();
         $cookieData = Hash::get($cookies, _config["cookieName"]);
 
         if (is_string($cookieData) && $cookieData != "") {
             try {
-                myRequest = myRequest.withAttribute("csrfToken", this.saltToken($cookieData));
+                $request = $request.withAttribute("csrfToken", this.saltToken($cookieData));
             } catch (InvalidArgumentException $e) {
                 $cookieData = null;
             }
         }
 
-        if ($method == "GET" && $cookieData is null) {
+        if ($method == "GET" && $cookieData == null) {
             $token = this.createToken();
-            myRequest = myRequest.withAttribute("csrfToken", this.saltToken($token));
+            $request = $request.withAttribute("csrfToken", this.saltToken($token));
             /** @var mixed $response */
-            $response = $handler.handle(myRequest);
+            $response = $handler.handle($request);
 
-            return _addTokenCookie($token, myRequest, $response);
+            return _addTokenCookie($token, $request, $response);
         }
 
         if ($hasData) {
-            _validateToken(myRequest);
-            myRequest = _unsetTokenField(myRequest);
+            _validateToken($request);
+            $request = _unsetTokenField($request);
         }
 
-        return $handler.handle(myRequest);
+        return $handler.handle($request);
     }
 
     /**
@@ -190,18 +192,18 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Remove CSRF protection token from request data.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request object.
+     * @param \Psr\Http\messages.IServerRequest $request The request object.
      * @return \Psr\Http\messages.IServerRequest
      */
-    protected auto _unsetTokenField(IServerRequest myRequest): IServerRequest
+    protected function _unsetTokenField(IServerRequest $request): IServerRequest
     {
-        $body = myRequest.getParsedBody();
+        $body = $request.getParsedBody();
         if (is_array($body)) {
             unset($body[_config["field"]]);
-            myRequest = myRequest.withParsedBody($body);
+            $request = $request.withParsedBody($body);
         }
 
-        return myRequest;
+        return $request;
     }
 
     /**
@@ -224,9 +226,9 @@ class CsrfProtectionMiddleware : IMiddleware
      * to BREACH they should rotate over time and support will be dropped
      * in 5.x.
      *
-     * @param string token The token to test.
+     * @param string $token The token to test.
      */
-    protected bool isHexadecimalToken(string token) {
+    protected bool isHexadecimalToken(string $token) {
         return preg_match("/^[a-f0-9]{" ~ static::TOKEN_WITH_CHECKSUM_LENGTH ~ "}$/", $token) == 1;
     }
 
@@ -234,9 +236,9 @@ class CsrfProtectionMiddleware : IMiddleware
      * Create a new token to be used for CSRF protection
      */
     string createToken() {
-        myValue = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
+        $value = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
 
-        return base64_encode(myValue . hash_hmac("sha1", myValue, Security::getSalt()));
+        return base64_encode($value . hash_hmac("sha1", $value, Security::getSalt()));
     }
 
     /**
@@ -246,10 +248,10 @@ class CsrfProtectionMiddleware : IMiddleware
      * When the token is compared to the session the token needs
      * to be unsalted.
      *
-     * @param string token The token to salt.
+     * @param string $token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    string saltToken(string token) {
+    string saltToken(string $token) {
         if (this.isHexadecimalToken($token)) {
             return $token;
         }
@@ -275,10 +277,10 @@ class CsrfProtectionMiddleware : IMiddleware
      * If the token is not TOKEN_VALUE_LENGTH * 2 it is an old
      * unsalted value that is supported for backwards compatibility.
      *
-     * @param string token The token that could be salty.
+     * @param string $token The token that could be salty.
      * @return string An unsalted token.
      */
-    string unsaltToken(string token) {
+    string unsaltToken(string $token) {
         if (this.isHexadecimalToken($token)) {
             return $token;
         }
@@ -301,9 +303,9 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Verify that CSRF token was originally generated by the receiving application.
      *
-     * @param string token The CSRF token.
+     * @param string $token The CSRF token.
      */
-    protected bool _verifyToken(string token) {
+    protected bool _verifyToken(string $token) {
         // If we have a hexadecimal value we"re in a compatibility mode from before
         // tokens were salted on each request.
         if (this.isHexadecimalToken($token)) {
@@ -311,14 +313,14 @@ class CsrfProtectionMiddleware : IMiddleware
         } else {
             $decoded = base64_decode($token, true);
         }
-        if (strlen($decoded) <= static::TOKEN_VALUE_LENGTH) {
+        if (!$decoded || strlen($decoded) <= static::TOKEN_VALUE_LENGTH) {
             return false;
         }
 
-        myKey = substr($decoded, 0, static::TOKEN_VALUE_LENGTH);
+        $key = substr($decoded, 0, static::TOKEN_VALUE_LENGTH);
         $hmac = substr($decoded, static::TOKEN_VALUE_LENGTH);
 
-        $expectedHmac = hash_hmac("sha1", myKey, Security::getSalt());
+        $expectedHmac = hash_hmac("sha1", $key, Security::getSalt());
 
         return hash_equals($hmac, $expectedHmac);
     }
@@ -326,17 +328,17 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Add a CSRF token to the response cookies.
      *
-     * @param string token The token to add.
-     * @param \Psr\Http\messages.IServerRequest myRequest The request to validate against.
+     * @param string $token The token to add.
+     * @param \Psr\Http\messages.IServerRequest $request The request to validate against.
      * @param \Psr\Http\messages.IResponse $response The response.
      * @return \Psr\Http\messages.IResponse $response Modified response.
      */
-    protected auto _addTokenCookie(
-        string token,
-        IServerRequest myRequest,
+    protected function _addTokenCookie(
+        string $token,
+        IServerRequest $request,
         IResponse $response
     ): IResponse {
-        $cookie = _createCookie($token, myRequest);
+        $cookie = _createCookie($token, $request);
         if ($response instanceof Response) {
             return $response.withCookie($cookie);
         }
@@ -347,27 +349,27 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Validate the request data against the cookie token.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request to validate against.
+     * @param \Psr\Http\messages.IServerRequest $request The request to validate against.
      * @return void
      * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected void _validateToken(IServerRequest myRequest) {
-        $cookie = Hash::get(myRequest.getCookieParams(), _config["cookieName"]);
+    protected void _validateToken(IServerRequest $request) {
+        $cookie = Hash::get($request.getCookieParams(), _config["cookieName"]);
 
         if (!$cookie || !is_string($cookie)) {
             throw new InvalidCsrfTokenException(__d("cake", "Missing or incorrect CSRF cookie type."));
         }
 
         if (!_verifyToken($cookie)) {
-            myException = new InvalidCsrfTokenException(__d("cake", "Missing or invalid CSRF cookie."));
+            $exception = new InvalidCsrfTokenException(__d("cake", "Missing or invalid CSRF cookie."));
 
-            $expiredCookie = _createCookie("", myRequest).withExpired();
-            myException.setHeader("Set-Cookie", $expiredCookie.toHeaderValue());
+            $expiredCookie = _createCookie("", $request).withExpired();
+            $exception.setHeader("Set-Cookie", $expiredCookie.toHeaderValue());
 
-            throw myException;
+            throw $exception;
         }
 
-        $body = myRequest.getParsedBody();
+        $body = $request.getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
             $post = (string)Hash::get($body, _config["field"]);
             $post = this.unsaltToken($post);
@@ -376,7 +378,7 @@ class CsrfProtectionMiddleware : IMiddleware
             }
         }
 
-        $header = myRequest.getHeaderLine("X-CSRF-Token");
+        $header = $request.getHeaderLine("X-CSRF-Token");
         $header = this.unsaltToken($header);
         if (hash_equals($header, $cookie)) {
             return;
@@ -391,24 +393,22 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Create response cookie
      *
-     * @param string myValue Cookie value
-     * @param \Psr\Http\messages.IServerRequest myRequest The request object.
-     * @return uim.cake.http.Cookie\ICookie
+     * @param string $value Cookie value
+     * @param \Psr\Http\messages.IServerRequest $request The request object.
+     * @return uim.cake.http.Cookie\CookieInterface
      */
-    protected auto _createCookie(string myValue, IServerRequest myRequest): ICookie
+    protected function _createCookie(string $value, IServerRequest $request): CookieInterface
     {
-        $cookie = Cookie::create(
+        return Cookie::create(
             _config["cookieName"],
-            myValue,
+            $value,
             [
-                "expires":_config["expiry"] ?: null,
-                "path":myRequest.getAttribute("webroot"),
-                "secure":_config["secure"],
-                "httponly":_config["httponly"],
-                "samesite":_config["samesite"],
+                "expires": _config["expiry"] ?: null,
+                "path": $request.getAttribute("webroot"),
+                "secure": _config["secure"],
+                "httponly": _config["httponly"],
+                "samesite": _config["samesite"],
             ]
         );
-
-        return $cookie;
     }
 }

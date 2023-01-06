@@ -1,18 +1,22 @@
-/*********************************************************************************************************
-	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
-	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
-	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.https\Middleware;
+
+
+
+ *
+
+
+ * @since         4.2.0
+
+ */module uim.cake.http.Middleware;
 
 use ArrayAccess;
-import uim.cake.https\exceptions.InvalidCsrfTokenException;
-import uim.cake.https\Session;
+import uim.cake.http.exceptions.InvalidCsrfTokenException;
+import uim.cake.http.Session;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use Psr\Http\messages.IResponse;
 use Psr\Http\messages.IServerRequest;
 use Psr\Http\servers.IMiddleware;
-use Psr\Http\servers.IRequestHandler;
+use Psr\Http\servers.RequestHandlerInterface;
 use RuntimeException;
 
 /**
@@ -31,7 +35,7 @@ use RuntimeException;
  *
  * If you use this middleware *do not* also use CsrfProtectionMiddleware.
  *
- * @see https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#sychronizer-token-pattern
+ * @see https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#synchronizer-token-pattern
  */
 class SessionCsrfProtectionMiddleware : IMiddleware
 {
@@ -45,8 +49,8 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * @var array<string, mixed>
      */
     protected _config = [
-        "key":"csrfToken",
-        "field":"_csrfToken",
+        "key": "csrfToken",
+        "field": "_csrfToken",
     ];
 
     /**
@@ -56,7 +60,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @var callable|null
      */
-    protected skipCheckCallback;
+    protected $skipCheckCallback;
 
     /**
      * @var int
@@ -66,57 +70,57 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     /**
      * Constructor
      *
-     * @param array<string, mixed> myConfig Config options. See _config for valid keys.
+     * @param array<string, mixed> aConfig Config options. See _config for valid keys.
      */
-    this(array myConfig = []) {
-        _config = myConfig + _config;
+    this(Json aConfig = []) {
+        _config = aConfig + _config;
     }
 
     /**
      * Checks and sets the CSRF token depending on the HTTP verb.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request.
-     * @param \Psr\Http\servers.IRequestHandler $handler The request handler.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\messages.IResponse A response.
      */
-    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        $method = myRequest.getMethod();
+        $method = $request.getMethod();
         $hasData = in_array($method, ["PUT", "POST", "DELETE", "PATCH"], true)
-            || myRequest.getParsedBody();
+            || $request.getParsedBody();
 
         if (
             $hasData
-            && this.skipCheckCallback  !is null
-            && call_user_func(this.skipCheckCallback, myRequest) == true
+            && this.skipCheckCallback != null
+            && call_user_func(this.skipCheckCallback, $request) == true
         ) {
-            myRequest = this.unsetTokenField(myRequest);
+            $request = this.unsetTokenField($request);
 
-            return $handler.handle(myRequest);
+            return $handler.handle($request);
         }
 
-        $session = myRequest.getAttribute("session");
+        $session = $request.getAttribute("session");
         if (!$session || !($session instanceof Session)) {
             throw new RuntimeException("You must have a `session` attribute to use session based CSRF tokens");
         }
 
         $token = $session.read(_config["key"]);
-        if ($token is null) {
+        if ($token == null) {
             $token = this.createToken();
             $session.write(_config["key"], $token);
         }
-        myRequest = myRequest.withAttribute("csrfToken", this.saltToken($token));
+        $request = $request.withAttribute("csrfToken", this.saltToken($token));
 
         if ($method == "GET") {
-            return $handler.handle(myRequest);
+            return $handler.handle($request);
         }
 
         if ($hasData) {
-            this.validateToken(myRequest, $session);
-            myRequest = this.unsetTokenField(myRequest);
+            this.validateToken($request, $session);
+            $request = this.unsetTokenField($request);
         }
 
-        return $handler.handle(myRequest);
+        return $handler.handle($request);
     }
 
     /**
@@ -141,10 +145,10 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * When the token is compared to the session the token needs
      * to be unsalted.
      *
-     * @param string token The token to salt.
+     * @param string $token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    string saltToken(string token) {
+    string saltToken(string $token) {
         $decoded = base64_decode($token);
         $length = strlen($decoded);
         $salt = Security::randomBytes($length);
@@ -163,10 +167,10 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * If the token is not TOKEN_VALUE_LENGTH * 2 it is an old
      * unsalted value that is supported for backwards compatibility.
      *
-     * @param string token The token that could be salty.
+     * @param string $token The token that could be salty.
      * @return string An unsalted token.
      */
-    protected string unsaltToken(string token) {
+    protected string unsaltToken(string $token) {
         $decoded = base64_decode($token, true);
         if ($decoded == false || strlen($decoded) != static::TOKEN_VALUE_LENGTH * 2) {
             return $token;
@@ -189,18 +193,18 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * This ensures that the token does not cause failures during
      * form tampering protection.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request object.
+     * @param \Psr\Http\messages.IServerRequest $request The request object.
      * @return \Psr\Http\messages.IServerRequest
      */
-    protected auto unsetTokenField(IServerRequest myRequest): IServerRequest
+    protected function unsetTokenField(IServerRequest $request): IServerRequest
     {
-        $body = myRequest.getParsedBody();
+        $body = $request.getParsedBody();
         if (is_array($body)) {
             unset($body[_config["field"]]);
-            myRequest = myRequest.withParsedBody($body);
+            $request = $request.withParsedBody($body);
         }
 
-        return myRequest;
+        return $request;
     }
 
     /**
@@ -216,17 +220,18 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     /**
      * Validate the request data against the cookie token.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request to validate against.
+     * @param \Psr\Http\messages.IServerRequest $request The request to validate against.
      * @param uim.cake.http.Session $session The session instance.
+     * @return void
      * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected void validateToken(IServerRequest myRequest, Session $session) {
+    protected void validateToken(IServerRequest $request, Session $session) {
         $token = $session.read(_config["key"]);
         if (!$token || !is_string($token)) {
             throw new InvalidCsrfTokenException(__d("cake", "Missing or incorrect CSRF session key"));
         }
 
-        $body = myRequest.getParsedBody();
+        $body = $request.getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
             $post = (string)Hash::get($body, _config["field"]);
             $post = this.unsaltToken($post);
@@ -235,7 +240,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
             }
         }
 
-        $header = myRequest.getHeaderLine("X-CSRF-Token");
+        $header = $request.getHeaderLine("X-CSRF-Token");
         $header = this.unsaltToken($header);
         if (hash_equals($header, $token)) {
             return;

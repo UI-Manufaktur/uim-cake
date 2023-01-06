@@ -9,10 +9,10 @@ import uim.cake.core.exceptions.CakeException;
 class MissingControllerException : CakeException
 {
 
-    protected $_defaultCode = 404;
+    protected _defaultCode = 404;
 
 
-    protected $_messageTemplate = "Controller class %s could not be found.";
+    protected _messageTemplate = "Controller class %s could not be found.";
 }
 
 // phpcs:disable

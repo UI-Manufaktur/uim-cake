@@ -103,14 +103,14 @@ class Response : Message : IResponse
      *
      * @var \SimpleXMLElement
      */
-    protected $_xml;
+    protected _xml;
 
     /**
      * Cached decoded JSON data.
      *
      * @var mixed
      */
-    protected $_json;
+    protected _json;
 
     /**
      * Constructor

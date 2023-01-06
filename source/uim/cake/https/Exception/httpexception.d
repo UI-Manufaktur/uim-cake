@@ -13,7 +13,7 @@ import uim.cake.core.exceptions.CakeException;
 class HttpException : CakeException
 {
 
-    protected $_defaultCode = 500;
+    protected _defaultCode = 500;
 
     /**
      * @var array<string, mixed>

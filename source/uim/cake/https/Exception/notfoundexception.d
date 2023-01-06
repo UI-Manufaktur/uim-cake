@@ -8,7 +8,7 @@ use Throwable;
 class NotFoundException : HttpException
 {
 
-    protected $_defaultCode = 404;
+    protected _defaultCode = 404;
 
     /**
      * Constructor

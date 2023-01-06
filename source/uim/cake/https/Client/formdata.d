@@ -28,24 +28,24 @@ class FormData : Countable
     /**
      * Boundary marker.
      */
-    protected string $_boundary;
+    protected string _boundary;
 
     /**
      * Whether this formdata object has attached files.
      */
-    protected bool $_hasFile = false;
+    protected bool _hasFile = false;
 
     /**
      * Whether this formdata object has a complex part.
      */
-    protected bool $_hasComplexPart = false;
+    protected bool _hasComplexPart = false;
 
     /**
      * The parts in the form data.
      *
      * @var array<uim.cake.Http\Client\FormDataPart>
      */
-    protected $_parts = [];
+    protected _parts = [];
 
     /**
      * Get the boundary marker

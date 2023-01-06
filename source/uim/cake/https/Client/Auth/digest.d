@@ -16,7 +16,7 @@ class Digest
      *
      * @var uim.cake.http.Client
      */
-    protected $_client;
+    protected _client;
 
     /**
      * Constructor
