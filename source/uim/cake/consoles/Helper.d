@@ -33,7 +33,7 @@ abstract class Helper
      * @param uim.cake.consoles.ConsoleIo $io The ConsoleIo instance to use.
      * @param array<string, mixed> $config The settings for this helper.
      */
-    this(ConsoleIo $io, array $config = []) {
+    this(ConsoleIo $io, Json aConfig = []) {
         _io = $io;
         this.setConfig($config);
     }

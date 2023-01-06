@@ -24,7 +24,7 @@ class ApcuEngine : CacheEngine {
      * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array $config = []) {
+    bool init(Json aConfig = []) {
         if (!extension_loaded("apcu")) {
             throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
         }

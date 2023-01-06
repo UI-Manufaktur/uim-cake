@@ -65,7 +65,7 @@ abstract class Driver : IDriver
      * @param array<string, mixed> $config The configuration for the driver.
      * @throws \InvalidArgumentException
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         if (empty($config["username"]) && !empty($config["login"])) {
             throw new InvalidArgumentException(
                 "Please pass "username" instead of "login" for connecting to the database"
@@ -85,7 +85,7 @@ abstract class Driver : IDriver
      * @param array<string, mixed> $config configuration to be used for creating connection
      * @return bool true on success
      */
-    protected bool _connect(string $dsn, array $config) {
+    protected bool _connect(string $dsn, Json aConfig) {
         $action = function () use ($dsn, $config) {
             this.setConnection(new PDO(
                 $dsn,

@@ -150,19 +150,15 @@ class AuthComponent : Component : IEventDispatcher
      */
     protected $components = ['RequestHandler', 'Flash'];
 
-    /**
-     * Objects that will be used for authentication checks.
-     *
-     * @var array<uim.cake.Auth\BaseAuthenticate>
-     */
-    protected $_authenticateObjects = [];
+    // Objects that will be used for authentication checks.
+    protected BaseAuthenticate _authenticateObjects = [];
 
     /**
      * Objects that will be used for authorization checks.
      *
-     * @var array<uim.cake.Auth\BaseAuthorize>
+     * @var array<uim.cake.Auth\>
      */
-    protected $_authorizeObjects = [];
+    protected BaseAuthorize _authorizeObjects = [];
 
     /**
      * Storage object.
@@ -201,7 +197,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param array<string, mixed> $config The config data.
      */
-    void initialize(array $config) {
+    void initialize(Json aConfig) {
         $controller = _registry.getController();
         this.setEventManager($controller.getEventManager());
     }

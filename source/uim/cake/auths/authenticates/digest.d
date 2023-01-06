@@ -53,8 +53,7 @@ import uim.cake;
  *
  * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
  */
-class DigestAuthenticate : BasicAuthenticate
-{
+class DigestAuthenticate : BasicAuthenticate {
     /**
      * Constructor
      *
@@ -72,7 +71,7 @@ class DigestAuthenticate : BasicAuthenticate
      *   used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
-    this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, Json aConfig = []) {
         this.setConfig([
             "nonceLifetime": 300,
             "secret": Security::getSalt(),

@@ -63,7 +63,7 @@ class FileEngine : CacheEngine
      * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array $config = []) {
+    bool init(Json aConfig = []) {
         super.init($config);
 
         if (_config["path"] == null) {

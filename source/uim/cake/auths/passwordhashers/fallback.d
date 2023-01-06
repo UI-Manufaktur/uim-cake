@@ -31,7 +31,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * `hashers` key to be present in the array with a list of other hashers to be
      * used.
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         super(($config);
         foreach (_config["hashers"] as $key: $hasher) {
             if (is_array($hasher) && !isset($hasher["className"])) {

@@ -136,7 +136,7 @@ class Cache {
             );
         }
 
-        /** @var array $config */
+        /** @var Json aConfig */
         $config = static::$_config[$name];
 
         try {

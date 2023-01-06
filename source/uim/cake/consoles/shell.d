@@ -848,7 +848,7 @@ class Shell
      * @param array<string, mixed> $config Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
-    function helper(string aName, array $config = []): Helper
+    function helper(string aName, Json aConfig = []): Helper
     {
         return _io.helper($name, $config);
     }

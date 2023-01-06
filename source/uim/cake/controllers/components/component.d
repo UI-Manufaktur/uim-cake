@@ -85,7 +85,7 @@ class Component : IEventListener
      *  this component can use to lazy load its components.
      * @param array<string, mixed> $config Array of configuration settings.
      */
-    this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, Json aConfig = []) {
         _registry = $registry;
 
         this.setConfig($config);
@@ -114,7 +114,7 @@ class Component : IEventListener
      *
      * @param array<string, mixed> $config The configuration settings provided to this component.
      */
-    void initialize(array $config) {
+    void initialize(Json aConfig) {
     }
 
     /**

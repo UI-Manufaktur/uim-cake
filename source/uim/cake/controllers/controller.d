@@ -259,7 +259,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @return uim.cake.controllers.Component
      * @throws \Exception
      */
-    function loadComponent(string aName, array $config = []): Component
+    function loadComponent(string aName, Json aConfig = []): Component
     {
         [, $prop] = pluginSplit($name);
 

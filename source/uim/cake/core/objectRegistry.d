@@ -61,7 +61,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
-    function load(string aName, array $config = []) {
+    function load(string aName, Json aConfig = []) {
         if (isset($config["className"])) {
             $objName = $name;
             $name = $config["className"];
@@ -112,7 +112,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return void
      * @throws \RuntimeException When a duplicate is found.
      */
-    protected void _checkDuplicate(string aName, array $config) {
+    protected void _checkDuplicate(string aName, Json aConfig) {
         $existing = _loaded[$name];
         $msg = sprintf("The "%s" alias has already been loaded.", $name);
         $hasConfig = method_exists($existing, "getConfig");
@@ -178,7 +178,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-param TObject|string $class
      * @psalm-return TObject
      */
-    abstract protected function _create($class, string $alias, array $config);
+    abstract protected function _create($class, string $alias, Json aConfig);
 
     /**
      * Get the list of loaded objects.

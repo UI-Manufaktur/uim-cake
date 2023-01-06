@@ -71,7 +71,7 @@ class TaskRegistry : ObjectRegistry
      * @return uim.cake.consoles.Shell The constructed task class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected function _create($class, string $alias, array $config): Shell
+    protected function _create($class, string $alias, Json aConfig): Shell
     {
         /** @var uim.cake.consoles.Shell */
         return new $class(_Shell.getIo());

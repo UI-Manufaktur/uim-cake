@@ -87,7 +87,7 @@ class MemcachedEngine : CacheEngine {
      * @throws \InvalidArgumentException When you try use authentication without
      *   Memcached compiled with SASL support
      */
-    bool init(array $config = []) {
+    bool init(Json aConfig = []) {
         if (!extension_loaded("memcached")) {
             throw new RuntimeException("The `memcached` extension must be enabled to use MemcachedEngine.");
         }

@@ -107,7 +107,7 @@ class ComponentRegistry : ObjectRegistry, IEventDispatcher {
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-param class-string $class
      */
-    protected function _create($class, string $alias, array $config): Component
+    protected function _create($class, string $alias, Json aConfig): Component
     {
         /** @var uim.cake.controllers.Component $instance */
         $instance = new $class(this, $config);

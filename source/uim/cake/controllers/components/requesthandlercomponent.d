@@ -59,7 +59,7 @@ class RequestHandlerComponent : Component
      * @param uim.cake.controllers.ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> $config Array of config.
      */
-    this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, Json aConfig = []) {
         $config += [
             'viewClassMap': [
                 'json': 'Json',

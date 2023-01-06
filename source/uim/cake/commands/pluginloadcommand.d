@@ -3,13 +3,8 @@ module uim.cake.commands;
 @safe:
 import uim.cake;
 
-/**
- * Command for loading plugins.
- *
- * @psalm-suppress PropertyNotSetInConstructor
- */
+// Command for loading plugins.
 class PluginLoadCommand : Command {
-
     static string defaultName() {
         return "plugin load";
     }
@@ -21,12 +16,7 @@ class PluginLoadCommand : Command {
      */
     protected $args;
 
-    /**
-     * Console IO
-     *
-     * @var uim.cake.consoles.ConsoleIo
-     */
-    protected $io;
+    protected ConsoleIo _io;
 
     /**
      * Execute the command
@@ -37,15 +27,15 @@ class PluginLoadCommand : Command {
      */
     Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
     {
-        this.io = $io;
+        _io = aConsoleIo;
         this.args = $args;
 
         $plugin = $args.getArgument("plugin") ?? "";
         try {
             Plugin::getCollection().findPath($plugin);
         } catch (MissingPluginException $e) {
-            this.io.err($e.getMessage());
-            this.io.err("Ensure you have the correct spelling and casing.");
+            _io.err($e.getMessage());
+            _io.err("Ensure you have the correct spelling and casing.");
 
             return static::CODE_ERROR;
         }

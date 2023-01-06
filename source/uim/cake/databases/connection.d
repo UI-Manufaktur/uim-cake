@@ -91,7 +91,7 @@ class Connection : IConnection {
      *
      * @param array<string, mixed> $config Configuration array.
      */
-    this(array $config) {
+    this(Json aConfig) {
         _config = $config;
 
         $driverConfig = array_diff_key($config, array_flip([
@@ -152,12 +152,12 @@ class Connection : IConnection {
      * Creates driver from name, class name or instance.
      *
      * @param uim.cake.databases.IDriver|string aName Driver name, class name or instance.
-     * @param array $config Driver config if $name is not an instance.
+     * @param Json aConfig Driver config if $name is not an instance.
      * @return uim.cake.databases.IDriver
      * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.
      * @throws uim.cake.databases.exceptions.MissingExtensionException When a driver's PHP extension is missing.
      */
-    protected function createDriver($name, array $config): IDriver
+    protected function createDriver($name, Json aConfig): IDriver
     {
         $driver = $name;
         if (is_string($driver)) {

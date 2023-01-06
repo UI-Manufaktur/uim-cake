@@ -135,7 +135,7 @@ trait PluginAssetsTrait
      * @param array<string, mixed> $config Plugin config.
      * @return bool
      */
-    protected bool _remove(array $config) {
+    protected bool _remove(Json aConfig) {
         if ($config["namespaced"] && !is_dir($config["destDir"])) {
             this.io.verbose(
                 $config["destDir"] . $config["link"] ~ " does not exist",

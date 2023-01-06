@@ -204,7 +204,7 @@ class PluginCollection : Iterator, Countable
      * @return uim.cake.Core\IPlugin
      * @throws uim.cake.Core\exceptions.MissingPluginException When plugin instance could not be created.
      */
-    function create(string aName, array $config = []): IPlugin
+    function create(string aName, Json aConfig = []): IPlugin
     {
         if (strpos(aName, "\\") != false) {
             /** @var uim.cake.Core\IPlugin */

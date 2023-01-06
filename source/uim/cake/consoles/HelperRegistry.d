@@ -79,7 +79,7 @@ class HelperRegistry : ObjectRegistry
      * @return uim.cake.consoles.Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected function _create($class, string $alias, array $config): Helper
+    protected function _create($class, string $alias, Json aConfig): Helper
     {
         /** @var uim.cake.consoles.Helper */
         return new $class(_io, $config);

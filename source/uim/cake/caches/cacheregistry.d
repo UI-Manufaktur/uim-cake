@@ -51,7 +51,7 @@ class CacheRegistry : ObjectRegistry
      * @return uim.cake.Cache\CacheEngine The constructed CacheEngine class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
-    protected CacheEngine _create($class, string $alias, array $config) {
+    protected CacheEngine _create($class, string $alias, Json aConfig) {
         if (is_object($class)) {
             $instance = $class;
         } else {
