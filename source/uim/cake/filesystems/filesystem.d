@@ -36,7 +36,7 @@ class Filesystem
      * @param int|null $flags Flags for FilesystemIterator::__construct();
      * @return \Iterator
      */
-    function find(string $path, $filter = null, ?int $flags = null): Iterator
+    function find(string $path, $filter = null, Nullable!int $flags = null): Iterator
     {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO
@@ -60,7 +60,7 @@ class Filesystem
      * @param int|null $flags Flags for FilesystemIterator::__construct();
      * @return \Iterator
      */
-    function findRecursive(string $path, $filter = null, ?int $flags = null): Iterator
+    function findRecursive(string $path, $filter = null, Nullable!int $flags = null): Iterator
     {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO

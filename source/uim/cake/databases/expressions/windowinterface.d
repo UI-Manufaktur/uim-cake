@@ -71,7 +71,7 @@ interface IWindow {
      *  If not passed in, only frame start SQL will be generated.
      * @return this
      */
-    function rows(?int $start, ?int $end = 0);
+    function rows(Nullable!int $start, Nullable!int $end = 0);
 
     /**
      * Adds a simple groups frame to the window.
@@ -83,7 +83,7 @@ interface IWindow {
      *  If not passed in, only frame start SQL will be generated.
      * @return this
      */
-    function groups(?int $start, ?int $end = 0);
+    function groups(Nullable!int $start, Nullable!int $end = 0);
 
     /**
      * Adds a frame to the window.

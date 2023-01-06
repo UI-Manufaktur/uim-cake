@@ -1333,7 +1333,7 @@ class Message : JsonSerializable, Serializable {
      * @param int|null $priority 1 (highest) to 5 (lowest)
      * @return this
      */
-    function setPriority(?int $priority) {
+    function setPriority(Nullable!int $priority) {
         this.priority = $priority;
 
         return this;

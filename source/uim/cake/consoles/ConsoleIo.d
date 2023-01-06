@@ -118,7 +118,7 @@ class ConsoleIo
      * @param int|null $level The current output level.
      * @return int The current output level.
      */
-    int level(?int $level = null) {
+    int level(Nullable!int $level = null) {
         if ($level != null) {
             _level = $level;
         }
@@ -305,7 +305,7 @@ class ConsoleIo
      * @param int|null $size The number of bytes to overwrite. Defaults to the
      *    length of the last message output.
      */
-    void overwrite($message, int $newlines = 1, ?int $size = null) {
+    void overwrite($message, int $newlines = 1, Nullable!int $size = null) {
         $size = $size ?: _lastWritten;
 
         // Output backspaces.

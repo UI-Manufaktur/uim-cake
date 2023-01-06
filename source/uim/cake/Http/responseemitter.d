@@ -235,7 +235,7 @@ class ResponseEmitter : EmitterInterface
      *
      * @param int|null $maxBufferLevel Flush up to this buffer level.
      */
-    protected void flush(?int $maxBufferLevel = null) {
+    protected void flush(Nullable!int $maxBufferLevel = null) {
         if ($maxBufferLevel == null) {
             $maxBufferLevel = ob_get_level();
         }

@@ -788,7 +788,7 @@ class Response : IResponse
      * @param int|null $time time in seconds after which the response should no longer be considered fresh.
      * @return static
      */
-    function withSharable(bool $public, ?int $time = null) {
+    function withSharable(bool $public, Nullable!int $time = null) {
         $new = clone this;
         unset($new._cacheDirectives["private"], $new._cacheDirectives["public"]);
 

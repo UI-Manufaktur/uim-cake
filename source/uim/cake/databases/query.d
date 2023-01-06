@@ -1442,7 +1442,7 @@ class Query : IExpression, IteratorAggregate
      * @return this
      * @throws \InvalidArgumentException If page number < 1.
      */
-    function page(int $num, ?int $limit = null) {
+    function page(int $num, Nullable!int $limit = null) {
         if ($num < 1) {
             throw new InvalidArgumentException("Pages must start at 1.");
         }

@@ -94,7 +94,7 @@ class AggregateExpression : FunctionExpression : IWindow
     }
 
 
-    function rows(?int $start, ?int $end = 0) {
+    function rows(Nullable!int $start, Nullable!int $end = 0) {
         this.over();
         this.window.rows($start, $end);
 
@@ -102,7 +102,7 @@ class AggregateExpression : FunctionExpression : IWindow
     }
 
 
-    function groups(?int $start, ?int $end = 0) {
+    function groups(Nullable!int $start, Nullable!int $end = 0) {
         this.over();
         this.window.groups($start, $end);
 

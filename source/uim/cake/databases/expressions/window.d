@@ -119,12 +119,12 @@ class WindowExpression : IExpression, IWindow
     }
 
 
-    function rows(?int $start, ?int $end = 0) {
+    function rows(Nullable!int $start, Nullable!int $end = 0) {
         return this.frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
 
-    function groups(?int $start, ?int $end = 0) {
+    function groups(Nullable!int $start, Nullable!int $end = 0) {
         return this.frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 

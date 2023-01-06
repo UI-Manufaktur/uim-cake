@@ -83,7 +83,7 @@ class PhpError
         int $code,
         string $message,
         ?string $file = null,
-        ?int $line = null,
+        Nullable!int $line = null,
         array $trace = []
     ) {
         this.code = $code;

@@ -26,7 +26,7 @@ class InvalidParameterException : CakeException {
      * @param int|null $code The error code
      * @param \Throwable|null $previous the previous exception.
      */
-    this($message = "", ?int $code = null, ?Throwable $previous = null) {
+    this($message = "", Nullable!int $code = null, ?Throwable $previous = null) {
         if (is_array($message)) {
             _messageTemplate = this.templates[$message["template"]] ?? "";
             unset($message["template"]);

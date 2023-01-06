@@ -18,9 +18,9 @@ class FatalErrorException : CakeException {
      */
     this(
         string $message,
-        ?int $code = null,
+        Nullable!int $code = null,
         ?string $file = null,
-        ?int $line = null,
+        Nullable!int $line = null,
         ?Throwable $previous = null
     ) {
         super(($message, $code, $previous);

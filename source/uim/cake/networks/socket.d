@@ -312,7 +312,7 @@ class Socket
      * @param int|null $errNum Error code
      * @param string $errStr Error string
      */
-    void setLastError(?int $errNum, string $errStr) {
+    void setLastError(Nullable!int $errNum, string $errStr) {
         this.lastError = ["num": $errNum, "str": $errStr];
     }
 

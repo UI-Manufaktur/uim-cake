@@ -302,7 +302,7 @@ class Sqlserver : Driver
      * @param int|null $offset The number of rows to offset.
      * @return uim.cake.databases.Query Modified query object.
      */
-    protected function _pagingSubquery(Query $original, ?int $limit, ?int $offset): Query
+    protected function _pagingSubquery(Query $original, Nullable!int $limit, Nullable!int $offset): Query
     {
         $field = "_cake_paging_._cake_page_rownum_";
 

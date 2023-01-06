@@ -128,7 +128,7 @@ abstract class BaseErrorHandler
         int $code,
         string $description,
         ?string $file = null,
-        ?int $line = null,
+        Nullable!int $line = null,
         ?array $context = null
     ) {
         if (!(error_reporting() & $code)) {

@@ -31,7 +31,7 @@ class MissingOptionException : ConsoleException {
         string $message,
         string $requested = "",
         array $suggestions = [],
-        ?int $code = null,
+        Nullable!int $code = null,
         ?Throwable $previous = null
     ) {
         this.suggestions = $suggestions;

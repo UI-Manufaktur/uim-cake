@@ -102,7 +102,7 @@ class ErrorTrap
         int $code,
         string $description,
         ?string $file = null,
-        ?int $line = null
+        Nullable!int $line = null
     ) {
         if (!(error_reporting() & $code)) {
             return false;

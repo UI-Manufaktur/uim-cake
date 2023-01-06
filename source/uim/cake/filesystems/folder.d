@@ -114,7 +114,7 @@ class Folder
      * @param bool $create Create folder if not found
      * @param int|null $mode Mode (CHMOD) to apply to created folder, false to ignore
      */
-    this(?string $path = null, bool $create = false, ?int $mode = null) {
+    this(?string $path = null, bool $create = false, Nullable!int $mode = null) {
         if (empty($path)) {
             $path = TMP;
         }
@@ -405,7 +405,7 @@ class Folder
      * @param array<string> $exceptions Array of files, directories to skip.
      * @return bool Success.
      */
-    bool chmod(string $path, ?int $mode = null, bool $recursive = true, array $exceptions = []) {
+    bool chmod(string $path, Nullable!int $mode = null, bool $recursive = true, array $exceptions = []) {
         if (!$mode) {
             $mode = this.mode;
         }
@@ -580,7 +580,7 @@ class Folder
      * @param int|null $mode octal value 0755
      * @return bool Returns TRUE on success, FALSE on failure
      */
-    bool create(string $pathname, ?int $mode = null) {
+    bool create(string $pathname, Nullable!int $mode = null) {
         if (is_dir($pathname) || empty($pathname)) {
             return true;
         }

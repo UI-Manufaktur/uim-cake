@@ -87,9 +87,9 @@ class SqlserverSchemaDialect : SchemaDialect
      */
     protected array _convertColumn(
         string $col,
-        ?int $length = null,
-        ?int $precision = null,
-        ?int $scale = null
+        Nullable!int $length = null,
+        Nullable!int $precision = null,
+        Nullable!int $scale = null
     ) {
         $col = strtolower($col);
 
