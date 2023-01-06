@@ -41,7 +41,7 @@ class CacheSession : SessionHandlerInterface
      * storing the session
      * @throws \InvalidArgumentException if the "config" key is not provided
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         if (empty($config["config"])) {
             throw new InvalidArgumentException("The cache configuration name to use is required");
         }

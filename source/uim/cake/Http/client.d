@@ -180,7 +180,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $config Config options for scoped clients.
      * @throws \InvalidArgumentException
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         this.setConfig($config);
 
         $adapter = _config["adapter"];

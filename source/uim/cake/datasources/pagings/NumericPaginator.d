@@ -410,7 +410,7 @@ class NumericPaginator : PaginatorInterface
      * @param array<string, mixed> $config The configuration data to coalesce and emit warnings on.
      * @return array<string>|null
      */
-    protected string[] getSortableFields(array $config): ?array
+    protected string[] getSortableFields(Json aConfig): ?array
     {
         $allowed = $config["sortableFields"] ?? null;
         if ($allowed != null) {

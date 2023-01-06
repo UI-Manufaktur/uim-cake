@@ -139,7 +139,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config) {
+    array listTablesSql(Json aConfig) {
         return [
             "SELECT name FROM sqlite_master " ~
             "WHERE (type="table" OR type="view") " ~
@@ -155,7 +155,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config) {
+    array listTablesWithoutViewsSql(Json aConfig) {
         return [
             "SELECT name FROM sqlite_master WHERE type="table" " ~
             "AND name != "sqlite_sequence" ORDER BY name",
@@ -164,7 +164,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config) {
+    array describeColumnSql(string $tableName, Json aConfig) {
         $sql = sprintf(
             "PRAGMA table_info(%s)",
             _driver.quoteIdentifier($tableName)
@@ -228,7 +228,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array describeIndexSql(string $tableName, array $config) {
+    array describeIndexSql(string $tableName, Json aConfig) {
         $sql = sprintf(
             "PRAGMA index_list(%s)",
             _driver.quoteIdentifier($tableName)
@@ -276,7 +276,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config) {
+    array describeForeignKeySql(string $tableName, Json aConfig) {
         $sql = sprintf("PRAGMA foreign_key_list(%s)", _driver.quoteIdentifier($tableName));
 
         return [$sql, []];

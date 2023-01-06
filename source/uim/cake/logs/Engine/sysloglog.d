@@ -82,7 +82,7 @@ class SyslogLog : BaseLog
     protected bool $_open = false;
 
 
-    this(array $config = []) {
+    this(Json aConfig = []) {
         if (isset($config["format"])) {
             deprecationWarning(
                 "`format` option is now deprecated in favor of custom formatters~ " ~

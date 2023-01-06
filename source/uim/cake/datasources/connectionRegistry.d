@@ -56,7 +56,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param array<string, mixed> $config An array of settings to use for the datasource.
      * @return uim.cake.Datasource\IConnection A connection with the correct settings.
      */
-    protected function _create($class, string $alias, array $config) {
+    protected function _create($class, string $alias, Json aConfig) {
         if (is_callable($class)) {
             return $class($alias);
         }

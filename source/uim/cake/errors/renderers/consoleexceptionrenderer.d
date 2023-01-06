@@ -43,9 +43,9 @@ class ConsoleExceptionRenderer
      *
      * @param \Throwable $error The error to render.
      * @param \Psr\Http\messages.IServerRequest|null $request Not used.
-     * @param array $config Error handling configuration.
+     * @param Json aConfig Error handling configuration.
      */
-    this(Throwable $error, ?IServerRequest $request, array $config) {
+    this(Throwable $error, ?IServerRequest $request, Json aConfig) {
         this.error = $error;
         this.output = $config["stderr"] ?? new ConsoleOutput("php://stderr");
         this.trace = $config["trace"] ?? true;

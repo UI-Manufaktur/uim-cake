@@ -44,7 +44,7 @@ class DatabaseSession : SessionHandlerInterface
      * @param array<string, mixed> $config The configuration for this engine. It requires the "model"
      * key to be present corresponding to the Table to use for managing the sessions.
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         if (isset($config["tableLocator"])) {
             this.setTableLocator($config["tableLocator"]);
         }

@@ -24,7 +24,7 @@ class MysqlSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config) {
+    array listTablesSql(Json aConfig) {
         return ["SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"]), []];
     }
 
@@ -35,7 +35,7 @@ class MysqlSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config) {
+    array listTablesWithoutViewsSql(Json aConfig) {
         return [
             "SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"])
             ~ " WHERE TABLE_TYPE = "BASE TABLE""
@@ -43,17 +43,17 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config) {
+    array describeColumnSql(string $tableName, Json aConfig) {
         return ["SHOW FULL COLUMNS FROM " ~ _driver.quoteIdentifier($tableName), []];
     }
 
 
-    array describeIndexSql(string $tableName, array $config) {
+    array describeIndexSql(string $tableName, Json aConfig) {
         return ["SHOW INDEXES FROM " ~ _driver.quoteIdentifier($tableName), []];
     }
 
 
-    array describeOptionsSql(string $tableName, array $config) {
+    array describeOptionsSql(string $tableName, Json aConfig) {
         return ["SHOW TABLE STATUS WHERE Name = ?", [$tableName]];
     }
 
@@ -247,7 +247,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config) {
+    array describeForeignKeySql(string $tableName, Json aConfig) {
         $sql = "SELECT * FROM information_schema.key_column_usage AS kcu
             INNER JOIN information_schema.referential_constraints AS rc
             ON (

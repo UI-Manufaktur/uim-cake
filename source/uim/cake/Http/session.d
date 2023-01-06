@@ -186,7 +186,7 @@ class Session
      *
      * @param array<string, mixed> $config The Configuration to apply to this session object
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         $config += [
             "timeout": null,
             "cookie": null,

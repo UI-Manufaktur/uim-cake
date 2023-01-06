@@ -30,7 +30,7 @@ class ErrorLogger : ErrorLoggerInterface
      *
      * @param array<string, mixed> $config Config array.
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         this.setConfig($config);
     }
 

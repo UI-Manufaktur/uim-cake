@@ -45,7 +45,7 @@ class CspMiddleware : IMiddleware
      * @param array<string, mixed> $config Configuration options.
      * @throws \RuntimeException
      */
-    this($csp, array $config = []) {
+    this($csp, Json aConfig = []) {
         if (!class_exists(CSPBuilder::class)) {
             throw new RuntimeException("You must install paragonie/csp-builder to use CspMiddleware");
         }

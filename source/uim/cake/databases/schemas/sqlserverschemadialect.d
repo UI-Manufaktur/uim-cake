@@ -18,7 +18,7 @@ class SqlserverSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config) {
+    array listTablesSql(Json aConfig) {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
             WHERE TABLE_SCHEMA = ?
@@ -36,7 +36,7 @@ class SqlserverSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config) {
+    array listTablesWithoutViewsSql(Json aConfig) {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
             WHERE TABLE_SCHEMA = ?
@@ -48,7 +48,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config) {
+    array describeColumnSql(string $tableName, Json aConfig) {
         $sql = "SELECT DISTINCT
             AC.column_id AS [column_id],
             AC.name AS [name],
@@ -244,7 +244,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeIndexSql(string $tableName, array $config) {
+    array describeIndexSql(string $tableName, Json aConfig) {
         $sql = "SELECT
                 I.[name] AS [index_name],
                 IC.[index_column_id] AS [index_order],
@@ -301,7 +301,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config) {
+    array describeForeignKeySql(string $tableName, Json aConfig) {
         // phpcs:disable Generic.Files.LineLength
         $sql = "SELECT FK.[name] AS [foreign_key_name], FK.[delete_referential_action_desc] AS [delete_type],
                 FK.[update_referential_action_desc] AS [update_type], C.name AS [column], RT.name AS [reference_table],

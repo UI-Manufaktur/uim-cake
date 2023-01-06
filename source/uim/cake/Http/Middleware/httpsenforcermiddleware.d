@@ -46,7 +46,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * @param array<string, mixed> $config The options to use.
      * @see uim.cake.http.Middleware\HttpsEnforcerMiddleware::$config
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         this.config = $config + this.config;
     }
 

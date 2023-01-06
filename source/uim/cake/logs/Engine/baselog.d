@@ -50,7 +50,7 @@ abstract class BaseLog : AbstractLogger
      *
      * @param array<string, mixed> $config Configuration array
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         this.setConfig($config);
 
         if (!is_array(_config["scopes"]) && _config["scopes"] != false) {

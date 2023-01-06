@@ -209,7 +209,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string, mixed> $config An array of request data to create a request with.
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         $config += [
             "params": this.params,
             "query": [],
@@ -232,7 +232,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string, mixed> $config The config data to use.
      */
-    protected void _setConfig(array $config) {
+    protected void _setConfig(Json aConfig) {
         if (empty($config["session"])) {
             $config["session"] = new Session([
                 "cookiePath": $config["base"],
@@ -288,7 +288,7 @@ class ServerRequest : IServerRequest
      * @param array<string, mixed> $config Config array.
      * @return array<string, mixed> Update config.
      */
-    protected array processUrlOption(array $config) {
+    protected array processUrlOption(Json aConfig) {
         if ($config["url"][0] != "/") {
             $config["url"] = "/" ~ $config["url"];
         }

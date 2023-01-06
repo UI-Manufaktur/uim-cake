@@ -35,9 +35,9 @@ class ConsoleErrorRenderer : ErrorRendererInterface
      * - `stderr` - The ConsoleOutput instance to use. Defaults to `php://stderr`
      * - `trace` - Whether or not stacktraces should be output.
      *
-     * @param array $config Error handling configuration.
+     * @param Json aConfig Error handling configuration.
      */
-    this(array $config) {
+    this(Json aConfig) {
         this.output = $config["stderr"] ?? new ConsoleOutput("php://stderr");
         this.trace = (bool)($config["trace"] ?? false);
     }

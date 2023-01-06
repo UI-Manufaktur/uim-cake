@@ -30,7 +30,7 @@ abstract class AbstractFormatter
     /**
      * @param array<string, mixed> $config Config options
      */
-    this(array $config = []) {
+    this(Json aConfig = []) {
         this.setConfig($config);
     }
 

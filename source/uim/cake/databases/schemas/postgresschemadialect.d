@@ -16,7 +16,7 @@ class PostgresSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config) {
+    array listTablesSql(Json aConfig) {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? ORDER BY name";
         $schema = empty($config["schema"]) ? "public" : $config["schema"];
@@ -31,7 +31,7 @@ class PostgresSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config) {
+    array listTablesWithoutViewsSql(Json aConfig) {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? AND table_type = \"BASE TABLE\" ORDER BY name";
         $schema = empty($config["schema"]) ? "public" : $config["schema"];
@@ -40,7 +40,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config) {
+    array describeColumnSql(string $tableName, Json aConfig) {
         $sql = "SELECT DISTINCT table_schema AS schema,
             column_name AS name,
             data_type AS type,
@@ -234,7 +234,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array describeIndexSql(string $tableName, array $config) {
+    array describeIndexSql(string $tableName, Json aConfig) {
         $sql = "SELECT
         c2.relname,
         a.attname,
@@ -305,7 +305,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config) {
+    array describeForeignKeySql(string $tableName, Json aConfig) {
         // phpcs:disable Generic.Files.LineLength
         $sql = "SELECT
         c.conname AS name,
