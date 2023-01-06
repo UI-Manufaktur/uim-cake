@@ -20,7 +20,7 @@ abstract class SchemaDialect
      *
      * @var uim.cake.databases.IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Constructor

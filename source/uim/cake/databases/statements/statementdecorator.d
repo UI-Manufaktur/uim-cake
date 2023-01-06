@@ -27,19 +27,19 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      *
      * @var uim.cake.databases.IStatement
      */
-    protected $_statement;
+    protected _statement;
 
     /**
      * Reference to the driver object associated to this statement.
      *
      * @var uim.cake.databases.IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Whether this statement has already been executed
      */
-    protected bool $_hasExecuted = false;
+    protected bool _hasExecuted = false;
 
     /**
      * Constructor

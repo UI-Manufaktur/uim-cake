@@ -6,10 +6,10 @@ module uim.cake.databases.Type;
 class DateTimeFractionalType : DateTimeType
 {
 
-    protected $_format = "Y-m-d H:i:s.u";
+    protected _format = "Y-m-d H:i:s.u";
 
 
-    protected $_marshalFormats = [
+    protected _marshalFormats = [
         "Y-m-d H:i",
         "Y-m-d H:i:s",
         "Y-m-d H:i:s.u",

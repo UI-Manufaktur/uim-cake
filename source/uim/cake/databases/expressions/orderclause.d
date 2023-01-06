@@ -15,7 +15,7 @@ class OrderClauseExpression : IExpression, FieldInterface
     /**
      * The direction of sorting.
      */
-    protected string $_direction;
+    protected string _direction;
 
     /**
      * Constructor

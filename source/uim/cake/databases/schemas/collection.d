@@ -17,14 +17,14 @@ class Collection : ICollection
      *
      * @var uim.cake.databases.Connection
      */
-    protected $_connection;
+    protected _connection;
 
     /**
      * Schema dialect instance.
      *
      * @var uim.cake.databases.Schema\SchemaDialect
      */
-    protected $_dialect;
+    protected _dialect;
 
     /**
      * Constructor.

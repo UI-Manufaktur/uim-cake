@@ -47,7 +47,7 @@ trait EntityTrait
      *
      * @var array<string, array<string, array<string, string>>>
      */
-    protected static $_accessors = [];
+    protected static _accessors = [];
 
     /**
      * Indicates whether this entity is yet to be persisted.
@@ -557,7 +557,7 @@ trait EntityTrait
 
     /**
      * Fetch accessor method name
-     * Accessor methods (available or not) are cached in $_accessors
+     * Accessor methods (available or not) are cached in _accessors
      *
      * @param string property the field name to derive getter name from
      * @param string myType the accessor type ("get" or "set")
@@ -566,12 +566,12 @@ trait EntityTrait
     protected static string _accessor(string property, string myType) {
         myClass = static::class;
 
-        if (isset(static::$_accessors[myClass][myType][$property])) {
-            return static::$_accessors[myClass][myType][$property];
+        if (isset(static::_accessors[myClass][myType][$property])) {
+            return static::_accessors[myClass][myType][$property];
         }
 
-        if (!empty(static::$_accessors[myClass])) {
-            return static::$_accessors[myClass][myType][$property] = "";
+        if (!empty(static::_accessors[myClass])) {
+            return static::_accessors[myClass][myType][$property] = "";
         }
 
         if (static::class == Entity::class) {
@@ -586,16 +586,16 @@ trait EntityTrait
             myField = lcfirst(substr($method, 4));
             $snakeField = Inflector::underscore(myField);
             $titleField = ucfirst(myField);
-            static::$_accessors[myClass][$prefix][$snakeField] = $method;
-            static::$_accessors[myClass][$prefix][myField] = $method;
-            static::$_accessors[myClass][$prefix][$titleField] = $method;
+            static::_accessors[myClass][$prefix][$snakeField] = $method;
+            static::_accessors[myClass][$prefix][myField] = $method;
+            static::_accessors[myClass][$prefix][$titleField] = $method;
         }
 
-        if (!isset(static::$_accessors[myClass][myType][$property])) {
-            static::$_accessors[myClass][myType][$property] = "";
+        if (!isset(static::_accessors[myClass][myType][$property])) {
+            static::_accessors[myClass][myType][$property] = "";
         }
 
-        return static::$_accessors[myClass][myType][$property];
+        return static::_accessors[myClass][myType][$property];
     }
 
     /**

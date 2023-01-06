@@ -10,7 +10,7 @@ trait BufferResultsTrait
     /**
      * Whether to buffer results in php
      */
-    protected bool $_bufferResults = true;
+    protected bool _bufferResults = true;
 
     /**
      * Whether to buffer results in php

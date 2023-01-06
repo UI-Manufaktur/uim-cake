@@ -16,7 +16,7 @@ class PDOStatement : StatementDecorator
      *
      * @var \PDOStatement
      */
-    protected $_statement;
+    protected _statement;
 
     /**
      * Constructor

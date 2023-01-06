@@ -15,7 +15,7 @@ class MysqlSchemaDialect : SchemaDialect
      *
      * @var uim.cake.databases.Driver\Mysql
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Generate the SQL to list the tables and views.

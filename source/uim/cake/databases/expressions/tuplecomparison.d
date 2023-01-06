@@ -17,7 +17,7 @@ class TupleComparison : ComparisonExpression
      * @var array<string|null>
      * @psalm-suppress NonInvariantDocblockPropertyType
      */
-    protected $_type;
+    protected _type;
 
     /**
      * Constructor

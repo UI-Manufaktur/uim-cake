@@ -26,14 +26,14 @@ class UnaryExpression : IExpression
     /**
      * The operator this unary expression represents
      */
-    protected string $_operator;
+    protected string _operator;
 
     /**
      * Holds the value which the unary expression operates
      *
      * @var mixed
      */
-    protected $_value;
+    protected _value;
 
     /**
      * Where to place the operator

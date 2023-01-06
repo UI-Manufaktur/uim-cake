@@ -34,7 +34,7 @@ class ConnectionManager
      *
      * @var array<string>
      */
-    protected static $_aliasMap = [];
+    protected static _aliasMap = [];
 
     /**
      * An array mapping url schemes to fully qualified driver class names
@@ -42,7 +42,7 @@ class ConnectionManager
      * @var array<string, string>
      * @psalm-var array<string, class-string>
      */
-    protected static $_dsnClassMap = [
+    protected static _dsnClassMap = [
         "mysql": Mysql::class,
         "postgres": Postgres::class,
         "sqlite": Sqlite::class,
@@ -54,7 +54,7 @@ class ConnectionManager
      *
      * @var uim.cake.datasources.ConnectionRegistry
      */
-    protected static $_registry;
+    protected static _registry;
 
     /**
      * Configure a new connection object.
@@ -141,7 +141,7 @@ class ConnectionManager
      * @param string $alias The alias name that resolves to `$source`.
      */
     static void alias(string $source, string $alias) {
-        static::$_aliasMap[$alias] = $source;
+        static::_aliasMap[$alias] = $source;
     }
 
     /**
@@ -153,7 +153,7 @@ class ConnectionManager
      * @param string $alias The connection alias to drop
      */
     static void dropAlias(string $alias) {
-        unset(static::$_aliasMap[$alias]);
+        unset(static::_aliasMap[$alias]);
     }
 
     /**
@@ -171,18 +171,18 @@ class ConnectionManager
      * data is missing.
      */
     static function get(string aName, bool $useAliases = true) {
-        if ($useAliases && isset(static::$_aliasMap[$name])) {
-            $name = static::$_aliasMap[$name];
+        if ($useAliases && isset(static::_aliasMap[$name])) {
+            $name = static::_aliasMap[$name];
         }
-        if (empty(static::$_config[$name])) {
+        if (empty(static::_config[$name])) {
             throw new MissingDatasourceConfigException(["name": $name]);
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
-        if (!isset(static::$_registry)) {
-            static::$_registry = new ConnectionRegistry();
+        if (!isset(static::_registry)) {
+            static::_registry = new ConnectionRegistry();
         }
 
-        return static::$_registry.{$name}
-            ?? static::$_registry.load($name, static::$_config[$name]);
+        return static::_registry.{$name}
+            ?? static::_registry.load($name, static::_config[$name]);
     }
 }

@@ -18,7 +18,7 @@ class BufferedStatement : Iterator, IStatement
     /**
      * If true, all rows were fetched
      */
-    protected bool $_allFetched = false;
+    protected bool _allFetched = false;
 
     /**
      * The decorated statement
@@ -32,7 +32,7 @@ class BufferedStatement : Iterator, IStatement
      *
      * @var uim.cake.databases.IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * The in-memory cache containing results from previous iterators
@@ -44,7 +44,7 @@ class BufferedStatement : Iterator, IStatement
     /**
      * Whether this statement has already been executed
      */
-    protected bool $_hasExecuted = false;
+    protected bool _hasExecuted = false;
 
     /**
      * The current iterator index.

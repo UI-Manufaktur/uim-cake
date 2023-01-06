@@ -17,7 +17,7 @@ class IdentifierExpression : IExpression
     /**
      * Holds the identifier string
      */
-    protected string $_identifier;
+    protected string _identifier;
 
     /**
      */

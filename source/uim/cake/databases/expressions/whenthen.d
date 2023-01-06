@@ -34,7 +34,7 @@ class WhenThenExpression : IExpression
      *
      * @var uim.cake.databases.TypeMap
      */
-    protected $_typeMap;
+    protected _typeMap;
 
     /**
      * Then `WHEN` value.

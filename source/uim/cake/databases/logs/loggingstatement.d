@@ -16,14 +16,14 @@ class LoggingStatement : StatementDecorator
      *
      * @var \Psr\logs.LoggerInterface
      */
-    protected $_logger;
+    protected _logger;
 
     /**
      * Holds bound params
      *
      * @var array<array>
      */
-    protected $_compiledParams = [];
+    protected _compiledParams = [];
 
     /**
      * Query execution start time.

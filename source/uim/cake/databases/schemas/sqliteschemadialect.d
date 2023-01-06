@@ -15,12 +15,12 @@ class SqliteSchemaDialect : SchemaDialect
      *
      * @var array<string, mixed>
      */
-    protected $_constraintsIdMap = [];
+    protected _constraintsIdMap = [];
 
     /**
      * Whether there is any table in this connection to SQLite containing sequences.
      */
-    protected bool $_hasSequences;
+    protected bool _hasSequences;
 
     /**
      * Convert a column definition to the abstract types.

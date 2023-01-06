@@ -23,7 +23,7 @@ class FloatType : BaseType : BatchCastingInterface
      * Whether numbers should be parsed using a locale aware parser
      * when marshalling string inputs.
      */
-    protected bool $_useLocaleParser = false;
+    protected bool _useLocaleParser = false;
 
     /**
      * Convert integer data into the database format.

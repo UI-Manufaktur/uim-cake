@@ -21,7 +21,7 @@ class QueryExpression : IExpression, Countable
      * String to be used for joining each of the internal expressions
      * this object internally stores for example "AND", "OR", etc.
      */
-    protected string $_conjunction;
+    protected string _conjunction;
 
     /**
      * A list of strings or other expression objects that represent the "branches" of
@@ -29,7 +29,7 @@ class QueryExpression : IExpression, Countable
      *
      * @var array
      */
-    protected $_conditions = [];
+    protected _conditions = [];
 
     /**
      * Constructor. A new expression object can be created without any params and

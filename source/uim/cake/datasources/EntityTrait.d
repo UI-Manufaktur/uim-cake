@@ -18,14 +18,14 @@ trait EntityTrait
      *
      * @var array<string, mixed>
      */
-    protected $_fields = [];
+    protected _fields = [];
 
     /**
      * Holds all fields that have been changed and their original values for this entity.
      *
      * @var array<string, mixed>
      */
-    protected $_original = [];
+    protected _original = [];
 
     /**
      * List of field names that should **not** be included in JSON or Array
@@ -33,7 +33,7 @@ trait EntityTrait
      *
      * @var array<string>
      */
-    protected $_hidden = [];
+    protected _hidden = [];
 
     /**
      * List of computed or virtual fields that **should** be included in JSON or array
@@ -42,7 +42,7 @@ trait EntityTrait
      *
      * @var array<string>
      */
-    protected $_virtual = [];
+    protected _virtual = [];
 
     /**
      * Holds a list of the fields that were modified or added after this object
@@ -50,35 +50,35 @@ trait EntityTrait
      *
      * @var array<bool>
      */
-    protected $_dirty = [];
+    protected _dirty = [];
 
     /**
      * Holds a cached list of getters/setters per class
      *
      * @var array<string, array<string, array<string, string>>>
      */
-    protected static $_accessors = [];
+    protected static _accessors = [];
 
     /**
      * Indicates whether this entity is yet to be persisted.
      * Entities default to assuming they are new. You can use Table::persisted()
      * to set the new flag on an entity based on records in the database.
      */
-    protected bool $_new = true;
+    protected bool _new = true;
 
     /**
      * List of errors per field as stored in this object.
      *
      * @var array<string, mixed>
      */
-    protected $_errors = [];
+    protected _errors = [];
 
     /**
      * List of invalid fields and their data for errors upon validation/patching.
      *
      * @var array<string, mixed>
      */
-    protected $_invalid = [];
+    protected _invalid = [];
 
     /**
      * Map of fields in this entity that can be safely assigned, each
@@ -91,12 +91,12 @@ trait EntityTrait
      *
      * @var array<string, bool>
      */
-    protected $_accessible = ["*": true];
+    protected _accessible = ["*": true];
 
     /**
      * The alias of the repository this entity came from
      */
-    protected string $_registryAlias = "";
+    protected string _registryAlias = "";
 
     /**
      * Magic getter to access fields that have been set in this entity
@@ -575,7 +575,7 @@ trait EntityTrait
 
     /**
      * Fetch accessor method name
-     * Accessor methods (available or not) are cached in $_accessors
+     * Accessor methods (available or not) are cached in _accessors
      *
      * @param string $property the field name to derive getter name from
      * @param string $type the accessor type ("get" or "set")
@@ -584,12 +584,12 @@ trait EntityTrait
     protected static string _accessor(string $property, string $type) {
         $class = static::class;
 
-        if (isset(static::$_accessors[$class][$type][$property])) {
-            return static::$_accessors[$class][$type][$property];
+        if (isset(static::_accessors[$class][$type][$property])) {
+            return static::_accessors[$class][$type][$property];
         }
 
-        if (!empty(static::$_accessors[$class])) {
-            return static::$_accessors[$class][$type][$property] = "";
+        if (!empty(static::_accessors[$class])) {
+            return static::_accessors[$class][$type][$property] = "";
         }
 
         if (static::class == Entity::class) {
@@ -604,16 +604,16 @@ trait EntityTrait
             $field = lcfirst(substr($method, 4));
             $snakeField = Inflector::underscore($field);
             $titleField = ucfirst($field);
-            static::$_accessors[$class][$prefix][$snakeField] = $method;
-            static::$_accessors[$class][$prefix][$field] = $method;
-            static::$_accessors[$class][$prefix][$titleField] = $method;
+            static::_accessors[$class][$prefix][$snakeField] = $method;
+            static::_accessors[$class][$prefix][$field] = $method;
+            static::_accessors[$class][$prefix][$titleField] = $method;
         }
 
-        if (!isset(static::$_accessors[$class][$type][$property])) {
-            static::$_accessors[$class][$type][$property] = "";
+        if (!isset(static::_accessors[$class][$type][$property])) {
+            static::_accessors[$class][$type][$property] = "";
         }
 
-        return static::$_accessors[$class][$type][$property];
+        return static::_accessors[$class][$type][$property];
     }
 
     /**

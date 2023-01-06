@@ -14,7 +14,7 @@ class FactoryLocator
      *
      * @var array<callable|uim.cake.Datasource\Locator\ILocator>
      */
-    protected static $_modelFactories = [];
+    protected static _modelFactories = [];
 
     /**
      * Register a callable to generate repositories of a given type.
@@ -24,7 +24,7 @@ class FactoryLocator
      */
     static void add(string $type, $factory) {
         if ($factory instanceof ILocator) {
-            static::$_modelFactories[$type] = $factory;
+            static::_modelFactories[$type] = $factory;
 
             return;
         }
@@ -35,7 +35,7 @@ class FactoryLocator
                 ~ " Use an instance of Cake\Datasource\Locator\ILocatorinstead."
             );
 
-            static::$_modelFactories[$type] = $factory;
+            static::_modelFactories[$type] = $factory;
 
             return;
         }
@@ -53,7 +53,7 @@ class FactoryLocator
      * @param string $type The name of the repository type to drop the factory for.
      */
     static void drop(string $type) {
-        unset(static::$_modelFactories[$type]);
+        unset(static::_modelFactories[$type]);
     }
 
     /**
@@ -64,17 +64,17 @@ class FactoryLocator
      * @return uim.cake.Datasource\Locator\ILocator|callable The factory for the repository type.
      */
     static function get(string $type) {
-        if (!isset(static::$_modelFactories["Table"])) {
-            static::$_modelFactories["Table"] = new TableLocator();
+        if (!isset(static::_modelFactories["Table"])) {
+            static::_modelFactories["Table"] = new TableLocator();
         }
 
-        if (!isset(static::$_modelFactories[$type])) {
+        if (!isset(static::_modelFactories[$type])) {
             throw new InvalidArgumentException(sprintf(
                 "Unknown repository type "%s". Make sure you register a type before trying to use it.",
                 $type
             ));
         }
 
-        return static::$_modelFactories[$type];
+        return static::_modelFactories[$type];
     }
 }

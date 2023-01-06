@@ -20,47 +20,47 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     /**
      * The name of the table
      */
-    protected string $_table;
+    protected string _table;
 
     /**
      * Columns in the table.
      *
      * @var array<string, array>
      */
-    protected $_columns = [];
+    protected _columns = [];
 
     /**
      * A map with columns to types
      *
      * @var array<string, string>
      */
-    protected $_typeMap = [];
+    protected _typeMap = [];
 
     /**
      * Indexes in the table.
      *
      * @var array<string, array>
      */
-    protected $_indexes = [];
+    protected _indexes = [];
 
     /**
      * Constraints in the table.
      *
      * @var array<string, array<string, mixed>>
      */
-    protected $_constraints = [];
+    protected _constraints = [];
 
     /**
      * Options for the table.
      *
      * @var array<string, mixed>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Whether the table is temporary
      */
-    protected bool $_temporary = false;
+    protected bool _temporary = false;
 
     /**
      * Column length when using a `tiny` column type
@@ -100,7 +100,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @var array<string, mixed>
      */
-    protected static $_columnKeys = [
+    protected static _columnKeys = [
         "type": null,
         "baseType": null,
         "length": null,
@@ -115,7 +115,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @var array<string, array<string, mixed>>
      */
-    protected static $_columnExtras = [
+    protected static _columnExtras = [
         "string": [
             "collate": null,
         ],
@@ -153,7 +153,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @var array<string, mixed>
      */
-    protected static $_indexKeys = [
+    protected static _indexKeys = [
         "type": null,
         "columns": [],
         "length": [],
@@ -167,7 +167,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @var array<string>
      */
-    protected static $_validIndexTypes = [
+    protected static _validIndexTypes = [
         self::INDEX_INDEX,
         self::INDEX_FULLTEXT,
     ];
@@ -177,7 +177,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @var array<string>
      */
-    protected static $_validConstraintTypes = [
+    protected static _validConstraintTypes = [
         self::CONSTRAINT_PRIMARY,
         self::CONSTRAINT_UNIQUE,
         self::CONSTRAINT_FOREIGN,
@@ -188,7 +188,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @var array<string>
      */
-    protected static $_validForeignKeyActions = [
+    protected static _validForeignKeyActions = [
         self::ACTION_CASCADE,
         self::ACTION_SET_NULL,
         self::ACTION_SET_DEFAULT,
@@ -269,9 +269,9 @@ class TableSchema : TableISchema, SqlGeneratorInterface
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
         }
-        $valid = static::$_columnKeys;
-        if (isset(static::$_columnExtras[$attrs["type"]])) {
-            $valid += static::$_columnExtras[$attrs["type"]];
+        $valid = static::_columnKeys;
+        if (isset(static::_columnExtras[$attrs["type"]])) {
+            $valid += static::_columnExtras[$attrs["type"]];
         }
         $attrs = array_intersect_key($attrs, $valid);
         _columns[$name] = $attrs + $valid;
@@ -386,11 +386,11 @@ class TableSchema : TableISchema, SqlGeneratorInterface
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
         }
-        $attrs = array_intersect_key($attrs, static::$_indexKeys);
-        $attrs += static::$_indexKeys;
+        $attrs = array_intersect_key($attrs, static::_indexKeys);
+        $attrs += static::_indexKeys;
         unset($attrs["references"], $attrs["update"], $attrs["delete"]);
 
-        if (!in_array($attrs["type"], static::$_validIndexTypes, true)) {
+        if (!in_array($attrs["type"], static::_validIndexTypes, true)) {
             throw new DatabaseException(sprintf(
                 "Invalid index type "%s" in index "%s" in table "%s".",
                 $attrs["type"],
@@ -467,9 +467,9 @@ class TableSchema : TableISchema, SqlGeneratorInterface
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
         }
-        $attrs = array_intersect_key($attrs, static::$_indexKeys);
-        $attrs += static::$_indexKeys;
-        if (!in_array($attrs["type"], static::$_validConstraintTypes, true)) {
+        $attrs = array_intersect_key($attrs, static::_indexKeys);
+        $attrs += static::_indexKeys;
+        if (!in_array($attrs["type"], static::_validConstraintTypes, true)) {
             throw new DatabaseException(sprintf(
                 "Invalid constraint type "%s" in table "%s".",
                 $attrs["type"],
@@ -555,16 +555,16 @@ class TableSchema : TableISchema, SqlGeneratorInterface
         if (count($attrs["references"]) < 2) {
             throw new DatabaseException("References must contain a table and column.");
         }
-        if (!in_array($attrs["update"], static::$_validForeignKeyActions)) {
+        if (!in_array($attrs["update"], static::_validForeignKeyActions)) {
             throw new DatabaseException(sprintf(
                 "Update action is invalid. Must be one of %s",
-                implode(",", static::$_validForeignKeyActions)
+                implode(",", static::_validForeignKeyActions)
             ));
         }
-        if (!in_array($attrs["delete"], static::$_validForeignKeyActions)) {
+        if (!in_array($attrs["delete"], static::_validForeignKeyActions)) {
             throw new DatabaseException(sprintf(
                 "Delete action is invalid. Must be one of %s",
-                implode(",", static::$_validForeignKeyActions)
+                implode(",", static::_validForeignKeyActions)
             ));
         }
 

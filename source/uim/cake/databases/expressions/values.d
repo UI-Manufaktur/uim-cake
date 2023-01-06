@@ -24,27 +24,27 @@ class ValuesExpression : IExpression {
      *
      * @var array
      */
-    protected $_values = [];
+    protected _values = [];
 
     /**
      * List of columns to ensure are part of the insert.
      *
      * @var array
      */
-    protected $_columns = [];
+    protected _columns = [];
 
     /**
      * The Query object to use as a values expression
      *
      * @var uim.cake.databases.Query|null
      */
-    protected $_query;
+    protected _query;
 
     /**
      * Whether values have been casted to expressions
      * already.
      */
-    protected bool $_castedExpressions = false;
+    protected bool _castedExpressions = false;
 
     /**
      * Constructor

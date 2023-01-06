@@ -13,10 +13,10 @@ use DateTimeInterface;
 class DateType : DateTimeType
 {
 
-    protected $_format = "Y-m-d";
+    protected _format = "Y-m-d";
 
 
-    protected $_marshalFormats = [
+    protected _marshalFormats = [
         "Y-m-d",
     ];
 

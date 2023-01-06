@@ -37,12 +37,12 @@ trait ModelAwareTrait
      *
      * @var array<callable|uim.cake.Datasource\Locator\ILocator>
      */
-    protected $_modelFactories = [];
+    protected _modelFactories = [];
 
     /**
      * The model type to use.
      */
-    protected string $_modelType = "Table";
+    protected string _modelType = "Table";
 
     /**
      * Set the modelClass property based on conventions.

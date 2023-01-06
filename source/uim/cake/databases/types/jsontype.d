@@ -20,7 +20,7 @@ class JsonType : BaseType : BatchCastingInterface
 {
     /**
      */
-    protected int $_encodingOptions = 0;
+    protected int _encodingOptions = 0;
 
     /**
      * Convert a value data into a JSON string
