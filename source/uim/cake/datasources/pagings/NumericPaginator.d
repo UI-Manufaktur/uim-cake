@@ -29,7 +29,7 @@ class NumericPaginator : PaginatorInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "page": 1,
         "limit": 20,
         "maxLimit": 100,
@@ -41,7 +41,7 @@ class NumericPaginator : PaginatorInterface
      *
      * @var array<string, array>
      */
-    protected $_pagingParams = [];
+    protected _pagingParams = [];
 
     /**
      * Handles automatic pagination of model records.

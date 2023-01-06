@@ -44,28 +44,28 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @var string
      * @psalm-var class-string<uim.cake.Form\Schema>
      */
-    protected $_schemaClass = Schema::class;
+    protected _schemaClass = Schema::class;
 
     /**
      * The schema used by this form.
      *
      * @var uim.cake.Form\Schema|null
      */
-    protected $_schema;
+    protected _schema;
 
     /**
      * The errors if any
      *
      * @var array
      */
-    protected $_errors = [];
+    protected _errors = [];
 
     /**
      * Form"s data.
      *
      * @var array
      */
-    protected $_data = [];
+    protected _data = [];
 
     /**
      * Constructor

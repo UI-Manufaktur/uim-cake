@@ -11,12 +11,12 @@ trait EventDispatcherTrait
      *
      * @var uim.cake.events.IEventManager|null
      */
-    protected $_eventManager;
+    protected _eventManager;
 
     /**
      * Default class name for new event objects.
      */
-    protected string $_eventClass = Event::class;
+    protected string _eventClass = Event::class;
 
     /**
      * Returns the Cake\events.EventManager manager instance for this object.

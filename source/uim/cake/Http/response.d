@@ -41,7 +41,7 @@ class Response : IResponse
      *
      * @var array<int, string>
      */
-    protected $_statusCodes = [
+    protected _statusCodes = [
         100: "Continue",
         101: "Switching Protocols",
         102: "Processing",
@@ -114,7 +114,7 @@ class Response : IResponse
      *
      * @var array<string, mixed>
      */
-    protected $_mimeTypes = [
+    protected _mimeTypes = [
         "html": ["text/html", "*/*"],
         "json": "application/json",
         "xml": ["application/xml", "text/xml"],
@@ -355,26 +355,26 @@ class Response : IResponse
     /**
      * Status code to send to the client
      */
-    protected int $_status = 200;
+    protected int _status = 200;
 
     /**
      * File object for file to be read out as response
      *
      * @var \SplFileInfo|null
      */
-    protected $_file;
+    protected _file;
 
     /**
      * File range. Used for requesting ranges of files.
      *
      * @var array<int>
      */
-    protected $_fileRange = [];
+    protected _fileRange = [];
 
     /**
      * The charset the response body is encoded with
      */
-    protected string $_charset = "UTF-8";
+    protected string _charset = "UTF-8";
 
     /**
      * Holds all the cache directives that will be converted
@@ -382,31 +382,31 @@ class Response : IResponse
      *
      * @var array<string, mixed>
      */
-    protected $_cacheDirectives = [];
+    protected _cacheDirectives = [];
 
     /**
      * Collection of cookies to send to the client
      *
      * @var uim.cake.http.Cookie\CookieCollection
      */
-    protected $_cookies;
+    protected _cookies;
 
     /**
      * Reason Phrase
      */
-    protected string $_reasonPhrase = "OK";
+    protected string _reasonPhrase = "OK";
 
     /**
      * Stream mode options.
      */
-    protected string $_streamMode = "wb+";
+    protected string _streamMode = "wb+";
 
     /**
      * Stream target or resource object.
      *
      * @var resource|string
      */
-    protected $_streamTarget = "php://memory";
+    protected _streamTarget = "php://memory";
 
     /**
      * Constructor
@@ -1313,7 +1313,7 @@ class Response : IResponse
      *
      * This method will augment both the body and a number of related headers.
      *
-     * If `$_SERVER["HTTP_RANGE"]` is set, a slice of the file will be
+     * If `_SERVER["HTTP_RANGE"]` is set, a slice of the file will be
      * returned instead of the entire file.
      *
      * ### Options keys

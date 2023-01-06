@@ -33,22 +33,22 @@ class Session
      *
      * @var \SessionHandlerInterface
      */
-    protected $_engine;
+    protected _engine;
 
     /**
      * Indicates whether the sessions has already started
      */
-    protected bool $_started;
+    protected bool _started;
 
     /**
      * The time in seconds the session will be valid for
      */
-    protected int $_lifetime;
+    protected int _lifetime;
 
     /**
      * Whether this session is running under a CLI environment
      */
-    protected bool $_isCLI = false;
+    protected bool _isCLI = false;
 
     /**
      * Returns a new instance of a session after building a configuration bundle for it.
@@ -312,7 +312,7 @@ class Session
         }
 
         if (_isCLI) {
-            $_SESSION = [];
+            _SESSION = [];
             this.id("cli");
 
             return _started = true;
@@ -386,15 +386,15 @@ class Session
             this.start();
         }
 
-        if (!isset($_SESSION)) {
+        if (!isset(_SESSION)) {
             return false;
         }
 
         if ($name == null) {
-            return (bool)$_SESSION;
+            return (bool)_SESSION;
         }
 
-        return Hash::get($_SESSION, $name) != null;
+        return Hash::get(_SESSION, $name) != null;
     }
 
     /**
@@ -410,15 +410,15 @@ class Session
             this.start();
         }
 
-        if (!isset($_SESSION)) {
+        if (!isset(_SESSION)) {
             return $default;
         }
 
         if ($name == null) {
-            return $_SESSION ?: [];
+            return _SESSION ?: [];
         }
 
-        return Hash::get($_SESSION, $name, $default);
+        return Hash::get(_SESSION, $name, $default);
     }
 
     /**
@@ -450,7 +450,7 @@ class Session
         $value = this.read($name);
         if ($value != null) {
             /** @psalm-suppress InvalidScalarArgument */
-            _overwrite($_SESSION, Hash::remove($_SESSION, $name));
+            _overwrite(_SESSION, Hash::remove(_SESSION, $name));
         }
 
         return $value;
@@ -471,13 +471,13 @@ class Session
             $name = [$name: $value];
         }
 
-        $data = $_SESSION ?? [];
+        $data = _SESSION ?? [];
         foreach ($name as $key: $val) {
             $data = Hash::insert($data, $key, $val);
         }
 
         /** @psalm-suppress PossiblyNullArgument */
-        _overwrite($_SESSION, $data);
+        _overwrite(_SESSION, $data);
     }
 
     /**
@@ -510,7 +510,7 @@ class Session
     void delete(string aName) {
         if (this.check($name)) {
             /** @psalm-suppress InvalidScalarArgument */
-            _overwrite($_SESSION, Hash::remove($_SESSION, $name));
+            _overwrite(_SESSION, Hash::remove(_SESSION, $name));
         }
     }
 
@@ -544,7 +544,7 @@ class Session
             session_destroy();
         }
 
-        $_SESSION = [];
+        _SESSION = [];
         _started = false;
     }
 
@@ -556,7 +556,7 @@ class Session
      * @param bool $renew If session should be renewed, as well. Defaults to false.
      */
     void clear(bool $renew = false) {
-        $_SESSION = [];
+        _SESSION = [];
         if ($renew) {
             this.renew();
         }
@@ -567,9 +567,9 @@ class Session
      */
     protected bool _hasSession() {
         return !ini_get("session.use_cookies")
-            || isset($_COOKIE[session_name()])
+            || isset(_COOKIE[session_name()])
             || _isCLI
-            || (ini_get("session.use_trans_sid") && isset($_GET[session_name()]));
+            || (ini_get("session.use_trans_sid") && isset(_GET[session_name()]));
     }
 
     /**

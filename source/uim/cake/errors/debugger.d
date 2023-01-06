@@ -46,7 +46,7 @@ class Debugger
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         'outputMask': [],
         'exportFormatter': null,
         'editor': 'phpstorm',
@@ -55,15 +55,15 @@ class Debugger
     /**
      * The current output format.
      */
-    protected string $_outputFormat = 'js';
+    protected string _outputFormat = 'js';
 
     /**
      * Templates used when generating trace or error strings. Can be global or indexed by the format
-     * value used in $_outputFormat.
+     * value used in _outputFormat.
      *
      * @var array<string, array<string, mixed>>
      */
-    protected $_templates = [
+    protected _templates = [
         'log': [
             // These templates are not actually used, as Debugger::log() is called instead.
             'trace': '{:reference} - {:path}, line {:line}',
@@ -130,7 +130,7 @@ class Debugger
      *
      * @var array
      */
-    protected $_data = [];
+    protected _data = [];
 
     /**
      * Constructor.
@@ -395,7 +395,7 @@ class Debugger
         $count = count($backtrace);
         $back = [];
 
-        $_trace = [
+        _trace = [
             'line': '??',
             'file': '[internal]',
             'class': null,
@@ -407,7 +407,7 @@ class Debugger
             $signature = $reference = '[main]';
 
             if (isset($backtrace[$i + 1])) {
-                $next = $backtrace[$i + 1] + $_trace;
+                $next = $backtrace[$i + 1] + _trace;
                 $signature = $reference = $next['function'];
 
                 if (!empty($next['class'])) {

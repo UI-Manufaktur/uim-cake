@@ -136,7 +136,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
         $request = this.request;
         $routerRequest = Router::getRequest();
         // Fallback to the request in the router or make a new one from
-        // $_SERVER
+        // _SERVER
         if ($request == null) {
             $request = $routerRequest ?: ServerRequestFactory::fromGlobals();
         }

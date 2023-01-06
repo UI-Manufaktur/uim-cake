@@ -33,11 +33,11 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * If any argument is not supplied, the corresponding superglobal value will
      * be used.
      *
-     * @param array|null $server $_SERVER superglobal
-     * @param array|null $query $_GET superglobal
-     * @param array|null $parsedBody $_POST superglobal
-     * @param array|null $cookies $_COOKIE superglobal
-     * @param array|null $files $_FILES superglobal
+     * @param array|null $server _SERVER superglobal
+     * @param array|null $query _GET superglobal
+     * @param array|null $parsedBody _POST superglobal
+     * @param array|null $cookies _COOKIE superglobal
+     * @param array|null $files _FILES superglobal
      * @return uim.cake.http.ServerRequest
      * @throws \InvalidArgumentException for invalid file values
      */
@@ -48,7 +48,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         ?array $cookies = null,
         ?array $files = null
     ): ServerRequest {
-        $server = normalizeServer($server ?: $_SERVER);
+        $server = normalizeServer($server ?: _SERVER);
         $uri = static::createUri($server);
 
         $webroot = "";
@@ -72,15 +72,15 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         myServerRequest = new ServerRequest([
             "environment": $server,
             "uri": $uri,
-            "cookies": $cookies ?: $_COOKIE,
-            "query": $query ?: $_GET,
+            "cookies": $cookies ?: _COOKIE,
+            "query": $query ?: _GET,
             "webroot": $webroot,
             "base": $base,
             "session": $session,
             "input": $server["CAKEPHP_INPUT"] ?? null,
         ]);
 
-        myServerRequest = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, myServerRequest);
+        myServerRequest = static::marshalBodyAndRequestMethod($parsedBody ?? _POST, myServerRequest);
         // This is required as `ServerRequest::scheme()` ignores the value of
         // `HTTP_X_FORWARDED_PROTO` unless `trustProxy` is enabled, while the
         // `Uri` instance intially created always takes values of `HTTP_X_FORWARDED_PROTO`
@@ -88,7 +88,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $uri = myServerRequest.getUri().withScheme(myServerRequest.scheme());
         myServerRequest = myServerRequest.withUri($uri, true);
 
-        return static::marshalFiles($files ?? $_FILES, myServerRequest);
+        return static::marshalFiles($files ?? _FILES, myServerRequest);
     }
 
     /**
@@ -211,12 +211,12 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * Create a new Uri instance from the provided server data.
      *
      * @param array $server Array of server data to build the Uri from.
-     *   $_SERVER will be added into the $server parameter.
+     *   _SERVER will be added into the $server parameter.
      * @return \Psr\Http\messages.UriInterface New instance.
      */
     static function createUri(array $server = []): UriInterface
     {
-        $server += $_SERVER;
+        $server += _SERVER;
         $server = normalizeServer($server);
         $headers = marshalHeadersFromSapi($server);
 

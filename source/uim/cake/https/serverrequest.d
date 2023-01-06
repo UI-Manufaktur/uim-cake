@@ -98,7 +98,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<callable|array>
      */
-    protected static $_detectors = [
+    protected static _detectors = [
         "get":["env":"REQUEST_METHOD", "value":"GET"],
         "post":["env":"REQUEST_METHOD", "value":"POST"],
         "put":["env":"REQUEST_METHOD", "value":"PUT"],
@@ -193,7 +193,7 @@ class ServerRequest : IServerRequest
      * - `query` Additional data from the query string.
      * - `files` Uploaded files in a normalized structure, with each leaf an instance of UploadedFileInterface.
      * - `cookies` Cookies for this request.
-     * - `environment` $_SERVER and $_ENV data.
+     * - `environment` _SERVER and _ENV data.
      * - `url` The URL without the base path for the request.
      * - `uri` The PSR7 UriInterface object. If null, one will be created from `url` or `environment`.
      * - `base` The base URL for the request.
@@ -447,8 +447,8 @@ class ServerRequest : IServerRequest
      */
     bool is(myType, ...$args) {
         if (is_array(myType)) {
-            foreach (myType as $_type) {
-                if (this.is($_type)) {
+            foreach (myType as _type) {
+                if (this.is(_type)) {
                     return true;
                 }
             }
@@ -457,7 +457,7 @@ class ServerRequest : IServerRequest
         }
 
         myType = strtolower(myType);
-        if (!isset(static::$_detectors[myType])) {
+        if (!isset(static::_detectors[myType])) {
             return false;
         }
         if ($args) {
@@ -482,7 +482,7 @@ class ServerRequest : IServerRequest
      * @return bool Whether the request is the type you are checking.
      */
     protected bool _is(string myType, array $args) {
-        $detect = static::$_detectors[myType];
+        $detect = static::_detectors[myType];
         if (is_callable($detect)) {
             array_unshift($args, this);
 
@@ -685,15 +685,15 @@ class ServerRequest : IServerRequest
     static void addDetector(string myName, $detector) {
         myName = strtolower(myName);
         if (is_callable($detector)) {
-            static::$_detectors[myName] = $detector;
+            static::_detectors[myName] = $detector;
 
             return;
         }
-        if (isset(static::$_detectors[myName], $detector["options"])) {
+        if (isset(static::_detectors[myName], $detector["options"])) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $detector = Hash::merge(static::$_detectors[myName], $detector);
+            $detector = Hash::merge(static::_detectors[myName], $detector);
         }
-        static::$_detectors[myName] = $detector;
+        static::_detectors[myName] = $detector;
     }
 
     /**

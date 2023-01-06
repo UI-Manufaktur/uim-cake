@@ -11,7 +11,7 @@ use Throwable;
  */
 class ConsoleErrorHandler : BaseErrorHandler {
     // Standard error stream.
-    protected ConsoleOutput $_stderr;
+    protected ConsoleOutput _stderr;
 
     /**
      * Constructor

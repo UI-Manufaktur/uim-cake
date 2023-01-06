@@ -53,7 +53,7 @@ class ExceptionTrap
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "exceptionRenderer": null,
         "logger": ErrorLogger::class,
         "stderr": null,
@@ -91,7 +91,7 @@ class ExceptionTrap
     /**
      * Constructor
      *
-     * @param array<string, mixed> $options An options array. See $_defaultConfig.
+     * @param array<string, mixed> $options An options array. See _defaultConfig.
      */
     this(array $options = []) {
         this.setConfig($options);

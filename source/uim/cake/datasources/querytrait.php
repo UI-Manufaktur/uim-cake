@@ -17,7 +17,7 @@ trait QueryTrait
      *
      * @var uim.cake.datasources.RepositoryInterface
      */
-    protected $_repository;
+    protected _repository;
 
     /**
      * A ResultSet.
@@ -27,7 +27,7 @@ trait QueryTrait
      * @var iterable|null
      * @see uim.cake.datasources.QueryTrait::setResult()
      */
-    protected $_results;
+    protected _results;
 
     /**
      * List of map-reduce routines that should be applied over the query
@@ -35,7 +35,7 @@ trait QueryTrait
      *
      * @var array
      */
-    protected $_mapReduce = [];
+    protected _mapReduce = [];
 
     /**
      * List of formatter classes or callbacks that will post-process the
@@ -43,14 +43,14 @@ trait QueryTrait
      *
      * @var array<callable>
      */
-    protected $_formatters = [];
+    protected _formatters = [];
 
     /**
      * A query cacher instance if this query has caching enabled.
      *
      * @var uim.cake.datasources.QueryCacher|null
      */
-    protected $_cache;
+    protected _cache;
 
     /**
      * Holds any custom options passed using applyOptions that could not be processed
@@ -58,12 +58,12 @@ trait QueryTrait
      *
      * @var array
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Whether the query is standalone or the product of an eager load operation.
      */
-    protected bool $_eagerLoaded = false;
+    protected bool _eagerLoaded = false;
 
     /**
      * Set the default Table object that will be used by this query

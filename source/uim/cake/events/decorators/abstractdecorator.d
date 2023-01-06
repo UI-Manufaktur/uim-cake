@@ -10,14 +10,14 @@ abstract class AbstractDecorator
      *
      * @var callable
      */
-    protected $_callable;
+    protected _callable;
 
     /**
      * Decorator options
      *
      * @var array
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Constructor.

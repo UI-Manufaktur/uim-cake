@@ -9,5 +9,5 @@ class MissingModelException : CakeException
 {
     /**
      */
-    protected string $_messageTemplate = "Model class "%s" of type "%s" could not be found.";
+    protected string _messageTemplate = "Model class "%s" of type "%s" could not be found.";
 }

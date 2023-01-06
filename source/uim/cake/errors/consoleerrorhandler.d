@@ -16,7 +16,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      *
      * @var uim.cake.consoles.ConsoleOutput
      */
-    protected $_stderr;
+    protected _stderr;
 
     /**
      * Constructor

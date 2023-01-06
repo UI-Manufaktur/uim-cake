@@ -21,24 +21,24 @@ class CorsBuilder
      *
      * @var \Psr\Http\messages.MessageInterface
      */
-    protected $_response;
+    protected _response;
 
     /**
      * The request"s Origin header value
      */
-    protected string $_origin;
+    protected string _origin;
 
     /**
      * Whether the request was over SSL.
      */
-    protected bool $_isSsl;
+    protected bool _isSsl;
 
     /**
      * The headers that have been queued so far.
      *
      * @var array<string, mixed>
      */
-    protected $_headers = [];
+    protected _headers = [];
 
     /**
      * Constructor.

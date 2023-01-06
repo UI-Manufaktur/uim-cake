@@ -36,7 +36,7 @@ class ErrorTrap
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "errorLevel": E_ALL,
         "errorRenderer": null,
         "log": true,
@@ -47,7 +47,7 @@ class ErrorTrap
     /**
      * Constructor
      *
-     * @param array<string, mixed> $options An options array. See $_defaultConfig.
+     * @param array<string, mixed> $options An options array. See _defaultConfig.
      */
     this(array $options = []) {
         this.setConfig($options);

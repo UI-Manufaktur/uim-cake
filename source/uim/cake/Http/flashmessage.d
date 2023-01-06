@@ -23,7 +23,7 @@ class FlashMessage
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "key": "flash",
         "element": "default",
         "plugin": null,
@@ -68,7 +68,7 @@ class FlashMessage
      * @param string $message Message to be flashed.
      * @param array<string, mixed> $options An array of options
      * @return void
-     * @see FlashMessage::$_defaultConfig For default values for the options.
+     * @see FlashMessage::_defaultConfig For default values for the options.
      */
     void set($message, array $options = []) {
         $options += (array)this.getConfig();

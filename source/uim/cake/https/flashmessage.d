@@ -60,7 +60,7 @@ class FlashMessage {
      * @param string myMessage Message to be flashed.
      * @param array<string, mixed> myOptions An array of options
      * @return void
-     * @see FlashMessage::$_defaultConfig For default values for the options.
+     * @see FlashMessage::_defaultConfig For default values for the options.
      */
     void set(myMessage, array myOptions = []) {
         myOptions += (array)this.getConfig();

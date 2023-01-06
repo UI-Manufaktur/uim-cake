@@ -23,7 +23,7 @@ abstract class BaseErrorHandler
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "log": true,
         "trace": false,
         "skipLog": [],
@@ -32,7 +32,7 @@ abstract class BaseErrorHandler
 
     /**
      */
-    protected bool $_handled = false;
+    protected bool _handled = false;
 
     /**
      * Exception logger instance.

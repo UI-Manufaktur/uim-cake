@@ -110,7 +110,7 @@ class Client : ClientInterface
      *
      * @var uim.cake.http.Client\Adapter\Mock|null
      */
-    protected static $_mockAdapter;
+    protected static _mockAdapter;
 
     /**
      * Adapter for sending requests.
@@ -454,7 +454,7 @@ class Client : ClientInterface
      * Clear all mocked responses
      */
     static void clearMockResponses() {
-        static::$_mockAdapter = null;
+        static::_mockAdapter = null;
     }
 
     /**
@@ -477,11 +477,11 @@ class Client : ClientInterface
      * @param array<string, mixed> myOptions See above.
      */
     static void addMockResponse(string method, string myUrl, Response $response, array myOptions = []) {
-        if (!static::$_mockAdapter) {
-            static::$_mockAdapter = new MockAdapter();
+        if (!static::_mockAdapter) {
+            static::_mockAdapter = new MockAdapter();
         }
         myRequest = new Request(myUrl, $method);
-        static::$_mockAdapter.addResponse(myRequest, $response, myOptions);
+        static::_mockAdapter.addResponse(myRequest, $response, myOptions);
     }
 
     /**
@@ -492,8 +492,8 @@ class Client : ClientInterface
      * @return uim.cake.http.Client\Response
      */
     protected Response _sendRequest(RequestInterface myRequest, array myOptions) {
-        if (static::$_mockAdapter) {
-            $responses = static::$_mockAdapter.send(myRequest, myOptions);
+        if (static::_mockAdapter) {
+            $responses = static::_mockAdapter.send(myRequest, myOptions);
         }
         if (empty($responses)) {
             $responses = _adapter.send(myRequest, myOptions);

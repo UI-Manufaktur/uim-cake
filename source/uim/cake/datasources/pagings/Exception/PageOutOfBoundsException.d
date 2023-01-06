@@ -16,7 +16,7 @@ import uim.cake.core.exceptions.CakeException;
 class PageOutOfBoundsException : CakeException
 {
 
-    protected $_messageTemplate = "Page number %s could not be found.";
+    protected _messageTemplate = "Page number %s could not be found.";
 }
 
 // phpcs:disable

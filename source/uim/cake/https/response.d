@@ -1297,7 +1297,7 @@ class Response : IResponse
      *
      * This method will augment both the body and a number of related headers.
      *
-     * If `$_SERVER["HTTP_RANGE"]` is set, a slice of the file will be
+     * If `_SERVER["HTTP_RANGE"]` is set, a slice of the file will be
      * returned instead of the entire file.
      *
      * ### Options keys

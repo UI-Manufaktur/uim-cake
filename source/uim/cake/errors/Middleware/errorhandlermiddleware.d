@@ -45,7 +45,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * @var array<string, mixed>
      * @see uim.cake.errors.ExceptionTrap
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "exceptionRenderer": WebExceptionRenderer::class,
     ];
 

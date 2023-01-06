@@ -11,25 +11,21 @@ import uim.cake;
  */
 class Event : IEvent
 {
-    /**
-     * Name of the event
-     */
-    protected string $_name;
+    // Name of the event
+    protected string _name;
 
     /**
      * The object this event applies to (usually the same object that generates the event)
-     *
      * @var object|null
-     * @psalm-var TSubject|null
      */
-    protected $_subject;
+    protected _subject;
 
     /**
      * Custom data for the method that receives the event
      *
      * @var array
      */
-    protected $_data;
+    protected _data;
 
     /**
      * Property used to retain the result value of the event listeners
@@ -43,7 +39,7 @@ class Event : IEvent
     /**
      * Flags an event as stopped or not, default is false
      */
-    protected bool $_stopped = false;
+    protected bool _stopped = false;
 
     /**
      * Constructor

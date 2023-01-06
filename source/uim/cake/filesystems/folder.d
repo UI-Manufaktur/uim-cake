@@ -74,7 +74,7 @@ class Folder
      *
      * @var array<string>
      */
-    protected $_fsorts = [
+    protected _fsorts = [
         self::SORT_NAME: "getPathname",
         self::SORT_TIME: "getCTime",
     ];
@@ -84,28 +84,28 @@ class Folder
      *
      * @var array
      */
-    protected $_messages = [];
+    protected _messages = [];
 
     /**
      * Holds errors from last method.
      *
      * @var array
      */
-    protected $_errors = [];
+    protected _errors = [];
 
     /**
      * Holds array of complete directory paths.
      *
      * @var array
      */
-    protected $_directories;
+    protected _directories;
 
     /**
      * Holds array of complete file paths.
      *
      * @var array
      */
-    protected $_files;
+    protected _files;
 
     /**
      * Constructor.

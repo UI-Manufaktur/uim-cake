@@ -23,7 +23,7 @@ class EventManager : IEventManager
      *
      * @var uim.cake.events.EventManager|null
      */
-    protected static $_generalManager;
+    protected static _generalManager;
 
     /**
      * List of listener callbacks associated to
@@ -66,15 +66,15 @@ class EventManager : IEventManager
      */
     static function instance(?EventManager $manager = null) {
         if ($manager instanceof EventManager) {
-            static::$_generalManager = $manager;
+            static::_generalManager = $manager;
         }
-        if (empty(static::$_generalManager)) {
-            static::$_generalManager = new static();
+        if (empty(static::_generalManager)) {
+            static::_generalManager = new static();
         }
 
-        static::$_generalManager._isGlobal = true;
+        static::_generalManager._isGlobal = true;
 
-        return static::$_generalManager;
+        return static::_generalManager;
     }
 
 

@@ -107,7 +107,7 @@ class Client : ClientInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "auth": null,
         "adapter": null,
         "host": null,
@@ -131,21 +131,21 @@ class Client : ClientInterface
      *
      * @var uim.cake.http.Cookie\CookieCollection
      */
-    protected $_cookies;
+    protected _cookies;
 
     /**
      * Mock adapter for stubbing requests in tests.
      *
      * @var uim.cake.http.Client\Adapter\Mock|null
      */
-    protected static $_mockAdapter;
+    protected static _mockAdapter;
 
     /**
      * Adapter for sending requests.
      *
      * @var uim.cake.http.Client\AdapterInterface
      */
-    protected $_adapter;
+    protected _adapter;
 
     /**
      * Create a new HTTP Client.
@@ -498,7 +498,7 @@ class Client : ClientInterface
      * Clear all mocked responses
      */
     static void clearMockResponses() {
-        static::$_mockAdapter = null;
+        static::_mockAdapter = null;
     }
 
     /**
@@ -521,11 +521,11 @@ class Client : ClientInterface
      * @param array<string, mixed> $options See above.
      */
     static void addMockResponse(string $method, string $url, Response $response, array $options = []) {
-        if (!static::$_mockAdapter) {
-            static::$_mockAdapter = new MockAdapter();
+        if (!static::_mockAdapter) {
+            static::_mockAdapter = new MockAdapter();
         }
         $request = new Request($url, $method);
-        static::$_mockAdapter.addResponse($request, $response, $options);
+        static::_mockAdapter.addResponse($request, $response, $options);
     }
 
     /**
@@ -537,8 +537,8 @@ class Client : ClientInterface
      */
     protected function _sendRequest(RequestInterface $request, array $options): Response
     {
-        if (static::$_mockAdapter) {
-            $responses = static::$_mockAdapter.send($request, $options);
+        if (static::_mockAdapter) {
+            $responses = static::_mockAdapter.send($request, $options);
         }
         if (empty($responses)) {
             $responses = _adapter.send($request, $options);

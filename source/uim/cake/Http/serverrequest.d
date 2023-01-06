@@ -62,7 +62,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string, mixed>
      */
-    protected $_environment = [];
+    protected _environment = [];
 
     /**
      * Base URL path.
@@ -98,7 +98,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<callable|array>
      */
-    protected static $_detectors = [
+    protected static _detectors = [
         "get": ["env": "REQUEST_METHOD", "value": "GET"],
         "post": ["env": "REQUEST_METHOD", "value": "POST"],
         "put": ["env": "REQUEST_METHOD", "value": "PUT"],
@@ -122,7 +122,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string, bool>
      */
-    protected $_detectorCache = [];
+    protected _detectorCache = [];
 
     /**
      * Request body stream. Contains php://input unless `input` constructor option is used.
@@ -196,7 +196,7 @@ class ServerRequest : IServerRequest
      * - `query` Additional data from the query string.
      * - `files` Uploaded files in a normalized structure, with each leaf an instance of UploadedFileInterface.
      * - `cookies` Cookies for this request.
-     * - `environment` $_SERVER and $_ENV data.
+     * - `environment` _SERVER and _ENV data.
      * - `url` The URL without the base path for the request.
      * - `uri` The PSR7 UriInterface object. If null, one will be created from `url` or `environment`.
      * - `base` The base URL for the request.
@@ -456,8 +456,8 @@ class ServerRequest : IServerRequest
      */
     bool is($type, ...$args) {
         if (is_array($type)) {
-            foreach ($type as $_type) {
-                if (this.is($_type)) {
+            foreach ($type as _type) {
+                if (this.is(_type)) {
                     return true;
                 }
             }
@@ -466,7 +466,7 @@ class ServerRequest : IServerRequest
         }
 
         $type = strtolower($type);
-        if (!isset(static::$_detectors[$type])) {
+        if (!isset(static::_detectors[$type])) {
             return false;
         }
         if ($args) {
@@ -491,7 +491,7 @@ class ServerRequest : IServerRequest
      * @return bool Whether the request is the type you are checking.
      */
     protected bool _is(string $type, array $args) {
-        $detect = static::$_detectors[$type];
+        $detect = static::_detectors[$type];
         if (is_callable($detect)) {
             array_unshift($args, this);
 
@@ -706,15 +706,15 @@ class ServerRequest : IServerRequest
     static void addDetector(string aName, $detector) {
         $name = strtolower($name);
         if (is_callable($detector)) {
-            static::$_detectors[$name] = $detector;
+            static::_detectors[$name] = $detector;
 
             return;
         }
-        if (isset(static::$_detectors[$name], $detector["options"])) {
+        if (isset(static::_detectors[$name], $detector["options"])) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $detector = Hash::merge(static::$_detectors[$name], $detector);
+            $detector = Hash::merge(static::_detectors[$name], $detector);
         }
-        static::$_detectors[$name] = $detector;
+        static::_detectors[$name] = $detector;
     }
 
     /**
