@@ -493,7 +493,7 @@ class AuthComponent : Component : IEventDispatcher
             }
             $className = App::className($class, 'Auth', 'Authorize');
             if ($className == null) {
-                throw new CakeException(sprintf('Authorization adapter "%s" was not found.', $class));
+                throw new CakeException(sprintf('Authorization adapter '%s' was not found.', $class));
             }
             if (!method_exists($className, 'authorize')) {
                 throw new CakeException('Authorization objects must implement an authorize() method.');
@@ -780,7 +780,7 @@ class AuthComponent : Component : IEventDispatcher
             }
             $className = App::className($class, 'Auth', 'Authenticate');
             if ($className == null) {
-                throw new CakeException(sprintf('Authentication adapter "%s" was not found.', $class));
+                throw new CakeException(sprintf('Authentication adapter '%s' was not found.', $class));
             }
             if (!method_exists($className, 'authenticate')) {
                 throw new CakeException('Authentication objects must implement an authenticate() method.');
@@ -822,7 +822,7 @@ class AuthComponent : Component : IEventDispatcher
         }
         $className = App::className($class, 'Auth/Storage', 'Storage');
         if ($className == null) {
-            throw new CakeException(sprintf('Auth storage adapter "%s" was not found.', $class));
+            throw new CakeException(sprintf('Auth storage adapter '%s' was not found.', $class));
         }
         $request = this.getController().getRequest();
         $response = this.getController().getResponse();

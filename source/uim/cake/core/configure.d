@@ -143,7 +143,7 @@ class Configure {
      */
     static function readOrFail(string $var) {
         if (!static::check($var)) {
-            throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
+            throw new RuntimeException(sprintf("Expected configuration key '%s' not found.", $var));
         }
 
         return static::read($var);
@@ -181,7 +181,7 @@ class Configure {
      */
     static function consumeOrFail(string $var) {
         if (!static::check($var)) {
-            throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
+            throw new RuntimeException(sprintf("Expected configuration key '%s' not found.", $var));
         }
 
         return static::consume($var);
@@ -350,7 +350,7 @@ class Configure {
     static bool dump(string aKey, string aConfig = "default", array $keys = []) {
         $engine = static::_getEngine(aConfig);
         if (!$engine) {
-            throw new CakeException(sprintf("There is no "%s" config engine.", aConfig));
+            throw new CakeException(sprintf("There is no '%s' config engine.", aConfig));
         }
         $values = static::_values;
         if (!empty($keys)) {

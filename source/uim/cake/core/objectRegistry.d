@@ -114,7 +114,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      */
     protected void _checkDuplicate(string aName, Json aConfig) {
         $existing = _loaded[$name];
-        $msg = sprintf("The "%s" alias has already been loaded.", $name);
+        $msg = sprintf("The '%s' alias has already been loaded.", $name);
         $hasConfig = method_exists($existing, "getConfig");
         if (!$hasConfig) {
             throw new RuntimeException($msg);
@@ -209,7 +209,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      */
     function get(string aName) {
         if (!isset(_loaded[$name])) {
-            throw new RuntimeException(sprintf("Unknown object "%s"", $name));
+            throw new RuntimeException(sprintf("Unknown object '%s'", $name));
         }
 
         return _loaded[$name];

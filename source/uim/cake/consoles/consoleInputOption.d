@@ -100,7 +100,7 @@ class ConsoleInputOption
 
         if (strlen(_short) > 1) {
             throw new ConsoleException(
-                sprintf("Short option "%s" is invalid, short options must be one letter.", _short)
+                sprintf("Short option '%s' is invalid, short options must be one letter.", _short)
             );
         }
         if (isset(_default) && this.prompt) {
@@ -227,7 +227,7 @@ class ConsoleInputOption
         if (!in_array($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
-                    ""%s" is not a valid value for --%s. Please use one of "%s"",
+                    "'%s' is not a valid value for --%s. Please use one of '%s'",
                     (string)$value,
                     _name,
                     implode(", ", _choices)

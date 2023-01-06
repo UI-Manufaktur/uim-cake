@@ -109,7 +109,7 @@ class Mysql : Driver
         }
 
         if (!empty(aConfig["timezone"])) {
-            aConfig["init"][] = sprintf("SET time_zone = "%s"", aConfig["timezone"]);
+            aConfig["init"][] = sprintf("SET time_zone = '%s'", aConfig["timezone"]);
         }
 
         aConfig["flags"] += [

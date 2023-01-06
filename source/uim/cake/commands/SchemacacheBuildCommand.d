@@ -36,7 +36,7 @@ class SchemacacheBuildCommand : Command {
         myTables = $cache.build($args.getArgument("name"));
 
         foreach (myTable; myTables) {
-            $io.verbose(sprintf("Cached "%s"", myTable));
+            $io.verbose(sprintf("Cached '%s'", myTable));
         }
 
         $io.out("<success>Cache build complete</success>");

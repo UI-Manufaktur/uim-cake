@@ -337,7 +337,7 @@ abstract class CacheEngine : ICache, ICacheEngine
             return $ttl;
         }
         if ($ttl instanceof DateInterval) {
-            return (int)$ttl.format("%s");
+            return (int)$ttl.format('%s');
         }
 
         throw new InvalidArgumentException("TTL values must be one of null, int, \DateInterval");

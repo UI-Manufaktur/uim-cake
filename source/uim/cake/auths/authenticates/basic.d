@@ -95,7 +95,7 @@ class BasicAuthenticate : BaseAuthenticate
         $realm = this.getConfig("realm") ?: myServerRequest.getEnv("SERVER_NAME");
 
         return [
-            "WWW-Authenticate": sprintf("Basic realm="%s"", $realm),
+            "WWW-Authenticate": sprintf("Basic realm='%s'", $realm),
         ];
     }
 }

@@ -540,7 +540,7 @@ class QueryExpression : IExpression, Countable
             return "";
         }
         $conjunction = _conjunction;
-        $template = $len == 1 ? "%s" : "(%s)";
+        $template = $len == 1 ? '%s' : "(%s)";
         $parts = [];
         foreach (_conditions as $part) {
             if ($part instanceof Query) {

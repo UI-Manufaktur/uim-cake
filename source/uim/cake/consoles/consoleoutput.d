@@ -301,7 +301,7 @@ class ConsoleOutput {
      */
     void setOutputAs(int myType) {
         if (!in_array(myType, [self::RAW, self::PLAIN, self::COLOR], true)) {
-            throw new InvalidArgumentException(sprintf("Invalid output type "%s".", myType));
+            throw new InvalidArgumentException(sprintf("Invalid output type '%s'.", myType));
         }
 
         _outputAs = myType;

@@ -73,7 +73,7 @@ class PluginLoadCommand : Command {
             this.abort();
         }
 
-        $append = "$indent    \this.addPlugin("%s");\n";
+        $append = "$indent    \this.addPlugin('%s');\n";
         $insert = str_replace(", []", "", sprintf($append, $plugin));
 
         $offset = $matches[0][1];

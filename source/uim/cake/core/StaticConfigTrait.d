@@ -70,7 +70,7 @@ trait StaticConfigTrait
 
         if (isset(static::_config[$key])) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            throw new BadMethodCallException(sprintf("Cannot reconfigure existing key "%s"", $key));
+            throw new BadMethodCallException(sprintf("Cannot reconfigure existing key '%s'", $key));
         }
 
         if (is_object(aConfig)) {

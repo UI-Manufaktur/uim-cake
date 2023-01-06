@@ -80,7 +80,7 @@ class PostgresSchemaDialect : SchemaDialect
     protected array _convertColumn(string $column) {
         preg_match("/([a-z\s]+)(?:\(([0-9,]+)\))?/i", $column, $matches);
         if (empty($matches)) {
-            throw new DatabaseException(sprintf("Unable to parse column type from "%s"", $column));
+            throw new DatabaseException(sprintf("Unable to parse column type from '%s'", $column));
         }
 
         $col = strtolower($matches[1]);

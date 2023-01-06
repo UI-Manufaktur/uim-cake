@@ -307,7 +307,7 @@ class ConsoleOutput
      */
     void setOutputAs(int $type) {
         if (!in_array($type, [self::RAW, self::PLAIN, self::COLOR], true)) {
-            throw new InvalidArgumentException(sprintf("Invalid output type "%s".", $type));
+            throw new InvalidArgumentException(sprintf("Invalid output type '%s'.", $type));
         }
 
         _outputAs = $type;

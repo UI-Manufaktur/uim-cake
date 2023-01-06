@@ -9,5 +9,5 @@ import uim.cake;
 class MissingExtensionException : CakeException {
 
     // phpcs:ignore Generic.Files.LineLength
-    protected _messageTemplate = "Database driver %s cannot be used due to a missing PHP extension or unmet dependency. Requested by connection "%s"";
+    protected _messageTemplate = "Database driver %s cannot be used due to a missing PHP extension or unmet dependency. Requested by connection '%s'";
 }

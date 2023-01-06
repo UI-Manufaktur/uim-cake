@@ -11,7 +11,7 @@ use Throwable;
 // Used when a passed parameter or action parameter type declaration is missing or invalid.
 class InvalidParameterException : CakeException {
     protected STRINGAA $templates = [
-        "failed_coercion": "Unable to coerce "%s" to `%s` for `%s` in action %s::%s().",
+        "failed_coercion": "Unable to coerce '%s' to `%s` for `%s` in action %s::%s().",
         "missing_dependency": "Failed to inject dependency from service container for parameter `%s` " ~
             "with type `%s` in action %s::%s().",
         "missing_parameter": "Missing passed parameter for `%s` in action %s::%s().",

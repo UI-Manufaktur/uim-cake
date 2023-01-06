@@ -255,7 +255,7 @@ class Postgres : Driver
                     .setConjunction(" + INTERVAL")
                     .iterateParts(function ($p, $key) {
                         if ($key == 1) {
-                            $p = sprintf(""%s"", $p);
+                            $p = sprintf("'%s'", $p);
                         }
 
                         return $p;

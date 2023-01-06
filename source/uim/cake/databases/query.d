@@ -1680,7 +1680,7 @@ class Query : IExpression, IteratorAggregate
      */
     function update($table) {
         if (!is_string($table) && !($table instanceof IExpression)) {
-            $text = "Table must be of type string or "%s", got "%s"";
+            $text = "Table must be of type string or '%s', got '%s'";
             $message = sprintf($text, IExpression::class, gettype($table));
             throw new InvalidArgumentException($message);
         }

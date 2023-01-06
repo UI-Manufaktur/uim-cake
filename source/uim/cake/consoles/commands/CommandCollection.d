@@ -48,7 +48,7 @@ class CommandCollection : IteratorAggregate, Countable
         if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, ICommand::class)) {
             $class = is_string($command) ? $command : get_class($command);
             throw new InvalidArgumentException(sprintf(
-                "Cannot use "%s" for command "%s"~ " ~
+                "Cannot use '%s' for command '%s'~ " ~
                 "It is not a subclass of Cake\Console\Shell or Cake\Command\Command.",
                 $class,
                 $name

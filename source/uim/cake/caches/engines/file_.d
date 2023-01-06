@@ -366,7 +366,7 @@ class FileEngine : CacheEngine
 
             if (!$exists && !chmod(_File.getPathname(), (int)_config["mask"])) {
                 trigger_error(sprintf(
-                    "Could not apply permission mask "%s" on cache file "%s"",
+                    "Could not apply permission mask '%s' on cache file '%s'",
                     _File.getPathname(),
                     _config["mask"]
                 ), E_USER_WARNING);

@@ -71,7 +71,7 @@ class PhpConfig : IConfigEngine
             return $return;
         }
 
-        throw new CakeException(sprintf("Config file "%s" did not return an array", myKey ~ ".php"));
+        throw new CakeException(sprintf("Config file '%s' did not return an array", myKey ~ ".php"));
     }
 
     /**
