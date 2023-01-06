@@ -70,8 +70,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      */
-    Nullable!string toPHP($value, IDriver $driver)
-    {
+    Nullable!string toPHP($value, IDriver $driver) {
         if ($value == null) {
             return null;
         }
@@ -98,8 +97,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param mixed $value The value being bound.
      * @param uim.cake.databases.IDriver $driver The driver.
      */
-    int toStatement($value, IDriver $driver)
-    {
+    int toStatement($value, IDriver $driver) {
         return PDO::PARAM_STR;
     }
 
@@ -109,8 +107,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param mixed $value The value to convert.
      * @return string|null Converted value.
      */
-    Nullable!string marshal($value)
-    {
+    Nullable!string marshal($value) {
         if ($value == null || $value == "") {
             return null;
         }

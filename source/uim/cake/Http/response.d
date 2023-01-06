@@ -543,8 +543,7 @@ class Response : IResponse
      *
      * @return int Status code.
      */
-    int getStatusCode()
-    {
+    int getStatusCode() {
         return _status;
     }
 

@@ -27,8 +27,7 @@ class SimplePaginator : NumericPaginator
      * @param array $data Pagination data.
      * @return int|null
      */
-    protected Nullable!int getCount(IQuery $query, array $data)
-    {
+    protected Nullable!int getCount(IQuery $query, array $data) {
         return null;
     }
 }

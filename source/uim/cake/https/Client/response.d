@@ -227,8 +227,7 @@ class Response : Message : IResponse
      *
      * @return int The status code.
      */
-    int getStatusCode()
-    {
+    int getStatusCode() {
         return this.code;
     }
 
@@ -260,8 +259,7 @@ class Response : Message : IResponse
      * Get the encoding if it was set.
      *
      */
-    Nullable!string getEncoding()
-    {
+    Nullable!string getEncoding() {
         $content = this.getHeaderLine("content-type");
         if (!$content) {
             return null;

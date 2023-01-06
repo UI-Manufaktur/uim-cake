@@ -4,7 +4,7 @@ module uim.cake.Datasource;
  * Describes the methods that any class representing a data storage should
  * comply with.
  */
-interface RepositoryInterface
+interface IRepository
 {
     /**
      * Sets the repository alias.
@@ -64,7 +64,7 @@ interface RepositoryInterface
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException if the record with such id
      * could not be found
      * @return uim.cake.Datasource\IEntity
-     * @see uim.cake.datasources.RepositoryInterface::find()
+     * @see uim.cake.datasources.IRepository::find()
      */
     function get($primaryKey, array $options = []): IEntity;
 
@@ -102,7 +102,7 @@ interface RepositoryInterface
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Returns the number of affected rows.
-     * @see uim.cake.datasources.RepositoryInterface::delete()
+     * @see uim.cake.datasources.IRepository::delete()
      */
     int deleteAll($conditions);
 

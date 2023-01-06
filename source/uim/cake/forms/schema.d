@@ -98,8 +98,7 @@ class Schema
      * @return string|null Either the field type or null if the
      *   field does not exist.
      */
-    Nullable!string fieldType(string aName)
-    {
+    Nullable!string fieldType(string aName) {
         $field = this.field($name);
         if (!$field) {
             return null;

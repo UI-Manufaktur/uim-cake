@@ -183,8 +183,7 @@ class FormProtector
      * Get validation error message.
      *
      */
-    Nullable!string getError()
-    {
+    Nullable!string getError() {
         return this.debugMessage;
     }
 
@@ -194,8 +193,7 @@ class FormProtector
      * @param mixed $formData Data to validate.
      * @return string|null Fields token on success, null on failure.
      */
-    protected Nullable!string extractToken($formData)
-    {
+    protected Nullable!string extractToken($formData) {
         if (!is_array($formData)) {
             this.debugMessage = "Request data is not an array.";
 
@@ -524,8 +522,7 @@ class FormProtector
      * @param string $missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected Nullable!string debugExpectedFields(array $expectedFields = [], string $missingMessage = "")
-    {
+    protected Nullable!string debugExpectedFields(array $expectedFields = [], string $missingMessage = "") {
         if (count($expectedFields) == 0) {
             return null;
         }

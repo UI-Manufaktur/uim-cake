@@ -7,7 +7,7 @@
  * @since         4.1.0
   */module uim.cake.datasources.Locator;
 
-import uim.cake.datasources.RepositoryInterface;
+import uim.cake.datasources.IRepository;
 
 /**
  * Registries for repository objects should implement this interface.
@@ -19,7 +19,7 @@ interface ILocator
      *
      * @param string $alias The alias name you want to get.
      * @param array<string, mixed> $options The options you want to build the table with.
-     * @return uim.cake.Datasource\RepositoryInterface
+     * @return uim.cake.Datasource\IRepository
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
@@ -29,10 +29,10 @@ interface ILocator
      * Set a repository instance.
      *
      * @param string $alias The alias to set.
-     * @param uim.cake.Datasource\RepositoryInterface $repository The repository to set.
-     * @return uim.cake.Datasource\RepositoryInterface
+     * @param uim.cake.Datasource\IRepository $repository The repository to set.
+     * @return uim.cake.Datasource\IRepository
      */
-    function set(string $alias, RepositoryInterface $repository);
+    function set(string $alias, IRepository $repository);
 
     /**
      * Check to see if an instance exists in the registry.

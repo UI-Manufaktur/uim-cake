@@ -96,16 +96,14 @@ class PhpError
     /**
      * Get the PHP error constant.
      */
-    int getCode()
-    {
+    int getCode() {
         return this.code;
     }
 
     /**
      * Get the mapped LOG_ constant.
      */
-    int getLogLevel()
-    {
+    int getLogLevel() {
         $label = this.getLabel();
 
         return this.logMap[$label] ?? LOG_ERR;
@@ -129,8 +127,7 @@ class PhpError
      * Get the error file
      *
      */
-    Nullable!string getFile()
-    {
+    Nullable!string getFile() {
         return this.file;
     }
 
@@ -138,8 +135,7 @@ class PhpError
      * Get the error line number.
      *
      */
-    Nullable!int getLine()
-    {
+    Nullable!int getLine() {
         return this.line;
     }
 

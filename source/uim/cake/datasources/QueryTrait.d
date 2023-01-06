@@ -12,12 +12,8 @@ use Traversable;
  */
 trait QueryTrait
 {
-    /**
-     * Instance of a table object this query is bound to
-     *
-     * @var uim.cake.datasources.RepositoryInterface
-     */
-    protected _repository;
+    // Instance of a table object this query is bound to
+    protected IRepository _repository;
 
     /**
      * A ResultSet.
@@ -69,10 +65,10 @@ trait QueryTrait
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param uim.cake.Datasource\RepositoryInterface|uim.cake.orm.Table $repository The default table object to use
+     * @param uim.cake.Datasource\IRepository|uim.cake.orm.Table $repository The default table object to use
      * @return this
      */
-    function repository(RepositoryInterface $repository) {
+    function repository(IRepository $repository) {
         _repository = $repository;
 
         return this;
@@ -82,10 +78,9 @@ trait QueryTrait
      * Returns the default table object that will be used by this query,
      * that is, the table that will appear in the from clause.
      *
-     * @return uim.cake.Datasource\RepositoryInterface
+     * @return uim.cake.Datasource\IRepository
      */
-    function getRepository(): RepositoryInterface
-    {
+    IRepository getRepository() {
         return _repository;
     }
 

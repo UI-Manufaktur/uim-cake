@@ -69,13 +69,13 @@ trait ModelAwareTrait
      * @param string|null $modelClass Name of model class to load. Defaults to this.modelClass.
      *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null $modelType The type of repository to load. Defaults to the getModelType() value.
-     * @return uim.cake.Datasource\RepositoryInterface The model instance created.
+     * @return uim.cake.Datasource\IRepository The model instance created.
      * @throws uim.cake.Datasource\exceptions.MissingModelException If the model class cannot be found.
      * @throws \UnexpectedValueException If $modelClass argument is not provided
      *   and ModelAwareTrait::$modelClass property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.
      */
-    function loadModel(?string $modelClass = null, ?string $modelType = null): RepositoryInterface
+    function loadModel(?string $modelClass = null, ?string $modelType = null): IRepository
     {
         $modelClass = $modelClass ?? this.modelClass;
         if (empty($modelClass)) {

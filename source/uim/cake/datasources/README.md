@@ -19,7 +19,7 @@ or multiple `Entity` objects by using a `Query`.
 This library exposes the following interfaces for creating a system that : the
 repository pattern and is compatible with the CakePHP framework:
 
-* `RepositoryInterface` - Describes the methods for a base repository class.
+* `IRepository` - Describes the methods for a base repository class.
 * `IEntity` - Describes the methods for a single result object.
 * `IResultSet` - Represents the idea of a collection of Entities as a result of a query.
 

@@ -261,18 +261,18 @@ interface IQuery
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param uim.cake.Datasource\RepositoryInterface $repository The default repository object to use
+     * @param uim.cake.Datasource\IRepository $repository The default repository object to use
      * @return this
      */
-    function repository(RepositoryInterface $repository);
+    function repository(IRepository $repository);
 
     /**
      * Returns the default repository object that will be used by this query,
      * that is, the repository that will appear in the from clause.
      *
-     * @return uim.cake.Datasource\RepositoryInterface|null $repository The default repository object to use
+     * @return uim.cake.Datasource\IRepository|null $repository The default repository object to use
      */
-    function getRepository(): ?RepositoryInterface;
+    function getRepository(): ?IRepository;
 
     /**
      * Adds a condition or set of conditions to be used in the WHERE clause for this

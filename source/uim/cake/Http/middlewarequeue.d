@@ -217,8 +217,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      *
      * Implement the Countable interface.
      */
-    size_t count()
-    {
+    size_t count() {
         return count(this.queue);
     }
 
@@ -277,8 +276,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return int
      * @see \Iterator::key()
      */
-    int key()
-    {
+    int key() {
         return this.position;
     }
 

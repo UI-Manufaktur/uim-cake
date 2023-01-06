@@ -307,8 +307,7 @@ class ServerRequest : IServerRequest
      * Get the content type used in this request.
      *
      */
-    Nullable!string contentType()
-    {
+    Nullable!string contentType() {
         $type = this.getEnv("CONTENT_TYPE");
         if ($type) {
             return $type;
@@ -398,8 +397,7 @@ class ServerRequest : IServerRequest
      *   Local addresses do not contain hostnames.
      * @return string|null The referring address for this request or null.
      */
-    Nullable!string referer(bool $local = true)
-    {
+    Nullable!string referer(bool $local = true) {
         $ref = this.getEnv("HTTP_REFERER");
 
         $base = Configure::read("App.fullBaseUrl") . this.webroot;
@@ -949,8 +947,7 @@ class ServerRequest : IServerRequest
      * Get the host that the request was handled on.
      *
      */
-    Nullable!string host()
-    {
+    Nullable!string host() {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_HOST")) {
             return this.getEnv("HTTP_X_FORWARDED_HOST");
         }
@@ -962,8 +959,7 @@ class ServerRequest : IServerRequest
      * Get the port the request was handled on.
      *
      */
-    Nullable!string port()
-    {
+    Nullable!string port() {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_PORT")) {
             return this.getEnv("HTTP_X_FORWARDED_PORT");
         }
@@ -978,8 +974,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null The scheme used for the request.
      */
-    Nullable!string scheme()
-    {
+    Nullable!string scheme() {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_PROTO")) {
             return this.getEnv("HTTP_X_FORWARDED_PROTO");
         }
@@ -1360,8 +1355,7 @@ class ServerRequest : IServerRequest
      *   variable"s value that does not exist.
      * @return string|null Either the environment value, or null if the value doesn"t exist.
      */
-    Nullable!string getEnv(string aKey, ?string $default = null)
-    {
+    Nullable!string getEnv(string aKey, ?string $default = null) {
         $key = strtoupper($key);
         if (!array_key_exists($key, _environment)) {
             _environment[$key] = env($key);

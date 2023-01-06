@@ -4,7 +4,7 @@ import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
 import uim.cake.datasources.IQuery;
-import uim.cake.datasources.RepositoryInterface;
+import uim.cake.datasources.IRepository;
 import uim.cake.datasources.IResultSet;
 
 /**
@@ -142,7 +142,7 @@ class NumericPaginator : PaginatorInterface
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param uim.cake.Datasource\RepositoryInterface|uim.cake.Datasource\IQuery $object The repository or query
+     * @param uim.cake.Datasource\IRepository|uim.cake.Datasource\IQuery $object The repository or query
      *   to paginate.
      * @param array $params Request params
      * @param array $settings The settings/configuration used for pagination.
@@ -184,12 +184,12 @@ class NumericPaginator : PaginatorInterface
     /**
      * Get query for fetching paginated results.
      *
-     * @param uim.cake.Datasource\RepositoryInterface $object Repository instance.
+     * @param uim.cake.Datasource\IRepository $object Repository instance.
      * @param uim.cake.Datasource\IQuery|null $query Query Instance.
      * @param array<string, mixed> $data Pagination data.
      * @return uim.cake.Datasource\IQuery
      */
-    protected function getQuery(RepositoryInterface $object, ?IQuery $query, array $data): IQuery
+    protected function getQuery(IRepository $object, ?IQuery $query, array $data): IQuery
     {
         if ($query == null) {
             $query = $object.find($data["finder"], $data["options"]);
@@ -207,20 +207,19 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Pagination data.
      * @return int|null
      */
-    protected Nullable!int getCount(IQuery $query, array $data)
-    {
+    protected Nullable!int getCount(IQuery $query, array $data) {
         return $query.count();
     }
 
     /**
      * Extract pagination data needed
      *
-     * @param uim.cake.Datasource\RepositoryInterface $object The repository object.
+     * @param uim.cake.Datasource\IRepository $object The repository object.
      * @param array<string, mixed> $params Request params
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return array Array with keys "defaults", "options" and "finder"
      */
-    protected array extractData(RepositoryInterface $object, array $params, array $settings) {
+    protected array extractData(IRepository $object, array $params, array $settings) {
         $alias = $object.getAlias();
         $defaults = this.getDefaults($alias, $settings);
         $options = this.mergeOptions($params, $defaults);
@@ -503,12 +502,12 @@ class NumericPaginator : PaginatorInterface
      * The default order options provided to paginate() will be merged with the user"s
      * requested sorting field/direction.
      *
-     * @param uim.cake.Datasource\RepositoryInterface $object Repository object.
+     * @param uim.cake.Datasource\IRepository $object Repository object.
      * @param array<string, mixed> $options The pagination options being used for this request.
      * @return array<string, mixed> An array of options with sort + direction removed and
      *   replaced with order if possible.
      */
-    array validateSort(RepositoryInterface $object, array $options) {
+    array validateSort(IRepository $object, array $options) {
         if (isset($options["sort"])) {
             $direction = null;
             if (isset($options["direction"])) {
@@ -595,12 +594,12 @@ class NumericPaginator : PaginatorInterface
     /**
      * Prefixes the field with the table alias if possible.
      *
-     * @param uim.cake.Datasource\RepositoryInterface $object Repository object.
+     * @param uim.cake.Datasource\IRepository $object Repository object.
      * @param array $order Order array.
      * @param bool $allowed Whether the field was allowed.
      * @return array Final order array.
      */
-    protected array _prefix(RepositoryInterface $object, array $order, bool $allowed = false) {
+    protected array _prefix(IRepository $object, array $order, bool $allowed = false) {
         $tableAlias = $object.getAlias();
         $tableOrder = [];
         foreach ($order as $key: $value) {

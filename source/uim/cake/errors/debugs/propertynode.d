@@ -53,8 +53,7 @@ class PropertyNode : INode
     /**
      * Get the property visibility
      */
-    Nullable!string getVisibility()
-    {
+    Nullable!string getVisibility() {
         return this.visibility;
     }
 
