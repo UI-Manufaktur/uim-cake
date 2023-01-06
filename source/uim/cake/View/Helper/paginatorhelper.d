@@ -200,7 +200,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    function sortKey(?string $model = null, array $options = []): ?string
+    Nullable!string sortKey(?string $model = null, array $options = [])
     {
         if (empty($options)) {
             $options = this.params($model);
@@ -642,7 +642,7 @@ class PaginatorHelper : Helper
      * @param string|null $model Model name to set
      * @return string|null Model name or null if the pagination isn"t initialized.
      */
-    function defaultModel(?string $model = null): ?string
+    Nullable!string defaultModel(?string $model = null)
     {
         if ($model != null) {
             _defaultModel = $model;
@@ -1114,7 +1114,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Array of options
      * @return string|null Meta links
      */
-    function meta(array $options = []): ?string
+    Nullable!string meta(array $options = [])
     {
         $options += [
                 "model": null,

@@ -204,7 +204,7 @@ class ArrayContext : IContext
     }
 
 
-    function getRequiredMessage(string $field): ?string
+    Nullable!string getRequiredMessage(string $field)
     {
         if (!is_array(_context["required"])) {
             return null;
@@ -231,9 +231,8 @@ class ArrayContext : IContext
      * In this context class, this is simply defined by the "length" array.
      *
      * @param string $field A dot separated path to check required-ness for.
-     * @return int|null
      */
-    function getMaxLength(string $field): ?int
+    Nullable!int getMaxLength(string $field): ?int
     {
         if (!is_array(_context["schema"])) {
             return null;
@@ -258,7 +257,7 @@ class ArrayContext : IContext
      * @return string|null An abstract data type or null.
      * @see uim.cake.databases.TypeFactory
      */
-    function type(string $field): ?string
+    Nullable!string type(string $field)
     {
         if (!is_array(_context["schema"])) {
             return null;

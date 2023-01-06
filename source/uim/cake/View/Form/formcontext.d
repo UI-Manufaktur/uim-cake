@@ -123,7 +123,7 @@ class FormContext : IContext
     }
 
 
-    function getRequiredMessage(string $field): ?string
+    Nullable!string getRequiredMessage(string $field)
     {
         $parts = explode(".", $field);
 
@@ -169,7 +169,7 @@ class FormContext : IContext
     }
 
 
-    function type(string $field): ?string
+    Nullable!string type(string $field)
     {
         return _form.getSchema().fieldType($field);
     }

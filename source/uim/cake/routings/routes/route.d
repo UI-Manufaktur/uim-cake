@@ -609,7 +609,7 @@ class Route
      *   directory and other url params.
      * @return string|null Either a string URL for the parameters if they match or null.
      */
-    function match(array $url, array $context = []): ?string
+    Nullable!string match(array $url, array $context = [])
     {
         if (empty(_compiledRoute)) {
             this.compile();

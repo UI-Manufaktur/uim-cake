@@ -51,7 +51,7 @@ class FlashHelper : Helper
      * @return string|null Rendered flash message or null if flash key does not exist
      *   in session.
      */
-    function render(string aKey = "flash", array $options = []): ?string
+    Nullable!string render(string aKey = "flash", array $options = [])
     {
         $messages = _View.getRequest().getFlash().consume($key);
         if ($messages == null) {

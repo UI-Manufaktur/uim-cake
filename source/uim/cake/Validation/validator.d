@@ -2404,9 +2404,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * Gets the required message for a field
      *
      * @param string $field Field name
-     * @return string|null
      */
-    function getRequiredMessage(string $field): ?string
+    Nullable!string getRequiredMessage(string $field)
     {
         if (!isset(_fields[$field])) {
             return null;
@@ -2424,9 +2423,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * Gets the notEmpty message for a field
      *
      * @param string $field Field name
-     * @return string|null
      */
-    function getNotEmptyMessage(string $field): ?string
+    Nullable!string getNotEmptyMessage(string $field)
     {
         if (!isset(_fields[$field])) {
             return null;

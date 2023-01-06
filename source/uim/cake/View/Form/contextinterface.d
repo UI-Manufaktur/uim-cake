@@ -58,17 +58,15 @@ interface IContext
      * Gets the default "required" error message for a field
      *
      * @param string $field A dot separated path to the field name
-     * @return string|null
      */
-    function getRequiredMessage(string $field): ?string;
+    Nullable!string getRequiredMessage(string $field);
 
     /**
      * Get maximum length of a field from model validation.
      *
      * @param string $field Field name.
-     * @return int|null
      */
-    function getMaxLength(string $field): ?int;
+    Nullable!int getMaxLength(string $field): ?int;
 
     /**
      * Get the field names of the top level object in this context.
@@ -84,7 +82,7 @@ interface IContext
      * @return string|null An abstract data type or null.
      * @see uim.cake.databases.TypeFactory
      */
-    function type(string $field): ?string;
+    Nullable!string type(string $field);
 
     /**
      * Get an associative array of other attributes for a field name.

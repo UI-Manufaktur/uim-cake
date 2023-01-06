@@ -245,7 +245,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param array<string, mixed> $options Table options array.
      * @return string|null
      */
-    protected function _getClassName(string $alias, array $options = []): ?string
+    protected Nullable!string _getClassName(string $alias, array $options = [])
     {
         if (empty($options["className"])) {
             $options["className"] = $alias;

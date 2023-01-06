@@ -123,7 +123,7 @@ class HtmlHelper : Helper
      * @return string|null A completed `<link />` element, or null if the element was sent to a block.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-meta-tags
      */
-    function meta($type, $content = null, array $options = []): ?string
+    Nullable!string meta($type, $content = null, array $options = [])
     {
         if (!is_array($type)) {
             $types = [
@@ -362,7 +362,7 @@ class HtmlHelper : Helper
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-css-files
      */
-    function css($path, array $options = []): ?string
+    Nullable!string css($path, array $options = [])
     {
         $options += [
             "once": true,
@@ -462,7 +462,7 @@ class HtmlHelper : Helper
      *   or if $once is true and the file has been included before.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-javascript-files
      */
-    function script($url, array $options = []): ?string
+    Nullable!string script($url, array $options = [])
     {
         $defaults = [
             "block": null,
@@ -521,7 +521,7 @@ class HtmlHelper : Helper
      * @return string|null String or null depending on the value of `$options["block"]`
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    function scriptBlock(string $script, array $options = []): ?string
+    Nullable!string scriptBlock(string $script, array $options = [])
     {
         $options += ["block": null, "nonce": _View.getRequest().getAttribute("cspScriptNonce")];
 
@@ -568,7 +568,7 @@ class HtmlHelper : Helper
      * @return string|null Depending on the settings of scriptStart() either a script tag or null
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    function scriptEnd(): ?string
+    Nullable!string scriptEnd()
     {
         $buffer = ob_get_clean();
         $options = _scriptBlockOptions;

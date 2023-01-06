@@ -57,7 +57,7 @@ class NullContext : IContext
     }
 
 
-    function getRequiredMessage(string $field): ?string
+    Nullable!string getRequiredMessage(string $field)
     {
         return null;
     }
@@ -75,7 +75,7 @@ class NullContext : IContext
     }
 
 
-    function type(string $field): ?string
+    Nullable!string type(string $field)
     {
         return null;
     }

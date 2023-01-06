@@ -298,7 +298,7 @@ class Socket
      *
      * @return string|null Last error
      */
-    function lastError(): ?string
+    Nullable!string lastError()
     {
         if (!empty(this.lastError)) {
             return this.lastError["num"] ~ ": " ~ this.lastError["str"];
@@ -349,7 +349,7 @@ class Socket
      * @param int $length Optional buffer length to read; defaults to 1024
      * @return string|null Socket data
      */
-    function read(int $length = 1024): ?string
+    Nullable!string read(int $length = 1024)
     {
         if (!this.connected && !this.connect()) {
             return null;

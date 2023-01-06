@@ -482,7 +482,7 @@ class EntityContext : IContext
     }
 
 
-    function getRequiredMessage(string $field): ?string
+    Nullable!string getRequiredMessage(string $field)
     {
         $parts = explode(".", $field);
 
@@ -504,9 +504,8 @@ class EntityContext : IContext
      * Get field length from validation
      *
      * @param string $field The dot separated path to the field you want to check.
-     * @return int|null
      */
-    function getMaxLength(string $field): ?int
+    Nullable!int getMaxLength(string $field): ?int
     {
         $parts = explode(".", $field);
         $validator = _getValidator($parts);
@@ -653,7 +652,7 @@ class EntityContext : IContext
      * @return string|null An abstract data type or null.
      * @see uim.cake.databases.TypeFactory
      */
-    function type(string $field): ?string
+    Nullable!string type(string $field)
     {
         $parts = explode(".", $field);
         $table = _getTable($parts);

@@ -482,9 +482,8 @@ class View : IEventDispatcher
     /**
      * Get the current view theme.
      *
-     * @return string|null
      */
-    function getTheme(): ?string
+    Nullable!string getTheme()
     {
         return this.theme;
     }
@@ -1204,7 +1203,7 @@ class View : IEventDispatcher
      * @return string|null
 
      */
-    function getPlugin(): ?string
+    Nullable!string getPlugin()
     {
         return this.plugin;
     }

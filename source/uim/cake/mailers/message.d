@@ -570,7 +570,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return string|null Encoding
      */
-    function getTransferEncoding(): ?string
+    Nullable!string getTransferEncoding()
     {
         return this.transferEncoding;
     }
@@ -592,7 +592,7 @@ class Message : JsonSerializable, Serializable {
      * EmailPattern setter/getter
      *
      */
-    Nullable!string getEmailPattern(): ?string
+    Nullable!string getEmailPattern()
     {
         return this.emailPattern;
     }

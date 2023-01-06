@@ -183,7 +183,7 @@ class ViewBlock
      *
      * @return string|null Either null or the name of the last open block.
      */
-    function active(): ?string
+    Nullable!string active()
     {
         end(_active);
 

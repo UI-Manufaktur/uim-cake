@@ -253,7 +253,7 @@ class Number
      * currently stored value
      * @return string|null Currency
      */
-    static function defaultCurrency($currency = null): ?string
+    static Nullable!string defaultCurrency($currency = null)
     {
         deprecationWarning(
             "Number::defaultCurrency() is deprecated~ " ~

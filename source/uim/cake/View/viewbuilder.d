@@ -182,9 +182,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets path for template files.
      *
-     * @return string|null
      */
-    function getTemplatePath(): ?string
+    Nullable!string getTemplatePath()
     {
         return _templatePath;
     }
@@ -204,9 +203,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets path for layout files.
      *
-     * @return string|null
      */
-    function getLayoutPath(): ?string
+    Nullable!string getLayoutPath()
     {
         return _layoutPath;
     }
@@ -263,9 +261,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets the plugin name to use.
      *
-     * @return string|null
      */
-    function getPlugin(): ?string
+    Nullable!string getPlugin()
     {
         return _plugin;
     }
@@ -350,9 +347,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets the view theme to use.
      *
-     * @return string|null
      */
-    function getTheme(): ?string
+    Nullable!string getTheme()
     {
         return _theme;
     }
@@ -374,9 +370,8 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets the name of the view file to render. The name specified is the
      * filename in `templates/<SubFolder>/` without the .php extension.
      *
-     * @return string|null
      */
-    function getTemplate(): ?string
+    Nullable!string getTemplate()
     {
         return _template;
     }
@@ -398,9 +393,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets the name of the layout file to render the view inside of.
      *
-     * @return string|null
      */
-    function getLayout(): ?string
+    Nullable!string getLayout()
     {
         return _layout;
     }
@@ -471,9 +465,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets the view name.
      *
-     * @return string|null
      */
-    function getName(): ?string
+    Nullable!string getName()
     {
         return _name;
     }
@@ -497,9 +490,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets the view classname.
      *
-     * @return string|null
      */
-    function getClassName(): ?string
+    Nullable!string getClassName()
     {
         return _className;
     }

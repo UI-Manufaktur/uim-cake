@@ -42,7 +42,7 @@ class PluginShortRoute : InflectedRoute
      *   directory.
      * @return string|null Either a string URL for the parameters if they match or null.
      */
-    function match(array $url, array $context = []): ?string
+    Nullable!string match(array $url, array $context = [])
     {
         if (isset($url["controller"], $url["plugin"]) && $url["plugin"] != $url["controller"]) {
             return null;
