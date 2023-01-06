@@ -133,8 +133,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * Get the number of commands in the collection.
      */
-    size_t count()
-    {
+    size_t count() {
         return count(this.commands);
     }
 

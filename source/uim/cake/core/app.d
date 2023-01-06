@@ -44,8 +44,7 @@ class App
      * @return string|null Namespaced class name, null if the class is not found.
      * @psalm-return class-string|null
      */
-    static Nullable!string className(string $class, string $type = "", string $suffix = "")
-    {
+    static Nullable!string className(string $class, string $type = "", string $suffix = "") {
         if (strpos($class, "\\") != false) {
             return class_exists($class) ? $class : null;
         }

@@ -25,14 +25,12 @@ abstract class BaseType : TypeInterface
     }
 
 
-    Nullable!string getName()
-    {
+    Nullable!string getName() {
         return _name;
     }
 
 
-    Nullable!string getBaseType()
-    {
+    Nullable!string getBaseType() {
         return _name;
     }
 

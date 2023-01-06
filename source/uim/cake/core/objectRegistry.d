@@ -363,8 +363,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Returns the number of loaded objects.
      */
-    size_t count()
-    {
+    size_t count() {
         return count(_loaded);
     }
 

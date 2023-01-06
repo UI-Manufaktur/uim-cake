@@ -35,8 +35,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
-    {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         $commands = this.commands.getIterator();
         if ($commands instanceof ArrayIterator) {
             $commands.ksort();

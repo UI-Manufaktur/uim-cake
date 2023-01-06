@@ -510,8 +510,7 @@ class QueryExpression : IExpression, Countable
      * Useful to determine if this expression object is void or it will generate
      * a non-empty string when compiled
      */
-    size_t count()
-    {
+    size_t count() {
         return count(_conditions);
     }
 
@@ -792,8 +791,7 @@ class QueryExpression : IExpression, Countable
      * @param uim.cake.databases.IExpression|string $field The field name to get a type for.
      * @return string|null The computed type or null, if the type is unknown.
      */
-    protected Nullable!string _calculateType($field)
-    {
+    protected Nullable!string _calculateType($field) {
         $field = $field instanceof IdentifierExpression ? $field.getIdentifier() : $field;
         if (is_string($field)) {
             return this.getTypeMap().type($field);

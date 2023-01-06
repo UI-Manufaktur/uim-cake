@@ -87,8 +87,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    int columnCount()
-    {
+    int columnCount() {
         return this.statement.columnCount();
     }
 
@@ -124,8 +123,7 @@ class BufferedStatement : Iterator, IStatement
      * Statements can be passed as argument for count() to return the number
      * for affected rows from last execution.
      */
-    size_t count()
-    {
+    size_t count() {
         return this.rowCount();
     }
 
@@ -196,8 +194,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    int rowCount()
-    {
+    int rowCount() {
         if (!_allFetched) {
             this.fetchAll(static::FETCH_TYPE_ASSOC);
         }

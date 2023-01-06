@@ -269,7 +269,7 @@ class Controller : IEventListener, IEventDispatcher {
      * Magic accessor for model autoloading.
      *
      * @param string aName Property name
-     * @return uim.cake.Datasource\RepositoryInterface|null The model instance or null
+     * @return uim.cake.Datasource\IRepository|null The model instance or null
      */
     function __get(string aName) {
         if (!empty(this.modelClass)) {
@@ -357,8 +357,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @return string|null
 
      */
-    Nullable!string getPlugin()
-    {
+    Nullable!string getPlugin() {
         return this.plugin;
     }
 
@@ -740,8 +739,7 @@ class Controller : IEventListener, IEventDispatcher {
      *
      * @return string|null The chosen view class or null for no decision.
      */
-    protected Nullable!string chooseViewClass()
-    {
+    protected Nullable!string chooseViewClass() {
         $possibleViewClasses = this.viewClasses();
         if (empty($possibleViewClasses)) {
             return null;

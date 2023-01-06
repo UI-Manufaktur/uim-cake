@@ -110,8 +110,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * echo $statement.columnCount(); // outputs 2
      * ```
      */
-    int columnCount()
-    {
+    int columnCount() {
         return _statement.columnCount();
     }
 
@@ -222,8 +221,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * print_r($statement.rowCount()); // will show 1
      * ```
      */
-    int rowCount()
-    {
+    int rowCount() {
         return _statement.rowCount();
     }
 
@@ -256,8 +254,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * Statements can be passed as argument for count() to return the number
      * for affected rows from last execution.
      */
-    size_t count()
-    {
+    size_t count() {
         return this.rowCount();
     }
 

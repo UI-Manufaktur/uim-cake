@@ -105,8 +105,7 @@ class CommandRunner : IEventDispatcher
      * @return int The exit code of the command.
      * @throws \RuntimeException
      */
-    int run(array $argv, ?ConsoleIo $io = null)
-    {
+    int run(array $argv, ?ConsoleIo $io = null) {
         this.bootstrap();
 
         $commands = new CommandCollection([
@@ -298,8 +297,7 @@ class CommandRunner : IEventDispatcher
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null Exit code
      */
-    protected Nullable!int runCommand(ICommand $command, array $argv, ConsoleIo $io)
-    {
+    protected Nullable!int runCommand(ICommand $command, array $argv, ConsoleIo $io) {
         try {
             return $command.run($argv, $io);
         } catch (StopException $e) {

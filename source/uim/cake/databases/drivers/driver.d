@@ -396,16 +396,14 @@ abstract class Driver : IDriver
      *
      * @return int|null Maximum alias length or null if no limit
      */
-    Nullable!int getMaxAliasLength()
-    {
+    Nullable!int getMaxAliasLength() {
         return static::MAX_ALIAS_LENGTH;
     }
 
     /**
      * Returns the number of connection retry attempts made.
      */
-    int getConnectRetries()
-    {
+    int getConnectRetries() {
         return this.connectRetries;
     }
 

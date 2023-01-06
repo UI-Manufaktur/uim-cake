@@ -112,8 +112,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      */
-    Nullable!string toDatabase($value, IDriver $driver)
-    {
+    Nullable!string toDatabase($value, IDriver $driver) {
         if ($value == null || is_string($value)) {
             return $value;
         }

@@ -533,8 +533,7 @@ class SecurityComponent : Component
      * @param string $missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected Nullable!string _debugExpectedFields(array $expectedFields = [], string $missingMessage = "")
-    {
+    protected Nullable!string _debugExpectedFields(array $expectedFields = [], string $missingMessage = "") {
         if (count($expectedFields) == 0) {
             return null;
         }

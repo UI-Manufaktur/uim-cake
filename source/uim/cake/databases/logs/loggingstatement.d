@@ -95,8 +95,7 @@ class LoggingStatement : StatementDecorator
     }
 
 
-    int rowCount()
-    {
+    int rowCount() {
         $result = super.rowCount();
 
         if (this.loggedQuery) {

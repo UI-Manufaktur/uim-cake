@@ -25,8 +25,7 @@ class SqliteStatement : StatementDecorator
     /**
      * Returns the number of rows returned of affected by last execution
      */
-    int rowCount()
-    {
+    int rowCount() {
         /** @psalm-suppress NoInterfaceProperties */
         if (
             _statement.queryString &&

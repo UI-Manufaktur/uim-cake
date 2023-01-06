@@ -70,8 +70,7 @@ class MissingOptionException : ConsoleException
      * @param array<string> $haystack Suggestions to look through.
      * @return string The best match
      */
-    protected Nullable!string findClosestItem($needle, $haystack)
-    {
+    protected Nullable!string findClosestItem($needle, $haystack) {
         $bestGuess = null;
         foreach ($haystack as $item) {
             if (strpos($item, $needle) == 0) {

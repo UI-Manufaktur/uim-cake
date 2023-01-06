@@ -242,8 +242,7 @@ class PluginCollection : Iterator, Countable
      *
      * Get the number of plugins in the collection.
      */
-    size_t count()
-    {
+    size_t count() {
         return count(this.plugins);
     }
 

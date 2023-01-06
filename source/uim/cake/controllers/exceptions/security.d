@@ -52,8 +52,7 @@ class SecurityException : BadRequestException {
      *
      * @return string|null
      */
-    Nullable!string getReason()
-    {
+    Nullable!string getReason() {
         return _reason;
     }
 }

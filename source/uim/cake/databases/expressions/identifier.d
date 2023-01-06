@@ -63,8 +63,7 @@ class IdentifierExpression : IExpression
      * Returns the collation.
      *
      */
-    Nullable!string getCollation()
-    {
+    Nullable!string getCollation() {
         return this.collation;
     }
 
