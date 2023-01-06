@@ -52,7 +52,7 @@ class LogEngineRegistry : ObjectRegistry
      *
      * @param \Psr\logs.LoggerInterface|string $class The classname or object to make.
      * @param string $alias The alias of the object.
-     * @param array<string, mixed> $config An array of settings to use for the logger.
+     * @param array<string, mixed> aConfig An array of settings to use for the logger.
      * @return \Psr\logs.LoggerInterface The constructed logger class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
@@ -68,7 +68,7 @@ class LogEngineRegistry : ObjectRegistry
 
         if (!isset($instance)) {
             /** @psalm-suppress UndefinedClass */
-            $instance = new $class($config);
+            $instance = new $class(aConfig);
         }
 
         if ($instance instanceof LoggerInterface) {

@@ -184,35 +184,35 @@ class Session
      *   the configuration array for the engine. You can set the `engine` key to an already
      *   instantiated session handler object.
      *
-     * @param array<string, mixed> $config The Configuration to apply to this session object
+     * @param array<string, mixed> aConfig The Configuration to apply to this session object
      */
     this(Json aConfig = []) {
-        $config += [
+        aConfig += [
             "timeout": null,
             "cookie": null,
             "ini": [],
             "handler": [],
         ];
 
-        if ($config["timeout"]) {
-            $config["ini"]["session.gc_maxlifetime"] = 60 * $config["timeout"];
+        if (aConfig["timeout"]) {
+            aConfig["ini"]["session.gc_maxlifetime"] = 60 * aConfig["timeout"];
         }
 
-        if ($config["cookie"]) {
-            $config["ini"]["session.name"] = $config["cookie"];
+        if (aConfig["cookie"]) {
+            aConfig["ini"]["session.name"] = aConfig["cookie"];
         }
 
-        if (!isset($config["ini"]["session.cookie_path"])) {
-            $cookiePath = empty($config["cookiePath"]) ? "/" : $config["cookiePath"];
-            $config["ini"]["session.cookie_path"] = $cookiePath;
+        if (!isset(aConfig["ini"]["session.cookie_path"])) {
+            $cookiePath = empty(aConfig["cookiePath"]) ? "/" : aConfig["cookiePath"];
+            aConfig["ini"]["session.cookie_path"] = $cookiePath;
         }
 
-        this.options($config["ini"]);
+        this.options(aConfig["ini"]);
 
-        if (!empty($config["handler"])) {
-            $class = $config["handler"]["engine"];
-            unset($config["handler"]["engine"]);
-            this.engine($class, $config["handler"]);
+        if (!empty(aConfig["handler"])) {
+            $class = aConfig["handler"]["engine"];
+            unset(aConfig["handler"]["engine"]);
+            this.engine($class, aConfig["handler"]);
         }
 
         _lifetime = (int)ini_get("session.gc_maxlifetime");

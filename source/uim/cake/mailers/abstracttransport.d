@@ -29,10 +29,10 @@ abstract class AbstractTransport
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config Configuration options.
+     * @param array<string, mixed> aConfig Configuration options.
      */
-    this(array $config = []) {
-        this.setConfig($config);
+    this(Json aConfig = []) {
+        this.setConfig(aConfig);
     }
 
     /**

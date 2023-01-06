@@ -78,10 +78,10 @@ class FileLog : BaseLog
     /**
      * Sets protected properties based on config provided
      *
-     * @param array<string, mixed> $config Configuration array
+     * @param array<string, mixed> aConfig Configuration array
      */
     this(Json aConfig = []) {
-        super(($config);
+        super((aConfig);
 
         _path = this.getConfig("path", sys_get_temp_dir() . DIRECTORY_SEPARATOR);
         if (Configure::read("debug") && !is_dir(_path)) {

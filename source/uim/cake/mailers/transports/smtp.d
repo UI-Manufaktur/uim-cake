@@ -228,14 +228,14 @@ class SmtpTransport : AbstractTransport
         }
         _smtpSend(null, "220");
 
-        $config = _config;
+        aConfig = _config;
 
         $host = "localhost";
-        if (isset($config["client"])) {
-            if (empty($config["client"])) {
+        if (isset(aConfig["client"])) {
+            if (empty(aConfig["client"])) {
                 throw new SocketException("Cannot use an empty client name.");
             }
-            $host = $config["client"];
+            $host = aConfig["client"];
         } else {
             /** @var string $httpHost */
             $httpHost = env("HTTP_HOST");
@@ -246,13 +246,13 @@ class SmtpTransport : AbstractTransport
 
         try {
             _smtpSend("EHLO {$host}", "250");
-            if ($config["tls"]) {
+            if (aConfig["tls"]) {
                 _smtpSend("STARTTLS", "220");
                 _socket().enableCrypto("tls");
                 _smtpSend("EHLO {$host}", "250");
             }
         } catch (SocketException $e) {
-            if ($config["tls"]) {
+            if (aConfig["tls"]) {
                 throw new SocketException(
                     "SMTP server did not accept the connection or trying to connect to non TLS SMTP server using TLS.",
                     null,

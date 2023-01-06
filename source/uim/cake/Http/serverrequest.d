@@ -207,10 +207,10 @@ class ServerRequest : IServerRequest
      *   requests with put, patch or delete data.
      * - `session` An instance of a Session object
      *
-     * @param array<string, mixed> $config An array of request data to create a request with.
+     * @param array<string, mixed> aConfig An array of request data to create a request with.
      */
     this(Json aConfig = []) {
-        $config += [
+        aConfig += [
             "params": this.params,
             "query": [],
             "post": [],
@@ -224,59 +224,59 @@ class ServerRequest : IServerRequest
             "input": null,
         ];
 
-        _setConfig($config);
+        _setConfig(aConfig);
     }
 
     /**
      * Process the config/settings data into properties.
      *
-     * @param array<string, mixed> $config The config data to use.
+     * @param array<string, mixed> aConfig The config data to use.
      */
     protected void _setConfig(Json aConfig) {
-        if (empty($config["session"])) {
-            $config["session"] = new Session([
-                "cookiePath": $config["base"],
+        if (empty(aConfig["session"])) {
+            aConfig["session"] = new Session([
+                "cookiePath": aConfig["base"],
             ]);
         }
 
-        if (empty($config["environment"]["REQUEST_METHOD"])) {
-            $config["environment"]["REQUEST_METHOD"] = "GET";
+        if (empty(aConfig["environment"]["REQUEST_METHOD"])) {
+            aConfig["environment"]["REQUEST_METHOD"] = "GET";
         }
 
-        this.cookies = $config["cookies"];
+        this.cookies = aConfig["cookies"];
 
-        if (isset($config["uri"])) {
-            if (!$config["uri"] instanceof UriInterface) {
+        if (isset(aConfig["uri"])) {
+            if (!aConfig["uri"] instanceof UriInterface) {
                 throw new CakeException("The `uri` key must be an instance of " ~ UriInterface::class);
             }
-            $uri = $config["uri"];
+            $uri = aConfig["uri"];
         } else {
-            if ($config["url"] != "") {
-                $config = this.processUrlOption($config);
+            if (aConfig["url"] != "") {
+                aConfig = this.processUrlOption(aConfig);
             }
-            $uri = ServerRequestFactory::createUri($config["environment"]);
+            $uri = ServerRequestFactory::createUri(aConfig["environment"]);
         }
 
-        _environment = $config["environment"];
+        _environment = aConfig["environment"];
 
         this.uri = $uri;
-        this.base = $config["base"];
-        this.webroot = $config["webroot"];
+        this.base = aConfig["base"];
+        this.webroot = aConfig["webroot"];
 
-        if (isset($config["input"])) {
+        if (isset(aConfig["input"])) {
             $stream = new Stream("php://memory", "rw");
-            $stream.write($config["input"]);
+            $stream.write(aConfig["input"]);
             $stream.rewind();
         } else {
             $stream = new PhpInputStream();
         }
         this.stream = $stream;
 
-        this.data = $config["post"];
-        this.uploadedFiles = $config["files"];
-        this.query = $config["query"];
-        this.params = $config["params"];
-        this.session = $config["session"];
+        this.data = aConfig["post"];
+        this.uploadedFiles = aConfig["files"];
+        this.query = aConfig["query"];
+        this.params = aConfig["params"];
+        this.session = aConfig["session"];
         this.flash = new FlashMessage(this.session);
     }
 
@@ -285,24 +285,24 @@ class ServerRequest : IServerRequest
      *
      * `query` option is also updated based on URL"s querystring.
      *
-     * @param array<string, mixed> $config Config array.
+     * @param array<string, mixed> aConfig Config array.
      * @return array<string, mixed> Update config.
      */
     protected array processUrlOption(Json aConfig) {
-        if ($config["url"][0] != "/") {
-            $config["url"] = "/" ~ $config["url"];
+        if (aConfig["url"][0] != "/") {
+            aConfig["url"] = "/" ~ aConfig["url"];
         }
 
-        if (strpos($config["url"], "?") != false) {
-            [$config["url"], $config["environment"]["QUERY_STRING"]] = explode("?", $config["url"]);
+        if (strpos(aConfig["url"], "?") != false) {
+            [aConfig["url"], aConfig["environment"]["QUERY_STRING"]] = explode("?", aConfig["url"]);
 
-            parse_str($config["environment"]["QUERY_STRING"], $queryArgs);
-            $config["query"] += $queryArgs;
+            parse_str(aConfig["environment"]["QUERY_STRING"], $queryArgs);
+            aConfig["query"] += $queryArgs;
         }
 
-        $config["environment"]["REQUEST_URI"] = $config["url"];
+        aConfig["environment"]["REQUEST_URI"] = aConfig["url"];
 
-        return $config;
+        return aConfig;
     }
 
     /**

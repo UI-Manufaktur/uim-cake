@@ -86,9 +86,9 @@ class LazyEagerLoader
             .contain($contain);
 
         foreach ($query.getEagerLoader().attachableAssociations($source) as $loadable) {
-            $config = $loadable.getConfig();
-            $config["includeFields"] = true;
-            $loadable.setConfig($config);
+            aConfig = $loadable.getConfig();
+            aConfig["includeFields"] = true;
+            $loadable.setConfig(aConfig);
         }
 
         return $query;

@@ -115,15 +115,15 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string $class The classname that is missing.
      * @param string $alias The alias of the object.
-     * @param array<string, mixed> $config An array of config to use for the behavior.
+     * @param array<string, mixed> aConfig An array of config to use for the behavior.
      * @return uim.cake.orm.Behavior The constructed behavior class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected function _create($class, string $alias, array $config): Behavior
+    protected function _create($class, string $alias, Json aConfig): Behavior
     {
         /** @var uim.cake.orm.Behavior $instance */
-        $instance = new $class(_table, $config);
-        $enable = $config["enabled"] ?? true;
+        $instance = new $class(_table, aConfig);
+        $enable = aConfig["enabled"] ?? true;
         if ($enable) {
             this.getEventManager().on($instance);
         }

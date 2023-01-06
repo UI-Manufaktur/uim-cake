@@ -83,19 +83,19 @@ class SyslogLog : BaseLog
 
 
     this(Json aConfig = []) {
-        if (isset($config["format"])) {
+        if (isset(aConfig["format"])) {
             deprecationWarning(
                 "`format` option is now deprecated in favor of custom formatters~ " ~
                 "Switching to `LegacySyslogFormatter`.",
                 0
             );
             /** @psalm-suppress DeprecatedClass */
-            $config["formatter"] = [
+            aConfig["formatter"] = [
                 "className": LegacySyslogFormatter::class,
-                "format": $config["format"],
+                "format": aConfig["format"],
             ];
         }
-        super(($config);
+        super((aConfig);
     }
 
     /**
@@ -112,8 +112,8 @@ class SyslogLog : BaseLog
      */
     void log($level, $message, array $context = []) {
         if (!_open) {
-            $config = _config;
-            _open($config["prefix"], $config["flag"], $config["facility"]);
+            aConfig = _config;
+            _open(aConfig["prefix"], aConfig["flag"], aConfig["facility"]);
             _open = true;
         }
 

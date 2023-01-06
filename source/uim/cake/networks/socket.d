@@ -83,11 +83,11 @@ class Socket
     /**
      * Constructor.
      *
-     * @param array<string, mixed> $config Socket configuration, which will be merged with the base configuration
+     * @param array<string, mixed> aConfig Socket configuration, which will be merged with the base configuration
      * @see uim.cake.Network\Socket::$_defaultConfig
      */
-    this(array $config = []) {
-        this.setConfig($config);
+    this(Json aConfig = []) {
+        this.setConfig(aConfig);
     }
 
     /**

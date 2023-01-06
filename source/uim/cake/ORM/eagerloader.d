@@ -383,12 +383,12 @@ class EagerLoader
         $processed = [];
         do {
             foreach ($attachable as $alias: $loadable) {
-                $config = $loadable.getConfig() + [
+                aConfig = $loadable.getConfig() + [
                     "aliasPath": $loadable.aliasPath(),
                     "propertyPath": $loadable.propertyPath(),
                     "includeFields": $includeFields,
                 ];
-                $loadable.instance().attachTo($query, $config);
+                $loadable.instance().attachTo($query, aConfig);
                 $processed[$alias] = true;
             }
 
@@ -467,7 +467,7 @@ class EagerLoader
         $table = $instance.getTarget();
 
         $extra = array_diff_key($options, $defaults);
-        $config = [
+        aConfig = [
             "associations": [],
             "instance": $instance,
             "config": array_diff_key($options, $extra),
@@ -475,13 +475,13 @@ class EagerLoader
             "propertyPath": trim($paths["propertyPath"], "."),
             "targetProperty": $instance.getProperty(),
         ];
-        $config["canBeJoined"] = $instance.canBeJoined($config["config"]);
-        $eagerLoadable = new EagerLoadable($alias, $config);
+        aConfig["canBeJoined"] = $instance.canBeJoined(aConfig["config"]);
+        $eagerLoadable = new EagerLoadable($alias, aConfig);
 
-        if ($config["canBeJoined"]) {
+        if (aConfig["canBeJoined"]) {
             _aliasList[$paths["root"]][$alias][] = $eagerLoadable;
         } else {
-            $paths["root"] = $config["aliasPath"];
+            $paths["root"] = aConfig["aliasPath"];
         }
 
         foreach ($extra as $t: $assoc) {
@@ -524,16 +524,16 @@ class EagerLoader
      * @param uim.cake.orm.EagerLoadable $loadable The association config
      */
     protected void _correctStrategy(EagerLoadable $loadable) {
-        $config = $loadable.getConfig();
-        $currentStrategy = $config["strategy"] ??
+        aConfig = $loadable.getConfig();
+        $currentStrategy = aConfig["strategy"] ??
             "join";
 
         if (!$loadable.canBeJoined() || $currentStrategy != "join") {
             return;
         }
 
-        $config["strategy"] = Association::STRATEGY_SELECT;
-        $loadable.setConfig($config);
+        aConfig["strategy"] = Association::STRATEGY_SELECT;
+        $loadable.setConfig(aConfig);
         $loadable.setCanBeJoined(false);
     }
 
@@ -599,11 +599,11 @@ class EagerLoader
         foreach ($external as $meta) {
             $contain = $meta.associations();
             $instance = $meta.instance();
-            $config = $meta.getConfig();
+            aConfig = $meta.getConfig();
             $alias = $instance.getSource().getAlias();
             $path = $meta.aliasPath();
 
-            $requiresKeys = $instance.requiresKeys($config);
+            $requiresKeys = $instance.requiresKeys(aConfig);
             if ($requiresKeys) {
                 // If the path or alias has no key the required association load will fail.
                 // Nested paths are not subject to this condition because they could
@@ -625,7 +625,7 @@ class EagerLoader
 
             $keys = $collected[$path][$alias] ?? null;
             $f = $instance.eagerLoader(
-                $config + [
+                aConfig + [
                     "query": $query,
                     "contain": $contain,
                     "keys": $keys,

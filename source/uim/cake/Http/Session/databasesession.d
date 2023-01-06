@@ -41,20 +41,20 @@ class DatabaseSession : SessionHandlerInterface
      * Constructor. Looks at Session configuration information and
      * sets up the session model.
      *
-     * @param array<string, mixed> $config The configuration for this engine. It requires the "model"
+     * @param array<string, mixed> aConfig The configuration for this engine. It requires the "model"
      * key to be present corresponding to the Table to use for managing the sessions.
      */
     this(Json aConfig = []) {
-        if (isset($config["tableLocator"])) {
-            this.setTableLocator($config["tableLocator"]);
+        if (isset(aConfig["tableLocator"])) {
+            this.setTableLocator(aConfig["tableLocator"]);
         }
         $tableLocator = this.getTableLocator();
 
-        if (empty($config["model"])) {
-            $config = $tableLocator.exists("Sessions") ? [] : ["table": "sessions", "allowFallbackClass": true];
-            _table = $tableLocator.get("Sessions", $config);
+        if (empty(aConfig["model"])) {
+            aConfig = $tableLocator.exists("Sessions") ? [] : ["table": "sessions", "allowFallbackClass": true];
+            _table = $tableLocator.get("Sessions", aConfig);
         } else {
-            _table = $tableLocator.get($config["model"]);
+            _table = $tableLocator.get(aConfig["model"]);
         }
 
         _timeout = (int)ini_get("session.gc_maxlifetime");

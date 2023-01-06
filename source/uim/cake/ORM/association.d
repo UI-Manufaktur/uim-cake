@@ -338,12 +338,12 @@ abstract class Association
 
             $tableLocator = this.getTableLocator();
 
-            $config = [];
+            aConfig = [];
             $exists = $tableLocator.exists($registryAlias);
             if (!$exists) {
-                $config = ["className": _className];
+                aConfig = ["className": _className];
             }
-            _targetTable = $tableLocator.get($registryAlias, $config);
+            _targetTable = $tableLocator.get($registryAlias, aConfig);
 
             if ($exists) {
                 $className = App::className(_className, "Model/Table", "Table") ?: Table::class;

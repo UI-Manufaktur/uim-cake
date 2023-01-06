@@ -56,23 +56,23 @@ class ConsoleLog : BaseLog
      * - `outputAs` integer or ConsoleOutput::[RAW|PLAIN|COLOR]
      * - `dateFormat` PHP date() format.
      *
-     * @param array<string, mixed> $config Options for the FileLog, see above.
+     * @param array<string, mixed> aConfig Options for the FileLog, see above.
      * @throws \InvalidArgumentException
      */
     this(Json aConfig = []) {
-        super(($config);
+        super((aConfig);
 
-        $config = _config;
-        if ($config["stream"] instanceof ConsoleOutput) {
-            _output = $config["stream"];
-        } elseif (is_string($config["stream"])) {
-            _output = new ConsoleOutput($config["stream"]);
+        aConfig = _config;
+        if (aConfig["stream"] instanceof ConsoleOutput) {
+            _output = aConfig["stream"];
+        } elseif (is_string(aConfig["stream"])) {
+            _output = new ConsoleOutput(aConfig["stream"]);
         } else {
             throw new InvalidArgumentException("`stream` not a ConsoleOutput nor string");
         }
 
-        if (isset($config["outputAs"])) {
-            _output.setOutputAs($config["outputAs"]);
+        if (isset(aConfig["outputAs"])) {
+            _output.setOutputAs(aConfig["outputAs"]);
         }
 
         if (isset(_config["dateFormat"])) {

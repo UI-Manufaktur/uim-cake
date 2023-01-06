@@ -132,22 +132,22 @@ class Behavior : IEventListener
      * Merges config with the default and store in the config property
      *
      * @param uim.cake.orm.Table $table The table this behavior is attached to.
-     * @param array<string, mixed> $config The config for this behavior.
+     * @param array<string, mixed> aConfig The config for this behavior.
      */
-    this(Table $table, array $config = []) {
-        $config = _resolveMethodAliases(
+    this(Table $table, Json aConfig = []) {
+        aConfig = _resolveMethodAliases(
             "implementedFinders",
             _defaultConfig,
-            $config
+            aConfig
         );
-        $config = _resolveMethodAliases(
+        aConfig = _resolveMethodAliases(
             "implementedMethods",
             _defaultConfig,
-            $config
+            aConfig
         );
         _table = $table;
-        this.setConfig($config);
-        this.initialize($config);
+        this.setConfig(aConfig);
+        this.initialize(aConfig);
     }
 
     /**
@@ -156,9 +156,9 @@ class Behavior : IEventListener
      * Implement this method to avoid having to overwrite
      * the constructor and call parent.
      *
-     * @param array<string, mixed> $config The configuration settings provided to this behavior.
+     * @param array<string, mixed> aConfig The configuration settings provided to this behavior.
      */
-    void initialize(array $config) {
+    void initialize(Json aConfig) {
     }
 
     /**
@@ -189,31 +189,31 @@ class Behavior : IEventListener
      *
      * @param string aKey The key to filter.
      * @param array<string, mixed> $defaults The default method mappings.
-     * @param array<string, mixed> $config The customized method mappings.
+     * @param array<string, mixed> aConfig The customized method mappings.
      * @return array A de-duped list of config data.
      */
-    protected array _resolveMethodAliases(string aKey, array $defaults, array $config) {
-        if (!isset($defaults[$key], $config[$key])) {
-            return $config;
+    protected array _resolveMethodAliases(string aKey, array $defaults, Json aConfig) {
+        if (!isset($defaults[$key], aConfig[$key])) {
+            return aConfig;
         }
-        if (isset($config[$key]) && $config[$key] == []) {
+        if (isset(aConfig[$key]) && aConfig[$key] == []) {
             this.setConfig($key, [], false);
-            unset($config[$key]);
+            unset(aConfig[$key]);
 
-            return $config;
+            return aConfig;
         }
 
         $indexed = array_flip($defaults[$key]);
-        $indexedCustom = array_flip($config[$key]);
+        $indexedCustom = array_flip(aConfig[$key]);
         foreach ($indexed as $method: $alias) {
             if (!isset($indexedCustom[$method])) {
                 $indexedCustom[$method] = $alias;
             }
         }
         this.setConfig($key, array_flip($indexedCustom), false);
-        unset($config[$key]);
+        unset(aConfig[$key]);
 
-        return $config;
+        return aConfig;
     }
 
     /**
@@ -270,8 +270,8 @@ class Behavior : IEventListener
             "Model.beforeRules": "beforeRules",
             "Model.afterRules": "afterRules",
         ];
-        $config = this.getConfig();
-        $priority = $config["priority"] ?? null;
+        aConfig = this.getConfig();
+        $priority = aConfig["priority"] ?? null;
         $events = [];
 
         foreach ($eventMap as $event: $method) {

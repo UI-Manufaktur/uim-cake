@@ -267,9 +267,9 @@ class Message : JsonSerializable, Serializable {
     /**
      * Constructor
      *
-     * @param array<string,mixed>|null $config Array of configs, or string to load configs from app.php
+     * @param array<string,mixed>|null aConfig Array of configs, or string to load configs from app.php
      */
-    this(?array $config = null) {
+    this(?Json aConfig = null) {
         this.appCharset = Configure::read("App.encoding");
         if (this.appCharset != null) {
             this.charset = this.appCharset;
@@ -279,8 +279,8 @@ class Message : JsonSerializable, Serializable {
             this.domain = php_uname("n");
         }
 
-        if ($config) {
-            this.setConfig($config);
+        if (aConfig) {
+            this.setConfig(aConfig);
         }
     }
 
@@ -1358,23 +1358,23 @@ class Message : JsonSerializable, Serializable {
     /**
      * Sets the configuration for this instance.
      *
-     * @param array<string, mixed> $config Config array.
+     * @param array<string, mixed> aConfig Config array.
      * @return this
      */
-    function setConfig(array $config) {
+    function setConfig(Json aConfig) {
         $simpleMethods = [
             "from", "sender", "to", "replyTo", "readReceipt", "returnPath",
             "cc", "bcc", "messageId", "domain", "subject", "attachments",
             "emailFormat", "emailPattern", "charset", "headerCharset",
         ];
         foreach ($simpleMethods as $method) {
-            if (isset($config[$method])) {
-                this.{"set" ~ ucfirst($method)}($config[$method]);
+            if (isset(aConfig[$method])) {
+                this.{"set" ~ ucfirst($method)}(aConfig[$method]);
             }
         }
 
-        if (isset($config["headers"])) {
-            this.setHeaders($config["headers"]);
+        if (isset(aConfig["headers"])) {
+            this.setHeaders(aConfig["headers"]);
         }
 
         return this;
@@ -1732,11 +1732,11 @@ class Message : JsonSerializable, Serializable {
     /**
      * Configures an email instance object from serialized config.
      *
-     * @param array<string, mixed> $config Email configuration array.
+     * @param array<string, mixed> aConfig Email configuration array.
      * @return this
      */
-    function createFromArray(array $config) {
-        foreach ($config as $property: $value) {
+    function createFromArray(Json aConfig) {
+        foreach (aConfig as $property: $value) {
             this.{$property} = $value;
         }
 

@@ -34,10 +34,10 @@ import uim.cake.orm.locators.ILocator;
  * helps make cyclic references easier to solve.
  *
  * ```
- * $table = TableRegistry::getTableLocator().get("Users", $config);
+ * $table = TableRegistry::getTableLocator().get("Users", aConfig);
  *
  * // Prior to 3.6.0
- * $table = TableRegistry::get("Users", $config);
+ * $table = TableRegistry::get("Users", aConfig);
  * ```
  */
 class TableRegistry

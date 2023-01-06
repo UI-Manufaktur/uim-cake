@@ -29,10 +29,10 @@ class DefaultFormatter : AbstractFormatter
     ];
 
     /**
-     * @param array<string, mixed> $config Formatter config
+     * @param array<string, mixed> aConfig Formatter config
      */
     this(Json aConfig = []) {
-        this.setConfig($config);
+        this.setConfig(aConfig);
     }
 
 

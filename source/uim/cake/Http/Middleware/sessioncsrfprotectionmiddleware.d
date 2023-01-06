@@ -70,10 +70,10 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config Config options. See $_config for valid keys.
+     * @param array<string, mixed> aConfig Config options. See $_config for valid keys.
      */
     this(Json aConfig = []) {
-        _config = $config + _config;
+        _config = aConfig + _config;
     }
 
     /**

@@ -32,7 +32,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      *
      * @var array<string, mixed>
      */
-    protected $config = [
+    protected aConfig = [
         "redirect": true,
         "statusCode": 301,
         "headers": [],
@@ -43,11 +43,11 @@ class HttpsEnforcerMiddleware : IMiddleware
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config The options to use.
-     * @see uim.cake.http.Middleware\HttpsEnforcerMiddleware::$config
+     * @param array<string, mixed> aConfig The options to use.
+     * @see uim.cake.http.Middleware\HttpsEnforcerMiddleware::aConfig
      */
     this(Json aConfig = []) {
-        this.config = $config + this.config;
+        this.config = aConfig + this.config;
     }
 
     /**
@@ -103,16 +103,16 @@ class HttpsEnforcerMiddleware : IMiddleware
      */
     protected function addHsts(IResponse $response): IResponse
     {
-        $config = this.config["hsts"];
-        if (!is_array($config)) {
+        aConfig = this.config["hsts"];
+        if (!is_array(aConfig)) {
             throw new UnexpectedValueException("The `hsts` config must be an array.");
         }
 
-        $value = "max-age=" ~ $config["maxAge"];
-        if ($config["includeSubDomains"] ?? false) {
+        $value = "max-age=" ~ aConfig["maxAge"];
+        if (aConfig["includeSubDomains"] ?? false) {
             $value .= "; includeSubDomains";
         }
-        if ($config["preload"] ?? false) {
+        if (aConfig["preload"] ?? false) {
             $value .= "; preload";
         }
 

@@ -294,14 +294,14 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * @return array An array containing the [baseDir, webroot]
      */
     protected static array getBase(UriInterface $uri, array $server) {
-        $config = (array)Configure::read("App") + [
+        aConfig = (array)Configure::read("App") + [
             "base": null,
             "webroot": null,
             "baseUrl": null,
         ];
-        $base = $config["base"];
-        $baseUrl = $config["baseUrl"];
-        $webroot = $config["webroot"];
+        $base = aConfig["base"];
+        $baseUrl = aConfig["baseUrl"];
+        $webroot = aConfig["webroot"];
 
         if ($base != false && $base != null) {
             return [$base, $base ~ "/"];

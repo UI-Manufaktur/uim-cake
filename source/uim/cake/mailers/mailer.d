@@ -188,21 +188,21 @@ class Mailer : IEventListener
     /**
      * Constructor
      *
-     * @param array<string, mixed>|string|null $config Array of configs, or string to load configs from app.php
+     * @param array<string, mixed>|string|null aConfig Array of configs, or string to load configs from app.php
      */
-    this($config = null) {
+    this(aConfig = null) {
         this.message = new this.messageClass();
 
         if (this.defaultTable != null) {
             this.modelClass = this.defaultTable;
         }
 
-        if ($config == null) {
-            $config = static::getConfig("default");
+        if (aConfig == null) {
+            aConfig = static::getConfig("default");
         }
 
-        if ($config) {
-            this.setProfile($config);
+        if (aConfig) {
+            this.setProfile(aConfig);
         }
     }
 
@@ -389,15 +389,15 @@ class Mailer : IEventListener
     /**
      * Sets the configuration profile to use for this instance.
      *
-     * @param array<string, mixed>|string $config String with configuration name, or
+     * @param array<string, mixed>|string aConfig String with configuration name, or
      *    an array with config.
      * @return this
      */
-    function setProfile($config) {
-        if (is_string($config)) {
-            $name = $config;
-            $config = static::getConfig($name);
-            if (empty($config)) {
+    function setProfile(aConfig) {
+        if (is_string(aConfig)) {
+            $name = aConfig;
+            aConfig = static::getConfig($name);
+            if (empty(aConfig)) {
                 throw new InvalidArgumentException(sprintf("Unknown email configuration "%s".", $name));
             }
             unset($name);
@@ -407,9 +407,9 @@ class Mailer : IEventListener
             "transport",
         ];
         foreach ($simpleMethods as $method) {
-            if (isset($config[$method])) {
-                this.{"set" ~ ucfirst($method)}($config[$method]);
-                unset($config[$method]);
+            if (isset(aConfig[$method])) {
+                this.{"set" ~ ucfirst($method)}(aConfig[$method]);
+                unset(aConfig[$method]);
             }
         }
 
@@ -417,36 +417,36 @@ class Mailer : IEventListener
             "template", "layout", "theme",
         ];
         foreach ($viewBuilderMethods as $method) {
-            if (array_key_exists($method, $config)) {
-                this.viewBuilder().{"set" ~ ucfirst($method)}($config[$method]);
-                unset($config[$method]);
+            if (array_key_exists($method, aConfig)) {
+                this.viewBuilder().{"set" ~ ucfirst($method)}(aConfig[$method]);
+                unset(aConfig[$method]);
             }
         }
 
-        if (array_key_exists("helpers", $config)) {
-            this.viewBuilder().setHelpers($config["helpers"], false);
-            unset($config["helpers"]);
+        if (array_key_exists("helpers", aConfig)) {
+            this.viewBuilder().setHelpers(aConfig["helpers"], false);
+            unset(aConfig["helpers"]);
         }
-        if (array_key_exists("viewRenderer", $config)) {
-            this.viewBuilder().setClassName($config["viewRenderer"]);
-            unset($config["viewRenderer"]);
+        if (array_key_exists("viewRenderer", aConfig)) {
+            this.viewBuilder().setClassName(aConfig["viewRenderer"]);
+            unset(aConfig["viewRenderer"]);
         }
-        if (array_key_exists("viewVars", $config)) {
-            this.viewBuilder().setVars($config["viewVars"]);
-            unset($config["viewVars"]);
+        if (array_key_exists("viewVars", aConfig)) {
+            this.viewBuilder().setVars(aConfig["viewVars"]);
+            unset(aConfig["viewVars"]);
         }
-        if (isset($config["autoLayout"])) {
-            if ($config["autoLayout"] == false) {
+        if (isset(aConfig["autoLayout"])) {
+            if (aConfig["autoLayout"] == false) {
                 this.viewBuilder().disableAutoLayout();
             }
-            unset($config["autoLayout"]);
+            unset(aConfig["autoLayout"]);
         }
 
-        if (isset($config["log"])) {
-            this.setLogConfig($config["log"]);
+        if (isset(aConfig["log"])) {
+            this.setLogConfig(aConfig["log"]);
         }
 
-        this.message.setConfig($config);
+        this.message.setConfig(aConfig);
 
         return this;
     }
@@ -561,7 +561,7 @@ class Mailer : IEventListener
      * @param array<string, mixed>|string|true $log Log config.
      */
     protected void setLogConfig($log) {
-        $config = [
+        aConfig = [
             "level": "debug",
             "scope": "email",
         ];
@@ -569,10 +569,10 @@ class Mailer : IEventListener
             if (!is_array($log)) {
                 $log = ["level": $log];
             }
-            $config = $log + $config;
+            aConfig = $log + aConfig;
         }
 
-        this.logConfig = $config;
+        this.logConfig = aConfig;
     }
 
     /**

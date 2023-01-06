@@ -99,17 +99,17 @@ class Email : JsonSerializable, Serializable
     /**
      * Constructor
      *
-     * @param array<string, mixed>|string|null $config Array of configs, or string to load configs from app.php
+     * @param array<string, mixed>|string|null aConfig Array of configs, or string to load configs from app.php
      */
-    this($config = null) {
+    this(aConfig = null) {
         this.message = new this.messageClass();
 
-        if ($config == null) {
-            $config = Mailer::getConfig("default");
+        if (aConfig == null) {
+            aConfig = Mailer::getConfig("default");
         }
 
-        if ($config) {
-            this.setProfile($config);
+        if (aConfig) {
+            this.setProfile(aConfig);
         }
     }
 
@@ -263,29 +263,29 @@ class Email : JsonSerializable, Serializable
     /**
      * Sets the configuration profile to use for this instance.
      *
-     * @param array<string, mixed>|string $config String with configuration name, or
+     * @param array<string, mixed>|string aConfig String with configuration name, or
      *    an array with config.
      * @return this
      */
-    function setProfile($config) {
-        if (is_string($config)) {
-            $name = $config;
-            $config = Mailer::getConfig($name);
-            if (empty($config)) {
+    function setProfile(aConfig) {
+        if (is_string(aConfig)) {
+            $name = aConfig;
+            aConfig = Mailer::getConfig($name);
+            if (empty(aConfig)) {
                 throw new InvalidArgumentException(sprintf("Unknown email configuration "%s".", $name));
             }
             unset($name);
         }
 
-        _profile = $config + _profile;
+        _profile = aConfig + _profile;
 
         $simpleMethods = [
             "transport",
         ];
         foreach ($simpleMethods as $method) {
-            if (isset($config[$method])) {
-                this.{"set" ~ ucfirst($method)}($config[$method]);
-                unset($config[$method]);
+            if (isset(aConfig[$method])) {
+                this.{"set" ~ ucfirst($method)}(aConfig[$method]);
+                unset(aConfig[$method]);
             }
         }
 
@@ -293,26 +293,26 @@ class Email : JsonSerializable, Serializable
             "template", "layout", "theme",
         ];
         foreach ($viewBuilderMethods as $method) {
-            if (array_key_exists($method, $config)) {
-                this.getRenderer().viewBuilder().{"set" ~ ucfirst($method)}($config[$method]);
-                unset($config[$method]);
+            if (array_key_exists($method, aConfig)) {
+                this.getRenderer().viewBuilder().{"set" ~ ucfirst($method)}(aConfig[$method]);
+                unset(aConfig[$method]);
             }
         }
 
-        if (array_key_exists("helpers", $config)) {
-            this.getRenderer().viewBuilder().setHelpers($config["helpers"], false);
-            unset($config["helpers"]);
+        if (array_key_exists("helpers", aConfig)) {
+            this.getRenderer().viewBuilder().setHelpers(aConfig["helpers"], false);
+            unset(aConfig["helpers"]);
         }
-        if (array_key_exists("viewRenderer", $config)) {
-            this.getRenderer().viewBuilder().setClassName($config["viewRenderer"]);
-            unset($config["viewRenderer"]);
+        if (array_key_exists("viewRenderer", aConfig)) {
+            this.getRenderer().viewBuilder().setClassName(aConfig["viewRenderer"]);
+            unset(aConfig["viewRenderer"]);
         }
-        if (array_key_exists("viewVars", $config)) {
-            this.getRenderer().viewBuilder().setVars($config["viewVars"]);
-            unset($config["viewVars"]);
+        if (array_key_exists("viewVars", aConfig)) {
+            this.getRenderer().viewBuilder().setVars(aConfig["viewVars"]);
+            unset(aConfig["viewVars"]);
         }
 
-        this.message.setConfig($config);
+        this.message.setConfig(aConfig);
 
         return this;
     }
@@ -416,7 +416,7 @@ class Email : JsonSerializable, Serializable
         if (empty(_profile["log"])) {
             return;
         }
-        $config = [
+        aConfig = [
             "level": "debug",
             "scope": "email",
         ];
@@ -424,12 +424,12 @@ class Email : JsonSerializable, Serializable
             if (!is_array(_profile["log"])) {
                 _profile["log"] = ["level": _profile["log"]];
             }
-            $config = _profile["log"] + $config;
+            aConfig = _profile["log"] + aConfig;
         }
         Log::write(
-            $config["level"],
+            aConfig["level"],
             PHP_EOL . this.flatten($contents["headers"]) . PHP_EOL . PHP_EOL . this.flatten($contents["message"]),
-            $config["scope"]
+            aConfig["scope"]
         );
     }
 
@@ -449,7 +449,7 @@ class Email : JsonSerializable, Serializable
      *   If null, will try to use "to" from transport config
      * @param string|null $subject String of subject or null to use "subject" from transport config
      * @param array|string|null $message String with message or array with variables to be used in render
-     * @param array<string, mixed>|string $config String to use Email delivery profile from app.php or array with configs
+     * @param array<string, mixed>|string aConfig String to use Email delivery profile from app.php or array with configs
      * @param bool $send Send the email or just return the instance pre-configured
      * @return uim.cake.mailers.Email
      * @throws \InvalidArgumentException
@@ -458,14 +458,14 @@ class Email : JsonSerializable, Serializable
         $to = null,
         ?string $subject = null,
         $message = null,
-        $config = "default",
+        aConfig = "default",
         bool $send = true
     ) {
-        if (is_array($config) && !isset($config["transport"])) {
-            $config["transport"] = "default";
+        if (is_array(aConfig) && !isset(aConfig["transport"])) {
+            aConfig["transport"] = "default";
         }
 
-        $instance = new static($config);
+        $instance = new static(aConfig);
         if ($to != null) {
             $instance.getMessage().setTo($to);
         }
@@ -476,9 +476,9 @@ class Email : JsonSerializable, Serializable
             $instance.setViewVars($message);
             $message = null;
         } elseif ($message == null) {
-            $config = $instance.getProfile();
-            if (array_key_exists("message", $config)) {
-                $message = $config["message"];
+            aConfig = $instance.getProfile();
+            if (array_key_exists("message", aConfig)) {
+                $message = aConfig["message"];
             }
         }
 
@@ -522,19 +522,19 @@ class Email : JsonSerializable, Serializable
     /**
      * Configures an email instance object from serialized config.
      *
-     * @param array<string, mixed> $config Email configuration array.
+     * @param array<string, mixed> aConfig Email configuration array.
      * @return this
      */
-    function createFromArray(array $config) {
-        if (isset($config["viewConfig"])) {
-            this.getRenderer().viewBuilder().createFromArray($config["viewConfig"]);
-            unset($config["viewConfig"]);
+    function createFromArray(Json aConfig) {
+        if (isset(aConfig["viewConfig"])) {
+            this.getRenderer().viewBuilder().createFromArray(aConfig["viewConfig"]);
+            unset(aConfig["viewConfig"]);
         }
 
         if (this.message == null) {
             this.message = new this.messageClass();
         }
-        this.message.createFromArray($config);
+        this.message.createFromArray(aConfig);
 
         return this;
     }

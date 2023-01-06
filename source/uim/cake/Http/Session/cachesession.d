@@ -36,16 +36,16 @@ class CacheSession : SessionHandlerInterface
     /**
      * Constructor.
      *
-     * @param array<string, mixed> $config The configuration to use for this engine
+     * @param array<string, mixed> aConfig The configuration to use for this engine
      * It requires the key "config" which is the name of the Cache config to use for
      * storing the session
      * @throws \InvalidArgumentException if the "config" key is not provided
      */
     this(Json aConfig = []) {
-        if (empty($config["config"])) {
+        if (empty(aConfig["config"])) {
             throw new InvalidArgumentException("The cache configuration name to use is required");
         }
-        _options = $config;
+        _options = aConfig;
     }
 
     /**

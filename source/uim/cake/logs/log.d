@@ -256,12 +256,12 @@ class Log
      * ```
      *
      * @param array<string, mixed>|string aKey The name of the logger config, or an array of multiple configs.
-     * @param array<string, mixed>|null $config An array of name: config data for adapter.
+     * @param array<string, mixed>|null aConfig An array of name: config data for adapter.
      * @return void
      * @throws \BadMethodCallException When trying to modify an existing config.
      */
-    static void setConfig($key, $config = null) {
-        static::_setConfig($key, $config);
+    static void setConfig($key, aConfig = null) {
+        static::_setConfig($key, aConfig);
         static::$_dirtyConfig = true;
     }
 

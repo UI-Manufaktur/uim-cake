@@ -16,17 +16,17 @@ trait MailerAwareTrait
      * Returns a mailer instance.
      *
      * @param string aName Mailer"s name.
-     * @param array<string, mixed>|string|null $config Array of configs, or profile name string.
+     * @param array<string, mixed>|string|null aConfig Array of configs, or profile name string.
      * @return uim.cake.mailers.Mailer
      * @throws uim.cake.mailers.exceptions.MissingMailerException if undefined mailer class.
      */
-    protected function getMailer(string aName, $config = null): Mailer
+    protected function getMailer(string aName, aConfig = null): Mailer
     {
         $className = App::className($name, "Mailer", "Mailer");
         if ($className == null) {
             throw new MissingMailerException(compact("name"));
         }
 
-        return new $className($config);
+        return new $className(aConfig);
     }
 }

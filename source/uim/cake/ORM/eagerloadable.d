@@ -89,7 +89,7 @@ class EagerLoadable
     protected $_targetProperty;
 
     /**
-     * Constructor. The $config parameter accepts the following array
+     * Constructor. The aConfig parameter accepts the following array
      * keys:
      *
      * - associations
@@ -104,17 +104,17 @@ class EagerLoadable
      * The keys maps to the settable properties in this class.
      *
      * @param string aName The Association name.
-     * @param array<string, mixed> $config The list of properties to set.
+     * @param array<string, mixed> aConfig The list of properties to set.
      */
-    this(string aName, array $config = []) {
+    this(string aName, Json aConfig = []) {
         _name = $name;
         $allowed = [
             "associations", "instance", "config", "canBeJoined",
             "aliasPath", "propertyPath", "forMatching", "targetProperty",
         ];
         foreach ($allowed as $property) {
-            if (isset($config[$property])) {
-                this.{"_" ~ $property} = $config[$property];
+            if (isset(aConfig[$property])) {
+                this.{"_" ~ $property} = aConfig[$property];
             }
         }
     }
@@ -202,11 +202,11 @@ class EagerLoadable
      * Sets the list of options to pass to the association object for loading
      * the records.
      *
-     * @param array<string, mixed> $config The value to set.
+     * @param array<string, mixed> aConfig The value to set.
      * @return this
      */
-    function setConfig(array $config) {
-        _config = $config;
+    function setConfig(Json aConfig) {
+        _config = aConfig;
 
         return this;
     }
@@ -261,15 +261,15 @@ class EagerLoadable
         foreach (_associations as $assoc) {
             $associations += $assoc.asContainArray();
         }
-        $config = _config;
+        aConfig = _config;
         if (_forMatching != null) {
-            $config = ["matching": _forMatching] + $config;
+            aConfig = ["matching": _forMatching] + aConfig;
         }
 
         return [
             _name: [
                 "associations": $associations,
-                "config": $config,
+                "config": aConfig,
             ],
         ];
     }

@@ -234,7 +234,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     /**
      * Initializes a new instance
      *
-     * The $config array understands the following keys:
+     * The aConfig array understands the following keys:
      *
      * - table: Name of the database table to represent
      * - alias: Alias to be assigned to this table (default to table name)
@@ -250,42 +250,42 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *   validation set, or an associative array, where key is the name of the
      *   validation set and value the Validator instance.
      *
-     * @param array<string, mixed> $config List of options for this table
+     * @param array<string, mixed> aConfig List of options for this table
      */
-    this(array $config = []) {
-        if (!empty($config["registryAlias"])) {
-            this.setRegistryAlias($config["registryAlias"]);
+    this(Json aConfig = []) {
+        if (!empty(aConfig["registryAlias"])) {
+            this.setRegistryAlias(aConfig["registryAlias"]);
         }
-        if (!empty($config["table"])) {
-            this.setTable($config["table"]);
+        if (!empty(aConfig["table"])) {
+            this.setTable(aConfig["table"]);
         }
-        if (!empty($config["alias"])) {
-            this.setAlias($config["alias"]);
+        if (!empty(aConfig["alias"])) {
+            this.setAlias(aConfig["alias"]);
         }
-        if (!empty($config["connection"])) {
-            this.setConnection($config["connection"]);
+        if (!empty(aConfig["connection"])) {
+            this.setConnection(aConfig["connection"]);
         }
-        if (!empty($config["schema"])) {
-            this.setSchema($config["schema"]);
+        if (!empty(aConfig["schema"])) {
+            this.setSchema(aConfig["schema"]);
         }
-        if (!empty($config["entityClass"])) {
-            this.setEntityClass($config["entityClass"]);
+        if (!empty(aConfig["entityClass"])) {
+            this.setEntityClass(aConfig["entityClass"]);
         }
         $eventManager = $behaviors = $associations = null;
-        if (!empty($config["eventManager"])) {
-            $eventManager = $config["eventManager"];
+        if (!empty(aConfig["eventManager"])) {
+            $eventManager = aConfig["eventManager"];
         }
-        if (!empty($config["behaviors"])) {
-            $behaviors = $config["behaviors"];
+        if (!empty(aConfig["behaviors"])) {
+            $behaviors = aConfig["behaviors"];
         }
-        if (!empty($config["associations"])) {
-            $associations = $config["associations"];
+        if (!empty(aConfig["associations"])) {
+            $associations = aConfig["associations"];
         }
-        if (!empty($config["validator"])) {
-            if (!is_array($config["validator"])) {
-                this.setValidator(static::DEFAULT_VALIDATOR, $config["validator"]);
+        if (!empty(aConfig["validator"])) {
+            if (!is_array(aConfig["validator"])) {
+                this.setValidator(static::DEFAULT_VALIDATOR, aConfig["validator"]);
             } else {
-                foreach ($config["validator"] as $name: $validator) {
+                foreach (aConfig["validator"] as $name: $validator) {
                     this.setValidator($name, $validator);
                 }
             }
@@ -295,7 +295,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
         _behaviors.setTable(this);
         _associations = $associations ?: new AssociationCollection();
 
-        this.initialize($config);
+        this.initialize(aConfig);
         _eventManager.on(this);
         this.dispatchEvent("Model.initialize");
     }
@@ -320,7 +320,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * define validation and do any other initialization logic you need.
      *
      * ```
-     *  function initialize(array $config)
+     *  function initialize(Json aConfig)
      *  {
      *      this.belongsTo("Users");
      *      this.belongsToMany("Tagging.Tags");
@@ -328,9 +328,9 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *  }
      * ```
      *
-     * @param array<string, mixed> $config Configuration options passed to the constructor
+     * @param array<string, mixed> aConfig Configuration options passed to the constructor
      */
-    void initialize(array $config) {
+    void initialize(Json aConfig) {
     }
 
     /**
