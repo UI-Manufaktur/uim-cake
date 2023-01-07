@@ -3,6 +3,13 @@ module uim.cake.orm.behaviors;
 @safe:
 import uim.cake;
 
+use ArrayObject;
+import uim.cake.datasources.IEntity;
+import uim.cake.events.IEvent;
+import uim.cake.orm.Association;
+import uim.cake.orm.Behavior;
+use Closure;
+
 /**
  * CounterCache behavior
  *
@@ -13,7 +20,7 @@ import uim.cake;
  * Regular counter cache
  * ```
  * [
- *     "Users":[
+ *     "Users": [
  *         "post_count"
  *     ]
  * ]
@@ -22,10 +29,10 @@ import uim.cake;
  * Counter cache with scope
  * ```
  * [
- *     "Users":[
- *         "posts_published":[
- *             "conditions":[
- *                 "published":true
+ *     "Users": [
+ *         "posts_published": [
+ *             "conditions": [
+ *                 "published": true
  *             ]
  *         ]
  *     ]
@@ -35,9 +42,9 @@ import uim.cake;
  * Counter cache using custom find
  * ```
  * [
- *     "Users":[
- *         "posts_published":[
- *             "finder":"published" // Will be using findPublished()
+ *     "Users": [
+ *         "posts_published": [
+ *             "finder": "published" // Will be using findPublished()
  *         ]
  *     ]
  * ]
@@ -48,13 +55,13 @@ import uim.cake;
  *
  * ```
  * [
- *     "Users":[
- *         "posts_published":function (IEvent myEvent, IEntity $entity, Table myTable) {
- *             myQuery = myTable.find("all").where([
- *                 "published":true,
- *                 "user_id":$entity.get("user_id")
+ *     "Users": [
+ *         "posts_published": function (IEvent $event, IEntity $entity, Table $table) {
+ *             $query = $table.find("all").where([
+ *                 "published": true,
+ *                 "user_id": $entity.get("user_id")
  *             ]);
- *             return myQuery.count();
+ *             return $query.count();
  *          }
  *     ]
  * ]
@@ -66,9 +73,9 @@ import uim.cake;
  * Ignore updating the field if it is dirty
  * ```
  * [
- *     "Users":[
- *         "posts_published":[
- *             "ignoreDirty":true
+ *     "Users": [
+ *         "posts_published": [
+ *             "ignoreDirty": true
  *         ]
  *     ]
  * ]
@@ -78,7 +85,7 @@ import uim.cake;
  * to your save operation:
  *
  * ```
- * this.Articles.save($article, ["ignoreCounterCache":true]);
+ * this.Articles.save($article, ["ignoreCounterCache": true]);
  * ```
  */
 class CounterCacheBehavior : Behavior
@@ -95,19 +102,19 @@ class CounterCacheBehavior : Behavior
      *
      * Check if a field, which should be ignored, is dirty
      *
-     * @param uim.cake.events.IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
-     * @param \ArrayObject myOptions The options for the query
+     * @param \ArrayObject $options The options for the query
      */
-    void beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] == true) {
+    void beforeSave(IEvent $event, IEntity $entity, ArrayObject $options) {
+        if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
 
         foreach (_config as $assoc: $settings) {
             $assoc = _table.getAssociation($assoc);
-            foreach ($settings as myField: myConfig) {
-                if (is_int(myField)) {
+            foreach ($settings as $field: aConfig) {
+                if (is_int($field)) {
                     continue;
                 }
 
@@ -115,12 +122,12 @@ class CounterCacheBehavior : Behavior
                 $entityAlias = $assoc.getProperty();
 
                 if (
-                    !is_callable(myConfig) &&
-                    isset(myConfig["ignoreDirty"]) &&
-                    myConfig["ignoreDirty"] == true &&
-                    $entity.$entityAlias.isDirty(myField)
+                    !is_callable(aConfig) &&
+                    isset(aConfig["ignoreDirty"]) &&
+                    aConfig["ignoreDirty"] == true &&
+                    $entity.$entityAlias.isDirty($field)
                 ) {
-                    _ignoreDirty[$registryAlias][myField] = true;
+                    _ignoreDirty[$registryAlias][$field] = true;
                 }
             }
         }
@@ -131,16 +138,16 @@ class CounterCacheBehavior : Behavior
      *
      * Makes sure to update counter cache when a new record is created or updated.
      *
-     * @param uim.cake.events.IEvent myEvent The afterSave event that was fired.
+     * @param uim.cake.events.IEvent $event The afterSave event that was fired.
      * @param uim.cake.Datasource\IEntity $entity The entity that was saved.
-     * @param \ArrayObject myOptions The options for the query
+     * @param \ArrayObject $options The options for the query
      */
-    void afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] == true) {
+    void afterSave(IEvent $event, IEntity $entity, ArrayObject $options) {
+        if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
 
-        _processAssociations(myEvent, $entity);
+        _processAssociations($event, $entity);
         _ignoreDirty = [];
     }
 
@@ -149,35 +156,35 @@ class CounterCacheBehavior : Behavior
      *
      * Makes sure to update counter cache when a record is deleted.
      *
-     * @param uim.cake.events.IEvent myEvent The afterDelete event that was fired.
+     * @param uim.cake.events.IEvent $event The afterDelete event that was fired.
      * @param uim.cake.Datasource\IEntity $entity The entity that was deleted.
-     * @param \ArrayObject myOptions The options for the query
+     * @param \ArrayObject $options The options for the query
      */
-    void afterDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
-        if (isset(myOptions["ignoreCounterCache"]) && myOptions["ignoreCounterCache"] == true) {
+    void afterDelete(IEvent $event, IEntity $entity, ArrayObject $options) {
+        if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
 
-        _processAssociations(myEvent, $entity);
+        _processAssociations($event, $entity);
     }
 
     /**
      * Iterate all associations and update counter caches.
      *
-     * @param uim.cake.events.IEvent myEvent Event instance.
+     * @param uim.cake.events.IEvent $event Event instance.
      * @param uim.cake.Datasource\IEntity $entity Entity.
      */
-    protected void _processAssociations(IEvent myEvent, IEntity $entity) {
+    protected void _processAssociations(IEvent $event, IEntity $entity) {
         foreach (_config as $assoc: $settings) {
             $assoc = _table.getAssociation($assoc);
-            _processAssociation(myEvent, $entity, $assoc, $settings);
+            _processAssociation($event, $entity, $assoc, $settings);
         }
     }
 
     /**
      * Updates counter cache for a single association
      *
-     * @param uim.cake.events.IEvent myEvent Event instance.
+     * @param uim.cake.events.IEvent $event Event instance.
      * @param uim.cake.Datasource\IEntity $entity Entity
      * @param uim.cake.orm.Association $assoc The association object
      * @param array $settings The settings for counter cache for this association
@@ -185,61 +192,61 @@ class CounterCacheBehavior : Behavior
      * @throws \RuntimeException If invalid callable is passed.
      */
     protected void _processAssociation(
-        IEvent myEvent,
+        IEvent $event,
         IEntity $entity,
         Association $assoc,
         array $settings
     ) {
         $foreignKeys = (array)$assoc.getForeignKey();
-        myCountConditions = $entity.extract($foreignKeys);
+        $countConditions = $entity.extract($foreignKeys);
 
-        foreach (myCountConditions as myField: myValue) {
-            if (myValue is null) {
-                myCountConditions[myField ~ " IS"] = myValue;
-                unset(myCountConditions[myField]);
+        foreach ($countConditions as $field: $value) {
+            if ($value == null) {
+                $countConditions[$field ~ " IS"] = $value;
+                unset($countConditions[$field]);
             }
         }
 
         $primaryKeys = (array)$assoc.getBindingKey();
-        $updateConditions = array_combine($primaryKeys, myCountConditions);
+        $updateConditions = array_combine($primaryKeys, $countConditions);
 
-        myCountOriginalConditions = $entity.extractOriginalChanged($foreignKeys);
-        if (myCountOriginalConditions != []) {
-            $updateOriginalConditions = array_combine($primaryKeys, myCountOriginalConditions);
+        $countOriginalConditions = $entity.extractOriginalChanged($foreignKeys);
+        if ($countOriginalConditions != []) {
+            $updateOriginalConditions = array_combine($primaryKeys, $countOriginalConditions);
         }
 
-        foreach ($settings as myField: myConfig) {
-            if (is_int(myField)) {
-                myField = myConfig;
-                myConfig = [];
+        foreach ($settings as $field: aConfig) {
+            if (is_int($field)) {
+                $field = aConfig;
+                aConfig = [];
             }
 
             if (
-                isset(_ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField]) &&
-                _ignoreDirty[$assoc.getTarget().getRegistryAlias()][myField] == true
+                isset(_ignoreDirty[$assoc.getTarget().getRegistryAlias()][$field]) &&
+                _ignoreDirty[$assoc.getTarget().getRegistryAlias()][$field] == true
             ) {
                 continue;
             }
 
             if (_shouldUpdateCount($updateConditions)) {
-                if (myConfig instanceof Closure) {
-                    myCount = myConfig(myEvent, $entity, _table, false);
+                if (aConfig instanceof Closure) {
+                    $count = aConfig($event, $entity, _table, false);
                 } else {
-                    myCount = _getCount(myConfig, myCountConditions);
+                    $count = _getCount(aConfig, $countConditions);
                 }
-                if (myCount != false) {
-                    $assoc.getTarget().updateAll([myField: myCount], $updateConditions);
+                if ($count != false) {
+                    $assoc.getTarget().updateAll([$field: $count], $updateConditions);
                 }
             }
 
             if (isset($updateOriginalConditions) && _shouldUpdateCount($updateOriginalConditions)) {
-                if (myConfig instanceof Closure) {
-                    myCount = myConfig(myEvent, $entity, _table, true);
+                if (aConfig instanceof Closure) {
+                    $count = aConfig($event, $entity, _table, true);
                 } else {
-                    myCount = _getCount(myConfig, myCountOriginalConditions);
+                    $count = _getCount(aConfig, $countOriginalConditions);
                 }
-                if (myCount != false) {
-                    $assoc.getTarget().updateAll([myField: myCount], $updateOriginalConditions);
+                if ($count != false) {
+                    $assoc.getTarget().updateAll([$field: $count], $updateOriginalConditions);
                 }
             }
         }
@@ -251,29 +258,29 @@ class CounterCacheBehavior : Behavior
      * @param array $conditions Conditions to update count.
      * @return bool True if the count update should happen, false otherwise.
      */
-    protected auto _shouldUpdateCount(array $conditions) {
-        return !empty(array_filter($conditions, function (myValue) {
-            return myValue  !is null;
+    protected function _shouldUpdateCount(array $conditions) {
+        return !empty(array_filter($conditions, function ($value) {
+            return $value != null;
         }));
     }
 
     /**
      * Fetches and returns the count for a single field in an association
      *
-     * @param array<string, mixed> myConfig The counter cache configuration for a single field
+     * @param array<string, mixed> aConfig The counter cache configuration for a single field
      * @param array $conditions Additional conditions given to the query
      * @return int The number of relations matching the given config and conditions
      */
-    protected int _getCount(array myConfig, array $conditions) {
-        myFinder = "all";
-        if (!empty(myConfig["finder"])) {
-            myFinder = myConfig["finder"];
-            unset(myConfig["finder"]);
+    protected int _getCount(Json aConfig, array $conditions) {
+        $finder = "all";
+        if (!empty(aConfig["finder"])) {
+            $finder = aConfig["finder"];
+            unset(aConfig["finder"]);
         }
 
-        myConfig["conditions"] = array_merge($conditions, myConfig["conditions"] ?? []);
-        myQuery = _table.find(myFinder, myConfig);
+        aConfig["conditions"] = array_merge($conditions, aConfig["conditions"] ?? []);
+        $query = _table.find($finder, aConfig);
 
-        return myQuery.count();
+        return $query.count();
     }
 }

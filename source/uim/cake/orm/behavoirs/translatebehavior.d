@@ -15,7 +15,7 @@ import uim.cake;
  * If you want to bring all or certain languages for each of the fetched records,
  * you can use the custom `translations` finders that is exposed to the table.
  */
-class TranslateBehavior : Behavior : IPropertyMarshal
+class TranslateBehavior : Behavior : PropertyMarshalInterface
 {
     /**
      * Default config
@@ -24,37 +24,37 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "implementedFinders":["translations":"findTranslations"],
-        "implementedMethods":[
-            "setLocale":"setLocale",
-            "getLocale":"getLocale",
-            "translationField":"translationField",
+    protected _defaultConfig = [
+        "implementedFinders": ["translations": "findTranslations"],
+        "implementedMethods": [
+            "setLocale": "setLocale",
+            "getLocale": "getLocale",
+            "translationField": "translationField",
         ],
-        "fields":[],
-        "defaultLocale":null,
-        "referenceName":"",
-        "allowEmptyTranslations":true,
-        "onlyTranslated":false,
-        "strategy":"subquery",
-        "tableLocator":null,
-        "validator":false,
+        "fields": [],
+        "defaultLocale": null,
+        "referenceName": "",
+        "allowEmptyTranslations": true,
+        "onlyTranslated": false,
+        "strategy": "subquery",
+        "tableLocator": null,
+        "validator": false,
     ];
 
     /**
      * Default strategy class name.
      *
      * @var string
-     * @psalm-var class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy>
+     * @psalm-var class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface>
      */
     protected static $defaultStrategyClass = EavStrategy::class;
 
     /**
      * Translation strategy instance.
      *
-     * @var uim.cake.orm.Behavior\Translate\ITranslateStrategy|null
+     * @var uim.cake.orm.Behavior\Translate\TranslateStrategyInterface|null
      */
-    protected strategy;
+    protected $strategy;
 
     /**
      * Constructor
@@ -79,38 +79,38 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * - `validator`: The validator that should be used when translation records
      *   are created/modified. Default `null`.
      *
-     * @param uim.cake.orm.Table myTable The table this behavior is attached to.
-     * @param array<string, mixed> myConfig The config for this behavior.
+     * @param uim.cake.orm.Table $table The table this behavior is attached to.
+     * @param array<string, mixed> aConfig The config for this behavior.
      */
-    this(Table myTable, array myConfig = []) {
-        myConfig += [
-            "defaultLocale":I18n::getDefaultLocale(),
-            "referenceName":this.referenceName(myTable),
-            "tableLocator":myTable.associations().getTableLocator(),
+    this(Table $table, Json aConfig = []) {
+        aConfig += [
+            "defaultLocale": I18n::getDefaultLocale(),
+            "referenceName": this.referenceName($table),
+            "tableLocator": $table.associations().getTableLocator(),
         ];
 
-        super.this(myTable, myConfig);
+        super(($table, aConfig);
     }
 
     /**
      * Initialize hook
      *
-     * @param array<string, mixed> myConfig The config for this behavior.
+     * @param array<string, mixed> aConfig The config for this behavior.
      */
-    void initialize(array myConfig) {
+    void initialize(Json aConfig) {
         this.getStrategy();
     }
 
     /**
      * Set default strategy class name.
      *
-     * @param string myClass Class name.
+     * @param string $class Class name.
      * @return void
      * @since 4.0.0
-     * @psalm-param class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy> myClass
+     * @psalm-param class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface> $class
      */
-    static auto setDefaultStrategyClass(string myClass) {
-        static::$defaultStrategyClass = myClass;
+    static function setDefaultStrategyClass(string $class) {
+        static::$defaultStrategyClass = $class;
     }
 
     /**
@@ -118,7 +118,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @return string
      * @since 4.0.0
-     * @psalm-return class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy>
+     * @psalm-return class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface>
      */
     static string getDefaultStrategyClass() {
         return static::$defaultStrategyClass;
@@ -127,12 +127,12 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Get strategy class instance.
      *
-     * @return uim.cake.orm.Behavior\Translate\ITranslateStrategy
+     * @return uim.cake.orm.Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
-    auto getStrategy(): ITranslateStrategy
+    function getStrategy(): TranslateStrategyInterface
     {
-        if (this.strategy  !is null) {
+        if (this.strategy != null) {
             return this.strategy;
         }
 
@@ -142,28 +142,28 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Create strategy instance.
      *
-     * @return uim.cake.orm.Behavior\Translate\ITranslateStrategy
+     * @return uim.cake.orm.Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
-    protected auto createStrategy() {
-        myConfig = array_diff_key(
+    protected function createStrategy() {
+        aConfig = array_diff_key(
             _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
-        /** @var class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy> myClassName */
-        myClassName = this.getConfig("strategyClass", static::$defaultStrategyClass);
+        /** @var class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface> $className */
+        $className = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
-        return new myClassName(_table, myConfig);
+        return new $className(_table, aConfig);
     }
 
     /**
      * Set strategy class instance.
      *
-     * @param uim.cake.orm.Behavior\Translate\ITranslateStrategy $strategy Strategy class instance.
+     * @param uim.cake.orm.Behavior\Translate\TranslateStrategyInterface $strategy Strategy class instance.
      * @return this
      * @since 4.0.0
      */
-    auto setStrategy(ITranslateStrategy $strategy) {
+    function setStrategy(TranslateStrategyInterface $strategy) {
         this.strategy = $strategy;
 
         return this;
@@ -176,9 +176,9 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      */
     array implementedEvents() {
         return [
-            "Model.beforeFind":"beforeFind",
-            "Model.beforeSave":"beforeSave",
-            "Model.afterSave":"afterSave",
+            "Model.beforeFind": "beforeFind",
+            "Model.beforeSave": "beforeSave",
+            "Model.afterSave": "afterSave",
         ];
     }
 
@@ -186,16 +186,16 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * {@inheritDoc}
      *
      * Add in `_translations` marshalling handlers. You can disable marshalling
-     * of translations by setting `"translations":false` in the options
+     * of translations by setting `"translations": false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
      * @param uim.cake.orm.Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
-     * @param array<string, mixed> myOptions The options array used in the marshalling call.
+     * @param array<string, mixed> $options The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
      */
-    array buildMarshalMap(Marshaller $marshaller, array $map, array myOptions) {
-        return this.getStrategy().buildMarshalMap($marshaller, $map, myOptions);
+    array buildMarshalMap(Marshaller $marshaller, array $map, array $options) {
+        return this.getStrategy().buildMarshalMap($marshaller, $map, $options);
     }
 
     /**
@@ -214,12 +214,12 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * in order to unset the current locale, and to make the behavior fall back to using the
      * globally configured locale.
      * @return this
-     * @see uim.cake.orm.Behavior\TranslateBehavior::locale()
-     * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
-     * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#saving-in-another-language
+     * @see uim.cake.orm.Behavior\TranslateBehavior::getLocale()
+     * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
+     * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
-    auto locale(Nullable!string locale) {
-        this.getStrategy().locale($locale);
+    function setLocale(Nullable!string $locale) {
+        this.getStrategy().setLocale($locale);
 
         return this;
     }
@@ -227,15 +227,15 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Returns the current locale.
      *
-     * If no locale has been explicitly set via `locale()`, this method will return
+     * If no locale has been explicitly set via `setLocale()`, this method will return
      * the currently configured global locale.
      *
      * @return string
-     * @see uim.cake.I18n\I18n::locale()
-     * @see uim.cake.orm.Behavior\TranslateBehavior::locale()
+     * @see uim.cake.I18n\I18n::getLocale()
+     * @see uim.cake.orm.Behavior\TranslateBehavior::setLocale()
      */
-    string locale() {
-        return this.getStrategy().locale();
+    string getLocale() {
+        return this.getStrategy().getLocale();
     }
 
     /**
@@ -245,10 +245,10 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * field with an alias of a corresponding association is returned. Table-aliased
      * field name is returned for all other fields.
      *
-     * @param string myField Field name to be aliased.
+     * @param string $field Field name to be aliased.
      */
-    string translationField(string myField) {
-        return this.getStrategy().translationField(myField);
+    string translationField(string $field) {
+        return this.getStrategy().translationField($field);
     }
 
     /**
@@ -262,42 +262,42 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * ### Example:
      *
      * ```
-     * $article = $articles.find("translations", ["locales":["eng", "deu"]).first();
+     * $article = $articles.find("translations", ["locales": ["eng", "deu"]).first();
      * $englishTranslatedFields = $article.get("_translations")["eng"];
      * ```
      *
      * If the `locales` array is not passed, it will bring all translations found
      * for each record.
      *
-     * @param uim.cake.orm.Query myQuery The original query to modify
-     * @param array<string, mixed> myOptions Options
+     * @param uim.cake.orm.Query $query The original query to modify
+     * @param array<string, mixed> $options Options
      * @return uim.cake.orm.Query
      */
-    function findTranslations(Query myQuery, array myOptions): Query
+    function findTranslations(Query $query, array $options): Query
     {
-        $locales = myOptions["locales"] ?? [];
-        myTargetAlias = this.getStrategy().getTranslationTable().getAlias();
+        $locales = $options["locales"] ?? [];
+        $targetAlias = this.getStrategy().getTranslationTable().getAlias();
 
-        return myQuery
-            .contain([myTargetAlias: function (myQuery) use ($locales, myTargetAlias) {
-                /** @var uim.cake.datasources.IQuery myQuery */
+        return $query
+            .contain([$targetAlias: function ($query) use ($locales, $targetAlias) {
+                /** @var uim.cake.datasources.IQuery $query */
                 if ($locales) {
-                    myQuery.where(["myTargetAlias.locale IN":$locales]);
+                    $query.where(["$targetAlias.locale IN": $locales]);
                 }
 
-                return myQuery;
+                return $query;
             }])
-            .formatResults([this.getStrategy(), "groupTranslations"], myQuery::PREPEND);
+            .formatResults([this.getStrategy(), "groupTranslations"], $query::PREPEND);
     }
 
     /**
      * Proxy method calls to strategy class instance.
      *
-     * @param string method Method name.
+     * @param string $method Method name.
      * @param array $args Method arguments.
      * @return mixed
      */
-    auto __call($method, $args) {
+    function __call($method, $args) {
         return this.strategy.{$method}(...$args);
     }
 
@@ -309,17 +309,16 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * the database table the object points at - or as a last resort, the alias
      * of the autotable instance.
      *
-     * @param uim.cake.orm.Table myTable The table class to get a reference name for.
-     * @return string
+     * @param uim.cake.orm.Table $table The table class to get a reference name for.
      */
-    protected string referenceName(Table myTable) {
-        myName = moduleSplit(get_class(myTable));
-        myName = substr(end(myName), 0, -5);
-        if (empty(myName)) {
-            myName = myTable.getTable() ?: myTable.getAlias();
-            myName = Inflector::camelize(myName);
+    protected string referenceName(Table $table) {
+        $name = namespaceSplit(get_class($table));
+        $name = substr(end($name), 0, -5);
+        if (empty($name)) {
+            $name = $table.getTable() ?: $table.getAlias();
+            $name = Inflector::camelize($name);
         }
 
-        return myName;
+        return $name;
     }
 }

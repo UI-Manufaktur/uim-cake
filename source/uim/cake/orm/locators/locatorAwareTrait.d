@@ -4,12 +4,17 @@ import uim.cake.core.exceptions\UIMException;
 import uim.cake.datasources\FactoryLocator;
 import uim.cake.orm.Table;
 
+use UnexpectedValueException;
+
 /**
- * Contains method for setting and accessing ILocator instance
+ * Contains method for setting and accessing ILocatorinstance
  */
 trait LocatorAwareTrait
 {
-    // This object"s default table alias.
+    /**
+     * This object"s default table alias.
+     *
+     */
     protected Nullable!string defaultTable = null;
 
     /**
@@ -22,11 +27,11 @@ trait LocatorAwareTrait
     /**
      * Sets the table locator.
      *
-     * @param uim.cake.orm.Locator\ILocator myTableLocator ILocator instance.
+     * @param uim.cake.orm.Locator\ILocator $tableLocator ILocatorinstance.
      * @return this
      */
-    auto setTableLocator(ILocator myTableLocator) {
-        _tableLocator = myTableLocator;
+    function setTableLocator(ILocator $tableLocator) {
+        _tableLocator = $tableLocator;
 
         return this;
     }
@@ -36,36 +41,38 @@ trait LocatorAwareTrait
      *
      * @return uim.cake.orm.Locator\ILocator
      */
-    auto getTableLocator(): ILocator
+    function getTableLocator(): ILocator
     {
-        if (_tableLocator is null) {
+        if (_tableLocator == null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */
             _tableLocator = FactoryLocator::get("Table");
         }
 
-        /** @var uim.cake.orm.Locator\ILocator */
+        /** @var uim.cake.orm.Locator\ILocator*/
         return _tableLocator;
     }
 
     /**
      * Convenience method to get a table instance.
      *
-     * @param string|null myAlias The alias name you want to get. Should be in CamelCase format.
+     * @param string|null $alias The alias name you want to get. Should be in CamelCase format.
      *  If `null` then the value of $defaultTable property is used.
-     * @param array<string, mixed> myOptions The options you want to build the table with.
+     * @param array<string, mixed> $options The options you want to build the table with.
      *   If a table has already been loaded the registry options will be ignored.
      * @return uim.cake.orm.Table
-     * @throws uim.cake.Core\exceptions.UIMException If `myAlias` argument and `$defaultTable` property both are `null`.
+     * @throws uim.cake.Core\exceptions.UIMException If `$alias` argument and `$defaultTable` property both are `null`.
      * @see uim.cake.orm.TableLocator::get()
      * @since 4.3.0
      */
-    function fetchTable(Nullable!string myAlias = null, array myOptions = []): Table
+    function fetchTable(Nullable!string $alias = null, array $options = []): Table
     {
-        myAlias = myAlias ?? this.defaultTable;
-        if (myAlias is null) {
-            throw new UIMException("You must provide an `myAlias` or set the `$defaultTable` property.");
+        $alias = $alias ?? this.defaultTable;
+        if (empty($alias)) {
+            throw new UnexpectedValueException(
+                "You must provide an `$alias` or set the `$defaultTable` property to a non empty string."
+            );
         }
 
-        return this.getTableLocator().get(myAlias, myOptions);
+        return this.getTableLocator().get($alias, $options);
     }
 }

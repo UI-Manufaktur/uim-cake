@@ -3,6 +3,8 @@ module uim.cake.orm.locators;
 @safe:
 import uim.cake;
 
+use RuntimeException;
+
 /**
  * Provides a default registry/factory for Table objects.
  */
@@ -13,7 +15,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @var array<string>
      */
-    protected myLocations = [];
+    protected $locations = [];
 
     /**
      * Configuration for aliases.
@@ -27,7 +29,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @var array<string, uim.cake.orm.Table>
      */
-    protected instances = [];
+    protected $instances = [];
 
     /**
      * Contains a list of Table objects that were created out of the
@@ -43,30 +45,28 @@ class TableLocator : AbstractLocator : ILocator
      * @var string
      * @psalm-var class-string<uim.cake.orm.Table>
      */
-    protected fallbackClassName = Table::class;
+    protected $fallbackClassName = Table::class;
 
     /**
      * Whether fallback class should be used if a table class could not be found.
-     *
-     * @var bool
      */
-    protected allowFallbackClass = true;
+    protected bool $allowFallbackClass = true;
 
     /**
      * Constructor.
      *
-     * @param array<string>|null myLocations Locations where tables should be looked for.
-     *   If none provided, the default `Model\Table` under your app"s module is used.
+     * @param array<string>|null $locations Locations where tables should be looked for.
+     *   If none provided, the default `Model\Table` under your app"s namespace is used.
      */
-    this(?array myLocations = null) {
-        if (myLocations is null) {
-            myLocations = [
+    this(?array $locations = null) {
+        if ($locations == null) {
+            $locations = [
                 "Model/Table",
             ];
         }
 
-        foreach (myLocations as myLocation) {
-            this.addLocation(myLocation);
+        foreach ($locations as $location) {
+            this.addLocation($location);
         }
     }
 
@@ -92,43 +92,43 @@ class TableLocator : AbstractLocator : ILocator
      * class for alias used in `get()` could not be found. Defaults to
      * `Cake\orm.Table`.
      *
-     * @param string myClassName Fallback class name
+     * @param string $className Fallback class name
      * @return this
-     * @psalm-param class-string<uim.cake.orm.Table> myClassName
+     * @psalm-param class-string<uim.cake.orm.Table> $className
      */
-    auto setFallbackClassName(myClassName) {
-        this.fallbackClassName = myClassName;
+    function setFallbackClassName($className) {
+        this.fallbackClassName = $className;
 
         return this;
     }
 
 
-    auto setConfig(myAlias, myOptions = null) {
-        if (!is_string(myAlias)) {
-            _config = myAlias;
+    function setConfig($alias, $options = null) {
+        if (!is_string($alias)) {
+            _config = $alias;
 
             return this;
         }
 
-        if (isset(this.instances[myAlias])) {
+        if (isset(this.instances[$alias])) {
             throw new RuntimeException(sprintf(
                 "You cannot configure '%s', it has already been constructed.",
-                myAlias
+                $alias
             ));
         }
 
-        _config[myAlias] = myOptions;
+        _config[$alias] = $options;
 
         return this;
     }
 
 
-    array getConfig(Nullable!string myAlias = null) {
-        if (myAlias is null) {
+    array getConfig(Nullable!string $alias = null) {
+        if ($alias == null) {
             return _config;
         }
 
-        return _config[myAlias] ?? [];
+        return _config[$alias] ?? [];
     }
 
     /**
@@ -139,7 +139,7 @@ class TableLocator : AbstractLocator : ILocator
      * This is important because table associations are resolved at runtime
      * and cyclic references need to be handled correctly.
      *
-     * The options that can be passed are the same as in {@link uim.cake.orm.Table::this()}, but the
+     * The options that can be passed are the same as in {@link uim.cake.orm.Table::__construct()}, but the
      * `className` key is also recognized.
      *
      * ### Options
@@ -157,79 +157,77 @@ class TableLocator : AbstractLocator : ILocator
      * - `connectionName` Define the connection name to use. The named connection will be fetched from
      *   {@link uim.cake.Datasource\ConnectionManager}.
      *
-     * *Note* If your `myAlias` uses plugin syntax only the name part will be used as
+     * *Note* If your `$alias` uses plugin syntax only the name part will be used as
      * key in the registry. This means that if two plugins, or a plugin and app provide
      * the same alias, the registry will only store the first instance.
      *
-     * @param string myAlias The alias name you want to get. Should be in CamelCase format.
-     * @param array<string, mixed> myOptions The options you want to build the table with.
+     * @param string $alias The alias name you want to get. Should be in CamelCase format.
+     * @param array<string, mixed> $options The options you want to build the table with.
      *   If a table has already been loaded the options will be ignored.
      * @return uim.cake.orm.Table
      * @throws \RuntimeException When you try to configure an alias that already exists.
      */
-    auto get(string myAlias, array myOptions = []): Table
+    function get(string $alias, array $options = []): Table
     {
         /** @var uim.cake.orm.Table */
-        return super.get(myAlias, myOptions);
+        return super.get($alias, $options);
     }
 
 
-    protected auto createInstance(string myAlias, array myOptions) {
-        if (indexOf(myAlias, "\\") == false) {
-            [, myClassAlias] = pluginSplit(myAlias);
-            myOptions = ["alias": myClassAlias] + myOptions;
-        } elseif (!isset(myOptions["alias"])) {
-            myOptions["className"] = myAlias;
-            /** @psalm-suppress PossiblyFalseOperand */
-            myAlias = substr(myAlias, strrpos(myAlias, "\\") + 1, -5);
+    protected function createInstance(string $alias, array $options) {
+        if (strpos($alias, "\\") == false) {
+            [, $classAlias] = pluginSplit($alias);
+            $options = ["alias": $classAlias] + $options;
+        } elseif (!isset($options["alias"])) {
+            $options["className"] = $alias;
         }
 
-        if (isset(_config[myAlias])) {
-            myOptions += _config[myAlias];
+        if (isset(_config[$alias])) {
+            $options += _config[$alias];
         }
 
-        $allowFallbackClass = myOptions["allowFallbackClass"] ?? this.allowFallbackClass;
-        myClassName = _getClassName(myAlias, myOptions);
-        if (myClassName) {
-            myOptions["className"] = myClassName;
+        $allowFallbackClass = $options["allowFallbackClass"] ?? this.allowFallbackClass;
+        $className = _getClassName($alias, $options);
+        if ($className) {
+            $options["className"] = $className;
         } elseif ($allowFallbackClass) {
-            if (empty(myOptions["className"])) {
-                myOptions["className"] = myAlias;
+            if (empty($options["className"])) {
+                $options["className"] = $alias;
             }
-            if (!isset(myOptions["table"]) && indexOf(myOptions["className"], "\\") == false) {
-                [, myTable] = pluginSplit(myOptions["className"]);
-                myOptions["table"] = Inflector::underscore(myTable);
+            if (!isset($options["table"]) && strpos($options["className"], "\\") == false) {
+                [, $table] = pluginSplit($options["className"]);
+                $options["table"] = Inflector::underscore($table);
             }
-            myOptions["className"] = this.fallbackClassName;
+            $options["className"] = this.fallbackClassName;
         } else {
-            myMessage = myOptions["className"] ?? myAlias;
-            myMessage = "`" ~ myMessage ~ "`";
-            if (indexOf(myMessage, "\\") == false) {
-                myMessage = "for alias " ~ myMessage;
+            $message = $options["className"] ?? $alias;
+            $message = "`" ~ $message ~ "`";
+            if (strpos($message, "\\") == false) {
+                $message = "for alias " ~ $message;
             }
-            throw new MissingTableClassException([myMessage]);
+            throw new MissingTableClassException([$message]);
         }
 
-        if (empty(myOptions["connection"])) {
-            if (!empty(myOptions["connectionName"])) {
-                myConnectionName = myOptions["connectionName"];
+        if (empty($options["connection"])) {
+            if (!empty($options["connectionName"])) {
+                $connectionName = $options["connectionName"];
             } else {
-                /** @var uim.cake.orm.Table myClassName */
-                myClassName = myOptions["className"];
-                myConnectionName = myClassName::defaultConnectionName();
+                /** @var uim.cake.orm.Table $className */
+                $className = $options["className"];
+                $connectionName = $className::defaultConnectionName();
             }
-            myOptions["connection"] = ConnectionManager::get(myConnectionName);
+            $options["connection"] = ConnectionManager::get($connectionName);
         }
-        if (empty(myOptions["associations"])) {
+        if (empty($options["associations"])) {
             $associations = new AssociationCollection(this);
-            myOptions["associations"] = $associations;
+            $options["associations"] = $associations;
         }
 
-        myOptions["registryAlias"] = myAlias;
-        $instance = _create(myOptions);
+        $options["registryAlias"] = $alias;
+        $instance = _create($options);
 
-        if (myOptions["className"] == this.fallbackClassName) {
-            _fallbacked[myAlias] = $instance;
+        if ($options["className"] == this.fallbackClassName) {
+            _fallbacked[$alias] = $instance;
         }
 
         return $instance;
@@ -238,23 +236,23 @@ class TableLocator : AbstractLocator : ILocator
     /**
      * Gets the table class name.
      *
-     * @param string myAlias The alias name you want to get. Should be in CamelCase format.
-     * @param array<string, mixed> myOptions Table options array.
+     * @param string $alias The alias name you want to get. Should be in CamelCase format.
+     * @param array<string, mixed> $options Table options array.
      * @return string|null
      */
-    protected Nullable!string _getClassName(string myAlias, array myOptions = []) {
-        if (empty(myOptions["className"])) {
-            myOptions["className"] = myAlias;
+    protected Nullable!string _getClassName(string $alias, array $options = []) {
+        if (empty($options["className"])) {
+            $options["className"] = $alias;
         }
 
-        if (indexOf(myOptions["className"], "\\") != false && class_exists(myOptions["className"])) {
-            return myOptions["className"];
+        if (strpos($options["className"], "\\") != false && class_exists($options["className"])) {
+            return $options["className"];
         }
 
-        foreach (this.locations as myLocation) {
-            myClass = App::className(myOptions["className"], myLocation, "Table");
-            if (myClass  !is null) {
-                return myClass;
+        foreach (this.locations as $location) {
+            $class = App::className($options["className"], $location, "Table");
+            if ($class != null) {
+                return $class;
             }
         }
 
@@ -264,26 +262,26 @@ class TableLocator : AbstractLocator : ILocator
     /**
      * Wrapper for creating table instances
      *
-     * @param array<string, mixed> myOptions The alias to check for.
+     * @param array<string, mixed> $options The alias to check for.
      * @return uim.cake.orm.Table
      */
-    protected auto _create(array myOptions): Table
+    protected function _create(array $options): Table
     {
         /** @var uim.cake.orm.Table */
-        return new myOptions["className"](myOptions);
+        return new $options["className"]($options);
     }
 
     /**
      * Set a Table instance.
      *
-     * @param string myAlias The alias to set.
-     * @param uim.cake.orm.Table myRepository The Table to set.
+     * @param string $alias The alias to set.
+     * @param uim.cake.orm.Table $repository The Table to set.
      * @return uim.cake.orm.Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    auto set(string myAlias, IRepository myRepository): Table
+    function set(string $alias, IRepository $repository): Table
     {
-        return this.instances[myAlias] = myRepository;
+        return this.instances[$alias] = $repository;
     }
 
 
@@ -307,22 +305,22 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    void remove(string myAlias) {
-        super.remove(myAlias);
+    void remove(string $alias) {
+        super.remove($alias);
 
-        unset(_fallbacked[myAlias]);
+        unset(_fallbacked[$alias]);
     }
 
     /**
      * Adds a location where tables should be looked for.
      *
-     * @param string myLocation Location to add.
+     * @param string $location Location to add.
      * @return this
      * @since 3.8.0
      */
-    function addLocation(string myLocation) {
-        myLocation = str_replace("\\", "/", myLocation);
-        this.locations[] = trim(myLocation, "/");
+    function addLocation(string $location) {
+        $location = str_replace("\\", "/", $location);
+        this.locations[] = trim($location, "/");
 
         return this;
     }
