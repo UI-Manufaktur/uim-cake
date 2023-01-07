@@ -1,7 +1,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/datasource.svg?style=flat-square)](https://packagist.org/packages/cakephp/datasource)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Datasource Library
+# UIM Datasource Library
 
 This library contains interfaces for implementing Repositories and Entities using any data source,
 a class for managing connections to datasources and traits to help you quickly implement the
@@ -17,7 +17,7 @@ In the case of a Relational database, a Repository would be a `Table`, which can
 or multiple `Entity` objects by using a `Query`.
 
 This library exposes the following interfaces for creating a system that : the
-repository pattern and is compatible with the CakePHP framework:
+repository pattern and is compatible with the UIM framework:
 
 * `IRepository` - Describes the methods for a base repository class.
 * `IEntity` - Describes the methods for a single result object.

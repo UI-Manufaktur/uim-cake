@@ -1,7 +1,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/http.svg?style=flat-square)](https://packagist.org/packages/cakephp/http)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Http Library
+# UIM Http Library
 
 This library provides a PSR-15 Http middleware server, PSR-7 Request and
 Response objects, and a PSR-18 Http Client. Together these classes let you

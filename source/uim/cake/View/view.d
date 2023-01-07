@@ -13,7 +13,7 @@ use Throwable;
  * in from the controller to render the results of the controller action. Often this is HTML,
  * but can also take the form of JSON, XML, PDF"s or streaming files.
  *
- * CakePHP uses a two-step-view pattern. This means that the template content is rendered first,
+ * UIM uses a two-step-view pattern. This means that the template content is rendered first,
  * and then inserted into the selected layout. This also means you can pass data from the template to the
  * layout using `this.set()`
  *
@@ -110,7 +110,7 @@ class View : IEventDispatcher
     protected string $layoutPath = "";
 
     /**
-     * Turns on or off CakePHP"s conventional mode of applying layout files. On by default.
+     * Turns on or off UIM"s conventional mode of applying layout files. On by default.
      * Setting to off means that layouts will not be automatically applied to rendered templates.
      */
     protected bool $autoLayout = true;
@@ -424,7 +424,7 @@ class View : IEventDispatcher
     }
 
     /**
-     * Returns if CakePHP"s conventional mode of applying layout files is enabled.
+     * Returns if UIM"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      */
     bool isAutoLayoutEnabled() {
@@ -432,7 +432,7 @@ class View : IEventDispatcher
     }
 
     /**
-     * Turns on or off CakePHP"s conventional mode of applying layout files.
+     * Turns on or off UIM"s conventional mode of applying layout files.
      * On by default. Setting to off means that layouts will not be
      * automatically applied to rendered views.
      *
@@ -446,7 +446,7 @@ class View : IEventDispatcher
     }
 
     /**
-     * Turns off CakePHP"s conventional mode of applying layout files.
+     * Turns off UIM"s conventional mode of applying layout files.
      * Layouts will not be automatically applied to rendered views.
      *
      * @return this
@@ -526,7 +526,7 @@ class View : IEventDispatcher
      *
      * Currently if config is not set it fallbacks to checking corresponding
      * view var with underscore prefix. Using underscore prefixed special view
-     * vars is deprecated and this fallback will be removed in CakePHP 4.1.0.
+     * vars is deprecated and this fallback will be removed in UIM 4.1.0.
      *
      * @param string|null $key The key to get or null for the whole config.
      * @param mixed $default The return value when the key does not exist.

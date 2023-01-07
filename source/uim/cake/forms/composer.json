@@ -1,6 +1,6 @@
 {
     "name": "cakephp/form",
-    "description": "CakePHP Form library",
+    "description": "UIM Form library",
     "type": "library",
     "keywords": [
         "cakephp",
@@ -10,7 +10,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
+            "name": "UIM Community",
             "homepage": "https://github.com/cakephp/form/graphs/contributors"
         }
     ],

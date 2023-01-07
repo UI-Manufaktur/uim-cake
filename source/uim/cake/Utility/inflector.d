@@ -4,7 +4,7 @@ module uim.cake.Utility;
  * Pluralize and singularize English words.
  *
  * Inflector pluralizes and singularizes English nouns.
- * Used by CakePHP"s naming conventions throughout the framework.
+ * Used by UIM"s naming conventions throughout the framework.
  *
  * @link https://book.cakephp.org/4/en/core-libraries/inflector.html
  */

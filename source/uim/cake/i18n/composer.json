@@ -1,6 +1,6 @@
 {
     "name": "cakephp/i18n",
-    "description": "CakePHP Internationalization library with support for messages translation and dates and numbers localization",
+    "description": "UIM Internationalization library with support for messages translation and dates and numbers localization",
     "type": "library",
     "keywords": [
         "cakephp",
@@ -17,7 +17,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
+            "name": "UIM Community",
             "homepage": "https://github.com/cakephp/i18n/graphs/contributors"
         }
     ],

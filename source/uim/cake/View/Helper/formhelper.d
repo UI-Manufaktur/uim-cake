@@ -2324,7 +2324,7 @@ class FormHelper : Helper
      * Add a new context type.
      *
      * Form context types allow FormHelper to interact with
-     * data providers that come from outside CakePHP. For example
+     * data providers that come from outside UIM. For example
      * if you wanted to use an alternative ORM like Doctrine you could
      * create and connect a new context class to allow FormHelper to
      * read metadata from doctrine.

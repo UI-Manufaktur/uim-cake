@@ -1,6 +1,6 @@
 {
     "name": "cakephp/validation",
-    "description": "CakePHP Validation library",
+    "description": "UIM Validation library",
     "type": "library",
     "keywords": [
         "cakephp",
@@ -11,7 +11,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
+            "name": "UIM Community",
             "homepage": "https://github.com/cakephp/validation/graphs/contributors"
         }
     ],

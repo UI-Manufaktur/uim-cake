@@ -458,7 +458,7 @@ class Debugger
     }
 
     /**
-     * Shortens file paths by replacing the application base path with 'APP', and the CakePHP core
+     * Shortens file paths by replacing the application base path with 'APP', and the UIM core
      * path with 'CORE'.
      *
      * @param string $path Path to shorten.
@@ -603,7 +603,7 @@ class Debugger
      *  - schema
      *
      * This is done to protect database credentials, which could be accidentally
-     * shown in an error message if CakePHP is deployed in development mode.
+     * shown in an error message if UIM is deployed in development mode.
      *
      * @param mixed $var Variable to convert.
      * @param int $maxDepth The depth to output to. Defaults to 3.

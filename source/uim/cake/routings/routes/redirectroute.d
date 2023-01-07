@@ -24,7 +24,7 @@ class RedirectRoute : Route
      * Constructor
      *
      * @param string $template Template string with parameter placeholders
-     * @param array $defaults Defaults for the route. Either a redirect=>value array or a CakePHP array URL.
+     * @param array $defaults Defaults for the route. Either a redirect=>value array or a UIM array URL.
      * @param array<string, mixed> $options Array of additional options for the Route
      */
     this(string $template, array $defaults = [], array $options = []) {

@@ -10,7 +10,7 @@ import uim.cake.routings.Router;
 use Exception;
 
 /**
- * Entry point to CakePHP"s error handling.
+ * Entry point to UIM"s error handling.
  *
  * Using the `register()` method you can attach an ErrorTrap to PHP"s default error handler.
  *
@@ -152,7 +152,7 @@ class ErrorTrap
             $loggerClass = get_class($logger);
             deprecationWarning(
                 "The configured logger `{$loggerClass}` does not implement `logError()` " ~
-                "which will be required in future versions of CakePHP."
+                "which will be required in future versions of UIM."
             );
             $context = [];
             if (_config["trace"]) {

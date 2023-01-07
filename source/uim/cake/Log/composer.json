@@ -1,6 +1,6 @@
 {
     "name": "cakephp/log",
-    "description": "CakePHP logging library with support for multiple different streams",
+    "description": "UIM logging library with support for multiple different streams",
     "type": "library",
     "keywords": [
         "cakephp",
@@ -12,7 +12,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
+            "name": "UIM Community",
             "homepage": "https://github.com/cakephp/log/graphs/contributors"
         }
     ],

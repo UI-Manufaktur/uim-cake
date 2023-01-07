@@ -1,7 +1,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/i18n.svg?style=flat-square)](https://packagist.org/packages/cakephp/i18n)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Internationalization Library
+# UIM Internationalization Library
 
 The I18n library provides a `I18n` service locator that can be used for setting
 the current locale, building translation bundles and translating messages.
@@ -31,7 +31,7 @@ import uim.cake.core.Configure;
 Configure::write("App.paths.locales", ["/path/with/trailing/slash/"]);
 ```
 
-Please refer to the [CakePHP Manual](https://book.cakephp.org/4/en/core-libraries/internationalization-and-localization.html#language-files) for details
+Please refer to the [UIM Manual](https://book.cakephp.org/4/en/core-libraries/internationalization-and-localization.html#language-files) for details
 about expected folder structure and file naming.
 
 ### Translating a Message

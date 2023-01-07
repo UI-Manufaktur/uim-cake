@@ -1,9 +1,9 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/validation.svg?style=flat-square)](https://packagist.org/packages/cakephp/validation)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Validation Library
+# UIM Validation Library
 
-The validation library in CakePHP provides features to build validators that can validate arbitrary
+The validation library in UIM provides features to build validators that can validate arbitrary
 arrays of data with ease.
 
 ## Usage

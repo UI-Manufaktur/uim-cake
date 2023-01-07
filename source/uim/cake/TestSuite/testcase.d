@@ -354,7 +354,7 @@ abstract class TestCase : BaseTestCase
      * Load plugins into a simulated application.
      *
      * Useful to test how plugins being loaded/not loaded interact with other
-     * elements in CakePHP or applications.
+     * elements in UIM or applications.
      *
      * @param array<string, mixed> $plugins List of Plugins to load.
      * @return uim.cake.http.BaseApplication

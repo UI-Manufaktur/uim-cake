@@ -7,7 +7,7 @@ import uim.cake.databases.IStatement;
  * Wraps a statement in a callback that allows row results
  * to be modified when being fetched.
  *
- * This is used by CakePHP to eagerly load association data.
+ * This is used by UIM to eagerly load association data.
  */
 class CallbackStatement : StatementDecorator
 {

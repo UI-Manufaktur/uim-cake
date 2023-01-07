@@ -21,7 +21,7 @@ use function Laminas\Diactoros\normalizeUploadedFiles;
 /**
  * Factory for making ServerRequest instances.
  *
- * This adds in CakePHP specific behavior to populate the basePath and webroot
+ * This adds in UIM specific behavior to populate the basePath and webroot
  * attributes. Furthermore the Uri"s path is corrected to only contain the
  * "virtual" path for the request.
  */
@@ -226,7 +226,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     /**
      * Build a UriInterface object.
      *
-     * Add in some CakePHP specific logic/properties that help
+     * Add in some UIM specific logic/properties that help
      * preserve backwards compatibility.
      *
      * @param array $server The server parameters.

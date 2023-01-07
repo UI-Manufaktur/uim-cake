@@ -9,7 +9,7 @@ module uim.cake.networks.socket;
 import uim.cake;
 
 /**
- * CakePHP network socket connection class.
+ * UIM network socket connection class.
  *
  * Core base class for network communication.
  */
@@ -498,7 +498,7 @@ class Socket
                 return this.connection;
 
             case "description":
-                deprecationWarning("The CakePHP team would love to know your use case for this property.");
+                deprecationWarning("The UIM team would love to know your use case for this property.");
 
                 return "Remote DataSource Network Socket Interface";
         }

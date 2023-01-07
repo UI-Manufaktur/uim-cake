@@ -108,7 +108,7 @@ abstract class BaseErrorHandler
     }
 
     /**
-     * Set as the default error handler by CakePHP.
+     * Set as the default error handler by UIM.
      *
      * Use config/error.php to customize or replace this error handler.
      * This function will use Debugger to display errors when debug mode is on. And

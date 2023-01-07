@@ -872,7 +872,7 @@ class ServerRequest : IServerRequest
      * - You can submit an input with the name `_method`
      *
      * Any of these 3 approaches can be used to set the HTTP method used
-     * by CakePHP internally, and will effect the result of this method.
+     * by UIM internally, and will effect the result of this method.
      *
      * @return string The name of the HTTP method used.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
@@ -1510,7 +1510,7 @@ class ServerRequest : IServerRequest
         $new = clone this;
         if (in_array($name, this.emulatedAttributes, true)) {
             throw new InvalidArgumentException(
-                "You cannot unset "$name". It is a required CakePHP attribute."
+                "You cannot unset "$name". It is a required UIM attribute."
             );
         }
         unset($new.attributes[$name]);
@@ -1543,7 +1543,7 @@ class ServerRequest : IServerRequest
     /**
      * Get all the attributes in the request.
      *
-     * This will include the params, webroot, base, and here attributes that CakePHP
+     * This will include the params, webroot, base, and here attributes that UIM
      * provides.
      *
      * @return array<string, mixed>

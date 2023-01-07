@@ -1,6 +1,6 @@
 {
     "name": "cakephp/utility",
-    "description": "CakePHP Utility classes such as Inflector, String, Hash, and Security",
+    "description": "UIM Utility classes such as Inflector, String, Hash, and Security",
     "type": "library",
     "keywords": [
         "cakephp",
@@ -14,7 +14,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
+            "name": "UIM Community",
             "homepage": "https://github.com/cakephp/utility/graphs/contributors"
         }
     ],

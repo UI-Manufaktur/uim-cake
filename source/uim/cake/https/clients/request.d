@@ -29,7 +29,7 @@ class Request : Message : IRequest {
         $headers += [
 <<<<<<< HEAD
             "Connection":"close",
-            "User-Agent":ini_get("user_agent") ?: "CakePHP",
+            "User-Agent":ini_get("user_agent") ?: "UIM",
 !==
             "Connection": "close",
             "User-Agent": ini_get("user_agent") ?: "UIM",

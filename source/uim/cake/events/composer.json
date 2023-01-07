@@ -1,6 +1,6 @@
 {
     "name": "cakephp/event",
-    "description": "CakePHP event dispatcher library that helps implementing the observer pattern",
+    "description": "UIM event dispatcher library that helps implementing the observer pattern",
     "type": "library",
     "keywords": [
         "cakephp",
@@ -12,7 +12,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
+            "name": "UIM Community",
             "homepage": "https://github.com/cakephp/event/graphs/contributors"
         }
     ],

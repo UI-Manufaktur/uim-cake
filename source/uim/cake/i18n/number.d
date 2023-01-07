@@ -35,7 +35,7 @@ class Number
 
     /**
      * ICU Constant for accounting format; not yet widely supported by INTL library.
-     * This will be able to go away once CakePHP minimum PHP requirement is 7.4.1 or higher.
+     * This will be able to go away once UIM minimum PHP requirement is 7.4.1 or higher.
      * See UNUM_CURRENCY_ACCOUNTING in https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/unum_8h.html
      *
      * @var int
@@ -245,7 +245,7 @@ class Number
 
     /**
      * Getter/setter for default currency. This behavior is *deprecated* and will be
-     * removed in future versions of CakePHP.
+     * removed in future versions of UIM.
      *
      * @deprecated 3.9.0 Use {@link getDefaultCurrency()} and {@link setDefaultCurrency()} instead.
      * @param string|false|null $currency Default currency string to be used by {@link currency()}

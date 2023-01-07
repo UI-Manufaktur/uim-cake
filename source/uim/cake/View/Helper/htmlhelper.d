@@ -107,7 +107,7 @@ class HtmlHelper : Helper
      * Create a custom meta tag:
      *
      * ```
-     * this.Html.meta(["property": "og:site_name", "content": "CakePHP"]);
+     * this.Html.meta(["property": "og:site_name", "content": "UIM"]);
      * ```
      *
      * ### Options
@@ -611,13 +611,13 @@ class HtmlHelper : Helper
      * Create a regular image:
      *
      * ```
-     * echo this.Html.image("cake_icon.png", ["alt": "CakePHP"]);
+     * echo this.Html.image("cake_icon.png", ["alt": "UIM"]);
      * ```
      *
      * Create an image link:
      *
      * ```
-     * echo this.Html.image("cake_icon.png", ["alt": "CakePHP", "url": "https://cakephp.org"]);
+     * echo this.Html.image("cake_icon.png", ["alt": "UIM", "url": "https://cakephp.org"]);
      * ```
      *
      * ### Options:

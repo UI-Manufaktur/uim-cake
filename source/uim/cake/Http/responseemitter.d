@@ -22,7 +22,7 @@ use Psr\Http\messages.IResponse;
  * This emitter offers a few changes from the emitters offered by
  * diactoros:
  *
- * - It logs headers sent using CakePHP"s logging tools.
+ * - It logs headers sent using UIM"s logging tools.
  * - Cookies are emitted using setcookie() to not conflict with ext/session
  */
 class ResponseEmitter : EmitterInterface

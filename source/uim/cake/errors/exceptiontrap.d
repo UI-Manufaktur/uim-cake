@@ -10,7 +10,7 @@ use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
- * Entry point to CakePHP"s exception handling.
+ * Entry point to UIM"s exception handling.
  *
  * Using the `register()` method you can attach an ExceptionTrap to PHP"s default exception handler and register
  * a shutdown handler to handle fatal errors.
@@ -113,7 +113,7 @@ class ExceptionTrap
         if ($deprecatedConfig) {
             deprecationWarning(
                 "Your application is using a deprecated `Error.exceptionRenderer`~ " ~
-                "You can either remove the `Error.exceptionRenderer` config key to have CakePHP choose " ~
+                "You can either remove the `Error.exceptionRenderer` config key to have UIM choose " ~
                 "one of the default exception renderers, or define a class that is not `Cake\errors.ExceptionRenderer`."
             );
         }
@@ -336,7 +336,7 @@ class ExceptionTrap
                 $loggerClass = get_class($logger);
                 deprecationWarning(
                     "The configured logger `{$loggerClass}` should implement `logException()` " ~
-                    "to be compatible with future versions of CakePHP."
+                    "to be compatible with future versions of UIM."
                 );
                 this.logger().log($exception, $request);
             }

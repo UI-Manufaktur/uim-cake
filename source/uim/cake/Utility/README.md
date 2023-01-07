@@ -1,9 +1,9 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/utility.svg?style=flat-square)](https://packagist.org/packages/cakephp/utility)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Utility Classes
+# UIM Utility Classes
 
-This library provides a range of utility classes that are used throughout the CakePHP framework
+This library provides a range of utility classes that are used throughout the UIM framework
 
 ## What"s in the toolbox?
 

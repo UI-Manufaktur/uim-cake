@@ -12,7 +12,7 @@ import uim.cake.TestSuite\ConnectionHelper;
 use PHPUnit\Runner\BeforeFirstTestHook;
 
 /**
- * PHPUnit extension to integrate CakePHP"s data-only fixtures.
+ * PHPUnit extension to integrate UIM"s data-only fixtures.
  */
 class PHPUnitExtension : BeforeFirstTestHook
 {

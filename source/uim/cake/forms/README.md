@@ -1,7 +1,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/form.svg?style=flat-square)](https://packagist.org/packages/cakephp/form)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP Form Library
+# UIM Form Library
 
 Form abstraction used to create forms not tied to ORM backed models,
 or to other permanent datastores. Ideal for implementing forms on top of

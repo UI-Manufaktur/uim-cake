@@ -200,7 +200,7 @@ class ViewBuilder : JsonSerializable, Serializable
     }
 
     /**
-     * Turns on or off CakePHP"s conventional mode of applying layout files.
+     * Turns on or off UIM"s conventional mode of applying layout files.
      * On by default. Setting to off means that layouts will not be
      * automatically applied to rendered views.
      *
@@ -214,7 +214,7 @@ class ViewBuilder : JsonSerializable, Serializable
     }
 
     /**
-     * Turns off CakePHP"s conventional mode of applying layout files.
+     * Turns off UIM"s conventional mode of applying layout files.
      *
      * Setting to off means that layouts will not be automatically applied to
      * rendered views.
@@ -228,7 +228,7 @@ class ViewBuilder : JsonSerializable, Serializable
     }
 
     /**
-     * Returns if CakePHP"s conventional mode of applying layout files is enabled.
+     * Returns if UIM"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      */
     bool isAutoLayoutEnabled() {
@@ -459,7 +459,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * Accepts either a short name (Ajax) a plugin name (MyPlugin.Ajax)
      * or a fully namespaced name (App\View\AppView) or null to use the
-     * View class provided by CakePHP.
+     * View class provided by UIM.
      *
      * @param string|null $name The class name for the view.
      * @return this

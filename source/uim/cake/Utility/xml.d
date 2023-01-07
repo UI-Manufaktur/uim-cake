@@ -16,7 +16,7 @@ use Exception;
 use SimpleXMLElement;
 
 /**
- * XML handling for CakePHP.
+ * XML handling for UIM.
  *
  * The methods in these classes enable the datasources that use XML to work.
  */

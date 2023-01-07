@@ -33,7 +33,7 @@ use Psr\Http\messages.IServerRequest;
  * Base class for full-stack applications
  *
  * This class serves as a base class for applications that are using
- * CakePHP as a full stack framework. If you are only using the Http or Console libraries
+ * UIM as a full stack framework. If you are only using the Http or Console libraries
  * you should implement the relevant interfaces directly.
  *
  * The application class is responsible for bootstrapping the application,
@@ -192,7 +192,7 @@ abstract class BaseApplication implements
     /**
      * Define the console commands for an application.
      *
-     * By default, all commands in CakePHP, plugins and the application will be
+     * By default, all commands in UIM, plugins and the application will be
      * loaded using conventions based names.
      *
      * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to add commands into.

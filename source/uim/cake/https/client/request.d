@@ -1,7 +1,7 @@
 
 
 /**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * UIM(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * Licensed under The MIT License
@@ -42,7 +42,7 @@ class Request : Message : RequestInterface
         this.uri = this.createUri($url);
         $headers += [
             "Connection": "close",
-            "User-Agent": ini_get("user_agent") ?: "CakePHP",
+            "User-Agent": ini_get("user_agent") ?: "UIM",
         ];
         this.addHeaders($headers);
 

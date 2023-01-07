@@ -12,7 +12,7 @@ use InvalidArgumentException;
  * Create test database schema from one or more SQL dump files.
  *
  * This class can be useful to create test database schema when
- * your schema is managed by tools external to your CakePHP
+ * your schema is managed by tools external to your UIM
  * application.
  *
  * It is not well suited for applications/plugins that need to
@@ -78,7 +78,7 @@ class SchemaLoader
     }
 
     /**
-     * Load and apply CakePHP-specific schema file.
+     * Load and apply UIM-specific schema file.
      *
      * @param string $file Schema file
      * @param string $connectionName Connection name

@@ -149,7 +149,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * ### Options
      *
-     * - `className` Define the specific class name to use. If undefined, CakePHP will generate the
+     * - `className` Define the specific class name to use. If undefined, UIM will generate the
      *   class name based on the alias. For example "Users" would result in
      *   `App\Model\Table\UsersTable` being used. If this class does not exist,
      *   then the default `Cake\orm.Table` class will be used. By setting the `className`

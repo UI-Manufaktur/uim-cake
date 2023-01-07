@@ -10,7 +10,7 @@ use Serializable;
 use SimpleXMLElement;
 
 /**
- * CakePHP Email class.
+ * UIM Email class.
  *
  * This class is used for sending Internet Message Format based
  * on the standard outlined in https://www.rfc-editor.org/rfc/rfc2822.txt
@@ -23,7 +23,7 @@ use SimpleXMLElement;
  * application sends.
  *
  * @mixin uim.cake.mailers.Mailer
- * @deprecated 4.0.0 This class will be removed in CakePHP 5.0, use {@link uim.cake.mailers.Mailer} instead.
+ * @deprecated 4.0.0 This class will be removed in UIM 5.0, use {@link uim.cake.mailers.Mailer} instead.
  */
 class Email : JsonSerializable, Serializable
 {

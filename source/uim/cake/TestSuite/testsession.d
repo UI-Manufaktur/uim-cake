@@ -3,7 +3,7 @@
 /**
  * A class to contain and retain the session during integration testing.
  *
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * UIM(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * Licensed under The MIT License

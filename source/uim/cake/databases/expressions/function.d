@@ -33,9 +33,9 @@ class FunctionExpression : QueryExpression : ITypedResult
      *
      * ### Examples:
      *
-     * `$f = new FunctionExpression("CONCAT", ["CakePHP", " rules"]);`
+     * `$f = new FunctionExpression("CONCAT", ["UIM", " rules"]);`
      *
-     * Previous line will generate `CONCAT("CakePHP", " rules")`
+     * Previous line will generate `CONCAT("UIM", " rules")`
      *
      * `$f = new FunctionExpression("CONCAT", ["name": "literal", " rules"]);`
      *

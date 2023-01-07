@@ -21,7 +21,7 @@ trait ModelAwareTrait
 {
     /**
      * This object"s primary model class name. Should be a plural form.
-     * CakePHP will not inflect the name.
+     * UIM will not inflect the name.
      *
      * Example: For an object named "Comments", the modelClass would be "Comments".
      * Plugin classes should use `Plugin.Comments` style names to correctly load

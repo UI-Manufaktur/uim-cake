@@ -1,15 +1,15 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cakephp/orm.svg?style=flat-square)](https://packagist.org/packages/cakephp/orm)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# CakePHP ORM
+# UIM ORM
 
-The CakePHP ORM provides a powerful and flexible way to work with relational
+The UIM ORM provides a powerful and flexible way to work with relational
 databases. Using a datamapper pattern the ORM allows you to manipulate data as
 entities allowing you to create expressive domain layers in your applications.
 
 ## Database engines supported
 
-The CakePHP ORM is compatible with:
+The UIM ORM is compatible with:
 
 * MySQL 5.1+
 * Postgres 8+
@@ -74,7 +74,7 @@ $articles = this.getTableLocator().get("Articles");
 
 ## Creating Associations
 
-In your table classes you can define the relations between your tables. CakePHP"s ORM
+In your table classes you can define the relations between your tables. UIM"s ORM
 supports 4 association types out of the box:
 
 * belongsTo - E.g. Many articles belong to a user.
@@ -236,5 +236,5 @@ Configure::write("App.namespace", "My\logs.SubNamespace");
 
 ## Additional Documentation
 
-Consult [the CakePHP ORM documentation](https://book.cakephp.org/4/en/orm.html)
+Consult [the UIM ORM documentation](https://book.cakephp.org/4/en/orm.html)
 for more in-depth documentation.
