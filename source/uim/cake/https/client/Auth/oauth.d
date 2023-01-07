@@ -261,8 +261,8 @@ class Oauth
      */
     protected string _normalizedUrl(UriInterface $uri) {
         $out = $uri.getScheme() ~ "://";
-        $out .= strtolower($uri.getHost());
-        $out .= $uri.getPath();
+        $out ~= strtolower($uri.getHost());
+        $out ~= $uri.getPath();
 
         return $out;
     }
@@ -341,7 +341,7 @@ class Oauth
         foreach ($data as $key: $value) {
             $params[] = $key ~ "="" ~ _encode((string)$value) ~ """;
         }
-        $out .= implode(",", $params);
+        $out ~= implode(",", $params);
 
         return $out;
     }
@@ -361,7 +361,7 @@ class Oauth
     protected void checkSslError() {
         $error = "";
         while ($text = openssl_error_string()) {
-            $error .= $text;
+            $error ~= $text;
         }
 
         if (strlen($error) > 0) {

@@ -112,16 +112,16 @@ class Digest
         }
 
         $authHeader = "Digest ";
-        $authHeader .= "username="" ~ str_replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) ~ "", ";
-        $authHeader .= "realm="" ~ $credentials["realm"] ~ "", ";
-        $authHeader .= "nonce="" ~ $credentials["nonce"] ~ "", ";
-        $authHeader .= "uri="" ~ $path ~ "", ";
-        $authHeader .= "response="" ~ $response ~ """;
+        $authHeader ~= "username="" ~ str_replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) ~ "", ";
+        $authHeader ~= "realm="" ~ $credentials["realm"] ~ "", ";
+        $authHeader ~= "nonce="" ~ $credentials["nonce"] ~ "", ";
+        $authHeader ~= "uri="" ~ $path ~ "", ";
+        $authHeader ~= "response="" ~ $response ~ """;
         if (!empty($credentials["opaque"])) {
-            $authHeader .= ", opaque="" ~ $credentials["opaque"] ~ """;
+            $authHeader ~= ", opaque="" ~ $credentials["opaque"] ~ """;
         }
         if (!empty($credentials["qop"])) {
-            $authHeader .= ", qop="auth", nc=" ~ $nc ~ ", cnonce="" ~ $credentials["cnonce"] ~ """;
+            $authHeader ~= ", qop="auth", nc=" ~ $nc ~ ", cnonce="" ~ $credentials["cnonce"] ~ """;
         }
 
         return $authHeader;

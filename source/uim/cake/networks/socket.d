@@ -127,7 +127,7 @@ class Socket
         $remoteSocketTarget = $scheme . _config["host"];
         $port = (int)_config["port"];
         if ($port > 0) {
-            $remoteSocketTarget .= ":" ~ $port;
+            $remoteSocketTarget ~= ":" ~ $port;
         }
 
         $errNum = 0;

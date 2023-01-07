@@ -332,7 +332,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
         if (!empty($base) || !$docRootContainsWebroot) {
             if (indexOf($webrootDir, "/" ~ $webroot ~ "/") == false) {
-                $webrootDir .= $webroot ~ "/";
+                $webrootDir ~= $webroot ~ "/";
             }
         }
 

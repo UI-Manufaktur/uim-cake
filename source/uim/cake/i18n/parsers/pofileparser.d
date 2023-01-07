@@ -93,7 +93,7 @@ class PoFileParser
                          * @psalm-suppress InvalidArrayOffset
                          * @psalm-suppress PossiblyNullArrayAccess
                          */
-                        $item[$stage[0]][$stage[1]] .= substr($line, 1, -1);
+                        $item[$stage[0]][$stage[1]] ~= substr($line, 1, -1);
                         break;
 
                     case 1:
@@ -102,7 +102,7 @@ class PoFileParser
                          * @psalm-suppress PossiblyInvalidOperand
                          * @psalm-suppress PossiblyNullOperand
                          */
-                        $item[$stage[0]] .= substr($line, 1, -1);
+                        $item[$stage[0]] ~= substr($line, 1, -1);
                         break;
                 }
             } elseif (substr($line, 0, 14) == "msgid_plural "") {

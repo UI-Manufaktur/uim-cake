@@ -1500,11 +1500,11 @@ class Message : JsonSerializable, Serializable {
             for ($i = 0, $count = strlen($line); $i < $count; $i++) {
                 $char = $line[$i];
                 if ($tagOpen) {
-                    $tag .= $char;
+                    $tag ~= $char;
                     if ($char == ">") {
                         $tagLength = strlen($tag);
                         if ($tagLength + $tmpLineLength < $wrapLength) {
-                            $tmpLine .= $tag;
+                            $tmpLine ~= $tag;
                             $tmpLineLength += $tagLength;
                         } else {
                             if ($tmpLineLength > 0) {
@@ -1537,7 +1537,7 @@ class Message : JsonSerializable, Serializable {
                     $tmpLineLength = 0;
                     continue;
                 }
-                $tmpLine .= $char;
+                $tmpLine ~= $char;
                 $tmpLineLength++;
                 if ($tmpLineLength == $wrapLength) {
                     $nextChar = $line[$i + 1] ?? "";

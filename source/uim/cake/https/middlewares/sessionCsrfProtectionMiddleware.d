@@ -151,7 +151,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
         $salted = "";
         for ($i = 0; $i < $length; $i++) {
             // XOR the token and salt together so that we can reverse it later.
-            $salted .= chr(ord($decoded[$i]) ^ ord($salt[$i]));
+            $salted ~= chr(ord($decoded[$i]) ^ ord($salt[$i]));
         }
 
         return base64_encode($salted . $salt);
@@ -177,7 +177,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
         $unsalted = "";
         for ($i = 0; $i < static::TOKEN_VALUE_LENGTH; $i++) {
             // Reverse the XOR to desalt.
-            $unsalted .= chr(ord($salted[$i]) ^ ord($salt[$i]));
+            $unsalted ~= chr(ord($salted[$i]) ^ ord($salt[$i]));
         }
 
         return base64_encode($unsalted);

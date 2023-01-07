@@ -57,8 +57,8 @@ class MailTransport : AbstractTransport
         $params = this.getConfig("additionalParameters", "");
         _mail($to, $subject, $message, $headers, $params);
 
-        $headers .= $eol ~ "To: " ~ $to;
-        $headers .= $eol ~ "Subject: " ~ $subject;
+        $headers ~= $eol ~ "To: " ~ $to;
+        $headers ~= $eol ~ "Subject: " ~ $subject;
 
         return ["headers": $headers, "message": $message];
     }

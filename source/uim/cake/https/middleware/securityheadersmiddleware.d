@@ -155,7 +155,7 @@ class SecurityHeadersMiddleware : IMiddleware
             if (empty($url)) {
                 throw new InvalidArgumentException("The 2nd arg $url can not be empty when `allow-from` is used");
             }
-            $option .= " " ~ $url;
+            $option ~= " " ~ $url;
         }
 
         this.headers["x-frame-options"] = $option;

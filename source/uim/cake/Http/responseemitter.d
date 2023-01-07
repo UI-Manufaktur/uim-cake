@@ -215,7 +215,7 @@ class ResponseEmitter : EmitterInterface
         if ($sameSite != null) {
             // Temporary hack for PHP 7.2 to set "SameSite" attribute
             // https://stackoverflow.com/questions/39750906/php-setcookie-samesite-strict
-            $path .= "; samesite=" ~ $sameSite;
+            $path ~= "; samesite=" ~ $sameSite;
         }
 
         return setcookie(

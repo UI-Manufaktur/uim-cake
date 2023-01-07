@@ -867,8 +867,8 @@ class Response : IResponse
     protected void _setCacheControl() {
         $control = "";
         foreach (_cacheDirectives as $key: $val) {
-            $control .= $val == true ? $key : sprintf("%s=%s", $key, $val);
-            $control .= ", ";
+            $control ~= $val == true ? $key : sprintf("%s=%s", $key, $val);
+            $control ~= ", ";
         }
         $control = rtrim($control, ", ");
         _setHeader("Cache-Control", $control);

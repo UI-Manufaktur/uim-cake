@@ -503,7 +503,7 @@ class SmtpTransport : AbstractTransport
                 if ($bytes == null) {
                     break;
                 }
-                $response .= $bytes;
+                $response ~= $bytes;
             }
             // Catch empty or malformed responses.
             if (substr($response, -2) != "\r\n") {

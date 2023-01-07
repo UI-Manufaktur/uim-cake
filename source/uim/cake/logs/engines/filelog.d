@@ -81,7 +81,7 @@ class FileLog : BaseLog
         if (!empty(_config["file"])) {
             _file = _config["file"];
             if (substr(_file, -4) != ".log") {
-                _file .= ".log";
+                _file ~= ".log";
             }
         }
 

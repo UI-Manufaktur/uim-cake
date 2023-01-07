@@ -222,7 +222,7 @@ class Stream : IAdapter
                 stream_set_timeout(_stream, max($deadline - time(), 1));
             }
 
-            myContents .= fread(_stream, 8192);
+            myContents ~= fread(_stream, 8192);
 
             $meta = stream_get_meta_data(_stream);
             if ($meta["timed_out"] || ($deadline != false && time() > $deadline)) {

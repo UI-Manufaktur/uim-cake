@@ -528,8 +528,8 @@ class Client : ClientInterface
 
         if (myQuery) {
             $q = indexOf(myUrl, "?") == false ? "?" : "&";
-            myUrl .= $q;
-            myUrl .= is_string(myQuery) ? myQuery : http_build_query(myQuery, "", "&", PHP_QUERY_RFC3986);
+            myUrl ~= $q;
+            myUrl ~= is_string(myQuery) ? myQuery : http_build_query(myQuery, "", "&", PHP_QUERY_RFC3986);
         }
 
         if (myOptions["protocolRelative"] && preg_match("#^//#", myUrl)) {
@@ -545,12 +545,12 @@ class Client : ClientInterface
         ];
         $out = myOptions["scheme"] ~ "://" ~ myOptions["host"];
         if (myOptions["port"] && (int)myOptions["port"] != $defaultPorts[myOptions["scheme"]]) {
-            $out .= ":" ~ myOptions["port"];
+            $out ~= ":" ~ myOptions["port"];
         }
         if (!empty(myOptions["basePath"])) {
-            $out .= "/" ~ trim(myOptions["basePath"], "/");
+            $out ~= "/" ~ trim(myOptions["basePath"], "/");
         }
-        $out .= "/" ~ ltrim(myUrl, "/");
+        $out ~= "/" ~ ltrim(myUrl, "/");
 
         return $out;
     }

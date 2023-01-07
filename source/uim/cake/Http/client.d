@@ -573,8 +573,8 @@ class Client : ClientInterface
 
         if ($query) {
             $q = strpos($url, "?") == false ? "?" : "&";
-            $url .= $q;
-            $url .= is_string($query) ? $query : http_build_query($query, "", "&", PHP_QUERY_RFC3986);
+            $url ~= $q;
+            $url ~= is_string($query) ? $query : http_build_query($query, "", "&", PHP_QUERY_RFC3986);
         }
 
         if ($options["protocolRelative"] && preg_match("#^//#", $url)) {
@@ -590,12 +590,12 @@ class Client : ClientInterface
         ];
         $out = $options["scheme"] ~ "://" ~ $options["host"];
         if ($options["port"] && (int)$options["port"] != $defaultPorts[$options["scheme"]]) {
-            $out .= ":" ~ $options["port"];
+            $out ~= ":" ~ $options["port"];
         }
         if (!empty($options["basePath"])) {
-            $out .= "/" ~ trim($options["basePath"], "/");
+            $out ~= "/" ~ trim($options["basePath"], "/");
         }
-        $out .= "/" ~ ltrim($url, "/");
+        $out ~= "/" ~ ltrim($url, "/");
 
         return $out;
     }

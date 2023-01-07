@@ -1676,7 +1676,7 @@ class ServerRequest : IServerRequest
         }
         $port = $uri.getPort();
         if ($port) {
-            $host .= ":" ~ $port;
+            $host ~= ":" ~ $port;
         }
         $new._environment["HTTP_HOST"] = $host;
 
@@ -1718,7 +1718,7 @@ class ServerRequest : IServerRequest
 
         $target = this.uri.getPath();
         if (this.uri.getQuery()) {
-            $target .= "?" ~ this.uri.getQuery();
+            $target ~= "?" ~ this.uri.getQuery();
         }
 
         if (empty($target)) {

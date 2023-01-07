@@ -110,10 +110,10 @@ class HttpsEnforcerMiddleware : IMiddleware
 
         $value = "max-age=" ~ aConfig["maxAge"];
         if (aConfig["includeSubDomains"] ?? false) {
-            $value .= "; includeSubDomains";
+            $value ~= "; includeSubDomains";
         }
         if (aConfig["preload"] ?? false) {
-            $value .= "; preload";
+            $value ~= "; preload";
         }
 
         return $response.withHeader("strict-transport-security", $value);

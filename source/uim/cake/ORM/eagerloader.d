@@ -453,7 +453,7 @@ class EagerLoader
         $instance = $parent.getAssociation($alias);
 
         $paths += ["aliasPath": "", "propertyPath": "", "root": $alias];
-        $paths["aliasPath"] .= "." ~ $alias;
+        $paths["aliasPath"] ~= "." ~ $alias;
 
         if (
             isset($options["matching"]) &&
@@ -461,7 +461,7 @@ class EagerLoader
         ) {
             $paths["propertyPath"] = "_matchingData." ~ $alias;
         } else {
-            $paths["propertyPath"] .= "." ~ $instance.getProperty();
+            $paths["propertyPath"] ~= "." ~ $instance.getProperty();
         }
 
         $table = $instance.getTarget();
