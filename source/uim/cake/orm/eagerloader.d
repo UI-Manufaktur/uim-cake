@@ -3,6 +3,9 @@ module uim.cake.orm;
 @safe:
 import uim.cake;
 
+/use Closure;
+use InvalidArgumentException;
+
 /**
  * Exposes the methods for storing the associations that should be eager loaded
  * for a table once a query is provided and delegates the job of creating the
@@ -34,17 +37,17 @@ class EagerLoader
      * @var array<string, int>
      */
     protected _containOptions = [
-        "associations":1,
-        "foreignKey":1,
-        "conditions":1,
-        "fields":1,
-        "sort":1,
-        "matching":1,
-        "queryBuilder":1,
-        "finder":1,
-        "joinType":1,
-        "strategy":1,
-        "negateMatch":1,
+        "associations": 1,
+        "foreignKey": 1,
+        "conditions": 1,
+        "fields": 1,
+        "sort": 1,
+        "matching": 1,
+        "queryBuilder": 1,
+        "finder": 1,
+        "joinType": 1,
+        "strategy": 1,
+        "negateMatch": 1,
     ];
 
     /**
@@ -72,7 +75,7 @@ class EagerLoader
      * A map of table aliases pointing to the association objects they represent
      * for the query.
      *
-     * @var array
+     * @var array<string, uim.cake.orm.EagerLoadable>
      */
     protected _joinsMap = [];
 
@@ -80,10 +83,8 @@ class EagerLoader
      * Controls whether fields from associated tables
      * will be eagerly loaded. When set to false, no fields will
      * be loaded from associations.
-     *
-     * @var bool
      */
-    protected _autoFields = true;
+    protected bool _autoFields = true;
 
     /**
      * Sets the list of associations that should be eagerly loaded along for a
@@ -106,35 +107,35 @@ class EagerLoader
      * - joinType: For joinable associations, the SQL join type to use.
      * - strategy: The loading strategy to use (join, select, subquery)
      *
-     * @param array|string associations list of table aliases to be queried.
+     * @param array|string $associations list of table aliases to be queried.
      * When this method is called multiple times it will merge previous list with
      * the new one.
-     * @param callable|null myQueryBuilder The query builder callable
+     * @param callable|null $queryBuilder The query builder callable
      * @return array Containments.
-     * @throws \InvalidArgumentException When using myQueryBuilder with an array of $associations
+     * @throws \InvalidArgumentException When using $queryBuilder with an array of $associations
      */
-    array contain($associations, ?callable myQueryBuilder = null) {
-      if (myQueryBuilder) {
-        if (!is_string($associations)) {
-          throw new InvalidArgumentException(
-              "Cannot set containments. To use myQueryBuilder, $associations must be a string"
-          );
+    array contain($associations, ?callable $queryBuilder = null) {
+        if ($queryBuilder) {
+            if (!is_string($associations)) {
+                throw new InvalidArgumentException(
+                    "Cannot set containments. To use $queryBuilder, $associations must be a string"
+                );
+            }
+
+            $associations = [
+                $associations: [
+                    "queryBuilder": $queryBuilder,
+                ],
+            ];
         }
 
-        $associations = [
-          $associations: [
-              "queryBuilder":myQueryBuilder,
-          ],
-        ];
-      }
+        $associations = (array)$associations;
+        $associations = _reformatContain($associations, _containments);
+        _normalized = null;
+        _loadExternal = [];
+        _aliasList = [];
 
-      $associations = (array)$associations;
-      $associations = _reformatContain($associations, _containments);
-      _normalized = null;
-      _loadExternal = [];
-      _aliasList = [];
-
-      return _containments = $associations;
+        return _containments = $associations;
     }
 
     /**
@@ -165,11 +166,11 @@ class EagerLoader
     /**
      * Sets whether contained associations will load fields automatically.
      *
-     * @param bool myEnable The value to set.
+     * @param bool $enable The value to set.
      * @return this
      */
-    function enableAutoFields(bool myEnable = true) {
-        _autoFields = myEnable;
+    function enableAutoFields(bool $enable = true) {
+        _autoFields = $enable;
 
         return this;
     }
@@ -207,19 +208,19 @@ class EagerLoader
      *  - `fields`: Fields to contain
      *  - `negateMatch`: Whether to add conditions negate match on target association
      *
-     * @param string associationPath Dot separated association path, "Name1.Name2.Name3"
-     * @param callable|null myBuilder the callback function to be used for setting extra
+     * @param string $associationPath Dot separated association path, "Name1.Name2.Name3"
+     * @param callable|null $builder the callback function to be used for setting extra
      * options to the filtering query
-     * @param array<string, mixed> myOptions Extra options for the association matching.
+     * @param array<string, mixed> $options Extra options for the association matching.
      * @return this
      */
-    auto setMatching(string associationPath, ?callable myBuilder = null, array myOptions = []) {
-        if (_matching is null) {
+    function setMatching(string $associationPath, ?callable $builder = null, array $options = []) {
+        if (_matching == null) {
             _matching = new static();
         }
 
-        myOptions += ["joinType":Query::JOIN_TYPE_INNER];
-        $sharedOptions = ["negateMatch":false, "matching":true] + myOptions;
+        $options += ["joinType": Query::JOIN_TYPE_INNER];
+        $sharedOptions = ["negateMatch": false, "matching": true] + $options;
 
         $contains = [];
         $nested = &$contains;
@@ -231,7 +232,7 @@ class EagerLoader
         }
 
         // Add all options to target association contain which is the last in nested chain
-        $nested = ["matching":true, "queryBuilder":myBuilder] + myOptions;
+        $nested = ["matching": true, "queryBuilder": $builder] + $options;
         _matching.contain($contains);
 
         return this;
@@ -243,7 +244,7 @@ class EagerLoader
      * @return array The resulting containments array
      */
     array getMatching() {
-        if (_matching is null) {
+        if (_matching == null) {
             _matching = new static();
         }
 
@@ -262,26 +263,25 @@ class EagerLoader
      * Additionally, it will set an "instance" key per association containing the
      * association instance from the corresponding source table
      *
-     * @param uim.cake.orm.Table myRepository The table containing the association that
+     * @param uim.cake.orm.Table $repository The table containing the association that
      * will be normalized
-     * @return array
      */
-    array normalized(Table myRepository) {
-        if (_normalized  !is null || empty(_containments)) {
+    array normalized(Table $repository) {
+        if (_normalized != null || empty(_containments)) {
             return (array)_normalized;
         }
 
         $contain = [];
-        foreach (_containments as myAlias: myOptions) {
-            if (!empty(myOptions["instance"])) {
+        foreach (_containments as $alias: $options) {
+            if (!empty($options["instance"])) {
                 $contain = _containments;
                 break;
             }
-            $contain[myAlias] = _normalizeContain(
-                myRepository,
-                myAlias,
-                myOptions,
-                ["root":null]
+            $contain[$alias] = _normalizeContain(
+                $repository,
+                $alias,
+                $options,
+                ["root": null]
             );
         }
 
@@ -296,71 +296,70 @@ class EagerLoader
      * @param array $associations user provided containments array
      * @param array $original The original containments array to merge
      * with the new one
-     * @return array
      */
     protected array _reformatContain(array $associations, array $original) {
-        myResult = $original;
+        $result = $original;
 
-        foreach ($associations as myTable: myOptions) {
-            $pointer = &myResult;
-            if (is_int(myTable)) {
-                myTable = myOptions;
-                myOptions = [];
+        foreach ($associations as $table: $options) {
+            $pointer = &$result;
+            if (is_int($table)) {
+                $table = $options;
+                $options = [];
             }
 
-            if (myOptions instanceof EagerLoadable) {
-                myOptions = myOptions.asContainArray();
-                myTable = key(myOptions);
-                myOptions = current(myOptions);
+            if ($options instanceof EagerLoadable) {
+                $options = $options.asContainArray();
+                $table = key($options);
+                $options = current($options);
             }
 
-            if (isset(_containOptions[myTable])) {
-                $pointer[myTable] = myOptions;
+            if (isset(_containOptions[$table])) {
+                $pointer[$table] = $options;
                 continue;
             }
 
-            if (indexOf(myTable, ".")) {
-                myPath = explode(".", myTable);
-                myTable = array_pop(myPath);
-                foreach (myPath as $t) {
+            if (strpos($table, ".")) {
+                $path = explode(".", $table);
+                $table = array_pop($path);
+                foreach ($path as $t) {
                     $pointer += [$t: []];
                     $pointer = &$pointer[$t];
                 }
             }
 
-            if (is_array(myOptions)) {
-                myOptions = isset(myOptions["config"]) ?
-                    myOptions["config"] + myOptions["associations"] :
-                    myOptions;
-                myOptions = _reformatContain(
-                    myOptions,
-                    $pointer[myTable] ?? []
+            if (is_array($options)) {
+                $options = isset($options["config"]) ?
+                    $options["config"] + $options["associations"] :
+                    $options;
+                $options = _reformatContain(
+                    $options,
+                    $pointer[$table] ?? []
                 );
             }
 
-            if (myOptions instanceof Closure) {
-                myOptions = ["queryBuilder":myOptions];
+            if ($options instanceof Closure) {
+                $options = ["queryBuilder": $options];
             }
 
-            $pointer += [myTable: []];
+            $pointer += [$table: []];
 
-            if (isset(myOptions["queryBuilder"], $pointer[myTable]["queryBuilder"])) {
-                $first = $pointer[myTable]["queryBuilder"];
-                $second = myOptions["queryBuilder"];
-                myOptions["queryBuilder"] = function (myQuery) use ($first, $second) {
-                    return $second($first(myQuery));
+            if (isset($options["queryBuilder"], $pointer[$table]["queryBuilder"])) {
+                $first = $pointer[$table]["queryBuilder"];
+                $second = $options["queryBuilder"];
+                $options["queryBuilder"] = function ($query) use ($first, $second) {
+                    return $second($first($query));
                 };
             }
 
-            if (!is_array(myOptions)) {
+            if (!is_array($options)) {
                 /** @psalm-suppress InvalidArrayOffset */
-                myOptions = [myOptions: []];
+                $options = [$options: []];
             }
 
-            $pointer[myTable] = myOptions + $pointer[myTable];
+            $pointer[$table] = $options + $pointer[$table];
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
@@ -369,31 +368,31 @@ class EagerLoader
      * This method will not modify the query for loading external associations, i.e.
      * those that cannot be loaded without executing a separate query.
      *
-     * @param uim.cake.orm.Query myQuery The query to be modified
-     * @param uim.cake.orm.Table myRepository The repository containing the associations
+     * @param uim.cake.orm.Query $query The query to be modified
+     * @param uim.cake.orm.Table $repository The repository containing the associations
      * @param bool $includeFields whether to append all fields from the associations
      * to the passed query. This can be overridden according to the settings defined
      * per association in the containments array
      */
-    void attachAssociations(Query myQuery, Table myRepository, bool $includeFields) {
-        if (empty(_containments) && _matching is null) {
+    void attachAssociations(Query $query, Table $repository, bool $includeFields) {
+        if (empty(_containments) && _matching == null) {
             return;
         }
 
-        $attachable = this.attachableAssociations(myRepository);
+        $attachable = this.attachableAssociations($repository);
         $processed = [];
         do {
-            foreach ($attachable as myAlias: $loadable) {
-                myConfig = $loadable.getConfig() + [
-                    "aliasPath":$loadable.aliasPath(),
-                    "propertyPath":$loadable.propertyPath(),
-                    "includeFields":$includeFields,
+            foreach ($attachable as $alias: $loadable) {
+                aConfig = $loadable.getConfig() + [
+                    "aliasPath": $loadable.aliasPath(),
+                    "propertyPath": $loadable.propertyPath(),
+                    "includeFields": $includeFields,
                 ];
-                $loadable.instance().attachTo(myQuery, myConfig);
-                $processed[myAlias] = true;
+                $loadable.instance().attachTo($query, aConfig);
+                $processed[$alias] = true;
             }
 
-            $newAttachable = this.attachableAssociations(myRepository);
+            $newAttachable = this.attachableAssociations($repository);
             $attachable = array_diff_key($newAttachable, $processed);
         } while (!empty($attachable));
     }
@@ -403,13 +402,13 @@ class EagerLoader
      * the array keys are the association aliases and the values will contain an array
      * with Cake\orm.EagerLoadable objects.
      *
-     * @param uim.cake.orm.Table myRepository The table containing the associations to be
+     * @param uim.cake.orm.Table $repository The table containing the associations to be
      * attached
      * @return array<uim.cake.orm.EagerLoadable>
      */
-    array attachableAssociations(Table myRepository) {
-        $contain = this.normalized(myRepository);
-        $matching = _matching ? _matching.normalized(myRepository) : [];
+    array attachableAssociations(Table $repository) {
+        $contain = this.normalized($repository);
+        $matching = _matching ? _matching.normalized($repository) : [];
         _fixStrategies();
         _loadExternal = [];
 
@@ -420,16 +419,16 @@ class EagerLoader
      * Returns an array with the associations that need to be fetched using a
      * separate query, each array value will contain a {@link uim.cake.orm.EagerLoadable} object.
      *
-     * @param uim.cake.orm.Table myRepository The table containing the associations
+     * @param uim.cake.orm.Table $repository The table containing the associations
      * to be loaded
      * @return array<uim.cake.orm.EagerLoadable>
      */
-    array externalAssociations(Table myRepository) {
+    array externalAssociations(Table $repository) {
         if (_loadExternal) {
             return _loadExternal;
         }
 
-        this.attachableAssociations(myRepository);
+        this.attachableAssociations($repository);
 
         return _loadExternal;
     }
@@ -439,56 +438,56 @@ class EagerLoader
      * using `contain()`
      *
      * @param uim.cake.orm.Table $parent owning side of the association
-     * @param string myAlias name of the association to be loaded
-     * @param array<string, mixed> myOptions list of extra options to use for this association
-     * @param array<string, mixed> myPaths An array with two values, the first one is a list of dot
-     * separated strings representing associations that lead to this `myAlias` in the
+     * @param string $alias name of the association to be loaded
+     * @param array<string, mixed> $options list of extra options to use for this association
+     * @param array<string, mixed> $paths An array with two values, the first one is a list of dot
+     * separated strings representing associations that lead to this `$alias` in the
      * chain of associations to be loaded. The second value is the path to follow in
      * entities" properties to fetch a record of the corresponding association.
      * @return uim.cake.orm.EagerLoadable Object with normalized associations
      * @throws \InvalidArgumentException When containments refer to associations that do not exist.
      */
-    protected auto _normalizeContain(Table $parent, string myAlias, array myOptions, array myPaths): EagerLoadable
+    protected function _normalizeContain(Table $parent, string $alias, array $options, array $paths): EagerLoadable
     {
         $defaults = _containOptions;
-        $instance = $parent.getAssociation(myAlias);
+        $instance = $parent.getAssociation($alias);
 
-        myPaths += ["aliasPath":"", "propertyPath":"", "root":myAlias];
-        myPaths["aliasPath"] ~= "." ~ myAlias;
+        $paths += ["aliasPath": "", "propertyPath": "", "root": $alias];
+        $paths["aliasPath"] ~= "." ~ $alias;
 
         if (
-            isset(myOptions["matching"]) &&
-            myOptions["matching"] == true
+            isset($options["matching"]) &&
+            $options["matching"] == true
         ) {
-            myPaths["propertyPath"] = "_matchingData." ~ myAlias;
+            $paths["propertyPath"] = "_matchingData." ~ $alias;
         } else {
-            myPaths["propertyPath"] ~= "." ~ $instance.getProperty();
+            $paths["propertyPath"] ~= "." ~ $instance.getProperty();
         }
 
-        myTable = $instance.getTarget();
+        $table = $instance.getTarget();
 
-        $extra = array_diff_key(myOptions, $defaults);
-        myConfig = [
-            "associations":[],
-            "instance":$instance,
-            "config":array_diff_key(myOptions, $extra),
-            "aliasPath":trim(myPaths["aliasPath"], "."),
-            "propertyPath":trim(myPaths["propertyPath"], "."),
-            "targetProperty":$instance.getProperty(),
+        $extra = array_diff_key($options, $defaults);
+        aConfig = [
+            "associations": [],
+            "instance": $instance,
+            "config": array_diff_key($options, $extra),
+            "aliasPath": trim($paths["aliasPath"], "."),
+            "propertyPath": trim($paths["propertyPath"], "."),
+            "targetProperty": $instance.getProperty(),
         ];
-        myConfig["canBeJoined"] = $instance.canBeJoined(myConfig["config"]);
-        $eagerLoadable = new EagerLoadable(myAlias, myConfig);
+        aConfig["canBeJoined"] = $instance.canBeJoined(aConfig["config"]);
+        $eagerLoadable = new EagerLoadable($alias, aConfig);
 
-        if (myConfig["canBeJoined"]) {
-            _aliasList[myPaths["root"]][myAlias][] = $eagerLoadable;
+        if (aConfig["canBeJoined"]) {
+            _aliasList[$paths["root"]][$alias][] = $eagerLoadable;
         } else {
-            myPaths["root"] = myConfig["aliasPath"];
+            $paths["root"] = aConfig["aliasPath"];
         }
 
         foreach ($extra as $t: $assoc) {
             $eagerLoadable.addAssociation(
                 $t,
-                _normalizeContain(myTable, $t, $assoc, myPaths)
+                _normalizeContain($table, $t, $assoc, $paths)
             );
         }
 
@@ -503,14 +502,14 @@ class EagerLoader
      * _normalizeContain() function.
      */
     protected void _fixStrategies() {
-        foreach (_aliasList as myAliases) {
-            foreach (myAliases as myConfigs) {
-                if (count(myConfigs) < 2) {
+        foreach (_aliasList as $aliases) {
+            foreach ($aliases as $configs) {
+                if (count($configs) < 2) {
                     continue;
                 }
                 /** @var uim.cake.orm.EagerLoadable $loadable */
-                foreach (myConfigs as $loadable) {
-                    if (indexOf($loadable.aliasPath(), ".")) {
+                foreach ($configs as $loadable) {
+                    if (strpos($loadable.aliasPath(), ".")) {
                         _correctStrategy($loadable);
                     }
                 }
@@ -525,16 +524,16 @@ class EagerLoader
      * @param uim.cake.orm.EagerLoadable $loadable The association config
      */
     protected void _correctStrategy(EagerLoadable $loadable) {
-        myConfig = $loadable.getConfig();
-        $currentStrategy = myConfig["strategy"] ??
+        aConfig = $loadable.getConfig();
+        $currentStrategy = aConfig["strategy"] ??
             "join";
 
         if (!$loadable.canBeJoined() || $currentStrategy != "join") {
             return;
         }
 
-        myConfig["strategy"] = Association::STRATEGY_SELECT;
-        $loadable.setConfig(myConfig);
+        aConfig["strategy"] = Association::STRATEGY_SELECT;
+        $loadable.setConfig(aConfig);
         $loadable.setCanBeJoined(false);
     }
 
@@ -547,16 +546,16 @@ class EagerLoader
      * @return array<uim.cake.orm.EagerLoadable>
      */
     protected array _resolveJoins(array $associations, array $matching = []) {
-        myResult = [];
-        foreach ($matching as myTable: $loadable) {
-            myResult[myTable] = $loadable;
-            myResult += _resolveJoins($loadable.associations(), []);
+        $result = [];
+        foreach ($matching as $table: $loadable) {
+            $result[$table] = $loadable;
+            $result += _resolveJoins($loadable.associations(), []);
         }
-        foreach ($associations as myTable: $loadable) {
-            $inMatching = isset($matching[myTable]);
+        foreach ($associations as $table: $loadable) {
+            $inMatching = isset($matching[$table]);
             if (!$inMatching && $loadable.canBeJoined()) {
-                myResult[myTable] = $loadable;
-                myResult += _resolveJoins($loadable.associations(), []);
+                $result[$table] = $loadable;
+                $result += _resolveJoins($loadable.associations(), []);
                 continue;
             }
 
@@ -568,29 +567,29 @@ class EagerLoader
             _loadExternal[] = $loadable;
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
      * Decorates the passed statement object in order to inject data from associations
      * that cannot be joined directly.
      *
-     * @param uim.cake.orm.Query myQuery The query for which to eager load external
+     * @param uim.cake.orm.Query $query The query for which to eager load external
      * associations
-     * @param uim.cake.databases.IStatement $statement The statement created after executing the myQuery
-     * @return uim.cake.databases.IStatement statement modified statement with extra loaders
+     * @param uim.cake.databases.StatementInterface $statement The statement created after executing the $query
+     * @return uim.cake.databases.StatementInterface statement modified statement with extra loaders
      * @throws \RuntimeException
      */
-    function loadExternal(Query myQuery, IStatement $statement): IStatement
+    function loadExternal(Query $query, StatementInterface $statement): StatementInterface
     {
-        myTable = myQuery.getRepository();
-        $external = this.externalAssociations(myTable);
+        $table = $query.getRepository();
+        $external = this.externalAssociations($table);
         if (empty($external)) {
             return $statement;
         }
 
-        myDriver = myQuery.getConnection().getDriver();
-        [$collected, $statement] = _collectKeys($external, myQuery, $statement);
+        $driver = $query.getConnection().getDriver();
+        [$collected, $statement] = _collectKeys($external, $query, $statement);
 
         // No records found, skip trying to attach associations.
         if (empty($collected) && $statement.count() == 0) {
@@ -600,40 +599,40 @@ class EagerLoader
         foreach ($external as $meta) {
             $contain = $meta.associations();
             $instance = $meta.instance();
-            myConfig = $meta.getConfig();
-            myAlias = $instance.getSource().getAlias();
-            myPath = $meta.aliasPath();
+            aConfig = $meta.getConfig();
+            $alias = $instance.getSource().getAlias();
+            $path = $meta.aliasPath();
 
-            $requiresKeys = $instance.requiresKeys(myConfig);
+            $requiresKeys = $instance.requiresKeys(aConfig);
             if ($requiresKeys) {
                 // If the path or alias has no key the required association load will fail.
                 // Nested paths are not subject to this condition because they could
                 // be attached to joined associations.
                 if (
-                    indexOf(myPath, ".") == false &&
-                    (!array_key_exists(myPath, $collected) || !array_key_exists(myAlias, $collected[myPath]))
+                    strpos($path, ".") == false &&
+                    (!array_key_exists($path, $collected) || !array_key_exists($alias, $collected[$path]))
                 ) {
-                    myMessage = "Unable to load `{myPath}` association. Ensure foreign key in `{myAlias}` is selected.";
-                    throw new InvalidArgumentException(myMessage);
+                    $message = "Unable to load `{$path}` association. Ensure foreign key in `{$alias}` is selected.";
+                    throw new InvalidArgumentException($message);
                 }
 
                 // If the association foreign keys are missing skip loading
                 // as the association could be optional.
-                if (empty($collected[myPath][myAlias])) {
+                if (empty($collected[$path][$alias])) {
                     continue;
                 }
             }
 
-            myKeys = $collected[myPath][myAlias] ?? null;
+            $keys = $collected[$path][$alias] ?? null;
             $f = $instance.eagerLoader(
-                myConfig + [
-                    "query":myQuery,
-                    "contain":$contain,
-                    "keys":myKeys,
-                    "nestKey":$meta.aliasPath(),
+                aConfig + [
+                    "query": $query,
+                    "contain": $contain,
+                    "keys": $keys,
+                    "nestKey": $meta.aliasPath(),
                 ]
             );
-            $statement = new CallbackStatement($statement, myDriver, $f);
+            $statement = new CallbackStatement($statement, $driver, $f);
         }
 
         return $statement;
@@ -650,11 +649,10 @@ class EagerLoader
      * - nestKey: A dotted path that can be used to correctly insert the data into the results.
      * - matching: Whether it is an association loaded through `matching()`.
      *
-     * @param uim.cake.orm.Table myTable The table containing the association that
+     * @param uim.cake.orm.Table $table The table containing the association that
      * will be normalized
-     * @return array
      */
-    array associationsMap(Table myTable) {
+    array associationsMap(Table $table) {
         $map = [];
 
         if (!this.getMatching() && !this.getContain() && empty(_joinsMap)) {
@@ -662,11 +660,10 @@ class EagerLoader
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        $map = _buildAssociationsMap($map, _matching.normalized(myTable), true);
-        $map = _buildAssociationsMap($map, this.normalized(myTable));
-        $map = _buildAssociationsMap($map, _joinsMap);
+        $map = _buildAssociationsMap($map, _matching.normalized($table), true);
+        $map = _buildAssociationsMap($map, this.normalized($table));
 
-        return $map;
+        return _buildAssociationsMap($map, _joinsMap);
     }
 
     /**
@@ -676,29 +673,28 @@ class EagerLoader
      * @param array $map An initial array for the map.
      * @param array<uim.cake.orm.EagerLoadable> $level An array of EagerLoadable instances.
      * @param bool $matching Whether it is an association loaded through `matching()`.
-     * @return array
      */
     protected array _buildAssociationsMap(array $map, array $level, bool $matching = false) {
-        foreach ($assoc, $meta; $level) {
+        foreach ($level as $assoc: $meta) {
             $canBeJoined = $meta.canBeJoined();
             $instance = $meta.instance();
             $associations = $meta.associations();
             $forMatching = $meta.forMatching();
-            auto map[] = [
-                "alias":$assoc,
-                "instance":$instance,
-                "canBeJoined":$canBeJoined,
-                "entityClass":$instance.getTarget().getEntityClass(),
-                "nestKey":$canBeJoined ? $assoc : $meta.aliasPath(),
-                "matching":$forMatching ?? $matching,
-                "targetProperty":$meta.targetProperty(),
+            $map[] = [
+                "alias": $assoc,
+                "instance": $instance,
+                "canBeJoined": $canBeJoined,
+                "entityClass": $instance.getTarget().getEntityClass(),
+                "nestKey": $canBeJoined ? $assoc : $meta.aliasPath(),
+                "matching": $forMatching ?? $matching,
+                "targetProperty": $meta.targetProperty(),
             ];
             if ($canBeJoined && $associations) {
-                map = _buildAssociationsMap(map, $associations, $matching);
+                $map = _buildAssociationsMap($map, $associations, $matching);
             }
         }
 
-        return map;
+        return $map;
     }
 
     /**
@@ -706,26 +702,26 @@ class EagerLoader
      * an association. This helps hydrators know what to do with the columns coming
      * from such joined table.
      *
-     * @param string myAlias The table alias as it appears in the query.
+     * @param string $alias The table alias as it appears in the query.
      * @param uim.cake.orm.Association $assoc The association object the alias represents;
      * will be normalized
      * @param bool $asMatching Whether this join results should be treated as a
      * "matching" association.
-     * @param string|null myTargetProperty The property name where the results of the join should be nested at.
+     * @param string|null $targetProperty The property name where the results of the join should be nested at.
      * If not passed, the default property for the association will be used.
      */
     void addToJoinsMap(
-        string myAlias,
+        string $alias,
         Association $assoc,
         bool $asMatching = false,
-        Nullable!string myTargetProperty = null
+        Nullable!string $targetProperty = null
     ) {
-        _joinsMap[myAlias] = new EagerLoadable(myAlias, [
-            "aliasPath":myAlias,
-            "instance":$assoc,
-            "canBeJoined":true,
-            "forMatching":$asMatching,
-            "targetProperty":myTargetProperty ?: $assoc.getProperty(),
+        _joinsMap[$alias] = new EagerLoadable($alias, [
+            "aliasPath": $alias,
+            "instance": $assoc,
+            "canBeJoined": true,
+            "forMatching": $asMatching,
+            "targetProperty": $targetProperty ?: $assoc.getProperty(),
         ]);
     }
 
@@ -734,11 +730,10 @@ class EagerLoader
      * to eagerly load associations.
      *
      * @param array<uim.cake.orm.EagerLoadable> $external the list of external associations to be loaded
-     * @param uim.cake.orm.Query myQuery The query from which the results where generated
-     * @param uim.cake.databases.IStatement $statement The statement to work on
-     * @return array
+     * @param uim.cake.orm.Query $query The query from which the results where generated
+     * @param uim.cake.databases.StatementInterface $statement The statement to work on
      */
-    protected array _collectKeys(array $external, Query myQuery, $statement) {
+    protected array _collectKeys(array $external, Query $query, $statement) {
         $collectKeys = [];
         foreach ($external as $meta) {
             $instance = $meta.instance();
@@ -747,23 +742,23 @@ class EagerLoader
             }
 
             $source = $instance.getSource();
-            myKeys = $instance.type() == Association::MANY_TO_ONE ?
+            $keys = $instance.type() == Association::MANY_TO_ONE ?
                 (array)$instance.getForeignKey() :
                 (array)$instance.getBindingKey();
 
-            myAlias = $source.getAlias();
+            $alias = $source.getAlias();
             $pkFields = [];
-            foreach (myKey; myKeys) {
-                $pkFields[] = key(myQuery.aliasField(myKey, myAlias));
+            foreach ($keys as $key) {
+                $pkFields[] = key($query.aliasField($key, $alias));
             }
-            $collectKeys[$meta.aliasPath()] = [myAlias, $pkFields, count($pkFields) == 1];
+            $collectKeys[$meta.aliasPath()] = [$alias, $pkFields, count($pkFields) == 1];
         }
         if (empty($collectKeys)) {
             return [[], $statement];
         }
 
         if (!($statement instanceof BufferedStatement)) {
-            $statement = new BufferedStatement($statement, myQuery.getConnection().getDriver());
+            $statement = new BufferedStatement($statement, $query.getConnection().getDriver());
         }
 
         return [_groupKeys($statement, $collectKeys), $statement];
@@ -775,48 +770,45 @@ class EagerLoader
      *
      * @param uim.cake.databases.Statement\BufferedStatement $statement The statement to read from.
      * @param array<string, array> $collectKeys The keys to collect
-     * @return array
      */
     protected array _groupKeys(BufferedStatement $statement, array $collectKeys) {
-        myKeys = [];
-        foreach (($statement.fetchAll("assoc") ?: []) as myResult) {
+        $keys = [];
+        foreach (($statement.fetchAll("assoc") ?: []) as $result) {
             foreach ($collectKeys as $nestKey: $parts) {
                 if ($parts[2] == true) {
                     // Missed joins will have null in the results.
-                    if (!array_key_exists($parts[1][0], myResult)) {
+                    if (!array_key_exists($parts[1][0], $result)) {
                         continue;
                     }
                     // Assign empty array to avoid not found association when optional.
-                    if (!isset(myResult[$parts[1][0]])) {
-                        if (!isset(myKeys[$nestKey][$parts[0]])) {
-                            myKeys[$nestKey][$parts[0]] = [];
+                    if (!isset($result[$parts[1][0]])) {
+                        if (!isset(string aKeys[$nestKey][$parts[0]])) {
+                            $keys[$nestKey][$parts[0]] = [];
                         }
                     } else {
-                        myValue = myResult[$parts[1][0]];
-                        myKeys[$nestKey][$parts[0]][myValue] = myValue;
+                        $value = $result[$parts[1][0]];
+                        $keys[$nestKey][$parts[0]][$value] = $value;
                     }
                     continue;
                 }
 
                 // Handle composite keys.
                 $collected = [];
-                foreach ($parts[1] as myKey) {
-                    $collected[] = myResult[myKey];
+                foreach ($parts[1] as $key) {
+                    $collected[] = $result[$key];
                 }
-                myKeys[$nestKey][$parts[0]][implode(";", $collected)] = $collected;
+                $keys[$nestKey][$parts[0]][implode(";", $collected)] = $collected;
             }
         }
         $statement.rewind();
 
-        return myKeys;
+        return $keys;
     }
 
     /**
      * Handles cloning eager loaders and eager loadables.
-     *
-     * @return void
      */
-    auto __clone() {
+    void __clone() {
         if (_matching) {
             _matching = clone _matching;
         }

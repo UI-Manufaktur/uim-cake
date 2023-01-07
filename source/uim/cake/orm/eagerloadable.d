@@ -33,7 +33,7 @@ class EagerLoadable
      * A list of options to pass to the association object for loading
      * the records.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _config = [];
 
@@ -55,16 +55,13 @@ class EagerLoadable
      *
      * The property path of `country` will be `author.company`
      *
-     * @var string|null
      */
-    protected _propertyPath;
+    protected Nullable!string _propertyPath;
 
     /**
      * Whether this level can be fetched using a join.
-     *
-     * @var bool
      */
-    protected _canBeJoined = false;
+    protected bool _canBeJoined = false;
 
     /**
      * Whether this level was meant for a "matching" fetch
@@ -86,12 +83,11 @@ class EagerLoadable
      *
      * The target property of `country` will be just `country`
      *
-     * @var string|null
      */
-    protected _targetProperty;
+    protected Nullable!string _targetProperty;
 
     /**
-     * Constructor. The myConfig parameter accepts the following array
+     * Constructor. The aConfig parameter accepts the following array
      * keys:
      *
      * - associations
@@ -105,18 +101,18 @@ class EagerLoadable
      *
      * The keys maps to the settable properties in this class.
      *
-     * @param string myName The Association name.
-     * @param array<string, mixed> myConfig The list of properties to set.
+     * @param string aName The Association name.
+     * @param array<string, mixed> aConfig The list of properties to set.
      */
-    this(string myName, array myConfig = []) {
-        _name = myName;
+    this(string aName, Json aConfig = []) {
+        _name = $name;
         $allowed = [
             "associations", "instance", "config", "canBeJoined",
             "aliasPath", "propertyPath", "forMatching", "targetProperty",
         ];
         foreach ($allowed as $property) {
-            if (isset(myConfig[$property])) {
-                this.{"_" ~ $property} = myConfig[$property];
+            if (isset(aConfig[$property])) {
+                this.{"_" ~ $property} = aConfig[$property];
             }
         }
     }
@@ -124,11 +120,11 @@ class EagerLoadable
     /**
      * Adds a new association to be loaded from this level.
      *
-     * @param string myName The association name.
+     * @param string aName The association name.
      * @param uim.cake.orm.EagerLoadable $association The association to load.
      */
-    void addAssociation(string myName, EagerLoadable $association) {
-        _associations[myName] = $association;
+    void addAssociation(string aName, EagerLoadable $association) {
+        _associations[$name] = $association;
     }
 
     /**
@@ -148,7 +144,7 @@ class EagerLoadable
      */
     function instance(): Association
     {
-        if (_instance is null) {
+        if (_instance == null) {
             throw new \RuntimeException("No instance set.");
         }
 
@@ -175,7 +171,6 @@ class EagerLoadable
      *
      * The property path of `country` will be `author.company`
      *
-     * @return string|null
      */
     Nullable!string propertyPath() {
         return _propertyPath;
@@ -187,7 +182,7 @@ class EagerLoadable
      * @param bool $possible The value to set.
      * @return this
      */
-    auto setCanBeJoined(bool $possible) {
+    function setCanBeJoined(bool $possible) {
         _canBeJoined = $possible;
 
         return this;
@@ -204,11 +199,11 @@ class EagerLoadable
      * Sets the list of options to pass to the association object for loading
      * the records.
      *
-     * @param array<string, mixed> myConfig The value to set.
+     * @param array<string, mixed> aConfig The value to set.
      * @return this
      */
-    auto setConfig(array myConfig) {
-        _config = myConfig;
+    function setConfig(Json aConfig) {
+        _config = aConfig;
 
         return this;
     }
@@ -216,6 +211,8 @@ class EagerLoadable
     /**
      * Gets the list of options to pass to the association object for loading
      * the records.
+     *
+     * @return array<string, mixed>
      */
     array getConfig() {
         return _config;
@@ -244,7 +241,6 @@ class EagerLoadable
      *
      * The target property of `country` will be just `country`
      *
-     * @return string|null
      */
     Nullable!string targetProperty() {
         return _targetProperty;
@@ -253,31 +249,31 @@ class EagerLoadable
     /**
      * Returns a representation of this object that can be passed to
      * Cake\orm.EagerLoader::contain()
+     *
+     * @return array<string, array>
      */
     array asContainArray() {
         $associations = [];
         foreach (_associations as $assoc) {
             $associations += $assoc.asContainArray();
         }
-        myConfig = _config;
-        if (_forMatching  !is null) {
-            myConfig = ["matching":_forMatching] + myConfig;
+        aConfig = _config;
+        if (_forMatching != null) {
+            aConfig = ["matching": _forMatching] + aConfig;
         }
 
         return [
             _name: [
-                "associations":$associations,
-                "config":myConfig,
+                "associations": $associations,
+                "config": aConfig,
             ],
         ];
     }
 
     /**
      * Handles cloning eager loadables.
-     *
-     * @return void
      */
-    auto __clone() {
+    void __clone() {
         foreach (_associations as $i: $association) {
             _associations[$i] = clone $association;
         }

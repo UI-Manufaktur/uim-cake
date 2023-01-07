@@ -3,6 +3,14 @@ module uim.cake.orm;
 @safe:
 import uim.cake;
 
+use BadMethodCallException;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
+import uim.cake.events.IEventDispatcher;
+import uim.cake.events.EventDispatcherTrait;
+import uim.cake.orm.exceptions.MissingBehaviorException;
+use LogicException;
+
 /**
  * BehaviorRegistry is used as a registry for loaded behaviors and handles loading
  * and constructing behavior objects.
@@ -25,48 +33,48 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Method mappings.
      *
-     * @var array
+     * @var array<string, array>
      */
     protected _methodMap = [];
 
     /**
      * Finder method mappings.
      *
-     * @var array
+     * @var array<string, array>
      */
     protected _finderMap = [];
 
     /**
      * Constructor
      *
-     * @param uim.cake.orm.Table|null myTable The table this registry is attached to.
+     * @param uim.cake.orm.Table|null $table The table this registry is attached to.
      */
-    this(?Table myTable = null) {
-        if (myTable  !is null) {
-            this.setTable(myTable);
+    this(?Table $table = null) {
+        if ($table != null) {
+            this.setTable($table);
         }
     }
 
     /**
      * Attaches a table instance to this registry.
      *
-     * @param uim.cake.orm.Table myTable The table this registry is attached to.
+     * @param uim.cake.orm.Table $table The table this registry is attached to.
      */
-    void setTable(Table myTable) {
-        _table = myTable;
-        this.setEventManager(myTable.getEventManager());
+    void setTable(Table $table) {
+        _table = $table;
+        this.setEventManager($table.getEventManager());
     }
 
     /**
      * Resolve a behavior classname.
      *
-     * @param string myClass Partial classname to resolve.
+     * @param string $class Partial classname to resolve.
      * @return string|null Either the correct classname or null.
      * @psalm-return class-string|null
      */
-    static Nullable!string className(string myClass) {
-        return App::className(myClass, "Model/Behavior", "Behavior")
-            ?: App::className(myClass, "ORM/Behavior", "Behavior");
+    static Nullable!string className(string $class) {
+        return App::className($class, "Model/Behavior", "Behavior")
+            ?: App::className($class, "ORM/Behavior", "Behavior");
     }
 
     /**
@@ -74,12 +82,12 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param string myClass Partial classname to resolve.
+     * @param string $class Partial classname to resolve.
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected Nullable!string _resolveClassName(string myClass) {
-        return static::className(myClass);
+    protected Nullable!string _resolveClassName(string $class) {
+        return static::className($class);
     }
 
     /**
@@ -88,14 +96,15 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      * and Cake\Core\ObjectRegistry::unload()
      *
-     * @param string myClass The classname that is missing.
-     * @param string|null myPlugin The plugin the behavior is missing in.
+     * @param string $class The classname that is missing.
+     * @param string|null $plugin The plugin the behavior is missing in.
+     * @return void
      * @throws uim.cake.orm.exceptions.MissingBehaviorException
      */
-    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new MissingBehaviorException([
-            "class":myClass ~ "Behavior",
-            "plugin":myPlugin,
+            "class": $class ~ "Behavior",
+            "plugin": $plugin,
         ]);
     }
 
@@ -105,20 +114,21 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      * Enabled behaviors will be registered with the event manager.
      *
-     * @param string myClass The classname that is missing.
-     * @param string myAlias The alias of the object.
-     * @param array<string, mixed> myConfig An array of config to use for the behavior.
+     * @param string $class The classname that is missing.
+     * @param string $alias The alias of the object.
+     * @param array<string, mixed> aConfig An array of config to use for the behavior.
      * @return uim.cake.orm.Behavior The constructed behavior class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected Behavior _create(myClass, string myAlias, array myConfig) {
+    protected function _create($class, string $alias, Json aConfig): Behavior
+    {
         /** @var uim.cake.orm.Behavior $instance */
-        $instance = new myClass(_table, myConfig);
-        myEnable = myConfig["enabled"] ?? true;
-        if (myEnable) {
+        $instance = new $class(_table, aConfig);
+        $enable = aConfig["enabled"] ?? true;
+        if ($enable) {
             this.getEventManager().on($instance);
         }
-        $methods = _getMethods($instance, myClass, myAlias);
+        $methods = _getMethods($instance, $class, $alias);
         _methodMap += $methods["methods"];
         _finderMap += $methods["finders"];
 
@@ -133,41 +143,41 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * declared on Cake\orm.Behavior
      *
      * @param uim.cake.orm.Behavior $instance The behavior to get methods from.
-     * @param string myClass The classname that is missing.
-     * @param string myAlias The alias of the object.
+     * @param string $class The classname that is missing.
+     * @param string $alias The alias of the object.
      * @return array A list of implemented finders and methods.
      * @throws \LogicException when duplicate methods are connected.
      */
-    protected array _getMethods(Behavior $instance, string myClass, string myAlias) {
-        myFinders = array_change_key_case($instance.implementedFinders());
+    protected array _getMethods(Behavior $instance, string $class, string $alias) {
+        $finders = array_change_key_case($instance.implementedFinders());
         $methods = array_change_key_case($instance.implementedMethods());
 
-        foreach (myFinders as myFinder: $methodName) {
-            if (isset(_finderMap[myFinder]) && this.has(_finderMap[myFinder][0])) {
-                $duplicate = _finderMap[myFinder];
-                myError = sprintf(
+        foreach ($finders as $finder: $methodName) {
+            if (isset(_finderMap[$finder]) && this.has(_finderMap[$finder][0])) {
+                $duplicate = _finderMap[$finder];
+                $error = sprintf(
                     "%s contains duplicate finder '%s' which is already provided by '%s'",
-                    myClass,
-                    myFinder,
+                    $class,
+                    $finder,
                     $duplicate[0]
                 );
-                throw new LogicException(myError);
+                throw new LogicException($error);
             }
-            myFinders[myFinder] = [myAlias, $methodName];
+            $finders[$finder] = [$alias, $methodName];
         }
 
         foreach ($methods as $method: $methodName) {
             if (isset(_methodMap[$method]) && this.has(_methodMap[$method][0])) {
                 $duplicate = _methodMap[$method];
-                myError = sprintf(
+                $error = sprintf(
                     "%s contains duplicate method '%s' which is already provided by '%s'",
-                    myClass,
+                    $class,
                     $method,
                     $duplicate[0]
                 );
-                throw new LogicException(myError);
+                throw new LogicException($error);
             }
-            $methods[$method] = [myAlias, $methodName];
+            $methods[$method] = [$alias, $methodName];
         }
 
         return compact("methods", "finders");
@@ -179,9 +189,9 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Will return true if any behavior provides a non-finder method
      * with the chosen name.
      *
-     * @param string method The method to check for.
+     * @param string $method The method to check for.
      */
-    bool hasMethod(string method) {
+    bool hasMethod(string $method) {
         $method = strtolower($method);
 
         return isset(_methodMap[$method]);
@@ -193,9 +203,9 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Will return true if any behavior provides a method with
      * the chosen name.
      *
-     * @param string method The method to check for.
+     * @param string $method The method to check for.
      */
-    bool hasFinder(string method) {
+    bool hasFinder(string $method) {
         $method = strtolower($method);
 
         return isset(_finderMap[$method]);
@@ -204,12 +214,12 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Invoke a method on a behavior.
      *
-     * @param string method The method to invoke.
+     * @param string $method The method to invoke.
      * @param array $args The arguments you want to invoke the method with.
      * @return mixed The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
-    function call(string method, array $args = []) {
+    function call(string $method, array $args = []) {
         $method = strtolower($method);
         if (this.hasMethod($method) && this.has(_methodMap[$method][0])) {
             [$behavior, $callMethod] = _methodMap[$method];
@@ -225,24 +235,24 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Invoke a finder on a behavior.
      *
-     * @param string myType The finder type to invoke.
+     * @param string $type The finder type to invoke.
      * @param array $args The arguments you want to invoke the method with.
      * @return uim.cake.orm.Query The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
-    function callFinder(string myType, array $args = []): Query
+    function callFinder(string $type, array $args = []): Query
     {
-        myType = strtolower(myType);
+        $type = strtolower($type);
 
-        if (this.hasFinder(myType) && this.has(_finderMap[myType][0])) {
-            [$behavior, $callMethod] = _finderMap[myType];
+        if (this.hasFinder($type) && this.has(_finderMap[$type][0])) {
+            [$behavior, $callMethod] = _finderMap[$type];
             $callable = [_loaded[$behavior], $callMethod];
 
             return $callable(...$args);
         }
 
         throw new BadMethodCallException(
-            sprintf("Cannot call finder '%s' it does not belong to any attached behavior.", myType)
+            sprintf("Cannot call finder '%s' it does not belong to any attached behavior.", $type)
         );
     }
 }

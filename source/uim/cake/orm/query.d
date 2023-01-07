@@ -3,6 +3,13 @@ module uim.cake.orm;
 @safe:
 import uim.cake;
 
+use ArrayObject;
+use BadMethodCallException;
+use InvalidArgumentException;
+use JsonSerializable;
+use RuntimeException;
+use Traversable;
+
 /**
  * : the base Query class to provide new methods related to association
  * loading, automatic fields selection, automatic type casting and to wrap results
@@ -14,26 +21,26 @@ import uim.cake;
  * @method uim.cake.orm.Table getRepository() Returns the default table object that will be used by this query,
  *   that is, the table that will appear in the from clause.
  * @method uim.cake.collections.ICollection each(callable $c) Passes each of the query results to the callable
- * @method uim.cake.collections.ICollection sortBy($callback, int $dir) Sorts the query with the callback
+ * @method uim.cake.collections.ICollection sortBy(callable|string $path, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC) Sorts the query with the callback
  * @method uim.cake.collections.ICollection filter(callable $c = null) Keeps the results using passing the callable test
  * @method uim.cake.collections.ICollection reject(callable $c) Removes the results passing the callable test
  * @method bool every(callable $c) Returns true if all the results pass the callable test
  * @method bool some(callable $c) Returns true if at least one of the results pass the callable test
  * @method uim.cake.collections.ICollection map(callable $c) Modifies each of the results using the callable
  * @method mixed reduce(callable $c, $zero = null) Folds all the results into a single value using the callable.
- * @method uim.cake.collections.ICollection extract(myField) Extracts a single column from each row
- * @method mixed max(myField) Returns the maximum value for a single column in all the results.
- * @method mixed min(myField) Returns the minimum value for a single column in all the results.
- * @method uim.cake.collections.ICollection groupBy(callable|string myField) In-memory group all results by the value of a column.
- * @method uim.cake.collections.ICollection indexBy(callable|string callback) Returns the results indexed by the value of a column.
- * @method uim.cake.collections.ICollection countBy(callable|string myField) Returns the number of unique values for a column
- * @method float sumOf(callable|string myField) Returns the sum of all values for a single column
+ * @method uim.cake.collections.ICollection extract($field) Extracts a single column from each row
+ * @method mixed max($field) Returns the maximum value for a single column in all the results.
+ * @method mixed min($field) Returns the minimum value for a single column in all the results.
+ * @method uim.cake.collections.ICollection groupBy(callable|string $field) In-memory group all results by the value of a column.
+ * @method uim.cake.collections.ICollection indexBy(callable|string $callback) Returns the results indexed by the value of a column.
+ * @method uim.cake.collections.ICollection countBy(callable|string $field) Returns the number of unique values for a column
+ * @method float sumOf(callable|string $field) Returns the sum of all values for a single column
  * @method uim.cake.collections.ICollection shuffle() In-memory randomize the order the results are returned
  * @method uim.cake.collections.ICollection sample(int $size = 10) In-memory shuffle the results and return a subset of them.
  * @method uim.cake.collections.ICollection take(int $size = 1, int $from = 0) In-memory limit and offset for the query results.
  * @method uim.cake.collections.ICollection skip(int $howMany) Skips some rows from the start of the query result.
  * @method mixed last() Return the last row of the query result
- * @method uim.cake.collections.ICollection append(array|\Traversable myItems) Appends more rows to the result of the query.
+ * @method uim.cake.collections.ICollection append(array|\Traversable $items) Appends more rows to the result of the query.
  * @method uim.cake.collections.ICollection combine($k, $v, $g = null) Returns the values of the column $v index by column $k,
  *   and grouped by $g.
  * @method uim.cake.collections.ICollection nest($k, $p, $n = "children") Creates a tree structure by nesting the values of column $p into that
@@ -43,12 +50,13 @@ import uim.cake;
  * @method uim.cake.collections.ICollection stopWhen(callable $c) Returns each row until the callable returns true.
  * @method uim.cake.collections.ICollection zip(array|\Traversable $c) Returns the first result of both the query and $c in an array,
  *   then the second results and so on.
- * @method uim.cake.collections.ICollection zipWith(myCollections, callable $callable) Returns each of the results out of calling $c
+ * @method uim.cake.collections.ICollection zipWith($collections, callable $callable) Returns each of the results out of calling $c
  *   with the first rows of the query and each of the items, then the second rows and so on.
  * @method uim.cake.collections.ICollection chunk(int $size) Groups the results in arrays of $size rows each.
  * @method bool isEmpty() Returns true if this query found no results.
  */
-class Query : DatabaseQuery : JsonSerializable, IQuery {
+class Query : DatabaseQuery : JsonSerializable, IQuery
+{
     use QueryTrait {
         cache as private _cache;
         all as private _all;
@@ -56,7 +64,52 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
         __call as private _call;
     }
 
-    // -------
+    /**
+     * Indicates that the operation should append to the list
+     *
+     * @var int
+     */
+    const APPEND = 0;
+
+    /**
+     * Indicates that the operation should prepend to the list
+     *
+     * @var int
+     */
+    const PREPEND = 1;
+
+    /**
+     * Indicates that the operation should overwrite the list
+     *
+     * @var bool
+     */
+    const OVERWRITE = true;
+
+    /**
+     * Whether the user select any fields before being executed, this is used
+     * to determined if any fields should be automatically be selected.
+     *
+     * @var bool|null
+     */
+    protected _hasFields;
+
+    /**
+     * Tracks whether the original query should include
+     * fields from the top level table.
+     *
+     * @var bool|null
+     */
+    protected _autoFields;
+
+    /**
+     * Whether to hydrate results into entity objects
+     */
+    protected bool _hydrate = true;
+
+    /**
+     * Whether aliases are generated for fields.
+     */
+    protected bool $aliasingEnabled = true;
 
     /**
      * A callable function that can be used to calculate the total amount of
@@ -76,10 +129,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
 
     /**
      * True if the beforeFind event has already been triggered for this query
-     *
-     * @var bool
      */
-    protected _beforeFindFired = false;
+    protected bool _beforeFindFired = false;
 
     /**
      * The COUNT(*) for the query.
@@ -93,14 +144,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Constructor
      *
-     * @param uim.cake.databases.Connection myConnection The connection object
-     * @param uim.cake.orm.Table myTable The table this query is starting on
+     * @param uim.cake.databases.Connection $connection The connection object
+     * @param uim.cake.orm.Table $table The table this query is starting on
      */
-    this(Connection myConnection, Table myTable) {
-        super.this(myConnection);
-        this.repository(myTable);
+    this(Connection $connection, Table $table) {
+        super(($connection);
+        this.repository($table);
 
-        if (_repository  !is null) {
+        if (_repository != null) {
             this.addDefaultTypes(_repository);
         }
     }
@@ -123,12 +174,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * ### Examples:
      *
      * ```
-     * myQuery.select(["id", "title"]); // Produces SELECT id, title
-     * myQuery.select(["author": "author_id"]); // Appends author: SELECT id, title, author_id as author
-     * myQuery.select("id", true); // Resets the list: SELECT id
-     * myQuery.select(["total": myCountQuery]); // SELECT id, (SELECT ...) AS total
-     * myQuery.select(function (myQuery) {
-     *     return ["article_id", "total": myQuery.count("*")];
+     * $query.select(["id", "title"]); // Produces SELECT id, title
+     * $query.select(["author": "author_id"]); // Appends author: SELECT id, title, author_id as author
+     * $query.select("id", true); // Resets the list: SELECT id
+     * $query.select(["total": $countQuery]); // SELECT id, (SELECT ...) AS total
+     * $query.select(function ($query) {
+     *     return ["article_id", "total": $query.count("*")];
      * })
      * ```
      *
@@ -140,25 +191,25 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * all the fields in the schema of the table or the association will be added to
      * the select clause.
      *
-     * @param uim.cake.databases.IExpression|uim.cake.orm.Table|uim.cake.orm.Association|callable|array|string myFields Fields
+     * @param uim.cake.databases.IExpression|uim.cake.orm.Table|uim.cake.orm.Association|callable|array|string $fields Fields
      * to be added to the list.
      * @param bool canOverwrite whether to reset fields with passed list or not
      * @return this
      */
-    function select(myFields = [], bool canOverwrite = false) {
-        if (myFields instanceof Association) {
-            myFields = myFields.getTarget();
+    function select($fields = [], bool canOverwrite = false) {
+        if ($fields instanceof Association) {
+            $fields = $fields.getTarget();
         }
 
-        if (myFields instanceof Table) {
+        if ($fields instanceof Table) {
             if (this.aliasingEnabled) {
-                myFields = this.aliasFields(myFields.getSchema().columns(), myFields.getAlias());
+                $fields = this.aliasFields($fields.getSchema().columns(), $fields.getAlias());
             } else {
-                myFields = myFields.getSchema().columns();
+                $fields = $fields.getSchema().columns();
             }
         }
 
-        return super.select(myFields, canOverwrite);
+        return super.select($fields, canOverwrite);
     }
 
     /**
@@ -168,27 +219,27 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * been added to the query by the first. If you need to change the list after the first call,
      * pass overwrite boolean true which will reset the select clause removing all previous additions.
      *
-     * @param uim.cake.orm.Table|uim.cake.orm.Association myTable The table to use to get an array of columns
-     * @param $excludedFields The un-aliased column names you do not want selected from myTable
+     * @param uim.cake.orm.Table|uim.cake.orm.Association $table The table to use to get an array of columns
+     * @param array<string> $excludedFields The un-aliased column names you do not want selected from $table
      * @param bool canOverwrite Whether to reset/remove previous selected fields
      * @return this
      * @throws \InvalidArgumentException If Association|Table is not passed in first argument
      */
-    function selectAllExcept(myTable, string[] $excludedFields, bool canOverwrite = false) {
-        if (myTable instanceof Association) {
-            myTable = myTable.getTarget();
+    function selectAllExcept($table, array $excludedFields, bool canOverwrite = false) {
+        if ($table instanceof Association) {
+            $table = $table.getTarget();
         }
 
-        if (!(myTable instanceof Table)) {
+        if (!($table instanceof Table)) {
             throw new InvalidArgumentException("You must provide either an Association or a Table object");
         }
 
-        myFields = array_diff(myTable.getSchema().columns(), $excludedFields);
+        $fields = array_diff($table.getSchema().columns(), $excludedFields);
         if (this.aliasingEnabled) {
-            myFields = this.aliasFields(myFields);
+            $fields = this.aliasFields($fields);
         }
 
-        return this.select(myFields, canOverwrite);
+        return this.select($fields, canOverwrite);
     }
 
     /**
@@ -199,17 +250,17 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * This method returns the same query object for chaining.
      *
-     * @param uim.cake.orm.Table myTable The table to pull types from
+     * @param uim.cake.orm.Table $table The table to pull types from
      * @return this
      */
-    function addDefaultTypes(Table myTable) {
-        myAlias = myTable.getAlias();
-        $map = myTable.getSchema().typeMap();
-        myFields = [];
-        foreach ($map as $f: myType) {
-            myFields[$f] = myFields[myAlias ~ "." ~ $f] = myFields[myAlias ~ "__" ~ $f] = myType;
+    function addDefaultTypes(Table $table) {
+        $alias = $table.getAlias();
+        $map = $table.getSchema().typeMap();
+        $fields = [];
+        foreach ($map as $f: $type) {
+            $fields[$f] = $fields[$alias ~ "." ~ $f] = $fields[$alias ~ "__" ~ $f] = $type;
         }
-        this.getTypeMap().addDefaults(myFields);
+        this.getTypeMap().addDefaults($fields);
 
         return this;
     }
@@ -221,7 +272,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * @param uim.cake.orm.EagerLoader $instance The eager loader to use.
      * @return this
      */
-    auto setEagerLoader(EagerLoader $instance) {
+    function setEagerLoader(EagerLoader $instance) {
         _eagerLoader = $instance;
 
         return this;
@@ -232,9 +283,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * @return uim.cake.orm.EagerLoader
      */
-    auto getEagerLoader(): EagerLoader
+    function getEagerLoader(): EagerLoader
     {
-        if (_eagerLoader is null) {
+        if (_eagerLoader == null) {
             _eagerLoader = new EagerLoader();
         }
 
@@ -250,10 +301,10 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring articles" author information
-     * myQuery.contain("Author");
+     * $query.contain("Author");
      *
      * // Also bring the category and tags associated to each article
-     * myQuery.contain(["Category", "Tag"]);
+     * $query.contain(["Category", "Tag"]);
      * ```
      *
      * Associations can be arbitrarily nested using dot notation or nested arrays,
@@ -264,13 +315,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Eager load the product info, and for each product load other 2 associations
-     * myQuery.contain(["Product": ["Manufacturer", "Distributor"]);
+     * $query.contain(["Product": ["Manufacturer", "Distributor"]);
      *
      * // Which is equivalent to calling
-     * myQuery.contain(["Products.Manufactures", "Products.Distributors"]);
+     * $query.contain(["Products.Manufactures", "Products.Distributors"]);
      *
      * // For an author query, load his region, state and country
-     * myQuery.contain("Regions.States.Countries");
+     * $query.contain("Regions.States.Countries");
      * ```
      *
      * It is possible to control the conditions and fields selected for each of the
@@ -279,11 +330,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * ### Example:
      *
      * ```
-     * myQuery.contain(["Tags": function ($q) {
+     * $query.contain(["Tags": function ($q) {
      *     return $q.where(["Tags.is_popular": true]);
      * }]);
      *
-     * myQuery.contain(["Products.Manufactures": function ($q) {
+     * $query.contain(["Products.Manufactures": function ($q) {
      *     return $q.select(["name"]).where(["Manufactures.active": true]);
      * }]);
      * ```
@@ -303,7 +354,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Set options for the hasMany articles that will be eagerly loaded for an author
-     * myQuery.contain([
+     * $query.contain([
      *     "Articles": [
      *         "fields": ["title", "author_id"]
      *     ]
@@ -314,7 +365,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Retrieve translations for the articles, but only those for the `en` and `es` locales
-     * myQuery.contain([
+     * $query.contain([
      *     "Articles": [
      *         "finder": [
      *             "translations": [
@@ -330,11 +381,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Use a query builder to add conditions to the containment
-     * myQuery.contain("Authors", function ($q) {
+     * $query.contain("Authors", function ($q) {
      *     return $q.where(...); // add conditions
      * });
      * // Use special join conditions for multiple containments in the same method call
-     * myQuery.contain([
+     * $query.contain([
      *     "Authors": [
      *         "foreignKey": false,
      *         "queryBuilder": function ($q) {
@@ -350,7 +401,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * If called with an empty first argument and `$override` is set to true, the
      * previous list will be emptied.
      *
-     * @param array|string associations List of table aliases to be queried.
+     * @param array|string $associations List of table aliases to be queried.
      * @param callable|bool $override The query builder for the association, or
      *   if associations is an array, a bool on whether to override previous list
      *   with the one passed
@@ -363,13 +414,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
             this.clearContain();
         }
 
-        myQueryBuilder = null;
+        $queryBuilder = null;
         if (is_callable($override)) {
-            myQueryBuilder = $override;
+            $queryBuilder = $override;
         }
 
         if ($associations) {
-            $loader.contain($associations, myQueryBuilder);
+            $loader.contain($associations, $queryBuilder);
         }
         _addAssociationsToTypeMap(
             this.getRepository(),
@@ -381,7 +432,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     }
 
     /**
-     * @return array
      */
     array getContain() {
         return this.getEagerLoader().getContain();
@@ -403,24 +453,24 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Used to recursively add contained association column types to
      * the query.
      *
-     * @param uim.cake.orm.Table myTable The table instance to pluck associations from.
-     * @param uim.cake.databases.TypeMap myTypeMap The typemap to check for columns in.
+     * @param uim.cake.orm.Table $table The table instance to pluck associations from.
+     * @param uim.cake.databases.TypeMap $typeMap The typemap to check for columns in.
      *   This typemap is indirectly mutated via {@link uim.cake.orm.Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
      */
-    protected void _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations) {
-        foreach ($associations as myName: $nested) {
-            if (!myTable.hasAssociation(myName)) {
+    protected void _addAssociationsToTypeMap(Table $table, TypeMap $typeMap, array $associations) {
+        foreach ($associations as $name: $nested) {
+            if (!$table.hasAssociation($name)) {
                 continue;
             }
-            $association = myTable.getAssociation(myName);
-            myTarget = $association.getTarget();
-            $primary = (array)myTarget.getPrimaryKeys();
-            if (empty($primary) || myTypeMap.type(myTarget.aliasField($primary[0])) is null) {
-                this.addDefaultTypes(myTarget);
+            $association = $table.getAssociation($name);
+            $target = $association.getTarget();
+            $primary = (array)$target.getPrimaryKeys();
+            if (empty($primary) || $typeMap.type($target.aliasField($primary[0])) == null) {
+                this.addDefaultTypes($target);
             }
             if (!empty($nested)) {
-                _addAssociationsToTypeMap(myTarget, myTypeMap, $nested);
+                _addAssociationsToTypeMap($target, $typeMap, $nested);
             }
         }
     }
@@ -435,7 +485,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring only articles that were tagged with "cake"
-     * myQuery.matching("Tags", function ($q) {
+     * $query.matching("Tags", function ($q) {
      *     return $q.where(["name": "cake"]);
      * });
      * ```
@@ -446,7 +496,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring only articles that were commented by "markstory"
-     * myQuery.matching("Comments.Users", function ($q) {
+     * $query.matching("Comments.Users", function ($q) {
      *     return $q.where(["username": "markstory"]);
      * });
      * ```
@@ -460,7 +510,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring unique articles that were commented by "markstory"
-     * myQuery.distinct(["Articles.id"])
+     * $query.distinct(["Articles.id"])
      *     .matching("Comments.Users", function ($q) {
      *         return $q.where(["username": "markstory"]);
      *     });
@@ -470,14 +520,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * `select`, `where`, `andWhere` and `orWhere` on it. If you wish to
      * add more complex clauses you can do it directly in the main query.
      *
-     * @param string assoc The association to filter by
-     * @param callable|null myBuilder a function that will receive a pre-made query object
+     * @param string $assoc The association to filter by
+     * @param callable|null $builder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function matching(string assoc, ?callable myBuilder = null) {
-        myResult = this.getEagerLoader().setMatching($assoc, myBuilder).getMatching();
-        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+    function matching(string $assoc, ?callable $builder = null) {
+        $result = this.getEagerLoader().setMatching($assoc, $builder).getMatching();
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
         _dirty();
 
         return this;
@@ -494,8 +544,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Get the count of articles per user
-     * myUsersQuery
-     *     .select(["total_articles": myQuery.func().count("Articles.id")])
+     * $usersQuery
+     *     .select(["total_articles": $query.func().count("Articles.id")])
      *     .leftJoinWith("Articles")
      *     .group(["Users.id"])
      *     .enableAutoFields();
@@ -505,8 +555,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Get the count of articles per user with at least 5 votes
-     * myUsersQuery
-     *     .select(["total_articles": myQuery.func().count("Articles.id")])
+     * $usersQuery
+     *     .select(["total_articles": $query.func().count("Articles.id")])
      *     .leftJoinWith("Articles", function ($q) {
      *         return $q.where(["Articles.votes >=": 5]);
      *     })
@@ -529,8 +579,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Total comments in articles by "markstory"
-     * myQuery
-     *     .select(["total_comments": myQuery.func().count("Comments.id")])
+     * $query
+     *     .select(["total_comments": $query.func().count("Comments.id")])
      *     .leftJoinWith("Comments.Users", function ($q) {
      *         return $q.where(["username": "markstory"]);
      *     })
@@ -541,19 +591,19 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * `select`, `where`, `andWhere` and `orWhere` on it. If you wish to
      * add more complex clauses you can do it directly in the main query.
      *
-     * @param string assoc The association to join with
-     * @param callable|null myBuilder a function that will receive a pre-made query object
+     * @param string $assoc The association to join with
+     * @param callable|null $builder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function leftJoinWith(string assoc, ?callable myBuilder = null) {
-        myResult = this.getEagerLoader()
-            .setMatching($assoc, myBuilder, [
+    function leftJoinWith(string $assoc, ?callable $builder = null) {
+        $result = this.getEagerLoader()
+            .setMatching($assoc, $builder, [
                 "joinType": Query::JOIN_TYPE_LEFT,
                 "fields": false,
             ])
             .getMatching();
-        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
         _dirty();
 
         return this;
@@ -570,7 +620,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring only articles that were tagged with "cake"
-     * myQuery.innerJoinWith("Tags", function ($q) {
+     * $query.innerJoinWith("Tags", function ($q) {
      *     return $q.where(["name": "cake"]);
      * });
      * ```
@@ -588,20 +638,20 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * This function works the same as `matching()` with the difference that it
      * will select no fields from the association.
      *
-     * @param string assoc The association to join with
-     * @param callable|null myBuilder a function that will receive a pre-made query object
+     * @param string $assoc The association to join with
+     * @param callable|null $builder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      * @see uim.cake.orm.Query::matching()
      */
-    function innerJoinWith(string assoc, ?callable myBuilder = null) {
-        myResult = this.getEagerLoader()
-            .setMatching($assoc, myBuilder, [
+    function innerJoinWith(string $assoc, ?callable $builder = null) {
+        $result = this.getEagerLoader()
+            .setMatching($assoc, $builder, [
                 "joinType": Query::JOIN_TYPE_INNER,
                 "fields": false,
             ])
             .getMatching();
-        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
         _dirty();
 
         return this;
@@ -617,7 +667,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring only articles that were not tagged with "cake"
-     * myQuery.notMatching("Tags", function ($q) {
+     * $query.notMatching("Tags", function ($q) {
      *     return $q.where(["name": "cake"]);
      * });
      * ```
@@ -628,7 +678,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring only articles that weren"t commented by "markstory"
-     * myQuery.notMatching("Comments.Users", function ($q) {
+     * $query.notMatching("Comments.Users", function ($q) {
      *     return $q.where(["username": "markstory"]);
      * });
      * ```
@@ -642,7 +692,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * ```
      * // Bring unique articles that were commented by "markstory"
-     * myQuery.distinct(["Articles.id"])
+     * $query.distinct(["Articles.id"])
      *     .notMatching("Comments.Users", function ($q) {
      *         return $q.where(["username": "markstory"]);
      *     });
@@ -652,20 +702,20 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * `select`, `where`, `andWhere` and `orWhere` on it. If you wish to
      * add more complex clauses you can do it directly in the main query.
      *
-     * @param string assoc The association to filter by
-     * @param callable|null myBuilder a function that will receive a pre-made query object
+     * @param string $assoc The association to filter by
+     * @param callable|null $builder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function notMatching(string assoc, ?callable myBuilder = null) {
-        myResult = this.getEagerLoader()
-            .setMatching($assoc, myBuilder, [
+    function notMatching(string $assoc, ?callable $builder = null) {
+        $result = this.getEagerLoader()
+            .setMatching($assoc, $builder, [
                 "joinType": Query::JOIN_TYPE_LEFT,
                 "fields": false,
                 "negateMatch": true,
             ])
             .getMatching();
-        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), myResult);
+        _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
         _dirty();
 
         return this;
@@ -695,7 +745,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * ### Example:
      *
      * ```
-     * myQuery.applyOptions([
+     * $query.applyOptions([
      *   "fields": ["id", "name"],
      *   "conditions": [
      *     "created >=": "2013-01-01"
@@ -707,7 +757,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Is equivalent to:
      *
      * ```
-     * myQuery
+     * $query
      *   .select(["id", "name"])
      *   .where(["created >=": "2013-01-01"])
      *   .limit(10)
@@ -716,25 +766,25 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Custom options can be read via `getOptions()`:
      *
      * ```
-     * myQuery.applyOptions([
+     * $query.applyOptions([
      *   "fields": ["id", "name"],
      *   "custom": "value",
      * ]);
      * ```
      *
-     * Here `myOptions` will hold `["custom": "value"]` (the `fields`
+     * Here `$options` will hold `["custom": "value"]` (the `fields`
      * option will be applied to the query instead of being stored, as
      * it"s a query clause related option):
      *
      * ```
-     * myOptions = myQuery.getOptions();
+     * $options = $query.getOptions();
      * ```
      *
-     * @param array<string, mixed> myOptions The options to be applied
+     * @param array<string, mixed> $options The options to be applied
      * @return this
      * @see getOptions()
      */
-    function applyOptions(array myOptions) {
+    function applyOptions(array $options) {
         $valid = [
             "fields": "select",
             "conditions": "where",
@@ -748,12 +798,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
             "page": "page",
         ];
 
-        ksort(myOptions);
-        foreach (myOptions as $option: myValues) {
-            if (isset($valid[$option], myValues)) {
-                this.{$valid[$option]}(myValues);
+        ksort($options);
+        foreach ($options as $option: $values) {
+            if (isset($valid[$option], $values)) {
+                this.{$valid[$option]}($values);
             } else {
-                _options[$option] = myValues;
+                _options[$option] = $values;
             }
         }
 
@@ -809,9 +859,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * Handles cloning eager loaders.
      */
-    auto __clone() {
+    function __clone() {
         super.__clone();
-        if (_eagerLoader  !is null) {
+        if (_eagerLoader != null) {
             _eagerLoader = clone _eagerLoader;
         }
     }
@@ -824,7 +874,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * value is returned
      */
     size_t count() {
-        if (_resultsCount is null) {
+        if (_resultsCount == null) {
             _resultsCount = _performCount();
         }
 
@@ -833,63 +883,61 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
 
     /**
      * Performs and returns the COUNT(*) for the query.
-     *
-     * @return int
      */
     protected int _performCount() {
-        myQuery = this.cleanCopy();
-        myCounter = _counter;
-        if (myCounter  !is null) {
-            myQuery.counter(null);
+        $query = this.cleanCopy();
+        $counter = _counter;
+        if ($counter != null) {
+            $query.counter(null);
 
-            return (int)myCounter(myQuery);
+            return (int)$counter($query);
         }
 
         $complex = (
-            myQuery.clause("distinct") ||
-            count(myQuery.clause("group")) ||
-            count(myQuery.clause("union")) ||
-            myQuery.clause("having")
+            $query.clause("distinct") ||
+            count($query.clause("group")) ||
+            count($query.clause("union")) ||
+            $query.clause("having")
         );
 
         if (!$complex) {
             // Expression fields could have bound parameters.
-            foreach (myQuery.clause("select") as myField) {
-                if (myField instanceof IExpression) {
+            foreach ($query.clause("select") as $field) {
+                if ($field instanceof IExpression) {
                     $complex = true;
                     break;
                 }
             }
         }
 
-        if (!$complex && _valueBinder  !is null) {
+        if (!$complex && _valueBinder != null) {
             $order = this.clause("order");
-            $complex = $order is null ? false : $order.hasNestedExpression();
+            $complex = $order == null ? false : $order.hasNestedExpression();
         }
 
-        myCount = ["count": myQuery.func().count("*")];
+        $count = ["count": $query.func().count("*")];
 
         if (!$complex) {
-            myQuery.getEagerLoader().disableAutoFields();
-            $statement = myQuery
-                .select(myCount, true)
+            $query.getEagerLoader().disableAutoFields();
+            $statement = $query
+                .select($count, true)
                 .disableAutoFields()
                 .execute();
         } else {
             $statement = this.getConnection().newQuery()
-                .select(myCount)
-                .from(["count_source": myQuery])
+                .select($count)
+                .from(["count_source": $query])
                 .execute();
         }
 
-        myResult = $statement.fetch("assoc");
+        $result = $statement.fetch("assoc");
         $statement.closeCursor();
 
-        if (myResult == false) {
+        if ($result == false) {
             return 0;
         }
 
-        return (int)myResult["count"];
+        return (int)$result["count"];
     }
 
     /**
@@ -907,11 +955,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * If the first param is a null value, the built-in counter function will be called
      * instead
      *
-     * @param callable|null myCounter The counter value
+     * @param callable|null $counter The counter value
      * @return this
      */
-    function counter(?callable myCounter) {
-        _counter = myCounter;
+    function counter(?callable $counter) {
+        _counter = $counter;
 
         return this;
     }
@@ -921,12 +969,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * If set to false array results will be returned for the query.
      *
-     * @param bool myEnable Use a boolean to set the hydration mode.
+     * @param bool $enable Use a boolean to set the hydration mode.
      * @return this
      */
-    function enableHydration(bool myEnable = true) {
+    function enableHydration(bool $enable = true) {
         _dirty();
-        _hydrate = myEnable;
+        _hydrate = $enable;
 
         return this;
     }
@@ -956,19 +1004,19 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * {@inheritDoc}
      *
-     * @param \Closure|string|false myKey Either the cache key or a function to generate the cache key.
+     * @param \Closure|string|false $key Either the cache key or a function to generate the cache key.
      *   When using a function, this query instance will be supplied as an argument.
-     * @param uim.cake.Cache\CacheEngine|string myConfig Either the name of the cache config to use, or
+     * @param uim.cake.Cache\CacheEngine|string aConfig Either the name of the cache config to use, or
      *   a cache config instance.
      * @return this
      * @throws \RuntimeException When you attempt to cache a non-select query.
      */
-    function cache(myKey, myConfig = "default") {
-        if (_type != "select" && _type  !is null) {
+    function cache($key, aConfig = "default") {
+        if (_type != "select" && _type != null) {
             throw new RuntimeException("You cannot cache the results of non-select queries.");
         }
 
-        return _cache(myKey, myConfig);
+        return _cache($key, aConfig);
     }
 
     /**
@@ -979,7 +1027,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      */
     function all(): IResultSet
     {
-        if (_type != "select" && _type  !is null) {
+        if (_type != "select" && _type != null) {
             throw new RuntimeException(
                 "You cannot call all() on a non-select query. Use execute() instead."
             );
@@ -997,8 +1045,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
         if (!_beforeFindFired && _type == "select") {
             _beforeFindFired = true;
 
-            myRepository = this.getRepository();
-            myRepository.dispatchEvent("Model.beforeFind", [
+            $repository = this.getRepository();
+            $repository.dispatchEvent("Model.beforeFind", [
                 this,
                 new ArrayObject(_options),
                 !this.isEagerLoaded(),
@@ -1022,7 +1070,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * @return uim.cake.Datasource\IResultSet
      */
-    protected auto _execute(): IResultSet
+    protected function _execute(): IResultSet
     {
         this.triggerBeforeFind();
         if (_results) {
@@ -1052,13 +1100,13 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
             return;
         }
 
-        myRepository = this.getRepository();
+        $repository = this.getRepository();
 
         if (empty(_parts["from"])) {
-            this.from([myRepository.getAlias(): myRepository.getTable()]);
+            this.from([$repository.getAlias(): $repository.getTable()]);
         }
         _addDefaultFields();
-        this.getEagerLoader().attachAssociations(this, myRepository, !_hasFields);
+        this.getEagerLoader().attachAssociations(this, $repository, !_hasFields);
         _addDefaultSelectTypes();
     }
 
@@ -1070,16 +1118,16 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
         $select = this.clause("select");
         _hasFields = true;
 
-        myRepository = this.getRepository();
+        $repository = this.getRepository();
 
         if (!count($select) || _autoFields == true) {
             _hasFields = false;
-            this.select(myRepository.getSchema().columns());
+            this.select($repository.getSchema().columns());
             $select = this.clause("select");
         }
 
         if (this.aliasingEnabled) {
-            $select = this.aliasFields($select, myRepository.getAlias());
+            $select = this.aliasFields($select, $repository.getAlias());
         }
         this.select($select, true);
     }
@@ -1088,39 +1136,39 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Sets the default types for converting the fields in the select clause
      */
     protected void _addDefaultSelectTypes() {
-        myTypeMap = this.getTypeMap().getDefaults();
+        $typeMap = this.getTypeMap().getDefaults();
         $select = this.clause("select");
-        myTypes = [];
+        $types = [];
 
-        foreach ($select as myAlias: myValue) {
-            if (myValue instanceof ITypedResult) {
-                myTypes[myAlias] = myValue.getReturnType();
+        foreach ($select as $alias: $value) {
+            if ($value instanceof ITypedResult) {
+                $types[$alias] = $value.getReturnType();
                 continue;
             }
-            if (isset(myTypeMap[myAlias])) {
-                myTypes[myAlias] = myTypeMap[myAlias];
+            if (isset($typeMap[$alias])) {
+                $types[$alias] = $typeMap[$alias];
                 continue;
             }
-            if (is_string(myValue) && isset(myTypeMap[myValue])) {
-                myTypes[myAlias] = myTypeMap[myValue];
+            if (is_string($value) && isset($typeMap[$value])) {
+                $types[$alias] = $typeMap[$value];
             }
         }
-        this.getSelectTypeMap().addDefaults(myTypes);
+        this.getSelectTypeMap().addDefaults($types);
     }
 
     /**
      * {@inheritDoc}
      *
-     * @param string myFinder The finder method to use.
-     * @param array<string, mixed> myOptions The options for the finder.
+     * @param string $finder The finder method to use.
+     * @param array<string, mixed> $options The options for the finder.
      * @return static Returns a modified query.
      * @psalm-suppress MoreSpecificReturnType
      */
-    function find(string myFinder, array myOptions = []) {
-        myTable = this.getRepository();
+    function find(string $finder, array $options = []) {
+        $table = this.getRepository();
 
         /** @psalm-suppress LessSpecificReturnStatement */
-        return myTable.callFinder(myFinder, this, myOptions);
+        return $table.callFinder($finder, this, $options);
     }
 
     /**
@@ -1139,16 +1187,16 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * This changes the query type to be "update".
      * Can be combined with set() and where() methods to create update queries.
      *
-     * @param uim.cake.databases.IExpression|string|null myTable Unused parameter.
+     * @param uim.cake.databases.IExpression|string|null $table Unused parameter.
      * @return this
      */
-    function update(myTable = null) {
-        if (!myTable) {
-            myRepository = this.getRepository();
-            myTable = myRepository.getTable();
+    function update($table = null) {
+        if (!$table) {
+            $repository = this.getRepository();
+            $table = $repository.getTable();
         }
 
-        return super.update(myTable);
+        return super.update($table);
     }
 
     /**
@@ -1157,14 +1205,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * This changes the query type to be "delete".
      * Can be combined with the where() method to create delete queries.
      *
-     * @param string|null myTable Unused parameter.
+     * @param string|null $table Unused parameter.
      * @return this
      */
-    function delete(Nullable!string myTable = null) {
-        myRepository = this.getRepository();
-        this.from([myRepository.getAlias(): myRepository.getTable()]);
+    function delete(Nullable!string $table = null) {
+        $repository = this.getRepository();
+        this.from([$repository.getAlias(): $repository.getTable()]);
 
-        // We do not pass myTable to parent class here
+        // We do not pass $table to parent class here
         return super.delete();
     }
 
@@ -1178,39 +1226,39 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Can be combined with the where() method to create delete queries.
      *
      * @param array $columns The columns to insert into.
-     * @param array<string, string> myTypes A map between columns & their datatypes.
+     * @param array<string> $types A map between columns & their datatypes.
      * @return this
      */
-    function insert(array $columns, array myTypes = []) {
-        myRepository = this.getRepository();
-        myTable = myRepository.getTable();
-        this.into(myTable);
+    function insert(array $columns, array $types = []) {
+        $repository = this.getRepository();
+        $table = $repository.getTable();
+        this.into($table);
 
-        return super.insert($columns, myTypes);
+        return super.insert($columns, $types);
     }
 
     /**
      * Returns a new Query that has automatic field aliasing disabled.
      *
-     * @param uim.cake.orm.Table myTable The table this query is starting on
+     * @param uim.cake.orm.Table $table The table this query is starting on
      * @return static
      */
-    static function subquery(Table myTable) {
-        myQuery = new static(myTable.getConnection(), myTable);
-        myQuery.aliasingEnabled = false;
+    static function subquery(Table $table) {
+        $query = new static($table.getConnection(), $table);
+        $query.aliasingEnabled = false;
 
-        return myQuery;
+        return $query;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @param string method the method to call
+     * @param string $method the method to call
      * @param array $arguments list of arguments for the method to call
      * @return mixed
      * @throws \BadMethodCallException if the method is called for a non-select query
      */
-    auto __call(string method, array $arguments) {
+    function __call(string $method, array $arguments) {
         if (this.type() == "select") {
             return _call($method, $arguments);
         }
@@ -1254,11 +1302,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * By default calling select() will disable auto-fields. You can re-enable
      * auto-fields with this method.
      *
-     * @param bool myValue Set true to enable, false to disable.
+     * @param bool $value Set true to enable, false to disable.
      * @return this
      */
-    function enableAutoFields(bool myValue = true) {
-        _autoFields = myValue;
+    function enableAutoFields(bool $value = true) {
+        _autoFields = $value;
 
         return this;
     }
@@ -1290,18 +1338,18 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Decorates the results iterator with MapReduce routines and formatters
      *
-     * @param \Traversable myResult Original results
+     * @param \Traversable $result Original results
      * @return uim.cake.Datasource\IResultSet
      */
-    protected auto _decorateResults(Traversable myResult): IResultSet
+    protected function _decorateResults(Traversable $result): IResultSet
     {
-        myResult = _applyDecorators(myResult);
+        $result = _applyDecorators($result);
 
-        if (!(myResult instanceof ResultSet) && this.isBufferedResultsEnabled()) {
-            myClass = _decoratorClass();
-            myResult = new myClass(myResult.buffered());
+        if (!($result instanceof ResultSet) && this.isBufferedResultsEnabled()) {
+            $class = _decoratorClass();
+            $result = new $class($result.buffered());
         }
 
-        return myResult;
+        return $result;
     }
 }
