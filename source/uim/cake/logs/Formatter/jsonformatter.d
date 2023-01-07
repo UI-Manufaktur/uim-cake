@@ -13,8 +13,7 @@
  * @since         4.3.0
   */module uim.cake.logs.Formatter;
 
-class JsonFormatter : AbstractFormatter
-{
+class JsonFormatter : AbstractFormatter {
     /**
      * Default config for this class
      *

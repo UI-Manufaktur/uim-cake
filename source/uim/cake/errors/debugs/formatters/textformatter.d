@@ -15,8 +15,7 @@ use RuntimeException;
  *
  * @internal
  */
-class TextFormatter : IFormatter
-{
+class TextFormatter : IFormatter {
 
     string formatWrapper(string myContentss, array myLocation) {
         myTemplate = <<<TEXT
@@ -40,9 +39,9 @@ TEXT;
      * @param uim.cake.errors.debugs.INode myNode The node tree to dump.
      */
     string dump(INode myNode) {
-        $indent = 0;
+        auto myIndent = 0;
 
-        return this.export(myNode, $indent);
+        return this.export(myNode, myIndent);
     }
 
     /**
@@ -52,29 +51,32 @@ TEXT;
      * @param int $indent The current indentation level.
      * @return string
      */
-    protected string export(INode $var, int $indent) {
-        if ($var instanceof ScalarNode) {
-            switch ($var.getType()) {
-                case "bool":
-                    return $var.getValue() ? "true" : "false";
-                case "null":
-                    return "null";
-                case "string":
-                    return """ ~ (string)$var.getValue() ~ """;
-                default:
-                    return "({$var.getType()}) {$var.getValue()}";
-            }
+    protected string export(INode aNode, int anIndent) {
+        if (auto scalarNode = cast(ScalarNode)aNode) {
+          switch (scalarNode.getType()) {
+            case "bool":
+              return scalarNode.getValue() ? "true" : "false";
+            case "null":
+                return "null";
+            case "string":
+                return " ~ %s ~ ".format(scalarNode.getValue());
+            default:
+                return "({aVar.getType()}) {aVar.getValue()}";
+          }
         }
-        if ($var instanceof ArrayNode) {
-            return this.exportArray($var, $indent + 1);
+        if (auto arrayNode = cast(ArrayNode)aNode) {
+          return this.exportArray(arrayNode, anIndent + 1);
         }
-        if ($var instanceof ClassNode || $var instanceof ReferenceNode) {
-            return this.exportObject($var, $indent + 1);
+        if (auto classNode = cast(ClassNode)aNode) {
+          return this.exportObject(classNode, anIndent + 1);
+        } 
+        if (auto referenceNode = cast(ReferenceNode)aNode) {
+          return this.exportObject(referenceNode, anIndent + 1);
         }
-        if ($var instanceof SpecialNode) {
-            return $var.getValue();
+        if (auto specialNode = cast(SpecialNode)aNode) {
+          return specialNode.getValue();
         }
-        throw new RuntimeException("Unknown node received " ~ get_class($var));
+        throw new Exception("Unknown node received " ~ get_class(aVar));
     }
 
     /**

@@ -15,8 +15,7 @@
 
 use DateTime;
 
-class DefaultFormatter : AbstractFormatter
-{
+class DefaultFormatter : AbstractFormatter {
     /**
      * Default config for this class
      *

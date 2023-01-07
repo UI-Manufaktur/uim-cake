@@ -12,10 +12,7 @@ use RuntimeException;
  *
  * @internal
  */
-class HtmlFormatter : IFormatter
-{
-    /**
-     */
+class HtmlFormatter : IFormatter {
     protected static bool $outputHeader = false;
 
     /**

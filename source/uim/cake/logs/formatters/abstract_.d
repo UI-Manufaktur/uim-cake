@@ -7,8 +7,7 @@
 @safe:
 import uim.cake;
 
-abstract class AbstractFormatter
-{
+abstract class AbstractFormatter {
     use InstanceConfigTrait;
 
     /**

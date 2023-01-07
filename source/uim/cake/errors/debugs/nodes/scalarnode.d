@@ -9,10 +9,7 @@ module uim.cake.errors.debugs.nodes;
  * Dump node for scalar values.
  */
 class ScalarNode : INode {
-    /**
-     * @var string
-     */
-    private myType;
+    private string _type;
 
     /**
      * @var string|float|int|bool|null
@@ -26,7 +23,7 @@ class ScalarNode : INode {
      * @param string|float|int|bool|null myValue The wrapped value.
      */
     this(string myType, myValue) {
-        this.type = myType;
+        _type = myType;
         this.value = myValue;
     }
 
@@ -34,7 +31,7 @@ class ScalarNode : INode {
      * Get the type of value
      */
     string getType() {
-        return this.type;
+        return _type;
     }
 
     /**
@@ -47,7 +44,7 @@ class ScalarNode : INode {
     }
 
 
-    array getChildren() {
+    INode[] getChildren() {
         return [];
     }
 }

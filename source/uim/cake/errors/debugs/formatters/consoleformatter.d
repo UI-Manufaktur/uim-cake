@@ -12,8 +12,7 @@ use RuntimeException;
  *
  * @internal
  */
-class ConsoleFormatter : IFormatter
-{
+class ConsoleFormatter : IFormatter {
     /**
      * text colors used in colored output.
      *

@@ -15,8 +15,7 @@
 
 import uim.cake.core.InstanceConfigTrait;
 
-abstract class AbstractFormatter
-{
+abstract class AbstractFormatter {
     use InstanceConfigTrait;
 
     /**

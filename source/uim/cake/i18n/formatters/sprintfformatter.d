@@ -6,8 +6,7 @@ import uim.cake.I18n\IFormatter;
  * A formatter that will interpolate variables using sprintf and
  * select the correct plural form when required
  */
-class SprintfFormatter : IFormatter
-{
+class SprintfFormatter : IFormatter {
     /**
      * Returns a string with all passed variables interpolated into the original
      * message. Variables are interpolated using the sprintf format.

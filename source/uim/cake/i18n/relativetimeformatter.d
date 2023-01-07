@@ -8,8 +8,7 @@ import uim.cake.Chronos\DifferenceIFormatter;
  *
  * @internal
  */
-class RelativeTimeFormatter : DifferenceIFormatter
-{
+class RelativeTimeFormatter : DifferenceIFormatter {
     /**
      * Get the difference in a human readable format.
      *

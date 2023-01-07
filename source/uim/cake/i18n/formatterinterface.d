@@ -11,8 +11,7 @@
 /**
  * Formatter Interface
  */
-interface IFormatter
-{
+interface IFormatter {
     /**
      * Returns a string with all passed variables interpolated into the original
      * message. Variables are interpolated using the sprintf format.

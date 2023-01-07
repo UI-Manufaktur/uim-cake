@@ -7,8 +7,7 @@ use MessageFormatter;
 /**
  * A formatter that will interpolate variables using the MessageFormatter class
  */
-class IcuFormatter : IFormatter
-{
+class IcuFormatter : IFormatter {
     /**
      * Returns a string with all passed variables interpolated into the original
      * message. Variables are interpolated using the MessageFormatter class.
