@@ -3,21 +3,69 @@ module uim.cake.orm;
 @safe:
 import uim.cake;
 
+use Closure;
+use InvalidArgumentException;
+use RuntimeException;
+
 /**
  * An Association is a relationship established between two tables and is used
  * to configure and customize the way interconnected records are retrieved.
  *
  * @mixin uim.cake.orm.Table
  */
-abstract class Association {
+abstract class Association
+{
     use ConventionsTrait;
     use LocatorAwareTrait;
 
-
-    // ----------
+    /**
+     * Strategy name to use joins for fetching associated records
+     */
+    const string STRATEGY_JOIN = "join";
 
     /**
-     * The field name in the owning side table that is used to match with the foreignKeys
+     * Strategy name to use a subquery for fetching associated records
+     */
+    const string STRATEGY_SUBQUERY = "subquery";
+
+    /**
+     * Strategy name to use a select for fetching associated records
+     */
+    const string STRATEGY_SELECT = "select";
+
+    /**
+     * Association type for one to one associations.
+     */
+    const string ONE_TO_ONE = "oneToOne";
+
+    /**
+     * Association type for one to many associations.
+     */
+    const string ONE_TO_MANY = "oneToMany";
+
+    /**
+     * Association type for many to many associations.
+     */
+    const string MANY_TO_MANY = "manyToMany";
+
+    /**
+     * Association type for many to one associations.
+     */
+    const string MANY_TO_ONE = "manyToOne";
+
+    /**
+     * Name given to the association, it usually represents the alias
+     * assigned to the target associated table
+     */
+    protected string _name;
+
+    /**
+     * The class name of the target table object
+     */
+    protected string _className;
+
+    /**
+     * The field name in the owning side table that is used to match with the foreignKey
      *
      * @var array<string>|string|null
      */
@@ -28,7 +76,7 @@ abstract class Association {
      *
      * @var array<string>|string
      */
-    protected _foreignKeys;
+    protected _foreignKey;
 
     /**
      * A list of conditions to be always included when fetching records from
@@ -42,17 +90,13 @@ abstract class Association {
      * Whether the records on the target table are dependent on the source table,
      * often used to indicate that records should be removed if the owning record in
      * the source table is deleted.
-     *
-     * @var bool
      */
-    protected _dependent = false;
+    protected bool _dependent = false;
 
     /**
      * Whether cascaded deletes should also fire callbacks.
-     *
-     * @var bool
      */
-    protected _cascadeCallbacks = false;
+    protected bool _cascadeCallbacks = false;
 
     /**
      * Source table instance
@@ -108,10 +152,10 @@ abstract class Association {
      * Constructor. Subclasses can override _options function to get the original
      * list of passed options if expecting any other special key
      *
-     * @param string myAlias The name given to the association
-     * @param array<string, mixed> myOptions A list of properties to be set on this object
+     * @param string $alias The name given to the association
+     * @param array<string, mixed> $options A list of properties to be set on this object
      */
-    this(string myAlias, array myOptions = []) {
+    this(string $alias, array $options = []) {
         $defaults = [
             "cascadeCallbacks",
             "className",
@@ -119,7 +163,7 @@ abstract class Association {
             "dependent",
             "finder",
             "bindingKey",
-            "foreignKeyss",
+            "foreignKey",
             "joinType",
             "tableLocator",
             "propertyName",
@@ -127,26 +171,63 @@ abstract class Association {
             "targetTable",
         ];
         foreach ($defaults as $property) {
-            if (isset(myOptions[$property])) {
-                this.{"_" ~ $property} = myOptions[$property];
+            if (isset($options[$property])) {
+                this.{"_" ~ $property} = $options[$property];
             }
         }
 
         if (empty(_className)) {
-            _className = myAlias;
+            _className = $alias;
         }
 
-        [, myName] = pluginSplit(myAlias);
-        _name = myName;
+        [, $name] = pluginSplit($alias);
+        _name = $name;
 
-        _options(myOptions);
+        _options($options);
 
-        if (!empty(myOptions["strategy"])) {
-            this.setStrategy(myOptions["strategy"]);
+        if (!empty($options["strategy"])) {
+            this.setStrategy($options["strategy"]);
         }
     }
 
-    // ------------
+    /**
+     * Sets the name for this association, usually the alias
+     * assigned to the target associated table
+     *
+     * @param string aName Name to be assigned
+     * @return this
+     * @deprecated 4.3.0 Changing the association name after object creation is
+     *   no longer supported. The name should only be set through the constructor.
+     */
+    function setName(string aName) {
+        deprecationWarning(
+            "Changing the association name after object creation is no longer supported."
+            ~ " The name should only be set through the constructor"
+        );
+
+        if (_targetTable != null) {
+            $alias = _targetTable.getAlias();
+            if ($alias != $name) {
+                throw new InvalidArgumentException(sprintf(
+                    "Association name '%s' does not match target table alias '%s'.",
+                    $name,
+                    $alias
+                ));
+            }
+        }
+
+        _name = $name;
+
+        return this;
+    }
+
+    /**
+     * Gets the name for this association, usually the alias
+     * assigned to the target associated table
+     */
+    string getName() {
+        return _name;
+    }
 
     /**
      * Sets whether cascaded deletes should also fire callbacks.
@@ -154,7 +235,7 @@ abstract class Association {
      * @param bool $cascadeCallbacks cascade callbacks switch value
      * @return this
      */
-    auto setCascadeCallbacks(bool $cascadeCallbacks) {
+    function setCascadeCallbacks(bool $cascadeCallbacks) {
         _cascadeCallbacks = $cascadeCallbacks;
 
         return this;
@@ -170,24 +251,24 @@ abstract class Association {
     /**
      * Sets the class name of the target table object.
      *
-     * @param string myClassName Class name to set.
+     * @param string $className Class name to set.
      * @return this
      * @throws \InvalidArgumentException In case the class name is set after the target table has been
      *  resolved, and it doesn"t match the target table"s class name.
      */
-    auto setClassName(string myClassName) {
+    function setClassName(string $className) {
         if (
-            _targetTable  !is null &&
-            get_class(_targetTable) != App::className(myClassName, "Model/Table", "Table")
+            _targetTable != null &&
+            get_class(_targetTable) != App::className($className, "Model/Table", "Table")
         ) {
             throw new InvalidArgumentException(sprintf(
                 "The class name '%s' doesn\"t match the target table class name of '%s'.",
-                myClassName,
+                $className,
                 get_class(_targetTable)
             ));
         }
 
-        _className = myClassName;
+        _className = $className;
 
         return this;
     }
@@ -202,11 +283,11 @@ abstract class Association {
     /**
      * Sets the table instance for the source side of the association.
      *
-     * @param uim.cake.orm.Table myTable the instance to be assigned as source side
+     * @param uim.cake.orm.Table $table the instance to be assigned as source side
      * @return this
      */
-    auto setSource(Table myTable) {
-        _sourceTable = myTable;
+    function setSource(Table $table) {
+        _sourceTable = $table;
 
         return this;
     }
@@ -216,7 +297,7 @@ abstract class Association {
      *
      * @return uim.cake.orm.Table
      */
-    auto getSource(): Table
+    function getSource(): Table
     {
         return _sourceTable;
     }
@@ -224,11 +305,11 @@ abstract class Association {
     /**
      * Sets the table instance for the target side of the association.
      *
-     * @param uim.cake.orm.Table myTable the instance to be assigned as target side
+     * @param uim.cake.orm.Table $table the instance to be assigned as target side
      * @return this
      */
-    auto setTarget(Table myTable) {
-        _targetTable = myTable;
+    function setTarget(Table $table) {
+        _targetTable = $table;
 
         return this;
     }
@@ -238,40 +319,40 @@ abstract class Association {
      *
      * @return uim.cake.orm.Table
      */
-    auto getTarget(): Table
+    function getTarget(): Table
     {
-        if (_targetTable is null) {
-            if (indexOf(_className, ".")) {
-                [myPlugin] = pluginSplit(_className, true);
-                $registryAlias = (string)myPlugin . _name;
+        if (_targetTable == null) {
+            if (strpos(_className, ".")) {
+                [$plugin] = pluginSplit(_className, true);
+                $registryAlias = (string)$plugin . _name;
             } else {
                 $registryAlias = _name;
             }
 
-            myTableLocator = this.getTableLocator();
+            $tableLocator = this.getTableLocator();
 
-            myConfig = [];
-            $exists = myTableLocator.exists($registryAlias);
+            aConfig = [];
+            $exists = $tableLocator.exists($registryAlias);
             if (!$exists) {
-                myConfig = ["className":_className];
+                aConfig = ["className": _className];
             }
-            _targetTable = myTableLocator.get($registryAlias, myConfig);
+            _targetTable = $tableLocator.get($registryAlias, aConfig);
 
             if ($exists) {
-                myClassName = App::className(_className, "Model/Table", "Table") ?: Table::class;
+                $className = App::className(_className, "Model/Table", "Table") ?: Table::class;
 
-                if (!_targetTable instanceof myClassName) {
-                    myErrorMessage = "%s association '%s' of type '%s' to '%s' doesn\"t match the expected class '%s'~ ";
-                    myErrorMessage ~= "You can\"t have an association of the same name with a different target ";
-                    myErrorMessage ~= ""className" option anywhere in your app.";
+                if (!_targetTable instanceof $className) {
+                    $errorMessage = "%s association '%s' of type '%s' to '%s' doesn\"t match the expected class '%s'~ ";
+                    $errorMessage ~= "You can\"t have an association of the same name with a different target ";
+                    $errorMessage ~= ""className" option anywhere in your app.";
 
                     throw new RuntimeException(sprintf(
-                        myErrorMessage,
-                        _sourceTable is null ? "null" : get_class(_sourceTable),
+                        $errorMessage,
+                        _sourceTable == null ? "null" : get_class(_sourceTable),
                         this.getName(),
                         this.type(),
                         get_class(_targetTable),
-                        myClassName
+                        $className
                     ));
                 }
             }
@@ -286,9 +367,9 @@ abstract class Association {
      *
      * @param \Closure|array $conditions list of conditions to be used
      * @see uim.cake.databases.Query::where() for examples on the format of the array
-     * @return uim.cake.orm.Association
+     * @return this
      */
-    auto setConditions($conditions) {
+    function setConditions($conditions) {
         _conditions = $conditions;
 
         return this;
@@ -301,7 +382,7 @@ abstract class Association {
      * @see uim.cake.databases.Query::where() for examples on the format of the array
      * @return \Closure|array
      */
-    auto getConditions() {
+    function getConditions() {
         return _conditions;
     }
 
@@ -309,11 +390,11 @@ abstract class Association {
      * Sets the name of the field representing the binding field with the target table.
      * When not manually specified the primary key of the owning side table is used.
      *
-     * @param array<string>|string myKey the table field or fields to be used to link both tables together
+     * @param array<string>|string aKey the table field or fields to be used to link both tables together
      * @return this
      */
-    auto setBindingKey(myKey) {
-        _bindingKey = myKey;
+    function setBindingKey($key) {
+        _bindingKey = $key;
 
         return this;
     }
@@ -321,9 +402,11 @@ abstract class Association {
     /**
      * Gets the name of the field representing the binding field with the target table.
      * When not manually specified the primary key of the owning side table is used.
+     *
+     * @return array<string>|string
      */
-    string[] getBindingKey() {
-        if (_bindingKey is null) {
+    function getBindingKey() {
+        if (_bindingKey == null) {
             _bindingKey = this.isOwningSide(this.getSource()) ?
                 this.getSource().getPrimaryKeys() :
                 this.getTarget().getPrimaryKeys();
@@ -332,19 +415,23 @@ abstract class Association {
         return _bindingKey;
     }
 
-    // Gets the name of the field representing the foreign key to the target table.
-    string[] getforeignKeys() {
-        return _foreignKeys;
+    /**
+     * Gets the name of the field representing the foreign key to the target table.
+     *
+     * @return array<string>|string
+     */
+    function getForeignKey() {
+        return _foreignKey;
     }
 
     /**
      * Sets the name of the field representing the foreign key to the target table.
      *
-     * @param myKey the key or keys to be used to link both tables together
+     * @param array<string>|string aKey the key or keys to be used to link both tables together
      * @return this
      */
-    auto setforeignKeys(string[] myKey) {
-        _foreignKeys = myKey;
+    function setForeignKey($key) {
+        _foreignKey = $key;
 
         return this;
     }
@@ -360,7 +447,7 @@ abstract class Association {
      * @param bool $dependent Set the dependent mode. Use null to read the current state.
      * @return this
      */
-    auto setDependent(bool $dependent) {
+    function setDependent(bool $dependent) {
         _dependent = $dependent;
 
         return this;
@@ -379,10 +466,10 @@ abstract class Association {
     /**
      * Whether this association can be expressed directly in a query join
      *
-     * @param array<string, mixed> myOptions custom options key that could alter the return value
+     * @param array<string, mixed> $options custom options key that could alter the return value
      */
-    bool canBeJoined(array myOptions = []) {
-        $strategy = myOptions["strategy"] ?? this.getStrategy();
+    bool canBeJoined(array $options = []) {
+        $strategy = $options["strategy"] ?? this.getStrategy();
 
         return $strategy == this::STRATEGY_JOIN;
     }
@@ -390,11 +477,11 @@ abstract class Association {
     /**
      * Sets the type of join to be used when adding the association to a query.
      *
-     * @param string myType the join type to be used (e.g. INNER)
+     * @param string $type the join type to be used (e.g. INNER)
      * @return this
      */
-    auto setJoinType(string myType) {
-        _joinType = myType;
+    function setJoinType(string $type) {
+        _joinType = $type;
 
         return this;
     }
@@ -410,11 +497,11 @@ abstract class Association {
      * Sets the property name that should be filled with data from the target table
      * in the source table record.
      *
-     * @param string myName The name of the association property. Use null to read the current value.
+     * @param string aName The name of the association property. Use null to read the current value.
      * @return this
      */
-    auto setProperty(string myName) {
-        _propertyName = myName;
+    function setProperty(string aName) {
+        _propertyName = $name;
 
         return this;
     }
@@ -443,9 +530,9 @@ abstract class Association {
      * Returns default property name based on association name.
      */
     protected string _propertyName() {
-        [, myName] = pluginSplit(_name);
+        [, $name] = pluginSplit(_name);
 
-        return Inflector::underscore(myName);
+        return Inflector::underscore($name);
     }
 
     /**
@@ -453,19 +540,19 @@ abstract class Association {
      * that some association types might not implement but a default strategy,
      * rendering any changes to this setting void.
      *
-     * @param string myName The strategy type. Use null to read the current value.
+     * @param string aName The strategy type. Use null to read the current value.
      * @return this
      * @throws \InvalidArgumentException When an invalid strategy is provided.
      */
-    auto setStrategy(string myName) {
-        if (!in_array(myName, _validStrategies, true)) {
+    function setStrategy(string aName) {
+        if (!in_array($name, _validStrategies, true)) {
             throw new InvalidArgumentException(sprintf(
                 "Invalid strategy '%s' was provided. Valid options are (%s).",
-                myName,
+                $name,
                 implode(", ", _validStrategies)
             ));
         }
-        _strategy = myName;
+        _strategy = $name;
 
         return this;
     }
@@ -484,18 +571,18 @@ abstract class Association {
      *
      * @return array|string
      */
-    auto getFinder() {
+    function getFinder() {
         return _finder;
     }
 
     /**
      * Sets the default finder to use for fetching rows from the target table.
      *
-     * @param array|string myFinder the finder name to use or array of finder name and option.
+     * @param array|string $finder the finder name to use or array of finder name and option.
      * @return this
      */
-    auto setFinder(myFinder) {
-        _finder = myFinder;
+    function setFinder($finder) {
+        _finder = $finder;
 
         return this;
     }
@@ -504,9 +591,9 @@ abstract class Association {
      * Override this function to initialize any concrete association class, it will
      * get passed the original list of options used in the constructor
      *
-     * @param array<string, mixed> myOptions List of options used for initialization
+     * @param array<string, mixed> $options List of options used for initialization
      */
-    protected void _options(array myOptions) {
+    protected void _options(array $options) {
     }
 
     /**
@@ -516,7 +603,7 @@ abstract class Association {
      * The options array accept the following keys:
      *
      * - includeFields: Whether to include target model fields in the result or not
-     * - foreignKeyss: The name of the field to use as foreign key, if false none
+     * - foreignKey: The name of the field to use as foreign key, if false none
      *   will be used
      * - conditions: array with a list of conditions to filter the join with, this
      *   will be merged with any conditions originally configured for this association
@@ -530,45 +617,45 @@ abstract class Association {
      * - negateMatch: Will append a condition to the passed query for excluding matches.
      *   with this association.
      *
-     * @param uim.cake.orm.Query myQuery the query to be altered to include the target table data
-     * @param array<string, mixed> myOptions Any extra options or overrides to be taken in account
+     * @param uim.cake.orm.Query $query the query to be altered to include the target table data
+     * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      * @return void
      * @throws \RuntimeException Unable to build the query or associations.
      */
-    void attachTo(Query myQuery, array myOptions = []) {
-        myTarget = this.getTarget();
-        myTable = myTarget.getTable();
+    void attachTo(Query $query, array $options = []) {
+        $target = this.getTarget();
+        $table = $target.getTable();
 
-        myOptions += [
-            "includeFields":true,
-            "foreignKeyss":this.getforeignKeys(),
-            "conditions":[],
-            "joinType":this.getJoinType(),
-            "fields":[],
-            "table":myTable,
-            "finder":this.getFinder(),
+        $options += [
+            "includeFields": true,
+            "foreignKey": this.getForeignKey(),
+            "conditions": [],
+            "joinType": this.getJoinType(),
+            "fields": [],
+            "table": $table,
+            "finder": this.getFinder(),
         ];
 
         // This is set by joinWith to disable matching results
-        if (myOptions["fields"] == false) {
-            myOptions["fields"] = [];
-            myOptions["includeFields"] = false;
+        if ($options["fields"] == false) {
+            $options["fields"] = [];
+            $options["includeFields"] = false;
         }
 
-        if (!empty(myOptions["foreignKeyss"])) {
-            $joinCondition = _joinCondition(myOptions);
+        if (!empty($options["foreignKey"])) {
+            $joinCondition = _joinCondition($options);
             if ($joinCondition) {
-                myOptions["conditions"][] = $joinCondition;
+                $options["conditions"][] = $joinCondition;
             }
         }
 
-        [myFinder, $opts] = _extractFinder(myOptions["finder"]);
+        [$finder, $opts] = _extractFinder($options["finder"]);
         $dummy = this
-            .find(myFinder, $opts)
+            .find($finder, $opts)
             .eagerLoaded(true);
 
-        if (!empty(myOptions["queryBuilder"])) {
-            $dummy = myOptions["queryBuilder"]($dummy);
+        if (!empty($options["queryBuilder"])) {
+            $dummy = $options["queryBuilder"]($dummy);
             if (!($dummy instanceof Query)) {
                 throw new RuntimeException(sprintf(
                     "Query builder for association '%s' did not return a query",
@@ -578,7 +665,7 @@ abstract class Association {
         }
 
         if (
-            !empty(myOptions["matching"]) &&
+            !empty($options["matching"]) &&
             _strategy == static::STRATEGY_JOIN &&
             $dummy.getContain()
         ) {
@@ -587,33 +674,33 @@ abstract class Association {
             );
         }
 
-        $dummy.where(myOptions["conditions"]);
+        $dummy.where($options["conditions"]);
         _dispatchBeforeFind($dummy);
 
-        myQuery.join([_name: [
-            "table":myOptions["table"],
-            "conditions":$dummy.clause("where"),
-            "type":myOptions["joinType"],
+        $query.join([_name: [
+            "table": $options["table"],
+            "conditions": $dummy.clause("where"),
+            "type": $options["joinType"],
         ]]);
 
-        _appendFields(myQuery, $dummy, myOptions);
-        _formatAssociationResults(myQuery, $dummy, myOptions);
-        _bindNewAssociations(myQuery, $dummy, myOptions);
-        _appendNotMatching(myQuery, myOptions);
+        _appendFields($query, $dummy, $options);
+        _formatAssociationResults($query, $dummy, $options);
+        _bindNewAssociations($query, $dummy, $options);
+        _appendNotMatching($query, $options);
     }
 
     /**
      * Conditionally adds a condition to the passed Query that will make it find
      * records where there is no match with this association.
      *
-     * @param uim.cake.orm.Query myQuery The query to modify
-     * @param array<string, mixed> myOptions Options array containing the `negateMatch` key.
+     * @param uim.cake.orm.Query $query The query to modify
+     * @param array<string, mixed> $options Options array containing the `negateMatch` key.
      */
-    protected void _appendNotMatching(Query myQuery, array myOptions) {
-        myTarget = _targetTable;
-        if (!empty(myOptions["negateMatch"])) {
-            $primaryKey = myQuery.aliasFields((array)myTarget.getPrimaryKeys(), _name);
-            myQuery.andWhere(function ($exp) use ($primaryKey) {
+    protected void _appendNotMatching(Query $query, array $options) {
+        $target = _targetTable;
+        if (!empty($options["negateMatch"])) {
+            $primaryKey = $query.aliasFields((array)$target.getPrimaryKeys(), _name);
+            $query.andWhere(function ($exp) use ($primaryKey) {
                 array_map([$exp, "isNull"], $primaryKey);
 
                 return $exp;
@@ -626,20 +713,19 @@ abstract class Association {
      * source results.
      *
      * @param array $row The row to transform
-     * @param string nestKey The array key under which the results for this association
+     * @param string $nestKey The array key under which the results for this association
      *   should be found
      * @param bool $joined Whether the row is a result of a direct join
      *   with this association
-     * @param string|null myTargetProperty The property name in the source results where the association
+     * @param string|null $targetProperty The property name in the source results where the association
      * data shuld be nested in. Will use the default one if not provided.
-     * @return array
      */
-    array transformRow(array $row, string nestKey, bool $joined, Nullable!string myTargetProperty = null) {
+    array transformRow(array $row, string $nestKey, bool $joined, Nullable!string $targetProperty = null) {
         $sourceAlias = this.getSource().getAlias();
         $nestKey = $nestKey ?: _name;
-        myTargetProperty = myTargetProperty ?: this.getProperty();
+        $targetProperty = $targetProperty ?: this.getProperty();
         if (isset($row[$sourceAlias])) {
-            $row[$sourceAlias][myTargetProperty] = $row[$nestKey];
+            $row[$sourceAlias][$targetProperty] = $row[$nestKey];
             unset($row[$nestKey]);
         }
 
@@ -651,10 +737,10 @@ abstract class Association {
      * with the default empty value according to whether the association was
      * joined or fetched externally.
      *
-     * @param array $row The row to set a default on.
+     * @param array<string, mixed> $row The row to set a default on.
      * @param bool $joined Whether the row is a result of a direct join
      *   with this association
-     * @return array
+     * @return array<string, mixed>
      */
     array defaultRowValue(array $row, bool $joined) {
         $sourceAlias = this.getSource().getAlias();
@@ -670,19 +756,19 @@ abstract class Association {
      * and modifies the query accordingly based of this association
      * configuration
      *
-     * @param array<string, mixed>|string|null myType the type of query to perform, if an array is passed,
-     *   it will be interpreted as the `myOptions` parameter
-     * @param array<string, mixed> myOptions The options to for the find
+     * @param array<string, mixed>|string|null $type the type of query to perform, if an array is passed,
+     *   it will be interpreted as the `$options` parameter
+     * @param array<string, mixed> $options The options to for the find
      * @see uim.cake.orm.Table::find()
      * @return uim.cake.orm.Query
      */
-    function find(myType = null, array myOptions = []): Query
+    function find($type = null, array $options = []): Query
     {
-        myType = myType ?: this.getFinder();
-        [myType, $opts] = _extractFinder(myType);
+        $type = $type ?: this.getFinder();
+        [$type, $opts] = _extractFinder($type);
 
         return this.getTarget()
-            .find(myType, myOptions + $opts)
+            .find($type, $options + $opts)
             .where(this.getConditions());
     }
 
@@ -705,18 +791,18 @@ abstract class Association {
     /**
      * Proxies the update operation to the target table"s updateAll method
      *
-     * @param array myFields A hash of field: new value.
+     * @param array $fields A hash of field: new value.
      * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @see uim.cake.orm.Table::updateAll()
      * @return int Count Returns the affected rows.
      */
-    int updateAll(array myFields, $conditions) {
+    int updateAll(array $fields, $conditions) {
         $expression = this.find()
             .where($conditions)
             .clause("where");
 
-        return this.getTarget().updateAll(myFields, $expression);
+        return this.getTarget().updateAll($fields, $expression);
     }
 
     /**
@@ -739,11 +825,11 @@ abstract class Association {
      * Returns true if the eager loading process will require a set of the owning table"s
      * binding keys in order to use them as a filter in the finder query.
      *
-     * @param array<string, mixed> myOptions The options containing the strategy to be used.
+     * @param array<string, mixed> $options The options containing the strategy to be used.
      * @return bool true if a list of keys will be required
      */
-    bool requiresKeys(array myOptions = []) {
-        $strategy = myOptions["strategy"] ?? this.getStrategy();
+    bool requiresKeys(array $options = []) {
+        $strategy = $options["strategy"] ?? this.getStrategy();
 
         return $strategy == static::STRATEGY_SELECT;
     }
@@ -752,103 +838,108 @@ abstract class Association {
      * Triggers beforeFind on the target table for the query this association is
      * attaching to
      *
-     * @param uim.cake.orm.Query myQuery the query this association is attaching itself to
+     * @param uim.cake.orm.Query $query the query this association is attaching itself to
      */
-    protected void _dispatchBeforeFind(Query myQuery) {
-        myQuery.triggerBeforeFind();
+    protected void _dispatchBeforeFind(Query $query) {
+        $query.triggerBeforeFind();
     }
 
     /**
      * Helper function used to conditionally append fields to the select clause of
      * a query from the fields found in another query object.
      *
-     * @param uim.cake.orm.Query myQuery the query that will get the fields appended to
+     * @param uim.cake.orm.Query $query the query that will get the fields appended to
      * @param uim.cake.orm.Query $surrogate the query having the fields to be copied from
-     * @param array<string, mixed> myOptions options passed to the method `attachTo`
+     * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _appendFields(Query myQuery, Query $surrogate, array myOptions) {
-        if (myQuery.getEagerLoader().isAutoFieldsEnabled() == false) {
+    protected void _appendFields(Query $query, Query $surrogate, array $options) {
+        if ($query.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
         }
 
-        myFields = array_merge($surrogate.clause("select"), myOptions["fields"]);
+        $fields = array_merge($surrogate.clause("select"), $options["fields"]);
 
         if (
-            (empty(myFields) && myOptions["includeFields"]) ||
+            (empty($fields) && $options["includeFields"]) ||
             $surrogate.isAutoFieldsEnabled()
         ) {
-            myFields = array_merge(myFields, _targetTable.getSchema().columns());
+            $fields = array_merge($fields, _targetTable.getSchema().columns());
         }
 
-        myQuery.select(myQuery.aliasFields(myFields, _name));
-        myQuery.addDefaultTypes(_targetTable);
+        $query.select($query.aliasFields($fields, _name));
+        $query.addDefaultTypes(_targetTable);
     }
 
     /**
-     * Adds a formatter function to the passed `myQuery` if the `$surrogate` query
+     * Adds a formatter function to the passed `$query` if the `$surrogate` query
      * declares any other formatter. Since the `$surrogate` query correspond to
      * the associated target table, the resulting formatter will be the result of
      * applying the surrogate formatters to only the property corresponding to
      * such table.
      *
-     * @param uim.cake.orm.Query myQuery the query that will get the formatter applied to
+     * @param uim.cake.orm.Query $query the query that will get the formatter applied to
      * @param uim.cake.orm.Query $surrogate the query having formatters for the associated
      * target table.
-     * @param array<string, mixed> myOptions options passed to the method `attachTo`
+     * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _formatAssociationResults(Query myQuery, Query $surrogate, array myOptions) {
+    protected void _formatAssociationResults(Query $query, Query $surrogate, array $options) {
         $formatters = $surrogate.getResultFormatters();
 
-        if (!$formatters || empty(myOptions["propertyPath"])) {
+        if (!$formatters || empty($options["propertyPath"])) {
             return;
         }
 
-        $property = myOptions["propertyPath"];
+        $property = $options["propertyPath"];
         $propertyPath = explode(".", $property);
-        myQuery.formatResults(function (myResults, myQuery) use ($formatters, $property, $propertyPath) {
-            $extracted = [];
-            foreach (myResults as myResult) {
-                foreach ($propertyPath as $propertyPathItem) {
-                    if (!isset(myResult[$propertyPathItem])) {
-                        myResult = null;
-                        break;
+        $query.formatResults(
+            function (ICollection $results, $query) use ($formatters, $property, $propertyPath) {
+                $extracted = [];
+                foreach ($results as $result) {
+                    foreach ($propertyPath as $propertyPathItem) {
+                        if (!isset($result[$propertyPathItem])) {
+                            $result = null;
+                            break;
+                        }
+                        $result = $result[$propertyPathItem];
                     }
-                    myResult = myResult[$propertyPathItem];
+                    $extracted[] = $result;
                 }
-                $extracted[] = myResult;
-            }
-            $extracted = new Collection($extracted);
-            foreach ($formatters as $callable) {
-                $extracted = new ResultSetDecorator($callable($extracted, myQuery));
-            }
+                $extracted = new Collection($extracted);
+                foreach ($formatters as $callable) {
+                    $extracted = $callable($extracted, $query);
+                    if (!$extracted instanceof IResultSet) {
+                        $extracted = new ResultSetDecorator($extracted);
+                    }
+                }
 
-            /** @var uim.cake.collections.ICollection myResults */
-            myResults = myResults.insert($property, $extracted);
-            if (myQuery.isHydrationEnabled()) {
-                myResults = myResults.map(function (myResult) {
-                    myResult.clean();
+                $results = $results.insert($property, $extracted);
+                if ($query.isHydrationEnabled()) {
+                    $results = $results.map(function ($result) {
+                        $result.clean();
 
-                    return myResult;
-                });
-            }
+                        return $result;
+                    });
+                }
 
-            return myResults;
-        }, Query::PREPEND);
+                return $results;
+            },
+            Query::PREPEND
+        );
     }
 
     /**
-     * Applies all attachable associations to `myQuery` out of the containments found
+     * Applies all attachable associations to `$query` out of the containments found
      * in the `$surrogate` query.
      *
      * Copies all contained associations from the `$surrogate` query into the
-     * passed `myQuery`. Containments are altered so that they respect the associations
+     * passed `$query`. Containments are altered so that they respect the associations
      * chain from which they originated.
      *
-     * @param uim.cake.orm.Query myQuery the query that will get the associations attached to
+     * @param uim.cake.orm.Query $query the query that will get the associations attached to
      * @param uim.cake.orm.Query $surrogate the query having the containments to be attached
-     * @param array<string, mixed> myOptions options passed to the method `attachTo`
+     * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _bindNewAssociations(Query myQuery, Query $surrogate, array myOptions) {
+    protected void _bindNewAssociations(Query $query, Query $surrogate, array $options) {
         $loader = $surrogate.getEagerLoader();
         $contain = $loader.getContain();
         $matching = $loader.getMatching();
@@ -858,20 +949,20 @@ abstract class Association {
         }
 
         $newContain = [];
-        foreach ($contain as myAlias: myValue) {
-            $newContain[myOptions["aliasPath"] ~ "." ~ myAlias] = myValue;
+        foreach ($contain as $alias: $value) {
+            $newContain[$options["aliasPath"] ~ "." ~ $alias] = $value;
         }
 
-        $eagerLoader = myQuery.getEagerLoader();
+        $eagerLoader = $query.getEagerLoader();
         if ($newContain) {
             $eagerLoader.contain($newContain);
         }
 
-        foreach ($matching as myAlias: myValue) {
+        foreach ($matching as $alias: $value) {
             $eagerLoader.setMatching(
-                myOptions["aliasPath"] ~ "." ~ myAlias,
-                myValue["queryBuilder"],
-                myValue
+                $options["aliasPath"] ~ "." ~ $alias,
+                $value["queryBuilder"],
+                $value
             );
         }
     }
@@ -880,41 +971,41 @@ abstract class Association {
      * Returns a single or multiple conditions to be appended to the generated join
      * clause for getting the results on the target table.
      *
-     * @param array<string, mixed> myOptions list of options passed to attachTo method
+     * @param array<string, mixed> $options list of options passed to attachTo method
      * @return array
-     * @throws \RuntimeException if the number of columns in the foreignKeyss do not
+     * @throws \RuntimeException if the number of columns in the foreignKey do not
      * match the number of columns in the source table primaryKey
      */
-    protected array _joinCondition(array myOptions) {
+    protected array _joinCondition(array $options) {
         $conditions = [];
         $tAlias = _name;
         $sAlias = this.getSource().getAlias();
-        $foreignKeyss = (array)myOptions["foreignKeyss"];
+        $foreignKey = (array)$options["foreignKey"];
         $bindingKey = (array)this.getBindingKey();
 
-        if (count($foreignKeyss) != count($bindingKey)) {
+        if (count($foreignKey) != count($bindingKey)) {
             if (empty($bindingKey)) {
-                myTable = this.getTarget().getTable();
+                $table = this.getTarget().getTable();
                 if (this.isOwningSide(this.getSource())) {
-                    myTable = this.getSource().getTable();
+                    $table = this.getSource().getTable();
                 }
                 $msg = "The '%s' table does not define a primary key, and cannot have join conditions generated.";
-                throw new RuntimeException(sprintf($msg, myTable));
+                throw new RuntimeException(sprintf($msg, $table));
             }
 
-            $msg = "Cannot match provided foreignKeyss for '%s', got "(%s)" but expected foreign key for "(%s)"";
+            $msg = "Cannot match provided foreignKey for '%s', got "(%s)" but expected foreign key for "(%s)"";
             throw new RuntimeException(sprintf(
                 $msg,
                 _name,
-                implode(", ", $foreignKeyss),
+                implode(", ", $foreignKey),
                 implode(", ", $bindingKey)
             ));
         }
 
-        foreach ($foreignKeyss as $k: $f) {
-            myField = sprintf("%s.%s", $sAlias, $bindingKey[$k]);
-            myValue = new IdentifierExpression(sprintf("%s.%s", $tAlias, $f));
-            $conditions[myField] = myValue;
+        foreach ($foreignKey as $k: $f) {
+            $field = sprintf("%s.%s", $sAlias, $bindingKey[$k]);
+            $value = new IdentifierExpression(sprintf("%s.%s", $tAlias, $f));
+            $conditions[$field] = $value;
         }
 
         return $conditions;
@@ -923,38 +1014,37 @@ abstract class Association {
     /**
      * Helper method to infer the requested finder and its options.
      *
-     * Returns the inferred options from the finder myType.
+     * Returns the inferred options from the finder $type.
      *
      * ### Examples:
      *
      * The following will call the finder "translations" with the value of the finder as its options:
-     * myQuery.contain(["Comments":["finder":["translations"]]]);
-     * myQuery.contain(["Comments":["finder":["translations":[]]]]);
-     * myQuery.contain(["Comments":["finder":["translations":["locales":["en_US"]]]]]);
+     * $query.contain(["Comments": ["finder": ["translations"]]]);
+     * $query.contain(["Comments": ["finder": ["translations": []]]]);
+     * $query.contain(["Comments": ["finder": ["translations": ["locales": ["en_US"]]]]]);
      *
-     * @param array|string myFinderData The finder name or an array having the name as key
+     * @param array|string $finderData The finder name or an array having the name as key
      * and options as value.
-     * @return array
      */
-    protected array _extractFinder(myFinderData) {
-        myFinderData = (array)myFinderData;
+    protected array _extractFinder($finderData) {
+        $finderData = (array)$finderData;
 
-        if (is_numeric(key(myFinderData))) {
-            return [current(myFinderData), []];
+        if (is_numeric(key($finderData))) {
+            return [current($finderData), []];
         }
 
-        return [key(myFinderData), current(myFinderData)];
+        return [key($finderData), current($finderData)];
     }
 
     /**
      * Proxies property retrieval to the target table. This is handy for getting this
      * association"s associations
      *
-     * @param string property the property name
+     * @param string $property the property name
      * @return uim.cake.orm.Association
      * @throws \RuntimeException if no association with such name exists
      */
-    auto __get($property) {
+    function __get($property) {
         return this.getTarget().{$property};
     }
 
@@ -962,22 +1052,22 @@ abstract class Association {
      * Proxies the isset call to the target table. This is handy to check if the
      * target table has another association with the passed name
      *
-     * @param string property the property name
+     * @param string $property the property name
      * @return bool true if the property exists
      */
-    auto __isSet($property) {
+    bool __isSet($property) {
         return isset(this.getTarget().{$property});
     }
 
     /**
      * Proxies method calls to the target table.
      *
-     * @param string method name of the method to be invoked
+     * @param string $method name of the method to be invoked
      * @param array $argument List of arguments passed to the function
      * @return mixed
      * @throws \BadMethodCallException
      */
-    auto __call($method, $argument) {
+    function __call($method, $argument) {
         return this.getTarget().$method(...$argument);
     }
 
@@ -1007,7 +1097,7 @@ abstract class Association {
      *
      * - query: Query object setup to find the source table records
      * - keys: List of primary key values from the source table
-     * - foreignKeyss: The name of the field used to relate both tables
+     * - foreignKey: The name of the field used to relate both tables
      * - conditions: List of conditions to be passed to the query where() method
      * - sort: The direction in which the records should be returned
      * - fields: List of fields to select from the target table
@@ -1015,10 +1105,10 @@ abstract class Association {
      * - strategy: The name of strategy to use for finding target table records
      * - nestKey: The array key under which results will be found when transforming the row
      *
-     * @param array<string, mixed> myOptions The options for eager loading.
+     * @param array<string, mixed> $options The options for eager loading.
      * @return \Closure
      */
-    abstract Closure eagerLoader(array myOptions);
+    abstract function eagerLoader(array $options): Closure;
 
     /**
      * Handles cascading a delete from an associated model.
@@ -1027,10 +1117,10 @@ abstract class Association {
      * required.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
-     * @param array<string, mixed> myOptions The options for the original delete.
+     * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success
      */
-    abstract bool cascadeDelete(IEntity $entity, array myOptions = []);
+    abstract bool cascadeDelete(IEntity $entity, array $options = []);
 
     /**
      * Returns whether the passed table is the owning side for this
@@ -1047,10 +1137,10 @@ abstract class Association {
      * the saving operation to the target table.
      *
      * @param uim.cake.Datasource\IEntity $entity the data to be saved
-     * @param array<string, mixed> myOptions The options for saving associated data.
+     * @param array<string, mixed> $options The options for saving associated data.
      * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      */
-    abstract function saveAssociated(IEntity $entity, array myOptions = []);
+    abstract function saveAssociated(IEntity $entity, array $options = []);
 }

@@ -3,6 +3,9 @@ module uim.cake.orm;
 @safe:
 import uim.cake;
 
+use ReflectionClass;
+use ReflectionMethod;
+
 /**
  * Base class for behaviors.
  *
@@ -23,7 +26,7 @@ import uim.cake;
  * }
  * ```
  *
- * Would be called like `myTable.doSomething($arg1, $arg2);`.
+ * Would be called like `$table.doSomething($arg1, $arg2);`.
  *
  * ### Callback methods
  *
@@ -31,41 +34,41 @@ import uim.cake;
  * UIM provides a number of lifecycle events your behaviors can
  * listen to:
  *
- * - `beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions, boolean $primary)`
+ * - `beforeFind(IEvent $event, Query $query, ArrayObject $options, boolean $primary)`
  *   Fired before each find operation. By stopping the event and supplying a
  *   return value you can bypass the find operation entirely. Any changes done
- *   to the myQuery instance will be retained for the rest of the find. The
+ *   to the $query instance will be retained for the rest of the find. The
  *   $primary parameter indicates whether this is the root query,
  *   or an associated query.
  *
- * - `buildValidator(IEvent myEvent, Validator $validator, string myName)`
- *   Fired when the validator object identified by myName is being built. You can use this
+ * - `buildValidator(IEvent $event, Validator $validator, string aName)`
+ *   Fired when the validator object identified by $name is being built. You can use this
  *   callback to add validation rules or add validation providers.
  *
- * - `buildRules(IEvent myEvent, RulesChecker $rules)`
+ * - `buildRules(IEvent $event, RulesChecker $rules)`
  *   Fired when the rules checking object for the table is being built. You can use this
  *   callback to add more rules to the set.
  *
- * - `beforeRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, $operation)`
+ * - `beforeRules(IEvent $event, IEntity $entity, ArrayObject $options, $operation)`
  *   Fired before an entity is validated using by a rules checker. By stopping this event,
  *   you can return the final value of the rules checking operation.
  *
- * - `afterRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, bool myResult, $operation)`
+ * - `afterRules(IEvent $event, IEntity $entity, ArrayObject $options, bool $result, $operation)`
  *   Fired after the rules have been checked on the entity. By stopping this event,
  *   you can return the final value of the rules checking operation.
  *
- * - `beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
+ * - `beforeSave(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired before each entity is saved. Stopping this event will abort the save
  *   operation. When the event is stopped the result of the event will be returned.
  *
- * - `afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
+ * - `afterSave(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired after an entity is saved.
  *
- * - `beforeDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
+ * - `beforeDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired before an entity is deleted. By stopping this event you will abort
  *   the delete operation.
  *
- * - `afterDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
+ * - `afterDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired after an entity has been deleted.
  *
  * In addition to the core events, behaviors can respond to any
@@ -87,7 +90,7 @@ import uim.cake;
  * methods should expect the following arguments:
  *
  * ```
- * findSlugged(Query myQuery, array myOptions)
+ * findSlugged(Query $query, array $options)
  * ```
  *
  * @see uim.cake.orm.Table::addBehavior()
@@ -121,30 +124,30 @@ class Behavior : IEventListener
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * Constructor
      *
      * Merges config with the default and store in the config property
      *
-     * @param uim.cake.orm.Table myTable The table this behavior is attached to.
-     * @param array<string, mixed> myConfig The config for this behavior.
+     * @param uim.cake.orm.Table $table The table this behavior is attached to.
+     * @param array<string, mixed> aConfig The config for this behavior.
      */
-    this(Table myTable, array myConfig = []) {
-        myConfig = _resolveMethodAliases(
+    this(Table $table, Json aConfig = []) {
+        aConfig = _resolveMethodAliases(
             "implementedFinders",
             _defaultConfig,
-            myConfig
+            aConfig
         );
-        myConfig = _resolveMethodAliases(
+        aConfig = _resolveMethodAliases(
             "implementedMethods",
             _defaultConfig,
-            myConfig
+            aConfig
         );
-        _table = myTable;
-        this.setConfig(myConfig);
-        this.initialize(myConfig);
+        _table = $table;
+        this.setConfig(aConfig);
+        this.initialize(aConfig);
     }
 
     /**
@@ -153,9 +156,9 @@ class Behavior : IEventListener
      * Implement this method to avoid having to overwrite
      * the constructor and call parent.
      *
-     * @param array<string, mixed> myConfig The configuration settings provided to this behavior.
+     * @param array<string, mixed> aConfig The configuration settings provided to this behavior.
      */
-    void initialize(array myConfig) {
+    void initialize(Json aConfig) {
     }
 
     /**
@@ -164,7 +167,7 @@ class Behavior : IEventListener
      * @return uim.cake.orm.Table The bound table instance.
      * @deprecated 4.2.0 Use table() instead.
      */
-    auto getTable(): Table
+    function getTable(): Table
     {
         deprecationWarning("Behavior::getTable() is deprecated. Use table() instead.");
 
@@ -184,33 +187,33 @@ class Behavior : IEventListener
     /**
      * Removes aliased methods that would otherwise be duplicated by userland configuration.
      *
-     * @param string myKey The key to filter.
+     * @param string aKey The key to filter.
      * @param array<string, mixed> $defaults The default method mappings.
-     * @param array<string, mixed> myConfig The customized method mappings.
+     * @param array<string, mixed> aConfig The customized method mappings.
      * @return array A de-duped list of config data.
      */
-    protected array _resolveMethodAliases(string myKey, array $defaults, array myConfig) {
-        if (!isset($defaults[myKey], myConfig[myKey])) {
-            return myConfig;
+    protected array _resolveMethodAliases(string aKey, array $defaults, Json aConfig) {
+        if (!isset($defaults[$key], aConfig[$key])) {
+            return aConfig;
         }
-        if (isset(myConfig[myKey]) && myConfig[myKey] == []) {
-            this.setConfig(myKey, [], false);
-            unset(myConfig[myKey]);
+        if (isset(aConfig[$key]) && aConfig[$key] == []) {
+            this.setConfig($key, [], false);
+            unset(aConfig[$key]);
 
-            return myConfig;
+            return aConfig;
         }
 
-        $indexed = array_flip($defaults[myKey]);
-        $indexedCustom = array_flip(myConfig[myKey]);
-        foreach ($indexed as $method: myAlias) {
+        $indexed = array_flip($defaults[$key]);
+        $indexedCustom = array_flip(aConfig[$key]);
+        foreach ($indexed as $method: $alias) {
             if (!isset($indexedCustom[$method])) {
-                $indexedCustom[$method] = myAlias;
+                $indexedCustom[$method] = $alias;
             }
         }
-        this.setConfig(myKey, array_flip($indexedCustom), false);
-        unset(myConfig[myKey]);
+        this.setConfig($key, array_flip($indexedCustom), false);
+        unset(aConfig[$key]);
 
-        return myConfig;
+        return aConfig;
     }
 
     /**
@@ -222,13 +225,13 @@ class Behavior : IEventListener
      * @throws uim.cake.Core\exceptions.UIMException if config are invalid
      */
     void verifyConfig() {
-        myKeys = ["implementedFinders", "implementedMethods"];
-        foreach (myKey; myKeys) {
-            if (!isset(_config[myKey])) {
+        $keys = ["implementedFinders", "implementedMethods"];
+        foreach ($keys as $key) {
+            if (!isset(_config[$key])) {
                 continue;
             }
 
-            foreach (_config[myKey] as $method) {
+            foreach (_config[$key] as $method) {
                 if (!is_callable([this, $method])) {
                     throw new UIMException(sprintf(
                         "The method %s is not callable on class %s",
@@ -252,56 +255,56 @@ class Behavior : IEventListener
      * @return array<string, mixed>
      */
     array implementedEvents() {
-        myEventMap = [
-            "Model.beforeMarshal":"beforeMarshal",
-            "Model.afterMarshal":"afterMarshal",
-            "Model.beforeFind":"beforeFind",
-            "Model.beforeSave":"beforeSave",
-            "Model.afterSave":"afterSave",
-            "Model.afterSaveCommit":"afterSaveCommit",
-            "Model.beforeDelete":"beforeDelete",
-            "Model.afterDelete":"afterDelete",
-            "Model.afterDeleteCommit":"afterDeleteCommit",
-            "Model.buildValidator":"buildValidator",
-            "Model.buildRules":"buildRules",
-            "Model.beforeRules":"beforeRules",
-            "Model.afterRules":"afterRules",
+        $eventMap = [
+            "Model.beforeMarshal": "beforeMarshal",
+            "Model.afterMarshal": "afterMarshal",
+            "Model.beforeFind": "beforeFind",
+            "Model.beforeSave": "beforeSave",
+            "Model.afterSave": "afterSave",
+            "Model.afterSaveCommit": "afterSaveCommit",
+            "Model.beforeDelete": "beforeDelete",
+            "Model.afterDelete": "afterDelete",
+            "Model.afterDeleteCommit": "afterDeleteCommit",
+            "Model.buildValidator": "buildValidator",
+            "Model.buildRules": "buildRules",
+            "Model.beforeRules": "beforeRules",
+            "Model.afterRules": "afterRules",
         ];
-        myConfig = this.getConfig();
-        $priority = myConfig["priority"] ?? null;
-        myEvents = [];
+        aConfig = this.getConfig();
+        $priority = aConfig["priority"] ?? null;
+        $events = [];
 
-        foreach (myEventMap as myEvent: $method) {
+        foreach ($eventMap as $event: $method) {
             if (!method_exists(this, $method)) {
                 continue;
             }
-            if ($priority is null) {
-                myEvents[myEvent] = $method;
+            if ($priority == null) {
+                $events[$event] = $method;
             } else {
-                myEvents[myEvent] = [
-                    "callable":$method,
-                    "priority":$priority,
+                $events[$event] = [
+                    "callable": $method,
+                    "priority": $priority,
                 ];
             }
         }
 
-        return myEvents;
+        return $events;
     }
 
     /**
      * implementedFinders
      *
-     * Provides an alias.methodname map of which finders a behavior :. Example:
+     * Provides an alias.methodname map of which finders a behavior implements. Example:
      *
      * ```
      *  [
-     *    "this":"findThis",
-     *    "alias":"findMethodName"
+     *    "this": "findThis",
+     *    "alias": "findMethodName"
      *  ]
      * ```
      *
-     * With the above example, a call to `myTable.find("this")` will call `$behavior.findThis()`
-     * and a call to `myTable.find("alias")` will call `$behavior.findMethodName()`
+     * With the above example, a call to `$table.find("this")` will call `$behavior.findThis()`
+     * and a call to `$table.find("alias")` will call `$behavior.findMethodName()`
      *
      * It is recommended, though not required, to define implementedFinders in the config property
      * of child classes such that it is not necessary to use reflections to derive the available
@@ -322,17 +325,17 @@ class Behavior : IEventListener
     /**
      * implementedMethods
      *
-     * Provides an alias.methodname map of which methods a behavior :. Example:
+     * Provides an alias.methodname map of which methods a behavior implements. Example:
      *
      * ```
      *  [
-     *    "method":"method",
-     *    "aliasedMethod":"somethingElse"
+     *    "method": "method",
+     *    "aliasedMethod": "somethingElse"
      *  ]
      * ```
      *
-     * With the above example, a call to `myTable.method()` will call `$behavior.method()`
-     * and a call to `myTable.aliasedMethod()` will call `$behavior.somethingElse()`
+     * With the above example, a call to `$table.method()` will call `$behavior.method()`
+     * and a call to `$table.aliasedMethod()` will call `$behavior.somethingElse()`
      *
      * It is recommended, though not required, to define implementedFinders in the config property
      * of child classes such that it is not necessary to use reflections to derive the available
@@ -361,53 +364,53 @@ class Behavior : IEventListener
      * @throws \ReflectionException
      */
     protected array _reflectionCache() {
-      myClass = static::class;
-      if (isset(self::_reflectionCache[myClass])) {
-          return self::_reflectionCache[myClass];
-      }
+        $class = static::class;
+        if (isset(self::_reflectionCache[$class])) {
+            return self::_reflectionCache[$class];
+        }
 
-      myEvents = this.implementedEvents();
-      myEventMethods = [];
-      foreach (myEvents as $binding) {
-          if (is_array($binding) && isset($binding["callable"])) {
-              /** @var string callable */
-              $callable = $binding["callable"];
-              $binding = $callable;
-          }
-          myEventMethods[$binding] = true;
-      }
+        $events = this.implementedEvents();
+        $eventMethods = [];
+        foreach ($events as $binding) {
+            if (is_array($binding) && isset($binding["callable"])) {
+                /** @var string $callable */
+                $callable = $binding["callable"];
+                $binding = $callable;
+            }
+            $eventMethods[$binding] = true;
+        }
 
-      $baseClass = self::class;
-      if (isset(self::_reflectionCache[$baseClass])) {
-          $baseMethods = self::_reflectionCache[$baseClass];
-      } else {
-          $baseMethods = get_class_methods($baseClass);
-          self::_reflectionCache[$baseClass] = $baseMethods;
-      }
+        $baseClass = self::class;
+        if (isset(self::_reflectionCache[$baseClass])) {
+            $baseMethods = self::_reflectionCache[$baseClass];
+        } else {
+            $baseMethods = get_class_methods($baseClass);
+            self::_reflectionCache[$baseClass] = $baseMethods;
+        }
 
-      $return = [
-          "finders":[],
-          "methods":[],
-      ];
+        $return = [
+            "finders": [],
+            "methods": [],
+        ];
 
-      $reflection = new ReflectionClass(myClass);
+        $reflection = new ReflectionClass($class);
 
-      foreach ($reflection.getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-          $methodName = $method.getName();
-          if (
-              in_array($methodName, $baseMethods, true) ||
-              isset(myEventMethods[$methodName])
-          ) {
-              continue;
-          }
+        foreach ($reflection.getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            $methodName = $method.getName();
+            if (
+                in_array($methodName, $baseMethods, true) ||
+                isset($eventMethods[$methodName])
+            ) {
+                continue;
+            }
 
-          if (substr($methodName, 0, 4) == "find") {
-              $return["finders"][lcfirst(substr($methodName, 4))] = $methodName;
-          } else {
-              $return["methods"][$methodName] = $methodName;
-          }
-      }
+            if (substr($methodName, 0, 4) == "find") {
+                $return["finders"][lcfirst(substr($methodName, 4))] = $methodName;
+            } else {
+                $return["methods"][$methodName] = $methodName;
+            }
+        }
 
-      return self::_reflectionCache[myClass] = $return;
+        return self::_reflectionCache[$class] = $return;
     }
 }

@@ -7,40 +7,44 @@ import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 use Closure;
 
+@safe:
+import uim.cake;
+
 /**
  * Represents an 1 - 1 relationship where the source side of the relation is
  * related to only one record in the target table and vice versa.
  *
  * An example of a HasOne association would be User has one Profile.
  */
-class HasOne : Association
-{
+class HasOne : Association {
     /**
      * Valid strategies for this type of association
      *
      * @var array<string>
      */
-    protected _validStrategies = [
+    protected string[] _validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
     ];
 
-    // Gets the name of the field representing the foreign key to the target table.
-    string[] getForeignKey() {
-        if (_foreignKey is null) {
+    /**
+     * Gets the name of the field representing the foreign key to the target table.
+     *
+     * @return array<string>|string
+     */
+    function getForeignKey() {
+        if (_foreignKey == null) {
             _foreignKey = _modelKey(this.getSource().getAlias());
         }
 
         return _foreignKey;
     }
 
-    /**
-     * Returns default property name based on association name.
-     */
+    // Returns default property name based on association name.
     protected string _propertyName() {
-        [, myName] = pluginSplit(_name);
+        [, $name] = pluginSplit(_name);
 
-        return Inflector::underscore(Inflector::singularize(myName));
+        return Inflector::underscore(Inflector::singularize($name));
     }
 
     /**
@@ -65,17 +69,17 @@ class HasOne : Association
      * Takes an entity from the source table and looks if there is a field
      * matching the property name for this association. The found entity will be
      * saved on the target table for this association by passing supplied
-     * `myOptions`
+     * `$options`
      *
      * @param uim.cake.Datasource\IEntity $entity an entity from the source table
-     * @param array<string, mixed> myOptions options to be passed to the save method in the target table
+     * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      */
-    function saveAssociated(IEntity $entity, array myOptions = []) {
-        myTargetEntity = $entity.get(this.getProperty());
-        if (empty(myTargetEntity) || !(myTargetEntity instanceof IEntity)) {
+    function saveAssociated(IEntity $entity, array $options = []) {
+        $targetEntity = $entity.get(this.getProperty());
+        if (empty($targetEntity) || !($targetEntity instanceof IEntity)) {
             return $entity;
         }
 
@@ -83,10 +87,10 @@ class HasOne : Association
             (array)this.getForeignKey(),
             $entity.extract((array)this.getBindingKey())
         );
-        myTargetEntity.set($properties, ["guard":false]);
+        $targetEntity.set($properties, ["guard": false]);
 
-        if (!this.getTarget().save(myTargetEntity, myOptions)) {
-            myTargetEntity.unset(array_keys($properties));
+        if (!this.getTarget().save($targetEntity, $options)) {
+            $targetEntity.unset(array_keys($properties));
 
             return false;
         }
@@ -95,25 +99,26 @@ class HasOne : Association
     }
 
 
-    Closure eagerLoader(array myOptions) {
+    function eagerLoader(array $options): Closure
+    {
         $loader = new SelectLoader([
-            "alias":this.getAlias(),
-            "sourceAlias":this.getSource().getAlias(),
-            "targetAlias":this.getTarget().getAlias(),
-            "foreignKey":this.getForeignKey(),
-            "bindingKey":this.getBindingKey(),
-            "strategy":this.getStrategy(),
-            "associationType":this.type(),
-            "finder":[this, "find"],
+            "alias": this.getAlias(),
+            "sourceAlias": this.getSource().getAlias(),
+            "targetAlias": this.getTarget().getAlias(),
+            "foreignKey": this.getForeignKey(),
+            "bindingKey": this.getBindingKey(),
+            "strategy": this.getStrategy(),
+            "associationType": this.type(),
+            "finder": [this, "find"],
         ]);
 
-        return $loader.buildEagerLoader(myOptions);
+        return $loader.buildEagerLoader($options);
     }
 
 
-    bool cascadeDelete(IEntity $entity, array myOptions = []) {
+    bool cascadeDelete(IEntity $entity, array $options = []) {
         $helper = new DependentDeleteHelper();
 
-        return $helper.cascadeDelete(this, $entity, myOptions);
+        return $helper.cascadeDelete(this, $entity, $options);
     }
 }
