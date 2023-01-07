@@ -8,16 +8,36 @@ import uim.cake;
  */
 class LinkConstraint
 {
-  // -------------
+    /**
+     * Status that requires a link to be present.
+     */
+    const string STATUS_LINKED = "linked";
+
+    /**
+     * Status that requires a link to not be present.
+     */
+    const string STATUS_NOT_LINKED = "notLinked";
+
+    /**
+     * The association that should be checked.
+     *
+     * @var uim.cake.orm.Association|string
+     */
+    protected _association;
+
+    /**
+     * The link status that is required to be present in order for the check to succeed.
+     */
+    protected string _requiredLinkState;
 
     /**
      * Constructor.
      *
-     * @param uim.cake.orm.Association|string association The alias of the association that should be checked.
-     * @param string requiredLinkStatus The link status that is required to be present in order for the check to
+     * @param uim.cake.orm.Association|string $association The alias of the association that should be checked.
+     * @param string $requiredLinkStatus The link status that is required to be present in order for the check to
      *  succeed.
      */
-    this($association, string requiredLinkStatus) {
+    this($association, string $requiredLinkStatus) {
         if (
             !is_string($association) &&
             !($association instanceof Association)
@@ -44,12 +64,12 @@ class LinkConstraint
      * Performs the actual link check.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity involved in the operation.
-     * @param array<string, mixed> myOptions Options passed from the rules checker.
+     * @param array<string, mixed> $options Options passed from the rules checker.
      * @return bool Whether the check was successful.
      */
-    bool __invoke(IEntity $entity, array myOptions) {
-        myTable = myOptions["repository"] ?? null;
-        if (!(myTable instanceof Table)) {
+    bool __invoke(IEntity $entity, array $options) {
+        $table = $options["repository"] ?? null;
+        if (!($table instanceof Table)) {
             throw new \InvalidArgumentException(
                 "Argument 2 is expected to have a `repository` key that holds an instance of `uim.cake.orm.Table`."
             );
@@ -57,19 +77,19 @@ class LinkConstraint
 
         $association = _association;
         if (!$association instanceof Association) {
-            $association = myTable.getAssociation($association);
+            $association = $table.getAssociation($association);
         }
 
-        myCount = _countLinks($association, $entity);
+        $count = _countLinks($association, $entity);
 
         if (
             (
                 _requiredLinkState == static::STATUS_LINKED &&
-                myCount < 1
+                $count < 1
             ) ||
             (
                 _requiredLinkState == static::STATUS_NOT_LINKED &&
-                myCount != 0
+                $count != 0
             )
         ) {
             return false;
@@ -81,35 +101,35 @@ class LinkConstraint
     /**
      * Alias fields.
      *
-     * @param array<string> myFields The fields that should be aliased.
+     * @param array<string> $fields The fields that should be aliased.
      * @param uim.cake.orm.Table $source The object to use for aliasing.
-     * @return The aliased fields
+     * @return array<string> The aliased fields
      */
-    protected string[] _aliasFields(array myFields, Table $source) {
-        foreach (myFields as myKey: myValue) {
-            myFields[myKey] = $source.aliasField(myValue);
+    protected string[] _aliasFields(array $fields, Table $source) {
+        foreach ($fields as $key: $value) {
+            $fields[$key] = $source.aliasField($value);
         }
 
-        return myFields;
+        return $fields;
     }
 
     /**
      * Build conditions.
      *
-     * @param array myFields The condition fields.
-     * @param array myValues The condition values.
+     * @param array $fields The condition fields.
+     * @param array $values The condition values.
      * @return array A conditions array combined from the passed fields and values.
      */
-    protected array _buildConditions(array myFields, array myValues) {
-        if (count(myFields) != count(myValues)) {
+    protected array _buildConditions(array $fields, array $values) {
+        if (count($fields) != count($values)) {
             throw new \InvalidArgumentException(sprintf(
                 "The number of fields is expected to match the number of values, got %d field(s) and %d value(s).",
-                count(myFields),
-                count(myValues)
+                count($fields),
+                count($values)
             ));
         }
 
-        return array_combine(myFields, myValues);
+        return array_combine($fields, $values);
     }
 
     /**
@@ -133,9 +153,9 @@ class LinkConstraint
             ));
         }
 
-        myAliasedPrimaryKey = _aliasFields($primaryKey, $source);
+        $aliasedPrimaryKey = _aliasFields($primaryKey, $source);
         $conditions = _buildConditions(
-            myAliasedPrimaryKey,
+            $aliasedPrimaryKey,
             $entity.extract($primaryKey)
         );
 

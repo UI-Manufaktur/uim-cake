@@ -3,13 +3,24 @@ module uim.cake.orm.associations.collection;
 @safe:
 import uim.cake;
 
+use ArrayIterator;
+import uim.cake.datasources.IEntity;
+import uim.cake.orm.locators.LocatorAwareTrait;
+import uim.cake.orm.locators.ILocator;
+use InvalidArgumentException;
+use IteratorAggregate;
+use Traversable;
+
 /**
  * A container/collection for association classes.
  *
  * Contains methods for managing associations, and
  * ordering operations around saving and deleting.
  */
-class AssociationCollection : IteratorAggregate {
+class AssociationCollection : IteratorAggregate
+{
+    use AssociationsNormalizerTrait;
+    use LocatorAwareTrait;
 
     /**
      * Stored associations
@@ -24,11 +35,11 @@ class AssociationCollection : IteratorAggregate {
      * Sets the default table locator for associations.
      * If no locator is provided, the global one will be used.
      *
-     * @param uim.cake.orm.Locator\ILocator|null myTableLocator Table locator instance.
+     * @param uim.cake.orm.Locator\ILocator|null $tableLocator Table locator instance.
      */
-    this(?ILocator myTableLocator = null) {
-        if (myTableLocator  !is null) {
-            _tableLocator = myTableLocator;
+    this(?ILocator $tableLocator = null) {
+        if ($tableLocator != null) {
+            _tableLocator = $tableLocator;
         }
     }
 
@@ -38,41 +49,34 @@ class AssociationCollection : IteratorAggregate {
      * If the alias added contains a `.` the part preceding the `.` will be dropped.
      * This makes using plugins simpler as the Plugin.Class syntax is frequently used.
      *
-     * @param string myAlias The association alias
+     * @param string $alias The association alias
      * @param uim.cake.orm.Association $association The association to add.
      * @return uim.cake.orm.Association The association object being added.
      */
-    function add(string myAlias, Association $association): Association
+    function add(string $alias, Association $association): Association
     {
-        [, myAlias] = pluginSplit(myAlias);
+        [, $alias] = pluginSplit($alias);
 
-        return _items[myAlias] = $association;
+        return _items[$alias] = $association;
     }
 
     /**
      * Creates and adds the Association object to this collection.
      *
-     * @param string myClassName The name of association class.
-     * @param string associated The alias for the target table.
-     * @param array<string, mixed> myOptions List of options to configure the association definition.
+     * @param string $className The name of association class.
+     * @param string $associated The alias for the target table.
+     * @param array<string, mixed> $options List of options to configure the association definition.
      * @return uim.cake.orm.Association
      * @throws \InvalidArgumentException
+     * @psalm-param class-string<uim.cake.orm.Association> $className
      */
-    function load(string myClassName, string associated, array myOptions = []): Association
+    function load(string $className, string $associated, array $options = []): Association
     {
-        myOptions += [
-            "tableLocator":this.getTableLocator(),
+        $options += [
+            "tableLocator": this.getTableLocator(),
         ];
 
-        $association = new myClassName($associated, myOptions);
-        if (!$association instanceof Association) {
-            myMessage = sprintf(
-                "The association must extend `%s` class, `%s` given.",
-                Association::class,
-                get_class($association)
-            );
-            throw new InvalidArgumentException(myMessage);
-        }
+        $association = new $className($associated, $options);
 
         return this.add($association.getName(), $association);
     }
@@ -80,21 +84,21 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Fetch an attached association by name.
      *
-     * @param string myAlias The association alias to get.
+     * @param string $alias The association alias to get.
      * @return uim.cake.orm.Association|null Either the association or null.
      */
-    auto get(string myAlias): ?Association
+    function get(string $alias): ?Association
     {
-        return _items[myAlias] ?? null;
+        return _items[$alias] ?? null;
     }
 
     /**
      * Fetch an association by property name.
      *
-     * @param string prop The property to find an association by.
+     * @param string $prop The property to find an association by.
      * @return uim.cake.orm.Association|null Either the association or null.
      */
-    auto getByProperty(string prop): ?Association
+    function getByProperty(string $prop): ?Association
     {
         foreach (_items as $assoc) {
             if ($assoc.getProperty() == $prop) {
@@ -108,14 +112,18 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Check for an attached association by name.
      *
-     * @param string myAlias The association alias to get.
+     * @param string $alias The association alias to get.
      * @return bool Whether the association exists.
      */
-    bool has(string myAlias) {
-        return isset(_items[myAlias]);
+    bool has(string $alias) {
+        return isset(_items[$alias]);
     }
 
-    // Get the names of all the associations in the collection.
+    /**
+     * Get the names of all the associations in the collection.
+     *
+     * @return array<string>
+     */
     string[] keys() {
         return array_keys(_items);
     }
@@ -123,18 +131,18 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Get an array of associations matching a specific type.
      *
-     * @param array<string>|string myClass The type of associations you want.
+     * @param array<string>|string $class The type of associations you want.
      *   For example "BelongsTo" or array like ["BelongsTo", "HasOne"]
      * @return array<uim.cake.orm.Association> An array of Association objects.
      * @since 3.5.3
      */
-    array getByType(myClass) {
-        myClass = array_map("strtolower", (array)myClass);
+    array getByType($class) {
+        $class = array_map("strtolower", (array)$class);
 
-        $out = array_filter(_items, function ($assoc) use (myClass) {
-            [, myName] = moduleSplit(get_class($assoc));
+        $out = array_filter(_items, function ($assoc) use ($class) {
+            [, $name] = namespaceSplit(get_class($assoc));
 
-            return in_array(strtolower(myName), myClass, true);
+            return in_array(strtolower($name), $class, true);
         });
 
         return array_values($out);
@@ -145,10 +153,10 @@ class AssociationCollection : IteratorAggregate {
      *
      * Once removed the association will no longer be reachable
      *
-     * @param string myAlias The alias name.
+     * @param string $alias The alias name.
      */
-    void remove(string myAlias) {
-        unset(_items[myAlias]);
+    void remove(string $alias) {
+        unset(_items[$alias]);
     }
 
     /**
@@ -157,8 +165,8 @@ class AssociationCollection : IteratorAggregate {
      * Once removed associations will no longer be reachable
      */
     void removeAll() {
-        foreach (_items as myAlias: $object) {
-            this.remove(myAlias);
+        foreach (_items as $alias: $object) {
+            this.remove($alias);
         }
     }
 
@@ -168,19 +176,19 @@ class AssociationCollection : IteratorAggregate {
      * Parent associations include any association where the given table
      * is the owning side.
      *
-     * @param uim.cake.orm.Table myTable The table entity is for.
+     * @param uim.cake.orm.Table $table The table entity is for.
      * @param uim.cake.Datasource\IEntity $entity The entity to save associated data for.
      * @param array $associations The list of associations to save parents from.
      *   associations not in this list will not be saved.
-     * @param array<string, mixed> myOptions The options for the save operation.
+     * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    bool saveParents(Table myTable, IEntity $entity, array $associations, array myOptions = []) {
+    bool saveParents(Table $table, IEntity $entity, array $associations, array $options = []) {
         if (empty($associations)) {
             return true;
         }
 
-        return _saveAssociations(myTable, $entity, $associations, myOptions, false);
+        return _saveAssociations($table, $entity, $associations, $options, false);
     }
 
     /**
@@ -189,59 +197,59 @@ class AssociationCollection : IteratorAggregate {
      * Child associations include any association where the given table
      * is not the owning side.
      *
-     * @param uim.cake.orm.Table myTable The table entity is for.
+     * @param uim.cake.orm.Table $table The table entity is for.
      * @param uim.cake.Datasource\IEntity $entity The entity to save associated data for.
      * @param array $associations The list of associations to save children from.
      *   associations not in this list will not be saved.
-     * @param array<string, mixed> myOptions The options for the save operation.
+     * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    bool saveChildren(Table myTable, IEntity $entity, array $associations, array myOptions) {
+    bool saveChildren(Table $table, IEntity $entity, array $associations, array $options) {
         if (empty($associations)) {
             return true;
         }
 
-        return _saveAssociations(myTable, $entity, $associations, myOptions, true);
+        return _saveAssociations($table, $entity, $associations, $options, true);
     }
 
     /**
      * Helper method for saving an association"s data.
      *
-     * @param uim.cake.orm.Table myTable The table the save is currently operating on
+     * @param uim.cake.orm.Table $table The table the save is currently operating on
      * @param uim.cake.Datasource\IEntity $entity The entity to save
      * @param array $associations Array of associations to save.
-     * @param array<string, mixed> myOptions Original options
+     * @param array<string, mixed> $options Original options
      * @param bool $owningSide Compared with association classes"
      *   isOwningSide method.
      * @return bool Success
      * @throws \InvalidArgumentException When an unknown alias is used.
      */
     protected bool _saveAssociations(
-        Table myTable,
+        Table $table,
         IEntity $entity,
         array $associations,
-        array myOptions,
+        array $options,
         bool $owningSide
     ) {
-        unset(myOptions["associated"]);
-        foreach ($associations as myAlias: $nested) {
-            if (is_int(myAlias)) {
-                myAlias = $nested;
+        unset($options["associated"]);
+        foreach ($associations as $alias: $nested) {
+            if (is_int($alias)) {
+                $alias = $nested;
                 $nested = [];
             }
-            $relation = this.get(myAlias);
+            $relation = this.get($alias);
             if (!$relation) {
                 $msg = sprintf(
                     "Cannot save %s, it is not associated to %s",
-                    myAlias,
-                    myTable.getAlias()
+                    $alias,
+                    $table.getAlias()
                 );
                 throw new InvalidArgumentException($msg);
             }
-            if ($relation.isOwningSide(myTable) != $owningSide) {
+            if ($relation.isOwningSide($table) != $owningSide) {
                 continue;
             }
-            if (!_save($relation, $entity, $nested, myOptions)) {
+            if (!_save($relation, $entity, $nested, $options)) {
                 return false;
             }
         }
@@ -255,23 +263,23 @@ class AssociationCollection : IteratorAggregate {
      * @param uim.cake.orm.Association $association The association object to save with.
      * @param uim.cake.Datasource\IEntity $entity The entity to save
      * @param array<string, mixed> $nested Options for deeper associations
-     * @param array<string, mixed> myOptions Original options
+     * @param array<string, mixed> $options Original options
      * @return bool Success
      */
     protected bool _save(
         Association $association,
         IEntity $entity,
         array $nested,
-        array myOptions
+        array $options
     ) {
         if (!$entity.isDirty($association.getProperty())) {
             return true;
         }
         if (!empty($nested)) {
-            myOptions = $nested + myOptions;
+            $options = $nested + $options;
         }
 
-        return (bool)$association.saveAssociated($entity, myOptions);
+        return (bool)$association.saveAssociated($entity, $options);
     }
 
     /**
@@ -279,23 +287,23 @@ class AssociationCollection : IteratorAggregate {
      * Cascade first across associations for which cascadeCallbacks is true.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to delete associations for.
-     * @param array<string, mixed> myOptions The options used in the delete operation.
+     * @param array<string, mixed> $options The options used in the delete operation.
      */
-    bool cascadeDelete(IEntity $entity, array myOptions) {
+    bool cascadeDelete(IEntity $entity, array $options) {
         $noCascade = [];
         foreach (_items as $assoc) {
             if (!$assoc.getCascadeCallbacks()) {
                 $noCascade[] = $assoc;
                 continue;
             }
-            $success = $assoc.cascadeDelete($entity, myOptions);
+            $success = $assoc.cascadeDelete($entity, $options);
             if (!$success) {
                 return false;
             }
         }
 
         foreach ($noCascade as $assoc) {
-            $success = $assoc.cascadeDelete($entity, myOptions);
+            $success = $assoc.cascadeDelete($entity, $options);
             if (!$success) {
                 return false;
             }
@@ -309,19 +317,18 @@ class AssociationCollection : IteratorAggregate {
      * array. If true is passed, then it returns all association names
      * in this collection.
      *
-     * @param array|bool myKeys the list of association names to normalize
-     * @return array
+     * @param array|bool $keys the list of association names to normalize
      */
-    array normalizeKeys(myKeys) {
-        if (myKeys == true) {
-            myKeys = this.keys();
+    array normalizeKeys($keys) {
+        if ($keys == true) {
+            $keys = this.keys();
         }
 
-        if (empty(myKeys)) {
+        if (empty($keys)) {
             return [];
         }
 
-        return _normalizeAssociations(myKeys);
+        return _normalizeAssociations($keys);
     }
 
     /**
@@ -329,7 +336,8 @@ class AssociationCollection : IteratorAggregate {
      *
      * @return \Traversable<string, uim.cake.orm.Association>
      */
-    Traversable getIterator() {
+    function getIterator(): Traversable
+    {
         return new ArrayIterator(_items);
     }
 }

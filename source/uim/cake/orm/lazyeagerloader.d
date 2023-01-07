@@ -35,10 +35,10 @@ class LazyEagerLoader
         }
 
         $entities = new Collection($entities);
-        myQuery = _getQuery($entities, $contain, $source);
-        $associations = array_keys(myQuery.getContain());
+        $query = _getQuery($entities, $contain, $source);
+        $associations = array_keys($query.getContain());
 
-        $entities = _injectResults($entities, myQuery, $associations, $source);
+        $entities = _injectResults($entities, $query, $associations, $source);
 
         return $returnSingle ? array_shift($entities) : $entities;
     }
@@ -52,19 +52,19 @@ class LazyEagerLoader
      * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
      * @return uim.cake.orm.Query
      */
-    protected auto _getQuery(ICollection $objects, array $contain, Table $source): Query
+    protected function _getQuery(ICollection $objects, array $contain, Table $source): Query
     {
         $primaryKey = $source.getPrimaryKeys();
         $method = is_string($primaryKey) ? "get" : "extract";
 
-        myKeys = $objects.map(function ($entity) use ($primaryKey, $method) {
+        $keys = $objects.map(function ($entity) use ($primaryKey, $method) {
             return $entity.{$method}($primaryKey);
         });
 
-        myQuery = $source
+        $query = $source
             .find()
             .select((array)$primaryKey)
-            .where(function ($exp, $q) use ($primaryKey, myKeys, $source) {
+            .where(function ($exp, $q) use ($primaryKey, $keys, $source) {
                 /**
                  * @var uim.cake.databases.Expression\QueryExpression $exp
                  * @var uim.cake.orm.Query $q
@@ -74,59 +74,59 @@ class LazyEagerLoader
                 }
 
                 if (is_string($primaryKey)) {
-                    return $exp.in($source.aliasField($primaryKey), myKeys.toList());
+                    return $exp.in($source.aliasField($primaryKey), $keys.toList());
                 }
 
-                myTypes = array_intersect_key($q.getDefaultTypes(), array_flip($primaryKey));
+                $types = array_intersect_key($q.getDefaultTypes(), array_flip($primaryKey));
                 $primaryKey = array_map([$source, "aliasField"], $primaryKey);
 
-                return new TupleComparison($primaryKey, myKeys.toList(), myTypes, "IN");
+                return new TupleComparison($primaryKey, $keys.toList(), $types, "IN");
             })
             .enableAutoFields()
             .contain($contain);
 
-        foreach (myQuery.getEagerLoader().attachableAssociations($source) as $loadable) {
-            myConfig = $loadable.getConfig();
-            myConfig["includeFields"] = true;
-            $loadable.setConfig(myConfig);
+        foreach ($query.getEagerLoader().attachableAssociations($source) as $loadable) {
+            aConfig = $loadable.getConfig();
+            aConfig["includeFields"] = true;
+            $loadable.setConfig(aConfig);
         }
 
-        return myQuery;
+        return $query;
     }
 
     /**
      * Returns a map of property names where the association results should be injected
      * in the top level entities.
      *
-     * @param $source The table having the top level associations
-     * @param $associations The name of the top level associations
+     * @param uim.cake.orm.Table $source The table having the top level associations
+     * @param array<string> $associations The name of the top level associations
      */
-    protected string[] _getPropertyMap(Table $source, string[] $associations) {
-      $map = [];
-      myContainer = $source.associations();
-      foreach ($associations as $assoc) {
-          /** @psalm-suppress PossiblyNullReference */
-          $map[$assoc] = myContainer.get($assoc).getProperty();
-      }
+    protected string[] _getPropertyMap(Table $source, array $associations) {
+        $map = [];
+        $container = $source.associations();
+        foreach ($associations as $assoc) {
+            /** @psalm-suppress PossiblyNullReference */
+            $map[$assoc] = $container.get($assoc).getProperty();
+        }
 
-      return $map;
+        return $map;
     }
 
     /**
      * Injects the results of the eager loader query into the original list of
      * entities.
      *
-     * @param \Traversable|array<uim.cake.Datasource\IEntity> $objects The original list of entities
-     * @param uim.cake.orm.Query myResults The loaded results
-     * @param $associations The top level associations that were loaded
+     * @param iterable<uim.cake.Datasource\IEntity> $objects The original list of entities
+     * @param uim.cake.orm.Query $results The loaded results
+     * @param array<string> $associations The top level associations that were loaded
      * @param uim.cake.orm.Table $source The table where the entities came from
-     * @return array
+     * @return array<uim.cake.Datasource\IEntity>
      */
-    protected array _injectResults(iterable $objects, myResults, string[] $associations, Table $source) {
+    protected function _injectResults(iterable $objects, $results, array $associations, Table $source) {
         $injected = [];
         $properties = _getPropertyMap($source, $associations);
         $primaryKey = (array)$source.getPrimaryKeys();
-        myResults = myResults
+        $results = $results
             .all()
             .indexBy(function ($e) use ($primaryKey) {
                 /** @var uim.cake.datasources.IEntity $e */
@@ -135,14 +135,14 @@ class LazyEagerLoader
             .toArray();
 
         foreach ($objects as $k: $object) {
-            myKey = implode(";", $object.extract($primaryKey));
-            if (!isset(myResults[myKey])) {
+            $key = implode(";", $object.extract($primaryKey));
+            if (!isset($results[$key])) {
                 $injected[$k] = $object;
                 continue;
             }
 
             /** @var uim.cake.datasources.IEntity $loaded */
-            $loaded = myResults[myKey];
+            $loaded = $results[$key];
             foreach ($associations as $assoc) {
                 $property = $properties[$assoc];
                 $object.set($property, $loaded.get($property), ["useSetters": false]);

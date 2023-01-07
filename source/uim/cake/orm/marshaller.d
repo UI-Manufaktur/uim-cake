@@ -3,6 +3,10 @@ module uim.cake.orm;
 @safe:
 import uim.cake;
 
+use ArrayObject;
+use InvalidArgumentException;
+use RuntimeException;
+
 /**
  * Contains logic to convert array data into entities.
  *
@@ -27,82 +31,81 @@ class Marshaller
     /**
      * Constructor.
      *
-     * @param uim.cake.orm.Table myTable The table this marshaller is for.
+     * @param uim.cake.orm.Table $table The table this marshaller is for.
      */
-    this(Table myTable) {
-        _table = myTable;
+    this(Table $table) {
+        _table = $table;
     }
 
     /**
      * Build the map of property: marshalling callable.
      *
-     * @param array myData The data being marshalled.
-     * @param array<string, mixed> myOptions List of options containing the "associated" key.
+     * @param array $data The data being marshalled.
+     * @param array<string, mixed> $options List of options containing the "associated" key.
      * @throws \InvalidArgumentException When associations do not exist.
-     * @return array
      */
-    protected array _buildPropertyMap(array myData, array myOptions) {
+    protected array _buildPropertyMap(array $data, array $options) {
         $map = [];
         $schema = _table.getSchema();
 
         // Is a concrete column?
-        foreach (array_keys(myData) as $prop) {
+        foreach (array_keys($data) as $prop) {
             $prop = (string)$prop;
             $columnType = $schema.getColumnType($prop);
             if ($columnType) {
-                $map[$prop] = function (myValue, $entity) use ($columnType) {
-                    return TypeFactory::build($columnType).marshal(myValue);
+                $map[$prop] = function ($value, $entity) use ($columnType) {
+                    return TypeFactory::build($columnType).marshal($value);
                 };
             }
         }
 
         // Map associations
-        myOptions["associated"] = myOptions["associated"] ?? [];
-        $include = _normalizeAssociations(myOptions["associated"]);
-        foreach ($include as myKey: $nested) {
-            if (is_int(myKey) && is_scalar($nested)) {
-                myKey = $nested;
+        $options["associated"] = $options["associated"] ?? [];
+        $include = _normalizeAssociations($options["associated"]);
+        foreach ($include as $key: $nested) {
+            if (is_int($key) && is_scalar($nested)) {
+                $key = $nested;
                 $nested = [];
             }
             // If the key is not a special field like _ids or _joinData
             // it is a missing association that we should error on.
-            if (!_table.hasAssociation(myKey)) {
-                if (substr(myKey, 0, 1) != "_") {
+            if (!_table.hasAssociation($key)) {
+                if (substr($key, 0, 1) != "_") {
                     throw new InvalidArgumentException(sprintf(
                         "Cannot marshal data for '%s' association. It is not associated with '%s'.",
-                        (string)myKey,
+                        (string)$key,
                         _table.getAlias()
                     ));
                 }
                 continue;
             }
-            $assoc = _table.getAssociation(myKey);
+            $assoc = _table.getAssociation($key);
 
-            if (isset(myOptions["forceNew"])) {
-                $nested["forceNew"] = myOptions["forceNew"];
+            if (isset($options["forceNew"])) {
+                $nested["forceNew"] = $options["forceNew"];
             }
-            if (isset(myOptions["isMerge"])) {
-                $callback = function (myValue, $entity) use ($assoc, $nested) {
+            if (isset($options["isMerge"])) {
+                $callback = function ($value, $entity) use ($assoc, $nested) {
                     /** @var uim.cake.datasources.IEntity $entity */
-                    myOptions = $nested + ["associated": [], "association": $assoc];
+                    $options = $nested + ["associated": [], "association": $assoc];
 
-                    return _mergeAssociation($entity.get($assoc.getProperty()), $assoc, myValue, myOptions);
+                    return _mergeAssociation($entity.get($assoc.getProperty()), $assoc, $value, $options);
                 };
             } else {
-                $callback = function (myValue, $entity) use ($assoc, $nested) {
-                    myOptions = $nested + ["associated": []];
+                $callback = function ($value, $entity) use ($assoc, $nested) {
+                    $options = $nested + ["associated": []];
 
-                    return _marshalAssociation($assoc, myValue, myOptions);
+                    return _marshalAssociation($assoc, $value, $options);
                 };
             }
             $map[$assoc.getProperty()] = $callback;
         }
 
         $behaviors = _table.behaviors();
-        foreach ($behaviors.loaded() as myName) {
-            $behavior = $behaviors.get(myName);
-            if ($behavior instanceof IPropertyMarshal) {
-                $map += $behavior.buildMarshalMap(this, $map, myOptions);
+        foreach ($behaviors.loaded() as $name) {
+            $behavior = $behaviors.get($name);
+            if ($behavior instanceof PropertyMarshalInterface) {
+                $map += $behavior.buildMarshalMap(this, $map, $options);
             }
         }
 
@@ -129,67 +132,67 @@ class Marshaller
      * When true this option restricts the request data to only be read from `_ids`.
      *
      * ```
-     * myResult = $marshaller.one(myData, [
+     * $result = $marshaller.one($data, [
      *   "associated": ["Tags": ["onlyIds": true]]
      * ]);
      * ```
      *
      * ```
-     * myResult = $marshaller.one(myData, [
+     * $result = $marshaller.one($data, [
      *   "associated": [
      *     "Tags": ["accessibleFields": ["*": true]]
      *   ]
      * ]);
      * ```
      *
-     * @param array myData The data to hydrate.
-     * @param array<string, mixed> myOptions List of options
+     * @param array $data The data to hydrate.
+     * @param array<string, mixed> $options List of options
      * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Table::newEntity()
      * @see uim.cake.orm.Entity::_accessible
      */
-    function one(array myData, array myOptions = []): IEntity
+    function one(array $data, array $options = []): IEntity
     {
-        [myData, myOptions] = _prepareDataAndOptions(myData, myOptions);
+        [$data, $options] = _prepareDataAndOptions($data, $options);
 
         $primaryKey = (array)_table.getPrimaryKeys();
         $entityClass = _table.getEntityClass();
         $entity = new $entityClass();
         $entity.setSource(_table.getRegistryAlias());
 
-        if (isset(myOptions["accessibleFields"])) {
-            foreach ((array)myOptions["accessibleFields"] as myKey: myValue) {
-                $entity.setAccess(myKey, myValue);
+        if (isset($options["accessibleFields"])) {
+            foreach ((array)$options["accessibleFields"] as $key: $value) {
+                $entity.setAccess($key, $value);
             }
         }
-        myErrors = _validate(myData, myOptions, true);
+        $errors = _validate($data, $options, true);
 
-        myOptions["isMerge"] = false;
-        $propertyMap = _buildPropertyMap(myData, myOptions);
+        $options["isMerge"] = false;
+        $propertyMap = _buildPropertyMap($data, $options);
         $properties = [];
-        foreach (myData as myKey: myValue) {
-            if (!empty(myErrors[myKey])) {
+        foreach ($data as $key: $value) {
+            if (!empty($errors[$key])) {
                 if ($entity instanceof InvalidPropertyInterface) {
-                    $entity.setInvalidField(myKey, myValue);
+                    $entity.setInvalidField($key, $value);
                 }
                 continue;
             }
 
-            if (myValue == "" && in_array(myKey, $primaryKey, true)) {
+            if ($value == "" && in_array($key, $primaryKey, true)) {
                 // Skip marshalling "" for pk fields.
                 continue;
             }
-            if (isset($propertyMap[myKey])) {
-                $properties[myKey] = $propertyMap[myKey](myValue, $entity);
+            if (isset($propertyMap[$key])) {
+                $properties[$key] = $propertyMap[$key]($value, $entity);
             } else {
-                $properties[myKey] = myValue;
+                $properties[$key] = $value;
             }
         }
 
-        if (isset(myOptions["fields"])) {
-            foreach ((array)myOptions["fields"] as myField) {
-                if (array_key_exists(myField, $properties)) {
-                    $entity.set(myField, $properties[myField]);
+        if (isset($options["fields"])) {
+            foreach ((array)$options["fields"] as $field) {
+                if (array_key_exists($field, $properties)) {
+                    $entity.set($field, $properties[$field]);
                 }
             }
         } else {
@@ -198,14 +201,14 @@ class Marshaller
 
         // Don"t flag clean association entities as
         // dirty so we don"t persist empty records.
-        foreach ($properties as myField: myValue) {
-            if (myValue instanceof IEntity) {
-                $entity.setDirty(myField, myValue.isDirty());
+        foreach ($properties as $field: $value) {
+            if ($value instanceof IEntity) {
+                $entity.setDirty($field, $value.isDirty());
             }
         }
 
-        $entity.setErrors(myErrors);
-        this.dispatchAfterMarshal($entity, myData, myOptions);
+        $entity.setErrors($errors);
+        this.dispatchAfterMarshal($entity, $data, $options);
 
         return $entity;
     }
@@ -213,100 +216,100 @@ class Marshaller
     /**
      * Returns the validation errors for a data set based on the passed options
      *
-     * @param array myData The data to validate.
-     * @param array<string, mixed> myOptions The options passed to this marshaller.
+     * @param array $data The data to validate.
+     * @param array<string, mixed> $options The options passed to this marshaller.
      * @param bool $isNew Whether it is a new entity or one to be updated.
      * @return array The list of validation errors.
      * @throws \RuntimeException If no validator can be created.
      */
-    protected array _validate(array myData, array myOptions, bool $isNew) {
-        if (!myOptions["validate"]) {
+    protected function _validate(array $data, array $options, bool $isNew) {
+        if (!$options["validate"]) {
             return [];
         }
 
         $validator = null;
-        if (myOptions["validate"] == true) {
+        if ($options["validate"] == true) {
             $validator = _table.getValidator();
-        } elseif (is_string(myOptions["validate"])) {
-            $validator = _table.getValidator(myOptions["validate"]);
-        } elseif (is_object(myOptions["validate"])) {
+        } elseif (is_string($options["validate"])) {
+            $validator = _table.getValidator($options["validate"]);
+        } elseif (is_object($options["validate"])) {
             deprecationWarning(
                 "Passing validator instance for the `validate` option is deprecated,"
                 ~ " use `ValidatorAwareTrait::setValidator() instead.`"
             );
 
             /** @var uim.cake.validations.Validator $validator */
-            $validator = myOptions["validate"];
+            $validator = $options["validate"];
         }
 
-        if ($validator is null) {
+        if ($validator == null) {
             throw new RuntimeException(
-                sprintf("validate must be a boolean, a string or an object. Got %s.", getTypeName(myOptions["validate"]))
+                sprintf("validate must be a boolean, a string or an object. Got %s.", getTypeName($options["validate"]))
             );
         }
 
-        return $validator.validate(myData, $isNew);
+        return $validator.validate($data, $isNew);
     }
 
     /**
      * Returns data and options prepared to validate and marshall.
      *
-     * @param array myData The data to prepare.
-     * @param array<string, mixed> myOptions The options passed to this marshaller.
+     * @param array $data The data to prepare.
+     * @param array<string, mixed> $options The options passed to this marshaller.
      * @return array An array containing prepared data and options.
      */
-    protected array _prepareDataAndOptions(array myData, array myOptions) {
-        myOptions += ["validate": true];
+    protected function _prepareDataAndOptions(array $data, array $options) {
+        $options += ["validate": true];
 
-        myTableName = _table.getAlias();
-        if (isset(myData[myTableName])) {
-            myData += myData[myTableName];
-            unset(myData[myTableName]);
+        $tableName = _table.getAlias();
+        if (isset($data[$tableName]) && is_array($data[$tableName])) {
+            $data += $data[$tableName];
+            unset($data[$tableName]);
         }
 
-        myData = new ArrayObject(myData);
-        myOptions = new ArrayObject(myOptions);
+        $data = new ArrayObject($data);
+        $options = new ArrayObject($options);
         _table.dispatchEvent("Model.beforeMarshal", compact("data", "options"));
 
-        return [(array)myData, (array)myOptions];
+        return [(array)$data, (array)$options];
     }
 
     /**
      * Create a new sub-marshaller and marshal the associated data.
      *
      * @param uim.cake.orm.Association $assoc The association to marshall
-     * @param mixed myValue The data to hydrate. If not an array, this method will return null.
-     * @param array<string, mixed> myOptions List of options.
+     * @param mixed $value The data to hydrate. If not an array, this method will return null.
+     * @param array<string, mixed> $options List of options.
      * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>|null
      */
-    protected auto _marshalAssociation(Association $assoc, myValue, array myOptions) {
-        if (!is_array(myValue)) {
+    protected function _marshalAssociation(Association $assoc, $value, array $options) {
+        if (!is_array($value)) {
             return null;
         }
-        myTargetTable = $assoc.getTarget();
-        $marshaller = myTargetTable.marshaller();
-        myTypes = [Association::ONE_TO_ONE, Association::MANY_TO_ONE];
-        myType = $assoc.type();
-        if (in_array(myType, myTypes, true)) {
-            return $marshaller.one(myValue, myOptions);
+        $targetTable = $assoc.getTarget();
+        $marshaller = $targetTable.marshaller();
+        $types = [Association::ONE_TO_ONE, Association::MANY_TO_ONE];
+        $type = $assoc.type();
+        if (in_array($type, $types, true)) {
+            return $marshaller.one($value, $options);
         }
-        if (myType == Association::ONE_TO_MANY || myType == Association::MANY_TO_MANY) {
-            $hasIds = array_key_exists("_ids", myValue);
-            $onlyIds = array_key_exists("onlyIds", myOptions) && myOptions["onlyIds"];
+        if ($type == Association::ONE_TO_MANY || $type == Association::MANY_TO_MANY) {
+            $hasIds = array_key_exists("_ids", $value);
+            $onlyIds = array_key_exists("onlyIds", $options) && $options["onlyIds"];
 
-            if ($hasIds && is_array(myValue["_ids"])) {
-                return _loadAssociatedByIds($assoc, myValue["_ids"]);
+            if ($hasIds && is_array($value["_ids"])) {
+                return _loadAssociatedByIds($assoc, $value["_ids"]);
             }
             if ($hasIds || $onlyIds) {
                 return [];
             }
         }
-        if (myType == Association::MANY_TO_MANY) {
+        if ($type == Association::MANY_TO_MANY) {
             /** @psalm-suppress ArgumentTypeCoercion */
-            return $marshaller._belongsToMany($assoc, myValue, myOptions);
+            return $marshaller._belongsToMany($assoc, $value, $options);
         }
 
-        return $marshaller.many(myValue, myOptions);
+        return $marshaller.many($value, $options);
     }
 
     /**
@@ -324,19 +327,19 @@ class Marshaller
      *   when primary key values are set, and a record does not already exist. Normally primary key
      *   on missing entities would be ignored. Defaults to false.
      *
-     * @param array myData The data to hydrate.
-     * @param array<string, mixed> myOptions List of options
+     * @param array $data The data to hydrate.
+     * @param array<string, mixed> $options List of options
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      * @see uim.cake.orm.Table::newEntities()
      * @see uim.cake.orm.Entity::_accessible
      */
-    array many(array myData, array myOptions = []) {
+    function many(array $data, array $options = []) {
         $output = [];
-        foreach (myData as $record) {
+        foreach ($data as $record) {
             if (!is_array($record)) {
                 continue;
             }
-            $output[] = this.one($record, myOptions);
+            $output[] = this.one($record, $options);
         }
 
         return $output;
@@ -349,74 +352,74 @@ class Marshaller
      * for junction table entities.
      *
      * @param uim.cake.orm.associations.BelongsToMany $assoc The association to marshal.
-     * @param array myData The data to convert into entities.
-     * @param array<string, mixed> myOptions List of options.
+     * @param array $data The data to convert into entities.
+     * @param array<string, mixed> $options List of options.
      * @return array<uim.cake.Datasource\IEntity> An array of built entities.
      * @throws \BadMethodCallException
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    protected array _belongsToMany(BelongsToMany $assoc, array myData, array myOptions = []) {
-        $associated = myOptions["associated"] ?? [];
-        $forceNew = myOptions["forceNew"] ?? false;
+    protected function _belongsToMany(BelongsToMany $assoc, array $data, array $options = []) {
+        $associated = $options["associated"] ?? [];
+        $forceNew = $options["forceNew"] ?? false;
 
-        myData = array_values(myData);
+        $data = array_values($data);
 
-        myTarget = $assoc.getTarget();
-        $primaryKey = array_flip((array)myTarget.getPrimaryKeys());
+        $target = $assoc.getTarget();
+        $primaryKey = array_flip((array)$target.getPrimaryKeys());
         $records = $conditions = [];
         $primaryCount = count($primaryKey);
 
-        foreach (myData as $i: $row) {
+        foreach ($data as $i: $row) {
             if (!is_array($row)) {
                 continue;
             }
             if (array_intersect_key($primaryKey, $row) == $primaryKey) {
-                myKeys = array_intersect_key($row, $primaryKey);
-                if (count(myKeys) == $primaryCount) {
+                $keys = array_intersect_key($row, $primaryKey);
+                if (count($keys) == $primaryCount) {
                     $rowConditions = [];
-                    foreach (myKeys as myKey: myValue) {
-                        $rowConditions[][myTarget.aliasField(myKey)] = myValue;
+                    foreach ($keys as $key: $value) {
+                        $rowConditions[][$target.aliasField($key)] = $value;
                     }
 
-                    if ($forceNew && !myTarget.exists($rowConditions)) {
-                        $records[$i] = this.one($row, myOptions);
+                    if ($forceNew && !$target.exists($rowConditions)) {
+                        $records[$i] = this.one($row, $options);
                     }
 
                     $conditions = array_merge($conditions, $rowConditions);
                 }
             } else {
-                $records[$i] = this.one($row, myOptions);
+                $records[$i] = this.one($row, $options);
             }
         }
 
         if (!empty($conditions)) {
-            myQuery = myTarget.find();
-            myQuery.andWhere(function ($exp) use ($conditions) {
+            $query = $target.find();
+            $query.andWhere(function ($exp) use ($conditions) {
                 /** @var uim.cake.databases.Expression\QueryExpression $exp */
                 return $exp.or($conditions);
             });
 
-            myKeyFields = array_keys($primaryKey);
+            $keyFields = array_keys($primaryKey);
 
             $existing = [];
-            foreach (myQuery as $row) {
-                $k = implode(";", $row.extract(myKeyFields));
+            foreach ($query as $row) {
+                $k = implode(";", $row.extract($keyFields));
                 $existing[$k] = $row;
             }
 
-            foreach (myData as $i: $row) {
-                myKey = [];
-                foreach (myKeyFields as $k) {
+            foreach ($data as $i: $row) {
+                $key = [];
+                foreach ($keyFields as $k) {
                     if (isset($row[$k])) {
-                        myKey[] = $row[$k];
+                        $key[] = $row[$k];
                     }
                 }
-                myKey = implode(";", myKey);
+                $key = implode(";", $key);
 
                 // Update existing record and child associations
-                if (isset($existing[myKey])) {
-                    $records[$i] = this.merge($existing[myKey], myData[$i], myOptions);
+                if (isset($existing[$key])) {
+                    $records[$i] = this.merge($existing[$key], $data[$i], $options);
                 }
             }
         }
@@ -430,8 +433,8 @@ class Marshaller
 
         foreach ($records as $i: $record) {
             // Update junction table data in _joinData.
-            if (isset(myData[$i]["_joinData"])) {
-                $joinData = $jointMarshaller.one(myData[$i]["_joinData"], $nested);
+            if (isset($data[$i]["_joinData"])) {
+                $joinData = $jointMarshaller.one($data[$i]["_joinData"], $nested);
                 $record.set("_joinData", $joinData);
             }
         }
@@ -446,42 +449,42 @@ class Marshaller
      * @param array $ids The list of ids to load.
      * @return array<uim.cake.Datasource\IEntity> An array of entities.
      */
-    protected array _loadAssociatedByIds(Association $assoc, array $ids) {
+    protected function _loadAssociatedByIds(Association $assoc, array $ids) {
         if (empty($ids)) {
             return [];
         }
 
-        myTarget = $assoc.getTarget();
-        $primaryKey = (array)myTarget.getPrimaryKeys();
+        $target = $assoc.getTarget();
+        $primaryKey = (array)$target.getPrimaryKeys();
         $multi = count($primaryKey) > 1;
-        $primaryKey = array_map([myTarget, "aliasField"], $primaryKey);
+        $primaryKey = array_map([$target, "aliasField"], $primaryKey);
 
         if ($multi) {
             $first = current($ids);
             if (!is_array($first) || count($first) != count($primaryKey)) {
                 return [];
             }
-            myType = [];
-            $schema = myTarget.getSchema();
-            foreach ((array)myTarget.getPrimaryKeys() as $column) {
-                myType[] = $schema.getColumnType($column);
+            $type = [];
+            $schema = $target.getSchema();
+            foreach ((array)$target.getPrimaryKeys() as $column) {
+                $type[] = $schema.getColumnType($column);
             }
-            $filter = new TupleComparison($primaryKey, $ids, myType, "IN");
+            $filter = new TupleComparison($primaryKey, $ids, $type, "IN");
         } else {
             $filter = [$primaryKey[0] ~ " IN": $ids];
         }
 
-        return myTarget.find().where($filter).toArray();
+        return $target.find().where($filter).toArray();
     }
 
     /**
-     * Merges `myData` into `$entity` and recursively does the same for each one of
-     * the association names passed in `myOptions`. When merging associations, if an
+     * Merges `$data` into `$entity` and recursively does the same for each one of
+     * the association names passed in `$options`. When merging associations, if an
      * entity is not present in the parent entity for a given association, a new one
      * will be created.
      *
      * When merging HasMany or BelongsToMany associations, all the entities in the
-     * `myData` array will appear, those that can be matched by primary key will get
+     * `$data` array will appear, those that can be matched by primary key will get
      * the data merged, but those that cannot, will be discarded. `ids` option can be used
      * to determine whether the association must use the `_ids` format.
      *
@@ -499,50 +502,50 @@ class Marshaller
      * When true this option restricts the request data to only be read from `_ids`.
      *
      * ```
-     * myResult = $marshaller.merge($entity, myData, [
+     * $result = $marshaller.merge($entity, $data, [
      *   "associated": ["Tags": ["onlyIds": true]]
      * ]);
      * ```
      *
      * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
-     * @param array myData key value list of fields to be merged into the entity
-     * @param array<string, mixed> myOptions List of options.
+     * @param array $data key value list of fields to be merged into the entity
+     * @param array<string, mixed> $options List of options.
      * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Entity::_accessible
      */
-    function merge(IEntity $entity, array myData, array myOptions = []): IEntity
+    function merge(IEntity $entity, array $data, array $options = []): IEntity
     {
-        [myData, myOptions] = _prepareDataAndOptions(myData, myOptions);
+        [$data, $options] = _prepareDataAndOptions($data, $options);
 
         $isNew = $entity.isNew();
-        myKeys = [];
+        $keys = [];
 
         if (!$isNew) {
-            myKeys = $entity.extract((array)_table.getPrimaryKeys());
+            $keys = $entity.extract((array)_table.getPrimaryKeys());
         }
 
-        if (isset(myOptions["accessibleFields"])) {
-            foreach ((array)myOptions["accessibleFields"] as myKey: myValue) {
-                $entity.setAccess(myKey, myValue);
+        if (isset($options["accessibleFields"])) {
+            foreach ((array)$options["accessibleFields"] as $key: $value) {
+                $entity.setAccess($key, $value);
             }
         }
 
-        myErrors = _validate(myData + myKeys, myOptions, $isNew);
-        myOptions["isMerge"] = true;
-        $propertyMap = _buildPropertyMap(myData, myOptions);
+        $errors = _validate($data + $keys, $options, $isNew);
+        $options["isMerge"] = true;
+        $propertyMap = _buildPropertyMap($data, $options);
         $properties = [];
-        foreach (myData as myKey: myValue) {
-            if (!empty(myErrors[myKey])) {
+        foreach ($data as $key: $value) {
+            if (!empty($errors[$key])) {
                 if ($entity instanceof InvalidPropertyInterface) {
-                    $entity.setInvalidField(myKey, myValue);
+                    $entity.setInvalidField($key, $value);
                 }
                 continue;
             }
-            $original = $entity.get(myKey);
+            $original = $entity.get(string aKey);
 
-            if (isset($propertyMap[myKey])) {
-                myValue = $propertyMap[myKey](myValue, $entity);
+            if (isset($propertyMap[$key])) {
+                $value = $propertyMap[$key]($value, $entity);
 
                 // Don"t dirty scalar values and objects that didn"t
                 // change. Arrays will always be marked as dirty because
@@ -550,66 +553,66 @@ class Marshaller
                 // same objects, even though those objects may have changed internally.
                 if (
                     (
-                        is_scalar(myValue)
-                        && $original == myValue
+                        is_scalar($value)
+                        && $original == $value
                     )
                     || (
-                        myValue is null
-                        && $original == myValue
+                        $value == null
+                        && $original == $value
                     )
                     || (
-                        is_object(myValue)
-                        && !(myValue instanceof IEntity)
-                        && $original == myValue
+                        is_object($value)
+                        && !($value instanceof IEntity)
+                        && $original == $value
                     )
                 ) {
                     continue;
                 }
             }
-            $properties[myKey] = myValue;
+            $properties[$key] = $value;
         }
 
-        $entity.setErrors(myErrors);
-        if (!isset(myOptions["fields"])) {
+        $entity.setErrors($errors);
+        if (!isset($options["fields"])) {
             $entity.set($properties);
 
-            foreach ($properties as myField: myValue) {
-                if (myValue instanceof IEntity) {
-                    $entity.setDirty(myField, myValue.isDirty());
+            foreach ($properties as $field: $value) {
+                if ($value instanceof IEntity) {
+                    $entity.setDirty($field, $value.isDirty());
                 }
             }
-            this.dispatchAfterMarshal($entity, myData, myOptions);
+            this.dispatchAfterMarshal($entity, $data, $options);
 
             return $entity;
         }
 
-        foreach ((array)myOptions["fields"] as myField) {
-            if (!array_key_exists(myField, $properties)) {
+        foreach ((array)$options["fields"] as $field) {
+            if (!array_key_exists($field, $properties)) {
                 continue;
             }
-            $entity.set(myField, $properties[myField]);
-            if ($properties[myField] instanceof IEntity) {
-                $entity.setDirty(myField, $properties[myField].isDirty());
+            $entity.set($field, $properties[$field]);
+            if ($properties[$field] instanceof IEntity) {
+                $entity.setDirty($field, $properties[$field].isDirty());
             }
         }
-        this.dispatchAfterMarshal($entity, myData, myOptions);
+        this.dispatchAfterMarshal($entity, $data, $options);
 
         return $entity;
     }
 
     /**
-     * Merges each of the elements from `myData` into each of the entities in `$entities`
+     * Merges each of the elements from `$data` into each of the entities in `$entities`
      * and recursively does the same for each of the association names passed in
-     * `myOptions`. When merging associations, if an entity is not present in the parent
+     * `$options`. When merging associations, if an entity is not present in the parent
      * entity for a given association, a new one will be created.
      *
-     * Records in `myData` are matched against the entities using the primary key
+     * Records in `$data` are matched against the entities using the primary key
      * column. Entries in `$entities` that cannot be matched to any record in
-     * `myData` will be discarded. Records in `myData` that could not be matched will
+     * `$data` will be discarded. Records in `$data` that could not be matched will
      * be marshalled as a new entity.
      *
      * When merging HasMany or BelongsToMany associations, all the entities in the
-     * `myData` array will appear, those that can be matched by primary key will get
+     * `$data` array will appear, those that can be matched by primary key will get
      * the data merged, but those that cannot, will be discarded.
      *
      * ### Options:
@@ -623,26 +626,26 @@ class Marshaller
      *
      * @param iterable<uim.cake.Datasource\IEntity> $entities the entities that will get the
      *   data merged in
-     * @param array myData list of arrays to be merged into the entities
-     * @param array<string, mixed> myOptions List of options.
+     * @param array $data list of arrays to be merged into the entities
+     * @param array<string, mixed> $options List of options.
      * @return array<uim.cake.Datasource\IEntity>
      * @see uim.cake.orm.Entity::_accessible
      * @psalm-suppress NullArrayOffset
      */
-    array mergeMany(iterable $entities, array myData, array myOptions = []) {
+    function mergeMany(iterable $entities, array $data, array $options = []) {
         $primary = (array)_table.getPrimaryKeys();
 
-        $indexed = (new Collection(myData))
+        $indexed = (new Collection($data))
             .groupBy(function ($el) use ($primary) {
-                myKeys = [];
-                foreach ($primary as myKey) {
-                    myKeys[] = $el[myKey] ?? "";
+                $keys = [];
+                foreach ($primary as $key) {
+                    $keys[] = $el[$key] ?? "";
                 }
 
-                return implode(";", myKeys);
+                return implode(";", $keys);
             })
-            .map(function ($element, myKey) {
-                return myKey == "" ? $element : $element[0];
+            .map(function ($element, $key) {
+                return $key == "" ? $element : $element[0];
             })
             .toArray();
 
@@ -655,25 +658,25 @@ class Marshaller
                 continue;
             }
 
-            myKey = implode(";", $entity.extract($primary));
-            if (!isset($indexed[myKey])) {
+            $key = implode(";", $entity.extract($primary));
+            if (!isset($indexed[$key])) {
                 continue;
             }
 
-            $output[] = this.merge($entity, $indexed[myKey], myOptions);
-            unset($indexed[myKey]);
+            $output[] = this.merge($entity, $indexed[$key], $options);
+            unset($indexed[$key]);
         }
 
         $conditions = (new Collection($indexed))
-            .map(function (myData, myKey) {
-                return explode(";", (string)myKey);
+            .map(function ($data, $key) {
+                return explode(";", (string)$key);
             })
-            .filter(function (myKeys) use ($primary) {
-                return count(Hash::filter(myKeys)) == count($primary);
+            .filter(function ($keys) use ($primary) {
+                return count(Hash::filter($keys)) == count($primary);
             })
-            .reduce(function ($conditions, myKeys) use ($primary) {
-                myFields = array_map([_table, "aliasField"], $primary);
-                $conditions["OR"][] = array_combine(myFields, myKeys);
+            .reduce(function ($conditions, $keys) use ($primary) {
+                $fields = array_map([_table, "aliasField"], $primary);
+                $conditions["OR"][] = array_combine($fields, $keys);
 
                 return $conditions;
             }, ["OR": []]);
@@ -681,19 +684,19 @@ class Marshaller
 
         if (!empty($indexed) && count($maybeExistentQuery.clause("where"))) {
             foreach ($maybeExistentQuery as $entity) {
-                myKey = implode(";", $entity.extract($primary));
-                if (isset($indexed[myKey])) {
-                    $output[] = this.merge($entity, $indexed[myKey], myOptions);
-                    unset($indexed[myKey]);
+                $key = implode(";", $entity.extract($primary));
+                if (isset($indexed[$key])) {
+                    $output[] = this.merge($entity, $indexed[$key], $options);
+                    unset($indexed[$key]);
                 }
             }
         }
 
-        foreach ((new Collection($indexed)).append($new) as myValue) {
-            if (!is_array(myValue)) {
+        foreach ((new Collection($indexed)).append($new) as $value) {
+            if (!is_array($value)) {
                 continue;
             }
-            $output[] = this.one(myValue, myOptions);
+            $output[] = this.one($value, $options);
         }
 
         return $output;
@@ -704,36 +707,36 @@ class Marshaller
      *
      * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $original The original entity
      * @param uim.cake.orm.Association $assoc The association to merge
-     * @param mixed myValue The array of data to hydrate. If not an array, this method will return null.
-     * @param array<string, mixed> myOptions List of options.
+     * @param mixed $value The array of data to hydrate. If not an array, this method will return null.
+     * @param array<string, mixed> $options List of options.
      * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>|null
      */
-    protected auto _mergeAssociation($original, Association $assoc, myValue, array myOptions) {
+    protected function _mergeAssociation($original, Association $assoc, $value, array $options) {
         if (!$original) {
-            return _marshalAssociation($assoc, myValue, myOptions);
+            return _marshalAssociation($assoc, $value, $options);
         }
-        if (!is_array(myValue)) {
+        if (!is_array($value)) {
             return null;
         }
 
-        myTargetTable = $assoc.getTarget();
-        $marshaller = myTargetTable.marshaller();
-        myTypes = [Association::ONE_TO_ONE, Association::MANY_TO_ONE];
-        myType = $assoc.type();
-        if (in_array(myType, myTypes, true)) {
+        $targetTable = $assoc.getTarget();
+        $marshaller = $targetTable.marshaller();
+        $types = [Association::ONE_TO_ONE, Association::MANY_TO_ONE];
+        $type = $assoc.type();
+        if (in_array($type, $types, true)) {
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
-            return $marshaller.merge($original, myValue, myOptions);
+            return $marshaller.merge($original, $value, $options);
         }
-        if (myType == Association::MANY_TO_MANY) {
+        if ($type == Association::MANY_TO_MANY) {
             /** @psalm-suppress PossiblyInvalidArgument, ArgumentTypeCoercion */
-            return $marshaller._mergeBelongsToMany($original, $assoc, myValue, myOptions);
+            return $marshaller._mergeBelongsToMany($original, $assoc, $value, $options);
         }
 
-        if (myType == Association::ONE_TO_MANY) {
-            $hasIds = array_key_exists("_ids", myValue);
-            $onlyIds = array_key_exists("onlyIds", myOptions) && myOptions["onlyIds"];
-            if ($hasIds && is_array(myValue["_ids"])) {
-                return _loadAssociatedByIds($assoc, myValue["_ids"]);
+        if ($type == Association::ONE_TO_MANY) {
+            $hasIds = array_key_exists("_ids", $value);
+            $onlyIds = array_key_exists("onlyIds", $options) && $options["onlyIds"];
+            if ($hasIds && is_array($value["_ids"])) {
+                return _loadAssociatedByIds($assoc, $value["_ids"]);
             }
             if ($hasIds || $onlyIds) {
                 return [];
@@ -741,7 +744,7 @@ class Marshaller
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        return $marshaller.mergeMany($original, myValue, myOptions);
+        return $marshaller.mergeMany($original, $value, $options);
     }
 
     /**
@@ -750,28 +753,28 @@ class Marshaller
      *
      * @param array<uim.cake.Datasource\IEntity> $original The original entities list.
      * @param uim.cake.orm.associations.BelongsToMany $assoc The association to marshall
-     * @param array myValue The data to hydrate
-     * @param array<string, mixed> myOptions List of options.
+     * @param array $value The data to hydrate
+     * @param array<string, mixed> $options List of options.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    protected array _mergeBelongsToMany(array $original, BelongsToMany $assoc, array myValue, array myOptions) {
-        $associated = myOptions["associated"] ?? [];
+    protected function _mergeBelongsToMany(array $original, BelongsToMany $assoc, array $value, array $options) {
+        $associated = $options["associated"] ?? [];
 
-        $hasIds = array_key_exists("_ids", myValue);
-        $onlyIds = array_key_exists("onlyIds", myOptions) && myOptions["onlyIds"];
+        $hasIds = array_key_exists("_ids", $value);
+        $onlyIds = array_key_exists("onlyIds", $options) && $options["onlyIds"];
 
-        if ($hasIds && is_array(myValue["_ids"])) {
-            return _loadAssociatedByIds($assoc, myValue["_ids"]);
+        if ($hasIds && is_array($value["_ids"])) {
+            return _loadAssociatedByIds($assoc, $value["_ids"]);
         }
         if ($hasIds || $onlyIds) {
             return [];
         }
 
         if (!empty($associated) && !in_array("_joinData", $associated, true) && !isset($associated["_joinData"])) {
-            return this.mergeMany($original, myValue, myOptions);
+            return this.mergeMany($original, $value, $options);
         }
 
-        return _mergeJoinData($original, $assoc, myValue, myOptions);
+        return _mergeJoinData($original, $assoc, $value, $options);
     }
 
     /**
@@ -779,12 +782,12 @@ class Marshaller
      *
      * @param array<uim.cake.Datasource\IEntity> $original The original entities list.
      * @param uim.cake.orm.associations.BelongsToMany $assoc The association to marshall
-     * @param array myValue The data to hydrate
-     * @param array<string, mixed> myOptions List of options.
+     * @param array $value The data to hydrate
+     * @param array<string, mixed> $options List of options.
      * @return array<uim.cake.Datasource\IEntity> An array of entities
      */
-    protected array _mergeJoinData(array $original, BelongsToMany $assoc, array myValue, array myOptions) {
-        $associated = myOptions["associated"] ?? [];
+    protected function _mergeJoinData(array $original, BelongsToMany $assoc, array $value, array $options) {
+        $associated = $options["associated"] ?? [];
         $extra = [];
         foreach ($original as $entity) {
             // Mark joinData as accessible so we can marshal it properly.
@@ -804,29 +807,29 @@ class Marshaller
             $nested = (array)$associated["_joinData"];
         }
 
-        myOptions["accessibleFields"] = ["_joinData": true];
+        $options["accessibleFields"] = ["_joinData": true];
 
-        $records = this.mergeMany($original, myValue, myOptions);
+        $records = this.mergeMany($original, $value, $options);
         foreach ($records as $record) {
             $hash = spl_object_hash($record);
-            myValue = $record.get("_joinData");
+            $value = $record.get("_joinData");
 
             // Already an entity, no further marshalling required.
-            if (myValue instanceof IEntity) {
+            if ($value instanceof IEntity) {
                 continue;
             }
 
             // Scalar data can"t be handled
-            if (!is_array(myValue)) {
+            if (!is_array($value)) {
                 $record.unset("_joinData");
                 continue;
             }
 
             // Marshal data into the old object, or make a new joinData object.
             if (isset($extra[$hash])) {
-                $record.set("_joinData", $marshaller.merge($extra[$hash], myValue, $nested));
+                $record.set("_joinData", $marshaller.merge($extra[$hash], $value, $nested));
             } else {
-                $joinData = $marshaller.one(myValue, $nested);
+                $joinData = $marshaller.one($value, $nested);
                 $record.set("_joinData", $joinData);
             }
         }
@@ -838,12 +841,12 @@ class Marshaller
      * dispatch Model.afterMarshal event.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity that was marshaled.
-     * @param array myData readOnly myData to use.
-     * @param array<string, mixed> myOptions List of options that are readOnly.
+     * @param array $data readOnly $data to use.
+     * @param array<string, mixed> $options List of options that are readOnly.
      */
-    protected void dispatchAfterMarshal(IEntity $entity, array myData, array myOptions = []) {
-        myData = new ArrayObject(myData);
-        myOptions = new ArrayObject(myOptions);
+    protected void dispatchAfterMarshal(IEntity $entity, array $data, array $options = []) {
+        $data = new ArrayObject($data);
+        $options = new ArrayObject($options);
         _table.dispatchEvent("Model.afterMarshal", compact("entity", "data", "options"));
     }
 }

@@ -6,15 +6,23 @@ import uim.cake;
 /**
  * Checks that a list of fields from an entity are unique in the table
  */
-class IsUnique {
-    // ------
-    
+class IsUnique
+{
+    /**
+     * The list of fields to check
+     *
+     * @var array<string>
+     */
+    protected _fields;
+
     /**
      * The unique check options
      *
      * @var array<string, mixed>
      */
-    protected _options = ;
+    protected _options = [
+        "allowMultipleNulls": false,
+    ];
 
     /**
      * Constructor.
@@ -23,12 +31,12 @@ class IsUnique {
      *
      * - `allowMultipleNulls` Allows any field to have multiple null values. Defaults to false.
      *
-     * @param myFields The list of fields to check uniqueness for
-     * @param array<string, mixed> myOptions The options for unique checks.
+     * @param array<string> $fields The list of fields to check uniqueness for
+     * @param array<string, mixed> $options The options for unique checks.
      */
-    this(string[] myFields, array myOptions = []) {
-        _fields = myFields;
-        _options = myOptions + _options;
+    this(array $fields, array $options = []) {
+        _fields = $fields;
+        _options = $options + _options;
     }
 
     /**
@@ -36,43 +44,44 @@ class IsUnique {
      *
      * @param uim.cake.Datasource\IEntity $entity The entity from where to extract the fields
      *   where the `repository` key is required.
-     * @param array<string, mixed> myOptions Options passed to the check,
+     * @param array<string, mixed> $options Options passed to the check,
      */
-    bool __invoke(IEntity $entity, array myOptions) {
+    bool __invoke(IEntity $entity, array $options) {
         if (!$entity.extract(_fields, true)) {
             return true;
         }
 
-        myFields = $entity.extract(_fields);
-        if (_options["allowMultipleNulls"] && array_filter(myFields, "is_null")) {
+        $fields = $entity.extract(_fields);
+        if (_options["allowMultipleNulls"] && array_filter($fields, "is_null")) {
             return true;
         }
 
-        myAlias = myOptions["repository"].getAlias();
-        $conditions = _alias(myAlias, myFields);
+        $alias = $options["repository"].getAlias();
+        $conditions = _alias($alias, $fields);
         if ($entity.isNew() == false) {
-            myKeys = (array)myOptions["repository"].getPrimaryKeys();
-            myKeys = _alias(myAlias, $entity.extract(myKeys));
-            if (Hash::filter(myKeys)) {
-                $conditions["NOT"] = myKeys;
+            $keys = (array)$options["repository"].getPrimaryKeys();
+            $keys = _alias($alias, $entity.extract($keys));
+            if (Hash::filter($keys)) {
+                $conditions["NOT"] = $keys;
             }
         }
 
-        return !myOptions["repository"].exists($conditions);
+        return !$options["repository"].exists($conditions);
     }
 
     /**
      * Add a model alias to all the keys in a set of conditions.
      *
-     * @param string myAlias The alias to add.
+     * @param string $alias The alias to add.
      * @param array $conditions The conditions to alias.
+     * @return array<string, mixed>
      */
-    protected array _alias(string myAlias, array $conditions) {
-        myAliased = [];
-        foreach ($conditions as myKey: myValue) {
-            myAliased["myAlias.myKey IS"] = myValue;
+    protected array _alias(string $alias, array $conditions) {
+        $aliased = [];
+        foreach ($conditions as $key: $value) {
+            $aliased["$alias.$key IS"] = $value;
         }
 
-        return myAliased;
+        return $aliased;
     }
 }
