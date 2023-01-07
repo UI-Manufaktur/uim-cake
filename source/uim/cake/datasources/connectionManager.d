@@ -64,7 +64,7 @@ class ConnectionManager
      * @param array<string, mixed>|string aKey The name of the connection config, or an array of multiple configs.
      * @param array<string, mixed>|null aConfig An array of name: config data for adapter.
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException When trying to modify an existing config.
+     * @throws uim.cake.Core\exceptions.UIMException When trying to modify an existing config.
      * @see uim.cake.Core\StaticConfigTrait::config()
      */
     static void setConfig($key, aConfig = null) {

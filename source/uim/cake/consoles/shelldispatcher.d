@@ -111,7 +111,7 @@ class ShellDispatcher
      * Defines current working environment.
      *
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     protected void _initEnvironment() {
         _bootstrap();

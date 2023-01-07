@@ -51,7 +51,7 @@ class JsonConfig : ConfigEngineInterface
      * @param string aKey The identifier to read from. If the key has a . it will be treated
      *   as a plugin prefix.
      * @return array Parsed configuration values.
-     * @throws uim.cake.Core\exceptions.CakeException When files don"t exist or when
+     * @throws uim.cake.Core\exceptions.UIMException When files don"t exist or when
      *   files contain ".." (as this could lead to abusive reads) or when there
      *   is an error parsing the JSON string.
      */
@@ -60,14 +60,14 @@ class JsonConfig : ConfigEngineInterface
 
         $values = json_decode(file_get_contents($file), true);
         if (json_last_error() != JSON_ERROR_NONE) {
-            throw new CakeException(sprintf(
+            throw new UIMException(sprintf(
                 "Error parsing JSON string fetched from config file "%s.json": %s",
                 $key,
                 json_last_error_msg()
             ));
         }
         if (!is_array($values)) {
-            throw new CakeException(sprintf(
+            throw new UIMException(sprintf(
                 "Decoding JSON config file "%s.json" did not return an array",
                 $key
             ));

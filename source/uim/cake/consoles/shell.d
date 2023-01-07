@@ -810,7 +810,7 @@ class Shell
             $fs.dumpFile($path, $contents);
 
             _io.out(sprintf("<success>Wrote</success> `%s`", $path));
-        } catch (CakeException $e) {
+        } catch (UIMException $e) {
             _io.err(sprintf("<error>Could not write to `%s`</error>.", $path), 2);
 
             return false;

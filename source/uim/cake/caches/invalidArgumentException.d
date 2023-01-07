@@ -10,5 +10,5 @@ import uim.cake;
 
 
 // Exception raised when cache keys are invalid.
-class InvalidArgumentException : CakeException, IInvalidArgument {
+class InvalidArgumentException : UIMException, IInvalidArgument {
 }

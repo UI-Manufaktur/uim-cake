@@ -15,7 +15,7 @@ use Throwable;
  *
  * @method int getCode() Gets the Exception code.
  */
-class CakeException : RuntimeException {
+class UIMException : RuntimeException {
     /**
      * Array of attributes that are passed in from the constructor, and
      * made available in the view when a development error is displayed.

@@ -5,12 +5,12 @@
 **********************************************************************************************************/
 module uim.cake.caches;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 use Psr\SimpleCache\InvalidArgumentException as IInvalidArgument;
 
 /**
  * Exception raised when cache keys are invalid.
  */
-class InvalidArgumentException : CakeException : IInvalidArgument
+class InvalidArgumentException : UIMException : IInvalidArgument
 {
 }

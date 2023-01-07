@@ -1,6 +1,6 @@
 module uim.cake.databases.types;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.databases.IDriver;
 import uim.cake.utilities.Text;
 use PDO;
@@ -49,7 +49,7 @@ class BinaryUuidType : BaseType {
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return resource|string|null
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     function toPHP($value, IDriver aDriver) {
         if ($value == null) {
@@ -62,7 +62,7 @@ class BinaryUuidType : BaseType {
             return $value;
         }
 
-        throw new CakeException(sprintf("Unable to convert %s into binary uuid.", gettype($value)));
+        throw new UIMException(sprintf("Unable to convert %s into binary uuid.", gettype($value)));
     }
 
     /**

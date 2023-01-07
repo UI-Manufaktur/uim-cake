@@ -1,6 +1,6 @@
 module uim.cake.databases.Statement;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.databases.IDriver;
 use PDO;
 use PDOStatement as Statement;
@@ -106,7 +106,7 @@ class PDOStatement : StatementDecorator
         }
 
         if (!is_int($type)) {
-            throw new CakeException(sprintf(
+            throw new UIMException(sprintf(
                 "Fetch type for PDOStatement must be an integer, found `%s` instead",
                 getTypeName($type)
             ));
@@ -142,7 +142,7 @@ class PDOStatement : StatementDecorator
         }
 
         if (!is_int($type)) {
-            throw new CakeException(sprintf(
+            throw new UIMException(sprintf(
                 "Fetch type for PDOStatement must be an integer, found `%s` instead",
                 getTypeName($type)
             ));

@@ -57,7 +57,7 @@ class PhpConfig : ConfigEngineInterface
      * @param string aKey The identifier to read from. If the key has a . it will be treated
      *  as a plugin prefix.
      * @return array Parsed configuration values.
-     * @throws uim.cake.Core\exceptions.CakeException when files don"t exist or they don"t contain `aConfig`.
+     * @throws uim.cake.Core\exceptions.UIMException when files don"t exist or they don"t contain `aConfig`.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
     array read(string aKey) {
@@ -70,7 +70,7 @@ class PhpConfig : ConfigEngineInterface
             return $return;
         }
 
-        throw new CakeException(sprintf("Config file '%s' did not return an array", $key ~ ".php"));
+        throw new UIMException(sprintf("Config file '%s' did not return an array", $key ~ ".php"));
     }
 
     /**

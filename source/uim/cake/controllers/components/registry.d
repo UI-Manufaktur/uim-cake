@@ -43,7 +43,7 @@ class ComponentRegistry : ObjectRegistry, IEventDispatcher {
      */
     Controller getController() {
         if (_Controller == null) {
-            throw new CakeException("Controller not set for ComponentRegistry");
+            throw new UIMException("Controller not set for ComponentRegistry");
         }
 
         return _Controller;

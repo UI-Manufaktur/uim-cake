@@ -52,7 +52,7 @@ class FloatType : BaseType : BatchCastingInterface
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return float|null
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     function toPHP($value, IDriver aDriver): ?float
     {

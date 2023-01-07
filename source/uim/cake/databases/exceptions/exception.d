@@ -1,11 +1,11 @@
 module uim.cake.databases.exceptions;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * Exception for the database package.
  */
-class DatabaseException : CakeException {
+class DatabaseException : UIMException {
 }
 
 // phpcs:disable

@@ -5,13 +5,13 @@
 **********************************************************************************************************/
 module uim.cake.controllers\Exception;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 
 /**
  * Missing Action exception - used when a controller action
  * cannot be found, or when the controller"s isAction() method returns false.
  */
-class MissingActionException : CakeException {
+class MissingActionException : UIMException {
 
     protected _messageTemplate = "Action %s::%s() could not be found, or is not accessible.";
 }

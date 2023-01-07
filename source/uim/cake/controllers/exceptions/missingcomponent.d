@@ -9,6 +9,6 @@ module uim.cake.controllers\Exception;
 import uim.cake;
 
 // Used when a component cannot be found.
-class MissingComponentException : CakeException {
+class MissingComponentException : UIMException {
     protected string _messageTemplate = "Component class %s could not be found.";
 }

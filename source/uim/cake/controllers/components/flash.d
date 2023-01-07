@@ -76,7 +76,7 @@ class FlashComponent : Component
      * @param mixed|null $value The value to set.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
-     * @throws uim.cake.Core\exceptions.CakeException When trying to set a key that is invalid.
+     * @throws uim.cake.Core\exceptions.UIMException When trying to set a key that is invalid.
      */
     function setConfig($key, $value = null, $merge = true) {
         this.flash().setConfig($key, $value, $merge);

@@ -25,12 +25,12 @@ trait FileConfigTrait
      *  as a plugin prefix.
      * @param bool $checkExists Whether to check if file exists. Defaults to false.
      * @return string Full file path
-     * @throws uim.cake.Core\exceptions.CakeException When files don"t exist or when
+     * @throws uim.cake.Core\exceptions.UIMException When files don"t exist or when
      *  files contain ".." as this could lead to abusive reads.
      */
     protected string _getFilePath(string aKey, bool $checkExists = false) {
         if (strpos($key, "..") != false) {
-            throw new CakeException("Cannot load/dump configuration files with ../ in them.");
+            throw new UIMException("Cannot load/dump configuration files with ../ in them.");
         }
 
         [$plugin, $key] = pluginSplit($key);
@@ -52,6 +52,6 @@ trait FileConfigTrait
             return $realPath;
         }
 
-        throw new CakeException(sprintf("Could not load configuration file: %s", $file));
+        throw new UIMException(sprintf("Could not load configuration file: %s", $file));
     }
 }

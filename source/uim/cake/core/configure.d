@@ -292,13 +292,13 @@ class Configure {
      * @param string aConfig Name of the configured engine to use to read the resource identified by $key.
      * @param bool $merge if config files should be merged instead of simply overridden
      * @return bool True if load successful.
-     * @throws uim.cake.Core\exceptions.CakeException if the aConfig engine is not found
+     * @throws uim.cake.Core\exceptions.UIMException if the aConfig engine is not found
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
     static bool load(string aKey, string aConfig = "default", bool $merge = true) {
         $engine = static::_getEngine(aConfig);
         if (!$engine) {
-            throw new CakeException(
+            throw new UIMException(
                 sprintf(
                     "Config %s engine not found when attempting to load %s.",
                     aConfig,
@@ -345,12 +345,12 @@ class Configure {
      * @param array<string> $keys The name of the top-level keys you want to dump.
      *   This allows you save only some data stored in Configure.
      * @return bool Success
-     * @throws uim.cake.Core\exceptions.CakeException if the adapter does not implement a `dump` method.
+     * @throws uim.cake.Core\exceptions.UIMException if the adapter does not implement a `dump` method.
      */
     static bool dump(string aKey, string aConfig = "default", array $keys = []) {
         $engine = static::_getEngine(aConfig);
         if (!$engine) {
-            throw new CakeException(sprintf("There is no '%s' config engine.", aConfig));
+            throw new UIMException(sprintf("There is no '%s' config engine.", aConfig));
         }
         $values = static::_values;
         if (!empty($keys)) {

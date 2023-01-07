@@ -51,7 +51,7 @@ trait InstanceConfigTrait
      * @param mixed|null $value The value to set.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
-     * @throws uim.cake.Core\exceptions.CakeException When trying to set a key that is invalid.
+     * @throws uim.cake.Core\exceptions.UIMException When trying to set a key that is invalid.
      */
     function setConfig($key, $value = null, $merge = true) {
         if (!_configInitialized) {
@@ -200,7 +200,7 @@ trait InstanceConfigTrait
      * @param string|bool $merge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
+     * @throws uim.cake.Core\exceptions.UIMException if attempting to clobber existing config
      */
     protected void _configWrite($key, $value, $merge = false) {
         if (is_string($key) && $value == null) {
@@ -239,7 +239,7 @@ trait InstanceConfigTrait
 
         foreach ($stack as $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf("Cannot set %s value", $key));
+                throw new UIMException(sprintf("Cannot set %s value", $key));
             }
 
             $update[$k] = $update[$k] ?? [];
@@ -255,7 +255,7 @@ trait InstanceConfigTrait
      *
      * @param string aKey Key to delete.
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
+     * @throws uim.cake.Core\exceptions.UIMException if attempting to clobber existing config
      */
     protected void _configDelete(string aKey) {
         if (strpos($key, ".") == false) {
@@ -270,7 +270,7 @@ trait InstanceConfigTrait
 
         foreach ($stack as $i: $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf("Cannot unset %s value", $key));
+                throw new UIMException(sprintf("Cannot unset %s value", $key));
             }
 
             if (!isset($update[$k])) {

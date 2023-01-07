@@ -4,6 +4,6 @@ module uim.cake.databases.exceptions.missingconnection;
 import uim.cake;
 
 // Class MissingConnectionException
-class MissingConnectionException : CakeException {
+class MissingConnectionException : UIMException {
   protected string _messageTemplate = "Connection to %s could not be established: %s";
 }

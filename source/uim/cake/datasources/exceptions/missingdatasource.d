@@ -9,6 +9,6 @@ module uim.cake.datasources.exceptions.missingdatasource;
 import uim.cake;
 
 // Used when a datasource cannot be found.
-class MissingDatasourceException : CakeException {
+class MissingDatasourceException : UIMException {
   protected string _messageTemplate = "Datasource class %s could not be found. %s";
 }

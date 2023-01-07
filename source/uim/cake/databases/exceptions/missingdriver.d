@@ -4,7 +4,7 @@ module uim.cake.databases.exceptions.missingdriver;
 import uim.cake;
 
 // Class MissingDriverException
-class MissingDriverException : CakeException {
+class MissingDriverException : UIMException {
 
     protected _messageTemplate = "Could not find driver `%s` for connection `%s`.";
 }

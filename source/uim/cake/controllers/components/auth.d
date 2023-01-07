@@ -305,7 +305,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param uim.cake.controllers.Controller $controller A reference to the controller object.
      * @return uim.cake.http.Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     protected function _unauthenticated(Controller $controller): ?Response
     {
@@ -315,7 +315,7 @@ class AuthComponent : Component : IEventDispatcher
         $response = $controller.getResponse();
         $auth = end(_authenticateObjects);
         if ($auth == false) {
-            throw new CakeException('At least one authenticate object must be available.');
+            throw new UIMException('At least one authenticate object must be available.');
         }
         $result = $auth.unauthenticated($controller.getRequest(), $response);
         if ($result != null) {
@@ -470,7 +470,7 @@ class AuthComponent : Component : IEventDispatcher
      * Loads the authorization objects configured.
      *
      * @return array|null The loaded authorization objects, or null when authorize is empty.
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     function constructAuthorize(): ?array
     {
@@ -493,10 +493,10 @@ class AuthComponent : Component : IEventDispatcher
             }
             $className = App::className($class, 'Auth', 'Authorize');
             if ($className == null) {
-                throw new CakeException(sprintf('Authorization adapter '%s' was not found.', $class));
+                throw new UIMException(sprintf('Authorization adapter '%s' was not found.', $class));
             }
             if (!method_exists($className, 'authorize')) {
-                throw new CakeException('Authorization objects must implement an authorize() method.');
+                throw new UIMException('Authorization objects must implement an authorize() method.');
             }
             aConfig = (array)aConfig + $global;
             _authorizeObjects[$alias] = new $className(_registry, aConfig);
@@ -757,7 +757,7 @@ class AuthComponent : Component : IEventDispatcher
      * Loads the configured authentication objects.
      *
      * @return array<string, object>|null The loaded authorization objects, or null on empty authenticate value.
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     function constructAuthenticate(): ?array
     {
@@ -780,10 +780,10 @@ class AuthComponent : Component : IEventDispatcher
             }
             $className = App::className($class, 'Auth', 'Authenticate');
             if ($className == null) {
-                throw new CakeException(sprintf('Authentication adapter '%s' was not found.', $class));
+                throw new UIMException(sprintf('Authentication adapter '%s' was not found.', $class));
             }
             if (!method_exists($className, 'authenticate')) {
-                throw new CakeException('Authentication objects must implement an authenticate() method.');
+                throw new UIMException('Authentication objects must implement an authenticate() method.');
             }
             aConfig = array_merge($global, (array)aConfig);
             _authenticateObjects[$alias] = new $className(_registry, aConfig);
@@ -822,7 +822,7 @@ class AuthComponent : Component : IEventDispatcher
         }
         $className = App::className($class, 'Auth/Storage', 'Storage');
         if ($className == null) {
-            throw new CakeException(sprintf('Auth storage adapter '%s' was not found.', $class));
+            throw new UIMException(sprintf('Auth storage adapter '%s' was not found.', $class));
         }
         $request = this.getController().getRequest();
         $response = this.getController().getResponse();

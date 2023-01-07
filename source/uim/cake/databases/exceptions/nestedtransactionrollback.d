@@ -8,7 +8,7 @@ use Throwable;
 /**
  * Class NestedTransactionRollbackException
  */
-class NestedTransactionRollbackException : CakeException {
+class NestedTransactionRollbackException : UIMException {
     /**
      * Constructor
      *

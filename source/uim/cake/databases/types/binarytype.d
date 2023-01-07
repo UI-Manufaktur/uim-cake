@@ -1,6 +1,6 @@
 module uim.cake.databases.types;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.databases.IDriver;
 use PDO;
 
@@ -30,7 +30,7 @@ class BinaryType : BaseType {
      * @param mixed $value The value to convert.
      * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return resource|null
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     function toPHP($value, IDriver aDriver) {
         if ($value == null) {
@@ -42,7 +42,7 @@ class BinaryType : BaseType {
         if (is_resource($value)) {
             return $value;
         }
-        throw new CakeException(sprintf("Unable to convert %s into binary.", gettype($value)));
+        throw new UIMException(sprintf("Unable to convert %s into binary.", gettype($value)));
     }
 
     /**

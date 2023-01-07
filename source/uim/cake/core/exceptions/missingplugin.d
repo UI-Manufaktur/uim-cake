@@ -9,6 +9,6 @@ module uim.cake.core.exceptions;
 import uim.cake;
 
 // Exception raised when a plugin could not be found
-class MissingPluginException : CakeException {
+class MissingPluginException : UIMException {
   protected string _messageTemplate = "Plugin %s could not be found.";
 }

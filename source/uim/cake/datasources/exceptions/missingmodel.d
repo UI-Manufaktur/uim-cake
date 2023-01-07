@@ -9,6 +9,6 @@ module uim.cake.datasources.exceptions.miisingmodel;
 import uim.cake;
 
 // Used when a model cannot be found.
-class MissingModelException : CakeException {
+class MissingModelException : UIMException {
   protected string _messageTemplate = "Model class '%s' of type '%s' could not be found.";
 }
