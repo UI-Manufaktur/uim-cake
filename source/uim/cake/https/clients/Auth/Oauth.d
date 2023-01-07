@@ -21,7 +21,7 @@ class Oauth
      * @param uim.cake.http.Client\Request myRequest The request object.
      * @param array $credentials Authentication credentials.
      * @return uim.cake.http.Client\Request The updated request.
-     * @throws uim.cake.Core\exceptions.CakeException On invalid signature types.
+     * @throws uim.cake.Core\exceptions.UIMException On invalid signature types.
      */
     function authentication(Request myRequest, array $credentials): Request
     {
@@ -67,7 +67,7 @@ class Oauth
                 break;
 
             default:
-                throw new CakeException(sprintf("Unknown Oauth signature method %s", $credentials["method"]));
+                throw new UIMException(sprintf("Unknown Oauth signature method %s", $credentials["method"]));
         }
 
         return myRequest.withHeader("Authorization", myValue);

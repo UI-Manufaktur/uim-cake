@@ -1,11 +1,11 @@
 module uim.cake.http.clients\Exception;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 
 /**
  * Used to indicate that a request did not have a matching mock response.
  */
-class MissingResponseException : CakeException {
+class MissingResponseException : UIMException {
     /**
      * @var string
      */

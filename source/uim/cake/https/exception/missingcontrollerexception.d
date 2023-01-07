@@ -1,12 +1,12 @@
 module uim.cake.http.exceptions;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * Missing Controller exception - used when a controller
  * cannot be found.
  */
-class MissingControllerException : CakeException {
+class MissingControllerException : UIMException {
 
     protected _defaultCode = 404;
 

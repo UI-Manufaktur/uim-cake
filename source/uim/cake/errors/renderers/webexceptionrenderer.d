@@ -14,7 +14,7 @@ import uim.cake.controllers.exceptions.MissingActionException;
 import uim.cake.core.App;
 import uim.cake.core.Configure;
 import uim.cake.core.Container;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.core.exceptions.MissingPluginException;
 import uim.cake.datasources.exceptions.RecordNotFoundException;
 import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
@@ -70,7 +70,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     protected $controller;
 
     /**
-     * Template to render for {@link uim.cake.Core\exceptions.CakeException}
+     * Template to render for {@link uim.cake.Core\exceptions.UIMException}
      */
     protected string $template = "";
 
@@ -218,7 +218,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
         $url = this.controller.getRequest().getRequestTarget();
         $response = this.controller.getResponse();
 
-        if ($exception instanceof CakeException) {
+        if ($exception instanceof UIMException) {
             /** @psalm-suppress DeprecatedMethod */
             foreach ((array)$exception.responseHeader() as $key: $value) {
                 $response = $response.withHeader($key, $value);
@@ -267,7 +267,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
         this.controller.set($viewVars);
         this.controller.viewBuilder().setOption("serialize", $serialize);
 
-        if ($exception instanceof CakeException && $isDebug) {
+        if ($exception instanceof UIMException && $isDebug) {
             this.controller.set($exception.getAttributes());
         }
         this.controller.setResponse($response);

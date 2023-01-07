@@ -1,6 +1,6 @@
 module uim.cake.Mailer;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.core.InstanceConfigTrait;
 
 /**
@@ -40,7 +40,7 @@ abstract class AbstractTransport
      *
      * @param uim.cake.mailers.Message $message Message instance.
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException If at least one of to, cc or bcc is not specified.
+     * @throws uim.cake.Core\exceptions.UIMException If at least one of to, cc or bcc is not specified.
      */
     protected void checkRecipient(Message $message) {
         if (
@@ -48,7 +48,7 @@ abstract class AbstractTransport
             && $message.getCc() == []
             && $message.getBcc() == []
         ) {
-            throw new CakeException(
+            throw new UIMException(
                 "You must specify at least one recipient."
                 ~ " Use one of `setTo`, `setCc` or `setBcc` to define a recipient."
             );

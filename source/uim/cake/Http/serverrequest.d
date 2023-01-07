@@ -2,7 +2,7 @@ module uim.cake.Http;
 
 use BadMethodCallException;
 import uim.cake.core.Configure;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.http.Cookie\CookieCollection;
 import uim.cake.http.exceptions.MethodNotAllowedException;
 import uim.cake.utilities.Hash;
@@ -245,7 +245,7 @@ class ServerRequest : IServerRequest
 
         if (isset(aConfig["uri"])) {
             if (!aConfig["uri"] instanceof UriInterface) {
-                throw new CakeException("The `uri` key must be an instance of " ~ UriInterface::class);
+                throw new UIMException("The `uri` key must be an instance of " ~ UriInterface::class);
             }
             $uri = aConfig["uri"];
         } else {

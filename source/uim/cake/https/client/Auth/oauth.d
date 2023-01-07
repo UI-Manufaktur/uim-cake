@@ -12,7 +12,7 @@
 
   */module uim.cake.http.Client\Auth;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.http.Client\Request;
 import uim.cake.utilities.Security;
 use Psr\Http\messages.UriInterface;
@@ -36,7 +36,7 @@ class Oauth
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array $credentials Authentication credentials.
      * @return uim.cake.http.Client\Request The updated request.
-     * @throws uim.cake.Core\exceptions.CakeException On invalid signature types.
+     * @throws uim.cake.Core\exceptions.UIMException On invalid signature types.
      */
     function authentication(Request $request, array $credentials): Request
     {
@@ -82,7 +82,7 @@ class Oauth
                 break;
 
             default:
-                throw new CakeException(sprintf("Unknown Oauth signature method %s", $credentials["method"]));
+                throw new UIMException(sprintf("Unknown Oauth signature method %s", $credentials["method"]));
         }
 
         return $request.withHeader("Authorization", $value);

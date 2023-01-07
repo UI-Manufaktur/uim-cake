@@ -9,7 +9,7 @@
 
 import uim.cake.consoles.ConsoleOutput;
 import uim.cake.core.Configure;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 use Psr\Http\messages.IServerRequest;
 use Throwable;
 
@@ -90,7 +90,7 @@ class ConsoleExceptionRenderer
         ];
 
         $debug = Configure::read("debug");
-        if ($debug && $exception instanceof CakeException) {
+        if ($debug && $exception instanceof UIMException) {
             $attributes = $exception.getAttributes();
             if ($attributes) {
                 $out[] = "";

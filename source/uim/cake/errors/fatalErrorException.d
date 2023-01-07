@@ -6,7 +6,7 @@ import uim.cake;
 /**
  * Represents a fatal error
  */
-class FatalErrorException : CakeException {
+class FatalErrorException : UIMException {
     /**
      * Constructor
      *

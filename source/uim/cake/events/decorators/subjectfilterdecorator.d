@@ -13,7 +13,7 @@
  * @since         3.3.0
   */module uim.cake.events.Decorator;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.events.IEvent;
 use RuntimeException;
 
@@ -53,7 +53,7 @@ class SubjectFilterDecorator : AbstractDecorator
 
         try {
             $subject = $event.getSubject();
-        } catch (CakeException $e) {
+        } catch (UIMException $e) {
             return false;
         }
 

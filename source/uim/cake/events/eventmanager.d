@@ -159,7 +159,7 @@ class EventManager : IEventManager
 
         if (!is_string(myEventKey)) {
             if (!is_callable(myEventKey)) {
-                throw new CakeException(
+                throw new UIMException(
                     "First argument of EventManager::off() must be " ~
                     " string or IEventListener instance or callable."
                 );
@@ -427,7 +427,7 @@ class EventManager : IEventManager
                 try {
                     $subject = myEvent.getSubject();
                     $properties["_dispatchedEvents"][] = myEvent.getName() ~ " with subject " ~ get_class($subject);
-                } catch (CakeException $e) {
+                } catch (UIMException $e) {
                     $properties["_dispatchedEvents"][] = myEvent.getName() ~ " with no subject";
                 }
             }

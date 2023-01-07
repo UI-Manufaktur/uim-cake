@@ -1,7 +1,7 @@
 module uim.cake.Mailer;
 
 use BadMethodCallException;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.core.StaticConfigTrait;
 import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.IEventListener;
@@ -469,7 +469,7 @@ class Mailer : IEventListener
         } elseif (is_object($name)) {
             $transport = $name;
             if (!$transport instanceof AbstractTransport) {
-                throw new CakeException("Transport class must extend Cake\mailers.AbstractTransport");
+                throw new UIMException("Transport class must extend Cake\mailers.AbstractTransport");
             }
         } else {
             throw new InvalidArgumentException(sprintf(

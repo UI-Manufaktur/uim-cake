@@ -1,6 +1,6 @@
 module uim.cake.datasources.Paging;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
 import uim.cake.datasources.IQuery;
@@ -156,7 +156,7 @@ class NumericPaginator : PaginatorInterface
             $query = $object;
             $object = $query.getRepository();
             if ($object == null) {
-                throw new CakeException("No repository set for query.");
+                throw new UIMException("No repository set for query.");
             }
         }
 

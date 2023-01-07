@@ -2,7 +2,7 @@ module uim.cake.I18n;
 
 import uim.cake.Chronos\ChronosInterface;
 import uim.cake.Chronos\DifferenceIFormatter;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 use Closure;
 use DateTime;
 use DateTimeZone;
@@ -316,7 +316,7 @@ trait DateFormatTrait
             $pattern
         );
         if (!$formatter) {
-            throw new CakeException("Unable to create IntlDateFormatter instance");
+            throw new UIMException("Unable to create IntlDateFormatter instance");
         }
         $formatter.setLenient(static::$lenientParsing);
 

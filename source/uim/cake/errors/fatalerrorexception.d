@@ -1,12 +1,12 @@
 module uim.cake.Error;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 use Throwable;
 
 /**
  * Represents a fatal error
  */
-class FatalErrorException : CakeException {
+class FatalErrorException : UIMException {
     /**
      * Constructor
      *

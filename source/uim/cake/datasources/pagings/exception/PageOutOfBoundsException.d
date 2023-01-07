@@ -8,12 +8,12 @@
  * Redistributions of files must retain the above copyright notice.
  *module uim.cake.datasources.Paging\Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * Exception raised when requested page number does not exist.
  */
-class PageOutOfBoundsException : CakeException {
+class PageOutOfBoundsException : UIMException {
 
     protected _messageTemplate = "Page number %s could not be found.";
 }

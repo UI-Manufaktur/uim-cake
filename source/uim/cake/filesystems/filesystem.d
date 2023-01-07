@@ -112,7 +112,7 @@ class Filesystem
      * @param string $filename File path.
      * @param string $content Content to dump.
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException When dumping fails.
+     * @throws uim.cake.Core\exceptions.UIMException When dumping fails.
      */
     void dumpFile(string $filename, string $content) {
         $dir = dirname($filename);
@@ -131,7 +131,7 @@ class Filesystem
         }
 
         if ($success == false) {
-            throw new CakeException(sprintf("Failed dumping content to file `%s`", $dir));
+            throw new UIMException(sprintf("Failed dumping content to file `%s`", $dir));
         }
 
         if (!$exists) {
@@ -145,7 +145,7 @@ class Filesystem
      * @param string $dir Directory path.
      * @param int $mode Octal mode passed to mkdir(). Defaults to 0755.
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException When directory creation fails.
+     * @throws uim.cake.Core\exceptions.UIMException When directory creation fails.
      */
     void mkdir(string $dir, int $mode = 0755) {
         if (is_dir($dir)) {
@@ -156,7 +156,7 @@ class Filesystem
         // phpcs:ignore
         if (@mkdir($dir, $mode, true) == false) {
             umask($old);
-            throw new CakeException(sprintf("Failed to create directory '%s'", $dir));
+            throw new UIMException(sprintf("Failed to create directory '%s'", $dir));
         }
 
         umask($old);
@@ -167,7 +167,7 @@ class Filesystem
      *
      * @param string $path Directory path.
      * @return bool
-     * @throws uim.cake.Core\exceptions.CakeException If path is not a directory.
+     * @throws uim.cake.Core\exceptions.UIMException If path is not a directory.
      */
     bool deleteDir(string $path) {
         if (!file_exists($path)) {
@@ -175,7 +175,7 @@ class Filesystem
         }
 
         if (!is_dir($path)) {
-            throw new CakeException(sprintf("'%s' is not a directory", $path));
+            throw new UIMException(sprintf("'%s' is not a directory", $path));
         }
 
         $iterator = new RecursiveIteratorIterator(

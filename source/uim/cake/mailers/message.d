@@ -1,7 +1,7 @@
 module uim.cake.Mailer;
 
 import uim.cake.core.Configure;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.http.Client\FormDataPart;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
@@ -1767,7 +1767,7 @@ class Message : JsonSerializable, Serializable {
     void unserialize($data) {
         $array = unserialize($data);
         if (!is_array($array)) {
-            throw new CakeException("Unable to unserialize message.");
+            throw new UIMException("Unable to unserialize message.");
         }
 
         this.createFromArray($array);

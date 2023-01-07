@@ -77,12 +77,12 @@ class Event : IEvent
      * If the event has no subject an exception will be raised.
      *
      * @return object
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      * @psalm-return TSubject
      */
     function getSubject() {
         if (_subject == null) {
-            throw new CakeException("No subject set for this event");
+            throw new UIMException("No subject set for this event");
         }
 
         return _subject;

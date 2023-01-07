@@ -1,7 +1,7 @@
 module uim.cake.Error;
 
 import uim.cake.core.Configure;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.logs.Log;
 use Psr\Http\messages.IServerRequest;
@@ -139,7 +139,7 @@ class ErrorLogger : ErrorLoggerInterface
         );
         $debug = Configure::read("debug");
 
-        if ($debug && $exception instanceof CakeException) {
+        if ($debug && $exception instanceof UIMException) {
             $attributes = $exception.getAttributes();
             if ($attributes) {
                 $message .= "\nException Attributes: " ~ var_export($exception.getAttributes(), true);

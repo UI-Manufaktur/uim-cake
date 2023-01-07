@@ -1,6 +1,6 @@
 module uim.cake.I18n;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 use Locale;
 
 /**
@@ -186,6 +186,6 @@ class PluralRules
                 return $n % 10 != 1 || $n % 100 == 11 ? 1 : 0;
         }
 
-        throw new CakeException("Unable to find plural rule number.");
+        throw new UIMException("Unable to find plural rule number.");
     }
 }

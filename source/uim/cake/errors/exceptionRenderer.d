@@ -37,7 +37,7 @@ class ExceptionRenderer : IExceptionRenderer
     protected controller;
 
     /**
-     * Template to render for {@link uim.cake.Core\exceptions.CakeException}
+     * Template to render for {@link uim.cake.Core\exceptions.UIMException}
      */
     protected string myTemplate = "";
 
@@ -185,7 +185,7 @@ class ExceptionRenderer : IExceptionRenderer
         myUrl = this.controller.getRequest().getRequestTarget();
         $response = this.controller.getResponse();
 
-        if (myException instanceof CakeException) {
+        if (myException instanceof UIMException) {
             /** @psalm-suppress DeprecatedMethod */
             foreach ((array)myException.responseHeader() as myKey: myValue) {
                 $response = $response.withHeader(myKey, myValue);
@@ -226,7 +226,7 @@ class ExceptionRenderer : IExceptionRenderer
         this.controller.set($viewVars);
         this.controller.viewBuilder().setOption("serialize", $serialize);
 
-        if (myException instanceof CakeException && $isDebug) {
+        if (myException instanceof UIMException && $isDebug) {
             this.controller.set(myException.getAttributes());
         }
         this.controller.setResponse($response);
