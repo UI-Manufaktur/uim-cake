@@ -61,11 +61,11 @@ class ViewBlock
      * @param string myMode If ViewBlock::OVERRIDE existing content will be overridden by new content.
      *   If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
-     * @throws uim.cake.Core\exceptions.CakeException When starting a block twice
+     * @throws uim.cake.Core\exceptions.UIMException When starting a block twice
      */
     void start(string myName, string myMode = ViewBlock::OVERRIDE) {
         if (array_key_exists(myName, _active)) {
-            throw new CakeException(sprintf("A view block with the name '%s' is already/still open.", myName));
+            throw new UIMException(sprintf("A view block with the name '%s' is already/still open.", myName));
         }
         _active[myName] = myMode;
         ob_start();

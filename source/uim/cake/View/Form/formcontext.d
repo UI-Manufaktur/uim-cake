@@ -1,6 +1,6 @@
 module uim.cake.View\Form;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.Form\Form;
 import uim.cake.utilities.Hash;
 
@@ -37,7 +37,7 @@ class FormContext : IContext
      */
     this(array $context) {
         if (!isset($context["entity"]) || !$context["entity"] instanceof Form) {
-            throw new CakeException("`$context[\"entity\"]` must be an instance of Cake\Form\Form");
+            throw new UIMException("`$context[\"entity\"]` must be an instance of Cake\Form\Form");
         }
 
         _form = $context["entity"];

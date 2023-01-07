@@ -8,6 +8,6 @@
 import uim.cake;
 
 // Used when a view class file cannot be found.
-class MissingViewException : CakeException {
+class MissingViewException : UIMException {
   protected string _messageTemplate = "View class '%s' is missing.";
 }

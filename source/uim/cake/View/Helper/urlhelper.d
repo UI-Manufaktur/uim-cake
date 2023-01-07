@@ -1,7 +1,7 @@
 module uim.cake.View\Helper;
 
 import uim.cake.core.App;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.routings.Asset;
 import uim.cake.routings.Router;
 import uim.cake.View\Helper;
@@ -40,7 +40,7 @@ class UrlHelper : Helper
         /** @psalm-var class-string<uim.cake.routings.Asset>|null $engineClass */
         $engineClass = App::className($engineClassConfig, "Routing");
         if ($engineClass == null) {
-            throw new CakeException(sprintf("Class for %s could not be found", $engineClassConfig));
+            throw new UIMException(sprintf("Class for %s could not be found", $engineClassConfig));
         }
 
         _assetUrlClassName = $engineClass;

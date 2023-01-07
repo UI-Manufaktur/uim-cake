@@ -627,12 +627,12 @@ class FormHelper : Helper
      * Get form protector instance.
      *
      * @return uim.cake.Form\FormProtector
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     FormProtector getFormProtector(): 
     {
         if (this.formProtector is null) {
-            throw new CakeException(
+            throw new UIMException(
                 "`FormProtector` instance has not been created. Ensure you have loaded the `FormProtectionComponent`"
                 ~ " in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`."
             );
@@ -1528,11 +1528,11 @@ class FormHelper : Helper
      * @param string method Method name / input type to make.
      * @param array myParams Parameters for the method call
      * @return string Formatted input method.
-     * @throws uim.cake.Core\exceptions.CakeException When there are no params for the method call.
+     * @throws uim.cake.Core\exceptions.UIMException When there are no params for the method call.
      */
     auto __call(string method, array myParams) {
         if (empty(myParams)) {
-            throw new CakeException(sprintf("Missing field name for FormHelper::%s", $method));
+            throw new UIMException(sprintf("Missing field name for FormHelper::%s", $method));
         }
         myOptions = myParams[1] ?? [];
         myOptions["type"] = myOptions["type"] ?? $method;

@@ -8,5 +8,5 @@
 import uim.cake;
 
 //  Used when a SerializedView class fails to serialize data.
-class SerializationFailureException : CakeException {
+class SerializationFailureException : UIMException {
 }

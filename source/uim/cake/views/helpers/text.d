@@ -55,7 +55,7 @@ class TextHelper : Helper
      *
      * @param uim.cake.View\View $view the view object the helper is attached to.
      * @param array<string, mixed> myConfig Settings array Settings array
-     * @throws uim.cake.Core\exceptions.CakeException when the engine class could not be found.
+     * @throws uim.cake.Core\exceptions.UIMException when the engine class could not be found.
      */
     this(View $view, array myConfig = []) {
         super.this($view, myConfig);
@@ -65,7 +65,7 @@ class TextHelper : Helper
         /** @psalm-var class-string<uim.cake.Utility\Text>|null $engineClass */
         $engineClass = App::className(myConfig["engine"], "Utility");
         if ($engineClass is null) {
-            throw new CakeException(sprintf("Class for %s could not be found", myConfig["engine"]));
+            throw new UIMException(sprintf("Class for %s could not be found", myConfig["engine"]));
         }
 
         _engine = new $engineClass(myConfig);

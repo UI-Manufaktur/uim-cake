@@ -8,7 +8,7 @@
   */module uim.cake.View\Helper;
 
 import uim.cake.core.Configure;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.Form\FormProtector;
 import uim.cake.routings.Router;
 import uim.cake.utilities.Hash;
@@ -646,12 +646,12 @@ class FormHelper : Helper
      * Get form protector instance.
      *
      * @return uim.cake.Form\FormProtector
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      */
     function getFormProtector(): FormProtector
     {
         if (this.formProtector == null) {
-            throw new CakeException(
+            throw new UIMException(
                 "`FormProtector` instance has not been created. Ensure you have loaded the `FormProtectionComponent`"
                 ~ " in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`."
             );
@@ -1554,11 +1554,11 @@ class FormHelper : Helper
      * @param string $method Method name / input type to make.
      * @param array $params Parameters for the method call
      * @return string Formatted input method.
-     * @throws uim.cake.Core\exceptions.CakeException When there are no params for the method call.
+     * @throws uim.cake.Core\exceptions.UIMException When there are no params for the method call.
      */
     function __call(string $method, array $params) {
         if (empty($params)) {
-            throw new CakeException(sprintf("Missing field name for FormHelper::%s", $method));
+            throw new UIMException(sprintf("Missing field name for FormHelper::%s", $method));
         }
         $options = $params[1] ?? [];
         $options["type"] = $options["type"] ?? $method;

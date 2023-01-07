@@ -1,9 +1,9 @@
 module uim.cake.View\Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * Used when a SerializedView class fails to serialize data.
  */
-class SerializationFailureException : CakeException {
+class SerializationFailureException : UIMException {
 }

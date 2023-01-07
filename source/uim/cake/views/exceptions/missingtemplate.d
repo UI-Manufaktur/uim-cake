@@ -4,13 +4,13 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.views.exceptions;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 use Throwable;
 
 /**
  * Used when a template file cannot be found.
  */
-class MissingTemplateException : CakeException {
+class MissingTemplateException : UIMException {
     /**
      * @var string|null
      */

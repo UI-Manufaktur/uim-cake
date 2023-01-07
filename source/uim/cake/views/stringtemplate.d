@@ -171,7 +171,7 @@ class StringTemplate {
      */
     void load(string myfile) {
         if (myfile == "") {
-            throw new CakeException("String template filename cannot be an empty string");
+            throw new UIMException("String template filename cannot be an empty string");
         }
 
         $loader = new PhpConfig();

@@ -1,11 +1,11 @@
 module uim.cake.View\Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * Used when a view class file cannot be found.
  */
-class MissingViewException : CakeException {
+class MissingViewException : UIMException {
 
     protected _messageTemplate = "View class '%s' is missing.";
 }
