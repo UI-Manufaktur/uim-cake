@@ -35,7 +35,7 @@ class LoggingStatement : StatementDecorator
     /**
      * Logged query
      *
-     * @var uim.cake.databases.logs.LoggedQuery|null
+     * @var DDBlogs.LoggedQuery|null
      */
     protected $loggedQuery;
 

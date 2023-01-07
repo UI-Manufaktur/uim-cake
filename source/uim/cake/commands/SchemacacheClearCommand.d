@@ -24,7 +24,7 @@ class SchemacacheClearCommand : Command {
      */
     int execute(Arguments $args, ConsoleIo $io) {
         try {
-            /** @var uim.cake.databases.Connection myConnection */
+            /** @var DDBConnection myConnection */
             myConnection = ConnectionManager::get((string)$args.getOption("connection"));
 
             $cache = new SchemaCache(myConnection);

@@ -8,7 +8,7 @@ trait FieldTrait
     /**
      * The field name or expression to be used in the left hand side of the operator
      *
-     * @var uim.cake.databases.IExpression|array|string
+     * @var DDBIExpression|array|string
      */
     protected _field;
 

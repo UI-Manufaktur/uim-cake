@@ -13,7 +13,7 @@ class MysqlSchemaDialect : SchemaDialect
     /**
      * The driver instance being used.
      *
-     * @var uim.cake.databases.Driver\Mysql
+     * @var DDBDriver\Mysql
      */
     protected _driver;
 

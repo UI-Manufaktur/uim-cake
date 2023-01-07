@@ -15,7 +15,7 @@ abstract class SchemaDialect
     /**
      * The driver instance being used.
      *
-     * @var uim.cake.databases.IDriver
+     * @var DDBIDriver
      */
     protected _driver;
 

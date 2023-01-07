@@ -70,7 +70,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     /**
      * The schema for this fixture.
      *
-     * @var uim.cake.databases.Schema\TableISchema&uim.cake.databases.Schema\ISqlGenerator
+     * @var DDBSchema\TableISchema&uim.cake.databases.Schema\ISqlGenerator
      * @psalm-suppress PropertyNotSetInConstructor
      */
     protected _schema;
@@ -221,7 +221,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
             $name = Inflector::camelize(this.table);
             $ormTable = this.fetchTable($name, ["connection": $db]);
 
-            /** @var uim.cake.databases.Schema\TableSchema $schema */
+            /** @var DDBSchema\TableSchema $schema */
             $schema = $ormTable.getSchema();
             _schema = $schema;
 

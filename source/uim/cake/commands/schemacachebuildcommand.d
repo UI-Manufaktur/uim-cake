@@ -26,7 +26,7 @@ class SchemacacheBuildCommand : Command {
      */
     Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         try {
-            /** @var uim.cake.databases.Connection $connection */
+            /** @var DDBConnection $connection */
             $connection = ConnectionManager::get((string)$args.getOption("connection"));
 
             $cache = new SchemaCache($connection);

@@ -36,7 +36,7 @@ class ValuesExpression : IExpression {
     /**
      * The Query object to use as a values expression
      *
-     * @var uim.cake.databases.Query|null
+     * @var DDBQuery|null
      */
     protected _query;
 
@@ -275,7 +275,7 @@ class ValuesExpression : IExpression {
 
         foreach (_values as $row: $values) {
             foreach ($types as $col: $type) {
-                /** @var uim.cake.databases.types.ExpressionTypeInterface $type */
+                /** @var DDBtypes.ExpressionTypeInterface $type */
                 _values[$row][$col] = $type.toExpression($values[$col]);
             }
         }

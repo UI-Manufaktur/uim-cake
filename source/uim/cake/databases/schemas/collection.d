@@ -14,14 +14,14 @@ class Collection : ICollection {
     /**
      * Connection object
      *
-     * @var uim.cake.databases.Connection
+     * @var DDBConnection
      */
     protected _connection;
 
     /**
      * Schema dialect instance.
      *
-     * @var uim.cake.databases.Schema\SchemaDialect
+     * @var DDBSchema\SchemaDialect
      */
     protected _dialect;
 

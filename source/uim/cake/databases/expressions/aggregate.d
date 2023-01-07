@@ -19,12 +19,12 @@ use Closure;
 class AggregateExpression : FunctionExpression : IWindow
 {
     /**
-     * @var uim.cake.databases.Expression\QueryExpression
+     * @var DDBExpression\QueryExpression
      */
     protected $filter;
 
     /**
-     * @var uim.cake.databases.Expression\WindowExpression
+     * @var DDBExpression\WindowExpression
      */
     protected $window;
 

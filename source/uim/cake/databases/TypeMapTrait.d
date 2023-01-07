@@ -9,7 +9,7 @@ module uim.cake.databases;
 trait TypeMapTrait
 {
     /**
-     * @var uim.cake.databases.TypeMap|null
+     * @var DDBTypeMap|null
      */
     protected _typeMap;
 

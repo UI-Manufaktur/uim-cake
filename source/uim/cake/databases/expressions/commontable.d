@@ -13,7 +13,7 @@ class CommonTableExpression : IExpression
     /**
      * The CTE name.
      *
-     * @var uim.cake.databases.Expression\IdentifierExpression
+     * @var DDBExpression\IdentifierExpression
      */
     protected $name;
 
@@ -27,7 +27,7 @@ class CommonTableExpression : IExpression
     /**
      * The CTE query definition.
      *
-     * @var uim.cake.databases.IExpression|null
+     * @var DDBIExpression|null
      */
     protected $query;
 

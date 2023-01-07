@@ -90,7 +90,7 @@ class EntityContext : IContext {
      * @throws \RuntimeException When a table object cannot be located/inferred.
      */
     protected void _prepare() {
-        /** @var uim.cake.orm.Table|null myTable */
+        /** @var DORMTable|null myTable */
         myTable = _context["table"];
         /** @var uim.cake.datasources.IEntity|iterable $entity */
         $entity = _context["entity"];

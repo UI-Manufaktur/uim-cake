@@ -58,7 +58,7 @@ class SchemaLoader
             this.helper.dropTables($connectionName);
         }
 
-        /** @var uim.cake.databases.Connection $connection */
+        /** @var DDBConnection $connection */
         $connection = ConnectionManager::get($connectionName);
         foreach ($files as $file) {
             if (!file_exists($file)) {

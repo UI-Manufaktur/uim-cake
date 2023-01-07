@@ -30,7 +30,7 @@ class OrderClauseExpression : IExpression, FieldInterface
 
 
     string sql(ValueBinder aBinder) {
-        /** @var uim.cake.databases.IExpression|string $field */
+        /** @var DDBIExpression|string $field */
         $field = _field;
         if ($field instanceof Query) {
             $field = sprintf("(%s)", $field.sql($binder));

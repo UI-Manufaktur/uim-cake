@@ -35,7 +35,7 @@ class CaseExpression : IExpression
     /**
      * The `ELSE` value for the case statement. If null then no `ELSE` will be included.
      *
-     * @var uim.cake.databases.IExpression|array|string|null
+     * @var DDBIExpression|array|string|null
      */
     protected _elseValue;
 

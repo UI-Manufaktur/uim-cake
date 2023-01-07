@@ -51,7 +51,7 @@ class Sqlserver : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var uim.cake.databases.Schema\SqlserverSchemaDialect|null
+     * @var DDBSchema\SqlserverSchemaDialect|null
      */
     protected _schemaDialect;
 

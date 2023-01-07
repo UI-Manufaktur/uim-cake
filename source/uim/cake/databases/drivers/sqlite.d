@@ -38,7 +38,7 @@ class Sqlite : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var uim.cake.databases.Schema\SqliteSchemaDialect|null
+     * @var DDBSchema\SqliteSchemaDialect|null
      */
     protected _schemaDialect;
 

@@ -25,14 +25,14 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * Statement instance implementation, such as PDOStatement
      * or any other custom implementation.
      *
-     * @var uim.cake.databases.IStatement
+     * @var DDBIStatement
      */
     protected _statement;
 
     /**
      * Reference to the driver object associated to this statement.
      *
-     * @var uim.cake.databases.IDriver
+     * @var DDBIDriver
      */
     protected _driver;
 

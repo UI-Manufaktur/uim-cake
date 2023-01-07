@@ -85,7 +85,7 @@ trait SqlDialectTrait
                 $query = (new IdentifierQuoter(this)).quote($query);
             }
 
-            /** @var uim.cake.orm.Query $query */
+            /** @var DORMQuery $query */
             $query = this.{"_" ~ $type ~ "QueryTranslator"}($query);
             $translators = _expressionTranslators();
             if (!$translators) {

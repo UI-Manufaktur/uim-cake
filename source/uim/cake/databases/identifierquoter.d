@@ -25,7 +25,7 @@ class IdentifierQuoter
     /**
      * The driver instance used to do the identifier quoting
      *
-     * @var uim.cake.databases.Driver
+     * @var DDBDriver
      */
     protected _driver;
 

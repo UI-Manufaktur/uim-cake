@@ -47,7 +47,7 @@ class FieldTypeConverter
     /**
      * The driver object to be used in the type conversion
      *
-     * @var uim.cake.databases.IDriver
+     * @var DDBIDriver
      */
     protected _driver;
 

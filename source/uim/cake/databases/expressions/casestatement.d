@@ -38,7 +38,7 @@ class CaseStatementExpression : IExpression, ITypedResult
     /**
      * The case value.
      *
-     * @var uim.cake.databases.IExpression|object|scalar|null
+     * @var DDBIExpression|object|scalar|null
      */
     protected $value = null;
 
@@ -65,7 +65,7 @@ class CaseStatementExpression : IExpression, ITypedResult
     /**
      * The else part result value.
      *
-     * @var uim.cake.databases.IExpression|object|scalar|null
+     * @var DDBIExpression|object|scalar|null
      */
     protected $else = null;
 

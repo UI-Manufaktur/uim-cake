@@ -23,7 +23,7 @@ class Connection : IConnection {
      * Driver object, responsible for creating the real connection
      * and provide specific SQL dialect.
      *
-     * @var uim.cake.databases.IDriver
+     * @var DDBIDriver
      */
     protected _driver;
 
@@ -65,7 +65,7 @@ class Connection : IConnection {
     /**
      * The schema collection object
      *
-     * @var uim.cake.databases.Schema\ICollection|null
+     * @var DDBSchema\ICollection|null
      */
     protected _schemaCollection;
 
@@ -73,7 +73,7 @@ class Connection : IConnection {
      * NestedTransactionRollbackException object instance, will be stored if
      * the rollback method is called in some nested transaction.
      *
-     * @var uim.cake.databases.exceptions.NestedTransactionRollbackException|null
+     * @var DDBexceptions.NestedTransactionRollbackException|null
      */
     protected $nestedTransactionRollbackException;
 
@@ -458,7 +458,7 @@ class Connection : IConnection {
 
         if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
-                /** @var uim.cake.databases.exceptions.NestedTransactionRollbackException $e */
+                /** @var DDBexceptions.NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
                 this.nestedTransactionRollbackException = null;
                 throw $e;

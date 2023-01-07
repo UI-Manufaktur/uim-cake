@@ -17,7 +17,7 @@ class DatabaseSession : SessionHandlerInterface
     /**
      * Reference to the table handling the session data
      *
-     * @var uim.cake.orm.Table
+     * @var DORMTable
      */
     protected _table;
 

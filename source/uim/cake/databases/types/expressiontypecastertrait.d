@@ -37,7 +37,7 @@ trait ExpressionTypeCasterTrait
         $multi = $type != $baseType;
 
         if ($multi) {
-            /** @var uim.cake.databases.types.ExpressionTypeInterface $converter */
+            /** @var DDBtypes.ExpressionTypeInterface $converter */
             return array_map([$converter, "toExpression"], $value);
         }
 

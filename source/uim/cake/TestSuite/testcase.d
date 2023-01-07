@@ -949,7 +949,7 @@ abstract class TestCase : BaseTestCase
             $builder.addMethods($nonExistingMethods);
         }
 
-        /** @var uim.cake.orm.Table $mock */
+        /** @var DORMTable $mock */
         $mock = $builder.getMock();
 
         if (empty($options["entityClass"]) && $mock.getEntityClass() == Entity::class) {

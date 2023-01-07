@@ -63,7 +63,7 @@ class ConnectionHelper
      * @param array<string>|null $tables List of tables names or null for all.
      */
     void dropTables(string $connectionName, ?array $tables = null) {
-        /** @var uim.cake.databases.Connection $connection */
+        /** @var DDBConnection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
 
@@ -79,13 +79,13 @@ class ConnectionHelper
         }, $tables);
 
         $dialect = $connection.getDriver().schemaDialect();
-        /** @var uim.cake.databases.Schema\TableSchema $schema */
+        /** @var DDBSchema\TableSchema $schema */
         foreach ($schemas as $schema) {
             foreach ($dialect.dropConstraintSql($schema) as $statement) {
                 $connection.execute($statement).closeCursor();
             }
         }
-        /** @var uim.cake.databases.Schema\TableSchema $schema */
+        /** @var DDBSchema\TableSchema $schema */
         foreach ($schemas as $schema) {
             foreach ($dialect.dropTableSql($schema) as $statement) {
                 $connection.execute($statement).closeCursor();
@@ -100,7 +100,7 @@ class ConnectionHelper
      * @param array<string>|null $tables List of tables names or null for all.
      */
     void truncateTables(string $connectionName, ?array $tables = null) {
-        /** @var uim.cake.databases.Connection $connection */
+        /** @var DDBConnection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
 
@@ -112,7 +112,7 @@ class ConnectionHelper
 
         this.runWithoutConstraints($connection, void (Connection $connection) use ($schemas) {
             $dialect = $connection.getDriver().schemaDialect();
-            /** @var uim.cake.databases.Schema\TableSchema $schema */
+            /** @var DDBSchema\TableSchema $schema */
             foreach ($schemas as $schema) {
                 foreach ($dialect.truncateTableSql($schema) as $statement) {
                     $connection.execute($statement).closeCursor();

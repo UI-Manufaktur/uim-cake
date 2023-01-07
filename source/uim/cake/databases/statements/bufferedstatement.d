@@ -23,14 +23,14 @@ class BufferedStatement : Iterator, IStatement
     /**
      * The decorated statement
      *
-     * @var uim.cake.databases.IStatement
+     * @var DDBIStatement
      */
     protected $statement;
 
     /**
      * The driver for the statement
      *
-     * @var uim.cake.databases.IDriver
+     * @var DDBIDriver
      */
     protected _driver;
 

@@ -17,7 +17,7 @@ use Closure;
 class WindowExpression : IExpression, IWindow
 {
     /**
-     * @var uim.cake.databases.Expression\IdentifierExpression
+     * @var DDBExpression\IdentifierExpression
      */
     protected $name;
 
@@ -27,7 +27,7 @@ class WindowExpression : IExpression, IWindow
     protected $partitions = [];
 
     /**
-     * @var uim.cake.databases.Expression\OrderByExpression|null
+     * @var DDBExpression\OrderByExpression|null
      */
     protected $order;
 

@@ -53,7 +53,7 @@ class Mysql : Driver
     /**
      * The schema dialect for this driver
      *
-     * @var uim.cake.databases.Schema\MysqlSchemaDialect|null
+     * @var DDBSchema\MysqlSchemaDialect|null
      */
     protected _schemaDialect;
 
