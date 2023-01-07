@@ -1,12 +1,12 @@
 module uim.cake.View\Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 use Throwable;
 
 /**
  * Used when a template file cannot be found.
  */
-class MissingTemplateException : CakeException {
+class MissingTemplateException : UIMException {
     /**
      */
     protected Nullable!string templateName;

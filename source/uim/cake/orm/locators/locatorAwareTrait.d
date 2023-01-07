@@ -1,6 +1,6 @@
 module uim.cake.orm.locators;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 import uim.cake.datasources\FactoryLocator;
 import uim.cake.orm.Table;
 
@@ -55,7 +55,7 @@ trait LocatorAwareTrait
      * @param array<string, mixed> myOptions The options you want to build the table with.
      *   If a table has already been loaded the registry options will be ignored.
      * @return uim.cake.orm.Table
-     * @throws uim.cake.Core\exceptions.CakeException If `myAlias` argument and `$defaultTable` property both are `null`.
+     * @throws uim.cake.Core\exceptions.UIMException If `myAlias` argument and `$defaultTable` property both are `null`.
      * @see uim.cake.orm.TableLocator::get()
      * @since 4.3.0
      */
@@ -63,7 +63,7 @@ trait LocatorAwareTrait
     {
         myAlias = myAlias ?? this.defaultTable;
         if (myAlias is null) {
-            throw new CakeException("You must provide an `myAlias` or set the `$defaultTable` property.");
+            throw new UIMException("You must provide an `myAlias` or set the `$defaultTable` property.");
         }
 
         return this.getTableLocator().get(myAlias, myOptions);

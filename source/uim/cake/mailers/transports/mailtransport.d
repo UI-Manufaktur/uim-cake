@@ -15,7 +15,7 @@
  * @since         2.0.0
   */module uim.cake.mailers.Transport;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.mailers.AbstractTransport;
 import uim.cake.mailers.Message;
 
@@ -84,7 +84,7 @@ class MailTransport : AbstractTransport
         if (!@mail($to, $subject, $message, $headers, $params)) {
             $error = error_get_last();
             $msg = "Could not send email: " ~ ($error["message"] ?? "unknown");
-            throw new CakeException($msg);
+            throw new UIMException($msg);
         }
         // phpcs:enable
     }

@@ -11,12 +11,12 @@
  * @since         3.2.13
   */module uim.cake.orm.Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * Used when a transaction was rolled back from a callback event.
  */
-class RolledbackTransactionException : CakeException {
+class RolledbackTransactionException : UIMException {
     /**
      */
     protected string _messageTemplate = "The afterSave event in '%s' is aborting the transaction"

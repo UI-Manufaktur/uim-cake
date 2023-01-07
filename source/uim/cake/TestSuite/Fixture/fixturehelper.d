@@ -145,7 +145,7 @@ class FixtureHelper
                     $fixture.sourceName(),
                     $exception.getMessage()
                 );
-                throw new CakeException($message);
+                throw new UIMException($message);
             }
         }
     }
@@ -199,7 +199,7 @@ class FixtureHelper
                     $fixture.sourceName(),
                     $exception.getMessage()
                 );
-                throw new CakeException($message);
+                throw new UIMException($message);
             }
         }
     }

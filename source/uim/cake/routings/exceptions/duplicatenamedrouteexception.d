@@ -11,13 +11,13 @@
  * @since         3.3.1
   */module uim.cake.routings.Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 use Throwable;
 
 /**
  * Exception raised when a route names used twice.
  */
-class DuplicateNamedRouteException : CakeException {
+class DuplicateNamedRouteException : UIMException {
 
     protected _messageTemplate = "A route named '%s' has already been connected to '%s'.";
 

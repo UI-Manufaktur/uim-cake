@@ -219,7 +219,7 @@ class Behavior : IEventListener
      * Checks that implemented keys contain values pointing at callable.
      *
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException if config are invalid
+     * @throws uim.cake.Core\exceptions.UIMException if config are invalid
      */
     void verifyConfig() {
         myKeys = ["implementedFinders", "implementedMethods"];
@@ -230,7 +230,7 @@ class Behavior : IEventListener
 
             foreach (_config[myKey] as $method) {
                 if (!is_callable([this, $method])) {
-                    throw new CakeException(sprintf(
+                    throw new UIMException(sprintf(
                         "The method %s is not callable on class %s",
                         $method,
                         static::class

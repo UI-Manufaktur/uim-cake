@@ -7,7 +7,7 @@
  * @since         2.1.0
   */module uim.cake.View;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * ViewBlock : the concept of Blocks or Slots in the View layer.
@@ -66,11 +66,11 @@ class ViewBlock
      * @param string $mode If ViewBlock::OVERRIDE existing content will be overridden by new content.
      *   If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
-     * @throws uim.cake.Core\exceptions.CakeException When starting a block twice
+     * @throws uim.cake.Core\exceptions.UIMException When starting a block twice
      */
     void start(string aName, string $mode = ViewBlock::OVERRIDE) {
         if (array_key_exists($name, _active)) {
-            throw new CakeException(sprintf("A view block with the name '%s' is already/still open.", $name));
+            throw new UIMException(sprintf("A view block with the name '%s' is already/still open.", $name));
         }
         _active[$name] = $mode;
         ob_start();

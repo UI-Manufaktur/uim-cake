@@ -4,12 +4,12 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.orm.Exception;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 
 /**
  * Exception raised when a Table could not be found.
  */
-class MissingTableClassException : CakeException {
+class MissingTableClassException : UIMException {
     /**
      * @var string
      */

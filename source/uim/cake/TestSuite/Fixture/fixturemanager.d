@@ -1,7 +1,7 @@
 module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.Configure;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.databases.IConstraints;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
@@ -279,7 +279,7 @@ class FixtureManager
                                 get_class($test),
                                 $e.getMessage()
                             );
-                            throw new CakeException($msg, null, $e);
+                            throw new UIMException($msg, null, $e);
                         }
                     }
                 }
@@ -306,7 +306,7 @@ class FixtureManager
                             get_class($test),
                             $e.getMessage()
                         );
-                        throw new CakeException($msg, null, $e);
+                        throw new UIMException($msg, null, $e);
                     }
                 }
             };
@@ -324,7 +324,7 @@ class FixtureManager
                             get_class($test),
                             $e.getMessage()
                         );
-                        throw new CakeException($msg, null, $e);
+                        throw new UIMException($msg, null, $e);
                     }
                 }
             };

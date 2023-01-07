@@ -4,12 +4,12 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.orm.Exception;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 
 /**
  * Exception raised when an Entity could not be found.
  */
-class MissingEntityException : CakeException {
+class MissingEntityException : UIMException {
     /**
      * @var string
      */

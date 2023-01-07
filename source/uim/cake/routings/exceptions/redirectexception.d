@@ -1,6 +1,6 @@
 module uim.cake.routings.Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * An exception subclass used by the routing layer to indicate
@@ -17,7 +17,7 @@ import uim.cake.core.exceptions.CakeException;
  *
  * @deprecated 4.1.0 Use {@link uim.cake.Http\exceptions.RedirectException} instead.
  */
-class RedirectException : CakeException {
+class RedirectException : UIMException {
 
     protected _defaultCode = 302;
 }

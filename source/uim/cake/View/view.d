@@ -687,7 +687,7 @@ class View : IEventDispatcher
      * @param string|null $template Name of template file to use
      * @param string|false|null $layout Layout to use. False to disable.
      * @return string Rendered content.
-     * @throws uim.cake.Core\exceptions.CakeException If there is an error in the view.
+     * @throws uim.cake.Core\exceptions.UIMException If there is an error in the view.
      * @triggers View.beforeRender this, [$templateFileName]
      * @triggers View.afterRender this, [$templateFileName]
      */
@@ -736,7 +736,7 @@ class View : IEventDispatcher
      * @param string $content Content to render in a template, wrapped by the surrounding layout.
      * @param string|null $layout Layout name
      * @return string Rendered output.
-     * @throws uim.cake.Core\exceptions.CakeException if there is an error in the view.
+     * @throws uim.cake.Core\exceptions.UIMException if there is an error in the view.
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */

@@ -3,7 +3,7 @@
  * @since         1.2.0
   */module uim.cake.TestSuite\Fixture;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.databases.IConstraints;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
@@ -85,7 +85,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     /**
      * Instantiate the fixture.
      *
-     * @throws uim.cake.Core\exceptions.CakeException on invalid datasource usage.
+     * @throws uim.cake.Core\exceptions.UIMException on invalid datasource usage.
      */
     this() {
         if (!empty(this.connection)) {
@@ -96,7 +96,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
                     $connection,
                     static::class
                 );
-                throw new CakeException($message);
+                throw new UIMException($message);
             }
         }
         this.init();
@@ -182,7 +182,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      * Build fixture schema from a table in another datasource.
      *
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException when trying to import from an empty table.
+     * @throws uim.cake.Core\exceptions.UIMException when trying to import from an empty table.
      */
     protected void _schemaFromImport() {
         if (!is_array(this.import)) {
@@ -192,13 +192,13 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
 
         if (!empty($import["model"])) {
             if (!empty($import["table"])) {
-                throw new CakeException("You cannot define both table and model.");
+                throw new UIMException("You cannot define both table and model.");
             }
             $import["table"] = this.getTableLocator().get($import["model"]).getTable();
         }
 
         if (empty($import["table"])) {
-            throw new CakeException("Cannot import from undefined table.");
+            throw new UIMException("Cannot import from undefined table.");
         }
 
         this.table = $import["table"];
@@ -213,7 +213,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      * Build fixture schema directly from the datasource
      *
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException when trying to reflect a table that does not exist
+     * @throws uim.cake.Core\exceptions.UIMException when trying to reflect a table that does not exist
      */
     protected void _schemaFromReflection() {
         $db = ConnectionManager::get(this.connection());
@@ -226,13 +226,13 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
             _schema = $schema;
 
             this.getTableLocator().clear();
-        } catch (CakeException $e) {
+        } catch (UIMException $e) {
             $message = sprintf(
                 "Cannot describe schema for table `%s` for fixture `%s`. The table does not exist.",
                 this.table,
                 static::class
             );
-            throw new CakeException($message, null, $e);
+            throw new UIMException($message, null, $e);
         }
     }
 

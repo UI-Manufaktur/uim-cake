@@ -4,12 +4,12 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.orm.Exception;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 
 /**
  * Used when a transaction was rolled back from a callback event.
  */
-class RolledbackTransactionException : CakeException {
+class RolledbackTransactionException : UIMException {
     /**
      * @var string
      */

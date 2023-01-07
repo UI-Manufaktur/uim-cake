@@ -332,7 +332,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             $table = namespaceSplit(static::class);
             $table = substr(end($table), 0, -5) ?: _alias;
             if (!$table) {
-                throw new CakeException(
+                throw new UIMException(
                     "You must specify either the `alias` or the `table` option for the constructor."
                 );
             }
@@ -362,7 +362,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             $alias = namespaceSplit(static::class);
             $alias = substr(end($alias), 0, -5) ?: _table;
             if (!$alias) {
-                throw new CakeException(
+                throw new UIMException(
                     "You must specify either the `alias` or the `table` option for the constructor."
                 );
             }

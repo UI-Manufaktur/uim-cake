@@ -1,6 +1,6 @@
 module uim.cake.ORM;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.events.IEventListener;
 use ReflectionClass;
@@ -222,7 +222,7 @@ class Behavior : IEventListener
      * Checks that implemented keys contain values pointing at callable.
      *
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException if config are invalid
+     * @throws uim.cake.Core\exceptions.UIMException if config are invalid
      */
     void verifyConfig() {
         $keys = ["implementedFinders", "implementedMethods"];
@@ -233,7 +233,7 @@ class Behavior : IEventListener
 
             foreach (_config[$key] as $method) {
                 if (!is_callable([this, $method])) {
-                    throw new CakeException(sprintf(
+                    throw new UIMException(sprintf(
                         "The method %s is not callable on class %s",
                         $method,
                         static::class

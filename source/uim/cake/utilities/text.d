@@ -1052,7 +1052,7 @@ class Text {
     static void setTransliteratorId(string transliteratorId) {
         $transliterator = transliterator_create($transliteratorId);
         if ($transliterator is null) {
-            throw new CakeException("Unable to create transliterator for id: " ~ $transliteratorId);
+            throw new UIMException("Unable to create transliterator for id: " ~ $transliteratorId);
         }
 
         static::setTransliterator($transliterator);
@@ -1077,7 +1077,7 @@ class Text {
 
         $return = transliterator_transliterate($transliterator, $string);
         if ($return == false) {
-            throw new CakeException(sprintf("Unable to transliterate string: %s", $string));
+            throw new UIMException(sprintf("Unable to transliterate string: %s", $string));
         }
 
         return $return;

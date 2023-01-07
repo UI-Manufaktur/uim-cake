@@ -4,13 +4,13 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.orm.Exception;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions\UIMException;
 import uim.cake.datasources\IEntity;
 import uim.cake.utilities.Hash;
 use Throwable;
 
 // Used when a strict save or delete fails
-class PersistenceFailedException : CakeException {
+class PersistenceFailedException : UIMException {
     /**
      * The entity on which the persistence operation failed
      *

@@ -172,7 +172,7 @@ class Router
      *   shifted into the passed arguments, supplying patterns for routing parameters and supplying the name of a
      *   custom routing class.
      * @return void
-     * @throws uim.cake.Core\exceptions.CakeException
+     * @throws uim.cake.Core\exceptions.UIMException
      * @see uim.cake.routings.RouteBuilder::connect()
      * @see uim.cake.routings.Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
@@ -369,7 +369,7 @@ class Router
      * @param bool $full If true, the full base URL will be prepended to the result.
      *   Default is false.
      * @return string Full translated URL with base path.
-     * @throws uim.cake.Core\exceptions.CakeException When the route name is not found
+     * @throws uim.cake.Core\exceptions.UIMException When the route name is not found
      */
     static string url($url = null, bool $full = false) {
         $context = static::_requestContext;

@@ -1,7 +1,7 @@
 module uim.cake.View;
 
 import uim.cake.core.configures.engines.PhpConfig;
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.utilities.Hash;
 use RuntimeException;
@@ -175,7 +175,7 @@ class StringTemplate
      */
     void load(string $file) {
         if ($file == "") {
-            throw new CakeException("String template filename cannot be an empty string");
+            throw new UIMException("String template filename cannot be an empty string");
         }
 
         $loader = new PhpConfig();

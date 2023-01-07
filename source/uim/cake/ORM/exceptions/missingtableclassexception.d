@@ -13,12 +13,12 @@
 
   */module uim.cake.orm.Exception;
 
-import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.exceptions.UIMException;
 
 /**
  * Exception raised when a Table could not be found.
  */
-class MissingTableClassException : CakeException {
+class MissingTableClassException : UIMException {
     /**
      */
     protected string _messageTemplate = "Table class %s could not be found.";
