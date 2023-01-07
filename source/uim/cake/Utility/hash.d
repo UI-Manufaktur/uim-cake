@@ -676,7 +676,7 @@ class Hash
                 }
                 $data = $element;
                 reset($data);
-                $path .= $key . $separator;
+                $path ~= $key . $separator;
             } else {
                 $result[$path . $key] = $element;
             }

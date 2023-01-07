@@ -835,11 +835,11 @@ class PaginatorHelper : Helper
 
         [$start, $end] = _getNumbersStartAndEnd($params, $options);
 
-        $out .= _firstNumber($ellipsis, $params, $start, $options);
-        $out .= $options["before"];
+        $out ~= _firstNumber($ellipsis, $params, $start, $options);
+        $out ~= $options["before"];
 
         for ($i = $start; $i < $params["page"]; $i++) {
-            $out .= _formatNumber($templater, [
+            $out ~= _formatNumber($templater, [
                 "text": this.Number.format($i),
                 "page": $i,
                 "model": $options["model"],
@@ -849,7 +849,7 @@ class PaginatorHelper : Helper
 
         $url = $options["url"];
         $url["?"]["page"] = $params["page"];
-        $out .= $templater.format("current", [
+        $out ~= $templater.format("current", [
             "text": this.Number.format($params["page"]),
             "url": this.generateUrl($url, $options["model"]),
         ]);
@@ -857,7 +857,7 @@ class PaginatorHelper : Helper
         $start = $params["page"] + 1;
         $i = $start;
         while ($i < $end) {
-            $out .= _formatNumber($templater, [
+            $out ~= _formatNumber($templater, [
                 "text": this.Number.format($i),
                 "page": $i,
                 "model": $options["model"],
@@ -867,7 +867,7 @@ class PaginatorHelper : Helper
         }
 
         if ($end != $params["page"]) {
-            $out .= _formatNumber($templater, [
+            $out ~= _formatNumber($templater, [
                 "text": this.Number.format($i),
                 "page": $end,
                 "model": $options["model"],
@@ -875,8 +875,8 @@ class PaginatorHelper : Helper
             ]);
         }
 
-        $out .= $options["after"];
-        $out .= _lastNumber($ellipsis, $params, $end, $options);
+        $out ~= $options["after"];
+        $out ~= _lastNumber($ellipsis, $params, $end, $options);
 
         return $out;
     }
@@ -895,9 +895,9 @@ class PaginatorHelper : Helper
         $first = is_int($options["first"]) ? $options["first"] : 0;
         if ($options["first"] && $start > 1) {
             $offset = $start <= $first ? $start - 1 : $options["first"];
-            $out .= this.first($offset, $options);
+            $out ~= this.first($offset, $options);
             if ($first < $start - 1) {
-                $out .= $ellipsis;
+                $out ~= $ellipsis;
             }
         }
 
@@ -919,9 +919,9 @@ class PaginatorHelper : Helper
         if ($options["last"] && $end < $params["pageCount"]) {
             $offset = $params["pageCount"] < $end + $last ? $params["pageCount"] - $end : $options["last"];
             if ($offset <= $options["last"] && $params["pageCount"] - $end > $last) {
-                $out .= $ellipsis;
+                $out ~= $ellipsis;
             }
-            $out .= this.last($offset, $options);
+            $out ~= this.last($offset, $options);
         }
 
         return $out;
@@ -937,11 +937,11 @@ class PaginatorHelper : Helper
      */
     protected string _numbers(StringTemplate $templater, array $params, array $options) {
         $out = "";
-        $out .= $options["before"];
+        $out ~= $options["before"];
 
         for ($i = 1; $i <= $params["pageCount"]; $i++) {
             if ($i == $params["page"]) {
-                $out .= $templater.format("current", [
+                $out ~= $templater.format("current", [
                     "text": this.Number.format($params["page"]),
                     "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
                 ]);
@@ -950,10 +950,10 @@ class PaginatorHelper : Helper
                     "text": this.Number.format($i),
                     "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
                 ];
-                $out .= $templater.format("number", $vars);
+                $out ~= $templater.format("number", $vars);
             }
         }
-        $out .= $options["after"];
+        $out ~= $options["after"];
 
         return $out;
     }
@@ -1003,14 +1003,14 @@ class PaginatorHelper : Helper
 
         if (is_int($first) && $params["page"] >= $first) {
             for ($i = 1; $i <= $first; $i++) {
-                $out .= this.templater().format("number", [
+                $out ~= this.templater().format("number", [
                     "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
                     "text": this.Number.format($i),
                 ]);
             }
         } elseif ($params["page"] > 1 && is_string($first)) {
             $first = $options["escape"] ? h($first) : $first;
-            $out .= this.templater().format("first", [
+            $out ~= this.templater().format("first", [
                 "url": this.generateUrl(["page": 1], $options["model"], $options["url"]),
                 "text": $first,
             ]);
@@ -1062,14 +1062,14 @@ class PaginatorHelper : Helper
 
         if (is_int($last) && $params["page"] <= $lower) {
             for ($i = $lower; $i <= $params["pageCount"]; $i++) {
-                $out .= this.templater().format("number", [
+                $out ~= this.templater().format("number", [
                     "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
                     "text": this.Number.format($i),
                 ]);
             }
         } elseif ($params["page"] < $params["pageCount"] && is_string($last)) {
             $last = $options["escape"] ? h($last) : $last;
-            $out .= this.templater().format("last", [
+            $out ~= this.templater().format("last", [
                 "url": this.generateUrl(["page": $params["pageCount"]], $options["model"], $options["url"]),
                 "text": $last,
             ]);
@@ -1203,7 +1203,7 @@ class PaginatorHelper : Helper
             ];
         }
         $out = this.Form.create(null, ["type": "get"]);
-        $out .= this.Form.control($scope ~ "limit", $options + [
+        $out ~= this.Form.control($scope ~ "limit", $options + [
             "type": "select",
             "label": __("View"),
             "default": $default,
@@ -1211,7 +1211,7 @@ class PaginatorHelper : Helper
             "options": $limits,
             "onChange": "this.form.submit()",
         ]);
-        $out .= this.Form.end();
+        $out ~= this.Form.end();
 
         return $out;
     }

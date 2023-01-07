@@ -513,7 +513,7 @@ trait IntegrationTestTrait
         $tokenUrl = $url;
 
         if ($query) {
-            $tokenUrl .= "?" ~ $query;
+            $tokenUrl ~= "?" ~ $query;
         }
 
         parse_str($query, $queryData);
@@ -1191,14 +1191,14 @@ trait IntegrationTestTrait
      */
     protected string extractVerboseMessage(string $message) {
         if (_exception instanceof Exception) {
-            $message .= this.extractExceptionMessage(_exception);
+            $message ~= this.extractExceptionMessage(_exception);
         }
         if (_controller == null) {
             return $message;
         }
         $error = _controller.viewBuilder().getVar("error");
         if ($error instanceof Exception) {
-            $message .= this.extractExceptionMessage(this.viewVariable("error"));
+            $message ~= this.extractExceptionMessage(this.viewVariable("error"));
         }
 
         return $message;
@@ -1219,14 +1219,14 @@ trait IntegrationTestTrait
         $message = PHP_EOL;
         foreach ($exceptions as $i: $error) {
             if ($i == 0) {
-                $message .= sprintf("Possibly related to %s: '%s'", get_class($error), $error.getMessage());
-                $message .= PHP_EOL;
+                $message ~= sprintf("Possibly related to %s: '%s'", get_class($error), $error.getMessage());
+                $message ~= PHP_EOL;
             } else {
-                $message .= sprintf("Caused by %s: '%s'", get_class($error), $error.getMessage());
-                $message .= PHP_EOL;
+                $message ~= sprintf("Caused by %s: '%s'", get_class($error), $error.getMessage());
+                $message ~= PHP_EOL;
             }
-            $message .= $error.getTraceAsString();
-            $message .= PHP_EOL;
+            $message ~= $error.getTraceAsString();
+            $message ~= PHP_EOL;
         }
 
         return $message;

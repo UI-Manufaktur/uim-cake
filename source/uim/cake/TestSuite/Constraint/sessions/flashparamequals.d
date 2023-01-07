@@ -41,7 +41,7 @@ class FlashParamEquals : Constraint
     this(?Session $session, string aKey, string $param, Nullable!int $at = null) {
         if (!$session) {
             $message = "There is no stored session data. Perhaps you need to run a request?";
-            $message .= " Additionally, ensure `this.enableRetainFlashMessages()` has been enabled for the test.";
+            $message ~= " Additionally, ensure `this.enableRetainFlashMessages()` has been enabled for the test.";
             throw new AssertionFailedError($message);
         }
 

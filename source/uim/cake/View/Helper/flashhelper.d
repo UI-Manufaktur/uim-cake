@@ -60,7 +60,7 @@ class FlashHelper : Helper
         $out = "";
         foreach ($messages as $message) {
             $message = $options + $message;
-            $out .= _View.element($message["element"], $message);
+            $out ~= _View.element($message["element"], $message);
         }
 
         return $out;

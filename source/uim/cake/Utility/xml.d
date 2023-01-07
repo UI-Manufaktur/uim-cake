@@ -470,7 +470,7 @@ class Xml
         }
 
         if (!empty($ns)) {
-            $ns .= ":";
+            $ns ~= ":";
         }
         $name = $ns . $xml.getName();
         if (isset($parentData[$name])) {

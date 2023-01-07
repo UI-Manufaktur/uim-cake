@@ -262,8 +262,8 @@ abstract class Association {
 
                 if (!_targetTable instanceof myClassName) {
                     myErrorMessage = "%s association '%s' of type '%s' to '%s' doesn\"t match the expected class '%s'~ ";
-                    myErrorMessage .= "You can\"t have an association of the same name with a different target ";
-                    myErrorMessage .= ""className" option anywhere in your app.";
+                    myErrorMessage ~= "You can\"t have an association of the same name with a different target ";
+                    myErrorMessage ~= ""className" option anywhere in your app.";
 
                     throw new RuntimeException(sprintf(
                         myErrorMessage,

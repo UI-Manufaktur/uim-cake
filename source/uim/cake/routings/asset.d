@@ -150,7 +150,7 @@ class Asset
             strpos($path, "?") == false &&
             substr($path, -strlen($options["ext"])) != $options["ext"]
         ) {
-            $path .= $options["ext"];
+            $path ~= $options["ext"];
         }
 
         // Check again if path has protocol as `pathPrefix` could be for CDNs.

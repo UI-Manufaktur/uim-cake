@@ -389,7 +389,7 @@ class Route
             if ($value == true || $value == false) {
                 $value = $value ? "1" : "0";
             }
-            $name .= $value . $glue;
+            $name ~= $value . $glue;
         }
 
         return _name = strtolower($name);
@@ -817,7 +817,7 @@ class Route
 
             // append the port & scheme if they exists.
             if (isset($params["_port"])) {
-                $host .= ":" ~ $params["_port"];
+                $host ~= ":" ~ $params["_port"];
             }
             $scheme = $params["_scheme"] ?? "http";
             $out = "{$scheme}://{$host}{$out}";
@@ -826,10 +826,10 @@ class Route
             $out = rtrim($out, "/");
         }
         if (!empty($params["_ext"])) {
-            $out .= "." ~ $params["_ext"];
+            $out ~= "." ~ $params["_ext"];
         }
         if (!empty($query)) {
-            $out .= rtrim("?" ~ http_build_query($query), "?");
+            $out ~= rtrim("?" ~ http_build_query($query), "?");
         }
 
         return $out;

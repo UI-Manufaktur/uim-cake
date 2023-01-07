@@ -1258,7 +1258,7 @@ class View : IEventDispatcher
             }
         }
 
-        $name .= _ext;
+        $name ~= _ext;
         $paths = _paths($plugin);
         foreach ($paths as $path) {
             if (is_file($path . $name)) {
@@ -1348,7 +1348,7 @@ class View : IEventDispatcher
             $name = this.layout;
         }
         [$plugin, $name] = this.pluginSplit($name);
-        $name .= _ext;
+        $name ~= _ext;
 
         foreach (this.getLayoutPaths($plugin) as $path) {
             if (is_file($path . $name)) {
@@ -1390,7 +1390,7 @@ class View : IEventDispatcher
     protected function _getElementFileName(string aName, bool $pluginCheck = true) {
         [$plugin, $name] = this.pluginSplit($name, $pluginCheck);
 
-        $name .= _ext;
+        $name ~= _ext;
         foreach (this.getElementPaths($plugin) as $path) {
             if (is_file($path . $name)) {
                 return $path . $name;
@@ -1432,7 +1432,7 @@ class View : IEventDispatcher
             $prefixPath = explode("/", this.request.getParam("prefix"));
             $path = "";
             foreach ($prefixPath as $prefixPart) {
-                $path .= Inflector::camelize($prefixPart) . DIRECTORY_SEPARATOR;
+                $path ~= Inflector::camelize($prefixPart) . DIRECTORY_SEPARATOR;
 
                 array_unshift(
                     $paths,

@@ -127,7 +127,7 @@ class ViewBlock
         if (myMode == ViewBlock::PREPEND) {
             _blocks[myName] = myValue . _blocks[myName];
         } else {
-            _blocks[myName] .= myValue;
+            _blocks[myName] ~= myValue;
         }
     }
 

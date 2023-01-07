@@ -810,7 +810,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
             myMessage = "The `{myName}` association is not defined on `{this.getAlias()}`.";
             if ($assocations) {
-                myMessage .= "\nValid associations are: " ~ implode(", ", $assocations);
+                myMessage ~= "\nValid associations are: " ~ implode(", ", $assocations);
             }
             throw new InvalidArgumentException(myMessage);
         }
@@ -1945,7 +1945,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             foreach ($primary as $k: $v) {
                 if (!isset(myData[$k]) && empty($schema.getColumn($k)["autoIncrement"])) {
                     $msg = "Cannot insert row, some of the primary key values are missing~ ";
-                    $msg .= sprintf(
+                    $msg ~= sprintf(
                         "Got (%s), expecting (%s)",
                         implode(", ", $filteredKeys + $entity.extract(array_keys($primary))),
                         implode(", ", array_keys($primary))
@@ -2034,7 +2034,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
         if (!$entity.has($primaryColumns)) {
             myMessage = "All primary key value(s) are needed for updating, ";
-            myMessage .= get_class($entity) ~ " is missing " ~ implode(", ", $primaryColumns);
+            myMessage ~= get_class($entity) ~ " is missing " ~ implode(", ", $primaryColumns);
             throw new InvalidArgumentException(myMessage);
         }
 

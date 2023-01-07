@@ -671,7 +671,7 @@ class Hash {
                 }
                 myData = $element;
                 reset(myData);
-                myPath .= myKey . $separator;
+                myPath ~= myKey . $separator;
             } else {
                 myResult[myPath . myKey] = $element;
             }

@@ -107,13 +107,13 @@ class Text
                 }
             }
             if ($tmpOffset != -1) {
-                $buffer .= mb_substr($data, $offset, $tmpOffset - $offset);
+                $buffer ~= mb_substr($data, $offset, $tmpOffset - $offset);
                 $char = mb_substr($data, $tmpOffset, 1);
                 if (!$depth && $char == $separator) {
                     $results[] = $buffer;
                     $buffer = "";
                 } else {
-                    $buffer .= $char;
+                    $buffer ~= $char;
                 }
                 if ($leftBound != $rightBound) {
                     if ($char == $leftBound) {
@@ -374,7 +374,7 @@ class Text
             }
             $toRewrap = "";
             for ($i = $options["indentAt"]; $i < $count; $i++) {
-                $toRewrap .= mb_substr($chunks[$i], $indentationLength) ~ " ";
+                $toRewrap ~= mb_substr($chunks[$i], $indentationLength) ~ " ";
                 unset($chunks[$i]);
             }
             $options["width"] -= $indentationLength;
@@ -616,13 +616,13 @@ class Text
                         }
                     }
 
-                    $prefix .= $tag[1];
+                    $prefix ~= $tag[1];
 
                     if ($totalLength + $contentLength + $ellipsisLength > $length) {
                         $truncate = $tag[3];
                         $truncateLength = $length - $totalLength;
                     } else {
-                        $prefix .= $tag[3];
+                        $prefix ~= $tag[3];
                     }
                 }
 
@@ -640,7 +640,7 @@ class Text
             $length = $truncateLength;
 
             foreach ($openTags as $tag) {
-                $suffix .= "</" ~ $tag ~ ">";
+                $suffix ~= "</" ~ $tag ~ ">";
             }
         } else {
             if (self::_strlen($text, $options) <= $length) {
@@ -800,7 +800,7 @@ class Text
                 $len = self::_strlen($part, $options);
             }
 
-            $result .= $part;
+            $result ~= $part;
             $totalLength += $len;
             if ($totalLength >= $length) {
                 break;
@@ -964,14 +964,14 @@ class Text
 
         foreach ($array as $utf8) {
             if ($utf8 < 128) {
-                $ascii .= chr($utf8);
+                $ascii ~= chr($utf8);
             } elseif ($utf8 < 2048) {
-                $ascii .= chr(192 + (($utf8 - ($utf8 % 64)) / 64));
-                $ascii .= chr(128 + ($utf8 % 64));
+                $ascii ~= chr(192 + (($utf8 - ($utf8 % 64)) / 64));
+                $ascii ~= chr(128 + ($utf8 % 64));
             } else {
-                $ascii .= chr(224 + (($utf8 - ($utf8 % 4096)) / 4096));
-                $ascii .= chr(128 + ((($utf8 % 4096) - ($utf8 % 64)) / 64));
-                $ascii .= chr(128 + ($utf8 % 64));
+                $ascii ~= chr(224 + (($utf8 - ($utf8 % 4096)) / 4096));
+                $ascii ~= chr(128 + ((($utf8 % 4096) - ($utf8 % 64)) / 64));
+                $ascii ~= chr(128 + ($utf8 % 64));
             }
         }
 
@@ -1122,7 +1122,7 @@ class Text
 
         $regex = "^\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}";
         if ($options["preserve"]) {
-            $regex .= preg_quote($options["preserve"], "/");
+            $regex ~= preg_quote($options["preserve"], "/");
         }
         $quotedReplacement = preg_quote((string)$options["replacement"], "/");
         $map = [

@@ -560,7 +560,7 @@ class Router
                     static::_requestContext["_host"]
                 );
                 if (!empty(static::_requestContext["_port"])) {
-                    $base .= ":" ~ static::_requestContext["_port"];
+                    $base ~= ":" ~ static::_requestContext["_port"];
                 }
 
                 Configure::write("App.fullBaseUrl", $base);

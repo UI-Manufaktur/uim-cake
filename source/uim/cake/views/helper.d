@@ -132,7 +132,7 @@ class Helper : IEventListener
         if (isset(myOptions[myKey]) && is_array(myOptions[myKey])) {
             myOptions[myKey][] = myClass;
         } elseif (isset(myOptions[myKey]) && trim(myOptions[myKey])) {
-            myOptions[myKey] .= " " ~ myClass;
+            myOptions[myKey] ~= " " ~ myClass;
         } else {
             myOptions[myKey] = myClass;
         }

@@ -52,9 +52,9 @@ class MissingTemplateException : UIMException {
         $name = this.templateName ?? this.filename;
         $message = "{this.type} file `{$name}` could not be found.";
         if (this.paths) {
-            $message .= "\n\nThe following paths were searched:\n\n";
+            $message ~= "\n\nThe following paths were searched:\n\n";
             foreach (this.paths as $path) {
-                $message .= "- `{$path}{this.filename}`\n";
+                $message ~= "- `{$path}{this.filename}`\n";
             }
         }
 

@@ -132,7 +132,7 @@ class ViewBlock
         if ($mode == ViewBlock::PREPEND) {
             _blocks[$name] = $value . _blocks[$name];
         } else {
-            _blocks[$name] .= $value;
+            _blocks[$name] ~= $value;
         }
     }
 

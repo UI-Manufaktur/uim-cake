@@ -117,7 +117,7 @@ class Security {
         $bytes = "";
         $byteLength = 0;
         while ($byteLength < $length) {
-            $bytes .= static::hash(Text::uuid() . uniqid((string)mt_rand(), true), "sha512", true);
+            $bytes ~= static::hash(Text::uuid() . uniqid((string)mt_rand(), true), "sha512", true);
             $byteLength = strlen($bytes);
         }
         $bytes = substr($bytes, 0, $length);

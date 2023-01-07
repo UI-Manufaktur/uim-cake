@@ -70,9 +70,9 @@ class TableHelper : Helper
     protected void _rowSeparator(array $widths) {
         $out = "";
         foreach ($widths as $column) {
-            $out .= "+" ~ str_repeat("-", $column + 2);
+            $out ~= "+" ~ str_repeat("-", $column + 2);
         }
-        $out .= "+";
+        $out ~= "+";
         _io.out($out);
     }
 
@@ -100,12 +100,12 @@ class TableHelper : Helper
                     throw new UnexpectedValueException("You cannot include text before or after the text-right tag.");
                 }
                 $column = str_replace(["<text-right>", "</text-right>"], "", $column);
-                $out .= "| " ~ str_repeat(" ", $pad) . $column ~ " ";
+                $out ~= "| " ~ str_repeat(" ", $pad) . $column ~ " ";
             } else {
-                $out .= "| " ~ $column . str_repeat(" ", $pad) ~ " ";
+                $out ~= "| " ~ $column . str_repeat(" ", $pad) ~ " ";
             }
         }
-        $out .= "|";
+        $out ~= "|";
         _io.out($out);
     }
 

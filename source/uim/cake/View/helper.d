@@ -133,7 +133,7 @@ class Helper : IEventListener
         if (isset($options[$key]) && is_array($options[$key])) {
             $options[$key][] = $class;
         } elseif (isset($options[$key]) && trim($options[$key])) {
-            $options[$key] .= " " ~ $class;
+            $options[$key] ~= " " ~ $class;
         } else {
             $options[$key] = $class;
         }

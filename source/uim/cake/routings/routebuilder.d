@@ -884,7 +884,7 @@ class RouteBuilder
         }
         $namePrefix = _namePrefix;
         if (isset($params["_namePrefix"])) {
-            $namePrefix .= $params["_namePrefix"];
+            $namePrefix ~= $params["_namePrefix"];
         }
         unset($params["_namePrefix"]);
 
