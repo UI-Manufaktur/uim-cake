@@ -16,9 +16,7 @@ use RuntimeException;
  * - `execute` Execute your command with parsed Arguments and ConsoleIo
  */
 abstract class BaseCommand : ICommand {
-    /**
-     * The name of this command.
-     */
+    // The name of this command.
     protected string aName = "cake unknown";
 
 

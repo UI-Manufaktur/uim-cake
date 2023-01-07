@@ -5,7 +5,7 @@
 
 
  * @since         4.4.0
-  */module uim.cake.errors.Renderer;
+  */module uim.cake.errors.renderers;
 
 import uim.cake.errors.Debugger;
 import uim.cake.errors.ErrorRendererInterface;

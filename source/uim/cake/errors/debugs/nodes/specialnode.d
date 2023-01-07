@@ -3,53 +3,35 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.errors.debugs;
+module uim.cake.errors.debugs.nodes;
 
 /**
- * Dump node for Array Items.
+ * Debug node for special messages like errors or recursion warnings.
  */
-class ArrayItemNode : INode {
+class SpecialNode : INode {
     /**
-     * @var uim.cake.errors.debugs.INode
-     */
-    private myKey;
-
-    /**
-     * @var uim.cake.errors.debugs.INode
+     * @var string
      */
     private myValue;
 
     /**
      * Constructor
      *
-     * @param uim.cake.errors.debugs.INode myKey The node for the item key
-     * @param uim.cake.errors.debugs.INode myValue The node for the array value
+     * @param string myValue The message/value to include in dump results.
      */
-    this(INode myKey, INode myValue) {
-        this.key = myKey;
+    this(string myValue) {
         this.value = myValue;
     }
 
     /**
-     * Get the value
-     *
-     * @return uim.cake.errors.debugs.INode
+     * Get the message/value
      */
-    auto getValue() {
+    string getValue() {
         return this.value;
-    }
-
-    /**
-     * Get the key
-     *
-     * @return uim.cake.errors.debugs.INode
-     */
-    auto getKey() {
-        return this.key;
     }
 
 
     array getChildren() {
-        return [this.value];
+        return [];
     }
 }

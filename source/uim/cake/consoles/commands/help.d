@@ -4,15 +4,6 @@ module uim.cake.console.commands.help;
 import uim.cake;
 
 use ArrayIterator;
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.BaseCommand;
-import uim.cake.consoles.CommandCollection;
-import uim.cake.consoles.CommandCollectionAwareInterface;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.consoles.ConsoleOutput;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
 use SimpleXMLElement;
 
 /**

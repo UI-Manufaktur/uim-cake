@@ -3,31 +3,46 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.errors.debugs;
+module uim.cake.errors.debugs.nodes;
 
 /**
- * Debug node for special messages like errors or recursion warnings.
+ * Dump node for class references.
+ *
+ * To prevent cyclic references from being output multiple times
+ * a reference node can be used after an object has been seen the
+ * first time.
  */
-class SpecialNode : INode {
+class ReferenceNode : INode {
+    private string myClass;
+
     /**
-     * @var string
+     * @var int
      */
-    private myValue;
+    private $id;
 
     /**
      * Constructor
      *
-     * @param string myValue The message/value to include in dump results.
+     * @param string myClass The class name
+     * @param int $id The id of the referenced class.
      */
-    this(string myValue) {
-        this.value = myValue;
+    this(string myClass, int $id) {
+        this.class = myClass;
+        this.id = $id;
     }
 
     /**
-     * Get the message/value
+     * Get the class name/value
      */
     string getValue() {
-        return this.value;
+        return this.class;
+    }
+
+    /**
+     * Get the reference id for this node.
+     */
+    int getId() {
+        return this.id;
     }
 
 

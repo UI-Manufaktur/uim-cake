@@ -3,8 +3,8 @@ module uim.cake.Error;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.errors.renderers.ConsoleErrorRenderer;
-import uim.cake.errors.renderers.HtmlErrorRenderer;
+import uim.cake.errors.rendererss.ConsoleErrorRenderer;
+import uim.cake.errors.rendererss.HtmlErrorRenderer;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.routings.Router;
 use Exception;

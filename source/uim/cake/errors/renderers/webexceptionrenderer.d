@@ -1,37 +1,8 @@
+module uim.cake.errors.renderers;
 
+@safe:
+import uim.cake;
 
-
- *
-
- * @link          https://cakephp.org UIM Project
- * @since         4.4.0
-  */module uim.cake.errors.Renderer;
-
-import uim.cake.controllers.Controller;
-import uim.cake.controllers.ControllerFactory;
-import uim.cake.controllers.exceptions.InvalidParameterException;
-import uim.cake.controllers.exceptions.MissingActionException;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Container;
-import uim.cake.core.exceptions.UIMException;
-import uim.cake.core.exceptions.MissingPluginException;
-import uim.cake.datasources.exceptions.RecordNotFoundException;
-import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
-import uim.cake.errors.Debugger;
-import uim.cake.errors.ExceptionRendererInterface;
-import uim.cake.events.Event;
-import uim.cake.http.exceptions.HttpException;
-import uim.cake.http.exceptions.MissingControllerException;
-import uim.cake.http.Response;
-import uim.cake.http.ResponseEmitter;
-import uim.cake.http.ServerRequest;
-import uim.cake.http.ServerRequestFactory;
-import uim.cake.routings.exceptions.MissingRouteException;
-import uim.cake.routings.Router;
-import uim.cake.utilities.Inflector;
-import uim.cake.View\exceptions.MissingLayoutException;
-import uim.cake.View\exceptions.MissingTemplateException;
 use PDOException;
 use Psr\Http\messages.IResponse;
 use Throwable;

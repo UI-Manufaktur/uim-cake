@@ -2,7 +2,7 @@
 module uim.cake.Error;
 
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.errors.renderers.ConsoleExceptionRenderer;
+import uim.cake.errors.rendererss.ConsoleExceptionRenderer;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.routings.Router;
 use InvalidArgumentException;

@@ -7,7 +7,7 @@ import uim.cake.controllers.Controller;
 import uim.cake.core.Configure;
 import uim.cake.core.TestSuite\ContainerStubTrait;
 import uim.cake.databases.exceptions.DatabaseException;
-import uim.cake.errors.renderers.WebExceptionRenderer;
+import uim.cake.errors.rendererss.WebExceptionRenderer;
 import uim.cake.events.IEvent;
 import uim.cake.events.EventManager;
 import uim.cake.Form\FormProtector;
@@ -491,7 +491,7 @@ trait IntegrationTestTrait
         if (empty($class) || !class_exists($class)) {
             $class = WebExceptionRenderer::class;
         }
-        /** @var uim.cake.errors.renderers.WebExceptionRenderer $instance */
+        /** @var uim.cake.errors.rendererss.WebExceptionRenderer $instance */
         $instance = new $class($exception);
         _response = $instance.render();
     }
