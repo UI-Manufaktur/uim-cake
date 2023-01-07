@@ -59,9 +59,9 @@ class MissingTemplateException : UIMException {
         myName = this.templateName ?? this.filename;
         myMessage = "{this.type} file `{myName}` could not be found.";
         if (this.paths) {
-            myMessage .= "\n\nThe following paths were searched:\n\n";
+            myMessage ~= "\n\nThe following paths were searched:\n\n";
             foreach (this.paths as myPath) {
-                myMessage .= "- `{myPath}{this.filename}`\n";
+                myMessage ~= "- `{myPath}{this.filename}`\n";
             }
         }
 

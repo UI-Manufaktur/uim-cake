@@ -395,7 +395,7 @@ class FormHelper : Helper
             case "delete":
             // Set patch method
             case "patch":
-                $append .= this.hidden("_method", [
+                $append ~= this.hidden("_method", [
                     "name": "_method",
                     "value": strtoupper(myOptions["type"]),
                     "secure": static::SECURE_SKIP,
@@ -426,7 +426,7 @@ class FormHelper : Helper
                 this.formProtector = this.createFormProtector($formTokenData);
             }
 
-            $append .= _csrfField();
+            $append ~= _csrfField();
         }
 
         if (!empty($append)) {
@@ -522,9 +522,9 @@ class FormHelper : Helper
         $out = "";
 
         if (this.requestType != "get" && _View.getRequest().getAttribute("formTokenData")  !is null) {
-            $out .= this.secure([], $secureAttributes);
+            $out ~= this.secure([], $secureAttributes);
         }
-        $out .= this.formatTemplate("formEnd", []);
+        $out ~= this.formatTemplate("formEnd", []);
 
         this.templater().pop();
         this.requestType = null;
@@ -583,12 +583,12 @@ class FormHelper : Helper
         $tokenUnlocked = array_merge($secureAttributes, [
             "value": $tokenData["unlocked"],
         ]);
-        $out .= this.hidden("_Token.unlocked", $tokenUnlocked);
+        $out ~= this.hidden("_Token.unlocked", $tokenUnlocked);
         if ($debugSecurity) {
             $tokenDebug = array_merge($secureAttributes, [
                 "value": $tokenData["debug"],
             ]);
-            $out .= this.hidden("_Token.debug", $tokenDebug);
+            $out ~= this.hidden("_Token.debug", $tokenDebug);
         }
 
         return this.formatTemplate("hiddenBlock", ["content": $out]);
@@ -895,7 +895,7 @@ class FormHelper : Helper
                 continue;
             }
 
-            $out .= this.control(myName, (array)$opts);
+            $out ~= this.control(myName, (array)$opts);
         }
 
         return this.fieldset($out, myOptions);
@@ -1682,12 +1682,12 @@ class FormHelper : Helper
         $out = this.create(null, $formOptions);
         if (isset(myOptions["data"]) && is_array(myOptions["data"])) {
             foreach (Hash::flatten(myOptions["data"]) as myKey: myValue) {
-                $out .= this.hidden(myKey, ["value": myValue]);
+                $out ~= this.hidden(myKey, ["value": myValue]);
             }
             unset(myOptions["data"]);
         }
-        $out .= this.button($title, myOptions);
-        $out .= this.end();
+        $out ~= this.button($title, myOptions);
+        $out ~= this.end();
 
         return $out;
     }
@@ -1757,11 +1757,11 @@ class FormHelper : Helper
         $out = this.formatTemplate("formStart", [
             "attrs": myTemplater.formatAttributes($formOptions) . $action,
         ]);
-        $out .= this.hidden("_method", [
+        $out ~= this.hidden("_method", [
             "value": myRequestMethod,
             "secure": static::SECURE_SKIP,
         ]);
-        $out .= _csrfField();
+        $out ~= _csrfField();
 
         $formTokenData = _View.getRequest().getAttribute("formTokenData");
         if ($formTokenData  !is null) {
@@ -1772,12 +1772,12 @@ class FormHelper : Helper
         if (isset(myOptions["data"]) && is_array(myOptions["data"])) {
             foreach (Hash::flatten(myOptions["data"]) as myKey: myValue) {
                 myFields[myKey] = myValue;
-                $out .= this.hidden(myKey, ["value": myValue, "secure": static::SECURE_SKIP]);
+                $out ~= this.hidden(myKey, ["value": myValue, "secure": static::SECURE_SKIP]);
             }
             unset(myOptions["data"]);
         }
-        $out .= this.secure(myFields);
-        $out .= this.formatTemplate("formEnd", []);
+        $out ~= this.secure(myFields);
+        $out ~= this.formatTemplate("formEnd", []);
 
         _lastAction = $restoreAction;
         this.formProtector = $restoreFormProtector;
@@ -1803,11 +1803,11 @@ class FormHelper : Helper
             ]);
             myOptions["data-confirm-message"] = $confirmMessage;
         } else {
-            $onClick .= " event.returnValue = false; return false;";
+            $onClick ~= " event.returnValue = false; return false;";
         }
         myOptions["onclick"] = $onClick;
 
-        $out .= this.Html.link($title, myUrl, myOptions);
+        $out ~= this.Html.link($title, myUrl, myOptions);
 
         return $out;
     }

@@ -167,7 +167,7 @@ class HtmlHelper : Helper {
                 ]);
                 myOptions["rel"] = "shortcut icon";
             }
-            $out .= this.formatTemplate("metalink", [
+            $out ~= this.formatTemplate("metalink", [
                 "url": myOptions["link"],
                 "attrs": this.templater().formatAttributes(myOptions, ["block", "link"]),
             ]);
@@ -363,7 +363,7 @@ class HtmlHelper : Helper {
         if (is_array(myPath)) {
             $out = "";
             foreach (myPath as $i) {
-                $out .= "\n\t" ~ (string)this.css($i, myOptions);
+                $out ~= "\n\t" ~ (string)this.css($i, myOptions);
             }
             if (empty(myOptions["block"])) {
                 return $out ~ "\n";
@@ -462,7 +462,7 @@ class HtmlHelper : Helper {
         if (is_array(myUrl)) {
             $out = "";
             foreach (myUrl as $i) {
-                $out .= "\n\t" ~ (string)this.script($i, myOptions);
+                $out ~= "\n\t" ~ (string)this.script($i, myOptions);
             }
             if (empty(myOptions["block"])) {
                 return $out ~ "\n";
@@ -767,7 +767,7 @@ class HtmlHelper : Helper {
             if ($useCount) {
                 $i += 1;
                 if (isset($cellOptions["class"])) {
-                    $cellOptions["class"] .= " column-" ~ $i;
+                    $cellOptions["class"] ~= " column-" ~ $i;
                 } else {
                     $cellOptions["class"] = "column-" ~ $i;
                 }
@@ -973,7 +973,7 @@ class HtmlHelper : Helper {
                     $source["type"] = _View.getResponse().getMimeType($ext);
                 }
                 $source["src"] = this.Url.assetUrl($source["src"], myOptions);
-                $sourceTags .= this.formatTemplate("tagselfclosing", [
+                $sourceTags ~= this.formatTemplate("tagselfclosing", [
                     "tag": "source",
                     "attrs": this.templater().formatAttributes($source),
                 ]);
@@ -1070,7 +1070,7 @@ class HtmlHelper : Helper {
             } elseif (isset($itemOptions["odd"]) && $index % 2 != 0) {
                 $itemOptions["class"] = $itemOptions["odd"];
             }
-            $out .= this.formatTemplate("li", [
+            $out ~= this.formatTemplate("li", [
                 "attrs": this.templater().formatAttributes($itemOptions, ["even", "odd"]),
                 "content": $item,
             ]);

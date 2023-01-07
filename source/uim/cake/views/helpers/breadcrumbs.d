@@ -288,7 +288,7 @@ class BreadcrumbsHelper : Helper
                 myTemplateParams["separator"] = $separatorString;
             }
 
-            $crumbTrail .= this.formatTemplate(myTemplate, myTemplateParams);
+            $crumbTrail ~= this.formatTemplate(myTemplate, myTemplateParams);
         }
 
         $crumbTrail = this.formatTemplate("wrapper", [
