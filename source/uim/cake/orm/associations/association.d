@@ -17,7 +17,7 @@ abstract class Association {
     // ----------
 
     /**
-     * The field name in the owning side table that is used to match with the foreignKey
+     * The field name in the owning side table that is used to match with the foreignKeys
      *
      * @var array<string>|string|null
      */
@@ -28,7 +28,7 @@ abstract class Association {
      *
      * @var array<string>|string
      */
-    protected _foreignKey;
+    protected _foreignKeys;
 
     /**
      * A list of conditions to be always included when fetching records from
@@ -119,7 +119,7 @@ abstract class Association {
             "dependent",
             "finder",
             "bindingKey",
-            "foreignKey",
+            "foreignKeyss",
             "joinType",
             "tableLocator",
             "propertyName",
@@ -333,8 +333,8 @@ abstract class Association {
     }
 
     // Gets the name of the field representing the foreign key to the target table.
-    string[] getForeignKey() {
-        return _foreignKey;
+    string[] getforeignKeys() {
+        return _foreignKeys;
     }
 
     /**
@@ -343,8 +343,8 @@ abstract class Association {
      * @param myKey the key or keys to be used to link both tables together
      * @return this
      */
-    auto setForeignKey(string[] myKey) {
-        _foreignKey = myKey;
+    auto setforeignKeys(string[] myKey) {
+        _foreignKeys = myKey;
 
         return this;
     }
@@ -516,7 +516,7 @@ abstract class Association {
      * The options array accept the following keys:
      *
      * - includeFields: Whether to include target model fields in the result or not
-     * - foreignKey: The name of the field to use as foreign key, if false none
+     * - foreignKeyss: The name of the field to use as foreign key, if false none
      *   will be used
      * - conditions: array with a list of conditions to filter the join with, this
      *   will be merged with any conditions originally configured for this association
@@ -541,7 +541,7 @@ abstract class Association {
 
         myOptions += [
             "includeFields":true,
-            "foreignKey":this.getForeignKey(),
+            "foreignKeyss":this.getforeignKeys(),
             "conditions":[],
             "joinType":this.getJoinType(),
             "fields":[],
@@ -555,7 +555,7 @@ abstract class Association {
             myOptions["includeFields"] = false;
         }
 
-        if (!empty(myOptions["foreignKey"])) {
+        if (!empty(myOptions["foreignKeyss"])) {
             $joinCondition = _joinCondition(myOptions);
             if ($joinCondition) {
                 myOptions["conditions"][] = $joinCondition;
@@ -882,17 +882,17 @@ abstract class Association {
      *
      * @param array<string, mixed> myOptions list of options passed to attachTo method
      * @return array
-     * @throws \RuntimeException if the number of columns in the foreignKey do not
+     * @throws \RuntimeException if the number of columns in the foreignKeyss do not
      * match the number of columns in the source table primaryKey
      */
     protected array _joinCondition(array myOptions) {
         $conditions = [];
         $tAlias = _name;
         $sAlias = this.getSource().getAlias();
-        $foreignKey = (array)myOptions["foreignKey"];
+        $foreignKeyss = (array)myOptions["foreignKeyss"];
         $bindingKey = (array)this.getBindingKey();
 
-        if (count($foreignKey) != count($bindingKey)) {
+        if (count($foreignKeyss) != count($bindingKey)) {
             if (empty($bindingKey)) {
                 myTable = this.getTarget().getTable();
                 if (this.isOwningSide(this.getSource())) {
@@ -902,16 +902,16 @@ abstract class Association {
                 throw new RuntimeException(sprintf($msg, myTable));
             }
 
-            $msg = "Cannot match provided foreignKey for '%s', got "(%s)" but expected foreign key for "(%s)"";
+            $msg = "Cannot match provided foreignKeyss for '%s', got "(%s)" but expected foreign key for "(%s)"";
             throw new RuntimeException(sprintf(
                 $msg,
                 _name,
-                implode(", ", $foreignKey),
+                implode(", ", $foreignKeyss),
                 implode(", ", $bindingKey)
             ));
         }
 
-        foreach ($foreignKey as $k: $f) {
+        foreach ($foreignKeyss as $k: $f) {
             myField = sprintf("%s.%s", $sAlias, $bindingKey[$k]);
             myValue = new IdentifierExpression(sprintf("%s.%s", $tAlias, $f));
             $conditions[myField] = myValue;
@@ -1007,7 +1007,7 @@ abstract class Association {
      *
      * - query: Query object setup to find the source table records
      * - keys: List of primary key values from the source table
-     * - foreignKey: The name of the field used to relate both tables
+     * - foreignKeyss: The name of the field used to relate both tables
      * - conditions: List of conditions to be passed to the query where() method
      * - sort: The direction in which the records should be returned
      * - fields: List of fields to select from the target table
