@@ -40,10 +40,10 @@ class ErrorLogger : IErrorLogger
 
     bool logMessage($level, string myMessage, array $context = []) {
         if (!empty($context["request"])) {
-            myMessage .= this.getRequestContext($context["request"]);
+            myMessage ~= this.getRequestContext($context["request"]);
         }
         if (!empty($context["trace"])) {
-            myMessage .= "\nTrace:\n" ~ $context["trace"] ~ "\n";
+            myMessage ~= "\nTrace:\n" ~ $context["trace"] ~ "\n";
         }
 
         return Log::write($level, myMessage);
@@ -60,10 +60,10 @@ class ErrorLogger : IErrorLogger
         myMessage = this.getMessage(myException);
 
         if (myRequest  !is null) {
-            myMessage .= this.getRequestContext(myRequest);
+            myMessage ~= this.getRequestContext(myRequest);
         }
 
-        myMessage .= "\n\n";
+        myMessage ~= "\n\n";
 
         return Log::error(myMessage);
     }
@@ -89,26 +89,26 @@ class ErrorLogger : IErrorLogger
         if ($debug && myException instanceof UIMException) {
             $attributes = myException.getAttributes();
             if ($attributes) {
-                myMessage .= "\nException Attributes: " ~ var_export(myException.getAttributes(), true);
+                myMessage ~= "\nException Attributes: " ~ var_export(myException.getAttributes(), true);
             }
         }
 
         if (this.getConfig("trace")) {
             /** @var array $trace */
             $trace = Debugger::formatTrace(myException, ["format":"points"]);
-            myMessage .= "\nStack Trace:\n";
+            myMessage ~= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {
-                    myMessage .= "- " ~ $line;
+                    myMessage ~= "- " ~ $line;
                 } else {
-                    myMessage .= "- {$line["file"]}:{$line["line"]}\n";
+                    myMessage ~= "- {$line["file"]}:{$line["line"]}\n";
                 }
             }
         }
 
         $previous = myException.getPrevious();
         if ($previous) {
-            myMessage .= this.getMessage($previous, true);
+            myMessage ~= this.getMessage($previous, true);
         }
 
         return myMessage;
@@ -124,13 +124,13 @@ class ErrorLogger : IErrorLogger
 
         $referer = myRequest.getHeaderLine("Referer");
         if ($referer) {
-            myMessage .= "\nReferer URL: " ~ $referer;
+            myMessage ~= "\nReferer URL: " ~ $referer;
         }
 
         if (method_exists(myRequest, "clientIp")) {
             $clientIp = myRequest.clientIp();
             if ($clientIp && $clientIp != "::1") {
-                myMessage .= "\nClient IP: " ~ $clientIp;
+                myMessage ~= "\nClient IP: " ~ $clientIp;
             }
         }
 

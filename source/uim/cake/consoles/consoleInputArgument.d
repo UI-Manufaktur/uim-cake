@@ -88,7 +88,7 @@ class ConsoleInputArgument {
             $optional = " <comment>(optional)</comment>";
         }
         if (_choices) {
-            $optional .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
+            $optional ~= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
 
         return sprintf("%s%s%s", $name, _help, $optional);

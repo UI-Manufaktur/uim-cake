@@ -53,7 +53,7 @@ class I18nInitCommand : Command {
             }
             $filename = $fileinfo.getFilename();
             $newFilename = $fileinfo.getBasename(".pot");
-            $newFilename .= ".po";
+            $newFilename ~= ".po";
 
             $io.createFile($targetFolder . $newFilename, file_get_contents($sourceFolder . $filename));
             $count++;

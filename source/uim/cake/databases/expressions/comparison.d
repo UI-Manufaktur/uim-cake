@@ -174,7 +174,7 @@ class ComparisonExpression : IExpression, FieldInterface
         }
 
         if (_isMultiple) {
-            $template .= "%s (%s)";
+            $template ~= "%s (%s)";
             $type = _type;
             if ($type != null) {
                 $type = str_replace("[]", "", $type);
@@ -191,7 +191,7 @@ class ComparisonExpression : IExpression, FieldInterface
                 );
             }
         } else {
-            $template .= "%s %s";
+            $template ~= "%s %s";
             $value = _bindValue(_value, $binder, _type);
         }
 

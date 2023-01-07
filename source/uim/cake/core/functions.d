@@ -74,7 +74,7 @@ if (!function_exists("pluginSplit")) {
         if (strpos($name, ".") != false) {
             $parts = explode(".", $name, 2);
             if ($dotAppend) {
-                $parts[0] .= ".";
+                $parts[0] ~= ".";
             }
 
             /** @psalm-var array{string, string}*/

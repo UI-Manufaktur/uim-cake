@@ -148,45 +148,45 @@ class Debugger
         this.setConfig(aConfig);
 
         $e = '<pre class="cake-error">';
-        $e .= '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-trace\')';
-        $e .= '.style.display = (document.getElementById(\'{:id}-trace\').style.display == ';
-        $e .= '\'none\' ? \'\' : \'none\');"><b>{:error}</b> ({:code})</a>: {:description} ';
-        $e .= '[<b>{:path}</b>, line <b>{:line}</b>]';
+        $e ~= '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-trace\')';
+        $e ~= '.style.display = (document.getElementById(\'{:id}-trace\').style.display == ';
+        $e ~= '\'none\' ? \'\' : \'none\');"><b>{:error}</b> ({:code})</a>: {:description} ';
+        $e ~= '[<b>{:path}</b>, line <b>{:line}</b>]';
 
-        $e .= '<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">';
-        $e .= '{:links}{:info}</div>';
-        $e .= '</pre>';
+        $e ~= '<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">';
+        $e ~= '{:links}{:info}</div>';
+        $e ~= '</pre>';
         _templates['js']['error'] = $e;
 
         $t = '<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">';
-        $t .= '{:context}{:code}{:trace}</div>';
+        $t ~= '{:context}{:code}{:trace}</div>';
         _templates['js']['info'] = $t;
 
         $links = [];
         $link = '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-code\')';
-        $link .= '.style.display = (document.getElementById(\'{:id}-code\').style.display == ';
-        $link .= '\'none\' ? \'\' : \'none\')">Code</a>';
+        $link ~= '.style.display = (document.getElementById(\'{:id}-code\').style.display == ';
+        $link ~= '\'none\' ? \'\' : \'none\')">Code</a>';
         $links['code'] = $link;
 
         $link = '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-context\')';
-        $link .= '.style.display = (document.getElementById(\'{:id}-context\').style.display == ';
-        $link .= '\'none\' ? \'\' : \'none\')">Context</a>';
+        $link ~= '.style.display = (document.getElementById(\'{:id}-context\').style.display == ';
+        $link ~= '\'none\' ? \'\' : \'none\')">Context</a>';
         $links['context'] = $link;
 
         _templates['js']['links'] = $links;
 
         _templates['js']['context'] = '<pre id="{:id}-context" class="cake-context cake-debug" ';
-        _templates['js']['context'] .= 'style="display: none;">{:context}</pre>';
+        _templates['js']['context'] ~= 'style="display: none;">{:context}</pre>';
 
         _templates['js']['code'] = '<pre id="{:id}-code" class="cake-code-dump" ';
-        _templates['js']['code'] .= 'style="display: none;">{:code}</pre>';
+        _templates['js']['code'] ~= 'style="display: none;">{:code}</pre>';
 
         $e = '<pre class="cake-error"><b>{:error}</b> ({:code}) : {:description} ';
-        $e .= '[<b>{:path}</b>, line <b>{:line}]</b></pre>';
+        $e ~= '[<b>{:path}</b>, line <b>{:line}]</b></pre>';
         _templates['html']['error'] = $e;
 
         _templates['html']['context'] = '<pre class="cake-context cake-debug"><b>Context</b> ';
-        _templates['html']['context'] .= '<p>{:context}</p></pre>';
+        _templates['html']['context'] ~= '<p>{:context}</p></pre>';
     }
 
     /**
@@ -332,7 +332,7 @@ class Debugger
     static void log($var, $level = 'debug', int $maxDepth = 3) {
         /** @var string $source */
         $source = static::trace(['start': 1]);
-        $source .= "\n";
+        $source ~= "\n";
 
         Log::write(
             $level,
@@ -418,9 +418,9 @@ class Debugger
                         foreach ($next['args'] as $arg) {
                             $args[] = Debugger::exportVar($arg);
                         }
-                        $reference .= implode(', ', $args);
+                        $reference ~= implode(', ', $args);
                     }
-                    $reference .= ')';
+                    $reference ~= ')';
                 }
             }
             if (in_array($signature, $options['exclude'], true)) {
@@ -996,7 +996,7 @@ class Debugger
             if (is_array($value)) {
                 $value = implode("\n", $value);
             }
-            $info .= Text::insert($tpl[$key], [$key: $value] + $data, $insertOpts);
+            $info ~= Text::insert($tpl[$key], [$key: $value] + $data, $insertOpts);
         }
         $links = implode(' ', $links);
 

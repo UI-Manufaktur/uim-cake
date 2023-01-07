@@ -189,7 +189,7 @@ class HtmlFormatter : IFormatter {
                 "</span>";
         }
 
-        $out .= this.style("punct", "object(") .
+        $out ~= this.style("punct", "object(") .
             this.style("class", $var.getValue()) .
             this.style("punct", ") id:") .
             this.style("number", (string)$var.getId()) .

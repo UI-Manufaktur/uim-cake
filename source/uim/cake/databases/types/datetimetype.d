@@ -339,7 +339,7 @@ class DateTimeType : BaseType : BatchCastingInterface
                 is_numeric($value["day"])
             )
         ) {
-            $format .= sprintf("%d-%02d-%02d", $value["year"], $value["month"], $value["day"]);
+            $format ~= sprintf("%d-%02d-%02d", $value["year"], $value["month"], $value["day"]);
         }
 
         if (isset($value["meridian"]) && (int)$value["hour"] == 12) {
@@ -348,7 +348,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         if (isset($value["meridian"])) {
             $value["hour"] = strtolower($value["meridian"]) == "am" ? $value["hour"] : $value["hour"] + 12;
         }
-        $format .= sprintf(
+        $format ~= sprintf(
             "%s%02d:%02d:%02d.%06d",
             empty($format) ? "" : " ",
             $value["hour"],

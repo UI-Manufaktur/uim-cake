@@ -140,7 +140,7 @@ class ConsoleInputOption
             $default = sprintf(" <comment>(default: %s)</comment>", _default);
         }
         if (_choices) {
-            $default .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
+            $default ~= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
         if (_short != "") {
             $short = ", -" ~ _short;

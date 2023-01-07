@@ -147,7 +147,7 @@ class File
 
         $data = "";
         while (!feof(this.handle)) {
-            $data .= fgets(this.handle, 4096);
+            $data ~= fgets(this.handle, 4096);
         }
 
         if (this.lock != null) {

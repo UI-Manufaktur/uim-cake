@@ -131,12 +131,12 @@ class QueryCompiler
             }
             if (isset(_templates[$partName])) {
                 $part = _stringifyExpressions((array)$part, $binder);
-                $sql .= sprintf(_templates[$partName], implode(", ", $part));
+                $sql ~= sprintf(_templates[$partName], implode(", ", $part));
 
                 return;
             }
 
-            $sql .= this.{"_build" ~ $partName ~ "Part"}($part, $query, $binder);
+            $sql ~= this.{"_build" ~ $partName ~ "Part"}($part, $query, $binder);
         };
     }
 
@@ -188,9 +188,9 @@ class QueryCompiler
             if (!is_numeric($k)) {
                 $p = $p ~ " AS ";
                 if ($quoteIdentifiers) {
-                    $p .= $driver.quoteIdentifier($k);
+                    $p ~= $driver.quoteIdentifier($k);
                 } else {
-                    $p .= $k;
+                    $p ~= $k;
                 }
             }
             $normalized[] = $p;
@@ -255,16 +255,16 @@ class QueryCompiler
                 $join["table"] = "(" ~ $join["table"].sql($binder) ~ ")";
             }
 
-            $joins .= sprintf(" %s JOIN %s %s", $join["type"], $join["table"], $join["alias"]);
+            $joins ~= sprintf(" %s JOIN %s %s", $join["type"], $join["table"], $join["alias"]);
 
             $condition = "";
             if (isset($join["conditions"]) && $join["conditions"] instanceof IExpression) {
                 $condition = $join["conditions"].sql($binder);
             }
             if ($condition == "") {
-                $joins .= " ON 1 = 1";
+                $joins ~= " ON 1 = 1";
             } else {
-                $joins .= " ON {$condition}";
+                $joins ~= " ON {$condition}";
             }
         }
 

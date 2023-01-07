@@ -350,7 +350,7 @@ class AuthComponent : Component : IEventDispatcher
             $loginAction['?'][static::QUERY_STRING_REDIRECT] = $urlToRedirectBackTo;
         } else {
             $char = strpos($loginAction, '?') == false ? '?' : '&';
-            $loginAction .= $char . static::QUERY_STRING_REDIRECT . '=' . urlencode($urlToRedirectBackTo);
+            $loginAction ~= $char . static::QUERY_STRING_REDIRECT . '=' . urlencode($urlToRedirectBackTo);
         }
 
         return $loginAction;

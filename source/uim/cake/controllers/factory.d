@@ -285,7 +285,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
                 );
 
                 if (strpos($prefix, "/") == false) {
-                    $namespace .= "/" ~ Inflector::camelize($prefix);
+                    $namespace ~= "/" ~ Inflector::camelize($prefix);
                 } else {
                     $prefixes = array_map(
                         function ($val) {
@@ -293,10 +293,10 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
                         },
                         explode("/", $prefix)
                     );
-                    $namespace .= "/" ~ implode("/", $prefixes);
+                    $namespace ~= "/" ~ implode("/", $prefixes);
                 }
             } else {
-                $namespace .= "/" ~ $prefix;
+                $namespace ~= "/" ~ $prefix;
             }
         }
         $firstChar = substr($controller, 0, 1);

@@ -916,7 +916,7 @@ class Folder
             }
             $newparts[] = $part;
         }
-        $newpath .= implode(DIRECTORY_SEPARATOR, $newparts);
+        $newpath ~= implode(DIRECTORY_SEPARATOR, $newparts);
 
         return Folder::slashTerm($newpath);
     }

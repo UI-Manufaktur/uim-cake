@@ -44,10 +44,10 @@ class ErrorLogger : ErrorLoggerInterface
     void logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false) {
         $message = $error.getMessage();
         if ($request) {
-            $message .= this.getRequestContext($request);
+            $message ~= this.getRequestContext($request);
         }
         if ($includeTrace) {
-            $message .= "\nTrace:\n" ~ $error.getTraceAsString() ~ "\n";
+            $message ~= "\nTrace:\n" ~ $error.getTraceAsString() ~ "\n";
         }
         $logMap = [
             "strict": LOG_NOTICE,
@@ -74,7 +74,7 @@ class ErrorLogger : ErrorLoggerInterface
         $message = this.getMessage($exception, false, $includeTrace);
 
         if ($request != null) {
-            $message .= this.getRequestContext($request);
+            $message ~= this.getRequestContext($request);
         }
         Log::error($message);
     }
@@ -88,10 +88,10 @@ class ErrorLogger : ErrorLoggerInterface
      */
     bool logMessage($level, string $message, array $context = []) {
         if (!empty($context["request"])) {
-            $message .= this.getRequestContext($context["request"]);
+            $message ~= this.getRequestContext($context["request"]);
         }
         if (!empty($context["trace"])) {
-            $message .= "\nTrace:\n" ~ $context["trace"] ~ "\n";
+            $message ~= "\nTrace:\n" ~ $context["trace"] ~ "\n";
         }
         $logMap = [
             "strict": LOG_NOTICE,
@@ -112,10 +112,10 @@ class ErrorLogger : ErrorLoggerInterface
         $message = this.getMessage($exception, false, this.getConfig("trace"));
 
         if ($request != null) {
-            $message .= this.getRequestContext($request);
+            $message ~= this.getRequestContext($request);
         }
 
-        $message .= "\n\n";
+        $message ~= "\n\n";
 
         return Log::error($message);
     }
@@ -142,26 +142,26 @@ class ErrorLogger : ErrorLoggerInterface
         if ($debug && $exception instanceof UIMException) {
             $attributes = $exception.getAttributes();
             if ($attributes) {
-                $message .= "\nException Attributes: " ~ var_export($exception.getAttributes(), true);
+                $message ~= "\nException Attributes: " ~ var_export($exception.getAttributes(), true);
             }
         }
 
         if ($includeTrace) {
             /** @var array $trace */
             $trace = Debugger::formatTrace($exception, ["format": "points"]);
-            $message .= "\nStack Trace:\n";
+            $message ~= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {
-                    $message .= "- " ~ $line;
+                    $message ~= "- " ~ $line;
                 } else {
-                    $message .= "- {$line["file"]}:{$line["line"]}\n";
+                    $message ~= "- {$line["file"]}:{$line["line"]}\n";
                 }
             }
         }
 
         $previous = $exception.getPrevious();
         if ($previous) {
-            $message .= this.getMessage($previous, true, $includeTrace);
+            $message ~= this.getMessage($previous, true, $includeTrace);
         }
 
         return $message;
@@ -177,13 +177,13 @@ class ErrorLogger : ErrorLoggerInterface
 
         $referer = $request.getHeaderLine("Referer");
         if ($referer) {
-            $message .= "\nReferer URL: " ~ $referer;
+            $message ~= "\nReferer URL: " ~ $referer;
         }
 
         if (method_exists($request, "clientIp")) {
             $clientIp = $request.clientIp();
             if ($clientIp && $clientIp != "::1") {
-                $message .= "\nClient IP: " ~ $clientIp;
+                $message ~= "\nClient IP: " ~ $clientIp;
             }
         }
 

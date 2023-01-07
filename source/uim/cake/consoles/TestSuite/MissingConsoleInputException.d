@@ -12,7 +12,7 @@ class MissingConsoleInputException : RuntimeException {
      * @param string $question The question text.
      */
     void setQuestion($question) {
-        this.message .= "\nThe question asked was: " ~ $question;
+        this.message ~= "\nThe question asked was: " ~ $question;
     }
 }
 

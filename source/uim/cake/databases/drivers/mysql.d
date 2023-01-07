@@ -133,7 +133,7 @@ class Mysql : Driver
         }
 
         if (!empty(aConfig["encoding"])) {
-            $dsn .= ";charset={aConfig["encoding"]}";
+            $dsn ~= ";charset={aConfig["encoding"]}";
         }
 
         _connect($dsn, aConfig);

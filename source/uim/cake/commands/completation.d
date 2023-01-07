@@ -40,7 +40,7 @@ class CompletionCommand : Command : ICommandCollectionAware
         ];
         myModeHelp = "";
         foreach (myKey, $help; myModes) {
-            myModeHelp .= "- <info>{myKey}</info> {$help}\n";
+            myModeHelp ~= "- <info>{myKey}</info> {$help}\n";
         }
 
         $parser.setDescription(

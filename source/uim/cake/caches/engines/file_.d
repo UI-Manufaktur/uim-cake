@@ -70,7 +70,7 @@ class FileEngine : CacheEngine
             _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR ~ "cake_cache" ~ DIRECTORY_SEPARATOR;
         }
         if (substr(_config["path"], -1) != DIRECTORY_SEPARATOR) {
-            _config["path"] .= DIRECTORY_SEPARATOR;
+            _config["path"] ~= DIRECTORY_SEPARATOR;
         }
         if (_groupPrefix) {
             _groupPrefix = str_replace("_", DIRECTORY_SEPARATOR, _groupPrefix);
@@ -164,7 +164,7 @@ class FileEngine : CacheEngine
         _File.next();
         while (_File.valid()) {
             /** @psalm-suppress PossiblyInvalidOperand */
-            $data .= _File.current();
+            $data ~= _File.current();
             _File.next();
         }
 

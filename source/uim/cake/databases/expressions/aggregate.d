@@ -151,13 +151,13 @@ class AggregateExpression : FunctionExpression : IWindow
     string sql(ValueBinder aBinder) {
         $sql = super.sql(aBinder);
         if (this.filter != null) {
-            $sql .= " FILTER (WHERE " ~ this.filter.sql(aBinder) ~ ")";
+            $sql ~= " FILTER (WHERE " ~ this.filter.sql(aBinder) ~ ")";
         }
         if (this.window != null) {
             if (this.window.isNamedOnly()) {
-                $sql .= " OVER " ~ this.window.sql(aBinder);
+                $sql ~= " OVER " ~ this.window.sql(aBinder);
             } else {
-                $sql .= " OVER (" ~ this.window.sql(aBinder) ~ ")";
+                $sql ~= " OVER (" ~ this.window.sql(aBinder) ~ ")";
             }
         }
 

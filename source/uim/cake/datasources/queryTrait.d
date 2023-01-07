@@ -148,7 +148,7 @@ trait QueryTrait
      * // Function to generate key.
      * $query.cache(function ($q) {
      *   $key = serialize($q.clause("select"));
-     *   $key .= serialize($q.clause("where"));
+     *   $key ~= serialize($q.clause("where"));
      *   return md5($key);
      * });
      *

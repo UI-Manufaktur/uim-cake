@@ -287,7 +287,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
         $type = $type ?: "string";
-        $type .= "[]";
+        $type ~= "[]";
         $values = $values instanceof IExpression ? $values : (array)$values;
 
         return this.add(new ComparisonExpression($field, $values, $type, "IN"));
@@ -358,7 +358,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
         $type = $type ?: "string";
-        $type .= "[]";
+        $type ~= "[]";
         $values = $values instanceof IExpression ? $values : (array)$values;
 
         return this.add(new ComparisonExpression($field, $values, $type, "NOT IN"));
@@ -741,7 +741,7 @@ class QueryExpression : IExpression, Countable
         if (in_array($operator, ["in", "not in"]) || $typeMultiple) {
             $type = $type ?: "string";
             if (!$typeMultiple) {
-                $type .= "[]";
+                $type ~= "[]";
             }
             $operator = $operator == "=" ? "IN" : $operator;
             $operator = $operator == "!=" ? "NOT IN" : $operator;

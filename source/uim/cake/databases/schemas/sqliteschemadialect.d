@@ -357,20 +357,20 @@ class SqliteSchemaDialect : SchemaDialect
             $data["unsigned"] == true
         ) {
             if ($data["type"] != TableSchema::TYPE_INTEGER || $schema.getPrimaryKeys() != [$name]) {
-                $out .= " UNSIGNED";
+                $out ~= " UNSIGNED";
             }
         }
 
         if (isset($typeMap[$data["type"]])) {
-            $out .= $typeMap[$data["type"]];
+            $out ~= $typeMap[$data["type"]];
         }
 
         if ($data["type"] == TableSchema::TYPE_TEXT && $data["length"] != TableSchema::LENGTH_TINY) {
-            $out .= " TEXT";
+            $out ~= " TEXT";
         }
 
         if ($data["type"] == TableSchema::TYPE_CHAR) {
-            $out .= "(" ~ $data["length"] ~ ")";
+            $out ~= "(" ~ $data["length"] ~ ")";
         }
 
         if (
@@ -380,18 +380,18 @@ class SqliteSchemaDialect : SchemaDialect
                 $data["length"] == TableSchema::LENGTH_TINY
             )
         ) {
-            $out .= " VARCHAR";
+            $out ~= " VARCHAR";
 
             if (isset($data["length"])) {
-                $out .= "(" ~ $data["length"] ~ ")";
+                $out ~= "(" ~ $data["length"] ~ ")";
             }
         }
 
         if ($data["type"] == TableSchema::TYPE_BINARY) {
             if (isset($data["length"])) {
-                $out .= " BLOB(" ~ $data["length"] ~ ")";
+                $out ~= " BLOB(" ~ $data["length"] ~ ")";
             } else {
-                $out .= " BLOB";
+                $out ~= " BLOB";
             }
         }
 
@@ -405,7 +405,7 @@ class SqliteSchemaDialect : SchemaDialect
             isset($data["length"]) &&
             $schema.getPrimaryKeys() != [$name]
         ) {
-            $out .= "(" ~ (int)$data["length"] ~ ")";
+            $out ~= "(" ~ (int)$data["length"] ~ ")";
         }
 
         $hasPrecision = [TableSchema::TYPE_FLOAT, TableSchema::TYPE_DECIMAL];
@@ -416,15 +416,15 @@ class SqliteSchemaDialect : SchemaDialect
                 isset($data["precision"])
             )
         ) {
-            $out .= "(" ~ (int)$data["length"] ~ "," ~ (int)$data["precision"] ~ ")";
+            $out ~= "(" ~ (int)$data["length"] ~ "," ~ (int)$data["precision"] ~ ")";
         }
 
         if (isset($data["null"]) && $data["null"] == false) {
-            $out .= " NOT NULL";
+            $out ~= " NOT NULL";
         }
 
         if ($data["type"] == TableSchema::TYPE_INTEGER && $schema.getPrimaryKeys() == [$name]) {
-            $out .= " PRIMARY KEY AUTOINCREMENT";
+            $out ~= " PRIMARY KEY AUTOINCREMENT";
         }
 
         $timestampTypes = [
@@ -435,10 +435,10 @@ class SqliteSchemaDialect : SchemaDialect
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
         if (isset($data["null"]) && $data["null"] == true && in_array($data["type"], $timestampTypes, true)) {
-            $out .= " DEFAULT NULL";
+            $out ~= " DEFAULT NULL";
         }
         if (isset($data["default"])) {
-            $out .= " DEFAULT " ~ _driver.schemaValue($data["default"]);
+            $out ~= " DEFAULT " ~ _driver.schemaValue($data["default"]);
         }
 
         return $out;

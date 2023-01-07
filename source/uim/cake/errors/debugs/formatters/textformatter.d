@@ -48,7 +48,7 @@ TEXT;
      * Convert a tree of INode objects into a plain text string.
      *
      * @param uim.cake.errors.debugs.INode $var The node tree to dump.
-     * @param int $indent The current indentation level.
+     * @param int aIndent The current indentation level.
      * @return string
      */
     protected string export(INode aNode, int anIndent) {
@@ -82,60 +82,59 @@ TEXT;
     /**
      * Export an array type object
      *
-     * @param uim.cake.errors.debugs.ArrayNode $var The array to export.
-     * @param int $indent The current indentation level.
+     * @param uim.cake.errors.debugs.ArrayNode aNode The array to export.
+     * @param int aIndent The current indentation level.
      * @return string Exported array.
      */
-    protected string exportArray(ArrayNode $var, int $indent) {
-        $out = "[";
-        $break = "\n" ~ str_repeat("  ", $indent);
-        $end = "\n" ~ str_repeat("  ", $indent - 1);
+    protected string exportArray(ArrayNode aNode, int aIndent) {
+        myResult = "[";
+        $break = "\n" ~ str_repeat("  ", aIndent);
+        $end = "\n" ~ str_repeat("  ", aIndent - 1);
         $vars = [];
 
-        foreach ($var.getChildren() as $item) {
-            $val = $item.getValue();
-            $vars[] = $break . this.export($item.getKey(), $indent) ~ ":" ~ this.export($val, $indent);
+        foreach (myItem; aNode.getChildren()) {
+            $val = myItem.getValue();
+            $vars[] = $break . this.export($item.getKey(), aIndent) ~ ":" ~ this.export($val, aIndent);
         }
         if (count($vars)) {
-            return $out . implode(",", $vars) . $end ~ "]";
+            return myResult . implode(",", $vars) . $end ~ "]";
         }
 
-        return $out ~ "]";
+        return myResult ~ "]";
     }
 
     /**
      * Handles object to string conversion.
      *
      * @param uim.cake.errors.debugs.ClassNode|uim.cake.errors.debugs.ReferenceNode $var Object to convert.
-     * @param int $indent Current indentation level.
+     * @param int aIndent Current indentation level.
      * @return string
      * @see uim.cake.errors.Debugger::exportVar()
      */
-    protected string exportObject($var, int $indent) {
-        $out = "";
-        $props = [];
-
+    protected string exportObject(ReferenceNode aNode, int aIndent) {
+        auto myResult = "";
+        $props = 
         if ($var instanceof ReferenceNode) {
             return "object({$var.getValue()}) id:{$var.getId()} {}";
         }
 
-        $out .= "object({$var.getValue()}) id:{$var.getId()} {";
-        $break = "\n" ~ str_repeat("  ", $indent);
-        $end = "\n" ~ str_repeat("  ", $indent - 1) ~ "}";
+        myResult ~= "object({$var.getValue()}) id:{$var.getId()} {";
+        $break = "\n" ~ str_repeat("  ", aIndent);
+        $end = "\n" ~ str_repeat("  ", aIndent - 1) ~ "}";
 
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
             myName = $property.getName();
             if ($visibility && $visibility != "public") {
-                $props[] = "[{$visibility}] {myName}: " ~ this.export($property.getValue(), $indent);
+                $props[] = "[{$visibility}] {myName}: " ~ this.export($property.getValue(), aIndent);
             } else {
-                $props[] = "{myName}: " ~ this.export($property.getValue(), $indent);
+                $props[] = "{myName}: " ~ this.export($property.getValue(), aIndent);
             }
         }
         if (count($props)) {
-            return $out . $break . implode($break, $props) . $end;
+            return myResult . $break . implode($break, $props) . $end;
         }
 
-        return $out ~ "}";
+        return myResult ~ "}";
     }
 }

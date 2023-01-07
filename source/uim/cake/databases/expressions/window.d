@@ -207,7 +207,7 @@ class WindowExpression : IExpression, IWindow
             $frameSql = sprintf("%s BETWEEN %s AND %s", this.frame["type"], $start, $end);
 
             if (this.exclusion != null) {
-                $frameSql .= " EXCLUDE " ~ this.exclusion;
+                $frameSql ~= " EXCLUDE " ~ this.exclusion;
             }
 
             $clauses[] = $frameSql;

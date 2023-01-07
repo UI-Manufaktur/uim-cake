@@ -289,7 +289,7 @@ trait ConsoleIntegrationTestTrait
                 continue;
             }
 
-            $arg .= $char;
+            $arg ~= $char;
         }
         $argv[] = $arg;
 

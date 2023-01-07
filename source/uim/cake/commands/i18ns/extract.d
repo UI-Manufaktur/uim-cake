@@ -515,16 +515,16 @@ class I18nExtractCommand : Command {
 
                     $sentence = "";
                     if ($context != "") {
-                        $sentence .= "msgctxt \"{$context}\"\n";
+                        $sentence ~= "msgctxt \"{$context}\"\n";
                     }
                     if ($plural == false) {
-                        $sentence .= "msgid \"{$msgid}\"\n";
-                        $sentence .= "msgstr \"\"\n\n";
+                        $sentence ~= "msgid \"{$msgid}\"\n";
+                        $sentence ~= "msgstr \"\"\n\n";
                     } else {
-                        $sentence .= "msgid \"{$msgid}\"\n";
-                        $sentence .= "msgid_plural \"{$plural}\"\n";
-                        $sentence .= "msgstr[0] \"\"\n";
-                        $sentence .= "msgstr[1] \"\"\n\n";
+                        $sentence ~= "msgid \"{$msgid}\"\n";
+                        $sentence ~= "msgid_plural \"{$plural}\"\n";
+                        $sentence ~= "msgstr[0] \"\"\n";
+                        $sentence ~= "msgstr[1] \"\"\n\n";
                     }
 
                     if ($domain != "default" && _merge) {
@@ -550,7 +550,7 @@ class I18nExtractCommand : Command {
         if (!isset(_storage[$domain][$sentence])) {
             _storage[$domain][$sentence] = $header;
         } else {
-            _storage[$domain][$sentence] .= $header;
+            _storage[$domain][$sentence] ~= $header;
         }
     }
 
@@ -570,7 +570,7 @@ class I18nExtractCommand : Command {
             $output = _writeHeader($domain);
             $headerLength = strlen($output);
             foreach ($sentence, $header; $sentences) {
-                $output .= $header . $sentence;
+                $output ~= $header . $sentence;
             }
 
             // Remove vendor prefix if present.
@@ -620,20 +620,20 @@ class I18nExtractCommand : Command {
         $projectIdVersion = $domain == "cake" ? "UIM " ~ Configure::version() : "PROJECT VERSION";
 
         $output = "# LANGUAGE translation of UIM Application\n";
-        $output .= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
-        $output .= "#\n";
-        $output .= "#, fuzzy\n";
-        $output .= "msgid \"\"\n";
-        $output .= "msgstr \"\"\n";
-        $output .= ""Project-Id-Version: " ~ $projectIdVersion ~ "\\n\"\n";
-        $output .= ""POT-Creation-Date: " ~ date("Y-m-d H:iO") ~ "\\n\"\n";
-        $output .= "\"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n\"\n";
-        $output .= "\"Last-Translator: NAME <EMAIL@ADDRESS>\\n\"\n";
-        $output .= "\"Language-Team: LANGUAGE <EMAIL@ADDRESS>\\n\"\n";
-        $output .= "\"MIME-Version: 1.0\\n\"\n";
-        $output .= "\"Content-Type: text/plain; charset=utf-8\\n\"\n";
-        $output .= "\"Content-Transfer-Encoding: 8bit\\n\"\n";
-        $output .= "\"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\\n\"\n\n";
+        $output ~= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
+        $output ~= "#\n";
+        $output ~= "#, fuzzy\n";
+        $output ~= "msgid \"\"\n";
+        $output ~= "msgstr \"\"\n";
+        $output ~= ""Project-Id-Version: " ~ $projectIdVersion ~ "\\n\"\n";
+        $output ~= ""POT-Creation-Date: " ~ date("Y-m-d H:iO") ~ "\\n\"\n";
+        $output ~= "\"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n\"\n";
+        $output ~= "\"Last-Translator: NAME <EMAIL@ADDRESS>\\n\"\n";
+        $output ~= "\"Language-Team: LANGUAGE <EMAIL@ADDRESS>\\n\"\n";
+        $output ~= "\"MIME-Version: 1.0\\n\"\n";
+        $output ~= "\"Content-Type: text/plain; charset=utf-8\\n\"\n";
+        $output ~= "\"Content-Transfer-Encoding: 8bit\\n\"\n";
+        $output ~= "\"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\\n\"\n\n";
 
         return $output;
     }
@@ -685,7 +685,7 @@ class I18nExtractCommand : Command {
                     || _tokens[$position] == "."
                 ) {
                     if (_tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING) {
-                        $string .= _formatString(_tokens[$position][1]);
+                        $string ~= _formatString(_tokens[$position][1]);
                     }
                     $position++;
                 }

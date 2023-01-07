@@ -41,7 +41,7 @@ trait FileConfigTrait
             $file = _path . $key;
         }
 
-        $file .= _extension;
+        $file ~= _extension;
 
         if (!$checkExists || is_file($file)) {
             return $file;
