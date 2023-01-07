@@ -7,6 +7,8 @@
 @safe:
 import uim.cake;
 
+use SplFixedArray;
+
 /**
  * Represents the results obtained after executing a query for a specific table
  * This object is responsible for correctly nesting result keys reported from
@@ -20,11 +22,13 @@ class ResultSet : IResultSet
     /**
      * Database statement holding the results
      *
-     * @var uim.cake.databases.IStatement
+     * @var uim.cake.databases.StatementInterface
      */
     protected _statement;
 
-    // Points to the next record number that should be fetched
+    /**
+     * Points to the next record number that should be fetched
+     */
     protected int _index = 0;
 
     /**
@@ -50,7 +54,7 @@ class ResultSet : IResultSet
      * List of associations that should be placed under the `_matchingData`
      * result key.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _matchingMap = [];
 
@@ -65,7 +69,7 @@ class ResultSet : IResultSet
      * Map of fields that are fetched from the statement with
      * their type and the table they belong to
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _map = [];
 
@@ -73,7 +77,7 @@ class ResultSet : IResultSet
      * List of matching associations and the column keys to expect
      * from each of them.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _matchingMapColumns = [];
 
@@ -86,36 +90,30 @@ class ResultSet : IResultSet
 
     /**
      * Whether to hydrate results into objects or not
-     *
-     * @var bool
      */
-    protected _hydrate = true;
+    protected bool _hydrate = true;
 
     /**
-     * Tracks value of _autoFields property of myQuery passed to constructor.
+     * Tracks value of _autoFields property of $query passed to constructor.
      *
      * @var bool|null
      */
     protected _autoFields;
 
     /**
-     * The fully moduled name of the class to use for hydrating results
+     * The fully namespaced name of the class to use for hydrating results
      */
     protected string _entityClass;
 
     /**
      * Whether to buffer results fetched from the statement
-     *
-     * @var bool
      */
-    protected _useBuffering = true;
+    protected bool _useBuffering = true;
 
     /**
      * Holds the count of records in this result set
-     *
-     * @var int
      */
-    protected _count;
+    protected int _count;
 
     /**
      * The Database driver object.
@@ -129,25 +127,25 @@ class ResultSet : IResultSet
     /**
      * Constructor
      *
-     * @param uim.cake.orm.Query myQuery Query from where results come
-     * @param uim.cake.databases.IStatement $statement The statement to fetch from
+     * @param uim.cake.orm.Query $query Query from where results come
+     * @param uim.cake.databases.StatementInterface $statement The statement to fetch from
      */
-    this(Query myQuery, IStatement $statement) {
-        myRepository = myQuery.getRepository();
+    this(Query $query, StatementInterface $statement) {
+        $repository = $query.getRepository();
         _statement = $statement;
-        _driver = myQuery.getConnection().getDriver();
-        _defaultTable = myRepository;
-        _calculateAssociationMap(myQuery);
-        _hydrate = myQuery.isHydrationEnabled();
-        _entityClass = myRepository.getEntityClass();
-        _useBuffering = myQuery.isBufferedResultsEnabled();
+        _driver = $query.getConnection().getDriver();
+        _defaultTable = $repository;
+        _calculateAssociationMap($query);
+        _hydrate = $query.isHydrationEnabled();
+        _entityClass = $repository.getEntityClass();
+        _useBuffering = $query.isBufferedResultsEnabled();
         _defaultAlias = _defaultTable.getAlias();
-        _calculateColumnMap(myQuery);
-        _autoFields = myQuery.isAutoFieldsEnabled();
+        _calculateColumnMap($query);
+        _autoFields = $query.isAutoFieldsEnabled();
 
         if (_useBuffering) {
-            myCount = this.count();
-            _results = new SplFixedArray(myCount);
+            $count = this.count();
+            _results = new SplFixedArray($count);
         }
     }
 
@@ -210,7 +208,7 @@ class ResultSet : IResultSet
     bool valid() {
         if (_useBuffering) {
             $valid = _index < _count;
-            if ($valid && _results[_index]  !is null) {
+            if ($valid && _results[_index] != null) {
                 _current = _results[_index];
 
                 return true;
@@ -226,7 +224,7 @@ class ResultSet : IResultSet
         if ($valid && _useBuffering) {
             _results[_index] = _current;
         }
-        if (!$valid && _statement  !is null) {
+        if (!$valid && _statement != null) {
             _statement.closeCursor();
         }
 
@@ -241,12 +239,12 @@ class ResultSet : IResultSet
      * @return object|array|null
      */
     function first() {
-        foreach (this as myResult) {
-            if (_statement  !is null && !_useBuffering) {
+        foreach (this as $result) {
+            if (_statement != null && !_useBuffering) {
                 _statement.closeCursor();
             }
 
-            return myResult;
+            return $result;
         }
 
         return null;
@@ -289,7 +287,7 @@ class ResultSet : IResultSet
      *
      * Part of Serializable interface.
      *
-     * @param string serialized Serialized object
+     * @param string $serialized Serialized object
      */
     void unserialize($serialized) {
         __unserialize((array)(unserialize($serialized) ?: []));
@@ -298,10 +296,10 @@ class ResultSet : IResultSet
     /**
      * Unserializes a resultset.
      *
-     * @param array myData Data array.
+     * @param array $data Data array.
      */
-    void __unserialize(array myData) {
-        _results = SplFixedArray::fromArray(myData);
+    void __unserialize(array $data) {
+        _results = SplFixedArray::fromArray($data);
         _useBuffering = true;
         _count = _results.count();
     }
@@ -312,10 +310,10 @@ class ResultSet : IResultSet
      * Part of the Countable interface.
      */
     size_t count() {
-        if (_count  !is null) {
+        if (_count != null) {
             return _count;
         }
-        if (_statement  !is null) {
+        if (_statement != null) {
             return _count = _statement.rowCount();
         }
 
@@ -332,17 +330,17 @@ class ResultSet : IResultSet
      * Calculates the list of associations that should get eager loaded
      * when fetching each record
      *
-     * @param uim.cake.orm.Query myQuery The query from where to derive the associations
+     * @param uim.cake.orm.Query $query The query from where to derive the associations
      */
-    protected void _calculateAssociationMap(Query myQuery) {
-        $map = myQuery.getEagerLoader().associationsMap(_defaultTable);
+    protected void _calculateAssociationMap(Query $query) {
+        $map = $query.getEagerLoader().associationsMap(_defaultTable);
         _matchingMap = (new Collection($map))
-            .match(["matching":true])
+            .match(["matching": true])
             .indexBy("alias")
             .toArray();
 
         _containMap = (new Collection(array_reverse($map)))
-            .match(["matching":false])
+            .match(["matching": false])
             .indexBy("nestKey")
             .toArray();
     }
@@ -351,28 +349,28 @@ class ResultSet : IResultSet
      * Creates a map of row keys out of the query select clause that can be
      * used to hydrate nested result sets more quickly.
      *
-     * @param uim.cake.orm.Query myQuery The query from where to derive the column map
+     * @param uim.cake.orm.Query $query The query from where to derive the column map
      */
-    protected void _calculateColumnMap(Query myQuery) {
+    protected void _calculateColumnMap(Query $query) {
         $map = [];
-        foreach (myQuery.clause("select") as myKey: myField) {
-            myKey = trim(myKey, ""`[]");
+        foreach ($query.clause("select") as $key: $field) {
+            $key = trim($key, ""`[]");
 
-            if (indexOf(myKey, "__") <= 0) {
-                $map[_defaultAlias][myKey] = myKey;
+            if (strpos($key, "__") <= 0) {
+                $map[_defaultAlias][$key] = $key;
                 continue;
             }
 
-            $parts = explode("__", myKey, 2);
-            $map[$parts[0]][myKey] = $parts[1];
+            $parts = explode("__", $key, 2);
+            $map[$parts[0]][$key] = $parts[1];
         }
 
-        foreach (_matchingMap as myAlias: $assoc) {
-            if (!isset($map[myAlias])) {
+        foreach (_matchingMap as $alias: $assoc) {
+            if (!isset($map[$alias])) {
                 continue;
             }
-            _matchingMapColumns[myAlias] = $map[myAlias];
-            unset($map[myAlias]);
+            _matchingMapColumns[$alias] = $map[$alias];
+            unset($map[$alias]);
         }
 
         _map = $map;
@@ -384,8 +382,8 @@ class ResultSet : IResultSet
      *
      * @return mixed
      */
-    protected auto _fetchResult() {
-        if (_statement is null) {
+    protected function _fetchResult() {
+        if (_statement == null) {
             return false;
         }
 
@@ -403,118 +401,125 @@ class ResultSet : IResultSet
      * @param array $row Array containing columns and values or false if there is no results
      * @return uim.cake.Datasource\IEntity|array Results
      */
-    protected auto _groupResult(array $row) {
+    protected function _groupResult(array $row) {
         $defaultAlias = _defaultAlias;
-        myResults = $presentAliases = [];
-        myOptions = [
-            "useSetters":false,
-            "markClean":true,
-            "markNew":false,
-            "guard":false,
+        $results = $presentAliases = [];
+        $options = [
+            "useSetters": false,
+            "markClean": true,
+            "markNew": false,
+            "guard": false,
         ];
 
-        foreach (_matchingMapColumns as myAlias: myKeys) {
-            $matching = _matchingMap[myAlias];
-            myResults["_matchingData"][myAlias] = array_combine(
-                myKeys,
-                array_intersect_key($row, myKeys)
+        foreach (_matchingMapColumns as $alias: $keys) {
+            $matching = _matchingMap[$alias];
+            $results["_matchingData"][$alias] = array_combine(
+                $keys,
+                array_intersect_key($row, $keys)
             );
             if (_hydrate) {
-                /** @var uim.cake.orm.Table myTable */
-                myTable = $matching["instance"];
-                myOptions["source"] = myTable.getRegistryAlias();
+                /** @var uim.cake.orm.Table $table */
+                $table = $matching["instance"];
+                $options["source"] = $table.getRegistryAlias();
                 /** @var uim.cake.datasources.IEntity $entity */
-                $entity = new $matching["entityClass"](myResults["_matchingData"][myAlias], myOptions);
-                myResults["_matchingData"][myAlias] = $entity;
+                $entity = new $matching["entityClass"]($results["_matchingData"][$alias], $options);
+                $results["_matchingData"][$alias] = $entity;
             }
         }
 
-        foreach (_map as myTable: myKeys) {
-            myResults[myTable] = array_combine(myKeys, array_intersect_key($row, myKeys));
-            $presentAliases[myTable] = true;
+        foreach (_map as $table: $keys) {
+            $results[$table] = array_combine($keys, array_intersect_key($row, $keys));
+            $presentAliases[$table] = true;
         }
 
         // If the default table is not in the results, set
         // it to an empty array so that any contained
         // associations hydrate correctly.
-        myResults[$defaultAlias] = myResults[$defaultAlias] ?? [];
+        $results[$defaultAlias] = $results[$defaultAlias] ?? [];
 
         unset($presentAliases[$defaultAlias]);
 
         foreach (_containMap as $assoc) {
-            myAlias = $assoc["nestKey"];
+            $alias = $assoc["nestKey"];
 
-            if ($assoc["canBeJoined"] && empty(_map[myAlias])) {
+            if ($assoc["canBeJoined"] && empty(_map[$alias])) {
                 continue;
             }
 
             /** @var uim.cake.orm.Association $instance */
             $instance = $assoc["instance"];
 
-            if (!$assoc["canBeJoined"] && !isset($row[myAlias])) {
-                myResults = $instance.defaultRowValue(myResults, $assoc["canBeJoined"]);
+            if (!$assoc["canBeJoined"] && !isset($row[$alias])) {
+                $results = $instance.defaultRowValue($results, $assoc["canBeJoined"]);
                 continue;
             }
 
             if (!$assoc["canBeJoined"]) {
-                myResults[myAlias] = $row[myAlias];
+                $results[$alias] = $row[$alias];
             }
 
-            myTarget = $instance.getTarget();
-            myOptions["source"] = myTarget.getRegistryAlias();
-            unset($presentAliases[myAlias]);
+            $target = $instance.getTarget();
+            $options["source"] = $target.getRegistryAlias();
+            unset($presentAliases[$alias]);
 
             if ($assoc["canBeJoined"] && _autoFields != false) {
                 $hasData = false;
-                foreach (myResults[myAlias] as $v) {
-                    if ($v  !is null && $v != []) {
+                foreach ($results[$alias] as $v) {
+                    if ($v != null && $v != []) {
                         $hasData = true;
                         break;
                     }
                 }
 
                 if (!$hasData) {
-                    myResults[myAlias] = null;
+                    $results[$alias] = null;
                 }
             }
 
-            if (_hydrate && myResults[myAlias]  !is null && $assoc["canBeJoined"]) {
-                $entity = new $assoc["entityClass"](myResults[myAlias], myOptions);
-                myResults[myAlias] = $entity;
+            if (_hydrate && $results[$alias] != null && $assoc["canBeJoined"]) {
+                $entity = new $assoc["entityClass"]($results[$alias], $options);
+                $results[$alias] = $entity;
             }
 
-            myResults = $instance.transformRow(myResults, myAlias, $assoc["canBeJoined"], $assoc["targetProperty"]);
+            $results = $instance.transformRow($results, $alias, $assoc["canBeJoined"], $assoc["targetProperty"]);
         }
 
-        foreach ($presentAliases as myAlias: $present) {
-            if (!isset(myResults[myAlias])) {
+        foreach ($presentAliases as $alias: $present) {
+            if (!isset($results[$alias])) {
                 continue;
             }
-            myResults[$defaultAlias][myAlias] = myResults[myAlias];
+            $results[$defaultAlias][$alias] = $results[$alias];
         }
 
-        if (isset(myResults["_matchingData"])) {
-            myResults[$defaultAlias]["_matchingData"] = myResults["_matchingData"];
+        if (isset($results["_matchingData"])) {
+            $results[$defaultAlias]["_matchingData"] = $results["_matchingData"];
         }
 
-        myOptions["source"] = _defaultTable.getRegistryAlias();
-        if (isset(myResults[$defaultAlias])) {
-            myResults = myResults[$defaultAlias];
+        $options["source"] = _defaultTable.getRegistryAlias();
+        if (isset($results[$defaultAlias])) {
+            $results = $results[$defaultAlias];
         }
-        if (_hydrate && !(myResults instanceof IEntity)) {
-            myResults = new _entityClass(myResults, myOptions);
+        if (_hydrate && !($results instanceof IEntity)) {
+            $results = new _entityClass($results, $options);
         }
 
-        return myResults;
+        return $results;
     }
 
     /**
      * Returns an array that can be used to describe the internal state of this
      * object.
+     *
+     * @return array<string, mixed>
      */
     array __debugInfo() {
+        $currentIndex = _index;
+        // toArray() adjusts the current index, so we have to reset it
+        $items = this.toArray();
+        _index = $currentIndex;
+
         return [
-            "items":this.toArray(),
+            "items": $items,
         ];
     }
 }

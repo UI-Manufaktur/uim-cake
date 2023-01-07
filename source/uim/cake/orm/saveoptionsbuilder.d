@@ -4,7 +4,7 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.orm;
 
-use ArrayObject;
+se ArrayObject;
 use RuntimeException;
 
 /**
@@ -14,14 +14,16 @@ use RuntimeException;
  * you to avoid mistakes by validating the options as you build them.
  *
  * @see uim.cake.datasources.RulesChecker
+ * @deprecated 4.4.0 Use a normal array for options instead.
  */
-class SaveOptionsBuilder : ArrayObject {
+class SaveOptionsBuilder : ArrayObject
+{
     use AssociationsNormalizerTrait;
 
     /**
      * Options
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _options = [];
 
@@ -35,14 +37,14 @@ class SaveOptionsBuilder : ArrayObject {
     /**
      * Constructor.
      *
-     * @param uim.cake.orm.Table myTable A table instance.
-     * @param array<string, mixed> myOptions Options to parse when instantiating.
+     * @param uim.cake.orm.Table $table A table instance.
+     * @param array<string, mixed> $options Options to parse when instantiating.
      */
-    this(Table myTable, array myOptions = []) {
-        _table = myTable;
-        this.parseArrayOptions(myOptions);
+    this(Table $table, array $options = []) {
+        _table = $table;
+        this.parseArrayOptions($options);
 
-        super.this();
+        super(();
     }
 
     /**
@@ -51,12 +53,12 @@ class SaveOptionsBuilder : ArrayObject {
      * This can be used to turn an options array into the object.
      *
      * @throws \InvalidArgumentException If a given option key does not exist.
-     * @param array $array Options array.
+     * @param array<string, mixed> $array Options array.
      * @return this
      */
     function parseArrayOptions(array $array) {
-        foreach ($array as myKey: myValue) {
-            this.{myKey}(myValue);
+        foreach ($array as $key: $value) {
+            this.{$key}($value);
         }
 
         return this;
@@ -65,7 +67,7 @@ class SaveOptionsBuilder : ArrayObject {
     /**
      * Set associated options.
      *
-     * @param array|string associated String or array of associations.
+     * @param array|string $associated String or array of associations.
      * @return this
      */
     function associated($associated) {
@@ -79,18 +81,18 @@ class SaveOptionsBuilder : ArrayObject {
     /**
      * Checks that the associations exists recursively.
      *
-     * @param uim.cake.orm.Table myTable Table object.
+     * @param uim.cake.orm.Table $table Table object.
      * @param array $associations An associations array.
      */
-    protected void _associated(Table myTable, array $associations) {
-        foreach ($associations as myKey: $associated) {
-            if (is_int(myKey)) {
-                _checkAssociation(myTable, $associated);
+    protected void _associated(Table $table, array $associations) {
+        foreach ($associations as $key: $associated) {
+            if (is_int($key)) {
+                _checkAssociation($table, $associated);
                 continue;
             }
-            _checkAssociation(myTable, myKey);
+            _checkAssociation($table, $key);
             if (isset($associated["associated"])) {
-                _associated(myTable.getAssociation(myKey).getTarget(), $associated["associated"]);
+                _associated($table.getAssociation($key).getTarget(), $associated["associated"]);
                 continue;
             }
         }
@@ -100,14 +102,14 @@ class SaveOptionsBuilder : ArrayObject {
      * Checks if an association exists.
      *
      * @throws \RuntimeException If no such association exists for the given table.
-     * @param uim.cake.orm.Table myTable Table object.
-     * @param string association Association name.
+     * @param uim.cake.orm.Table $table Table object.
+     * @param string $association Association name.
      */
-    protected void _checkAssociation(Table myTable, string association) {
-        if (!myTable.associations().has($association)) {
+    protected void _checkAssociation(Table $table, string $association) {
+        if (!$table.associations().has($association)) {
             throw new RuntimeException(sprintf(
                 "Table `%s` is not associated with `%s`",
-                get_class(myTable),
+                get_class($table),
                 $association
             ));
         }
@@ -128,10 +130,10 @@ class SaveOptionsBuilder : ArrayObject {
     /**
      * Set the validation rule set to use.
      *
-     * @param string validate Name of the validation rule set to use.
+     * @param string $validate Name of the validation rule set to use.
      * @return this
      */
-    function validate(string validate) {
+    function validate(string $validate) {
         _table.getValidator($validate);
         _options["validate"] = $validate;
 
@@ -175,6 +177,7 @@ class SaveOptionsBuilder : ArrayObject {
     }
 
     /**
+     * @return array<string, mixed>
      */
     array toArray() {
         return _options;
@@ -183,15 +186,15 @@ class SaveOptionsBuilder : ArrayObject {
     /**
      * Setting custom options.
      *
-     * @param string option Option key.
-     * @param mixed myValue Option value.
+     * @param string $option Option key.
+     * @param mixed $value Option value.
      * @return this
      */
-    auto set(string option, myValue) {
+    function set(string $option, $value) {
         if (method_exists(this, $option)) {
-            return this.{$option}(myValue);
+            return this.{$option}($value);
         }
-        _options[$option] = myValue;
+        _options[$option] = $value;
 
         return this;
     }

@@ -30,28 +30,28 @@ class RulesChecker : BaseRulesChecker
      *
      * - `allowMultipleNulls` Allows any field to have multiple null values. Defaults to false.
      *
-     * @param myFields The list of fields to check for uniqueness.
-     * @param array<string, mixed>|string|null myMessage The error message to show in case the rule does not pass. Can
+     * @param array<string> $fields The list of fields to check for uniqueness.
+     * @param array<string, mixed>|string|null $message The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return uim.cake.Datasource\RuleInvoker
      */
-    bool isUnique(string[] myFields, myMessage = null): RuleInvoker
+    bool isUnique(array $fields, $message = null): RuleInvoker
     {
-        myOptions = is_array(myMessage) ? myMessage : ["message":myMessage];
-        myMessage = myOptions["message"] ?? null;
-        unset(myOptions["message"]);
+        $options = is_array($message) ? $message : ["message": $message];
+        $message = $options["message"] ?? null;
+        unset($options["message"]);
 
-        if (!myMessage) {
+        if (!$message) {
             if (_useI18n) {
-                myMessage = __d("cake", "This value is already in use");
+                $message = __d("cake", "This value is already in use");
             } else {
-                myMessage = "This value is already in use";
+                $message = "This value is already in use";
             }
         }
 
-        myErrorField = current(myFields);
+        $errorField = current($fields);
 
-        return _addError(new IsUnique(myFields, myOptions), "_isUnique", compact("errorField", "message"));
+        return _addError(new IsUnique($fields, $options), "_isUnique", compact("errorField", "message"));
     }
 
     /**
@@ -68,37 +68,37 @@ class RulesChecker : BaseRulesChecker
      * $rules.add($rules.existsIn("site_id", new SitesTable(), "Invalid Site"));
      * ```
      *
-     * Available myOptions are error "message" and "allowNullableNulls" flag.
+     * Available $options are error "message" and "allowNullableNulls" flag.
      * "message" sets a custom error message.
      * Set "allowNullableNulls" to true to accept composite foreign keys where one or more nullable columns are null.
      *
-     * @param array<string>|string myField The field or list of fields to check for existence by
+     * @param array<string>|string $field The field or list of fields to check for existence by
      * primary key lookup in the other table.
-     * @param uim.cake.orm.Table|uim.cake.orm.Association|string myTable The table name where the fields existence will be checked.
-     * @param array<string, mixed>|string|null myMessage The error message to show in case the rule does not pass. Can
+     * @param uim.cake.orm.Table|uim.cake.orm.Association|string $table The table name where the fields existence will be checked.
+     * @param array<string, mixed>|string|null $message The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return uim.cake.Datasource\RuleInvoker
      */
-    function existsIn(myField, myTable, myMessage = null): RuleInvoker
+    function existsIn($field, $table, $message = null): RuleInvoker
     {
-        myOptions = [];
-        if (is_array(myMessage)) {
-            myOptions = myMessage + ["message":null];
-            myMessage = myOptions["message"];
-            unset(myOptions["message"]);
+        $options = [];
+        if (is_array($message)) {
+            $options = $message + ["message": null];
+            $message = $options["message"];
+            unset($options["message"]);
         }
 
-        if (!myMessage) {
+        if (!$message) {
             if (_useI18n) {
-                myMessage = __d("cake", "This value does not exist");
+                $message = __d("cake", "This value does not exist");
             } else {
-                myMessage = "This value does not exist";
+                $message = "This value does not exist";
             }
         }
 
-        myErrorField = is_string(myField) ? myField : current(myField);
+        $errorField = is_string($field) ? $field : current($field);
 
-        return _addError(new ExistsIn(myField, myTable, myOptions), "_existsIn", compact("errorField", "message"));
+        return _addError(new ExistsIn($field, $table, $options), "_existsIn", compact("errorField", "message"));
     }
 
     /**
@@ -113,19 +113,19 @@ class RulesChecker : BaseRulesChecker
      * On a `Comments` table that has a `belongsTo Articles` association, this check would ensure that comments
      * can only be edited as long as they are associated to an existing article.
      *
-     * @param uim.cake.orm.Association|string association The association to check for links.
-     * @param string|null myField The name of the association property. When supplied, this is the name used to set
+     * @param uim.cake.orm.Association|string $association The association to check for links.
+     * @param string|null $field The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
-     * @param string|null myMessage The error message to show in case the rule does not pass.
+     * @param string|null $message The error message to show in case the rule does not pass.
      * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
-    bool isLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
+    bool isLinkedTo($association, Nullable!string $field = null, Nullable!string $message = null): RuleInvoker
     {
         return _addLinkConstraintRule(
             $association,
-            myField,
-            myMessage,
+            $field,
+            $message,
             LinkConstraint::STATUS_LINKED,
             "_isLinkedTo"
         );
@@ -143,19 +143,19 @@ class RulesChecker : BaseRulesChecker
      * On a `Articles` table that has a `hasMany Comments` association, this check would ensure that articles
      * can only be deleted when no associated comments exist.
      *
-     * @param uim.cake.orm.Association|string association The association to check for links.
-     * @param string|null myField The name of the association property. When supplied, this is the name used to set
+     * @param uim.cake.orm.Association|string $association The association to check for links.
+     * @param string|null $field The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
-     * @param string|null myMessage The error message to show in case the rule does not pass.
+     * @param string|null $message The error message to show in case the rule does not pass.
      * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
-    bool isNotLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
+    bool isNotLinkedTo($association, Nullable!string $field = null, Nullable!string $message = null): RuleInvoker
     {
         return _addLinkConstraintRule(
             $association,
-            myField,
-            myMessage,
+            $field,
+            $message,
             LinkConstraint::STATUS_NOT_LINKED,
             "_isNotLinkedTo"
         );
@@ -164,12 +164,12 @@ class RulesChecker : BaseRulesChecker
     /**
      * Adds a link constraint rule.
      *
-     * @param uim.cake.orm.Association|string association The association to check for links.
-     * @param string|null myErrorField The name of the property to use for setting possible errors. When absent,
+     * @param uim.cake.orm.Association|string $association The association to check for links.
+     * @param string|null $errorField The name of the property to use for setting possible errors. When absent,
      *   the name is inferred from `$association`.
-     * @param string|null myMessage The error message to show in case the rule does not pass.
-     * @param string linkStatus The ink status required for the check to pass.
-     * @param string ruleName The alias/name of the rule.
+     * @param string|null $message The error message to show in case the rule does not pass.
+     * @param string $linkStatus The ink status required for the check to pass.
+     * @param string $ruleName The alias/name of the rule.
      * @return uim.cake.Datasource\RuleInvoker
      * @throws \InvalidArgumentException In case the `$association` argument is of an invalid type.
      * @since 4.0.0
@@ -178,29 +178,29 @@ class RulesChecker : BaseRulesChecker
      * @see uim.cake.orm.rules.LinkConstraint::STATUS_LINKED
      * @see uim.cake.orm.rules.LinkConstraint::STATUS_NOT_LINKED
      */
-    protected auto _addLinkConstraintRule(
+    protected function _addLinkConstraintRule(
         $association,
-        Nullable!string myErrorField,
-        Nullable!string myMessage,
-        string linkStatus,
-        string ruleName
+        Nullable!string $errorField,
+        Nullable!string $message,
+        string $linkStatus,
+        string $ruleName
     ): RuleInvoker {
         if ($association instanceof Association) {
             $associationAlias = $association.getName();
 
-            if (myErrorField is null) {
-                myErrorField = $association.getProperty();
+            if ($errorField == null) {
+                $errorField = $association.getProperty();
             }
         } elseif (is_string($association)) {
             $associationAlias = $association;
 
-            if (myErrorField is null) {
-                myRepository = _options["repository"] ?? null;
-                if (myRepository instanceof Table) {
-                    $association = myRepository.getAssociation($association);
-                    myErrorField = $association.getProperty();
+            if ($errorField == null) {
+                $repository = _options["repository"] ?? null;
+                if ($repository instanceof Table) {
+                    $association = $repository.getAssociation($association);
+                    $errorField = $association.getProperty();
                 } else {
-                    myErrorField = Inflector::underscore($association);
+                    $errorField = Inflector::underscore($association);
                 }
             }
         } else {
@@ -210,15 +210,15 @@ class RulesChecker : BaseRulesChecker
             ));
         }
 
-        if (!myMessage) {
+        if (!$message) {
             if (_useI18n) {
-                myMessage = __d(
+                $message = __d(
                     "cake",
                     "Cannot modify row: a constraint for the `{0}` association fails.",
                     $associationAlias
                 );
             } else {
-                myMessage = sprintf(
+                $message = sprintf(
                     "Cannot modify row: a constraint for the `%s` association fails.",
                     $associationAlias
                 );
@@ -236,30 +236,30 @@ class RulesChecker : BaseRulesChecker
     /**
      * Validates the count of associated records.
      *
-     * @param string myField The field to check the count on.
-     * @param int myCount The expected count.
-     * @param string operator The operator for the count comparison.
-     * @param string|null myMessage The error message to show in case the rule does not pass.
+     * @param string $field The field to check the count on.
+     * @param int $count The expected count.
+     * @param string $operator The operator for the count comparison.
+     * @param string|null $message The error message to show in case the rule does not pass.
      * @return uim.cake.Datasource\RuleInvoker
      */
     function validCount(
-        string myField,
-        int myCount = 0,
-        string operator = ">",
-        Nullable!string myMessage = null
+        string $field,
+        int $count = 0,
+        string $operator = ">",
+        Nullable!string $message = null
     ): RuleInvoker {
-        if (!myMessage) {
+        if (!$message) {
             if (_useI18n) {
-                myMessage = __d("cake", "The count does not match {0}{1}", [$operator, myCount]);
+                $message = __d("cake", "The count does not match {0}{1}", [$operator, $count]);
             } else {
-                myMessage = sprintf("The count does not match %s%d", $operator, myCount);
+                $message = sprintf("The count does not match %s%d", $operator, $count);
             }
         }
 
-        myErrorField = myField;
+        $errorField = $field;
 
         return _addError(
-            new ValidCount(myField),
+            new ValidCount($field),
             "_validCount",
             compact("count", "operator", "errorField", "message")
         );

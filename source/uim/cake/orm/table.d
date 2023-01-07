@@ -7,6 +7,12 @@
 @safe:
 import uim.cake;
 
+use ArrayObject;
+use BadMethodCallException;
+use Exception;
+use InvalidArgumentException;
+use RuntimeException;
+
 /**
  * Represents a single database table.
  *
@@ -22,18 +28,18 @@ import uim.cake;
  *
  * ### Dynamic finders
  *
- * In addition to the standard find(myType) finder methods, UIM provides dynamic
+ * In addition to the standard find($type) finder methods, UIM provides dynamic
  * finder methods. These methods allow you to easily set basic conditions up. For example
  * to filter users by username you would call
  *
  * ```
- * myQuery = myUsers.findByUsername("mark");
+ * $query = $users.findByUsername("mark");
  * ```
  *
  * You can also combine conditions on multiple fields using either `Or` or `And`:
  *
  * ```
- * myQuery = myUsers.findByUsernameOrEmail("mark", "mark@example.org");
+ * $query = $users.findByUsernameOrEmail("mark", "mark@example.org");
  * ```
  *
  * ### Bulk updates/deletes
@@ -48,7 +54,7 @@ import uim.cake;
  *
  * - `Model.beforeFind` Fired before each find operation. By stopping the event and
  *   supplying a return value you can bypass the find operation entirely. Any
- *   changes done to the myQuery instance will be retained for the rest of the find. The
+ *   changes done to the $query instance will be retained for the rest of the find. The
  *   `$primary` parameter indicates whether this is the root query, or an
  *   associated query.
  *
@@ -84,24 +90,24 @@ import uim.cake;
  * You can subscribe to the events listed above in your table classes by implementing the
  * lifecycle methods below:
  *
- * - `beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions, boolean $primary)`
- * - `beforeMarshal(IEvent myEvent, ArrayObject myData, ArrayObject myOptions)`
- * - `afterMarshal(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
- * - `buildValidator(IEvent myEvent, Validator $validator, string myName)`
+ * - `beforeFind(IEvent $event, Query $query, ArrayObject $options, boolean $primary)`
+ * - `beforeMarshal(IEvent $event, ArrayObject $data, ArrayObject $options)`
+ * - `afterMarshal(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `buildValidator(IEvent $event, Validator $validator, string aName)`
  * - `buildRules(RulesChecker $rules)`
- * - `beforeRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, string operation)`
- * - `afterRules(IEvent myEvent, IEntity $entity, ArrayObject myOptions, bool myResult, string operation)`
- * - `beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
- * - `afterSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
- * - `afterSaveCommit(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
- * - `beforeDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
- * - `afterDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
- * - `afterDeleteCommit(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
+ * - `beforeRules(IEvent $event, IEntity $entity, ArrayObject $options, string $operation)`
+ * - `afterRules(IEvent $event, IEntity $entity, ArrayObject $options, bool $result, string $operation)`
+ * - `beforeSave(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterSave(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterSaveCommit(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `beforeDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterDeleteCommit(IEvent $event, IEntity $entity, ArrayObject $options)`
  *
  * @see uim.cake.events.EventManager for reference on the events system.
- * @link https://book.UIM.org/4/en/orm/table-objects.html#event-list
+ * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
  */
-class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
+class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use RulesAwareTrait;
@@ -109,43 +115,43 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
     /**
      * Name of default validation set.
+     *
+     * @var 
      */
     const string DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      */
-    const string VALIDATOR_PROVIDER_NAME = "table";
+    const string string VALIDATOR_PROVIDER_NAME = "table";
 
     /**
      * The name of the event dispatched when a validator has been built.
      */
-    const string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
+    const string string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
 
     /**
      * The rules class name that is used.
      */
-    const string RULES_CLASS = RulesChecker::class;
+    const string string RULES_CLASS = RulesChecker::class;
 
     /**
      * The IsUnique class name that is used.
      */
-    const string IS_UNIQUE_CLASS = IsUnique::class;
+    const string string IS_UNIQUE_CLASS = IsUnique::class;
 
     /**
      * Name of the table as it can be found in the database
      *
-     * @var string|null
      */
-    protected _table;
+    protected Nullable!string _table;
 
     /**
      * Human name giving to this particular instance. Multiple objects representing
      * the same database table can exist by using different aliases.
      *
-     * @var string|null
      */
-    protected _alias;
+    protected Nullable!string _alias;
 
     /**
      * Connection instance
@@ -200,19 +206,18 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Registry key used to create this table object
      *
-     * @var string|null
      */
-    protected _registryAlias;
+    protected Nullable!string _registryAlias;
 
     /**
      * Initializes a new instance
      *
-     * The myConfig array understands the following keys:
+     * The aConfig array understands the following keys:
      *
      * - table: Name of the database table to represent
      * - alias: Alias to be assigned to this table (default to table name)
      * - connection: The connection instance to use
-     * - entityClass: The fully moduled class name of the entity class that will
+     * - entityClass: The fully namespaced class name of the entity class that will
      *   represent rows in this table.
      * - schema: A uim.cake.databases.Schema\TableISchema object or an array that can be
      *   passed to it.
@@ -223,52 +228,52 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   validation set, or an associative array, where key is the name of the
      *   validation set and value the Validator instance.
      *
-     * @param array<string, mixed> myConfig List of options for this table
+     * @param array<string, mixed> aConfig List of options for this table
      */
-    this(array myConfig = []) {
-        if (!empty(myConfig["registryAlias"])) {
-            this.setRegistryAlias(myConfig["registryAlias"]);
+    this(Json aConfig = []) {
+        if (!empty(aConfig["registryAlias"])) {
+            this.setRegistryAlias(aConfig["registryAlias"]);
         }
-        if (!empty(myConfig["table"])) {
-            this.setTable(myConfig["table"]);
+        if (!empty(aConfig["table"])) {
+            this.setTable(aConfig["table"]);
         }
-        if (!empty(myConfig["alias"])) {
-            this.setAlias(myConfig["alias"]);
+        if (!empty(aConfig["alias"])) {
+            this.setAlias(aConfig["alias"]);
         }
-        if (!empty(myConfig["connection"])) {
-            this.setConnection(myConfig["connection"]);
+        if (!empty(aConfig["connection"])) {
+            this.setConnection(aConfig["connection"]);
         }
-        if (!empty(myConfig["schema"])) {
-            this.setSchema(myConfig["schema"]);
+        if (!empty(aConfig["schema"])) {
+            this.setSchema(aConfig["schema"]);
         }
-        if (!empty(myConfig["entityClass"])) {
-            this.setEntityClass(myConfig["entityClass"]);
+        if (!empty(aConfig["entityClass"])) {
+            this.setEntityClass(aConfig["entityClass"]);
         }
-        myEventManager = $behaviors = $associations = null;
-        if (!empty(myConfig["eventManager"])) {
-            myEventManager = myConfig["eventManager"];
+        $eventManager = $behaviors = $associations = null;
+        if (!empty(aConfig["eventManager"])) {
+            $eventManager = aConfig["eventManager"];
         }
-        if (!empty(myConfig["behaviors"])) {
-            $behaviors = myConfig["behaviors"];
+        if (!empty(aConfig["behaviors"])) {
+            $behaviors = aConfig["behaviors"];
         }
-        if (!empty(myConfig["associations"])) {
-            $associations = myConfig["associations"];
+        if (!empty(aConfig["associations"])) {
+            $associations = aConfig["associations"];
         }
-        if (!empty(myConfig["validator"])) {
-            if (!is_array(myConfig["validator"])) {
-                this.setValidator(static::DEFAULT_VALIDATOR, myConfig["validator"]);
+        if (!empty(aConfig["validator"])) {
+            if (!is_array(aConfig["validator"])) {
+                this.setValidator(static::DEFAULT_VALIDATOR, aConfig["validator"]);
             } else {
-                foreach (myConfig["validator"] as myName: $validator) {
-                    this.setValidator(myName, $validator);
+                foreach (aConfig["validator"] as $name: $validator) {
+                    this.setValidator($name, $validator);
                 }
             }
         }
-        _eventManager = myEventManager ?: new EventManager();
+        _eventManager = $eventManager ?: new EventManager();
         _behaviors = $behaviors ?: new BehaviorRegistry();
         _behaviors.setTable(this);
         _associations = $associations ?: new AssociationCollection();
 
-        this.initialize(myConfig);
+        this.initialize(aConfig);
         _eventManager.on(this);
         this.dispatchEvent("Model.initialize");
     }
@@ -282,7 +287,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @return string
      * @see uim.cake.orm.Locator\TableLocator::get()
      */
-    static string defaultConnectionName() {
+    static function defaultConnectionName() {
         return "default";
     }
 
@@ -293,7 +298,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * define validation and do any other initialization logic you need.
      *
      * ```
-     *  function initialize(array myConfig)
+     *  function initialize(Json aConfig)
      *  {
      *      this.belongsTo("Users");
      *      this.belongsToMany("Tagging.Tags");
@@ -301,9 +306,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *  }
      * ```
      *
-     * @param array<string, mixed> myConfig Configuration options passed to the constructor
+     * @param array<string, mixed> aConfig Configuration options passed to the constructor
      */
-    void initialize(array myConfig) {
+    void initialize(Json aConfig) {
     }
 
     /**
@@ -312,11 +317,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * This can include the database schema name in the form "schema.table".
      * If the name must be quoted, enable automatic identifier quoting.
      *
-     * @param string myTable Table name.
+     * @param string $table Table name.
      * @return this
      */
-    auto setTable(string myTable) {
-        _table = myTable;
+    function setTable(string $table) {
+        _table = $table;
 
         return this;
     }
@@ -327,13 +332,15 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * This can include the database schema name if set using `setTable()`.
      */
     string getTable() {
-        if (_table is null) {
-            myTable = moduleSplit(static::class);
-            myTable = substr(end(myTable), 0, -5);
-            if (!myTable) {
-                myTable = this.getAlias();
+        if (_table == null) {
+            $table = namespaceSplit(static::class);
+            $table = substr(end($table), 0, -5) ?: _alias;
+            if (!$table) {
+                throw new UIMException(
+                    "You must specify either the `alias` or the `table` option for the constructor."
+                );
             }
-            _table = Inflector::underscore(myTable);
+            _table = Inflector::underscore($table);
         }
 
         return _table;
@@ -342,11 +349,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Sets the table alias.
      *
-     * @param string myAlias Table alias
+     * @param string $alias Table alias
      * @return this
      */
-    auto setAlias(string myAlias) {
-        _alias = myAlias;
+    function setAlias(string $alias) {
+        _alias = $alias;
 
         return this;
     }
@@ -355,10 +362,15 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns the table alias.
      */
     string getAlias() {
-        if (_alias is null) {
-            myAlias = moduleSplit(static::class);
-            myAlias = substr(end(myAlias), 0, -5) ?: this.getTable();
-            _alias = myAlias;
+        if (_alias == null) {
+            $alias = namespaceSplit(static::class);
+            $alias = substr(end($alias), 0, -5) ?: _table;
+            if (!$alias) {
+                throw new UIMException(
+                    "You must specify either the `alias` or the `table` option for the constructor."
+                );
+            }
+            _alias = $alias;
         }
 
         return _alias;
@@ -369,24 +381,24 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * If field is already aliased it will result in no-op.
      *
-     * @param string myField The field to alias.
+     * @param string $field The field to alias.
      * @return string The field prefixed with the table alias.
      */
-    string aliasField(string myField) {
-        if (indexOf(myField, ".") != false) {
-            return myField;
+    function aliasField(string $field) {
+        if (strpos($field, ".") != false) {
+            return $field;
         }
 
-        return this.getAlias() ~ "." ~ myField;
+        return this.getAlias() ~ "." ~ $field;
     }
 
     /**
      * Sets the table registry key used to create this table instance.
      *
-     * @param string registryAlias The key used to access this object.
+     * @param string $registryAlias The key used to access this object.
      * @return this
      */
-    auto setRegistryAlias(string registryAlias) {
+    function setRegistryAlias(string $registryAlias) {
         _registryAlias = $registryAlias;
 
         return this;
@@ -396,7 +408,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns the table registry key used to create this table instance.
      */
     string getRegistryAlias() {
-        if (_registryAlias is null) {
+        if (_registryAlias == null) {
             _registryAlias = this.getAlias();
         }
 
@@ -406,11 +418,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Sets the connection instance.
      *
-     * @param uim.cake.databases.Connection myConnection The connection instance
+     * @param uim.cake.databases.Connection $connection The connection instance
      * @return this
      */
-    auto setConnection(Connection myConnection) {
-        _connection = myConnection;
+    function setConnection(Connection $connection) {
+        _connection = $connection;
 
         return this;
     }
@@ -420,11 +432,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @return uim.cake.databases.Connection
      */
-    Connection getConnection() {
+    function getConnection(): Connection
+    {
         if (!_connection) {
-            /** @var uim.cake.databases.Connection myConnection */
-            myConnection = ConnectionManager::get(static::defaultConnectionName());
-            _connection = myConnection;
+            /** @var uim.cake.databases.Connection $connection */
+            $connection = ConnectionManager::get(static::defaultConnectionName());
+            _connection = $connection;
         }
 
         return _connection;
@@ -435,9 +448,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @return uim.cake.databases.Schema\TableISchema
      */
-    auto getSchema(): TableISchema
+    function getSchema(): TableISchema
     {
-        if (_schema is null) {
+        if (_schema == null) {
             _schema = _initializeSchema(
                 this.getConnection()
                     .getSchemaCollection()
@@ -460,7 +473,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.databases.Schema\TableISchema|array $schema Schema to be used for this table
      * @return this
      */
-    auto setSchema($schema) {
+    function setSchema($schema) {
         if (is_array($schema)) {
             $constraints = [];
 
@@ -471,8 +484,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
             $schema = this.getConnection().getDriver().newTableSchema(this.getTable(), $schema);
 
-            foreach ($constraints as myName: myValue) {
-                $schema.addConstraint(myName, myValue);
+            foreach ($constraints as $name: $value) {
+                $schema.addConstraint($name, $value);
             }
         }
 
@@ -492,7 +505,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @throws \RuntimeException When an alias combination is too long
      */
     protected void checkAliasLengths() {
-        if (_schema is null) {
+        if (_schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
         }
 
@@ -500,17 +513,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         if (method_exists(this.getConnection().getDriver(), "getMaxAliasLength")) {
             $maxLength = this.getConnection().getDriver().getMaxAliasLength();
         }
-        if ($maxLength is null) {
+        if ($maxLength == null) {
             return;
         }
 
-        myTable = this.getAlias();
-        foreach (_schema.columns() as myName) {
-            if (strlen(myTable ~ "__" ~ myName) > $maxLength) {
-                myNameLength = $maxLength - 2;
+        $table = this.getAlias();
+        foreach (_schema.columns() as $name) {
+            if (strlen($table ~ "__" ~ $name) > $maxLength) {
+                $nameLength = $maxLength - 2;
                 throw new RuntimeException(
                     "ORM queries generate field aliases using the table name/alias and column name~ " ~
-                    "The table alias `{myTable}` and column `{myName}` create an alias longer than ({myNameLength})~ " ~
+                    "The table alias `{$table}` and column `{$name}` create an alias longer than ({$nameLength})~ " ~
                     "You must change the table schema in the database and shorten either the table or column " ~
                     "identifier so they fit within the database alias limits."
                 );
@@ -528,7 +541,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ### Example:
      *
      * ```
-     * protected auto _initializeSchema(uim.cake.databases.Schema\TableISchema $schema) {
+     * protected function _initializeSchema(uim.cake.databases.Schema\TableISchema $schema) {
      *  $schema.setColumnType("preferences", "json");
      *  return $schema;
      * }
@@ -537,7 +550,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.databases.Schema\TableISchema $schema The table definition fetched from database.
      * @return uim.cake.databases.Schema\TableISchema the altered schema
      */
-    protected auto _initializeSchema(TableISchema $schema): TableISchema
+    protected function _initializeSchema(TableISchema $schema): TableISchema
     {
         return $schema;
     }
@@ -548,35 +561,39 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Delegates to the schema object and checks for column presence
      * using the Schema\Table instance.
      *
-     * @param string myField The field to check for.
+     * @param string $field The field to check for.
      * @return bool True if the field exists, false if it does not.
      */
-    bool hasField(string myField) {
+    bool hasField(string $field) {
         $schema = this.getSchema();
 
-        return $schema.getColumn(myField)  !is null;
+        return $schema.getColumn($field) != null;
     }
 
     /**
      * Sets the primary key field name.
      *
-     * @param array<string>|string myKey Sets a new name to be used as primary key
+     * @param array<string>|string aKey Sets a new name to be used as primary key
      * @return this
      */
-    auto setPrimaryKey(myKey) {
-        _primaryKey = myKey;
+    function setPrimaryKey($key) {
+        _primaryKey = $key;
 
         return this;
     }
 
-    // Returns the primary key field name.
-    string[] primaryKeys() {
-        if (_primaryKey is null) {
-            myKey = this.getSchema().getPrimaryKeys();
-            if (count(myKey) == 1) {
-                myKey = myKey[0];
+    /**
+     * Returns the primary key field name.
+     *
+     * @return array<string>|string
+     */
+    function getPrimaryKeys() {
+        if (_primaryKey == null) {
+            $key = this.getSchema().getPrimaryKeys();
+            if (count($key) == 1) {
+                $key = $key[0];
             }
-            _primaryKey = myKey;
+            _primaryKey = $key;
         }
 
         return _primaryKey;
@@ -585,23 +602,27 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Sets the display field.
      *
-     * @param array<string>|string myField Name to be used as display field.
+     * @param array<string>|string $field Name to be used as display field.
      * @return this
      */
-    auto setDisplayField(myField) {
-        _displayField = myField;
+    function setDisplayField($field) {
+        _displayField = $field;
 
         return this;
     }
 
-    // Returns the display field.
+    /**
+     * Returns the display field.
+     *
+     * @return array<string>|string|null
+     */
     string[] getDisplayField() {
-        if (_displayField is null) {
+        if (_displayField == null) {
             $schema = this.getSchema();
             _displayField = this.getPrimaryKeys();
-            foreach (["title", "name", "label"] as myField) {
-                if ($schema.hasColumn(myField)) {
-                    _displayField = myField;
+            foreach (["title", "name", "label"] as $field) {
+                if ($schema.hasColumn($field)) {
+                    _displayField = $field;
                     break;
                 }
             }
@@ -626,19 +647,19 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
                 return _entityClass = $default;
             }
 
-            myAlias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
-            myName = implode("\\", array_slice($parts, 0, -1)) ~ "\\Entity\\" ~ myAlias;
-            if (!class_exists(myName)) {
+            $alias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
+            $name = implode("\\", array_slice($parts, 0, -1)) ~ "\\Entity\\" ~ $alias;
+            if (!class_exists($name)) {
                 return _entityClass = $default;
             }
 
-            /** @var class-string<uim.cake.Datasource\IEntity>|null myClass */
-            myClass = App::className(myName, "Model/Entity");
-            if (!myClass) {
-                throw new MissingEntityException([myName]);
+            /** @var class-string<uim.cake.Datasource\IEntity>|null $class */
+            $class = App::className($name, "Model/Entity");
+            if (!$class) {
+                throw new MissingEntityException([$name]);
             }
 
-            _entityClass = myClass;
+            _entityClass = $class;
         }
 
         return _entityClass;
@@ -647,18 +668,18 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Sets the class used to hydrate rows for this table.
      *
-     * @param string myName The name of the class to use
+     * @param string aName The name of the class to use
      * @throws uim.cake.orm.exceptions.MissingEntityException when the entity class cannot be found
      * @return this
      */
-    auto setEntityClass(string myName) {
+    function setEntityClass(string aName) {
         /** @psalm-var class-string<uim.cake.Datasource\IEntity>|null */
-        myClass = App::className(myName, "Model/Entity");
-        if (myClass is null) {
-            throw new MissingEntityException([myName]);
+        $class = App::className($name, "Model/Entity");
+        if ($class == null) {
+            throw new MissingEntityException([$name]);
         }
 
-        _entityClass = myClass;
+        _entityClass = $class;
 
         return this;
     }
@@ -681,14 +702,14 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * Behaviors are generally loaded during Table::initialize().
      *
-     * @param string myName The name of the behavior. Can be a short class reference.
-     * @param array<string, mixed> myOptions The options for the behavior to use.
+     * @param string aName The name of the behavior. Can be a short class reference.
+     * @param array<string, mixed> $options The options for the behavior to use.
      * @return this
      * @throws \RuntimeException If a behavior is being reloaded.
      * @see uim.cake.orm.Behavior
      */
-    function addBehavior(string myName, array myOptions = []) {
-        _behaviors.load(myName, myOptions);
+    function addBehavior(string aName, array $options = []) {
+        _behaviors.load($name, $options);
 
         return this;
     }
@@ -710,13 +731,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @throws \RuntimeException If a behavior is being reloaded.
      */
     function addBehaviors(array $behaviors) {
-        foreach ($behaviors as myName: myOptions) {
-            if (is_int(myName)) {
-                myName = myOptions;
-                myOptions = [];
+        foreach ($behaviors as $name: $options) {
+            if (is_int($name)) {
+                $name = $options;
+                $options = [];
             }
 
-            this.addBehavior(myName, myOptions);
+            this.addBehavior($name, $options);
         }
 
         return this;
@@ -733,12 +754,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * this.removeBehavior("Tree");
      * ```
      *
-     * @param string myName The alias that the behavior was added with.
+     * @param string aName The alias that the behavior was added with.
      * @return this
      * @see uim.cake.orm.Behavior
      */
-    function removeBehavior(string myName) {
-        _behaviors.unload(myName);
+    function removeBehavior(string aName) {
+        _behaviors.unload($name);
 
         return this;
     }
@@ -756,33 +777,31 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Get a behavior from the registry.
      *
-     * @param string myName The behavior alias to get from the registry.
+     * @param string aName The behavior alias to get from the registry.
      * @return uim.cake.orm.Behavior
      * @throws \InvalidArgumentException If the behavior does not exist.
      */
-    auto getBehavior(string myName): Behavior
+    function getBehavior(string aName): Behavior
     {
-        if (!_behaviors.has(myName)) {
+        if (!_behaviors.has($name)) {
             throw new InvalidArgumentException(sprintf(
                 "The %s behavior is not defined on %s.",
-                myName,
+                $name,
                 static::class
             ));
         }
 
-        $behavior = _behaviors.get(myName);
-
-        return $behavior;
+        return _behaviors.get($name);
     }
 
     /**
      * Check if a behavior with the given alias has been loaded.
      *
-     * @param string myName The behavior alias to check.
+     * @param string aName The behavior alias to check.
      * @return bool Whether the behavior exists.
      */
-    bool hasBehavior(string myName) {
-        return _behaviors.has(myName);
+    bool hasBehavior(string aName) {
+        return _behaviors.has($name);
     }
 
     /**
@@ -791,28 +810,28 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * The name argument also supports dot syntax to access deeper associations.
      *
      * ```
-     * myUsers = this.getAssociation("Articles.Comments.Users");
+     * $users = this.getAssociation("Articles.Comments.Users");
      * ```
      *
      * Note that this method requires the association to be present or otherwise
      * throws an exception.
      * If you are not sure, use hasAssociation() before calling this method.
      *
-     * @param string myName The alias used for the association.
+     * @param string aName The alias used for the association.
      * @return uim.cake.orm.Association The association.
      * @throws \InvalidArgumentException
      */
-    auto getAssociation(string myName): Association
+    function getAssociation(string aName): Association
     {
-        $association = this.findAssociation(myName);
+        $association = this.findAssociation($name);
         if (!$association) {
             $assocations = this.associations().keys();
 
-            myMessage = "The `{myName}` association is not defined on `{this.getAlias()}`.";
+            $message = "The `{$name}` association is not defined on `{this.getAlias()}`.";
             if ($assocations) {
-                myMessage ~= "\nValid associations are: " ~ implode(", ", $assocations);
+                $message ~= "\nValid associations are: " ~ implode(", ", $assocations);
             }
-            throw new InvalidArgumentException(myMessage);
+            throw new InvalidArgumentException($message);
         }
 
         return $association;
@@ -827,10 +846,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * $hasUsers = this.hasAssociation("Articles.Comments.Users");
      * ```
      *
-     * @param string myName The alias used for the association.
+     * @param string aName The alias used for the association.
      */
-    bool hasAssociation(string myName) {
-        return this.findAssociation(myName)  !is null;
+    bool hasAssociation(string aName) {
+        return this.findAssociation($name) != null;
     }
 
     /**
@@ -839,29 +858,29 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * The name argument also supports dot syntax to access deeper associations.
      *
      * ```
-     * myUsers = this.getAssociation("Articles.Comments.Users");
+     * $users = this.getAssociation("Articles.Comments.Users");
      * ```
      *
-     * @param string myName The alias used for the association.
+     * @param string aName The alias used for the association.
      * @return uim.cake.orm.Association|null Either the association or null.
      */
-    protected auto findAssociation(string myName): ?Association
+    protected function findAssociation(string aName): ?Association
     {
-        if (indexOf(myName, ".") == false) {
-            return _associations.get(myName);
+        if (strpos($name, ".") == false) {
+            return _associations.get($name);
         }
 
-        myResult = null;
-        [myName, $next] = array_pad(explode(".", myName, 2), 2, null);
-        if (myName  !is null) {
-            myResult = _associations.get(myName);
+        $result = null;
+        [$name, $next] = array_pad(explode(".", $name, 2), 2, null);
+        if ($name != null) {
+            $result = _associations.get($name);
         }
 
-        if (myResult  !is null && $next  !is null) {
-            myResult = myResult.getTarget().getAssociation($next);
+        if ($result != null && $next != null) {
+            $result = $result.getTarget().getAssociation($next);
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
@@ -894,21 +913,21 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * are the aliases, and the values are association config data. If numeric
      * keys are used the values will be treated as association aliases.
      *
-     * @param array myParams Set of associations to bind (indexed by association type)
+     * @param array $params Set of associations to bind (indexed by association type)
      * @return this
      * @see uim.cake.orm.Table::belongsTo()
      * @see uim.cake.orm.Table::hasOne()
      * @see uim.cake.orm.Table::hasMany()
      * @see uim.cake.orm.Table::belongsToMany()
      */
-    function addAssociations(array myParams) {
-        foreach (myParams as $assocType: myTables) {
-            foreach (myTables as $associated: myOptions) {
+    function addAssociations(array $params) {
+        foreach ($params as $assocType: $tables) {
+            foreach ($tables as $associated: $options) {
                 if (is_numeric($associated)) {
-                    $associated = myOptions;
-                    myOptions = [];
+                    $associated = $options;
+                    $options = [];
                 }
-                this.{$assocType}($associated, myOptions);
+                this.{$assocType}($associated, $options);
             }
         }
 
@@ -940,17 +959,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string associated the alias for the target table. This is used to
+     * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
-     * @param array<string, mixed> myOptions list of options to configure the association definition
+     * @param array<string, mixed> $options list of options to configure the association definition
      * @return uim.cake.orm.associations.BelongsTo
      */
-    function belongsTo(string associated, array myOptions = []): BelongsTo
+    function belongsTo(string $associated, array $options = []): BelongsTo
     {
-        myOptions += ["sourceTable": this];
+        $options += ["sourceTable": this];
 
         /** @var uim.cake.orm.associations.BelongsTo $association */
-        $association = _associations.load(BelongsTo::class, $associated, myOptions);
+        $association = _associations.load(BelongsTo::class, $associated, $options);
 
         return $association;
     }
@@ -986,17 +1005,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string associated the alias for the target table. This is used to
+     * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
-     * @param array<string, mixed> myOptions list of options to configure the association definition
+     * @param array<string, mixed> $options list of options to configure the association definition
      * @return uim.cake.orm.associations.HasOne
      */
-    bool hasOne(string associated, array myOptions = []): HasOne
+    bool hasOne(string $associated, array $options = []): HasOne
     {
-        myOptions += ["sourceTable": this];
+        $options += ["sourceTable": this];
 
         /** @var uim.cake.orm.associations.HasOne $association */
-        $association = _associations.load(HasOne::class, $associated, myOptions);
+        $association = _associations.load(HasOne::class, $associated, $options);
 
         return $association;
     }
@@ -1038,17 +1057,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string associated the alias for the target table. This is used to
+     * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
-     * @param array<string, mixed> myOptions list of options to configure the association definition
+     * @param array<string, mixed> $options list of options to configure the association definition
      * @return uim.cake.orm.associations.HasMany
      */
-    bool hasMany(string associated, array myOptions = []): HasMany
+    bool hasMany(string $associated, array $options = []): HasMany
     {
-        myOptions += ["sourceTable": this];
+        $options += ["sourceTable": this];
 
         /** @var uim.cake.orm.associations.HasMany $association */
-        $association = _associations.load(HasMany::class, $associated, myOptions);
+        $association = _associations.load(HasMany::class, $associated, $options);
 
         return $association;
     }
@@ -1092,17 +1111,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * This method will return the association object that was built.
      *
-     * @param string associated the alias for the target table. This is used to
+     * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
-     * @param array<string, mixed> myOptions list of options to configure the association definition
+     * @param array<string, mixed> $options list of options to configure the association definition
      * @return uim.cake.orm.associations.BelongsToMany
      */
-    function belongsToMany(string associated, array myOptions = []): BelongsToMany
+    function belongsToMany(string $associated, array $options = []): BelongsToMany
     {
-        myOptions += ["sourceTable": this];
+        $options += ["sourceTable": this];
 
         /** @var uim.cake.orm.associations.BelongsToMany $association */
-        $association = _associations.load(BelongsToMany::class, $associated, myOptions);
+        $association = _associations.load(BelongsToMany::class, $associated, $options);
 
         return $association;
     }
@@ -1114,9 +1133,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ### Model.beforeFind event
      *
      * Each find() will trigger a `Model.beforeFind` event for all attached
-     * listeners. Any listener can set a valid result set using myQuery
+     * listeners. Any listener can set a valid result set using $query
      *
-     * By default, `myOptions` will recognize the following keys:
+     * By default, `$options` will recognize the following keys:
      *
      * - fields
      * - conditions
@@ -1134,7 +1153,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Using the options array:
      *
      * ```
-     * myQuery = $articles.find("all", [
+     * $query = $articles.find("all", [
      *   "conditions": ["published": 1],
      *   "limit": 10,
      *   "contain": ["Users", "Comments"]
@@ -1144,7 +1163,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Using the builder interface:
      *
      * ```
-     * myQuery = $articles.find()
+     * $query = $articles.find()
      *   .where(["published": 1])
      *   .limit(10)
      *   .contain(["Users", "Comments"]);
@@ -1156,21 +1175,18 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * You can invoke a finder by specifying the type:
      *
      * ```
-     * myQuery = $articles.find("published");
+     * $query = $articles.find("published");
      * ```
      *
      * Would invoke the `findPublished` method.
      *
-     * @param string myType the type of query to perform
-     * @param array<string, mixed> myOptions An array that will be passed to Query::applyOptions()
+     * @param string $type the type of query to perform
+     * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
      * @return uim.cake.orm.Query The query builder
      */
-    function find(string myType = "all", array myOptions = []): Query
+    function find(string $type = "all", array $options = []): Query
     {
-        myQuery = this.query();
-        myQuery.select();
-
-        return this.callFinder(myType, myQuery, myOptions);
+        return this.callFinder($type, this.query().select(), $options);
     }
 
     /**
@@ -1179,13 +1195,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * By default findAll() applies no conditions, you
      * can override this method in subclasses to modify how `find("all")` works.
      *
-     * @param uim.cake.orm.Query myQuery The query to find with
-     * @param array<string, mixed> myOptions The options to use for the find
+     * @param uim.cake.orm.Query $query The query to find with
+     * @param array<string, mixed> $options The options to use for the find
      * @return uim.cake.orm.Query The query builder
      */
-    function findAll(Query myQuery, array myOptions): Query
+    function findAll(Query $query, array $options): Query
     {
-        return myQuery;
+        return $query;
     }
 
     /**
@@ -1208,11 +1224,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ```
      *
      * You can specify which property will be used as the key and which as value
-     * by using the `myOptions` array, when not specified, it will use the results
+     * by using the `$options` array, when not specified, it will use the results
      * of calling `primaryKey` and `displayField` respectively in this table:
      *
      * ```
-     * myTable.find("list", [
+     * $table.find("list", [
      *  "keyField": "name",
      *  "valueField": "age"
      * ]);
@@ -1222,7 +1238,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * the `valueSeparator` option to control how the values will be concatenated:
      *
      * ```
-     * myTable.find("list", [
+     * $table.find("list", [
      *  "valueField": ["first_name", "last_name"],
      *  "valueSeparator": " | ",
      * ]);
@@ -1241,7 +1257,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * can customize the property to use for grouping by setting `groupField`:
      *
      * ```
-     * myTable.find("list", [
+     * $table.find("list", [
      *  "groupField": "category_id",
      * ]);
      * ```
@@ -1260,13 +1276,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ]
      * ```
      *
-     * @param uim.cake.orm.Query myQuery The query to find with
-     * @param array<string, mixed> myOptions The options for the find
+     * @param uim.cake.orm.Query $query The query to find with
+     * @param array<string, mixed> $options The options for the find
      * @return uim.cake.orm.Query The query builder
      */
-    function findList(Query myQuery, array myOptions): Query
+    function findList(Query $query, array $options): Query
     {
-        myOptions += [
+        $options += [
             "keyField": this.getPrimaryKeys(),
             "valueField": this.getDisplayField(),
             "groupField": null,
@@ -1274,33 +1290,33 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         ];
 
         if (
-            !myQuery.clause("select") &&
-            !is_object(myOptions["keyField"]) &&
-            !is_object(myOptions["valueField"]) &&
-            !is_object(myOptions["groupField"])
+            !$query.clause("select") &&
+            !is_object($options["keyField"]) &&
+            !is_object($options["valueField"]) &&
+            !is_object($options["groupField"])
         ) {
-            myFields = array_merge(
-                (array)myOptions["keyField"],
-                (array)myOptions["valueField"],
-                (array)myOptions["groupField"]
+            $fields = array_merge(
+                (array)$options["keyField"],
+                (array)$options["valueField"],
+                (array)$options["groupField"]
             );
             $columns = this.getSchema().columns();
-            if (count(myFields) == count(array_intersect(myFields, $columns))) {
-                myQuery.select(myFields);
+            if (count($fields) == count(array_intersect($fields, $columns))) {
+                $query.select($fields);
             }
         }
 
-        myOptions = _setFieldMatchers(
-            myOptions,
+        $options = _setFieldMatchers(
+            $options,
             ["keyField", "valueField", "groupField"]
         );
 
-        return myQuery.formatResults(function (myResults) use (myOptions) {
-            /** @var uim.cake.collections.ICollection myResults */
-            return myResults.combine(
-                myOptions["keyField"],
-                myOptions["valueField"],
-                myOptions["groupField"]
+        return $query.formatResults(function ($results) use ($options) {
+            /** @var uim.cake.collections.ICollection $results */
+            return $results.combine(
+                $options["keyField"],
+                $options["valueField"],
+                $options["groupField"]
             );
         });
     }
@@ -1315,72 +1331,73 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * You can customize what fields are used for nesting results, by default the
      * primary key and the `parent_id` fields are used. If you wish to change
      * these defaults you need to provide the keys `keyField`, `parentField` or `nestingKey` in
-     * `myOptions`:
+     * `$options`:
      *
      * ```
-     * myTable.find("threaded", [
+     * $table.find("threaded", [
      *  "keyField": "id",
-     *  "parentField": "ancestor_id"
+     *  "parentField": "ancestor_id",
      *  "nestingKey": "children"
      * ]);
      * ```
      *
-     * @param uim.cake.orm.Query myQuery The query to find with
-     * @param array<string, mixed> myOptions The options to find with
+     * @param uim.cake.orm.Query $query The query to find with
+     * @param array<string, mixed> $options The options to find with
      * @return uim.cake.orm.Query The query builder
      */
-    function findThreaded(Query myQuery, array myOptions): Query
+    function findThreaded(Query $query, array $options): Query
     {
-        myOptions += [
+        $options += [
             "keyField": this.getPrimaryKeys(),
             "parentField": "parent_id",
             "nestingKey": "children",
         ];
 
-        myOptions = _setFieldMatchers(myOptions, ["keyField", "parentField"]);
+        $options = _setFieldMatchers($options, ["keyField", "parentField"]);
 
-        return myQuery.formatResults(function (myResults) use (myOptions) {
-            /** @var uim.cake.collections.ICollection myResults */
-            return myResults.nest(myOptions["keyField"], myOptions["parentField"], myOptions["nestingKey"]);
+        return $query.formatResults(function ($results) use ($options) {
+            /** @var uim.cake.collections.ICollection $results */
+            return $results.nest($options["keyField"], $options["parentField"], $options["nestingKey"]);
         });
     }
 
     /**
-     * Out of an options array, check if the keys described in `myKeys` are arrays
+     * Out of an options array, check if the keys described in `$keys` are arrays
      * and change the values for closures that will concatenate the each of the
      * properties in the value array when passed a row.
      *
      * This is an auxiliary function used for result formatters that can accept
      * composite keys when comparing values.
      *
-     * @param array<string, mixed> myOptions the original options passed to a finder
-     * @param myKeys the keys to check in myOptions to build matchers from
+     * @param array<string, mixed> $options the original options passed to a finder
+     * @param array<string> $keys the keys to check in $options to build matchers from
      * the associated value
+     * @return array<string, mixed>
      */
-    protected array _setFieldMatchers(array myOptions, string[] myKeys) {
-        foreach (myKeys as myField) {
-            if (!is_array(myOptions[myField])) {
+    protected array _setFieldMatchers(array $options, array $keys) {
+        foreach ($keys as $field) {
+            if (!is_array($options[$field])) {
                 continue;
             }
 
-            if (count(myOptions[myField]) == 1) {
-                myOptions[myField] = current(myOptions[myField]);
+            if (count($options[$field]) == 1) {
+                $options[$field] = current($options[$field]);
                 continue;
             }
 
-            myFields = myOptions[myField];
-            $glue = in_array(myField, ["keyField", "parentField"], true) ? ";" : myOptions["valueSeparator"];
-            myOptions[myField] = function ($row) use (myFields, $glue) {
+            $fields = $options[$field];
+            $glue = in_array($field, ["keyField", "parentField"], true) ? ";" : $options["valueSeparator"];
+            $options[$field] = function ($row) use ($fields, $glue) {
                 $matches = [];
-                foreach (myFields as myField) {
-                    $matches[] = $row[myField];
+                foreach ($fields as $field) {
+                    $matches[] = $row[$field];
                 }
 
                 return implode($glue, $matches);
             };
         }
 
-        return myOptions;
+        return $options;
     }
 
     /**
@@ -1395,7 +1412,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ```
      *
      * @param mixed $primaryKey primary key value to find
-     * @param array<string, mixed> myOptions options accepted by `Table::find()`
+     * @param array<string, mixed> $options options accepted by `Table::find()`
      * @return uim.cake.Datasource\IEntity
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException if the record with such id
      * could not be found
@@ -1404,18 +1421,27 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @see uim.cake.datasources.IRepository::find()
      * @psalm-suppress InvalidReturnType
      */
-    auto get($primaryKey, array myOptions = []): IEntity
+    function get($primaryKey, array $options = []): IEntity
     {
-        myKey = (array)this.getPrimaryKeys();
-        myAlias = this.getAlias();
-        foreach (myKey as $index: myKeyname) {
-            myKey[$index] = myAlias ~ "." ~ myKeyname;
+        if ($primaryKey == null) {
+            throw new InvalidPrimaryKeyException(sprintf(
+                "Record not found in table '%s' with primary key [NULL]",
+                this.getTable()
+            ));
         }
-        $primaryKey = (array)$primaryKey;
-        if (count(myKey) != count($primaryKey)) {
+
+        $key = (array)this.getPrimaryKeys();
+        $alias = this.getAlias();
+        foreach ($key as $index: $keyname) {
+            $key[$index] = $alias ~ "." ~ $keyname;
+        }
+        if (!is_array($primaryKey)) {
+            $primaryKey = [$primaryKey];
+        }
+        if (count($key) != count($primaryKey)) {
             $primaryKey = $primaryKey ?: [null];
-            $primaryKey = array_map(function (myKey) {
-                return var_export(myKey, true);
+            $primaryKey = array_map(function ($key) {
+                return var_export($key, true);
             }, $primaryKey);
 
             throw new InvalidPrimaryKeyException(sprintf(
@@ -1424,29 +1450,29 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
                 implode(", ", $primaryKey)
             ));
         }
-        $conditions = array_combine(myKey, $primaryKey);
+        $conditions = array_combine($key, $primaryKey);
 
-        $cacheConfig = myOptions["cache"] ?? false;
-        $cacheKey = myOptions["key"] ?? false;
-        myFinder = myOptions["finder"] ?? "all";
-        unset(myOptions["key"], myOptions["cache"], myOptions["finder"]);
+        $cacheConfig = $options["cache"] ?? false;
+        $cacheKey = $options["key"] ?? false;
+        $finder = $options["finder"] ?? "all";
+        unset($options["key"], $options["cache"], $options["finder"]);
 
-        myQuery = this.find(myFinder, myOptions).where($conditions);
+        $query = this.find($finder, $options).where($conditions);
 
         if ($cacheConfig) {
             if (!$cacheKey) {
                 $cacheKey = sprintf(
-                    "get:%s.%s%s",
+                    "get-%s-%s-%s",
                     this.getConnection().configName(),
                     this.getTable(),
                     json_encode($primaryKey)
                 );
             }
-            myQuery.cache($cacheKey, $cacheConfig);
+            $query.cache($cacheKey, $cacheConfig);
         }
 
         /** @psalm-suppress InvalidReturnStatement */
-        return myQuery.firstOrFail();
+        return $query.firstOrFail();
     }
 
     /**
@@ -1456,7 +1482,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param bool $atomic Whether to execute the worker inside a database transaction.
      * @return mixed
      */
-    protected auto _executeTransaction(callable $worker, bool $atomic = true) {
+    protected function _executeTransaction(callable $worker, bool $atomic = true) {
         if ($atomic) {
             return this.getConnection().transactional(function () use ($worker) {
                 return $worker();
@@ -1507,22 +1533,22 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param callable|null $callback A callback that will be invoked for newly
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
-     * @param array<string, mixed> myOptions The options to use when saving.
+     * @param array<string, mixed> $options The options to use when saving.
      * @return uim.cake.Datasource\IEntity An entity.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      */
-    function findOrCreate($search, ?callable $callback = null, myOptions = []): IEntity
+    function findOrCreate($search, ?callable $callback = null, $options = []): IEntity
     {
-        myOptions = new ArrayObject(myOptions + [
+        $options = new ArrayObject($options + [
             "atomic": true,
             "defaults": true,
         ]);
 
-        $entity = _executeTransaction(function () use ($search, $callback, myOptions) {
-            return _processFindOrCreate($search, $callback, myOptions.getArrayCopy());
-        }, myOptions["atomic"]);
+        $entity = _executeTransaction(function () use ($search, $callback, $options) {
+            return _processFindOrCreate($search, $callback, $options.getArrayCopy());
+        }, $options["atomic"]);
 
-        if ($entity && _transactionCommitted(myOptions["atomic"], true)) {
+        if ($entity && _transactionCommitted($options["atomic"], true)) {
             this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
         }
 
@@ -1537,32 +1563,32 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param callable|null $callback A callback that will be invoked for newly
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
-     * @param array<string, mixed> myOptions The options to use when saving.
+     * @param array<string, mixed> $options The options to use when saving.
      * @return uim.cake.Datasource\IEntity|array An entity.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      * @throws \InvalidArgumentException
      */
-    protected auto _processFindOrCreate($search, ?callable $callback = null, myOptions = []) {
-        myQuery = _getFindOrCreateQuery($search);
+    protected function _processFindOrCreate($search, ?callable $callback = null, $options = []) {
+        $query = _getFindOrCreateQuery($search);
 
-        $row = myQuery.first();
-        if ($row  !is null) {
+        $row = $query.first();
+        if ($row != null) {
             return $row;
         }
 
         $entity = this.newEmptyEntity();
-        if (myOptions["defaults"] && is_array($search)) {
+        if ($options["defaults"] && is_array($search)) {
             $accessibleFields = array_combine(array_keys($search), array_fill(0, count($search), true));
             $entity = this.patchEntity($entity, $search, ["accessibleFields": $accessibleFields]);
         }
-        if ($callback  !is null) {
+        if ($callback != null) {
             $entity = $callback($entity) ?: $entity;
         }
-        unset(myOptions["defaults"]);
+        unset($options["defaults"]);
 
-        myResult = this.save($entity, myOptions);
+        $result = this.save($entity, $options);
 
-        if (myResult == false) {
+        if ($result == false) {
             throw new PersistenceFailedException($entity, ["findOrCreate"]);
         }
 
@@ -1575,15 +1601,15 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.orm.Query|callable|array $search The criteria to find existing records by.
      * @return uim.cake.orm.Query
      */
-    protected auto _getFindOrCreateQuery($search): Query
+    protected function _getFindOrCreateQuery($search): Query
     {
         if (is_callable($search)) {
-            myQuery = this.find();
-            $search(myQuery);
+            $query = this.find();
+            $search($query);
         } elseif (is_array($search)) {
-            myQuery = this.find().where($search);
+            $query = this.find().where($search);
         } elseif ($search instanceof Query) {
-            myQuery = $search;
+            $query = $search;
         } else {
             throw new InvalidArgumentException(sprintf(
                 "Search criteria must be an array, callable or Query. Got '%s'",
@@ -1591,7 +1617,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             ));
         }
 
-        return myQuery;
+        return $query;
     }
 
     /**
@@ -1616,12 +1642,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     }
 
 
-    int updateAll(myFields, $conditions) {
-        myQuery = this.query();
-        myQuery.update()
-            .set(myFields)
-            .where($conditions);
-        $statement = myQuery.execute();
+    int updateAll($fields, $conditions) {
+        $statement = this.query()
+            .update()
+            .set($fields)
+            .where($conditions)
+            .execute();
         $statement.closeCursor();
 
         return $statement.rowCount();
@@ -1629,10 +1655,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
 
     int deleteAll($conditions) {
-        myQuery = this.query()
+        $statement = this.query()
             .delete()
-            .where($conditions);
-        $statement = myQuery.execute();
+            .where($conditions)
+            .execute();
         $statement.closeCursor();
 
         return $statement.rowCount();
@@ -1675,7 +1701,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * When saving, this method will trigger four events:
      *
      * - Model.beforeRules: Will be triggered right before any rule checking is done
-     *   for the passed entity if the `checkRules` key in myOptions is not set to false.
+     *   for the passed entity if the `checkRules` key in $options is not set to false.
      *   Listeners will receive as arguments the entity, options array and the operation type.
      *   If the event is stopped the rules check result will be set to the result of the event itself.
      * - Model.afterRules: Will be triggered right after the `checkRules()` method is
@@ -1732,24 +1758,26 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ```
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
-     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array myOptions The options to use when saving.
+     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options The options to use when saving.
      * @return uim.cake.Datasource\IEntity|false
      * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
-    function save(IEntity $entity, myOptions = []) {
-        if (myOptions instanceof SaveOptionsBuilder) {
-            myOptions = myOptions.toArray();
+    function save(IEntity $entity, $options = []) {
+        if ($options instanceof SaveOptionsBuilder) {
+            deprecationWarning("SaveOptionsBuilder is deprecated. Use a normal array for options instead.");
+            $options = $options.toArray();
         }
 
-        myOptions = new ArrayObject((array)myOptions + [
+        $options = new ArrayObject((array)$options + [
             "atomic": true,
             "associated": true,
             "checkRules": true,
             "checkExisting": true,
             "_primary": true,
+            "_cleanOnSuccess": true,
         ]);
 
-        if ($entity.hasErrors((bool)myOptions["associated"])) {
+        if ($entity.hasErrors((bool)$options["associated"])) {
             return false;
         }
 
@@ -1757,17 +1785,19 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             return $entity;
         }
 
-        $success = _executeTransaction(function () use ($entity, myOptions) {
-            return _processSave($entity, myOptions);
-        }, myOptions["atomic"]);
+        $success = _executeTransaction(function () use ($entity, $options) {
+            return _processSave($entity, $options);
+        }, $options["atomic"]);
 
         if ($success) {
-            if (_transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+            if (_transactionCommitted($options["atomic"], $options["_primary"])) {
                 this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
             }
-            if (myOptions["atomic"] || myOptions["_primary"]) {
-                $entity.clean();
-                $entity.setNew(false);
+            if ($options["atomic"] || $options["_primary"]) {
+                if ($options["_cleanOnSuccess"]) {
+                    $entity.clean();
+                    $entity.setNew(false);
+                }
                 $entity.setSource(this.getRegistryAlias());
             }
         }
@@ -1780,14 +1810,14 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * the entity contains errors or the save was aborted by a callback.
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
-     * @param \ArrayAccess|array myOptions The options to use when saving.
+     * @param \ArrayAccess|array $options The options to use when saving.
      * @return uim.cake.Datasource\IEntity
      * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      * @see uim.cake.orm.Table::save()
      */
-    function saveOrFail(IEntity $entity, myOptions = []): IEntity
+    function saveOrFail(IEntity $entity, $options = []): IEntity
     {
-        $saved = this.save($entity, myOptions);
+        $saved = this.save($entity, $options);
         if ($saved == false) {
             throw new PersistenceFailedException($entity, ["save"]);
         }
@@ -1799,70 +1829,70 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Performs the actual saving of an entity based on the passed options.
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
-     * @param \ArrayObject myOptions the options to use for the save operation
+     * @param \ArrayObject $options the options to use for the save operation
      * @return uim.cake.Datasource\IEntity|false
      * @throws \RuntimeException When an entity is missing some of the primary keys.
      * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
-    protected auto _processSave(IEntity $entity, ArrayObject myOptions) {
+    protected function _processSave(IEntity $entity, ArrayObject $options) {
         $primaryColumns = (array)this.getPrimaryKeys();
 
-        if (myOptions["checkExisting"] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
-            myAlias = this.getAlias();
+        if ($options["checkExisting"] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
+            $alias = this.getAlias();
             $conditions = [];
             foreach ($entity.extract($primaryColumns) as $k: $v) {
-                $conditions["myAlias.$k"] = $v;
+                $conditions["$alias.$k"] = $v;
             }
             $entity.setNew(!this.exists($conditions));
         }
 
-        myMode = $entity.isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
-        if (myOptions["checkRules"] && !this.checkRules($entity, myMode, myOptions)) {
+        $mode = $entity.isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
+        if ($options["checkRules"] && !this.checkRules($entity, $mode, $options)) {
             return false;
         }
 
-        myOptions["associated"] = _associations.normalizeKeys(myOptions["associated"]);
-        myEvent = this.dispatchEvent("Model.beforeSave", compact("entity", "options"));
+        $options["associated"] = _associations.normalizeKeys($options["associated"]);
+        $event = this.dispatchEvent("Model.beforeSave", compact("entity", "options"));
 
-        if (myEvent.isStopped()) {
-            myResult = myEvent.getResult();
-            if (myResult is null) {
+        if ($event.isStopped()) {
+            $result = $event.getResult();
+            if ($result == null) {
                 return false;
             }
 
-            if (myResult != false && !(myResult instanceof IEntity)) {
+            if ($result != false && !($result instanceof IEntity)) {
                 throw new RuntimeException(sprintf(
                     "The beforeSave callback must return `false` or `IEntity` instance. Got `%s` instead.",
-                    getTypeName(myResult)
+                    getTypeName($result)
                 ));
             }
 
-            return myResult;
+            return $result;
         }
 
         $saved = _associations.saveParents(
             this,
             $entity,
-            myOptions["associated"],
-            ["_primary": false] + myOptions.getArrayCopy()
+            $options["associated"],
+            ["_primary": false] + $options.getArrayCopy()
         );
 
-        if (!$saved && myOptions["atomic"]) {
+        if (!$saved && $options["atomic"]) {
             return false;
         }
 
-        myData = $entity.extract(this.getSchema().columns(), true);
+        $data = $entity.extract(this.getSchema().columns(), true);
         $isNew = $entity.isNew();
 
         if ($isNew) {
-            $success = _insert($entity, myData);
+            $success = _insert($entity, $data);
         } else {
-            $success = _update($entity, myData);
+            $success = _update($entity, $data);
         }
 
         if ($success) {
-            $success = _onSaveSuccess($entity, myOptions);
+            $success = _onSaveSuccess($entity, $options);
         }
 
         if (!$success && $isNew) {
@@ -1878,30 +1908,30 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * once the entity for this table has been saved successfully.
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
-     * @param \ArrayObject myOptions the options to use for the save operation
+     * @param \ArrayObject $options the options to use for the save operation
      * @return bool True on success
      * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
-    protected bool _onSaveSuccess(IEntity $entity, ArrayObject myOptions) {
+    protected bool _onSaveSuccess(IEntity $entity, ArrayObject $options) {
         $success = _associations.saveChildren(
             this,
             $entity,
-            myOptions["associated"],
-            ["_primary": false] + myOptions.getArrayCopy()
+            $options["associated"],
+            ["_primary": false] + $options.getArrayCopy()
         );
 
-        if (!$success && myOptions["atomic"]) {
+        if (!$success && $options["atomic"]) {
             return false;
         }
 
         this.dispatchEvent("Model.afterSave", compact("entity", "options"));
 
-        if (myOptions["atomic"] && !this.getConnection().inTransaction()) {
+        if ($options["atomic"] && !this.getConnection().inTransaction()) {
             throw new RolledbackTransactionException(["table": static::class]);
         }
 
-        if (!myOptions["atomic"] && !myOptions["_primary"]) {
+        if (!$options["atomic"] && !$options["_primary"]) {
             $entity.clean();
             $entity.setNew(false);
             $entity.setSource(this.getRegistryAlias());
@@ -1913,13 +1943,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Auxiliary function to handle the insert of an entity"s data in the table
      *
-     * @param uim.cake.Datasource\IEntity $entity the subject entity from were myData was extracted
-     * @param array myData The actual data that needs to be saved
+     * @param uim.cake.Datasource\IEntity $entity the subject entity from were $data was extracted
+     * @param array $data The actual data that needs to be saved
      * @return uim.cake.Datasource\IEntity|false
      * @throws \RuntimeException if not all the primary keys where supplied or could
      * be generated when the table has composite primary keys. Or when the table has no primary key.
      */
-    protected auto _insert(IEntity $entity, array myData) {
+    protected function _insert(IEntity $entity, array $data) {
         $primary = (array)this.getPrimaryKeys();
         if (empty($primary)) {
             $msg = sprintf(
@@ -1928,22 +1958,22 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             );
             throw new RuntimeException($msg);
         }
-        myKeys = array_fill(0, count($primary), null);
-        $id = (array)_newId($primary) + myKeys;
+        $keys = array_fill(0, count($primary), null);
+        $id = (array)_newId($primary) + $keys;
 
-        // Generate primary keys preferring values in myData.
+        // Generate primary keys preferring values in $data.
         $primary = array_combine($primary, $id) ?: [];
-        $primary = array_intersect_key(myData, $primary) + $primary;
+        $primary = array_intersect_key($data, $primary) + $primary;
 
         $filteredKeys = array_filter($primary, function ($v) {
-            return $v  !is null;
+            return $v != null;
         });
-        myData += $filteredKeys;
+        $data += $filteredKeys;
 
         if (count($primary) > 1) {
             $schema = this.getSchema();
             foreach ($primary as $k: $v) {
-                if (!isset(myData[$k]) && empty($schema.getColumn($k)["autoIncrement"])) {
+                if (!isset($data[$k]) && empty($schema.getColumn($k)["autoIncrement"])) {
                     $msg = "Cannot insert row, some of the primary key values are missing~ ";
                     $msg ~= sprintf(
                         "Got (%s), expecting (%s)",
@@ -1955,26 +1985,26 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             }
         }
 
-        $success = false;
-        if (empty(myData)) {
-            return $success;
+        if (empty($data)) {
+            return false;
         }
 
-        $statement = this.query().insert(array_keys(myData))
-            .values(myData)
+        $statement = this.query().insert(array_keys($data))
+            .values($data)
             .execute();
 
+        $success = false;
         if ($statement.rowCount() != 0) {
             $success = $entity;
             $entity.set($filteredKeys, ["guard": false]);
             $schema = this.getSchema();
-            myDriver = this.getConnection().getDriver();
-            foreach ($primary as myKey: $v) {
-                if (!isset(myData[myKey])) {
-                    $id = $statement.lastInsertId(this.getTable(), myKey);
-                    /** @var string myType */
-                    myType = $schema.getColumnType(myKey);
-                    $entity.set(myKey, TypeFactory::build(myType).toPHP($id, myDriver));
+            $driver = this.getConnection().getDriver();
+            foreach ($primary as $key: $v) {
+                if (!isset($data[$key])) {
+                    $id = $statement.lastInsertId(this.getTable(), $key);
+                    /** @var string $type */
+                    $type = $schema.getColumnType($key);
+                    $entity.set(string aKey, TypeFactory::build($type).toPHP($id, $driver));
                     break;
                 }
             }
@@ -1994,60 +2024,57 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Note: The ORM will not generate primary key values for composite primary keys.
      * You can overwrite _newId() in your table class.
      *
-     * @param $primary The primary key columns to get a new ID for.
+     * @param array<string> $primary The primary key columns to get a new ID for.
      * @return string|null Either null or the primary key value or a list of primary key values.
      */
-    protected auto _newId(string[] $primary) {
+    protected function _newId(array $primary) {
         if (!$primary || count($primary) > 1) {
             return null;
         }
-        /** @var string myTypeName */
-        myTypeName = this.getSchema().getColumnType($primary[0]);
-        myType = TypeFactory::build(myTypeName);
+        /** @var string $typeName */
+        $typeName = this.getSchema().getColumnType($primary[0]);
+        $type = TypeFactory::build($typeName);
 
-        return myType.newId();
+        return $type.newId();
     }
 
     /**
      * Auxiliary function to handle the update of an entity"s data in the table
      *
-     * @param uim.cake.Datasource\IEntity $entity the subject entity from were myData was extracted
-     * @param array myData The actual data that needs to be saved
+     * @param uim.cake.Datasource\IEntity $entity the subject entity from were $data was extracted
+     * @param array $data The actual data that needs to be saved
      * @return uim.cake.Datasource\IEntity|false
      * @throws \InvalidArgumentException When primary key data is missing.
      */
-    protected auto _update(IEntity $entity, array myData) {
+    protected function _update(IEntity $entity, array $data) {
         $primaryColumns = (array)this.getPrimaryKeys();
         $primaryKey = $entity.extract($primaryColumns);
 
-        myData = array_diff_key(myData, $primaryKey);
-        if (empty(myData)) {
+        $data = array_diff_key($data, $primaryKey);
+        if (empty($data)) {
             return $entity;
         }
 
         if (count($primaryColumns) == 0) {
             $entityClass = get_class($entity);
-            myTable = this.getTable();
-            myMessage = "Cannot update `$entityClass`. The `myTable` has no primary key.";
-            throw new InvalidArgumentException(myMessage);
+            $table = this.getTable();
+            $message = "Cannot update `$entityClass`. The `$table` has no primary key.";
+            throw new InvalidArgumentException($message);
         }
 
         if (!$entity.has($primaryColumns)) {
-            myMessage = "All primary key value(s) are needed for updating, ";
-            myMessage ~= get_class($entity) ~ " is missing " ~ implode(", ", $primaryColumns);
-            throw new InvalidArgumentException(myMessage);
+            $message = "All primary key value(s) are needed for updating, ";
+            $message ~= get_class($entity) ~ " is missing " ~ implode(", ", $primaryColumns);
+            throw new InvalidArgumentException($message);
         }
 
-        myQuery = this.query();
-        $statement = myQuery.update()
-            .set(myData)
+        $statement = this.query()
+            .update()
+            .set($data)
             .where($primaryKey)
             .execute();
 
-        $success = false;
-        if ($statement.errorCode() == "00000") {
-            $success = $entity;
-        }
+        $success = $statement.errorCode() == "00000" ? $entity : false;
         $statement.closeCursor();
 
         return $success;
@@ -2060,15 +2087,15 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to save.
-     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity>|false False on failure, entities list on success.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
+     * @return iterable<uim.cake.Datasource\IEntity>|false False on failure, entities list on success.
      * @throws \Exception
      */
-    function saveMany(iterable $entities, myOptions = []) {
+    function saveMany(iterable $entities, $options = []) {
         try {
-            return _saveMany($entities, myOptions);
-        } catch (PersistenceFailedException myException) {
+            return _saveMany($entities, $options);
+        } catch (PersistenceFailedException $exception) {
             return false;
         }
     }
@@ -2080,40 +2107,46 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to save.
-     * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> Entities list.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to save.
+     * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
+     * @return iterable<uim.cake.Datasource\IEntity> Entities list.
      * @throws \Exception
      * @throws uim.cake.orm.exceptions.PersistenceFailedException If an entity couldn"t be saved.
      */
-    function saveManyOrFail(iterable $entities, myOptions = []): iterable
+    function saveManyOrFail(iterable $entities, $options = []): iterable
     {
-        return _saveMany($entities, myOptions);
+        return _saveMany($entities, $options);
     }
 
     /**
-     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to save.
-     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
-     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> Entities list.
+     * @return iterable<uim.cake.Datasource\IEntity> Entities list.
      */
-    protected auto _saveMany(iterable $entities, myOptions = []): iterable
+    protected function _saveMany(iterable $entities, $options = []): iterable
     {
-        myOptions = new ArrayObject(
-            (array)myOptions + [
+        if ($options instanceof SaveOptionsBuilder) {
+            deprecationWarning("SaveOptionsBuilder is deprecated. Use a normal array for options instead.");
+            $options = $options.toArray();
+        }
+
+        $options = new ArrayObject(
+            (array)$options + [
                 "atomic": true,
                 "checkRules": true,
                 "_primary": true,
             ]
         );
+        $options["_cleanOnSuccess"] = false;
 
         /** @var array<bool> $isNew */
         $isNew = [];
-        $cleanup = void ($entities) use (&$isNew) {
+        $cleanupOnFailure = void ($entities) use (&$isNew) {
             /** @var array<uim.cake.Datasource\IEntity> $entities */
-            foreach ($entities as myKey: $entity) {
-                if (isset($isNew[myKey]) && $isNew[myKey]) {
+            foreach ($entities as $key: $entity) {
+                if (isset($isNew[$key]) && $isNew[$key]) {
                     $entity.unset(this.getPrimaryKeys());
                     $entity.setNew(true);
                 }
@@ -2124,10 +2157,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         $failed = null;
         try {
             this.getConnection()
-                .transactional(function () use ($entities, myOptions, &$isNew, &$failed) {
-                    foreach ($entities as myKey: $entity) {
-                        $isNew[myKey] = $entity.isNew();
-                        if (this.save($entity, myOptions) == false) {
+                .transactional(function () use ($entities, $options, &$isNew, &$failed) {
+                    foreach ($entities as $key: $entity) {
+                        $isNew[$key] = $entity.isNew();
+                        if (this.save($entity, $options) == false) {
                             $failed = $entity;
 
                             return false;
@@ -2135,20 +2168,40 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
                     }
                 });
         } catch (Exception $e) {
-            $cleanup($entities);
+            $cleanupOnFailure($entities);
 
             throw $e;
         }
 
-        if ($failed  !is null) {
-            $cleanup($entities);
+        if ($failed != null) {
+            $cleanupOnFailure($entities);
 
             throw new PersistenceFailedException($failed, ["saveMany"]);
         }
 
-        if (_transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        $cleanupOnSuccess = function (IEntity $entity) use (&$cleanupOnSuccess) {
+            $entity.clean();
+            $entity.setNew(false);
+
+            foreach (array_keys($entity.toArray()) as $field) {
+                $value = $entity.get($field);
+
+                if ($value instanceof IEntity) {
+                    $cleanupOnSuccess($value);
+                } elseif (is_array($value) && current($value) instanceof IEntity) {
+                    foreach ($value as $associated) {
+                        $cleanupOnSuccess($associated);
+                    }
+                }
+            }
+        };
+
+        if (_transactionCommitted($options["atomic"], $options["_primary"])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent("Model.afterSaveCommit", compact("entity", "options"));
+                if ($options["atomic"] || $options["_primary"]) {
+                    $cleanupOnSuccess($entity);
+                }
             }
         }
 
@@ -2182,24 +2235,24 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * the options used in the delete operation.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to remove.
-     * @param \ArrayAccess|array myOptions The options for the delete.
+     * @param \ArrayAccess|array $options The options for the delete.
      * @return bool success
      */
-    bool delete(IEntity $entity, myOptions = []) {
-        myOptions = new ArrayObject((array)myOptions + [
+    bool delete(IEntity $entity, $options = []) {
+        $options = new ArrayObject((array)$options + [
             "atomic": true,
             "checkRules": true,
             "_primary": true,
         ]);
 
-        $success = _executeTransaction(function () use ($entity, myOptions) {
-            return _processDelete($entity, myOptions);
-        }, myOptions["atomic"]);
+        $success = _executeTransaction(function () use ($entity, $options) {
+            return _processDelete($entity, $options);
+        }, $options["atomic"]);
 
-        if ($success && _transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        if ($success && _transactionCommitted($options["atomic"], $options["_primary"])) {
             this.dispatchEvent("Model.afterDeleteCommit", [
                 "entity": $entity,
-                "options": myOptions,
+                "options": $options,
             ]);
         }
 
@@ -2213,16 +2266,16 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to delete.
-     * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity>|false Entities list
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to delete.
+     * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
+     * @return iterable<uim.cake.Datasource\IEntity>|false Entities list
      *   on success, false on failure.
      * @see uim.cake.orm.Table::delete() for options and events related to this method.
      */
-    function deleteMany(iterable $entities, myOptions = []) {
-        $failed = _deleteMany($entities, myOptions);
+    function deleteMany(iterable $entities, $options = []) {
+        $failed = _deleteMany($entities, $options);
 
-        if ($failed  !is null) {
+        if ($failed != null) {
             return false;
         }
 
@@ -2236,17 +2289,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to delete.
-     * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> Entities list.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to delete.
+     * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
+     * @return iterable<uim.cake.Datasource\IEntity> Entities list.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException
      * @see uim.cake.orm.Table::delete() for options and events related to this method.
      */
-    function deleteManyOrFail(iterable $entities, myOptions = []): iterable
+    function deleteManyOrFail(iterable $entities, $options = []): iterable
     {
-        $failed = _deleteMany($entities, myOptions);
+        $failed = _deleteMany($entities, $options);
 
-        if ($failed  !is null) {
+        if ($failed != null) {
             throw new PersistenceFailedException($failed, ["deleteMany"]);
         }
 
@@ -2254,33 +2307,33 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     }
 
     /**
-     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to delete.
-     * @param \ArrayAccess|array myOptions Options used.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to delete.
+     * @param \ArrayAccess|array $options Options used.
      * @return uim.cake.Datasource\IEntity|null
      */
-    protected auto _deleteMany(iterable $entities, myOptions = []): ?IEntity
+    protected function _deleteMany(iterable $entities, $options = []): ?IEntity
     {
-        myOptions = new ArrayObject((array)myOptions + [
+        $options = new ArrayObject((array)$options + [
                 "atomic": true,
                 "checkRules": true,
                 "_primary": true,
             ]);
 
-        $failed = _executeTransaction(function () use ($entities, myOptions) {
+        $failed = _executeTransaction(function () use ($entities, $options) {
             foreach ($entities as $entity) {
-                if (!_processDelete($entity, myOptions)) {
+                if (!_processDelete($entity, $options)) {
                     return $entity;
                 }
             }
 
             return null;
-        }, myOptions["atomic"]);
+        }, $options["atomic"]);
 
-        if ($failed is null && _transactionCommitted(myOptions["atomic"], myOptions["_primary"])) {
+        if ($failed == null && _transactionCommitted($options["atomic"], $options["_primary"])) {
             foreach ($entities as $entity) {
                 this.dispatchEvent("Model.afterDeleteCommit", [
                     "entity": $entity,
-                    "options": myOptions,
+                    "options": $options,
                 ]);
             }
         }
@@ -2293,13 +2346,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * has no primary key value, application rules checks failed or the delete was aborted by a callback.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to remove.
-     * @param \ArrayAccess|array myOptions The options for the delete.
+     * @param \ArrayAccess|array $options The options for the delete.
      * @return true
      * @throws uim.cake.orm.exceptions.PersistenceFailedException
      * @see uim.cake.orm.Table::delete()
      */
-    bool deleteOrFail(IEntity $entity, myOptions = []) {
-        $deleted = this.delete($entity, myOptions);
+    bool deleteOrFail(IEntity $entity, $options = []) {
+        $deleted = this.delete($entity, $options);
         if ($deleted == false) {
             throw new PersistenceFailedException($entity, ["delete"]);
         }
@@ -2314,12 +2367,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * dependent associations, and clear out join tables for BelongsToMany associations.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to delete.
-     * @param \ArrayObject myOptions The options for the delete.
+     * @param \ArrayObject $options The options for the delete.
      * @throws \InvalidArgumentException if there are no primary key values of the
      * passed entity
      * @return bool success
      */
-    protected bool _processDelete(IEntity $entity, ArrayObject myOptions) {
+    protected bool _processDelete(IEntity $entity, ArrayObject $options) {
         if ($entity.isNew()) {
             return false;
         }
@@ -2330,86 +2383,83 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             throw new InvalidArgumentException($msg);
         }
 
-        if (myOptions["checkRules"] && !this.checkRules($entity, RulesChecker::DELETE, myOptions)) {
+        if ($options["checkRules"] && !this.checkRules($entity, RulesChecker::DELETE, $options)) {
             return false;
         }
 
-        myEvent = this.dispatchEvent("Model.beforeDelete", [
+        $event = this.dispatchEvent("Model.beforeDelete", [
             "entity": $entity,
-            "options": myOptions,
+            "options": $options,
         ]);
 
-        if (myEvent.isStopped()) {
-            return (bool)myEvent.getResult();
+        if ($event.isStopped()) {
+            return (bool)$event.getResult();
         }
 
         $success = _associations.cascadeDelete(
             $entity,
-            ["_primary": false] + myOptions.getArrayCopy()
+            ["_primary": false] + $options.getArrayCopy()
         );
         if (!$success) {
             return $success;
         }
 
-        myQuery = this.query();
-        $conditions = $entity.extract($primaryKey);
-        $statement = myQuery.delete()
-            .where($conditions)
+        $statement = this.query()
+            .delete()
+            .where($entity.extract($primaryKey))
             .execute();
 
-        $success = $statement.rowCount() > 0;
-        if (!$success) {
-            return $success;
+        if ($statement.rowCount() < 1) {
+            return false;
         }
 
         this.dispatchEvent("Model.afterDelete", [
             "entity": $entity,
-            "options": myOptions,
+            "options": $options,
         ]);
 
-        return $success;
+        return true;
     }
 
     /**
      * Returns true if the finder exists for the table
      *
-     * @param string myType name of finder to check
+     * @param string $type name of finder to check
      */
-    bool hasFinder(string myType) {
-        myFinder = "find" ~ myType;
+    bool hasFinder(string $type) {
+        $finder = "find" ~ $type;
 
-        return method_exists(this, myFinder) || _behaviors.hasFinder(myType);
+        return method_exists(this, $finder) || _behaviors.hasFinder($type);
     }
 
     /**
-     * Calls a finder method directly and applies it to the passed query,
-     * if no query is passed a new one will be created and returned
+     * Calls a finder method and applies it to the passed query.
      *
-     * @param string myType name of the finder to be called
-     * @param uim.cake.orm.Query myQuery The query object to apply the finder options to
-     * @param array<string, mixed> myOptions List of options to pass to the finder
+     * @param string $type Name of the finder to be called.
+     * @param uim.cake.orm.Query $query The query object to apply the finder options to.
+     * @param array<string, mixed> $options List of options to pass to the finder.
      * @return uim.cake.orm.Query
      * @throws \BadMethodCallException
      * @uses findAll()
      * @uses findList()
      * @uses findThreaded()
      */
-    function callFinder(string myType, Query myQuery, array myOptions = []): Query
+    function callFinder(string $type, Query $query, array $options = []): Query
     {
-        myQuery.applyOptions(myOptions);
-        myOptions = myQuery.getOptions();
-        myFinder = "find" ~ myType;
-        if (method_exists(this, myFinder)) {
-            return this.{myFinder}(myQuery, myOptions);
+        $query.applyOptions($options);
+        $options = $query.getOptions();
+        $finder = "find" ~ $type;
+        if (method_exists(this, $finder)) {
+            return this.{$finder}($query, $options);
         }
 
-        if (_behaviors.hasFinder(myType)) {
-            return _behaviors.callFinder(myType, [myQuery, myOptions]);
+        if (_behaviors.hasFinder($type)) {
+            return _behaviors.callFinder($type, [$query, $options]);
         }
 
         throw new BadMethodCallException(sprintf(
             "Unknown finder method '%s' on %s.",
-            myType,
+            $type,
             static::class
         ));
     }
@@ -2417,37 +2467,37 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Provides the dynamic findBy and findAllBy methods.
      *
-     * @param string method The method name that was fired.
+     * @param string $method The method name that was fired.
      * @param array $args List of arguments passed to the function.
      * @return uim.cake.orm.Query
      * @throws \BadMethodCallException when there are missing arguments, or when
      *  and & or are combined.
      */
-    protected auto _dynamicFinder(string method, array $args) {
+    protected function _dynamicFinder(string $method, array $args) {
         $method = Inflector::underscore($method);
         preg_match("/^find_([\w]+)_by_/", $method, $matches);
         if (empty($matches)) {
             // find_by_ is 8 characters.
-            myFields = substr($method, 8);
+            $fields = substr($method, 8);
             $findType = "all";
         } else {
-            myFields = substr($method, strlen($matches[0]));
+            $fields = substr($method, strlen($matches[0]));
             $findType = Inflector::variable($matches[1]);
         }
-        $hasOr = indexOf(myFields, "_or_");
-        $hasAnd = indexOf(myFields, "_and_");
+        $hasOr = strpos($fields, "_or_");
+        $hasAnd = strpos($fields, "_and_");
 
-        $makeConditions = function (myFields, $args) {
+        $makeConditions = function ($fields, $args) {
             $conditions = [];
-            if (count($args) < count(myFields)) {
+            if (count($args) < count($fields)) {
                 throw new BadMethodCallException(sprintf(
                     "Not enough arguments for magic finder. Got %s required %s",
                     count($args),
-                    count(myFields)
+                    count($fields)
                 ));
             }
-            foreach (myFields as myField) {
-                $conditions[this.aliasField(myField)] = array_shift($args);
+            foreach ($fields as $field) {
+                $conditions[this.aliasField($field)] = array_shift($args);
             }
 
             return $conditions;
@@ -2460,15 +2510,15 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         }
 
         if ($hasOr == false && $hasAnd == false) {
-            $conditions = $makeConditions([myFields], $args);
+            $conditions = $makeConditions([$fields], $args);
         } elseif ($hasOr != false) {
-            myFields = explode("_or_", myFields);
+            $fields = explode("_or_", $fields);
             $conditions = [
-                "OR": $makeConditions(myFields, $args),
+                "OR": $makeConditions($fields, $args),
             ];
         } else {
-            myFields = explode("_and_", myFields);
-            $conditions = $makeConditions(myFields, $args);
+            $fields = explode("_and_", $fields);
+            $conditions = $makeConditions($fields, $args);
         }
 
         return this.find($findType, [
@@ -2482,12 +2532,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * If your Table uses any behaviors you can call them as if
      * they were on the table object.
      *
-     * @param string method name of the method to be invoked
+     * @param string $method name of the method to be invoked
      * @param array $args List of arguments passed to the function
      * @return mixed
      * @throws \BadMethodCallException
      */
-    auto __call($method, $args) {
+    function __call($method, $args) {
         if (_behaviors.hasMethod($method)) {
             return _behaviors.call($method, $args);
         }
@@ -2504,11 +2554,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns the association named after the passed value if exists, otherwise
      * throws an exception.
      *
-     * @param string property the association name
+     * @param string $property the association name
      * @return uim.cake.orm.Association
      * @throws \RuntimeException if no association with such name exists
      */
-    auto __get($property) {
+    function __get($property) {
         $association = _associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
@@ -2527,10 +2577,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns whether an association named after the passed value
      * exists for this table.
      *
-     * @param string property the association name
-     * @return bool
+     * @param string $property the association name
      */
-    auto __isSet($property) {
+    bool __isSet($property) {
         return _associations.has($property);
     }
 
@@ -2555,9 +2604,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      */
     function newEmptyEntity(): IEntity
     {
-        myClass = this.getEntityClass();
+        $class = this.getEntityClass();
 
-        return new myClass([], ["source": this.getRegistryAlias()]);
+        return new $class([], ["source": this.getRegistryAlias()]);
     }
 
     /**
@@ -2614,17 +2663,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * You can use the `Model.beforeMarshal` event to modify request data
      * before it is converted into entities.
      *
-     * @param array myData The data to build an entity with.
-     * @param array<string, mixed> myOptions A list of options for the object hydration.
+     * @param array $data The data to build an entity with.
+     * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Marshaller::one()
      */
-    function newEntity(array myData, array myOptions = []): IEntity
+    function newEntity(array $data, array $options = []): IEntity
     {
-        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller.one(myData, myOptions);
+        return $marshaller.one($data, $options);
     }
 
     /**
@@ -2655,22 +2704,22 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * You can use the `Model.beforeMarshal` event to modify request data
      * before it is converted into entities.
      *
-     * @param array myData The data to build an entity with.
-     * @param array<string, mixed> myOptions A list of options for the objects hydration.
+     * @param array $data The data to build an entity with.
+     * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
-    array newEntities(array myData, array myOptions = []) {
-        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
+    array newEntities(array $data, array $options = []) {
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller.many(myData, myOptions);
+        return $marshaller.many($data, $options);
     }
 
     /**
      * {@inheritDoc}
      *
      * When merging HasMany or BelongsToMany associations, all the entities in the
-     * `myData` array will appear, those that can be matched by primary key will get
+     * `$data` array will appear, those that can be matched by primary key will get
      * the data merged, but those that cannot, will be discarded.
      *
      * You can limit fields that will be present in the merged entity by
@@ -2712,28 +2761,28 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
-     * @param array myData key value list of fields to be merged into the entity
-     * @param array<string, mixed> myOptions A list of options for the object hydration.
+     * @param array $data key value list of fields to be merged into the entity
+     * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Marshaller::merge()
      */
-    function patchEntity(IEntity $entity, array myData, array myOptions = []): IEntity
+    function patchEntity(IEntity $entity, array $data, array $options = []): IEntity
     {
-        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller.merge($entity, myData, myOptions);
+        return $marshaller.merge($entity, $data, $options);
     }
 
     /**
      * {@inheritDoc}
      *
      * Those entries in `$entities` that cannot be matched to any record in
-     * `myData` will be discarded. Records in `myData` that could not be matched will
+     * `$data` will be discarded. Records in `$data` that could not be matched will
      * be marshalled as a new entity.
      *
      * When merging HasMany or BelongsToMany associations, all the entities in the
-     * `myData` array will appear, those that can be matched by primary key will get
+     * `$data` array will appear, those that can be matched by primary key will get
      * the data merged, but those that cannot, will be discarded.
      *
      * You can limit fields that will be present in the merged entities by
@@ -2750,17 +2799,17 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * You can use the `Model.beforeMarshal` event to modify request data
      * before it is converted into entities.
      *
-     * @param \Traversable|array<uim.cake.Datasource\IEntity> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\IEntity> $entities the entities that will get the
      * data merged in
-     * @param array myData list of arrays to be merged into the entities
-     * @param array<string, mixed> myOptions A list of options for the objects hydration.
+     * @param array $data list of arrays to be merged into the entities
+     * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    array patchEntities(iterable $entities, array myData, array myOptions = []) {
-        myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
+    array patchEntities(iterable $entities, array $data, array $options = []) {
+        $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
-        return $marshaller.mergeMany($entities, myData, myOptions);
+        return $marshaller.mergeMany($entities, $data, $options);
     }
 
     /**
@@ -2791,15 +2840,15 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * the same site_id. Scoping will only be used if the scoping field is present in
      * the data to be validated.
      *
-     * @param mixed myValue The value of column to be checked for uniqueness.
-     * @param array<string, mixed> myOptions The options array, optionally containing the "scope" key.
+     * @param mixed $value The value of column to be checked for uniqueness.
+     * @param array<string, mixed> $options The options array, optionally containing the "scope" key.
      *   May also be the validation context, if there are no options.
      * @param array|null $context Either the validation context or null.
      * @return bool True if the value is unique, or false if a non-scalar, non-unique value was given.
      */
-    bool validateUnique(myValue, array myOptions, ?array $context = null) {
-        if ($context is null) {
-            $context = myOptions;
+    bool validateUnique($value, array $options, ?array $context = null) {
+        if ($context == null) {
+            $context = $options;
         }
         $entity = new Entity(
             $context["data"],
@@ -2809,19 +2858,19 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
                 "source": this.getRegistryAlias(),
             ]
         );
-        myFields = array_merge(
+        $fields = array_merge(
             [$context["field"]],
-            isset(myOptions["scope"]) ? (array)myOptions["scope"] : []
+            isset($options["scope"]) ? (array)$options["scope"] : []
         );
-        myValues = $entity.extract(myFields);
-        foreach (myValues as myField) {
-            if (myField  !is null && !is_scalar(myField)) {
+        $values = $entity.extract($fields);
+        foreach ($values as $field) {
+            if ($field != null && !is_scalar($field)) {
                 return false;
             }
         }
-        myClass = static::IS_UNIQUE_CLASS;
+        $class = static::IS_UNIQUE_CLASS;
         /** @var uim.cake.orm.rules.IsUnique $rule */
-        $rule = new myClass(myFields, myOptions);
+        $rule = new $class($fields, $options);
 
         return $rule($entity, ["repository": this]);
     }
@@ -2853,7 +2902,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @return array<string, mixed>
      */
     array implementedEvents() {
-        myEventMap = [
+        $eventMap = [
             "Model.beforeMarshal": "beforeMarshal",
             "Model.afterMarshal": "afterMarshal",
             "Model.buildValidator": "buildValidator",
@@ -2867,16 +2916,16 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             "Model.beforeRules": "beforeRules",
             "Model.afterRules": "afterRules",
         ];
-        myEvents = [];
+        $events = [];
 
-        foreach (myEventMap as myEvent: $method) {
+        foreach ($eventMap as $event: $method) {
             if (!method_exists(this, $method)) {
                 continue;
             }
-            myEvents[myEvent] = $method;
+            $events[$event] = $method;
         }
 
-        return myEvents;
+        return $events;
     }
 
     /**
@@ -2893,12 +2942,13 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Gets a SaveOptionsBuilder instance.
      *
-     * @param array<string, mixed> myOptions Options to parse by the builder.
+     * @param array<string, mixed> $options Options to parse by the builder.
      * @return uim.cake.orm.SaveOptionsBuilder
+     * @deprecated 4.4.0 Use a normal array for options instead.
      */
-    auto getSaveOptionsBuilder(array myOptions = []): SaveOptionsBuilder
+    function getSaveOptionsBuilder(array $options = []): SaveOptionsBuilder
     {
-        return new SaveOptionsBuilder(this, myOptions);
+        return new SaveOptionsBuilder(this, $options);
     }
 
     /**
@@ -2909,9 +2959,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ### Example:
      *
      * ```
-     * myUser = myUsersTable.get(1);
-     * myUser = myUsersTable.loadInto(myUser, ["Articles.Tags", "Articles.Comments"]);
-     * echo myUser.articles[0].title;
+     * $user = $usersTable.get(1);
+     * $user = $usersTable.loadInto($user, ["Articles.Tags", "Articles.Comments"]);
+     * echo $user.articles[0].title;
      * ```
      *
      * You can also load associations for multiple entities at once
@@ -2919,9 +2969,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ### Example:
      *
      * ```
-     * myUsers = myUsersTable.find().where([...]).toList();
-     * myUsers = myUsersTable.loadInto(myUsers, ["Articles.Tags", "Articles.Comments"]);
-     * echo myUser[1].articles[0].title;
+     * $users = $usersTable.find().where([...]).toList();
+     * $users = $usersTable.loadInto($users, ["Articles.Tags", "Articles.Comments"]);
+     * echo $user[1].articles[0].title;
      * ```
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
@@ -2936,13 +2986,15 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     }
 
 
-    protected bool validationMethodExists(string myName) {
-        return method_exists(this, myName) || this.behaviors().hasMethod(myName);
+    protected bool validationMethodExists(string aName) {
+        return method_exists(this, $name) || this.behaviors().hasMethod($name);
     }
 
     /**
      * Returns an array that can be used to describe the internal state of this
      * object.
+     *
+     * @return array<string, mixed>
      */
     array __debugInfo() {
         $conn = this.getConnection();
