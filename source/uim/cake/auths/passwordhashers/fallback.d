@@ -46,10 +46,10 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      *
      * Uses the first password hasher in the list to generate the hash
      *
-     * @param string $password Plain text password to hash.
+     * aPassword -Plain text password to hash.
      * @return string|false Password hash or false
      */
-    bool hash(string $password) {
+    bool hash(string aPassword) {
         return _hashers[0].hash($password);
     }
 
@@ -59,11 +59,11 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * This will iterate over all configured hashers until one of them returns
      * true.
      *
-     * @param string $password Plain text password to hash.
-     * @param string $hashedPassword Existing hashed password.
+     * aPassword -Plain text password to hash.
+     * @param string aHashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    bool check(string $password, string $hashedPassword) {
+    bool check(string aPassword, string aHashedPassword) {
         foreach (_hashers as $hasher) {
             if ($hasher.check($password, $hashedPassword)) {
                 return true;
@@ -77,10 +77,10 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * Returns true if the password need to be rehashed, with the first hasher present
      * in the list of hashers
      *
-     * @param string $password The password to verify
+     * aPassword -The password to verify
      * @return bool
      */
-    bool needsRehash(string $password) {
+    bool needsRehash(string aPassword) {
         return _hashers[0].needsRehash($password);
     }
 }

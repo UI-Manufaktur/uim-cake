@@ -13,14 +13,13 @@ class PasswordHasherFactory {
     /**
      * Returns password hasher object out of a hasher name or a configuration array
      *
-     * @param array<string, mixed>|string $passwordHasher Name of the password hasher or an array with
+     * @param array<string, mixed>|string aPasswordHasher Name of the password hasher or an array with
      * at least the key `className` set to the name of the class to use
      * @return uim.cake.Auth\AbstractPasswordHasher Password hasher instance
      * @throws \RuntimeException If password hasher class not found or
      *   it does not extend {@link uim.cake.Auth\AbstractPasswordHasher}
      */
-    static function build($passwordHasher): AbstractPasswordHasher
-    {
+    static function build($passwordHasher): AbstractPasswordHasher {
         aConfig = [];
         if (is_string($passwordHasher)) {
             $class = $passwordHasher;

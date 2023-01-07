@@ -29,7 +29,7 @@ class ArrayEngine : CacheEngine {
     /**
      * Write data for key into cache
      *
-     * @param string string aKey Identifier for the data
+     * aKey -  Identifier for the data
      * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
@@ -47,7 +47,7 @@ class ArrayEngine : CacheEngine {
     /**
      * Read a key from the cache
      *
-     * @param string string aKey Identifier for the data
+     * aKey -  Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
@@ -73,7 +73,7 @@ class ArrayEngine : CacheEngine {
     /**
      * Increments the value of an integer cached key
      *
-     * @param string string aKey Identifier for the data
+     * aKey -  Identifier for the data
      * @param int anOffset How much to increment
      * @return int|false New incremented value, false otherwise
      */
@@ -90,11 +90,11 @@ class ArrayEngine : CacheEngine {
     /**
      * Decrements the value of an integer cached key
      *
-     * @param string string aKey Identifier for the data
+     * aKey -  Identifier for the data
      * @param int anOffset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string string aKey, int anOffset = 1) {
+    function decrement(string aKey, int anOffset = 1) {
         if (this.get(string aKey) == null) {
             this.set(string aKey, 0);
         }
@@ -107,7 +107,7 @@ class ArrayEngine : CacheEngine {
     /**
      * Delete a key from the cache
      *
-     * @param string string aKey Identifier for the data
+     * aKey -  Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete(string aKey) {

@@ -5,7 +5,7 @@ import uim.cake;
 
 /**
  * Base class for commands using the full stack
- * CakePHP Framework.
+ * UIM Framework.
  *
  * Includes traits that integrate logging
  * and ORM models to console commands.
@@ -19,7 +19,7 @@ class Command : BaseCommand {
     /**
      * Constructor
      *
-     * By default CakePHP will construct command objects when
+     * By default UIM will construct command objects when
      * building the CommandCollection for your application.
      */
     this() {

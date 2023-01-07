@@ -112,7 +112,7 @@ class PaginatorComponent : Component
      *
      * ### Controlling sort fields
      *
-     * By default CakePHP will automatically allow sorting on any column on the table object being
+     * By default UIM will automatically allow sorting on any column on the table object being
      * paginated. Often times you will want to allow sorting on either associated columns or calculated
      * fields. In these cases you will need to define an allowed list of fields you wish to allow
      * sorting on. You can define the allowed fields in the `$settings` parameter:
@@ -147,7 +147,7 @@ class PaginatorComponent : Component
      *
      * ```
      * $query = this.Articles.find("popular").matching("Tags", function ($q) {
-     *   return $q.where(["name": "CakePHP"])
+     *   return $q.where(["name": "UIM"])
      * });
      * $results = $paginator.paginate($query);
      * ```

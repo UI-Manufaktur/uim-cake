@@ -1,6 +1,6 @@
 {
     "name": "cakephp/console",
-    "description": "Build beautiful console applications with CakePHP",
+    "description": "Build beautiful console applications with UIM",
     "type": "library",
     "keywords": [
         "cakephp",
@@ -12,7 +12,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "CakePHP Community",
+            "name": "UIM Community",
             "homepage": "https://github.com/cakephp/cache/graphs/contributors"
         }
     ],

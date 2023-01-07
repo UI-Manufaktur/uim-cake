@@ -13,7 +13,7 @@ use Traversable;
  * Acts as a registry/factory for objects.
  *
  * Provides registry & factory functionality for object types. Used
- * as a super class for various composition based re-use features in CakePHP.
+ * as a super class for various composition based re-use features in UIM.
  *
  * Each subclass needs to implement the various abstract methods to complete
  * the template method load().

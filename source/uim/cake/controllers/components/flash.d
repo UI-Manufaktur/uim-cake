@@ -7,7 +7,7 @@ import uim.cake.utilities.Inflector;
 use Throwable;
 
 /**
- * The CakePHP FlashComponent provides a way for you to write a flash variable
+ * The UIM FlashComponent provides a way for you to write a flash variable
  * to the session from your controllers, to be rendered in a view with the
  * FlashHelper.
  *

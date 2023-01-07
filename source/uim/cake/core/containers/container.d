@@ -6,7 +6,7 @@
 module uim.cake.core.containers.container;
 
 @safe:
-  import uim.cake;
+import uim.cake;
   
 use League\Container\Container as LeagueContainer;
 

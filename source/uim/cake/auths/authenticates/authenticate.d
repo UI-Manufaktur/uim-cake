@@ -134,7 +134,7 @@ abstract class BaseAuthenticate : IEventListener {
     /**
      * Get query object for fetching user from database.
      *
-     * @param string anUsername The username/identifier.
+     * anUsername - The username/identifier.
      * @return uim.cake.orm.Query
      */
     protected Query _query(string anUsername) {

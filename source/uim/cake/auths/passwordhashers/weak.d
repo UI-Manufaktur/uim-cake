@@ -33,18 +33,18 @@ class WeakPasswordHasher : AbstractPasswordHasher
     }
 
 
-    bool hash(string $password) {
+    bool hash(string aPassword) {
         return Security::hash($password, _config["hashType"], true);
     }
 
     /**
      * Check hash. Generate hash for user provided password and check against existing hash.
      *
-     * @param string $password Plain text password to hash.
-     * @param string $hashedPassword Existing hashed password.
+     * aPassword -Plain text password to hash.
+     * @param string aHashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    bool check(string $password, string $hashedPassword) {
+    bool check(string aPassword, string aHashedPassword) {
         return $hashedPassword == this.hash($password);
     }
 }

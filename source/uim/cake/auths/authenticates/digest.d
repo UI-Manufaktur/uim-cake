@@ -25,7 +25,7 @@ import uim.cake;
  *  ]);
  * ```
  *
- * You should set `storage` to `Memory` to prevent CakePHP from sending a
+ * You should set `storage` to `Memory` to prevent UIM from sending a
  * session cookie to the client.
  *
  * You should set `unauthorizedRedirect` to `false`. This causes `AuthComponent` to
@@ -90,17 +90,17 @@ class DigestAuthenticate : BasicAuthenticate {
      * @return array<string, mixed>|false Either false or an array of user information
      */
     function getUser(ServerRequest myServerRequest) {
-        $digest = _getDigest(myServerRequest);
-        if (empty($digest)) {
+        aDigest = _getDigest(myServerRequest);
+        if (empty(aDigest)) {
             return false;
         }
 
-        $user = _findUser($digest["username"]);
+        $user = _findUser(aDigest["username"]);
         if (empty($user)) {
             return false;
         }
 
-        if (!this.validNonce($digest["nonce"])) {
+        if (!this.validNonce(aDigest["nonce"])) {
             return false;
         }
 
@@ -110,11 +110,11 @@ class DigestAuthenticate : BasicAuthenticate {
 
         $requestMethod = myServerRequest.getEnv("ORIGINAL_REQUEST_METHOD") ?: myServerRequest.getMethod();
         $hash = this.generateResponseHash(
-            $digest,
+            aDigest,
             $password,
             (string)$requestMethod
         );
-        if (hash_equals($hash, $digest["response"])) {
+        if (hash_equals($hash, aDigest["response"])) {
             return $user;
         }
 
@@ -128,34 +128,34 @@ class DigestAuthenticate : BasicAuthenticate {
      * @return array<string, mixed>|null Array of digest information.
      */
     protected array _getDigest(ServerRequest myServerRequest) {
-        $digest = myServerRequest.getEnv("PHP_AUTH_DIGEST");
-        if (empty($digest) && function_exists("apache_request_headers")) {
+        aDigest = myServerRequest.getEnv("PHP_AUTH_DIGEST");
+        if (empty(aDigest) && function_exists("apache_request_headers")) {
             $headers = apache_request_headers();
             if (!empty($headers["Authorization"]) && substr($headers["Authorization"], 0, 7) == "Digest ") {
-                $digest = substr($headers["Authorization"], 7);
+                aDigest = substr($headers["Authorization"], 7);
             }
         }
-        if (empty($digest)) {
+        if (empty(aDigest)) {
             return null;
         }
 
-        return this.parseAuthData($digest);
+        return this.parseAuthData(aDigest);
     }
 
     /**
      * Parse the digest authentication headers and split them up.
      *
-     * @param string $digest The raw digest authentication headers.
+     * @param string aDigest The raw digest authentication headers.
      * @return array|null An array of digest authentication headers
      */
-    function parseAuthData(string $digest): ?array
+    function parseAuthData(string aDigest): ?array
     {
-        if (substr($digest, 0, 7) == "Digest ") {
-            $digest = substr($digest, 7);
+        if (substr(aDigest, 0, 7) == "Digest ") {
+            aDigest = substr(aDigest, 7);
         }
         $keys = $match = [];
         $req = ["nonce": 1, "nc": 1, "cnonce": 1, "qop": 1, "username": 1, "uri": 1, "response": 1];
-        preg_match_all("/(\w+)=([\""]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/", $digest, $match, PREG_SET_ORDER);
+        preg_match_all("/(\w+)=([\""]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/", aDigest, $match, PREG_SET_ORDER);
 
         foreach ($match as $i) {
             $keys[$i[1]] = $i[3];
@@ -172,16 +172,16 @@ class DigestAuthenticate : BasicAuthenticate {
     /**
      * Generate the response hash for a given digest array.
      *
-     * @param array<string, mixed> $digest Digest information containing data from DigestAuthenticate::parseAuthData().
-     * @param string $password The digest hash password generated with DigestAuthenticate::password()
+     * @param array<string, mixed> aDigest Digest information containing data from DigestAuthenticate::parseAuthData().
+     * aPassword -The digest hash password generated with DigestAuthenticate::password()
      * @param string $method Request method
      * @return string Response hash
      */
-    string generateResponseHash(array $digest, string $password, string $method) {
+    string generateResponseHash(array aDigest, string aPassword, string $method) {
         return md5(
             $password .
-            ":" ~ $digest["nonce"] ~ ":" ~ $digest["nc"] ~ ":" ~ $digest["cnonce"] ~ ":" ~ $digest["qop"] ~ ":" ~
-            md5($method ~ ":" ~ $digest["uri"])
+            ":" ~ aDigest["nonce"] ~ ":" ~ aDigest["nc"] ~ ":" ~ aDigest["cnonce"] ~ ":" ~ aDigest["qop"] ~ ":" ~
+            md5($method ~ ":" ~ aDigest["uri"])
         );
     }
 
@@ -189,11 +189,11 @@ class DigestAuthenticate : BasicAuthenticate {
      * Creates an auth digest password hash to store
      *
      * @param string anUsername The username to use in the digest hash.
-     * @param string $password The unhashed password to make a digest hash for.
+     * aPassword -The unhashed password to make a digest hash for.
      * @param string $realm The realm the password is for.
      * @return string the hashed password that can later be used with Digest authentication.
      */
-    static string password(string anUsername, string $password, string $realm) {
+    static string password(string anUsername, string aPassword, string $realm) {
         return md5($username ~ ":" ~ $realm ~ ":" ~ $password);
     }
 
@@ -213,13 +213,13 @@ class DigestAuthenticate : BasicAuthenticate {
             "opaque": _config["opaque"] ?: md5($realm),
         ];
 
-        $digest = _getDigest($request);
-        if ($digest && isset($digest["nonce"]) && !this.validNonce($digest["nonce"])) {
+        aDigest = _getDigest($request);
+        if (aDigest && isset(aDigest["nonce"]) && !this.validNonce(aDigest["nonce"])) {
             $options["stale"] = true;
         }
 
         $opts = [];
-        foreach ($options as $k: $v) {
+        foreach ($k, $v, $options) {
             if (is_bool($v)) {
                 $v = $v ? "true" : "false";
                 $opts[] = sprintf("%s=%s", $k, $v);
@@ -233,9 +233,7 @@ class DigestAuthenticate : BasicAuthenticate {
         ];
     }
 
-    /**
-     * Generate a nonce value that is validated in future requests.
-     */
+    // Generate a nonce value that is validated in future requests.
     protected string generateNonce() {
         $expiryTime = microtime(true) + this.getConfig("nonceLifetime");
         $secret = this.getConfig("secret");

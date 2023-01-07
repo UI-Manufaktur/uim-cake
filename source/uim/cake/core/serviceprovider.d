@@ -54,7 +54,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * Delegate to the bootstrap() method
      *
      * This method wraps the league/container function so users
-     * only need to use the CakePHP bootstrap() interface.
+     * only need to use the UIM bootstrap() interface.
      */
     void boot() {
         this.bootstrap(this.getContainer());
@@ -77,7 +77,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * Call the abstract services() method.
      *
      * This method primarily exists as a shim between the interface
-     * that league/container has and the one we want to offer in CakePHP.
+     * that league/container has and the one we want to offer in UIM.
      */
     void register() {
         this.services(this.getContainer());

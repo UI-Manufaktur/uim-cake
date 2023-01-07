@@ -68,7 +68,7 @@ class ServerCommand : Command {
         }
 
         $io.out();
-        $io.out(sprintf("<info>Welcome to CakePHP %s Console</info>", "v" ~ Configure::version()));
+        $io.out(sprintf("<info>Welcome to UIM %s Console</info>", "v" ~ Configure::version()));
         $io.hr();
         $io.out(sprintf("App : %s", Configure::read("App.dir")));
         $io.out(sprintf("Path: %s", APP));
@@ -118,7 +118,7 @@ class ServerCommand : Command {
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            "PHP Built-in Server for CakePHP",
+            "PHP Built-in Server for UIM",
             "<warning>[WARN] Don\"t use this in a production environment</warning>",
         ]).addOption("host", [
             "short": "H",

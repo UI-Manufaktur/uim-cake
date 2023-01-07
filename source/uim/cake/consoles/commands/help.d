@@ -83,7 +83,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
             $namespace = str_replace("\\", "/", $matches[1]);
             $prefix = "App";
             if ($namespace == "Cake") {
-                $prefix = "CakePHP";
+                $prefix = "UIM";
             } elseif (in_array($namespace, $plugins, true)) {
                 $prefix = $namespace;
             }

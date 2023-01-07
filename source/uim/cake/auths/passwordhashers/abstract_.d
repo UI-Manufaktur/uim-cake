@@ -18,39 +18,32 @@ abstract class AbstractPasswordHasher {
 
     /**
      * Default config
-     *
-     * These are merged with user-provided config when the object is used.
-     *
-     * @var array<string, mixed>
      */
-    protected _defaultConfig = [];
+    protected Json _defaultConfig = [];
 
-    /**
-     * Constructor
-     *
-     * @param array<string, mixed> aConfig Array of config.
-     */
-    this(Json aConfig = []) {
+    this(
+        Json aConfig = [] // aConfig - Config data
+    ) {
         this.setConfig(aConfig);
     }
 
     /**
      * Generates password hash.
      *
-     * @param string $password Plain text password to hash.
-     * @return string|false Either the password hash string or false
+     * aPassword - Plain text password to hash.
+     * returns Either the password hash string or null if false
      */
-    abstract bool hash(string $password);
+    abstract string hash(string aPassword);
 
     /**
      * Check hash. Generate hash from user provided password string or data array
      * and check against existing hash.
      *
-     * @param string $password Plain text password to hash.
-     * @param string $hashedPassword Existing hashed password.
-     * @return bool True if hashes match else false.
+     * aPassword - Plain text password to hash.
+     * aHashedPassword - Existing hashed password.
+     * returns True if hashes match else false.
      */
-    abstract bool check(string $password, string $hashedPassword);
+    abstract bool check(string aPassword, string aHashedPassword);
 
     /**
      * Returns true if the password need to be rehashed, due to the password being
@@ -59,9 +52,9 @@ abstract class AbstractPasswordHasher {
      * Returns true by default since the only implementation users should rely
      * on is the one provided by default in php 5.5+ or any compatible library
      *
-     * @param string $password The password to verify
+     * aPassword -The password to verify
      */
-    bool needsRehash(string $password) {
+    bool needsRehash(string aPassword) {
         return password_needs_rehash($password, PASSWORD_DEFAULT);
     }
 }

@@ -191,7 +191,7 @@ class Configure {
      * Used to read and delete a variable from Configure.
      *
      * This is primarily used during bootstrapping to move configuration data
-     * out of configure into the various other classes in CakePHP.
+     * out of configure into the various other classes in UIM.
      *
      * @param string $var The key to read and remove.
      * @return array|string|null
@@ -214,7 +214,7 @@ class Configure {
 
     /**
      * Add a new engine to Configure. Engines allow you to read configuration
-     * files in various formats/storage locations. CakePHP comes with two built-in engines
+     * files in various formats/storage locations. UIM comes with two built-in engines
      * PhpConfig and IniConfig. You can also implement your own engine classes in your application.
      *
      * To add a new engine to Configure:
@@ -380,14 +380,14 @@ class Configure {
     }
 
     /**
-     * Used to determine the current version of CakePHP.
+     * Used to determine the current version of UIM.
      *
      * Usage
      * ```
      * Configure::version();
      * ```
      *
-     * @return string Current version of CakePHP
+     * @return string Current version of UIM
      */
     static string version() {
         $version = static::read("Cake.version");

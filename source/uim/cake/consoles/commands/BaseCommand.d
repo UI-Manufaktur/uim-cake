@@ -104,7 +104,7 @@ abstract class BaseCommand : ICommand {
     }
 
     /**
-     * Hook method invoked by CakePHP when a command is about to be executed.
+     * Hook method invoked by UIM when a command is about to be executed.
      *
      * Override this method and implement expensive/important setup steps that
      * should not run on every command run. This method will be called *before*

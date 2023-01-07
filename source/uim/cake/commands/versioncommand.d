@@ -4,11 +4,11 @@ module uim.cake.commands;
 import uim.cake;
 
 /**
- * Print out the version of CakePHP in use.
+ * Print out the version of UIM in use.
  */
 class VersionCommand : Command {
     /**
-     * Print out the version of CakePHP in use.
+     * Print out the version of UIM in use.
      *
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io

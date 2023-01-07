@@ -341,7 +341,7 @@ class I18nExtractCommand : Command {
             "help":"Always overwrite existing .pot files.",
         ]).addOption("extract-core", [
 <<<<<<< HEAD
-            "help":"Extract messages from the CakePHP core libraries.",
+            "help":"Extract messages from the UIM core libraries.",
             "choices":["yes", "no"],
 !==
             "help": "Extract messages from the UIM core libraries.",

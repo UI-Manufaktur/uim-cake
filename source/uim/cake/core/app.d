@@ -36,7 +36,7 @@ class App
 {
     /**
      * Return the class name namespaced. This method checks if the class is defined on the
-     * application/plugin, otherwise try to load from the CakePHP core
+     * application/plugin, otherwise try to load from the UIM core
      *
      * @param string $class Class name
      * @param string $type Type of class
@@ -230,7 +230,7 @@ class App
     }
 
     /**
-     * Returns the full path to a package inside the CakePHP core
+     * Returns the full path to a package inside the UIM core
      *
      * Usage:
      *

@@ -43,7 +43,7 @@ use UnexpectedValueException;
  *
  * ### Life cycle callbacks
  *
- * CakePHP fires a number of life cycle callbacks during each request.
+ * UIM fires a number of life cycle callbacks during each request.
  * By implementing a method you can receive the related events. The available
  * callbacks are:
  *
@@ -138,7 +138,7 @@ class Controller : IEventListener, IEventDispatcher {
      * Constructor.
      *
      * Sets a number of properties based on conventions if they are empty. To override the
-     * conventions CakePHP uses you can define properties in your class declaration.
+     * conventions UIM uses you can define properties in your class declaration.
      *
      * @param uim.cake.http.ServerRequest|null myServerRequest Request object for this controller. Can be null for testing,
      *   but expect that features that use the request parameters will not work.
