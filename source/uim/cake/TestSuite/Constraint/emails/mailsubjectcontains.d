@@ -41,7 +41,7 @@ class MailSubjectContains : MailConstraintBase
      * respects this.at
      */
     protected string getAssertedMessages() {
-        $messageMembers = [];
+        $messageMembers = null;
         $messages = this.getMessages();
         foreach ($messages as $message) {
             $messageMembers[] = $message.getSubject();

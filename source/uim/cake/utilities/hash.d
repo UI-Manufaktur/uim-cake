@@ -140,7 +140,7 @@ class Hash {
         $context = [_key: [myData]];
 
         foreach ($tokens as $token) {
-            $next = [];
+            $next = null;
 
             [$token, $conditions] = self::_splitConditions($token);
 
@@ -158,7 +158,7 @@ class Hash {
 
             // Filter for attributes.
             if ($conditions) {
-                $filter = [];
+                $filter = null;
                 foreach ($next as $item) {
                     if (
                         (
@@ -352,7 +352,7 @@ class Hash {
                 _list[myKey] = _list[myKey] ?? [];
                 _list = &_list[myKey];
                 if (!is_array(_list)) {
-                    _list = [];
+                    _list = null;
                 }
             } elseif ($op == "remove") {
                 if ($i == $last) {
@@ -484,7 +484,7 @@ class Hash {
             myGroup = static::extract(myData, myGroupPath);
             if (!empty(myGroup)) {
                 $c = is_array(myKeys) ? count(myKeys) : count($vals);
-                $out = [];
+                $out = null;
                 for ($i = 0; $i < $c; $i++) {
                     myGroup[$i] = myGroup[$i] ?? 0;
                     $out[myGroup[$i]] = $out[myGroup[$i]] ?? [];
@@ -526,7 +526,7 @@ class Hash {
      * @see uim.cake.Utility\Hash::extract()
      */
     static string[] format(array myData, string[] myPaths, string format) {
-        $extracted = [];
+        $extracted = null;
         myCount = count(myPaths);
 
         if (!myCount) {
@@ -536,14 +536,14 @@ class Hash {
         for ($i = 0; $i < myCount; $i++) {
             $extracted[] = static::extract(myData, myPaths[$i]);
         }
-        $out = [];
+        $out = null;
         /** @var array<mixed, array> myData */
         myData = $extracted;
         myCount = count(myData[0]);
 
         myCountTwo = count(myData);
         for ($j = 0; $j < myCount; $j++) {
-            $args = [];
+            $args = null;
             for ($i = 0; $i < myCountTwo; $i++) {
                 if (array_key_exists($j, myData[$i])) {
                     $args[] = myData[$i][$j];
@@ -567,7 +567,7 @@ class Hash {
         if (empty(myData) || empty($needle)) {
             return false;
         }
-        $stack = [];
+        $stack = null;
 
         while (!empty($needle)) {
             myKey = key($needle);
@@ -655,8 +655,8 @@ class Hash {
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::flatten
      */
     static array flatten(array myData, string separator = ".") {
-        myResult = [];
-        $stack = [];
+        myResult = null;
+        $stack = null;
         myPath = "";
 
         reset(myData);
@@ -699,7 +699,7 @@ class Hash {
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::expand
      */
     static array expand(array myData, string separator = ".") {
-        myResult = [];
+        myResult = null;
         foreach (myData as $flat: myValue) {
             myKeys = explode($separator, (string)$flat);
             myKeys = array_reverse(myKeys);
@@ -737,7 +737,7 @@ class Hash {
     static array merge(array myData, myMerge) {
         $args = array_slice(func_get_args(), 1);
         $return = myData;
-        $stack = [];
+        $stack = null;
 
         foreach ($args as &$curArg) {
             $stack[] = [(array)$curArg, &$return];
@@ -834,7 +834,7 @@ class Hash {
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::maxDimensions
      */
     static int maxDimensions(array myData) {
-        $depth = [];
+        $depth = null;
         if (!empty(myData)) {
             foreach (myData as myValue) {
                 if (is_array(myValue)) {
@@ -1006,7 +1006,7 @@ class Hash {
             myValues = array_map("mb_strtolower", myValues);
         }
         array_multisort(myValues, $dir, myType, myKeys, $dir, myType);
-        $sorted = [];
+        $sorted = null;
         myKeys = array_unique(myKeys);
 
         foreach (myKeys as $k) {
@@ -1033,7 +1033,7 @@ class Hash {
      * @return array
      */
     protected static array _squash(array myData, myKey = null) {
-        $stack = [];
+        $stack = null;
         foreach (myData as $k: $r) {
             $id = $k;
             if (myKey  !is null) {
@@ -1126,7 +1126,7 @@ class Hash {
             }
         }
         if (!$numeric || $assoc) {
-            $newList = [];
+            $newList = null;
             for ($i = 0; $i < myCount; $i++) {
                 if (is_int(myKeys[$i])) {
                     $newList[myData[myKeys[$i]]] = null;
@@ -1159,7 +1159,7 @@ class Hash {
      * @throws \InvalidArgumentException When providing invalid data.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::nest
      */
-    static array nest(array myData, array myOptions = []) {
+    static array nest(array myData, array myOptions = null) {
         if (!myData) {
             return myData;
         }
@@ -1172,7 +1172,7 @@ class Hash {
             "root": null,
         ];
 
-        $return = $idMap = [];
+        $return = $idMap = null;
         /** @var array $ids */
         $ids = static::extract(myData, myOptions["idPath"]);
 
@@ -1183,7 +1183,7 @@ class Hash {
         array_shift($parentKeys);
 
         foreach (myData as myResult) {
-            myResult[myOptions["children"]] = [];
+            myResult[myOptions["children"]] = null;
 
             $id = static::get(myResult, $idKeys);
             $parentId = static::get(myResult, $parentKeys);

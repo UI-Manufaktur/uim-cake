@@ -16,7 +16,7 @@ class TestEmailTransport : DebugTransport
     /**
      * @var array
      */
-    private static $messages = [];
+    private static $messages = null;
 
     /**
      * Stores email for later assertions
@@ -57,6 +57,6 @@ class TestEmailTransport : DebugTransport
      * Clears list of emails that have been sent
      */
     static void clearMessages() {
-        static::$messages = [];
+        static::$messages = null;
     }
 }

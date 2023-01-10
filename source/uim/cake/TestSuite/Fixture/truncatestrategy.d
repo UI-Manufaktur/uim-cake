@@ -20,7 +20,7 @@ class TruncateStrategy : FixtureStrategyInterface
     /**
      * @var array<uim.cake.Datasource\IFixture>
      */
-    protected $fixtures = [];
+    protected $fixtures = null;
 
     /**
      * Initialize strategy.

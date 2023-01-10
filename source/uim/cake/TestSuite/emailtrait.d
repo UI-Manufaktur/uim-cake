@@ -161,7 +161,7 @@ trait EmailTrait
      * @param array $file Additional file properties
      * @param string $message Message
      */
-    void assertMailContainsAttachment(string $filename, array $file = [], string $message = "") {
+    void assertMailContainsAttachment(string $filename, array $file = null, string $message = "") {
         this.assertThat([$filename, $file], new MailContainsAttachment(), $message);
     }
 

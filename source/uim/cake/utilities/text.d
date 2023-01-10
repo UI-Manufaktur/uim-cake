@@ -82,7 +82,7 @@ class Text {
         $depth = 0;
         $offset = 0;
         $buffer = "";
-        myResults = [];
+        myResults = null;
         $length = mb_strlen(myData);
         $open = false;
 
@@ -167,7 +167,7 @@ class Text {
      * @param array<string, mixed> myOptions An array of options, see description above
      * @return string
      */
-    static string insert(string str, array myData, array myOptions = []) {
+    static string insert(string str, array myData, array myOptions = null) {
         $defaults = [
             "before":":", "after":"", "escape":"\\", "format":null, "clean":false,
         ];
@@ -306,7 +306,7 @@ class Text {
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrap(string text, myOptions = []) {
+    static string wrap(string text, myOptions = null) {
         if (is_numeric(myOptions)) {
             myOptions = ["width":myOptions];
         }
@@ -342,7 +342,7 @@ class Text {
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrapBlock(string text, myOptions = []) {
+    static string wrapBlock(string text, myOptions = null) {
         if (is_numeric(myOptions)) {
             myOptions = ["width":myOptions];
         }
@@ -410,7 +410,7 @@ class Text {
      * @return string Formatted text.
      */
     protected static string _wordWrap(string text, int $width = 72, string break = "\n", bool $cut = false) {
-        $parts = [];
+        $parts = null;
         if ($cut) {
             while (mb_strlen($text) > 0) {
                 $part = mb_substr($text, 0, $width);
@@ -466,7 +466,7 @@ class Text {
      * @return string The highlighted text
      * @link https://book.UIM.org/4/en/core-libraries/text.html#highlighting-substrings
      */
-    static string highlight(string text, $phrase, array myOptions = []) {
+    static string highlight(string text, $phrase, array myOptions = null) {
         if (empty($phrase)) {
             return $text;
         }
@@ -480,8 +480,8 @@ class Text {
         myOptions += $defaults;
 
         if (is_array($phrase)) {
-            $replace = [];
-            $with = [];
+            $replace = null;
+            $with = null;
 
             foreach ($phrase as myKey: $segment) {
                 $segment = "(" ~ preg_quote($segment, "|") ~ ")";
@@ -525,7 +525,7 @@ class Text {
      * @param array<string, mixed> myOptions An array of options.
      * @return string Trimmed string.
      */
-    static string tail(string text, int $length = 100, array myOptions = []) {
+    static string tail(string text, int $length = 100, array myOptions = null) {
         $default = [
             "ellipsis":"...", "exact":true,
         ];
@@ -564,7 +564,7 @@ class Text {
      * @return string Trimmed string.
      * @link https://book.UIM.org/4/en/core-libraries/text.html#truncating-text
      */
-    static string truncate(string text, int $length = 100, array myOptions = []) {
+    static string truncate(string text, int $length = 100, array myOptions = null) {
         $default = [
             "ellipsis": "...", 
             "exact": "true", "html":false, "trimWidth":false,
@@ -582,7 +582,7 @@ class Text {
 
             $truncateLength = 0;
             $totalLength = 0;
-            $openTags = [];
+            $openTags = null;
             $truncate = "";
 
             preg_match_all("/(<\/?([\w+]+)[^>]*>)?([^<>]*)/", $text, $tags, PREG_SET_ORDER);
@@ -667,7 +667,7 @@ class Text {
      * @return string Trimmed string.
      * @see uim.cake.Utility\Text::truncate()
      */
-    static string truncateByWidth(string text, int $length = 100, array myOptions = []) {
+    static string truncateByWidth(string text, int $length = 100, array myOptions = null) {
         return static::truncate($text, $length, ["trimWidth":true] + myOptions);
     }
 
@@ -918,9 +918,9 @@ class Text {
      * @return array
      */
     static array utf8(string string) {
-        $map = [];
+        $map = null;
 
-        myValues = [];
+        myValues = null;
         $find = 1;
         $length = strlen($string);
 
@@ -941,7 +941,7 @@ class Text {
                     } else {
                         $map[] = ((myValues[0] % 32) * 64) + (myValues[1] % 64);
                     }
-                    myValues = [];
+                    myValues = null;
                     $find = 1;
                 }
             }
@@ -1104,7 +1104,7 @@ class Text {
      * @see setTransliterator()
      * @see setTransliteratorId()
      */
-    static string slug(string string, myOptions = []) {
+    static string slug(string string, myOptions = null) {
         if (is_string(myOptions)) {
             myOptions = ["replacement":myOptions];
         }

@@ -17,9 +17,9 @@ trait MergeVariablesTrait
      * @param $properties An array of properties and the merge strategy for them.
      * @param array<string, mixed> myOptions The options to use when merging properties.
      */
-    protected void _mergeVars(string[] $properties, array myOptions = []) {
+    protected void _mergeVars(string[] $properties, array myOptions = null) {
         myClass = static::class;
-        $parents = [];
+        $parents = null;
         while (true) {
             $parent = get_parent_class(myClass);
             if (!$parent) {

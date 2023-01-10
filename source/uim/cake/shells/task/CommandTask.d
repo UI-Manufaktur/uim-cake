@@ -89,7 +89,7 @@ class CommandTask : Shell {
         $fs = new Filesystem();
         myfiles = $fs.find($dir, "/\.php$/");
 
-        myShells = [];
+        myShells = null;
         foreach (myfiles as myfile) {
             myShells[] = myfile.getBasename(".php");
         }

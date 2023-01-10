@@ -90,7 +90,7 @@ class Text
         $depth = 0;
         $offset = 0;
         $buffer = "";
-        $results = [];
+        $results = null;
         $length = mb_strlen($data);
         $open = false;
 
@@ -174,7 +174,7 @@ class Text
      *     to be replaced with val
      * @param array<string, mixed> $options An array of options, see description above
      */
-    static string insert(string $str, array $data, STRINGAA someOptions = []) {
+    static string insert(string $str, array $data, STRINGAA someOptions = null) {
         $defaults = [
             "before": ":", "after": "", "escape": "\\", "format": null, "clean": false,
         ];
@@ -313,7 +313,7 @@ class Text
      * @param array<string, mixed>|int $options Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrap(string $text, $options = []) {
+    static string wrap(string $text, $options = null) {
         if (is_numeric($options)) {
             $options = ["width": $options];
         }
@@ -349,7 +349,7 @@ class Text
      * @param array<string, mixed>|int $options Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrapBlock(string $text, $options = []) {
+    static string wrapBlock(string $text, $options = null) {
         if (is_numeric($options)) {
             $options = ["width": $options];
         }
@@ -418,7 +418,7 @@ class Text
      * @return string Formatted text.
      */
     protected static string _wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false) {
-        $parts = [];
+        $parts = null;
         if ($cut) {
             while (mb_strlen($text) > 0) {
                 $part = mb_substr($text, 0, $width);
@@ -474,7 +474,7 @@ class Text
      * @return string The highlighted text
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#highlighting-substrings
      */
-    static string highlight(string $text, $phrase, STRINGAA someOptions = []) {
+    static string highlight(string $text, $phrase, STRINGAA someOptions = null) {
         if (empty($phrase)) {
             return $text;
         }
@@ -488,8 +488,8 @@ class Text
         $options += $defaults;
 
         if (is_array($phrase)) {
-            $replace = [];
-            $with = [];
+            $replace = null;
+            $with = null;
 
             foreach ($phrase as $key: $segment) {
                 $segment = "(" ~ preg_quote($segment, "|") ~ ")";
@@ -533,7 +533,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return string Trimmed string.
      */
-    static string tail(string $text, int $length = 100, STRINGAA someOptions = []) {
+    static string tail(string $text, int $length = 100, STRINGAA someOptions = null) {
         $default = [
             "ellipsis": "...", "exact": true,
         ];
@@ -572,7 +572,7 @@ class Text
      * @return string Trimmed string.
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#truncating-text
      */
-    static string truncate(string $text, int $length = 100, STRINGAA someOptions = []) {
+    static string truncate(string $text, int $length = 100, STRINGAA someOptions = null) {
         $default = [
             "ellipsis": "...", "exact": true, "html": false, "trimWidth": false,
         ];
@@ -589,7 +589,7 @@ class Text
 
             $truncateLength = 0;
             $totalLength = 0;
-            $openTags = [];
+            $openTags = null;
             $truncate = "";
 
             preg_match_all("/(<\/?([\w+]+)[^>]*>)?([^<>]*)/", $text, $tags, PREG_SET_ORDER);
@@ -674,7 +674,7 @@ class Text
      * @return string Trimmed string.
      * @see uim.cake.Utility\Text::truncate()
      */
-    static string truncateByWidth(string $text, int $length = 100, STRINGAA someOptions = []) {
+    static string truncateByWidth(string $text, int $length = 100, STRINGAA someOptions = null) {
         return static::truncate($text, $length, ["trimWidth": true] + $options);
     }
 
@@ -921,9 +921,9 @@ class Text
      * @param string $string String to convert.
      */
     static int[] utf8(string $string) {
-        $map = [];
+        $map = null;
 
-        $values = [];
+        $values = null;
         $find = 1;
         $length = strlen($string);
 
@@ -944,7 +944,7 @@ class Text
                     } else {
                         $map[] = (($values[0] % 32) * 64) + ($values[1] % 64);
                     }
-                    $values = [];
+                    $values = null;
                     $find = 1;
                 }
             }
@@ -1106,7 +1106,7 @@ class Text
      * @see setTransliterator()
      * @see setTransliteratorId()
      */
-    static string slug(string $string, $options = []) {
+    static string slug(string $string, $options = null) {
         if (is_string($options)) {
             $options = ["replacement": $options];
         }

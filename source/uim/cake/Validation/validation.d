@@ -94,7 +94,7 @@ class Validation
      *
      * @var array
      */
-    static $errors = [];
+    static $errors = null;
 
     /**
      * Checks that a string contains something other than whitespace
@@ -644,7 +644,7 @@ class Validation
      * @param array<string|int|bool> $booleanValues List of valid boolean values, defaults to `[true, false, 0, 1, "0", "1"]`.
      * @return bool Success.
      */
-    static bool boolean($check, array $booleanValues = []) {
+    static bool boolean($check, array $booleanValues = null) {
         if (!$booleanValues) {
             $booleanValues = [true, false, 0, 1, "0", "1"];
         }
@@ -661,7 +661,7 @@ class Validation
      * @param array<string|int|bool> $truthyValues List of valid truthy values, defaults to `[true, 1, "1"]`.
      * @return bool Success.
      */
-    static bool truthy($check, array $truthyValues = []) {
+    static bool truthy($check, array $truthyValues = null) {
         if (!$truthyValues) {
             $truthyValues = [true, 1, "1"];
         }
@@ -678,7 +678,7 @@ class Validation
      * @param array<string|int|bool> $falseyValues List of valid falsey values, defaults to `[false, 0, "0"]`.
      * @return bool Success.
      */
-    static bool falsey($check, array $falseyValues = []) {
+    static bool falsey($check, array $falseyValues = null) {
         if (!$falseyValues) {
             $falseyValues = [false, 0, "0"];
         }
@@ -939,7 +939,7 @@ class Validation
      * @param bool $caseInsensitive Set to true for case insensitive comparison.
      * @return bool Success
      */
-    static bool multiple($check, STRINGAA someOptions = [], bool $caseInsensitive = false) {
+    static bool multiple($check, STRINGAA someOptions = null, bool $caseInsensitive = false) {
         $defaults = ["in": null, "max": null, "min": null];
         $options += $defaults;
 
@@ -1150,7 +1150,7 @@ class Validation
      * @throws \RuntimeException when mime type can not be determined.
      * @throws \LogicException when ext/fileinfo is missing
      */
-    static bool mimeType($check, $mimeTypes = []) {
+    static bool mimeType($check, $mimeTypes = null) {
         $file = static::getFilename($check);
         if ($file == false) {
             return false;
@@ -1286,7 +1286,7 @@ class Validation
      * @param mixed $file The uploaded file data from PHP.
      * @param array<string, mixed> $options An array of options for the validation.
      */
-    static bool uploadedFile($file, STRINGAA someOptions = []) {
+    static bool uploadedFile($file, STRINGAA someOptions = null) {
         $options += [
             "minSize": null,
             "maxSize": null,
@@ -1427,7 +1427,7 @@ class Validation
      * @param mixed $value Geographic location as string
      * @param array<string, mixed> $options Options for the validation logic.
      */
-    static bool geoCoordinate($value, STRINGAA someOptions = []) {
+    static bool geoCoordinate($value, STRINGAA someOptions = null) {
         if (!is_scalar($value)) {
             return false;
         }
@@ -1462,7 +1462,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Latitude
      * @see uim.cake.validations.Validation::geoCoordinate()
      */
-    static bool latitude($value, STRINGAA someOptions = []) {
+    static bool latitude($value, STRINGAA someOptions = null) {
         $options["format"] = "lat";
 
         return self::geoCoordinate($value, $options);
@@ -1477,7 +1477,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Longitude
      * @see uim.cake.validations.Validation::geoCoordinate()
      */
-    static bool longitude($value, STRINGAA someOptions = []) {
+    static bool longitude($value, STRINGAA someOptions = null) {
         $options["format"] = "long";
 
         return self::geoCoordinate($value, $options);
@@ -1512,7 +1512,7 @@ class Validation
      * @param mixed $value The value to check
      * @param array<string, mixed> $options An array of options. See above for the supported options.
      */
-    static bool utf8($value, STRINGAA someOptions = []) {
+    static bool utf8($value, STRINGAA someOptions = null) {
         if (!is_string($value)) {
             return false;
         }
@@ -1595,7 +1595,7 @@ class Validation
         $checkInt = intval(substr($check, 2, 2));
         $account = substr($check, 4);
         $search = range("A", "Z");
-        $replace = [];
+        $replace = null;
         foreach (range(10, 35) as $tmp) {
             $replace[] = strval($tmp);
         }
@@ -1697,6 +1697,6 @@ class Validation
      * @return void
      */
     protected static void _reset() {
-        static::$errors = [];
+        static::$errors = null;
     }
 }

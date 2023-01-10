@@ -87,7 +87,7 @@ class MiddlewareDispatcher
     protected function _createRequest(array $spec): ServerRequest
     {
         if (isset($spec["input"])) {
-            $spec["post"] = [];
+            $spec["post"] = null;
             $spec["environment"]["CAKEPHP_INPUT"] = $spec["input"];
         }
         $environment = array_merge(

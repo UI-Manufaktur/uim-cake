@@ -27,7 +27,7 @@ class RedirectRoute : Route
      * @param array $defaults Defaults for the route. Either a redirect=>value array or a UIM array URL.
      * @param array<string, mixed> $options Array of additional options for the Route
      */
-    this(string $template, array $defaults = [], STRINGAA someOptions = []) {
+    this(string $template, array $defaults = null, STRINGAA someOptions = null) {
         super(($template, $defaults, $options);
         if (isset($defaults["redirect"])) {
             $defaults = (array)$defaults["redirect"];
@@ -80,7 +80,7 @@ class RedirectRoute : Route
      * @param array $context Array of request context parameters.
      * @return string|null Always null, string return result unused.
      */
-    Nullable!string match(array $url, array $context = []) {
+    Nullable!string match(array $url, array $context = null) {
         return null;
     }
 

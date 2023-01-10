@@ -27,7 +27,7 @@ class TableHelper : Helper
      * @return array<int>
      */
     protected array _calculateWidths(array $rows) {
-        $widths = [];
+        $widths = null;
         foreach ($rows as $line) {
             foreach (array_values($line) as $k: $v) {
                 $columnLength = _cellWidth((string)$v);
@@ -83,7 +83,7 @@ class TableHelper : Helper
      * @param array<int> $widths The widths of each column to output.
      * @param array<string, mixed> $options Options to be passed.
      */
-    protected void _render(array $row, array $widths, STRINGAA someOptions = []) {
+    protected void _render(array $row, array $widths, STRINGAA someOptions = null) {
         if (count($row) == 0) {
             return;
         }

@@ -28,28 +28,28 @@ class FixtureManager
      *
      * @var array<uim.cake.Datasource\IFixture>
      */
-    protected _loaded = [];
+    protected _loaded = null;
 
     /**
      * Holds the fixture classes that where instantiated indexed by class name
      *
      * @var array<uim.cake.Datasource\IFixture>
      */
-    protected _fixtureMap = [];
+    protected _fixtureMap = null;
 
     /**
      * A map of connection names and the fixture currently in it.
      *
      * @var array<string, array<uim.cake.Datasource\IFixture>>
      */
-    protected _insertionMap = [];
+    protected _insertionMap = null;
 
     /**
      * List of TestCase class name that have been processed
      *
      * @var array<string, bool>
      */
-    protected _processed = [];
+    protected _processed = null;
 
     /**
      * Is the test runner being run with `--debug` enabled.
@@ -89,7 +89,7 @@ class FixtureManager
      * @return array<string>
      */
     string[] getInserted() {
-        $inserted = [];
+        $inserted = null;
         foreach (_insertionMap as $fixtures) {
             foreach ($fixtures as $fixture) {
                 /** @var uim.cake.TestSuite\Fixture\TestFixture $fixture */
@@ -109,7 +109,7 @@ class FixtureManager
     protected void _aliasConnections() {
         $connections = ConnectionManager::configured();
         ConnectionManager::alias("test", "default");
-        $map = [];
+        $map = null;
         foreach ($connections as $connection) {
             if ($connection == "test" || $connection == "default") {
                 continue;
@@ -372,7 +372,7 @@ class FixtureManager
      * @return array An array of connection names.
      */
     protected array _fixtureConnections(array $fixtures) {
-        $dbs = [];
+        $dbs = null;
         foreach ($fixtures as $name) {
             if (!empty(_loaded[$name])) {
                 $fixture = _loaded[$name];

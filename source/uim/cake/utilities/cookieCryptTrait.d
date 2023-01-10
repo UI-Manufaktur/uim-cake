@@ -84,7 +84,7 @@ trait CookieCryptTrait
             return _decode(myValues, myMode, myKey);
         }
 
-        $decrypted = [];
+        $decrypted = null;
         foreach (myValues as myName: myValue) {
             $decrypted[myName] = _decode(myValue, myMode, myKey);
         }
@@ -156,7 +156,7 @@ trait CookieCryptTrait
 
             return $ret ?? $string;
         }
-        $array = [];
+        $array = null;
         foreach (explode(",", $string) as $pair) {
             myKey = explode("|", $pair);
             if (!isset(myKey[1])) {

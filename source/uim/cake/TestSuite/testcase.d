@@ -47,7 +47,7 @@ abstract class TestCase : BaseTestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [];
+    protected $fixtures = null;
 
     /**
      * By default, all fixtures attached to this class will be truncated and reloaded after each test.
@@ -81,7 +81,7 @@ abstract class TestCase : BaseTestCase
      *
      * @var array
      */
-    protected _configure = [];
+    protected _configure = null;
 
     /**
      * Asserts that a string matches a given regular expression.
@@ -246,7 +246,7 @@ abstract class TestCase : BaseTestCase
             Configure::write(_configure);
         }
         this.getTableLocator().clear();
-        _configure = [];
+        _configure = null;
         _tableLocator = null;
     }
 
@@ -359,7 +359,7 @@ abstract class TestCase : BaseTestCase
      * @param array<string, mixed> $plugins List of Plugins to load.
      * @return uim.cake.http.BaseApplication
      */
-    function loadPlugins(array $plugins = []): BaseApplication
+    function loadPlugins(array $plugins = null): BaseApplication
     {
         /** @var uim.cake.http.BaseApplication $app */
         $app = this.getMockForAbstractClass(
@@ -388,7 +388,7 @@ abstract class TestCase : BaseTestCase
      *
      * @param array<string> $names A list of plugins you want to remove.
      */
-    void removePlugins(array $names = []) {
+    void removePlugins(array $names = null) {
         $collection = Plugin::getCollection();
         foreach ($names as $name) {
             $collection.remove($name);
@@ -652,8 +652,8 @@ abstract class TestCase : BaseTestCase
      * @param bool $fullDebug Whether more verbose output should be used.
      */
     bool assertHtml(array $expected, string $string, bool $fullDebug = false) {
-        $regex = [];
-        $normalized = [];
+        $regex = null;
+        $normalized = null;
         foreach ($expected as $key: $val) {
             if (!is_numeric($key)) {
                 $normalized[] = [$key: $val];
@@ -708,10 +708,10 @@ abstract class TestCase : BaseTestCase
                     $i,
                 ];
                 if ($attributes == true) {
-                    $attributes = [];
+                    $attributes = null;
                 }
-                $attrs = [];
-                $explanations = [];
+                $attrs = null;
+                $explanations = null;
                 $i = 1;
                 foreach ($attributes as $attr: $val) {
                     if (is_numeric($attr) && preg_match("/^preg\:\/(.+)\/$/i", (string)$val, $matches)) {
@@ -920,7 +920,7 @@ abstract class TestCase : BaseTestCase
      * @throws uim.cake.orm.exceptions.MissingTableClassException
      * @return uim.cake.orm.Table|\PHPUnit\Framework\MockObject\MockObject
      */
-    function getMockForModel(string $alias, array $methods = [], STRINGAA someOptions = []) {
+    function getMockForModel(string $alias, array $methods = null, STRINGAA someOptions = null) {
         $className = _getTableClassName($alias, $options);
         $connectionName = $className::defaultConnectionName();
         $connection = ConnectionManager::get($connectionName);

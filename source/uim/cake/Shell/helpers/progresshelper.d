@@ -85,7 +85,7 @@ class ProgressHelper : Helper
      * @param array $args The initialization data.
      * @return this
      */
-    function init(array $args = []) {
+    function init(array $args = null) {
         $args += ["total": 100, "width": 80];
         _progress = 0;
         _width = $args["width"];

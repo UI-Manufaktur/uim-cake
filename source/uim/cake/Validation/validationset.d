@@ -24,7 +24,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<uim.cake.validations.ValidationRule>
      */
-    protected _rules = [];
+    protected _rules = null;
 
     /**
      * Denotes whether the fieldname key must be present in data array

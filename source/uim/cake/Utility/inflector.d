@@ -152,14 +152,14 @@ class Inflector
      *
      * @var array<string, mixed>
      */
-    protected static _cache = [];
+    protected static _cache = null;
 
     /**
      * The initial state of Inflector so reset() works.
      *
      * @var array
      */
-    protected static _initialState = [];
+    protected static _initialState = null;
 
     /**
      * Cache inflected values, and return if already available
@@ -233,7 +233,7 @@ class Inflector
             static::${$var} = $rules + static::${$var};
         }
 
-        static::_cache = [];
+        static::_cache = null;
     }
 
     /**

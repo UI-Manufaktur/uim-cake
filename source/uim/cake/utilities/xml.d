@@ -80,7 +80,7 @@ class Xml {
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function build($input, array myOptions = []) {
+    static function build($input, array myOptions = null) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -143,7 +143,7 @@ class Xml {
      * @return \SimpleXMLElement|\DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function loadHtml(string input, array myOptions = []) {
+    static function loadHtml(string input, array myOptions = null) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -240,7 +240,7 @@ class Xml {
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function fromArray($input, array myOptions = []) {
+    static function fromArray($input, array myOptions = null) {
         if (is_object($input) && method_exists($input, "toArray") && is_callable([$input, "toArray"])) {
             $input = $input.toArray();
         }
@@ -411,7 +411,7 @@ class Xml {
         if (!($obj instanceof SimpleXMLElement)) {
             throw new XmlException("The input is not instance of SimpleXMLElement, DOMDocument or DOMNode.");
         }
-        myResult = [];
+        myResult = null;
         $modules = array_merge(["": ""], $obj.getmodules(true));
         static::_toArray($obj, myResult, "", array_keys($modules));
 
@@ -428,7 +428,7 @@ class Xml {
      * @return void
      */
     protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string ns, string[] $modules) {
-        myData = [];
+        myData = null;
 
         foreach ($modules as $module) {
             /**

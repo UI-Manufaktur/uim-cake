@@ -72,7 +72,7 @@ trait IntegrationTestTrait
      *
      * @var array
      */
-    protected _request = [];
+    protected _request = null;
 
     /**
      * The response for the most recent request.
@@ -93,14 +93,14 @@ trait IntegrationTestTrait
      *
      * @var array
      */
-    protected _session = [];
+    protected _session = null;
 
     /**
      * Cookie data to use in the next request.
      *
      * @var array
      */
-    protected _cookie = [];
+    protected _cookie = null;
 
     /**
      * The controller used in the last request.
@@ -149,7 +149,7 @@ trait IntegrationTestTrait
      *
      * @var array
      */
-    protected _flashMessages = [];
+    protected _flashMessages = null;
 
     /**
      */
@@ -160,7 +160,7 @@ trait IntegrationTestTrait
      *
      * @var array<string>
      */
-    protected _unlockedFields = [];
+    protected _unlockedFields = null;
 
     /**
      * The name that will be used when retrieving the csrf token.
@@ -175,9 +175,9 @@ trait IntegrationTestTrait
      * @psalm-suppress PossiblyNullPropertyAssignmentValue
      */
     void cleanup() {
-        _request = [];
-        _session = [];
-        _cookie = [];
+        _request = null;
+        _session = null;
+        _cookie = null;
         _response = null;
         _exception = null;
         _controller = null;
@@ -187,7 +187,7 @@ trait IntegrationTestTrait
         _securityToken = false;
         _csrfToken = false;
         _retainFlashMessages = false;
-        _flashMessages = [];
+        _flashMessages = null;
     }
 
     /**
@@ -204,7 +204,7 @@ trait IntegrationTestTrait
      *
      * @param array<string> $unlockedFields List of fields that are excluded from field validation.
      */
-    void setUnlockedFields(array $unlockedFields = []) {
+    void setUnlockedFields(array $unlockedFields = null) {
         _unlockedFields = $unlockedFields;
     }
 
@@ -326,7 +326,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void post($url, $data = []) {
+    void post($url, $data = null) {
         _sendRequest($url, "POST", $data);
     }
 
@@ -340,7 +340,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void patch($url, $data = []) {
+    void patch($url, $data = null) {
         _sendRequest($url, "PATCH", $data);
     }
 
@@ -354,7 +354,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void put($url, $data = []) {
+    void put($url, $data = null) {
         _sendRequest($url, "PUT", $data);
     }
 
@@ -408,7 +408,7 @@ trait IntegrationTestTrait
      * @return void
      * @throws \PHPUnit\Exception|\Throwable
      */
-    protected void _sendRequest($url, $method, $data = []) {
+    protected void _sendRequest($url, $method, $data = null) {
         $dispatcher = _makeDispatcher();
         $url = $dispatcher.resolveUrl($url);
 
@@ -504,7 +504,7 @@ trait IntegrationTestTrait
      * @param array|string $data The request data.
      * @return array The request context
      */
-    protected array _buildRequest(string $url, $method, $data = []) {
+    protected array _buildRequest(string $url, $method, $data = null) {
         $sessionConfig = (array)Configure::read("Session") + [
             "defaults": "php",
         ];
@@ -653,7 +653,7 @@ trait IntegrationTestTrait
         $path = $uri.getPath();
         $query = $uri.getQuery();
 
-        $hostData = [];
+        $hostData = null;
         if ($uri.getHost()) {
             $hostData["host"] = $uri.getHost();
         }

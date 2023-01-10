@@ -47,7 +47,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      *
      * @var array
      */
-    $fields = [];
+    $fields = null;
 
     /**
      * Configuration for importing fixture schema
@@ -65,7 +65,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      *
      * @var array
      */
-    $records = [];
+    $records = null;
 
     /**
      * The schema for this fixture.
@@ -80,7 +80,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      *
      * @var array<string, mixed>
      */
-    protected _constraints = [];
+    protected _constraints = null;
 
     /**
      * Instantiate the fixture.
@@ -368,7 +368,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      * @return array
      */
     protected array _getRecords() {
-        $fields = $values = $types = [];
+        $fields = $values = $types = null;
         $columns = _schema.columns();
         foreach (this.records as $record) {
             $fields = array_merge($fields, array_intersect(array_keys($record), $columns));

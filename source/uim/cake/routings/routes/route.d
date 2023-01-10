@@ -26,21 +26,21 @@ class Route
      *
      * @var array
      */
-    $keys = [];
+    $keys = null;
 
     /**
      * An array of additional parameters for the Route.
      *
      * @var array
      */
-    $options = [];
+    $options = null;
 
     /**
      * Default parameters for a Route
      *
      * @var array
      */
-    $defaults = [];
+    $defaults = null;
 
     /**
      * The routes template string.
@@ -72,14 +72,14 @@ class Route
      *
      * @var array<string>
      */
-    protected _extensions = [];
+    protected _extensions = null;
 
     /**
      * List of middleware that should be applied.
      *
      * @var array
      */
-    protected $middleware = [];
+    protected $middleware = null;
 
     /**
      * Track whether brace keys `{var}` were used.
@@ -121,7 +121,7 @@ class Route
      * @param array<string, mixed> $options Array of additional options for the Route
      * @throws \InvalidArgumentException When `$options["_method"]` are not in `VALID_METHODS` list.
      */
-    this(string $template, array $defaults = [], STRINGAA someOptions = []) {
+    this(string $template, array $defaults = null, STRINGAA someOptions = null) {
         this.template = $template;
         this.defaults = $defaults;
         this.options = $options + ["_ext": [], "_middleware": []];
@@ -180,7 +180,7 @@ class Route
             : strtoupper($methods);
 
         $diff = array_diff((array)$methods, static::VALID_METHODS);
-        if ($diff != []) {
+        if ($diff != null) {
             throw new InvalidArgumentException(
                 sprintf("Invalid HTTP method received. `%s` is invalid.", implode(", ", $diff))
             );
@@ -286,12 +286,12 @@ class Route
     protected void _writeRoute() {
         if (empty(this.template) || (this.template == "/")) {
             _compiledRoute = "#^/*$#";
-            this.keys = [];
+            this.keys = null;
 
             return;
         }
         $route = this.template;
-        $names = $routeParams = [];
+        $names = $routeParams = null;
         $parsed = preg_quote(this.template, "#");
 
         if (strpos($route, "{") != false && strpos($route, "}") != false) {
@@ -459,7 +459,7 @@ class Route
         for ($i = 0; $i <= $count; $i++) {
             unset($route[$i]);
         }
-        $route["pass"] = [];
+        $route["pass"] = null;
 
         // Assign defaults, set passed args to pass
         foreach (this.defaults as $key: $value) {
@@ -557,7 +557,7 @@ class Route
      * @return array<string> Array of passed args.
      */
     protected array _parseArgs(string $args, array $context) {
-        $pass = [];
+        $pass = null;
         $args = explode("/", $args);
         $urldecode = this.options["_urldecode"] ?? true;
 
@@ -603,7 +603,7 @@ class Route
      *   directory and other url params.
      * @return string|null Either a string URL for the parameters if they match or null.
      */
-    Nullable!string match(array $url, array $context = []) {
+    Nullable!string match(array $url, array $context = null) {
         if (empty(_compiledRoute)) {
             this.compile();
         }
@@ -692,7 +692,7 @@ class Route
             return null;
         }
 
-        $pass = [];
+        $pass = null;
         foreach ($url as $key: $value) {
             // If the key is a routed key, it"s not different yet.
             if (array_key_exists($key, $keyNames)) {
@@ -771,14 +771,14 @@ class Route
      * @param array $query An array of parameters
      * @return string Composed route string.
      */
-    protected string _writeUrl(array $params, array $pass = [], array $query = []) {
+    protected string _writeUrl(array $params, array $pass = null, array $query = null) {
         $pass = array_map(function ($value) {
             return rawurlencode((string)$value);
         }, $pass);
         $pass = implode("/", $pass);
         $out = this.template;
 
-        $search = $replace = [];
+        $search = $replace = null;
         foreach (this.keys as $key) {
             if (!array_key_exists($key, $params)) {
                 throw new InvalidArgumentException("Missing required route key `{$key}`");

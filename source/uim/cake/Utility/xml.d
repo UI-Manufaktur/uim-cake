@@ -93,7 +93,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function build($input, STRINGAA someOptions = []) {
+    static function build($input, STRINGAA someOptions = null) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -156,7 +156,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function loadHtml(string $input, STRINGAA someOptions = []) {
+    static function loadHtml(string $input, STRINGAA someOptions = null) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -253,7 +253,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function fromArray($input, STRINGAA someOptions = []) {
+    static function fromArray($input, STRINGAA someOptions = null) {
         if (is_object($input) && method_exists($input, "toArray") && is_callable([$input, "toArray"])) {
             $input = $input.toArray();
         }
@@ -425,7 +425,7 @@ class Xml
         if (!($obj instanceof SimpleXMLElement)) {
             throw new XmlException("The input is not instance of SimpleXMLElement, DOMDocument or DOMNode.");
         }
-        $result = [];
+        $result = null;
         $namespaces = array_merge(["": ""], $obj.getNamespaces(true));
         static::_toArray($obj, $result, "", array_keys($namespaces));
 
@@ -442,7 +442,7 @@ class Xml
      * @return void
      */
     protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, array $namespaces) {
-        $data = [];
+        $data = null;
 
         foreach ($namespaces as $namespace) {
             /**

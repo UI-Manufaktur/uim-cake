@@ -20,9 +20,9 @@ class FixtureHelper
      * @return array<uim.cake.Datasource\IFixture>
      */
     array loadFixtures(array $fixtureNames) {
-        static $cachedFixtures = [];
+        static $cachedFixtures = null;
 
-        $fixtures = [];
+        $fixtures = null;
         foreach ($fixtureNames as $fixtureName) {
             if (strpos($fixtureName, ".")) {
                 [$type, $pathName] = explode(".", $fixtureName, 2);
@@ -90,7 +90,7 @@ class FixtureHelper
      * @param array<uim.cake.Datasource\IFixture> $fixtures Test fixtures
      */
     void runPerConnection(Closure $callback, array $fixtures) {
-        $groups = [];
+        $groups = null;
         foreach ($fixtures as $fixture) {
             $groups[$fixture.connection()][] = $fixture;
         }
@@ -213,8 +213,8 @@ class FixtureHelper
      */
     protected function sortByConstraint(Connection $connection, array $fixtures): ?array
     {
-        $constrained = [];
-        $unconstrained = [];
+        $constrained = null;
+        $unconstrained = null;
         foreach ($fixtures as $fixture) {
             $references = this.getForeignReferences($connection, $fixture);
             if ($references) {
@@ -245,7 +245,7 @@ class FixtureHelper
      * @return array<string>
      */
     protected array getForeignReferences(Connection $connection, IFixture $fixture) {
-        static $schemas = [];
+        static $schemas = null;
 
         // Get and cache off the schema since TestFixture generates a fake schema based on $fields
         $tableName = $fixture.sourceName();
@@ -254,7 +254,7 @@ class FixtureHelper
         }
         $schema = $schemas[$tableName];
 
-        $references = [];
+        $references = null;
         foreach ($schema.constraints() as $constraintName) {
             $constraint = $schema.getConstraint($constraintName);
 
