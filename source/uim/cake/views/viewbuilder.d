@@ -75,21 +75,21 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @var array<string, mixed>
      */
-    protected _options = [];
+    protected _options = null;
 
     /**
      * The helpers to use
      *
      * @var array
      */
-    protected _helpers = [];
+    protected _helpers = null;
 
     /**
      * View vars
      *
      * @var array<string, mixed>
      */
-    protected _vars = [];
+    protected _vars = null;
 
     /**
      * Saves a variable for use inside a template.
@@ -221,7 +221,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      * @since 4.1.0
      */
-    function addHelper(string helper, array myOptions = []) {
+    function addHelper(string helper, array myOptions = null) {
         if (myOptions) {
             $array = [$helper: myOptions];
         } else {
@@ -244,7 +244,7 @@ class ViewBuilder : JsonSerializable, Serializable
         foreach ($helpers as $helper: myConfig) {
             if (is_int($helper)) {
                 $helper = myConfig;
-                myConfig = [];
+                myConfig = null;
             }
             this.addHelper($helper, myConfig);
         }
@@ -454,7 +454,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @throws uim.cake.View\exceptions.MissingViewException
      */
     function build(
-        array $vars = [],
+        array $vars = null,
         ?ServerRequest myRequest = null,
         ?Response $response = null,
         ?IEventManager myEvents = null
@@ -514,7 +514,7 @@ class ViewBuilder : JsonSerializable, Serializable
             "_layoutPath", "_name", "_className", "_options", "_helpers", "_vars",
         ];
 
-        $array = [];
+        $array = null;
 
         foreach ($properties as $property) {
             $array[$property] = this.{$property};

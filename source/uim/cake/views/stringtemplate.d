@@ -69,28 +69,28 @@ class StringTemplate {
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [];
+    protected STRINGAA _defaultConfig = null;
 
     /**
      * A stack of template sets that have been stashed temporarily.
      *
      * @var array
      */
-    protected _configStack = [];
+    protected _configStack = null;
 
     /**
      * Contains the list of compiled templates
      *
      * @var array<string, array>
      */
-    protected _compiled = [];
+    protected _compiled = null;
 
     /**
      * Constructor.
      *
      * @param array<string, mixed> myConfig A set of templates to add.
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         this.add(myConfig);
     }
 
@@ -141,7 +141,7 @@ class StringTemplate {
      *
      * @param array<string> myTemplates The template names to compile. If empty all templates will be compiled.
      */
-    protected void _compileTemplates(array myTemplates = []) {
+    protected void _compileTemplates(array myTemplates = null) {
       if (empty(myTemplates)) {
           myTemplates = array_keys(_config);
       }
@@ -207,7 +207,7 @@ class StringTemplate {
             myData += myData["templateVars"];
             unset(myData["templateVars"]);
         }
-        $replace = [];
+        $replace = null;
         foreach ($placeholders as $placeholder) {
             $replacement = myData[$placeholder] ?? null;
             if (is_array($replacement)) {
@@ -250,13 +250,13 @@ class StringTemplate {
         myOptions = (array)myOptions + ["escape": true];
 
         if (!is_array($exclude)) {
-            $exclude = [];
+            $exclude = null;
         }
 
         $exclude = ["escape": true, "idPrefix": true, "templateVars": true, "fieldName": true]
             + array_flip($exclude);
         $escape = myOptions["escape"];
-        $attributes = [];
+        $attributes = null;
 
         foreach (myOptions as myKey: myValue) {
             if (!isset($exclude[myKey]) && myValue != false && myValue  !is null) {
@@ -316,7 +316,7 @@ class StringTemplate {
             myClass = Hash::get($input, $useIndex, []);
         } else {
             myClass = $input;
-            $input = [];
+            $input = null;
         }
 
         // Convert and sanitise the inputs
@@ -324,7 +324,7 @@ class StringTemplate {
             if (is_string(myClass) && !empty(myClass)) {
                 myClass = explode(" ", myClass);
             } else {
-                myClass = [];
+                myClass = null;
             }
         }
 

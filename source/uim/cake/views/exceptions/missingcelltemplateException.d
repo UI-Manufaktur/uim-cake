@@ -25,7 +25,7 @@ class MissingCellTemplateException : MissingTemplateException {
     this(
         string myName,
         string myfile,
-        array myPaths = [],
+        array myPaths = null,
         Nullable!int $code = null,
         ?Throwable $previous = null
     ) {

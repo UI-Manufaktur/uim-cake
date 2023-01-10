@@ -55,7 +55,7 @@ class FormContext : IContext
     }
 
 
-    function val(string myField, array myOptions = []) {
+    function val(string myField, array myOptions = null) {
         myOptions += [
             "default": null,
             "schemaDefault": true,

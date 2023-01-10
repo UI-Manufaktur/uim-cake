@@ -41,7 +41,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myConfig Configuration settings for the helper
      * @throws uim.cake.Core\exceptions.UIMException When the engine class could not be found.
      */
-    this(View $view, array myConfig = []) {
+    this(View $view, array myConfig = null) {
         super.this($view, myConfig);
 
         myConfig = _config;
@@ -76,7 +76,7 @@ class NumberHelper : Helper
      * @see uim.cake.I18n\Number::precision()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
-    string precision($number, int $precision = 3, array myOptions = []) {
+    string precision($number, int $precision = 3, array myOptions = null) {
         return _engine.precision($number, $precision, myOptions);
     }
 
@@ -106,7 +106,7 @@ class NumberHelper : Helper
      * @see uim.cake.I18n\Number::toPercentage()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-percentages
      */
-    string toPercentage($number, int $precision = 2, array myOptions = []) {
+    string toPercentage($number, int $precision = 2, array myOptions = null) {
         return _engine.toPercentage($number, $precision, myOptions);
     }
 
@@ -127,7 +127,7 @@ class NumberHelper : Helper
      * @return string Formatted number
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-numbers
      */
-    string format($number, array myOptions = []) {
+    string format($number, array myOptions = null) {
         $formatted = _engine.format($number, myOptions);
         myOptions += ["escape": true];
 
@@ -158,7 +158,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return string Number formatted as a currency.
      */
-    string currency($number, Nullable!string currency = null, array myOptions = []) {
+    string currency($number, Nullable!string currency = null, array myOptions = null) {
         $formatted = _engine.currency($number, $currency, myOptions);
         myOptions += ["escape": true];
 
@@ -181,7 +181,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions Options list.
      * @return string formatted delta
      */
-    string formatDelta(myValue, array myOptions = []) {
+    string formatDelta(myValue, array myOptions = null) {
         $formatted = _engine.formatDelta(myValue, myOptions);
         myOptions += ["escape": true];
 
@@ -221,7 +221,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> myOptions An array with options.
      * @return string formatted number
      */
-    string ordinal(myValue, array myOptions = []) {
+    string ordinal(myValue, array myOptions = null) {
         return _engine.ordinal(myValue, myOptions);
     }
 }

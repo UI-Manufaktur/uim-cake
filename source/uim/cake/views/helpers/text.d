@@ -36,7 +36,7 @@ class TextHelper : Helper
      *
      * @var array<string, array>
      */
-    protected _placeholders = [];
+    protected _placeholders = null;
 
     /**
      * Cake Utility Text instance
@@ -57,7 +57,7 @@ class TextHelper : Helper
      * @param array<string, mixed> myConfig Settings array Settings array
      * @throws uim.cake.Core\exceptions.UIMException when the engine class could not be found.
      */
-    this(View $view, array myConfig = []) {
+    this(View $view, array myConfig = null) {
         super.this($view, myConfig);
 
         myConfig = _config;
@@ -95,8 +95,8 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-urls
      */
-    string autoLinkUrls(string text, array myOptions = []) {
-        _placeholders = [];
+    string autoLinkUrls(string text, array myOptions = null) {
+        _placeholders = null;
         myOptions += ["escape": true];
 
         // phpcs:disable Generic.Files.LineLength
@@ -169,7 +169,7 @@ class TextHelper : Helper
      * @return string The text with links inserted.
      */
     protected string _linkUrls(string text, array $htmlOptions) {
-        $replace = [];
+        $replace = null;
         foreach (_placeholders as $hash: myContents) {
             $link = myUrl = myContents["content"];
             $envelope = myContents["envelope"];
@@ -191,7 +191,7 @@ class TextHelper : Helper
      * @see uim.cake.View\Helper\TextHelper::autoLinkEmails()
      */
     protected string _linkEmails(string text, array myOptions) {
-        $replace = [];
+        $replace = null;
         foreach (_placeholders as $hash: myContents) {
             myUrl = myContents["content"];
             $envelope = myContents["envelope"];
@@ -213,9 +213,9 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-email-addresses
      */
-    string autoLinkEmails(string text, array myOptions = []) {
+    string autoLinkEmails(string text, array myOptions = null) {
         myOptions += ["escape": true];
-        _placeholders = [];
+        _placeholders = null;
 
         $atom = "[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]";
         $text = preg_replace_callback(
@@ -242,7 +242,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.UIM.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
-    string autoLink(string text, array myOptions = []) {
+    string autoLink(string text, array myOptions = null) {
         $text = this.autoLinkUrls($text, myOptions);
 
         return this.autoLinkEmails($text, ["escape": false] + myOptions);
@@ -259,7 +259,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::highlight()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#highlighting-substrings
      */
-    string highlight(string text, string phrase, array myOptions = []) {
+    string highlight(string text, string phrase, array myOptions = null) {
         return _engine.highlight($text, $phrase, myOptions);
     }
 
@@ -307,7 +307,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::truncate()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-text
      */
-    string truncate(string text, int $length = 100, array myOptions = []) {
+    string truncate(string text, int $length = 100, array myOptions = null) {
         return _engine.truncate($text, $length, myOptions);
     }
 
@@ -329,7 +329,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::tail()
      * @link https://book.UIM.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
-    string tail(string text, int $length = 100, array myOptions = []) {
+    string tail(string text, int $length = 100, array myOptions = null) {
         return _engine.tail($text, $length, myOptions);
     }
 
@@ -384,7 +384,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::setTransliterator()
      * @see uim.cake.Utility\Text::setTransliteratorId()
      */
-    string slug(string string, myOptions = []) {
+    string slug(string string, myOptions = null) {
         return _engine.slug($string, myOptions);
     }
 

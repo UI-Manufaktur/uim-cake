@@ -42,7 +42,7 @@ interface IContext
      *   is needed for.
      * @return mixed
      */
-    function val(string myField, array myOptions = []);
+    function val(string myField, array myOptions = null);
 
     /**
      * Check if a given field is "required".

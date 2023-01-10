@@ -138,7 +138,7 @@ class JsonView : SerializedView {
      */
     protected auto _dataToSerialize(string[] serializeNames...) {
         if (is_array(serializeNames)) {
-            myData = [];
+            myData = null;
             foreach (myAlias: myKey; serializeNames) {
                 if (is_numeric(myAlias)) {
                     myAlias = myKey;

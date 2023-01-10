@@ -8,11 +8,11 @@ import uim.cake;
  *
  * Automatic generation of HTML FORMs from given data.
  *
- * @method string text(string myFieldName, array myOptions = []) Creates input of type text.
- * @method string number(string myFieldName, array myOptions = []) Creates input of type number.
- * @method string email(string myFieldName, array myOptions = []) Creates input of type email.
- * @method string password(string myFieldName, array myOptions = []) Creates input of type password.
- * @method string search(string myFieldName, array myOptions = []) Creates input of type search.
+ * @method string text(string myFieldName, array myOptions = null) Creates input of type text.
+ * @method string number(string myFieldName, array myOptions = null) Creates input of type number.
+ * @method string email(string myFieldName, array myOptions = null) Creates input of type email.
+ * @method string password(string myFieldName, array myOptions = null) Creates input of type password.
+ * @method string search(string myFieldName, array myOptions = null) Creates input of type search.
  * @property uim.cake.View\Helper\HtmlHelper $Html
  * @property uim.cake.View\Helper\UrlHelper myUrl
  * @link https://book.UIM.org/4/en/views/helpers/form.html
@@ -226,7 +226,7 @@ class FormHelper : Helper
      * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper.
      */
-    this(View $view, array myConfig = []) {
+    this(View $view, array myConfig = null) {
         $locator = null;
         $widgets = _defaultWidgets;
         if (isset(myConfig["locator"])) {
@@ -286,7 +286,7 @@ class FormHelper : Helper
      * @param array $contexts An array of context providers.
      * @return uim.cake.View\Form\ContextFactory
      */
-    ContextFactory contextFactory(?ContextFactory $instance = null, array $contexts = []) {
+    ContextFactory contextFactory(?ContextFactory $instance = null, array $contexts = null) {
         if ($instance is null) {
             if (_contextFactory is null) {
                 _contextFactory = ContextFactory::createWithDefaults($contexts);
@@ -327,14 +327,14 @@ class FormHelper : Helper
      * @return string An formatted opening FORM tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#Cake\View\Helper\FormHelper::create
      */
-    string create($context = null, array myOptions = []) {
+    string create($context = null, array myOptions = null) {
         $append = "";
 
         if ($context instanceof IContext) {
             this.context($context);
         } else {
             if (empty(myOptions["context"])) {
-                myOptions["context"] = [];
+                myOptions["context"] = null;
             }
             myOptions["context"]["entity"] = $context;
             $context = _getContext(myOptions["context"]);
@@ -380,7 +380,7 @@ class FormHelper : Helper
         _lastAction(myUrl);
         unset(myOptions["url"], myOptions["idPrefix"]);
 
-        $htmlAttributes = [];
+        $htmlAttributes = null;
         switch (strtolower(myOptions["type"])) {
             case "get":
                 $htmlAttributes["method"] = "get";
@@ -518,7 +518,7 @@ class FormHelper : Helper
      * @return string A closing FORM tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#closing-the-form
      */
-    string end(array $secureAttributes = []) {
+    string end(array $secureAttributes = null) {
         $out = "";
 
         if (this.requestType != "get" && _View.getRequest().getAttribute("formTokenData")  !is null) {
@@ -551,7 +551,7 @@ class FormHelper : Helper
      * @return string A hidden input field with a security hash, or empty string when
      *   secured forms are not in use.
      */
-    string secure(array myFields = [], array $secureAttributes = []) {
+    string secure(array myFields = null, array $secureAttributes = null) {
         if (!this.formProtector) {
             return "";
         }
@@ -669,7 +669,7 @@ class FormHelper : Helper
      * @return string Formatted errors or "".
      * @link https://book.UIM.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
-    string error(string myField, $text = null, array myOptions = []) {
+    string error(string myField, $text = null, array myOptions = null) {
         if (substr(myField, -5) == "._ids") {
             myField = substr(myField, 0, -5);
         }
@@ -682,7 +682,7 @@ class FormHelper : Helper
         myError = $context.error(myField);
 
         if (is_array($text)) {
-            $tmp = [];
+            $tmp = null;
             foreach (myError as $k: $e) {
                 if (isset($text[$k])) {
                     $tmp[] = $text[$k];
@@ -706,7 +706,7 @@ class FormHelper : Helper
 
         if (is_array(myError)) {
             if (count(myError) > 1) {
-                myErrorText = [];
+                myErrorText = null;
                 foreach (myError as $err) {
                     myErrorText[] = this.formatTemplate("errorItem", ["text": $err]);
                 }
@@ -782,7 +782,7 @@ class FormHelper : Helper
      * @return string The formatted LABEL element
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-labels
      */
-    string label(string myFieldName, Nullable!string text = null, array myOptions = []) {
+    string label(string myFieldName, Nullable!string text = null, array myOptions = null) {
         if ($text is null) {
             $text = myFieldName;
             if (substr($text, -5) == "._ids") {
@@ -850,7 +850,7 @@ class FormHelper : Helper
      * @return string Completed form controls.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#generating-entire-forms
      */
-    string allControls(array myFields = [], array myOptions = []) {
+    string allControls(array myFields = null, array myOptions = null) {
         $context = _getContext();
 
         myModelFields = $context.fieldNames();
@@ -886,7 +886,7 @@ class FormHelper : Helper
      * @return string Completed form inputs.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#generating-entire-forms
      */
-    string controls(array myFields, array myOptions = []) {
+    string controls(array myFields, array myOptions = null) {
         myFields = Hash::normalize(myFields);
 
         $out = "";
@@ -914,7 +914,7 @@ class FormHelper : Helper
      *    to customize the legend text.
      * @return string Completed form inputs.
      */
-    string fieldset(string myFields = "", array myOptions = []) {
+    string fieldset(string myFields = "", array myOptions = null) {
         $legend = myOptions["legend"] ?? true;
         myFieldset = myOptions["fieldset"] ?? true;
         $context = _getContext();
@@ -980,7 +980,7 @@ class FormHelper : Helper
      * @psalm-suppress InvalidReturnType
      * @psalm-suppress InvalidReturnStatement
      */
-    string control(string myFieldName, array myOptions = []) {
+    string control(string myFieldName, array myOptions = null) {
         myOptions += [
             "type": null,
             "label": null,
@@ -1150,7 +1150,7 @@ class FormHelper : Helper
             case "multicheckbox":
                 $opts = myOptions["options"];
                 if ($opts is null) {
-                    $opts = [];
+                    $opts = null;
                 }
                 unset(myOptions["options"]);
 
@@ -1382,7 +1382,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Options for the label element.
      * @return string Generated label element
      */
-    protected string _inputLabel(string myFieldName, $label = null, array myOptions = []) {
+    protected string _inputLabel(string myFieldName, $label = null, array myOptions = null) {
         myOptions += ["id": null, "input": null, "nestedInput": false, "templateVars": []];
         $labelAttributes = ["templateVars": myOptions["templateVars"]];
         if (is_array($label)) {
@@ -1428,7 +1428,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions Array of HTML attributes.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-checkboxes
      */
-    string[] checkbox(string myFieldName, array myOptions = []) {
+    string[] checkbox(string myFieldName, array myOptions = null) {
         myOptions += ["hiddenField": true, "value": 1];
 
         // Work around value=>val translations.
@@ -1485,7 +1485,7 @@ class FormHelper : Helper
      * @return string Completed radio widget set.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-radio-buttons
      */
-    string radio(string myFieldName, iterable myOptions = [], array $attributes = []) {
+    string radio(string myFieldName, iterable myOptions = null, array $attributes = null) {
         $attributes["options"] = myOptions;
         $attributes["idPrefix"] = _idPrefix;
         $attributes = _initInputField(myFieldName, $attributes);
@@ -1553,7 +1553,7 @@ class FormHelper : Helper
      * @return string A generated HTML text input element
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-textareas
      */
-    string textarea(string myFieldName, array myOptions = []) {
+    string textarea(string myFieldName, array myOptions = null) {
         myOptions = _initInputField(myFieldName, myOptions);
         unset(myOptions["type"]);
 
@@ -1568,7 +1568,7 @@ class FormHelper : Helper
      * @return string A generated hidden input
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-hidden-inputs
      */
-    string hidden(string myFieldName, array myOptions = []) {
+    string hidden(string myFieldName, array myOptions = null) {
         myOptions += ["required": false, "secure": true];
 
         $secure = myOptions["secure"];
@@ -1600,7 +1600,7 @@ class FormHelper : Helper
      * @return string A generated file input.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-file-inputs
      */
-    string file(string myFieldName, array myOptions = []) {
+    string file(string myFieldName, array myOptions = null) {
         myOptions += ["secure": true];
         myOptions = _initInputField(myFieldName, myOptions);
 
@@ -1624,7 +1624,7 @@ class FormHelper : Helper
      * @return string A HTML button tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-button-elements
      */
-    string button(string title, array myOptions = []) {
+    string button(string title, array myOptions = null) {
         myOptions += [
             "type": "submit",
             "escapeTitle": true,
@@ -1669,7 +1669,7 @@ class FormHelper : Helper
      * @return string A HTML button tag.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    string postButton(string title, myUrl, array myOptions = []) {
+    string postButton(string title, myUrl, array myOptions = null) {
         $formOptions = ["url": myUrl];
         if (isset(myOptions["method"])) {
             $formOptions["type"] = myOptions["method"];
@@ -1721,7 +1721,7 @@ class FormHelper : Helper
      * @return string An `<a />` element.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    string postLink(string title, myUrl = null, array myOptions = []) {
+    string postLink(string title, myUrl = null, array myOptions = null) {
         myOptions += ["block": null, "confirm": null];
 
         myRequestMethod = "POST";
@@ -1768,7 +1768,7 @@ class FormHelper : Helper
             this.formProtector = this.createFormProtector($formTokenData);
         }
 
-        myFields = [];
+        myFields = null;
         if (isset(myOptions["data"]) && is_array(myOptions["data"])) {
             foreach (Hash::flatten(myOptions["data"]) as myKey: myValue) {
                 myFields[myKey] = myValue;
@@ -1831,7 +1831,7 @@ class FormHelper : Helper
      * @return string A HTML submit button
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    string submit(Nullable!string caption = null, array myOptions = []) {
+    string submit(Nullable!string caption = null, array myOptions = null) {
         if ($caption is null) {
             $caption = __d("cake", "Submit");
         }
@@ -1951,7 +1951,7 @@ class FormHelper : Helper
      * @see uim.cake.View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-select-pickers
      */
-    string select(string myFieldName, iterable myOptions = [], array $attributes = []) {
+    string select(string myFieldName, iterable myOptions = null, array $attributes = null) {
         $attributes += [
             "disabled": null,
             "escape": true,
@@ -2028,7 +2028,7 @@ class FormHelper : Helper
      * @return string Formatted SELECT element
      * @see uim.cake.View\Helper\FormHelper::select() for supported option formats.
      */
-    string multiCheckbox(string myFieldName, iterable myOptions, array $attributes = []) {
+    string multiCheckbox(string myFieldName, iterable myOptions, array $attributes = null) {
         $attributes += [
             "disabled": null,
             "escape": true,
@@ -2072,7 +2072,7 @@ class FormHelper : Helper
      * @return string Completed year select input
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-year-inputs
      */
-    string year(string myFieldName, array myOptions = []) {
+    string year(string myFieldName, array myOptions = null) {
         myOptions += [
             "empty": true,
         ];
@@ -2092,7 +2092,7 @@ class FormHelper : Helper
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      */
-    string month(string myFieldName, array myOptions = []) {
+    string month(string myFieldName, array myOptions = null) {
         myOptions += [
             "value": null,
         ];
@@ -2114,7 +2114,7 @@ class FormHelper : Helper
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      */
-    string dateTime(string myFieldName, array myOptions = []) {
+    string dateTime(string myFieldName, array myOptions = null) {
         myOptions += [
             "value": null,
         ];
@@ -2135,7 +2135,7 @@ class FormHelper : Helper
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      */
-    string time(string myFieldName, array myOptions = []) {
+    string time(string myFieldName, array myOptions = null) {
         myOptions += [
             "value": null,
         ];
@@ -2155,7 +2155,7 @@ class FormHelper : Helper
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
      */
-    string date(string myFieldName, array myOptions = []) {
+    string date(string myFieldName, array myOptions = null) {
         myOptions += [
             "value": null,
         ];
@@ -2190,7 +2190,7 @@ class FormHelper : Helper
      * @param array<string, mixed>|array<string> myOptions Array of options to append options into.
      * @return array<string, mixed> Array of options for the input.
      */
-    protected array _initInputField(string myField, array myOptions = []) {
+    protected array _initInputField(string myField, array myOptions = null) {
         myOptions += ["fieldName": myField];
 
         if (!isset(myOptions["secure"])) {
@@ -2267,7 +2267,7 @@ class FormHelper : Helper
             // Simple list options
             $first = myOptions["options"][array_keys(myOptions["options"])[0]];
             if (is_scalar($first)) {
-                return array_diff(myOptions["options"], myOptions["disabled"]) == [];
+                return array_diff(myOptions["options"], myOptions["disabled"]) == null;
             }
             // Complex option types
             if (is_array($first)) {
@@ -2326,7 +2326,7 @@ class FormHelper : Helper
      * @throws \RuntimeException when the context class does not implement the
      *   IContext.
      */
-    protected IContext _getContext(myData = []) {
+    protected IContext _getContext(myData = null) {
         if (isset(_context) && empty(myData)) {
             return _context;
         }
@@ -2360,7 +2360,7 @@ class FormHelper : Helper
      * @param string myName The name of the widget. e.g~ "text".
      * @param array myData The data to render.
      */
-    string widget(string myName, array myData = []) {
+    string widget(string myName, array myData = null) {
         $secure = null;
         if (isset(myData["secure"])) {
             $secure = myData["secure"];
@@ -2457,7 +2457,7 @@ class FormHelper : Helper
      * @param array<string, mixed> myOptions The options containing default values.
      * @return mixed Field value derived from sources or defaults.
      */
-    auto getSourceValue(string myFieldname, array myOptions = []) {
+    auto getSourceValue(string myFieldname, array myOptions = null) {
         myValueMap = [
             "data": "getData",
             "query": "getQuery",

@@ -65,14 +65,14 @@ class HtmlHelper : Helper {
      *
      * @var array<string, array>
      */
-    protected _includedAssets = [];
+    protected _includedAssets = null;
 
     /**
      * Options for the currently opened script block buffer if any.
      *
      * @var array<string, mixed>
      */
-    protected _scriptBlockOptions = [];
+    protected _scriptBlockOptions = null;
 
     /**
      * Creates a link to an external resource and handles basic meta tags
@@ -114,7 +114,7 @@ class HtmlHelper : Helper {
      * @return string|null A completed `<link />` element, or null if the element was sent to a block.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-meta-tags
      */
-    Nullable!string meta(myType, myContents = null, array myOptions = []) {
+    Nullable!string meta(myType, myContents = null, array myOptions = null) {
         if (!is_array(myType)) {
             myTypes = [
                 "rss": ["type": "application/rss+xml", "rel": "alternate", "title": myType, "link": myContents],
@@ -147,7 +147,7 @@ class HtmlHelper : Helper {
                 myType = myTypes[myOptions["type"]];
                 unset(myOptions["type"]);
             } else {
-                myType = [];
+                myType = null;
             }
         }
 
@@ -230,7 +230,7 @@ class HtmlHelper : Helper {
      * @return string An `<a />` element.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
-    string link($title, myUrl = null, array myOptions = []) {
+    string link($title, myUrl = null, array myOptions = null) {
         $escapeTitle = true;
         if (myUrl  !is null) {
             myUrl = this.Url.build(myUrl, myOptions);
@@ -297,7 +297,7 @@ class HtmlHelper : Helper {
      * @see uim.cake.routings.Router::pathUrl()
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
-    string linkFromPath(string title, string myPath, array myParams = [], array myOptions = []) {
+    string linkFromPath(string title, string myPath, array myParams = null, array myOptions = null) {
         return this.link($title, ["_path": myPath] + myParams, myOptions);
     }
 
@@ -352,7 +352,7 @@ class HtmlHelper : Helper {
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-css-files
      */
-    Nullable!string css(myPath, array myOptions = []) {
+    Nullable!string css(myPath, array myOptions = null) {
         myOptions += [
             "once": true,
             "block": null,
@@ -451,7 +451,7 @@ class HtmlHelper : Helper {
      *   or if $once is true and the file has been included before.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-javascript-files
      */
-    Nullable!string script(myUrl, array myOptions = []) {
+    Nullable!string script(myUrl, array myOptions = null) {
         $defaults = [
             "block": null,
             "once": true,
@@ -509,7 +509,7 @@ class HtmlHelper : Helper {
      * @return string|null String or null depending on the value of `myOptions["block"]`
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    Nullable!string scriptBlock(string script, array myOptions = []) {
+    Nullable!string scriptBlock(string script, array myOptions = null) {
         myOptions += ["block": null, "nonce": _View.getRequest().getAttribute("cspScriptNonce")];
 
         $out = this.formatTemplate("javascriptblock", [
@@ -541,7 +541,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Options for the code block.
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    void scriptStart(array myOptions = []) {
+    void scriptStart(array myOptions = null) {
         _scriptBlockOptions = myOptions;
         ob_start();
     }
@@ -557,7 +557,7 @@ class HtmlHelper : Helper {
     Nullable!string scriptEnd() {
         $buffer = ob_get_clean();
         myOptions = _scriptBlockOptions;
-        _scriptBlockOptions = [];
+        _scriptBlockOptions = null;
 
         return this.scriptBlock($buffer, myOptions);
     }
@@ -580,7 +580,7 @@ class HtmlHelper : Helper {
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-css-programatically
      */
     string style(array myData, bool $oneLine = true) {
-        $out = [];
+        $out = null;
         foreach (myData as myKey: myValue) {
             $out[] = myKey ~ ":" ~ myValue ~ ";";
         }
@@ -622,7 +622,7 @@ class HtmlHelper : Helper {
      * @return string completed img tag
      * @link https://book.UIM.org/4/en/views/helpers/html.html#linking-to-images
      */
-    string image(myPath, array myOptions = []) {
+    string image(myPath, array myOptions = null) {
         if (is_string(myPath)) {
             myPath = this.Url.image(myPath, myOptions);
         } else {
@@ -668,7 +668,7 @@ class HtmlHelper : Helper {
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-table-headings
      */
     string tableHeaders(array myNames, ?array $trOptions = null, ?array $thOptions = null) {
-        $out = [];
+        $out = null;
         foreach (myNames as $arg) {
             if (!is_array($arg)) {
                 myContents = $arg;
@@ -731,7 +731,7 @@ class HtmlHelper : Helper {
             myCount = 0;
         }
 
-        $out = [];
+        $out = null;
         foreach (myData as $line) {
             myCount++;
             $cellsOut = _renderCells($line, $useCount);
@@ -755,9 +755,9 @@ class HtmlHelper : Helper {
      */
     protected string[] _renderCells(array $line, bool $useCount = false) {
         $i = 0;
-        $cellsOut = [];
+        $cellsOut = null;
         foreach ($line as $cell) {
-            $cellOptions = [];
+            $cellOptions = null;
 
             if (is_array($cell)) {
                 $cellOptions = $cell[1];
@@ -785,7 +785,7 @@ class HtmlHelper : Helper {
      * @param string myContents The content of the row.
      * @param array<string, mixed> myOptions HTML attributes.
      */
-    string tableRow(string myContents, array myOptions = []) {
+    string tableRow(string myContents, array myOptions = null) {
         return this.formatTemplate("tablerow", [
             "attrs": this.templater().formatAttributes(myOptions),
             "content": myContents,
@@ -798,7 +798,7 @@ class HtmlHelper : Helper {
      * @param string myContents The content of the cell.
      * @param array<string, mixed> myOptions HTML attributes.
      */
-    string tableCell(string myContents, array myOptions = []) {
+    string tableCell(string myContents, array myOptions = null) {
         return this.formatTemplate("tablecell", [
             "attrs": this.templater().formatAttributes(myOptions),
             "content": myContents,
@@ -818,7 +818,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag, see above.
      * @return string The formatted tag element
      */
-    string tag(string myName, Nullable!string text = null, array myOptions = []) {
+    string tag(string myName, Nullable!string text = null, array myOptions = null) {
         if (isset(myOptions["escape"]) && myOptions["escape"]) {
             $text = h($text);
             unset(myOptions["escape"]);
@@ -849,7 +849,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
      */
-    string div(Nullable!string myClass = null, Nullable!string text = null, array myOptions = []) {
+    string div(Nullable!string myClass = null, Nullable!string text = null, array myOptions = null) {
         if (!empty(myClass)) {
             myOptions["class"] = myClass;
         }
@@ -869,7 +869,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the P tag
      * @return string The formatted P element
      */
-    string para(Nullable!string myClass, Nullable!string text, array myOptions = []) {
+    string para(Nullable!string myClass, Nullable!string text, array myOptions = null) {
         if (!empty(myOptions["escape"])) {
             $text = h($text);
         }
@@ -947,7 +947,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Array of HTML attributes, and special options above.
      * @return string Generated media element
      */
-    string media(myPath, array myOptions = []) {
+    string media(myPath, array myOptions = null) {
         myOptions += [
             "tag": null,
             "pathPrefix": "files/",
@@ -1038,7 +1038,7 @@ class HtmlHelper : Helper {
      * @return string The nested list
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-nested-lists
      */
-    string nestedList(array $list, array myOptions = [], array $itemOptions = []) {
+    string nestedList(array $list, array myOptions = null, array $itemOptions = null) {
         myOptions += ["tag": "ul"];
         myItems = _nestedListItem($list, myOptions, $itemOptions);
 

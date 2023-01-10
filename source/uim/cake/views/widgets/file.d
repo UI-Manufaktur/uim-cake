@@ -61,7 +61,7 @@ class FileWidget : BasicWidget
         }
 
         // Backwards compatibility for array files.
-        myFields = [];
+        myFields = null;
         foreach (["name", "type", "tmp_name", "error", "size"] as $suffix) {
             myFields[] = myData["name"] ~ "[" ~ $suffix ~ "]";
         }

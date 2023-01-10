@@ -13,13 +13,13 @@ trait IdGeneratorTrait
     protected string _idPrefix;
 
     // A list of id suffixes used in the current rendering.
-    protected string[] _idSuffixes = [];
+    protected string[] _idSuffixes = null;
 
     /**
      * Clear the stored ID suffixes.
      */
     protected void _clearIds() {
-        _idSuffixes = [];
+        _idSuffixes = null;
     }
 
     /**

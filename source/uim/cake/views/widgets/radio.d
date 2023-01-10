@@ -92,7 +92,7 @@ class RadioWidget : BasicWidget
 
         _idPrefix = myData["idPrefix"];
         _clearIds();
-        $opts = [];
+        $opts = null;
         foreach (myOptions as $val: $text) {
             $opts[] = _renderInput($val, $text, myData, $context);
         }

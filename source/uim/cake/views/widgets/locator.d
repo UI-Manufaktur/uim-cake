@@ -25,7 +25,7 @@ class WidgetLocator
      *
      * @var array
      */
-    protected _widgets = [];
+    protected _widgets = null;
 
     /**
      * Templates to use.
@@ -48,7 +48,7 @@ class WidgetLocator
      * @param uim.cake.View\View $view The view instance to set as a widget.
      * @param array $widgets See add() method for more information.
      */
-    this(StringTemplate myTemplates, View $view, array $widgets = []) {
+    this(StringTemplate myTemplates, View $view, array $widgets = null) {
         _templates = myTemplates;
         _view = $view;
 
@@ -90,7 +90,7 @@ class WidgetLocator
      * @throws \RuntimeException When class does not implement IWidget.
      */
     void add(array $widgets) {
-        myfiles = [];
+        myfiles = null;
 
         foreach ($widgets as myKey: $widget) {
             if (is_int(myKey)) {
@@ -145,7 +145,7 @@ class WidgetLocator
 
     // Clear the registry and reset the widgets.
     void clear() {
-        _widgets = [];
+        _widgets = null;
     }
 
     /**

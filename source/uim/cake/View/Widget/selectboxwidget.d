@@ -196,7 +196,7 @@ class SelectBoxWidget : BasicWidget
         $escape
     ) {
         $opts = $optgroup;
-        $attrs = [];
+        $attrs = null;
         if (isset($optgroup["options"], $optgroup["text"])) {
             $opts = $optgroup["options"];
             $label = $optgroup["text"];
@@ -225,7 +225,7 @@ class SelectBoxWidget : BasicWidget
      * @return array<string> Option elements.
      */
     protected string[] _renderOptions(iterable $options, ?array $disabled, $selected, $templateVars, $escape) {
-        $out = [];
+        $out = null;
         foreach ($options as $key: $val) {
             // Option groups
             $isIterable = is_iterable($val);

@@ -145,7 +145,7 @@ class ArrayContext : IContext
      *     context"s schema should be used if it"s not explicitly provided.
      * @return mixed
      */
-    function val(string myField, array myOptions = []) {
+    function val(string myField, array myOptions = null) {
         myOptions += [
             "default": null,
             "schemaDefault": true,

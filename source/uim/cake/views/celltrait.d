@@ -35,7 +35,7 @@ trait CellTrait {
      * @return uim.cake.View\Cell The cell instance
      * @throws uim.cake.View\exceptions.MissingCellException If Cell class was not found.
      */
-    protected Cell cell(string cell, array myData = [], array myOptions = []) {
+    protected Cell cell(string cell, array myData = null, array myOptions = null) {
         $parts = explode("::", $cell);
 
         if (count($parts) == 2) {

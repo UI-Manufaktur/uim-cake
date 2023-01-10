@@ -42,7 +42,7 @@ class NullContext : IContext
     }
 
 
-    function val(string myField, array myOptions = []) {
+    function val(string myField, array myOptions = null) {
         return null;
     }
 
