@@ -40,7 +40,7 @@ class CorsBuilder
      *
      * @var array<string, mixed>
      */
-    protected _headers = [];
+    protected _headers = null;
 
     /**
      * Constructor.
@@ -109,7 +109,7 @@ class CorsBuilder
      * @return array
      */
     protected array _normalizeDomains(string[] $domains) {
-        myResult = [];
+        myResult = null;
         foreach ($domains as $domain) {
             if ($domain == "*") {
                 myResult[] = ["preg":"@.@", "original":"*"];

@@ -361,7 +361,7 @@ class Response : IResponse
      *
      * @var array<int>
      */
-    protected _fileRange = [];
+    protected _fileRange = null;
 
     /**
      * The charset the response body is encoded with
@@ -374,7 +374,7 @@ class Response : IResponse
      *
      * @var array
      */
-    protected _cacheDirectives = [];
+    protected _cacheDirectives = null;
 
     /**
      * Collection of cookies to send to the client
@@ -411,7 +411,7 @@ class Response : IResponse
      *  - charset: the charset for the response body
      * @throws \InvalidArgumentException
      */
-    this(array myOptions = []) {
+    this(array myOptions = null) {
         _streamTarget = myOptions["streamTarget"] ?? _streamTarget;
         _streamMode = myOptions["streamMode"] ?? _streamMode;
         if (isset(myOptions["stream"])) {
@@ -1087,8 +1087,8 @@ class Response : IResponse
      * @return static
 
      */
-    function withAddedLink(string myUrl, array myOptions = []) {
-        myParams = [];
+    function withAddedLink(string myUrl, array myOptions = null) {
+        myParams = null;
         foreach (myOptions as myKey: $option) {
             myParams[] = myKey ~ "="" ~ $option ~ """;
         }
@@ -1216,7 +1216,7 @@ class Response : IResponse
      * Returns an associative array of cookie name: cookie data.
      */
     array getCookies() {
-        $out = [];
+        $out = null;
         /** @var array<uim.cake.Http\Cookie\Cookie> $cookies */
         $cookies = _cookies;
         foreach ($cookies as $cookie) {
@@ -1311,7 +1311,7 @@ class Response : IResponse
      * @return static
      * @throws uim.cake.http.exceptions.NotFoundException
      */
-    function withFile(string myPath, array myOptions = []) {
+    function withFile(string myPath, array myOptions = null) {
         myfile = this.validateFile(myPath);
         myOptions += [
             "name":null,

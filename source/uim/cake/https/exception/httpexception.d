@@ -17,7 +17,7 @@ class HttpException : UIMException {
     /**
      * @var array<string, mixed>
      */
-    protected $headers = [];
+    protected $headers = null;
 
     /**
      * Set a single HTTP response header.

@@ -35,7 +35,7 @@ class FormData : Countable {
      *
      * @var array<uim.cake.Http\Client\FormDataPart>
      */
-    protected _parts = [];
+    protected _parts = null;
 
     /**
      * Get the boundary marker
@@ -221,7 +221,7 @@ class FormData : Countable {
 
             return $out;
         }
-        myData = [];
+        myData = null;
         foreach (_parts as $part) {
             myData[$part.name()] = $part.value();
         }

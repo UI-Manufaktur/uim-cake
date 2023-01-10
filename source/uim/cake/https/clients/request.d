@@ -23,7 +23,7 @@ class Request : Message : IRequest {
      * @param array $headers The HTTP headers to set.
      * @param array|string|null myData The request body to use.
      */
-    this(string myUrl = "", string method = self::METHOD_GET, array $headers = [], myData = null) {
+    this(string myUrl = "", string method = self::METHOD_GET, array $headers = null, myData = null) {
         this.setMethod($method);
         this.uri = this.createUri(myUrl);
         $headers += [

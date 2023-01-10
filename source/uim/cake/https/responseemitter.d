@@ -160,7 +160,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\messages.IResponse $response The response to emit
      */
     protected void emitHeaders(IResponse $response) {
-        $cookies = [];
+        $cookies = null;
         if (method_exists($response, "getCookieCollection")) {
             $cookies = iterator_to_array($response.getCookieCollection());
         }

@@ -96,7 +96,7 @@ class Message
     /**
      * The array of cookies in the response.
      */
-    protected array _cookies = [];
+    protected array _cookies = null;
 
     /**
      * Get all cookies

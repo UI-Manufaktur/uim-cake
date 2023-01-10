@@ -36,7 +36,7 @@ class FlashMessage {
      * @param array<string, mixed> myConfig Config array.
      * @see FlashMessage::set() For list of valid config keys.
      */
-    this(Session $session, array myConfig = []) {
+    this(Session $session, array myConfig = null) {
         this.session = $session;
         this.setConfig(myConfig);
     }
@@ -62,7 +62,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::_defaultConfig For default values for the options.
      */
-    void set(myMessage, array myOptions = []) {
+    void set(myMessage, array myOptions = null) {
         myOptions += (array)this.getConfig();
 
         if (isset(myOptions["escape"]) && !isset(myOptions["params"]["escape"])) {
@@ -80,7 +80,7 @@ class FlashMessage {
             myOptions["element"] = "flash/" ~ $element;
         }
 
-        myMessages = [];
+        myMessages = null;
         if (!myOptions["clear"]) {
             myMessages = (array)this.session.read("Flash." ~ myOptions["key"]);
         }
@@ -117,7 +117,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void setExceptionMessage(Throwable myException, array myOptions = []) {
+    void setExceptionMessage(Throwable myException, array myOptions = null) {
         myOptions["element"] = myOptions["element"] ?? "error";
         myOptions["params"]["code"] = myOptions["params"]["code"] ?? myException.getCode();
 
@@ -146,7 +146,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void success(string myMessage, array myOptions = []) {
+    void success(string myMessage, array myOptions = null) {
         myOptions["element"] = "success";
         this.set(myMessage, myOptions);
     }
@@ -161,7 +161,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void error(string myMessage, array myOptions = []) {
+    void error(string myMessage, array myOptions = null) {
         myOptions["element"] = "error";
         this.set(myMessage, myOptions);
     }
@@ -176,7 +176,7 @@ class FlashMessage {
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void warning(string myMessage, array myOptions = []) {
+    void warning(string myMessage, array myOptions = null) {
         myOptions["element"] = "warning";
         this.set(myMessage, myOptions);
     }
@@ -190,7 +190,7 @@ class FlashMessage {
      * @param array<string, mixed> myOptions An array of options.
      * @see FlashMessage::set() For list of valid options
      */
-    void info(string myMessage, array myOptions = []) {
+    void info(string myMessage, array myOptions = null) {
         myOptions["element"] = "info";
         this.set(myMessage, myOptions);
     }

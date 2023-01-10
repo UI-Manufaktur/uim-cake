@@ -21,7 +21,7 @@ class RedirectException : HttpException {
      * @param int $code The exception code that will be used as a HTTP status code
      * @param array $headers The headers that should be sent in the unauthorized challenge response.
      */
-    this(string myTarget, int $code = 302, array $headers = []) {
+    this(string myTarget, int $code = 302, array $headers = null) {
         super.this(myTarget, $code);
 
         foreach ($headers as myKey: myValue) {

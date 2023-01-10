@@ -74,7 +74,7 @@ class Curl : AdapterInterface
      * @param array<string, mixed> $options The client options
      */
     array buildOptions(RequestInterface $request, STRINGAA someOptions) {
-        $headers = [];
+        $headers = null;
         foreach ($request.getHeaders() as $key: $values) {
             $headers[] = $key ~ ": " ~ implode(", ", $values);
         }

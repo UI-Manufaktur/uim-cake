@@ -35,14 +35,14 @@ class CookieCollection : IteratorAggregate, Countable
      *
      * @var array<uim.cake.Http\Cookie\CookieInterface>
      */
-    protected $cookies = [];
+    protected $cookies = null;
 
     /**
      * Constructor
      *
      * @param array<uim.cake.Http\Cookie\CookieInterface> $cookies Array of cookie objects
      */
-    this(array $cookies = []) {
+    this(array $cookies = null) {
         this.checkCookies($cookies);
         foreach ($cookies as $cookie) {
             this.cookies[$cookie.getId()] = $cookie;
@@ -56,8 +56,8 @@ class CookieCollection : IteratorAggregate, Countable
      * @param array<string, mixed> $defaults The defaults attributes.
      * @return static
      */
-    static function createFromHeader(array $header, array $defaults = []) {
-        $cookies = [];
+    static function createFromHeader(array $header, array $defaults = null) {
+        $cookies = null;
         foreach ($header as $value) {
             try {
                 $cookies[] = Cookie::createFromHeaderString($value, $defaults);
@@ -77,7 +77,7 @@ class CookieCollection : IteratorAggregate, Countable
      */
     static function createFromServerRequest(IServerRequest $request) {
         $data = $request.getCookieParams();
-        $cookies = [];
+        $cookies = null;
         foreach ($data as $name: $value) {
             $cookies[] = new Cookie($name, $value);
         }
@@ -214,7 +214,7 @@ class CookieCollection : IteratorAggregate, Countable
      *   is useful when you have cookie data from outside the collection you want to send.
      * @return \Psr\Http\messages.RequestInterface An updated request.
      */
-    function addToRequest(RequestInterface $request, array $extraCookies = []): RequestInterface
+    function addToRequest(RequestInterface $request, array $extraCookies = null): RequestInterface
     {
         $uri = $request.getUri();
         $cookies = this.findMatchingCookies(
@@ -223,7 +223,7 @@ class CookieCollection : IteratorAggregate, Countable
             $uri.getPath() ?: "/"
         );
         $cookies = $extraCookies + $cookies;
-        $cookiePairs = [];
+        $cookiePairs = null;
         foreach ($cookies as $key: $value) {
             $cookie = sprintf("%s=%s", rawurlencode((string)$key), rawurlencode($value));
             $size = strlen($cookie);
@@ -252,7 +252,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @return array<string, mixed> An array of cookie name/value pairs
      */
     protected array findMatchingCookies(string $scheme, string $host, string $path) {
-        $out = [];
+        $out = null;
         $now = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         foreach (this.cookies as $cookie) {
             if ($scheme == "http" && $cookie.isSecure()) {

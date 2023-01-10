@@ -22,7 +22,7 @@ class Mock : IAdapter
      *
      * @var array
      */
-    protected responses = [];
+    protected responses = null;
 
     /**
      * Add a mocked response.

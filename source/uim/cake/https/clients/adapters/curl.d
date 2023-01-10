@@ -56,7 +56,7 @@ class Curl : IAdapter
      * @return array
      */
     array buildOptions(RequestInterface myRequest, array myOptions) {
-        $headers = [];
+        $headers = null;
         foreach (myRequest.getHeaders() as myKey: myValues) {
             $headers[] = myKey ~ ": " ~ implode(", ", myValues);
         }

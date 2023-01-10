@@ -36,14 +36,14 @@ class MiddlewareQueue : Countable, SeekableIterator
      *
      * @var array<int, mixed>
      */
-    protected queue = [];
+    protected queue = null;
 
     /**
      * Constructor
      *
      * @param array $middleware The list of middleware to append.
      */
-    this(array $middleware = []) {
+    this(array $middleware = null) {
         this.queue = $middleware;
     }
 

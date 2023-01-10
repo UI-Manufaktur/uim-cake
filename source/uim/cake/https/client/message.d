@@ -135,7 +135,7 @@ class Message
      *
      * @var array
      */
-    protected _cookies = [];
+    protected _cookies = null;
 
     /**
      * Get all cookies

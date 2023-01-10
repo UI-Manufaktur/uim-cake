@@ -194,7 +194,7 @@ class Cookie : CookieInterface
      * @return static
      * @see uim.cake.Cookie\Cookie::setDefaults()
      */
-    static function create(string aName, $value, STRINGAA someOptions = []) {
+    static function create(string aName, $value, STRINGAA someOptions = null) {
         $options += static::$defaults;
         $options["expires"] = static::dateTimeInstance($options["expires"]);
 
@@ -253,7 +253,7 @@ class Cookie : CookieInterface
      * @return static
      * @see uim.cake.http.Cookie\Cookie::setDefaults()
      */
-    static function createFromHeaderString(string $cookie, array $defaults = []) {
+    static function createFromHeaderString(string $cookie, array $defaults = null) {
         if (strpos($cookie, "";"") != false) {
             $cookie = replace("";"", "{__cookie_replace__}", $cookie);
             $parts = replace("{__cookie_replace__}", "";"", explode(";", $cookie));
@@ -312,7 +312,7 @@ class Cookie : CookieInterface
             /** @psalm-suppress PossiblyInvalidArgument */
             $value = _flatten(this.value);
         }
-        $headerValue = [];
+        $headerValue = null;
         /** @psalm-suppress PossiblyInvalidArgument */
         $headerValue[] = sprintf("%s=%s", this.name, rawurlencode($value));
 
@@ -703,7 +703,7 @@ class Cookie : CookieInterface
             return $ret ?? $string;
         }
 
-        $array = [];
+        $array = null;
         foreach (explode(",", $string) as $pair) {
             $key = explode("|", $pair);
             if (!isset(string aKey[1])) {

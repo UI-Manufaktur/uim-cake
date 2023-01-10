@@ -283,14 +283,14 @@ class Oauth
         $query = parse_url((string)$request.getUri(), PHP_URL_QUERY);
         parse_str((string)$query, $queryArgs);
 
-        $post = [];
+        $post = null;
         $contentType = $request.getHeaderLine("Content-Type");
         if ($contentType == "" || $contentType == "application/x-www-form-urlencoded") {
             parse_str((string)$request.getBody(), $post);
         }
         $args = array_merge($queryArgs, $oauthValues, $post);
         $pairs = _normalizeData($args);
-        $data = [];
+        $data = null;
         foreach ($pairs as $pair) {
             $data[] = implode("=", $pair);
         }
@@ -307,7 +307,7 @@ class Oauth
      * @see https://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
      */
     protected array _normalizeData(array $args, string $path = "") {
-        $data = [];
+        $data = null;
         foreach ($args as $key: $value) {
             if ($path) {
                 // Fold string keys with [].
@@ -337,7 +337,7 @@ class Oauth
      */
     protected string _buildAuth(array $data) {
         $out = "OAuth ";
-        $params = [];
+        $params = null;
         foreach ($data as $key: $value) {
             $params[] = $key ~ "="" ~ _encode((string)$value) ~ """;
         }

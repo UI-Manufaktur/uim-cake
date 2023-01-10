@@ -131,7 +131,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             $override &&
             !hasAllValues(myServerRequest.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
         ) {
-            $parsedBody = [];
+            $parsedBody = null;
         }
 
         return myServerRequest.withParsedBody($parsedBody);
@@ -193,7 +193,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *     the generated request instance.
      * @return \Psr\Http\messages.IServerRequest
      */
-    function createServerRequest(string $method, $uri, array $serverParams = []): IServerRequest
+    function createServerRequest(string $method, $uri, array $serverParams = null): IServerRequest
     {
         $serverParams["REQUEST_METHOD"] = $method;
         $options = ["environment": $serverParams];
@@ -214,7 +214,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *   _SERVER will be added into the $server parameter.
      * @return \Psr\Http\messages.UriInterface New instance.
      */
-    static function createUri(array $server = []): UriInterface
+    static function createUri(array $server = null): UriInterface
     {
         $server += _SERVER;
         $server = normalizeServer($server);

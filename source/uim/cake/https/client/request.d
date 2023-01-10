@@ -37,7 +37,7 @@ class Request : Message : RequestInterface
      * @param array $headers The HTTP headers to set.
      * @param array|string|null $data The request body to use.
      */
-    this(string $url = "", string $method = self::METHOD_GET, array $headers = [], $data = null) {
+    this(string $url = "", string $method = self::METHOD_GET, array $headers = null, $data = null) {
         this.setMethod($method);
         this.uri = this.createUri($url);
         $headers += [

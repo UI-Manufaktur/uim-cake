@@ -41,28 +41,28 @@ class ServerRequest : IServerRequest
      *
      * @var object|array|null
      */
-    protected myData = [];
+    protected myData = null;
 
     /**
      * Array of query string arguments
      *
      * @var array
      */
-    protected myQuery = [];
+    protected myQuery = null;
 
     /**
      * Array of cookie data.
      *
      * @var array
      */
-    protected cookies = [];
+    protected cookies = null;
 
     /**
      * Array of environment data.
      *
      * @var array
      */
-    protected _environment = [];
+    protected _environment = null;
 
     /**
      * Base URL path.
@@ -88,7 +88,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string>
      */
-    protected trustedProxies = [];
+    protected trustedProxies = null;
 
     /**
      * The built in detectors used with `is()` can be modified with `addDetector()`.
@@ -117,7 +117,7 @@ class ServerRequest : IServerRequest
      *
      * @var array
      */
-    protected _detectorCache = [];
+    protected _detectorCache = null;
 
     /**
      * Request body stream. Contains php://input unless `input` constructor option is used.
@@ -152,7 +152,7 @@ class ServerRequest : IServerRequest
      *
      * @var array
      */
-    protected attributes = [];
+    protected attributes = null;
 
     /**
      * A list of properties that emulated by the PSR7 attribute methods.
@@ -166,7 +166,7 @@ class ServerRequest : IServerRequest
      *
      * @var array
      */
-    protected uploadedFiles = [];
+    protected uploadedFiles = null;
 
     /**
      * The HTTP protocol version used.
@@ -204,7 +204,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string, mixed> myConfig An array of request data to create a request with.
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         myConfig += [
             "params":this.params,
             "query":[],
@@ -471,7 +471,7 @@ class ServerRequest : IServerRequest
      * Clears the instance detector cache, used by the is() function
      */
     void clearDetectorCache() {
-        _detectorCache = [];
+        _detectorCache = null;
     }
 
     /**
@@ -724,7 +724,7 @@ class ServerRequest : IServerRequest
      * @link http://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
     array getHeaders() {
-        $headers = [];
+        $headers = null;
         foreach (_environment as myKey: myValue) {
             myName = null;
             if (indexOf(myKey, "HTTP_") == 0) {
@@ -819,7 +819,7 @@ class ServerRequest : IServerRequest
     function withAddedHeader(myName, myValue) {
         $new = clone this;
         myName = this.normalizeHeaderName(myName);
-        $existing = [];
+        $existing = null;
         if (isset($new._environment[myName])) {
             $existing = (array)$new._environment[myName];
         }
@@ -1027,7 +1027,7 @@ class ServerRequest : IServerRequest
      */
     function accepts(Nullable!string myType = null) {
         $raw = this.parseAccept();
-        $accept = [];
+        $accept = null;
         foreach ($raw as myTypes) {
             $accept = array_merge($accept, myTypes);
         }
@@ -1067,7 +1067,7 @@ class ServerRequest : IServerRequest
      */
     function acceptLanguage(Nullable!string myLanguage = null) {
         $raw = _parseAcceptWithQualifier(this.getHeaderLine("Accept-Language"));
-        $accept = [];
+        $accept = null;
         foreach ($raw as myLanguages) {
             foreach (myLanguages as &$lang) {
                 if (indexOf($lang, "_")) {
@@ -1094,7 +1094,7 @@ class ServerRequest : IServerRequest
      * @return array
      */
     protected array _parseAcceptWithQualifier(string header) {
-        $accept = [];
+        $accept = null;
         $headers = explode(",", $header);
         foreach (array_filter($headers) as myValue) {
             $prefValue = "1.0";
@@ -1113,7 +1113,7 @@ class ServerRequest : IServerRequest
             }
 
             if (!isset($accept[$prefValue])) {
-                $accept[$prefValue] = [];
+                $accept[$prefValue] = null;
             }
             if ($prefValue) {
                 $accept[$prefValue][] = myValue;
@@ -1276,7 +1276,7 @@ class ServerRequest : IServerRequest
      */
     function withCookieCollection(CookieCollection $cookies) {
         $new = clone this;
-        myValues = [];
+        myValues = null;
         foreach ($cookies as $cookie) {
             myValues[$cookie.getName()] = $cookie.getValue();
         }

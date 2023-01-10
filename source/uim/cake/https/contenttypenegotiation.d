@@ -46,7 +46,7 @@ class ContentTypeNegotiation
      * @return array<string, array<string>>
      */
     protected array parseQualifiers(string $header) {
-        $accept = [];
+        $accept = null;
         if (!$header) {
             return $accept;
         }
@@ -68,7 +68,7 @@ class ContentTypeNegotiation
             }
 
             if (!isset($accept[$prefValue])) {
-                $accept[$prefValue] = [];
+                $accept[$prefValue] = null;
             }
             if ($prefValue) {
                 $accept[$prefValue][] = $value;
@@ -93,7 +93,7 @@ class ContentTypeNegotiation
      * @return string|null The prefered type or null if there is no match with choices or if the
      *   request had no Accept header.
      */
-    Nullable!string preferredType(RequestInterface $request, array $choices = []) {
+    Nullable!string preferredType(RequestInterface $request, array $choices = null) {
         $parsed = this.parseAccept($request);
         if (empty($parsed)) {
             return null;
@@ -125,7 +125,7 @@ class ContentTypeNegotiation
      */
     array acceptedLanguages(RequestInterface $request) {
         $raw = this.parseAcceptLanguage($request);
-        $accept = [];
+        $accept = null;
         foreach ($raw as $languages) {
             foreach ($languages as &$lang) {
                 if (strpos($lang, "_")) {

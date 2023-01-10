@@ -40,14 +40,14 @@ class Stream : AdapterInterface
      *
      * @var array<string, mixed>
      */
-    protected _contextOptions = [];
+    protected _contextOptions = null;
 
     /**
      * Array of options/content for the SSL stream context.
      *
      * @var array<string, mixed>
      */
-    protected _sslContextOptions = [];
+    protected _sslContextOptions = null;
 
     /**
      * The stream resource.
@@ -61,15 +61,15 @@ class Stream : AdapterInterface
      *
      * @var array
      */
-    protected _connectionErrors = [];
+    protected _connectionErrors = null;
 
 
     array send(RequestInterface $request, STRINGAA someOptions) {
         _stream = null;
         _context = null;
-        _contextOptions = [];
-        _sslContextOptions = [];
-        _connectionErrors = [];
+        _contextOptions = null;
+        _sslContextOptions = null;
+        _connectionErrors = null;
 
         _buildContext($request, $options);
 
@@ -87,7 +87,7 @@ class Stream : AdapterInterface
      * @return array<uim.cake.Http\Client\Response> The list of responses from the request(s)
      */
     array createResponses(array $headers, string $content) {
-        $indexes = $responses = [];
+        $indexes = $responses = null;
         foreach ($headers as $i: $header) {
             if (strtoupper(substr($header, 0, 5)) == "HTTP/") {
                 $indexes[] = $i;
@@ -137,7 +137,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> $options Array of options to use.
      */
     protected void _buildHeaders(RequestInterface $request, STRINGAA someOptions) {
-        $headers = [];
+        $headers = null;
         foreach ($request.getHeaders() as $name: $values) {
             $headers[] = sprintf("%s: %s", $name, implode(", ", $values));
         }

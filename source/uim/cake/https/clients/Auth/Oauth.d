@@ -265,14 +265,14 @@ class Oauth
         myQuery = parse_url((string)myRequest.getUri(), PHP_URL_QUERY);
         parse_str((string)myQuery, myQueryArgs);
 
-        $post = [];
+        $post = null;
         myContentsType = myRequest.getHeaderLine("Content-Type");
         if (myContentsType == "" || myContentsType == "application/x-www-form-urlencoded") {
             parse_str((string)myRequest.getBody(), $post);
         }
         $args = array_merge(myQueryArgs, $oauthValues, $post);
         $pairs = _normalizeData($args);
-        myData = [];
+        myData = null;
         foreach ($pairs as $pair) {
             myData[] = implode("=", $pair);
         }
@@ -290,7 +290,7 @@ class Oauth
      * @return array
      */
     protected array _normalizeData(array $args, string myPath = "") {
-        myData = [];
+        myData = null;
         foreach ($args as myKey: myValue) {
             if (myPath) {
                 // Fold string keys with [].
@@ -321,7 +321,7 @@ class Oauth
      */
     protected string _buildAuth(array myData) {
         $out = "OAuth ";
-        myParams = [];
+        myParams = null;
         foreach (myData as myKey: myValue) {
             myParams[] = myKey ~ "="" ~ _encode((string)myValue) ~ """;
         }

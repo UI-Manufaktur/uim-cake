@@ -73,7 +73,7 @@ class Session
      * @return static
      * @see uim.cake.http.Session::this()
      */
-    static function create(array $sessionConfig = []) {
+    static function create(array $sessionConfig = null) {
         if (isset($sessionConfig["defaults"])) {
             $defaults = static::_defaultConfig($sessionConfig["defaults"]);
             if ($defaults) {
@@ -182,7 +182,7 @@ class Session
      *
      * @param array<string, mixed> myConfig The Configuration to apply to this session object
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         myConfig += [
             "timeout":null,
             "cookie":null,
@@ -233,7 +233,7 @@ class Session
      * @return \SessionHandlerInterface|null
      * @throws \InvalidArgumentException
      */
-    function engine(myClass = null, array myOptions = []): ?SessionHandlerInterface
+    function engine(myClass = null, array myOptions = null): ?SessionHandlerInterface
     {
         if (myClass is null) {
             return _engine;
@@ -314,7 +314,7 @@ class Session
         }
 
         if (_isCLI) {
-            _SESSION = [];
+            _SESSION = null;
             this.id("cli");
 
             return _started = true;
@@ -545,7 +545,7 @@ class Session
             session_destroy();
         }
 
-        _SESSION = [];
+        _SESSION = null;
         _started = false;
     }
 
@@ -557,7 +557,7 @@ class Session
      * @param bool $renew If session should be renewed, as well. Defaults to false.
      */
     void clear(bool $renew = false) {
-        _SESSION = [];
+        _SESSION = null;
         if ($renew) {
             this.renew();
         }
