@@ -52,7 +52,7 @@ trait ExpressionTypeCasterTrait
      * @param array $types List of type names
      */
     protected array _requiresToExpressionCasting(array $types) {
-        $result = [];
+        $result = null;
         $types = array_filter($types);
         foreach ($types as $k: $type) {
             $object = TypeFactory::build($type);

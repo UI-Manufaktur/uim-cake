@@ -24,7 +24,7 @@ class WindowExpression : IExpression, IWindow
     /**
      * @var array<uim.cake.databases.IExpression>
      */
-    protected $partitions = [];
+    protected $partitions = null;
 
     /**
      * @var DDBExpression\OrderByExpression|null
@@ -174,13 +174,13 @@ class WindowExpression : IExpression, IWindow
 
 
     string sql(ValueBinder aBinder) {
-        $clauses = [];
+        $clauses = null;
         if (this.name.getIdentifier()) {
             $clauses[] = this.name.sql($binder);
         }
 
         if (this.partitions) {
-            $expressions = [];
+            $expressions = null;
             foreach (this.partitions as $partition) {
                 $expressions[] = $partition.sql($binder);
             }

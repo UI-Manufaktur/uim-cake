@@ -8,7 +8,7 @@ module uim.datasources;
 /**
  * The basis for every query object
  *
- * @method this andWhere($conditions, array $types = []) Connects any previously defined set of conditions to the
+ * @method this andWhere($conditions, array $types = null) Connects any previously defined set of conditions to the
  *   provided list using the AND operator. {@see uim.cake.databases.Query::andWhere()}
  * @method uim.cake.Datasource\IEntity|array firstOrFail() Get the first result from the executing query or raise an exception.
  *   {@see uim.cake.databases.Query::firstOrFail()}
@@ -122,7 +122,7 @@ interface IQuery
      * @param array<string, mixed> $options The options for the finder.
      * @return static Returns a modified query.
      */
-    function find(string $finder, STRINGAA someOptions = []);
+    function find(string $finder, STRINGAA someOptions = null);
 
     /**
      * Returns the first result out of executing this query, if the query has not been
@@ -383,5 +383,5 @@ interface IQuery
      * @param bool canOverwrite whether to reset conditions with passed list or not
      * @return this
      */
-    function where($conditions = null, array $types = [], bool canOverwrite = false);
+    function where($conditions = null, array $types = null, bool canOverwrite = false);
 }

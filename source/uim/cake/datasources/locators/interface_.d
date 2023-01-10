@@ -21,7 +21,7 @@ interface ILocator
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    function get(string $alias, STRINGAA someOptions = []);
+    function get(string $alias, STRINGAA someOptions = null);
 
     /**
      * Set a repository instance.

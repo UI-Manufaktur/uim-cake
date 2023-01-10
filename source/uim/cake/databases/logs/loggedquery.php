@@ -37,7 +37,7 @@ class LoggedQuery : JsonSerializable
      *
      * @var array
      */
-    $params = [];
+    $params = null;
 
     /**
      * Number of rows affected or returned by the query execution
@@ -92,7 +92,7 @@ class LoggedQuery : JsonSerializable
             return $p;
         }, this.params);
 
-        $keys = [];
+        $keys = null;
         $limit = is_int(key($params)) ? 1 : -1;
         foreach ($params as $key: $param) {
             $keys[] = is_string($key) ? "/:$key\b/" : "/[?]/";

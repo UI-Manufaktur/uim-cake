@@ -39,7 +39,7 @@ class BufferedStatement : Iterator, IStatement
      *
      * @var array<int, array>
      */
-    protected $buffer = [];
+    protected $buffer = null;
 
     /**
      * Whether this statement has already been executed
@@ -206,7 +206,7 @@ class BufferedStatement : Iterator, IStatement
      * Reset all properties
      */
     protected void _reset() {
-        this.buffer = [];
+        this.buffer = null;
         _allFetched = false;
         this.index = 0;
     }

@@ -36,7 +36,7 @@ trait ModelAwareTrait
      *
      * @var array<callable|uim.cake.Datasource\Locator\ILocator>
      */
-    protected _modelFactories = [];
+    protected _modelFactories = null;
 
     /**
      * The model type to use.
@@ -82,7 +82,7 @@ trait ModelAwareTrait
         }
         $modelType = $modelType ?? this.getModelType();
 
-        $options = [];
+        $options = null;
         if (strpos(_modelClassName, "\\") == false) {
             [, $alias] = pluginSplit(_modelClassName, true);
         } else {

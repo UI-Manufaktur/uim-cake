@@ -27,35 +27,35 @@ class TableSchema : TableISchema, ISqlGenerator
      *
      * @var array<string, array>
      */
-    protected _columns = [];
+    protected _columns = null;
 
     /**
      * A map with columns to types
      *
      * @var array<string, string>
      */
-    protected _typeMap = [];
+    protected _typeMap = null;
 
     /**
      * Indexes in the table.
      *
      * @var array<string, array>
      */
-    protected _indexes = [];
+    protected _indexes = null;
 
     /**
      * Constraints in the table.
      *
      * @var array<string, array<string, mixed>>
      */
-    protected _constraints = [];
+    protected _constraints = null;
 
     /**
      * Options for the table.
      *
      * @var array<string, mixed>
      */
-    protected _options = [];
+    protected _options = null;
 
     /**
      * Whether the table is temporary
@@ -252,7 +252,7 @@ class TableSchema : TableISchema, ISqlGenerator
      * @param string $table The table name.
      * @param array<string, array|string> $columns The list of columns for the schema.
      */
-    this(string $table, array $columns = []) {
+    this(string $table, array $columns = null) {
         _table = $table;
         foreach ($columns as $field: $definition) {
             this.addColumn($field, $definition);
@@ -365,7 +365,7 @@ class TableSchema : TableISchema, ISqlGenerator
 
 
     array defaultValues() {
-        $defaults = [];
+        $defaults = null;
         foreach (_columns as $name: $data) {
             if (!array_key_exists("default", $data)) {
                 continue;
@@ -607,7 +607,7 @@ class TableSchema : TableISchema, ISqlGenerator
 
     array createSql(Connection $connection) {
         $dialect = $connection.getDriver().schemaDialect();
-        $columns = $constraints = $indexes = [];
+        $columns = $constraints = $indexes = null;
         foreach (array_keys(_columns) as $name) {
             $columns[] = $dialect.columnSql(this, $name);
         }

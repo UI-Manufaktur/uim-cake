@@ -29,7 +29,7 @@ class QueryExpression : IExpression, Countable
      *
      * @var array
      */
-    protected _conditions = [];
+    protected _conditions = null;
 
     /**
      * Constructor. A new expression object can be created without any params and
@@ -46,7 +46,7 @@ class QueryExpression : IExpression, Countable
      * level of the expression tree. For example "AND", "OR", "XOR"...
      * @see uim.cake.databases.Expression\QueryExpression::add() for more details on $conditions and $types
      */
-    this($conditions = [], $types = [], $conjunction = "AND") {
+    this($conditions = null, $types = null, $conjunction = "AND") {
         this.setTypeMap($types);
         this.setConjunction(strtoupper($conjunction));
         if (!empty($conditions)) {
@@ -93,7 +93,7 @@ class QueryExpression : IExpression, Countable
      * @see uim.cake.databases.Query::where() for examples on conditions
      * @return this
      */
-    function add($conditions, array $types = []) {
+    function add($conditions, array $types = null) {
         if (is_string($conditions)) {
             _conditions[] = $conditions;
 
@@ -306,7 +306,7 @@ class QueryExpression : IExpression, Countable
      * @return this
      * @deprecated 4.3.0 Use QueryExpression::case() or CaseStatementExpression instead
      */
-    function addCase($conditions, $values = [], $types = []) {
+    function addCase($conditions, $values = null, $types = null) {
         deprecationWarning("QueryExpression::addCase() is deprecated, use case() instead.");
 
         return this.add(new CaseExpression($conditions, $values, $types));
@@ -429,7 +429,7 @@ class QueryExpression : IExpression, Countable
      * values that are being passed. Used for correctly binding values to statements.
      * @return uim.cake.databases.Expression\QueryExpression
      */
-    function and($conditions, $types = []) {
+    function and($conditions, $types = null) {
         if ($conditions instanceof Closure) {
             return $conditions(new static([], this.getTypeMap().setTypes($types)));
         }
@@ -446,7 +446,7 @@ class QueryExpression : IExpression, Countable
      * values that are being passed. Used for correctly binding values to statements.
      * @return uim.cake.databases.Expression\QueryExpression
      */
-    function or($conditions, $types = []) {
+    function or($conditions, $types = null) {
         if ($conditions instanceof Closure) {
             return $conditions(new static([], this.getTypeMap().setTypes($types), "OR"));
         }
@@ -466,7 +466,7 @@ class QueryExpression : IExpression, Countable
      * @return uim.cake.databases.Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link and()} instead.
      */
-    function and_($conditions, $types = []) {
+    function and_($conditions, $types = null) {
         deprecationWarning("QueryExpression::and_() is deprecated use and() instead.");
 
         return this.and($conditions, $types);
@@ -482,7 +482,7 @@ class QueryExpression : IExpression, Countable
      * @return uim.cake.databases.Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link or()} instead.
      */
-    function or_($conditions, $types = []) {
+    function or_($conditions, $types = null) {
         deprecationWarning("QueryExpression::or_() is deprecated use or() instead.");
 
         return this.or($conditions, $types);
@@ -501,7 +501,7 @@ class QueryExpression : IExpression, Countable
      * values that are being passed. Used for correctly binding values to statements.
      * @return this
      */
-    function not($conditions, $types = []) {
+    function not($conditions, $types = null) {
         return this.add(["NOT": $conditions], $types);
     }
 
@@ -541,7 +541,7 @@ class QueryExpression : IExpression, Countable
         }
         $conjunction = _conjunction;
         $template = $len == 1 ? '%s' : "(%s)";
-        $parts = [];
+        $parts = null;
         foreach (_conditions as $part) {
             if ($part instanceof Query) {
                 $part = "(" ~ $part.sql($binder) ~ ")";
@@ -584,7 +584,7 @@ class QueryExpression : IExpression, Countable
      * @return this
      */
     function iterateParts(callable $callback) {
-        $parts = [];
+        $parts = null;
         foreach (_conditions as $k: $c) {
             $key = &$k;
             $part = $callback($c, $key);

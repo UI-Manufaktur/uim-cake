@@ -15,7 +15,7 @@ class FactoryLocator {
      *
      * @var array<callable|uim.cake.Datasource\Locator\ILocator>
      */
-    protected static _modelFactories = [];
+    protected static _modelFactories = null;
 
     /**
      * Register a callable to generate repositories of a given type.

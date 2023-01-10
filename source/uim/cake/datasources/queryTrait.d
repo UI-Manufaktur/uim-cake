@@ -43,7 +43,7 @@ trait QueryTrait
      *
      * @var array
      */
-    protected _mapReduce = [];
+    protected _mapReduce = null;
 
     /**
      * List of formatter classes or callbacks that will post-process the
@@ -51,7 +51,7 @@ trait QueryTrait
      *
      * @var array<callable>
      */
-    protected _formatters = [];
+    protected _formatters = null;
 
     /**
      * A query cacher instance if this query has caching enabled.
@@ -66,7 +66,7 @@ trait QueryTrait
      *
      * @var array
      */
-    protected _options = [];
+    protected _options = null;
 
     /**
      * Whether the query is standalone or the product of an eager load operation.
@@ -229,7 +229,7 @@ trait QueryTrait
      * @param string|null $defaultAlias The default alias
      */
     STRINGAA aliasFields(array $fields, Nullable!string $defaultAlias = null) {
-        $aliased = [];
+        $aliased = null;
         foreach ($fields as $alias: $field) {
             if (is_numeric($alias) && is_string($field)) {
                 $aliased += this.aliasField($field, $defaultAlias);
@@ -298,7 +298,7 @@ trait QueryTrait
      */
     function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool canOverwrite = false) {
         if (canOverwrite) {
-            _mapReduce = [];
+            _mapReduce = null;
         }
         if ($mapper == null) {
             if (!canOverwrite) {
@@ -413,7 +413,7 @@ trait QueryTrait
      */
     function formatResults(?callable $formatter = null, $mode = self::APPEND) {
         if ($mode == self::OVERWRITE) {
-            _formatters = [];
+            _formatters = null;
         }
         if ($formatter == null) {
             if ($mode != self::OVERWRITE) {

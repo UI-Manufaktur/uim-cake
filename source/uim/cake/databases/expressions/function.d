@@ -48,7 +48,7 @@ class FunctionExpression : QueryExpression : ITypedResult
      * passed arguments
      * @param string $returnType The return type of this expression
      */
-    this(string aName, array $params = [], array $types = [], string $returnType = "string") {
+    this(string aName, array $params = null, array $types = null, string $returnType = "string") {
         _name = $name;
         _returnType = $returnType;
         super(($params, $types, ",");
@@ -85,7 +85,7 @@ class FunctionExpression : QueryExpression : ITypedResult
      * @return this
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function add($conditions, array $types = [], bool $prepend = false) {
+    function add($conditions, array $types = null, bool $prepend = false) {
         $put = $prepend ? "array_unshift" : "array_push";
         $typeMap = this.getTypeMap().setTypes($types);
         foreach ($conditions as $k: $p) {
@@ -118,7 +118,7 @@ class FunctionExpression : QueryExpression : ITypedResult
 
 
     string sql(ValueBinder aBinder) {
-        $parts = [];
+        $parts = null;
         foreach (_conditions as $condition) {
             if ($condition instanceof Query) {
                 $condition = sprintf("(%s)", $condition.sql($binder));

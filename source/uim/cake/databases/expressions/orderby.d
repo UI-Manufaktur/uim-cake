@@ -16,13 +16,13 @@ class OrderByExpression : QueryExpression
      * @param uim.cake.databases.TypeMap|array<string, string> $types The types for each column.
      * @param string $conjunction The glue used to join conditions together.
      */
-    this($conditions = [], $types = [], $conjunction = "") {
+    this($conditions = null, $types = null, $conjunction = "") {
         super(($conditions, $types, $conjunction);
     }
 
 
     string sql(ValueBinder aBinder) {
-        $order = [];
+        $order = null;
         foreach (_conditions as $k: $direction) {
             if ($direction instanceof IExpression) {
                 $direction = $direction.sql($binder);

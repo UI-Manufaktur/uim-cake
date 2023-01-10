@@ -153,7 +153,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * keys are `setter` and `guard`
      * @return this
      */
-    function set(string fieldName, $value = null, STRINGAA someOptions = []);
+    function set(string fieldName, $value = null, STRINGAA someOptions = null);
 
     /**
      * Returns the value of a field by name

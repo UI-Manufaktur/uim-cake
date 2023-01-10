@@ -45,7 +45,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @var array<uim.cake.databases.IExpression>
      */
-    protected _valueExpressions = [];
+    protected _valueExpressions = null;
 
     /**
      * Constructor
@@ -222,7 +222,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null $type the type to cast values to
      */
     protected string _flattenValue(iterable $value, ValueBinder aBinder, Nullable!string $type = null) {
-        $parts = [];
+        $parts = null;
         if (is_array($value)) {
             foreach (_valueExpressions as $k: $v) {
                 $parts[$k] = $v.sql($binder);
@@ -249,7 +249,7 @@ class ComparisonExpression : IExpression, FieldInterface
             return [$values, []];
         }
 
-        $expressions = $result = [];
+        $expressions = $result = null;
         $isArray = is_array($values);
 
         if ($isArray) {

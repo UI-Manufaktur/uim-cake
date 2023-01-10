@@ -22,14 +22,14 @@ trait EntityTrait
      *
      * @var array<string, mixed>
      */
-    protected _fields = [];
+    protected _fields = null;
 
     /**
      * Holds all fields that have been changed and their original values for this entity.
      *
      * @var array<string, mixed>
      */
-    protected _original = [];
+    protected _original = null;
 
     /**
      * List of field names that should **not** be included in JSON or Array
@@ -37,7 +37,7 @@ trait EntityTrait
      *
      * @var array<string>
      */
-    protected _hidden = [];
+    protected _hidden = null;
 
     /**
      * List of computed or virtual fields that **should** be included in JSON or array
@@ -46,7 +46,7 @@ trait EntityTrait
      *
      * @var array<string>
      */
-    protected _virtual = [];
+    protected _virtual = null;
 
     /**
      * Holds a list of the fields that were modified or added after this object
@@ -54,14 +54,14 @@ trait EntityTrait
      *
      * @var array<bool>
      */
-    protected _dirty = [];
+    protected _dirty = null;
 
     /**
      * Holds a cached list of getters/setters per class
      *
      * @var array<string, array<string, array<string, string>>>
      */
-    protected static _accessors = [];
+    protected static _accessors = null;
 
     /**
      * Indicates whether this entity is yet to be persisted.
@@ -75,14 +75,14 @@ trait EntityTrait
      *
      * @var array<string, mixed>
      */
-    protected _errors = [];
+    protected _errors = null;
 
     /**
      * List of invalid fields and their data for errors upon validation/patching.
      *
      * @var array<string, mixed>
      */
-    protected _invalid = [];
+    protected _invalid = null;
 
     /**
      * Map of fields in this entity that can be safely assigned, each
@@ -197,7 +197,7 @@ trait EntityTrait
      * @return this
      * @throws \InvalidArgumentException
      */
-    function set($field, $value = null, STRINGAA someOptions = []) {
+    function set($field, $value = null, STRINGAA someOptions = null) {
         if (is_string($field) && $field != "") {
             $guard = false;
             $field = [$field: $value];
@@ -508,11 +508,11 @@ trait EntityTrait
      * into arrays as well.
      */
     array toArray() {
-        $result = [];
+        $result = null;
         foreach (this.getVisible() as $field) {
             $value = this.get($field);
             if (is_array($value)) {
-                $result[$field] = [];
+                $result[$field] = null;
                 foreach ($value as $k: $entity) {
                     if ($entity instanceof IEntity) {
                         $result[$field][$k] = $entity.toArray();
@@ -628,7 +628,7 @@ trait EntityTrait
      * @param bool $onlyDirty Return the requested field only if it is dirty
      */
     array extract(array $fields, bool $onlyDirty = false) {
-        $result = [];
+        $result = null;
         foreach ($fields as $field) {
             if (!$onlyDirty || this.isDirty($field)) {
                 $result[$field] = this.get($field);
@@ -648,7 +648,7 @@ trait EntityTrait
      * @param array<string> $fields List of fields to be returned
      */
     array extractOriginal(array $fields) {
-        $result = [];
+        $result = null;
         foreach ($fields as $field) {
             $result[$field] = this.getOriginal($field);
         }
@@ -666,7 +666,7 @@ trait EntityTrait
      * @param array<string> $fields List of fields to be returned
      */
     array extractOriginalChanged(array $fields) {
-        $result = [];
+        $result = null;
         foreach ($fields as $field) {
             $original = this.getOriginal($field);
             if ($original != this.get($field)) {
@@ -727,10 +727,10 @@ trait EntityTrait
      * for an initial object hydration
      */
     void clean() {
-        _dirty = [];
-        _errors = [];
-        _invalid = [];
-        _original = [];
+        _dirty = null;
+        _errors = null;
+        _invalid = null;
+        _original = null;
     }
 
     /**

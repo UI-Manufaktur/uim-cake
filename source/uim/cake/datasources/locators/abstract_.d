@@ -20,14 +20,14 @@ abstract class AbstractLocator : ILocator
      *
      * @var array<string, uim.cake.Datasource\IRepository>
      */
-    protected $instances = [];
+    protected $instances = null;
 
     /**
      * Contains a list of options that were passed to get() method.
      *
      * @var array<string, array>
      */
-    protected $options = [];
+    protected $options = null;
 
     /**
      * {@inheritDoc}
@@ -38,7 +38,7 @@ abstract class AbstractLocator : ILocator
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    function get(string $alias, STRINGAA someOptions = []) {
+    function get(string $alias, STRINGAA someOptions = null) {
         $storeOptions = $options;
         unset($storeOptions["allowFallbackClass"]);
 
@@ -87,7 +87,7 @@ abstract class AbstractLocator : ILocator
 
 
     void clear() {
-        this.instances = [];
-        this.options = [];
+        this.instances = null;
+        this.options = null;
     }
 }

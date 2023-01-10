@@ -34,7 +34,7 @@ class ConnectionManager
      *
      * @var array<string>
      */
-    protected static _aliasMap = [];
+    protected static _aliasMap = null;
 
     /**
      * An array mapping url schemes to fully qualified driver class names

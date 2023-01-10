@@ -39,7 +39,7 @@ class Paginator : IPaginator {
      *
      * @var array
      */
-    protected _pagingParams = [];
+    protected _pagingParams = null;
 
     /**
      * Handles automatic pagination of model records.
@@ -151,7 +151,7 @@ class Paginator : IPaginator {
      * @return uim.cake.Datasource\IResultSet Query results
      * @throws uim.cake.Datasource\exceptions.PageOutOfBoundsException
      */
-    function paginate(object $object, array myParams = [], array $settings = []): IResultSet
+    function paginate(object $object, array myParams = null, array $settings = null): IResultSet
     {
         myQuery = null;
         if ($object instanceof IQuery) {
@@ -390,7 +390,7 @@ class Paginator : IPaginator {
     protected string[] getAllowedParameters() {
         $allowed = this.getConfig("allowedParameters");
         if (!$allowed) {
-            $allowed = [];
+            $allowed = null;
         }
         $whitelist = this.getConfig("whitelist");
         if ($whitelist) {
@@ -525,7 +525,7 @@ class Paginator : IPaginator {
         unset(myOptions["direction"]);
 
         if (empty(myOptions["order"])) {
-            myOptions["order"] = [];
+            myOptions["order"] = null;
         }
         if (!is_array(myOptions["order"])) {
             return myOptions;
@@ -539,7 +539,7 @@ class Paginator : IPaginator {
             myField = key(myOptions["order"]);
             $sortAllowed = hasAllValues(myField, $allowed, true);
             if (!$sortAllowed) {
-                myOptions["order"] = [];
+                myOptions["order"] = null;
                 myOptions["sort"] = null;
 
                 return myOptions;
@@ -567,7 +567,7 @@ class Paginator : IPaginator {
      * @return array<string, mixed> myFields Unaliased fields where applicable
      */
     protected array _removeAliases(array myFields, string myModel) {
-        myResult = [];
+        myResult = null;
         foreach (myFields as myField: $sort) {
             if (indexOf(myField, ".") == false) {
                 myResult[myField] = $sort;
@@ -597,7 +597,7 @@ class Paginator : IPaginator {
      */
     protected array _prefix(IRepository $object, array $order, bool $allowed = false) {
         myTableAlias = $object.getAlias();
-        myTableOrder = [];
+        myTableOrder = null;
         foreach ($order as myKey: myValue) {
             if (is_numeric(myKey)) {
                 myTableOrder[] = myValue;

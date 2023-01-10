@@ -22,7 +22,7 @@ class CommonTableExpression : IExpression
      *
      * @var array<uim.cake.databases.Expression\IdentifierExpression>
      */
-    protected $fields = [];
+    protected $fields = null;
 
     /**
      * The CTE query definition.

@@ -49,7 +49,7 @@ interface IRepository
      * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
      * @return uim.cake.Datasource\IQuery
      */
-    function find(string $type = "all", STRINGAA someOptions = []);
+    function find(string $type = "all", STRINGAA someOptions = null);
 
     /**
      * Returns a single record after finding it by its primary key, if no record is
@@ -71,7 +71,7 @@ interface IRepository
      * @return uim.cake.Datasource\IEntity
      * @see uim.datasources.IRepository::find()
      */
-    function get($primaryKey, STRINGAA someOptions = []): IEntity;
+    function get($primaryKey, STRINGAA someOptions = null): IEntity;
 
     /**
      * Creates a new Query instance for this repository
@@ -128,7 +128,7 @@ interface IRepository
      * @param \ArrayAccess|STRINGAA someOptions The options to use when saving.
      * @return uim.cake.Datasource\IEntity|false
      */
-    function save(IEntity $entity, $options = []);
+    function save(IEntity $entity, $options = null);
 
     /**
      * Delete a single entity.
@@ -140,7 +140,7 @@ interface IRepository
      * @param \ArrayAccess|STRINGAA someOptions The options for the delete.
      * @return bool success
      */
-    bool delete(IEntity $entity, $options = []);
+    bool delete(IEntity $entity, $options = null);
 
     /**
      * This creates a new entity object.
@@ -171,7 +171,7 @@ interface IRepository
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\IEntity
      */
-    function newEntity(array $data, STRINGAA someOptions = []): IEntity;
+    function newEntity(array $data, STRINGAA someOptions = null): IEntity;
 
     /**
      * Create a list of entities + associated entities from an array.
@@ -189,7 +189,7 @@ interface IRepository
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
-    array newEntities(array $data, STRINGAA someOptions = []);
+    array newEntities(array $data, STRINGAA someOptions = null);
 
     /**
      * Merges the passed `$data` into `$entity` respecting the accessible
@@ -208,7 +208,7 @@ interface IRepository
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\IEntity
      */
-    function patchEntity(IEntity $entity, array $data, STRINGAA someOptions = []): IEntity;
+    function patchEntity(IEntity $entity, array $data, STRINGAA someOptions = null): IEntity;
 
     /**
      * Merges each of the elements passed in `$data` into the entities
@@ -228,5 +228,5 @@ interface IRepository
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    array patchEntities(iterable $entities, array $data, STRINGAA someOptions = []);
+    array patchEntities(iterable $entities, array $data, STRINGAA someOptions = null);
 }

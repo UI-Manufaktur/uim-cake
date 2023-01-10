@@ -28,7 +28,7 @@ class TupleComparison : ComparisonExpression
      * one type per position in the value array in needed
      * @param string $conjunction the operator used for comparing field and value
      */
-    this($fields, $values, array $types = [], string $conjunction = "=") {
+    this($fields, $values, array $types = null, string $conjunction = "=") {
         _type = $types;
         this.setField($fields);
         _operator = $conjunction;
@@ -70,7 +70,7 @@ class TupleComparison : ComparisonExpression
 
     string sql(ValueBinder aBinder) {
         $template = "(%s) %s (%s)";
-        $fields = [];
+        $fields = null;
         $originalFields = this.getField();
 
         if (!is_array($originalFields)) {
@@ -95,7 +95,7 @@ class TupleComparison : ComparisonExpression
      * @param uim.cake.databases.ValueBinder aBinder The value binder to convert expressions with.
      */
     protected string _stringifyValues(ValueBinder aBinder) {
-        $values = [];
+        $values = null;
         $parts = this.getValue();
 
         if ($parts instanceof IExpression) {
@@ -115,7 +115,7 @@ class TupleComparison : ComparisonExpression
             }
 
             if ($isMultiOperation) {
-                $bound = [];
+                $bound = null;
                 foreach ($value as $k: $val) {
                     /** @var string $valType */
                     $valType = $type && isset($type[$k]) ? $type[$k] : $type;

@@ -194,7 +194,7 @@ class MysqlSchemaDialect : SchemaDialect
 
     void convertIndexDescription(TableSchema $schema, array $row) {
         $type = null;
-        $columns = $length = [];
+        $columns = $length = null;
 
         $name = $row["Key_name"];
         if ($name == "PRIMARY") {
@@ -516,7 +516,7 @@ class MysqlSchemaDialect : SchemaDialect
 
     array addConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
-        $sql = [];
+        $sql = null;
 
         foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
@@ -533,7 +533,7 @@ class MysqlSchemaDialect : SchemaDialect
 
     array dropConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s DROP FOREIGN KEY %s;";
-        $sql = [];
+        $sql = null;
 
         foreach ($schema.constraints() as $name) {
             /** @var array $constraint */

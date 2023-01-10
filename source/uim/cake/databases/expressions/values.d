@@ -24,14 +24,14 @@ class ValuesExpression : IExpression {
      *
      * @var array
      */
-    protected _values = [];
+    protected _values = null;
 
     /**
      * List of columns to ensure are part of the insert.
      *
      * @var array
      */
-    protected _columns = [];
+    protected _columns = null;
 
     /**
      * The Query object to use as a values expression
@@ -117,7 +117,7 @@ class ValuesExpression : IExpression {
      *
      */
     protected array _columnNames() {
-        $columns = [];
+        $columns = null;
         foreach (_columns as $col) {
             if (is_string($col)) {
                 $col = trim($col, "`[]"");
@@ -188,9 +188,9 @@ class ValuesExpression : IExpression {
 
         $columns = _columnNames();
         $defaults = array_fill_keys($columns, null);
-        $placeholders = [];
+        $placeholders = null;
 
-        $types = [];
+        $types = null;
         $typeMap = this.getTypeMap();
         foreach ($defaults as $col: $v) {
             $types[$col] = $typeMap.type($col);
@@ -198,7 +198,7 @@ class ValuesExpression : IExpression {
 
         foreach (_values as $row) {
             $row += $defaults;
-            $rowPlaceholders = [];
+            $rowPlaceholders = null;
 
             foreach ($columns as $column) {
                 $value = $row[$column];
@@ -256,7 +256,7 @@ class ValuesExpression : IExpression {
      * Converts values that need to be casted to expressions
      */
     protected void _processExpressions() {
-        $types = [];
+        $types = null;
         $typeMap = this.getTypeMap();
 
         $columns = _columnNames();

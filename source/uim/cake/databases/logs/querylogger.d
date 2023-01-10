@@ -16,7 +16,7 @@ class QueryLogger : BaseLog
      *
      * @param array<string, mixed> aConfig Configuration array
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         _defaultConfig["scopes"] = ["queriesLog"];
         _defaultConfig["connection"] = "";
 
@@ -24,7 +24,7 @@ class QueryLogger : BaseLog
     }
 
 
-    function log($level, $message, array $context = []) {
+    function log($level, $message, array $context = null) {
         $context["scope"] = this.scopes() ?: ["queriesLog"];
         $context["connection"] = this.getConfig("connection");
 

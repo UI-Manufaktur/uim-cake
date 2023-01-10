@@ -13,7 +13,7 @@ class SqliteSchemaDialect : SchemaDialect
      *
      * @var array<string, mixed>
      */
-    protected _constraintsIdMap = [];
+    protected _constraintsIdMap = null;
 
     /**
      * Whether there is any table in this connection to SQLite containing sequences.
@@ -254,7 +254,7 @@ class SqliteSchemaDialect : SchemaDialect
         );
         $statement = _driver.prepare($sql);
         $statement.execute();
-        $columns = [];
+        $columns = null;
         /** @psalm-suppress PossiblyFalseIterator */
         foreach ($statement.fetchAll("assoc") as $column) {
             $columns[] = $column["name"];
@@ -558,7 +558,7 @@ class SqliteSchemaDialect : SchemaDialect
 
     array truncateTableSql(TableSchema $schema) {
         $name = $schema.name();
-        $sql = [];
+        $sql = null;
         if (this.hasSequences()) {
             $sql[] = sprintf("DELETE FROM sqlite_sequence WHERE name='%s'", $name);
         }

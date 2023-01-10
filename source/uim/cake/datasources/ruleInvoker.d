@@ -27,7 +27,7 @@ class RuleInvoker
      *
      * @var array<string, mixed>
      */
-    protected $options = [];
+    protected $options = null;
 
     /**
      * Rule callable
@@ -52,7 +52,7 @@ class RuleInvoker
      * @param Nullable!string aName The name of the rule. Used in error messages.
      * @param array<string, mixed> $options The options for the rule. See above.
      */
-    this(callable $rule, Nullable!string aName, STRINGAA someOptions = []) {
+    this(callable $rule, Nullable!string aName, STRINGAA someOptions = null) {
         this.rule = $rule;
         this.name = $name;
         this.options = $options;

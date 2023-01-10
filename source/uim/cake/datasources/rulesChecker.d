@@ -53,35 +53,35 @@ class RulesChecker
      *
      * @var array<uim.cake.Datasource\RuleInvoker>
      */
-    protected _rules = [];
+    protected _rules = null;
 
     /**
      * The list of rules to check during create operations
      *
      * @var array<uim.cake.Datasource\RuleInvoker>
      */
-    protected _createRules = [];
+    protected _createRules = null;
 
     /**
      * The list of rules to check during update operations
      *
      * @var array<uim.cake.Datasource\RuleInvoker>
      */
-    protected _updateRules = [];
+    protected _updateRules = null;
 
     /**
      * The list of rules to check during delete operations
      *
      * @var array<uim.cake.Datasource\RuleInvoker>
      */
-    protected _deleteRules = [];
+    protected _deleteRules = null;
 
     /**
      * List of options to pass to every callable rule
      *
      * @var array
      */
-    protected _options = [];
+    protected _options = null;
 
     /**
      * Whether to use I18n functions for translating default error messages
@@ -93,7 +93,7 @@ class RulesChecker
      *
      * @param array<string, mixed> $options The options to pass to every rule
      */
-    this(STRINGAA someOptions = []) {
+    this(STRINGAA someOptions = null) {
         _options = $options;
         _useI18n = function_exists("__d");
     }
@@ -117,7 +117,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function add(callable $rule, $name = null, STRINGAA someOptions = []) {
+    function add(callable $rule, $name = null, STRINGAA someOptions = null) {
         _rules[] = _addError($rule, $name, $options);
 
         return this;
@@ -141,7 +141,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addCreate(callable $rule, $name = null, STRINGAA someOptions = []) {
+    function addCreate(callable $rule, $name = null, STRINGAA someOptions = null) {
         _createRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -165,7 +165,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addUpdate(callable $rule, $name = null, STRINGAA someOptions = []) {
+    function addUpdate(callable $rule, $name = null, STRINGAA someOptions = null) {
         _updateRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -189,7 +189,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addDelete(callable $rule, $name = null, STRINGAA someOptions = []) {
+    function addDelete(callable $rule, $name = null, STRINGAA someOptions = null) {
         _deleteRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -206,7 +206,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    bool check(IEntity $entity, string $mode, STRINGAA someOptions = []) {
+    bool check(IEntity $entity, string $mode, STRINGAA someOptions = null) {
         if ($mode == self::CREATE) {
             return this.checkCreate($entity, $options);
         }
@@ -229,7 +229,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkCreate(IEntity $entity, STRINGAA someOptions = []) {
+    bool checkCreate(IEntity $entity, STRINGAA someOptions = null) {
         return _checkRules($entity, $options, array_merge(_rules, _createRules));
     }
 
@@ -240,7 +240,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkUpdate(IEntity $entity, STRINGAA someOptions = []) {
+    bool checkUpdate(IEntity $entity, STRINGAA someOptions = null) {
         return _checkRules($entity, $options, array_merge(_rules, _updateRules));
     }
 
@@ -251,7 +251,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkDelete(IEntity $entity, STRINGAA someOptions = []) {
+    bool checkDelete(IEntity $entity, STRINGAA someOptions = null) {
         return _checkRules($entity, $options, _deleteRules);
     }
 
@@ -263,7 +263,7 @@ class RulesChecker
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @param array<uim.cake.Datasource\RuleInvoker> $rules The list of rules that must be checked.
      */
-    protected bool _checkRules(IEntity $entity, STRINGAA someOptions = [], array $rules = []) {
+    protected bool _checkRules(IEntity $entity, STRINGAA someOptions = null, array $rules = null) {
         $success = true;
         $options += _options;
         foreach ($rules as $rule) {
@@ -282,7 +282,7 @@ class RulesChecker
      * @param array<string, mixed> $options The options containing the error message and field.
      * @return uim.cake.Datasource\RuleInvoker
      */
-    protected function _addError(callable $rule, $name = null, STRINGAA someOptions = []): RuleInvoker
+    protected function _addError(callable $rule, $name = null, STRINGAA someOptions = null): RuleInvoker
     {
         if (is_array($name)) {
             $options = $name;

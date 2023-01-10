@@ -23,7 +23,7 @@ class LoggingStatement : StatementDecorator
      *
      * @var array<array>
      */
-    protected _compiledParams = [];
+    protected _compiledParams = null;
 
     /**
      * Query execution start time.

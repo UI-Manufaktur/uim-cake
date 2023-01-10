@@ -485,7 +485,7 @@ class PostgresSchemaDialect : SchemaDialect
 
     array addConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
-        $sql = [];
+        $sql = null;
 
         foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
@@ -502,7 +502,7 @@ class PostgresSchemaDialect : SchemaDialect
 
     array dropConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
-        $sql = [];
+        $sql = null;
 
         foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
@@ -580,7 +580,7 @@ class PostgresSchemaDialect : SchemaDialect
         $content = implode(",\n", array_filter($content));
         $tableName = _driver.quoteIdentifier($schema.name());
         $temporary = $schema.isTemporary() ? " TEMPORARY " : " ";
-        $out = [];
+        $out = null;
         $out[] = sprintf("CREATE%sTABLE %s (\n%s\n)", $temporary, $tableName, $content);
         foreach ($indexes as $index) {
             $out[] = $index;

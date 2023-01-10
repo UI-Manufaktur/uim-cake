@@ -503,7 +503,7 @@ class SqlserverSchemaDialect : SchemaDialect
 
     array addConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
-        $sql = [];
+        $sql = null;
 
         foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
@@ -520,7 +520,7 @@ class SqlserverSchemaDialect : SchemaDialect
 
     array dropConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
-        $sql = [];
+        $sql = null;
 
         foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
@@ -597,7 +597,7 @@ class SqlserverSchemaDialect : SchemaDialect
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
         $tableName = _driver.quoteIdentifier($schema.name());
-        $out = [];
+        $out = null;
         $out[] = sprintf("CREATE TABLE %s (\n%s\n)", $tableName, $content);
         foreach ($indexes as $index) {
             $out[] = $index;

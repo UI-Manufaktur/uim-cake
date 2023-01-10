@@ -42,7 +42,7 @@ class Collection : ICollection {
      */
     array listTablesWithoutViews() {
         [$sql, $params] = _dialect.listTablesWithoutViewsSql(_connection.config());
-        $result = [];
+        $result = null;
         $statement = _connection.execute($sql, $params);
         while ($row = $statement.fetch()) {
             $result[] = $row[0];
@@ -59,7 +59,7 @@ class Collection : ICollection {
      */
     array listTables() {
         [$sql, $params] = _dialect.listTablesSql(_connection.config());
-        $result = [];
+        $result = null;
         $statement = _connection.execute($sql, $params);
         while ($row = $statement.fetch()) {
             $result[] = $row[0];
@@ -87,7 +87,7 @@ class Collection : ICollection {
      * @return uim.cake.databases.Schema\TableSchema Object with column metadata.
      * @throws uim.cake.databases.exceptions.DatabaseException when table cannot be described.
      */
-    function describe(string aName, STRINGAA someOptions = []): TableISchema
+    function describe(string aName, STRINGAA someOptions = null): TableISchema
     {
         aConfig = _connection.config();
         if (strpos($name, ".")) {
