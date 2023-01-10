@@ -685,10 +685,10 @@ class Response : IResponse
      *
      * e.g `getMimeType("pdf"); // returns "application/pdf"`
      *
-     * @param string myAlias the content type alias to map
+     * @param string aliasName the content type alias to map
      * @return array|string|false String mapped mime type or false if myAlias is not mapped
      */
-    auto getMimeType(string myAlias) {
+    auto getMimeType(string aliasName) {
         return _mimeTypes[myAlias] ?? false;
     }
 

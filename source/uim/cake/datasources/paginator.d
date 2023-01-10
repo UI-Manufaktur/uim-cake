@@ -451,12 +451,12 @@ class Paginator : IPaginator {
      * Get the settings for a myModel. If there are no settings for a specific
      * repository, the general settings will be used.
      *
-     * @param string myAlias Model name to get settings for.
+     * @param string aliasName Model name to get settings for.
      * @param array<string, mixed> $settings The settings which is used for combining.
      * @return array<string, mixed> An array of pagination settings for a model,
      *   or the general settings.
      */
-    array getDefaults(string myAlias, array $settings) {
+    array getDefaults(string aliasName, array $settings) {
         if (isset($settings[myAlias])) {
             $settings = $settings[myAlias];
         }

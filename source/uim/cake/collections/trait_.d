@@ -860,7 +860,7 @@ trait CollectionTrait
     }
 
 
-    int countKeys() {
+    size_t countKeys() {
         return count(this.toArray());
     }
 

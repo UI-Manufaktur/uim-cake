@@ -90,7 +90,7 @@ interface IRepository
      * @param uim.cake.databases.Expression\QueryExpression|\Closure|array|string $fields A hash of field: new value.
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
-     * @return int Count Returns the affected rows.
+     * @return size_t count Returns the affected rows.
      */
     int updateAll($fields, $conditions);
 

@@ -78,7 +78,7 @@ class EventManager : IEventManager
     }
 
 
-    function on(myEventKey, myOptions = null, ?callable $callable = null) {
+    function on(myEventKey, STRINGAA someOptions = null, ?callable $callable = null) {
         if (myEventKey instanceof IEventListener) {
             _attachSubscriber(myEventKey);
 

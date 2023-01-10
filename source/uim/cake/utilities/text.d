@@ -306,7 +306,7 @@ class Text {
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrap(string text, myOptions = null) {
+    static string wrap(string text, STRINGAA someOptions = null) {
         if (is_numeric(myOptions)) {
             myOptions = ["width":myOptions];
         }
@@ -342,7 +342,7 @@ class Text {
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static string wrapBlock(string text, myOptions = null) {
+    static string wrapBlock(string text, STRINGAA someOptions = null) {
         if (is_numeric(myOptions)) {
             myOptions = ["width":myOptions];
         }
@@ -1104,7 +1104,7 @@ class Text {
      * @see setTransliterator()
      * @see setTransliteratorId()
      */
-    static string slug(string string, myOptions = null) {
+    static string slug(string string, STRINGAA someOptions = null) {
         if (is_string(myOptions)) {
             myOptions = ["replacement":myOptions];
         }

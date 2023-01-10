@@ -1138,7 +1138,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @see uim.cake.collections.ICollection::count()
      */
-    int countKeys();
+    size_t countKeys();
 
     /**
      * Create a new collection that is the cartesian product of the current collection

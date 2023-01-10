@@ -48,12 +48,12 @@ class CacheRegistry : ObjectRegistry
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
      * @param uim.cake.Cache\CacheEngine|string myClass The classname or object to make.
-     * @param string myAlias The alias of the object.
+     * @param string aliasName The alias of the object.
      * @param array<string, mixed> myConfig An array of settings to use for the cache engine.
      * @return uim.cake.Cache\CacheEngine The constructed CacheEngine class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
-    protected CacheEngine _create(myClass, string myAlias, array myConfig) {
+    protected CacheEngine _create(myClass, string aliasName, array myConfig) {
       if (is_object(myClass)) {
           $instance = myClass;
       } else {

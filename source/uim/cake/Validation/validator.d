@@ -117,7 +117,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<string, uim.cake.validations.ValidationSet>
      */
-    protected _fields = null;
+    protected ValidationSet[string] _fields = null;
 
     /**
      * An associative array of objects or classes containing methods
@@ -139,10 +139,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Contains the validation messages associated with checking the presence
      * for each corresponding field.
-     *
-     * @var array<string, string>
      */
-    protected _presenceMessages = null;
+    protected STRINGAA _presenceMessages = null;
 
     /**
      * Whether to use I18n functions for translating default error messages

@@ -116,12 +116,12 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      * Enabled helpers will be registered with the event manager.
      *
      * @param string myClass The class to create.
-     * @param string myAlias The alias of the loaded helper.
+     * @param string aliasName The alias of the loaded helper.
      * @param array<string, mixed> myConfig An array of settings to use for the helper.
      * @return uim.cake.View\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected Helper _create(myClass, string myAlias, array myConfig) {
+    protected Helper _create(myClass, string aliasName, array myConfig) {
         /** @var uim.cake.View\Helper $instance */
         $instance = new myClass(_View, myConfig);
 

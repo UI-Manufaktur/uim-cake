@@ -384,7 +384,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::setTransliterator()
      * @see uim.cake.Utility\Text::setTransliteratorId()
      */
-    string slug(string string, myOptions = null) {
+    string slug(string string, STRINGAA someOptions = null) {
         return _engine.slug($string, myOptions);
     }
 
