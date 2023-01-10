@@ -74,10 +74,10 @@ class PluginLoadCommand : Command {
         }
 
         $append = "$indent    \this.addPlugin('%s');\n";
-        $insert = str_replace(", []", "", sprintf($append, $plugin));
+        $insert = replace(", []", "", sprintf($append, $plugin));
 
         $offset = $matches[0][1];
-        $contents = substr_replace($contents, $insert, $offset, 0);
+        $contents = subreplace($contents, $insert, $offset, 0);
 
         file_put_contents($app, $contents);
 

@@ -177,7 +177,7 @@ class ComparisonExpression : IExpression, FieldInterface
             $template ~= "%s (%s)";
             $type = _type;
             if ($type != null) {
-                $type = str_replace("[]", "", $type);
+                $type = replace("[]", "", $type);
             }
             $value = _flattenValue(_value, $binder, $type);
 

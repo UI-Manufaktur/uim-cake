@@ -567,7 +567,7 @@ class ConsoleIo
         if (file_exists($path) && $forceOverwrite == false) {
             this.warning("File `{$path}` exists");
             $key = this.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
-            $key = strtolower($key);
+            $key = $key.toLower;
 
             if ($key == "q") {
                 this.error("Quitting.", 2);

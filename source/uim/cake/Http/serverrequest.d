@@ -722,7 +722,7 @@ class ServerRequest : IServerRequest
      * @return string The normalized header name.
      */
     protected string normalizeHeaderName(string aName) {
-        $name = str_replace("-", "_", strtoupper($name));
+        $name = replace("-", "_", strtoupper($name));
         if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
             $name = "HTTP_" ~ $name;
         }
@@ -753,8 +753,8 @@ class ServerRequest : IServerRequest
                 $name = $key;
             }
             if ($name != null) {
-                $name = str_replace("_", " ", strtolower($name));
-                $name = str_replace(" ", "-", ucwords($name));
+                $name = replace("_", " ", strtolower($name));
+                $name = replace(" ", "-", ucwords($name));
                 $headers[$name] = (array)$value;
             }
         }

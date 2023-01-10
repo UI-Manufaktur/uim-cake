@@ -164,7 +164,7 @@ class Shell
     this(?ConsoleIo $io = null, ?ILocator $locator = null) {
         if (!this.name) {
             [, $class] = namespaceSplit(static::class);
-            this.name = str_replace(["Shell", "Task"], "", $class);
+            this.name = replace(["Shell", "Task"], "", $class);
         }
         _io = $io ?: new ConsoleIo();
         _tableLocator = $locator;
@@ -771,7 +771,7 @@ class Shell
      * @link https://book.cakephp.org/4/en/console-and-shells.html#creating-files
      */
     bool createFile(string $path, string $contents) {
-        $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
+        $path = replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
 
         _io.out();
 
@@ -786,17 +786,17 @@ class Shell
             _io.out(sprintf("<warning>File `%s` exists</warning>", $path));
             $key = _io.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
 
-            if (strtolower($key) == "q") {
+            if ($key.toLower == "q") {
                 _io.out("<error>Quitting</error>.", 2);
                 _stop();
 
                 return false;
             }
-            if (strtolower($key) == "a") {
+            if ($key.toLower == "a") {
                 this.params["force"] = true;
                 $key = "y";
             }
-            if (strtolower($key) != "y") {
+            if ($key.toLower != "y") {
                 _io.out(sprintf("Skip `%s`", $path), 2);
 
                 return false;
@@ -827,11 +827,11 @@ class Shell
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::shortPath
      */
     string shortPath(string $file) {
-        $shortPath = str_replace(ROOT, "", $file);
-        $shortPath = str_replace(".." ~ DIRECTORY_SEPARATOR, "", $shortPath);
-        $shortPath = str_replace(DIRECTORY_SEPARATOR, "/", $shortPath);
+        $shortPath = replace(ROOT, "", $file);
+        $shortPath = replace(".." ~ DIRECTORY_SEPARATOR, "", $shortPath);
+        $shortPath = replace(DIRECTORY_SEPARATOR, "/", $shortPath);
 
-        return str_replace("//", DIRECTORY_SEPARATOR, $shortPath);
+        return replace("//", DIRECTORY_SEPARATOR, $shortPath);
     }
 
     /**

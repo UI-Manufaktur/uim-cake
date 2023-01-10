@@ -274,7 +274,7 @@ abstract class Driver : IDriver
             return "TRUE";
         }
         if (is_float($value)) {
-            return str_replace(",", ".", (string)$value);
+            return replace(",", ".", (string)$value);
         }
         /** @psalm-suppress InvalidArgument */
         if (

@@ -50,11 +50,11 @@ class App
         }
 
         [$plugin, $name] = pluginSplit($class);
-        $fullname = "\\" ~ str_replace("/", "\\", $type ~ "\\" ~ $name) . $suffix;
+        $fullname = "\\" ~ replace("/", "\\", $type ~ "\\" ~ $name) . $suffix;
 
         $base = $plugin ?: Configure::read("App.namespace");
         if ($base != null) {
-            $base = str_replace("/", "\\", rtrim($base, "\\"));
+            $base = replace("/", "\\", rtrim($base, "\\"));
 
             if (static::_classExistsInBase($fullname, $base)) {
                 /** @var class-string */
@@ -111,7 +111,7 @@ class App
      * @return string Plugin split name of class
      */
     static string shortName(string $class, string $type, string $suffix = "") {
-        $class = str_replace("\\", "/", $class);
+        $class = replace("\\", "/", $class);
         $type = "/" ~ $type ~ "/";
 
         $pos = strrpos($class, $type);
@@ -128,7 +128,7 @@ class App
 
         $nonPluginNamespaces = [
             "Cake",
-            str_replace("\\", "/", (string)Configure::read("App.namespace")),
+            replace("\\", "/", (string)Configure::read("App.namespace")),
         ];
         if (in_array($pluginName, $nonPluginNamespaces, true)) {
             return $name;
@@ -248,6 +248,6 @@ class App
             return [CORE_PATH ~ "templates" ~ DIRECTORY_SEPARATOR];
         }
 
-        return [CAKE . str_replace("/", DIRECTORY_SEPARATOR, $type) . DIRECTORY_SEPARATOR];
+        return [CAKE . replace("/", DIRECTORY_SEPARATOR, $type) . DIRECTORY_SEPARATOR];
     }
 }

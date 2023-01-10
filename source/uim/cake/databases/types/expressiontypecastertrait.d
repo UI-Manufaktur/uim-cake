@@ -27,7 +27,7 @@ trait ExpressionTypeCasterTrait
             return $value;
         }
 
-        $baseType = str_replace("[]", "", $type);
+        $baseType = replace("[]", "", $type);
         $converter = TypeFactory::build($baseType);
 
         if (!$converter instanceof ExpressionTypeInterface) {

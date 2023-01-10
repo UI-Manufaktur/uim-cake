@@ -73,7 +73,7 @@ class CommandScanner
             return [];
         }
         $path = Plugin::classPath($plugin);
-        $namespace = str_replace("/", "\\", $plugin);
+        $namespace = replace("/", "\\", $plugin);
         $prefix = Inflector::underscore($plugin) ~ ".";
 
         $commands = this.scanDir($path ~ "Command", $namespace ~ "\Command\\", $prefix, []);

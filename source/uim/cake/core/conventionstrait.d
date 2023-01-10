@@ -49,7 +49,7 @@ trait ConventionsTrait
      * @return string Model name
      */
     protected string _modelNameFromKey(string aKey) {
-        $key = str_replace("_id", "", $key);
+        $key = replace("_id", "", $key);
 
         return Inflector::camelize(Inflector::pluralize($key));
     }
@@ -125,6 +125,6 @@ trait ConventionsTrait
      * @return string Plugin"s namespace
      */
     protected string _pluginNamespace(string $pluginName) {
-        return str_replace("/", "\\", $pluginName);
+        return replace("/", "\\", $pluginName);
     }
 }

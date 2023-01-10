@@ -61,7 +61,7 @@ class Request : Message : RequestInterface
      */
     protected void addHeaders(array $headers) {
         foreach ($headers as $key: $val) {
-            $normalized = strtolower($key);
+            $normalized = $key.toLower;
             this.headers[$key] = (array)$val;
             this.headerNames[$normalized] = $key;
         }

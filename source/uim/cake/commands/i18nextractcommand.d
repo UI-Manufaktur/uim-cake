@@ -441,7 +441,7 @@ class I18nExtractCommand : Command {
                         "file": _file,
                         "line": $line,
                     ];
-                    $details["file"] = "." ~ str_replace(ROOT, "", $details["file"]);
+                    $details["file"] = "." ~ replace(ROOT, "", $details["file"]);
                     if ($plural != null) {
                         $details["msgid_plural"] = $plural;
                     }
@@ -489,7 +489,7 @@ class I18nExtractCommand : Command {
                         $occurrences = implode("\n#: ", $occurrences);
 
                         $header = "#: "
-                            . str_replace(DIRECTORY_SEPARATOR, "/", $occurrences)
+                            . replace(DIRECTORY_SEPARATOR, "/", $occurrences)
                             ~ "\n";
                     }
 
@@ -559,7 +559,7 @@ class I18nExtractCommand : Command {
                 $domain = substr($domain, $slashPosition + 1);
             }
 
-            $filename = str_replace("/", "_", $domain) ~ ".pot";
+            $filename = replace("/", "_", $domain) ~ ".pot";
             $outputPath = _output . $filename;
 
             if (this.checkUnchanged($outputPath, $headerLength, $output) == true) {
@@ -695,7 +695,7 @@ class I18nExtractCommand : Command {
         } else {
             $string = strtr($string, ["\\"": """, "\\\\": "\\"]);
         }
-        $string = str_replace("\r\n", "\n", $string);
+        $string = replace("\r\n", "\n", $string);
 
         return addcslashes($string, "\0..\37\\\"");
     }

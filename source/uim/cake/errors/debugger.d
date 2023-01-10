@@ -302,7 +302,7 @@ class Debugger
 
         $template = $instance.editors[$editor];
         if (is_string($template)) {
-            return str_replace(['{file}', '{line}'], [$file, (string)$line], $template);
+            return replace(['{file}', '{line}'], [$file, (string)$line], $template);
         }
 
         return $template($file, $line);
@@ -466,13 +466,13 @@ class Debugger
      */
     static string trimPath(string $path) {
         if (defined('APP') && strpos($path, APP) == 0) {
-            return str_replace(APP, 'APP/', $path);
+            return replace(APP, 'APP/', $path);
         }
         if (defined('CAKE_CORE_INCLUDE_PATH') && strpos($path, CAKE_CORE_INCLUDE_PATH) == 0) {
-            return str_replace(CAKE_CORE_INCLUDE_PATH, 'CORE', $path);
+            return replace(CAKE_CORE_INCLUDE_PATH, 'CORE', $path);
         }
         if (defined('ROOT') && strpos($path, ROOT) == 0) {
-            return str_replace(ROOT, 'ROOT', $path);
+            return replace(ROOT, 'ROOT', $path);
         }
 
         return $path;
@@ -519,7 +519,7 @@ class Debugger
             if (!isset($data[$i])) {
                 continue;
             }
-            $string = str_replace(["\r\n", "\n"], '', static::_highlight($data[$i]));
+            $string = replace(["\r\n", "\n"], '', static::_highlight($data[$i]));
             if ($i == $line) {
                 $lines[] = '<span class="code-highlight">' . $string . '</span>';
             } else {
@@ -548,7 +548,7 @@ class Debugger
         }
         $highlight = highlight_string($str, true);
         if ($added) {
-            $highlight = str_replace(
+            $highlight = replace(
                 ['&lt;?php&nbsp;<br/>', '&lt;?php&nbsp;<br />'],
                 '',
                 $highlight

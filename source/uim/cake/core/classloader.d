@@ -96,7 +96,7 @@ class ClassLoader
         }
 
         foreach (_prefixes[$prefix] as $baseDir) {
-            $file = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) ~ ".php";
+            $file = $baseDir . replace("\\", DIRECTORY_SEPARATOR, $relativeClass) ~ ".php";
 
             if (_requireFile($file)) {
                 return $file;

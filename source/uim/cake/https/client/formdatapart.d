@@ -214,7 +214,7 @@ class FormDataPart
      * @param string aValue The value of the header parameter
      */
     protected string _headerParameterToString(string aName, string aValue) {
-        $transliterated = Text::transliterate(str_replace(""", "", $value));
+        $transliterated = Text::transliterate(replace(""", "", $value));
         $return = sprintf("%s='%s'", $name, $transliterated);
         if (_charset != null && $value != $transliterated) {
             $return ~= sprintf("; %s*=%s"'%s', $name, strtolower(_charset), rawurlencode($value));

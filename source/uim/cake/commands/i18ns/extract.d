@@ -158,14 +158,14 @@ class I18nExtractCommand : Command {
         }
 
         if ($args.hasOption("extract-core")) {
-            _extractCore = !(strtolower((string)$args.getOption("extract-core")) == "no");
+            _extractCore = !((string)$args.getOption("extract-core").toLower) == "no");
         } else {
             $response = $io.askChoice(
                 "Would you like to extract the messages from the UIM core?",
                 ["y", "n"],
                 "n"
             );
-            _extractCore = strtolower($response) == "y";
+            _extractCore = $response.toLower == "y";
         }
 
         if ($args.hasOption("exclude-plugins") && _isExtractingApp()) {
@@ -254,19 +254,19 @@ class I18nExtractCommand : Command {
     protected void _addTranslation(string domain, string msgid, array $details = []) {
         $context = $details["msgctxt"] ?? "";
 
-        if (empty(_translations[$domain][$msgid][$context])) {
-            _translations[$domain][$msgid][$context] = [
+        if (empty(_translations[aDomain][$msgid][$context])) {
+            _translations[aDomain][$msgid][$context] = [
                 "msgid_plural":false,
             ];
         }
 
         if (isset($details["msgid_plural"])) {
-            _translations[$domain][$msgid][$context]["msgid_plural"] = $details["msgid_plural"];
+            _translations[aDomain][$msgid][$context]["msgid_plural"] = $details["msgid_plural"];
         }
 
         if (isset($details["file"])) {
             $line = $details["line"] ?? 0;
-            _translations[$domain][$msgid][$context]["references"][$details["file"]][] = $line;
+            _translations[aDomain][$msgid][$context]["references"][$details["file"]][] = $line;
         }
     }
 
@@ -456,19 +456,19 @@ class I18nExtractCommand : Command {
                     $plural = $context = null;
                     $vars = array_combine($map, $strings);
                     extract($vars);
-                    $domain = $domain ?? "default";
+                    aDomain = aDomain ?? "default";
                     $details = [
                         "file":_file,
                         "line":$line,
                     ];
-                    $details["file"] = "." ~ str_replace(ROOT, "", $details["file"]);
+                    $details["file"] = "." ~ replace(ROOT, "", $details["file"]);
                     if ($plural  !is null) {
                         $details["msgid_plural"] = $plural;
                     }
                     if ($context  !is null) {
                         $details["msgctxt"] = $context;
                     }
-                    _addTranslation($domain, $singular, $details);
+                    _addTranslation(aDomain, $singular, $details);
                 } else {
                     _markerError($io, _file, $line, $functionName, myCount);
                 }
@@ -491,7 +491,7 @@ class I18nExtractCommand : Command {
             return strlen($a) - strlen($b);
         });
 
-        foreach ($domain: $translations; _translations) {
+        foreach (aDomain: $translations; _translations) {
             foreach ($msgid: $contexts; $translations) {
                 foreach ($context, $details; $contexts) {
                     $plural = $details["msgid_plural"];
@@ -509,7 +509,7 @@ class I18nExtractCommand : Command {
                         $occurrences = implode("\n#: ", $occurrences);
 
                         $header = "#: "
-                            . str_replace(DIRECTORY_SEPARATOR, "/", $occurrences)
+                            . replace(DIRECTORY_SEPARATOR, "/", $occurrences)
                             ~ "\n";
                     }
 
@@ -527,10 +527,10 @@ class I18nExtractCommand : Command {
                         $sentence ~= "msgstr[1] \"\"\n\n";
                     }
 
-                    if ($domain != "default" && _merge) {
+                    if (aDomain != "default" && _merge) {
                         _store("default", $header, $sentence);
                     } else {
-                        _store($domain, $header, $sentence);
+                        _store(aDomain, $header, $sentence);
                     }
                 }
             }
@@ -545,12 +545,12 @@ class I18nExtractCommand : Command {
      * @param string sentence The sentence to store.
      */
     protected void _store(string domain, string header, string sentence) {
-        _storage[$domain] = _storage[$domain] ?? [];
+        _storage[aDomain] = _storage[aDomain] ?? [];
 
-        if (!isset(_storage[$domain][$sentence])) {
-            _storage[$domain][$sentence] = $header;
+        if (!isset(_storage[aDomain][$sentence])) {
+            _storage[aDomain][$sentence] = $header;
         } else {
-            _storage[$domain][$sentence] ~= $header;
+            _storage[aDomain][$sentence] ~= $header;
         }
     }
 
@@ -566,20 +566,20 @@ class I18nExtractCommand : Command {
         if ($args.getOption("overwrite")) {
             $overwriteAll = true;
         }
-        foreach ($domain, $sentences; _storage) {
-            $output = _writeHeader($domain);
+        foreach (aDomain, $sentences; _storage) {
+            $output = _writeHeader(aDomain);
             $headerLength = strlen($output);
             foreach ($sentence, $header; $sentences) {
                 $output ~= $header . $sentence;
             }
 
             // Remove vendor prefix if present.
-            $slashPosition = indexOf($domain, "/");
+            $slashPosition = indexOf(aDomain, "/");
             if ($slashPosition != false) {
-                $domain = substr($domain, $slashPosition + 1);
+                aDomain = substr(aDomain, $slashPosition + 1);
             }
 
-            myfilename = str_replace("/", "_", $domain) ~ ".pot";
+            myfilename = replace("/", "_", aDomain) ~ ".pot";
             $outputPath = _output . myfilename;
 
             if (this.checkUnchanged($outputPath, $headerLength, $output) == true) {
@@ -588,7 +588,7 @@ class I18nExtractCommand : Command {
             }
 
             $response = "";
-            while ($overwriteAll == false && file_exists($outputPath) && strtoupper($response) != "Y") {
+            while ($overwriteAll == false && file_exists($outputPath) && $response.toUpper != "Y") {
                 $io.out();
                 $response = $io.askChoice(
                     sprintf("Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll", myfilename),
@@ -613,29 +613,29 @@ class I18nExtractCommand : Command {
     /**
      * Build the translation template header
      *
-     * @param $domain Domain
+     * aDomain - Domain
      * @return Translation template header
      */
-    protected string _writeHeader(string domain) {
-        $projectIdVersion = $domain == "cake" ? "UIM " ~ Configure::version() : "PROJECT VERSION";
+    protected string _writeHeader(string aDomain) {
+        $projectIdVersion = aDomain == "cake" ? "UIM " ~ Configure::version() : "PROJECT VERSION";
 
-        $output = "# LANGUAGE translation of UIM Application\n";
-        $output ~= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
-        $output ~= "#\n";
-        $output ~= "#, fuzzy\n";
-        $output ~= "msgid \"\"\n";
-        $output ~= "msgstr \"\"\n";
-        $output ~= ""Project-Id-Version: " ~ $projectIdVersion ~ "\\n\"\n";
-        $output ~= ""POT-Creation-Date: " ~ date("Y-m-d H:iO") ~ "\\n\"\n";
-        $output ~= "\"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n\"\n";
-        $output ~= "\"Last-Translator: NAME <EMAIL@ADDRESS>\\n\"\n";
-        $output ~= "\"Language-Team: LANGUAGE <EMAIL@ADDRESS>\\n\"\n";
-        $output ~= "\"MIME-Version: 1.0\\n\"\n";
-        $output ~= "\"Content-Type: text/plain; charset=utf-8\\n\"\n";
-        $output ~= "\"Content-Transfer-Encoding: 8bit\\n\"\n";
-        $output ~= "\"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\\n\"\n\n";
+        result = "# LANGUAGE translation of UIM Application\n";
+        result ~= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
+        result ~= "#\n";
+        result ~= "#, fuzzy\n";
+        result ~= "msgid \"\"\n";
+        result ~= "msgstr \"\"\n";
+        result ~= ""Project-Id-Version: " ~ $projectIdVersion ~ "\\n\"\n";
+        result ~= ""POT-Creation-Date: " ~ date("Y-m-d H:iO") ~ "\\n\"\n";
+        result ~= "\"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n\"\n";
+        result ~= "\"Last-Translator: NAME <EMAIL@ADDRESS>\\n\"\n";
+        result ~= "\"Language-Team: LANGUAGE <EMAIL@ADDRESS>\\n\"\n";
+        result ~= "\"MIME-Version: 1.0\\n\"\n";
+        result ~= "\"Content-Type: text/plain; charset=utf-8\\n\"\n";
+        result ~= "\"Content-Transfer-Encoding: 8bit\\n\"\n";
+        result ~= "\"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\\n\"\n\n";
 
-        return $output;
+        return result;
     }
 
     /**
@@ -715,7 +715,7 @@ class I18nExtractCommand : Command {
         } else {
             $string = strtr($string, ["\\"":""", "\\\\":"\\"]);
         }
-        $string = str_replace("\r\n", "\n", $string);
+        $string = replace("\r\n", "\n", $string);
 
         return addcslashes($string, "\0..\37\\\"");
     }

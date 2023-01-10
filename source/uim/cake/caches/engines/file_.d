@@ -73,7 +73,7 @@ class FileEngine : CacheEngine
             _config["path"] ~= DIRECTORY_SEPARATOR;
         }
         if (_groupPrefix) {
-            _groupPrefix = str_replace("_", DIRECTORY_SEPARATOR, _groupPrefix);
+            _groupPrefix = replace("_", DIRECTORY_SEPARATOR, _groupPrefix);
         }
 
         return _active();

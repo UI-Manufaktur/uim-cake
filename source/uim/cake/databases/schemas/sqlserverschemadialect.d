@@ -237,7 +237,7 @@ class SqlserverSchemaDialect : SchemaDialect
 
         // Remove quotes
         if (preg_match("/^\(?N?"(.*)"\)?/", $default, $matches)) {
-            return str_replace("""", """, $matches[1]);
+            return replace("""", """, $matches[1]);
         }
 
         return $default;

@@ -71,7 +71,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
             if (empty($matches)) {
                 continue;
             }
-            $namespace = str_replace("\\", "/", $matches[1]);
+            $namespace = replace("\\", "/", $matches[1]);
             $prefix = "App";
             if ($namespace == "Cake") {
                 $prefix = "UIM";

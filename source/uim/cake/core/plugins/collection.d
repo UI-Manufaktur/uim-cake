@@ -118,7 +118,7 @@ class PluginCollection : Iterator, Countable
             return $path;
         }
 
-        $pluginPath = str_replace("/", DIRECTORY_SEPARATOR, aName);
+        $pluginPath = replace("/", DIRECTORY_SEPARATOR, aName);
         $paths = App::path("plugins");
         foreach ($paths as $path) {
             if (is_dir($path . $pluginPath)) {
@@ -219,7 +219,7 @@ class PluginCollection : Iterator, Countable
         }
 
         aConfig += ["name": aName];
-        $namespace = str_replace("/", "\\", aName);
+        $namespace = replace("/", "\\", aName);
 
         $className = $namespace ~ "\\" ~ "Plugin";
         // Check for [Vendor/]Foo/Plugin class

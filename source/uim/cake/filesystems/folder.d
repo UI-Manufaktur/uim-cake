@@ -330,7 +330,7 @@ class Folder
         $to = Folder::correctSlashFor($path);
         $from = ($to == "/" ? "\\" : "/");
 
-        return str_replace($from, $to, $path);
+        return replace($from, $to, $path);
     }
 
     /**
@@ -894,7 +894,7 @@ class Folder
 
             return $path;
         }
-        $path = str_replace("/", DIRECTORY_SEPARATOR, trim($path));
+        $path = replace("/", DIRECTORY_SEPARATOR, trim($path));
         $parts = explode(DIRECTORY_SEPARATOR, $path);
         $newparts = [];
         $newpath = "";

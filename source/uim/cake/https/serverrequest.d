@@ -703,7 +703,7 @@ class ServerRequest : IServerRequest
      * @return string The normalized header name.
      */
     protected string normalizeHeaderName(string myName) {
-        myName = str_replace("-", "_", strtoupper(myName));
+        myName = replace("-", "_", strtoupper(myName));
         if (!in_array(myName, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
             myName = "HTTP_" ~ myName;
         }
@@ -734,8 +734,8 @@ class ServerRequest : IServerRequest
                 myName = myKey;
             }
             if (myName  !is null) {
-                myName = str_replace("_", " ", strtolower(myName));
-                myName = str_replace(" ", "-", ucwords(myName));
+                myName = replace("_", " ", strtolower(myName));
+                myName = replace(" ", "-", ucwords(myName));
                 $headers[myName] = (array)myValue;
             }
         }
@@ -1071,7 +1071,7 @@ class ServerRequest : IServerRequest
         foreach ($raw as myLanguages) {
             foreach (myLanguages as &$lang) {
                 if (indexOf($lang, "_")) {
-                    $lang = str_replace("_", "-", $lang);
+                    $lang = replace("_", "-", $lang);
                 }
                 $lang = strtolower($lang);
             }

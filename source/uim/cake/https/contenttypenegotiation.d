@@ -129,7 +129,7 @@ class ContentTypeNegotiation
         foreach ($raw as $languages) {
             foreach ($languages as &$lang) {
                 if (strpos($lang, "_")) {
-                    $lang = str_replace("_", "-", $lang);
+                    $lang = replace("_", "-", $lang);
                 }
                 $lang = strtolower($lang);
             }

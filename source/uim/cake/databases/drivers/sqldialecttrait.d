@@ -41,7 +41,7 @@ trait SqlDialectTrait
 
         // string.*
         if (preg_match("/^[\w-]+\.\*$/u", $identifier)) {
-            return _startQuote . str_replace(".*", _endQuote ~ ".*", $identifier);
+            return _startQuote . replace(".*", _endQuote ~ ".*", $identifier);
         }
 
         // Functions

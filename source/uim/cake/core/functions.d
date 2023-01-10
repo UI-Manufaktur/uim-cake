@@ -214,7 +214,7 @@ if (!function_exists("env")) {
 
                 return substr($filename, 0, -(strlen($name) + $offset));
             case "PHP_SELF":
-                return str_replace((string)env("DOCUMENT_ROOT"), "", (string)env("SCRIPT_FILENAME"));
+                return replace((string)env("DOCUMENT_ROOT"), "", (string)env("SCRIPT_FILENAME"));
             case "CGI_MODE":
                 return PHP_SAPI == "cgi";
         }
@@ -264,10 +264,10 @@ if (!function_exists("deprecationWarning")) {
             $frame = $trace[$stackFrame];
             $frame += ["file": "[internal]", "line": "??"];
 
-            $relative = str_replace(DIRECTORY_SEPARATOR, "/", substr($frame["file"], strlen(ROOT) + 1));
+            $relative = replace(DIRECTORY_SEPARATOR, "/", substr($frame["file"], strlen(ROOT) + 1));
             $patterns = (array)Configure::read("Error.ignoredDeprecationPaths");
             foreach ($patterns as $pattern) {
-                $pattern = str_replace(DIRECTORY_SEPARATOR, "/", $pattern);
+                $pattern = replace(DIRECTORY_SEPARATOR, "/", $pattern);
                 if (fnmatch($pattern, $relative)) {
                     return;
                 }

@@ -597,7 +597,7 @@ class File
             return false;
         }
 
-        $replaced = this.write(str_replace($search, $replace, this.read()), "w", true);
+        $replaced = this.write(replace($search, $replace, this.read()), "w", true);
 
         if (this.lock != null) {
             flock(this.handle, LOCK_UN);

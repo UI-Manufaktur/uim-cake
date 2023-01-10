@@ -113,7 +113,7 @@ class BinaryUuidType : BaseType {
      * @return string Converted value.
      */
     protected string convertStringToBinaryUuid($string) {
-        $string = str_replace("-", "", $string);
+        $string = replace("-", "", $string);
 
         return pack("H*", $string);
     }

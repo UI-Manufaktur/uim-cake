@@ -21,7 +21,7 @@ class I18nCommand : Command {
         $io.out("[Q]uit");
 
         do {
-            $choice = strtolower($io.askChoice("What would you like to do?", ["E", "I", "H", "Q"]));
+            $choice = $io.askChoice("What would you like to do?", ["E", "I", "H", "Q"]).toLower;
             $code = null;
             switch ($choice) {
                 case "e":

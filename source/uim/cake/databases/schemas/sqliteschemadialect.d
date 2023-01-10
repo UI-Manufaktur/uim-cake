@@ -219,7 +219,7 @@ class SqliteSchemaDialect : SchemaDialect
 
         // Remove quotes
         if (is_string($default) && preg_match("/^"(.*)"$/", $default, $matches)) {
-            return str_replace("""", """, $matches[1]);
+            return replace("""", """, $matches[1]);
         }
 
         return $default;

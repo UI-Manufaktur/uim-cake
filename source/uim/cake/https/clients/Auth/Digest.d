@@ -113,7 +113,7 @@ class Digest
         }
 
         $authHeader = "Digest ";
-        $authHeader ~= "username="" ~ str_replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) ~ "", ";
+        $authHeader ~= "username="" ~ replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) ~ "", ";
         $authHeader ~= "realm="" ~ $credentials["realm"] ~ "", ";
         $authHeader ~= "nonce="" ~ $credentials["nonce"] ~ "", ";
         $authHeader ~= "uri="" ~ myPath ~ "", ";
