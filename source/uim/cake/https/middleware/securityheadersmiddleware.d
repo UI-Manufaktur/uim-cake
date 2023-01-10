@@ -84,7 +84,7 @@ class SecurityHeadersMiddleware : IMiddleware
      *
      * @var array<string, mixed>
      */
-    protected $headers = [];
+    protected $headers = null;
 
     /**
      * X-Content-Type-Options

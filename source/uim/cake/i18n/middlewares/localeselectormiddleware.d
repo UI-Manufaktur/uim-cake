@@ -31,7 +31,7 @@ class LocaleSelectorMiddleware : IMiddleware
      *
      * @var array
      */
-    protected $locales = [];
+    protected $locales = null;
 
     /**
      * Constructor.
@@ -39,7 +39,7 @@ class LocaleSelectorMiddleware : IMiddleware
      * @param array $locales A list of accepted locales, or ["*"] to accept any
      *   locale header value.
      */
-    this(array $locales = []) {
+    this(array $locales = null) {
         this.locales = $locales;
     }
 

@@ -80,7 +80,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
      * @return string Relative time string.
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    string timeAgoInWords(I18nDateTimeInterface $time, STRINGAA someOptions = []) {
+    string timeAgoInWords(I18nDateTimeInterface $time, STRINGAA someOptions = null) {
         $options = _options($options, FrozenTime::class);
         if ($options["timezone"]) {
             $time = $time.timezone($options["timezone"]);
@@ -109,7 +109,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
         $diffData = _diffData($futureTime, $pastTime, $backwards, $options);
         [$fNum, $fWord, $years, $months, $weeks, $days, $hours, $minutes, $seconds] = array_values($diffData);
 
-        $relativeDate = [];
+        $relativeDate = null;
         if ($fNum >= 1 && $years > 0) {
             $relativeDate[] = __dn("cake", "{0} year", "{0} years", $years, $years);
         }
@@ -181,7 +181,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
 
         // If more than a week, then take into account the length of months
         if ($diff >= 604800) {
-            $future = [];
+            $future = null;
             [
                 $future["H"],
                 $future["i"],
@@ -191,7 +191,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
                 $future["Y"],
             ] = explode("/", date("H/i/s/d/m/Y", $futureTime));
 
-            $past = [];
+            $past = null;
             [
                 $past["H"],
                 $past["i"],
@@ -300,7 +300,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
      * @return string Relative date string.
      * @see uim.cake.I18n\Date::timeAgoInWords()
      */
-    string dateAgoInWords(I18nDateTimeInterface $date, STRINGAA someOptions = []) {
+    string dateAgoInWords(I18nDateTimeInterface $date, STRINGAA someOptions = null) {
         $options = _options($options, FrozenDate::class);
         if ($options["timezone"]) {
             $date = $date.timezone($options["timezone"]);
@@ -329,7 +329,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
         $diffData = _diffData($futureTime, $pastTime, $backwards, $options);
         [$fNum, $fWord, $years, $months, $weeks, $days] = array_values($diffData);
 
-        $relativeDate = [];
+        $relativeDate = null;
         if ($fNum >= 1 && $years > 0) {
             $relativeDate[] = __dn("cake", "{0} year", "{0} years", $years, $years);
         }
@@ -390,7 +390,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
         ];
         if (is_string($options["accuracy"])) {
             $accuracy = $options["accuracy"];
-            $options["accuracy"] = [];
+            $options["accuracy"] = null;
             foreach ($class::$wordAccuracy as $key: $level) {
                 $options["accuracy"][$key] = $accuracy;
             }

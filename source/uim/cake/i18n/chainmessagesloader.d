@@ -13,7 +13,7 @@ class ChainMessagesLoader
      *
      * @var array<callable>
      */
-    protected _loaders = [];
+    protected _loaders = null;
 
     /**
      * Receives a list of callable functions or objects that will be executed

@@ -61,9 +61,9 @@ class PoFileParser
             "translated": null,
         ];
 
-        $messages = [];
+        $messages = null;
         $item = $defaults;
-        $stage = [];
+        $stage = null;
 
         while ($line = fgets($stream)) {
             $line = trim($line);
@@ -72,7 +72,7 @@ class PoFileParser
                 // Whitespace indicated current item is done
                 _addMessage($messages, $item);
                 $item = $defaults;
-                $stage = [];
+                $stage = null;
             } elseif (substr($line, 0, 7) == "msgid "") {
                 // We start a new msg so save previous
                 _addMessage($messages, $item);

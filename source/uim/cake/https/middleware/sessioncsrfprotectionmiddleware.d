@@ -72,7 +72,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @param array<string, mixed> aConfig Config options. See _config for valid keys.
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         _config = aConfig + _config;
     }
 

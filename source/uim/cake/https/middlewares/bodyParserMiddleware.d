@@ -16,7 +16,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @var array<\Closure>
      */
-    protected parsers = [];
+    protected parsers = null;
 
     /**
      * The HTTP methods to parse data on.
@@ -37,7 +37,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @param array<string, mixed> myOptions The options to use. See above.
      */
-    this(array myOptions = []) {
+    this(array myOptions = null) {
         myOptions += ["json":true, "xml":false, "methods":null];
         if (myOptions["json"]) {
             this.addParser(

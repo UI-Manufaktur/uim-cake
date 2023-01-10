@@ -37,7 +37,7 @@ trait DateFormatTrait
      *
      * @var array<\IntlDateFormatter>
      */
-    protected static _formatters = [];
+    protected static _formatters = null;
 
     /**
      * Gets the default locale.

@@ -26,7 +26,7 @@ class PackageLocator
      *
      * @var array<string, array<string, uim.cake.I18n\Package|callable>>
      */
-    protected $registry = [];
+    protected $registry = null;
 
     /**
      * Tracks whether a registry entry has been converted from a
@@ -34,7 +34,7 @@ class PackageLocator
      *
      * @var array<string, array<string, bool>>
      */
-    protected $converted = [];
+    protected $converted = null;
 
     /**
      * Constructor.
@@ -42,7 +42,7 @@ class PackageLocator
      * @param array<string, array<string, uim.cake.I18n\Package|callable>> $registry A registry of packages.
      * @see PackageLocator::$registry
      */
-    this(array $registry = []) {
+    this(array $registry = null) {
         foreach ($registry as $name: $locales) {
             foreach ($locales as $locale: $spec) {
                 this.set($name, $locale, $spec);

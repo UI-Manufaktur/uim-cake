@@ -69,7 +69,7 @@ class MoFileParser
 
         // Offset to start of translations
         fread($stream, 8);
-        $messages = [];
+        $messages = null;
 
         for ($i = 0; $i < $count; $i++) {
             $pluralId = null;

@@ -87,7 +87,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param array<string, mixed> myConfig Config options. See _config for valid keys.
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         if (array_key_exists("httpOnly", myConfig)) {
             myConfig["httponly"] = myConfig["httpOnly"];
             deprecationWarning("Option `httpOnly` is deprecated. Use lowercased `httponly` instead.");

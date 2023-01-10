@@ -20,7 +20,7 @@ class CacheSession : SessionHandlerInterface
      *
      * @var array
      */
-    protected _options = [];
+    protected _options = null;
 
     /**
      * Constructor.
@@ -30,7 +30,7 @@ class CacheSession : SessionHandlerInterface
      * storing the session
      * @throws \InvalidArgumentException if the "config" key is not provided
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         if (empty(myConfig["config"])) {
             throw new InvalidArgumentException("The cache configuration name to use is required");
         }

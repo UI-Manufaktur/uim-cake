@@ -18,7 +18,7 @@ class Package
      *
      * @var array<array|string>
      */
-    protected $messages = [];
+    protected $messages = null;
 
     /**
      * The name of a fallback package to use when a message key does not
@@ -42,7 +42,7 @@ class Package
     this(
         string $formatter = "default",
         Nullable!string $fallback = null,
-        array $messages = []
+        array $messages = null
     ) {
         this.formatter = $formatter;
         this.fallback = $fallback;

@@ -132,7 +132,7 @@ class MessagesFileLoader
             $locale["language"],
         ];
 
-        $searchPaths = [];
+        $searchPaths = null;
 
         $localePaths = App::path("locales");
         if (empty($localePaths) && defined("APP")) {

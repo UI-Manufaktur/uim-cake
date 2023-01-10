@@ -153,7 +153,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      * @param array<string, mixed> $options Array of options.
      * @return string Relative time string.
      */
-    string timeAgoInWords(STRINGAA someOptions = []) {
+    string timeAgoInWords(STRINGAA someOptions = null) {
         /** @psalm-suppress UndefinedInterfaceMethod */
         return static::getDiffFormatter().dateAgoInWords(this, $options);
     }

@@ -22,7 +22,7 @@ class FormatterLocator
      *
      * @var array<string, uim.cake.I18n\IFormatter|class-string<uim.cake.I18n\IFormatter>>
      */
-    protected $registry = [];
+    protected $registry = null;
 
     /**
      * Tracks whether a registry entry has been converted from a
@@ -30,7 +30,7 @@ class FormatterLocator
      *
      * @var array<bool>
      */
-    protected $converted = [];
+    protected $converted = null;
 
     /**
      * Constructor.
@@ -38,7 +38,7 @@ class FormatterLocator
      * @param array<string, class-string<uim.cake.I18n\IFormatter>> $registry An array of key-value pairs where the key is the
      * formatter name the value is a FQCN for the formatter.
      */
-    this(array $registry = []) {
+    this(array $registry = null) {
         foreach ($registry as $name: $spec) {
             this.set($name, $spec);
         }

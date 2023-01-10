@@ -16,7 +16,7 @@ class TranslatorRegistry
      *
      * @var array<string, array<string, uim.cake.I18n\Translator>>
      */
-    protected $registry = [];
+    protected $registry = null;
 
     /**
      * The current locale code.
@@ -45,7 +45,7 @@ class TranslatorRegistry
      *
      * @var array<callable>
      */
-    protected _loaders = [];
+    protected _loaders = null;
 
     /**
      * The name of the default formatter to use for newly created

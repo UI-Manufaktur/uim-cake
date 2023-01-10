@@ -137,7 +137,7 @@ class EncryptedCookieMiddleware : IMiddleware
     {
         /** @var array<uim.cake.Http\Cookie\CookieInterface> $cookies */
         $cookies = CookieCollection::createFromHeader($response.getHeader("Set-Cookie"));
-        $header = [];
+        $header = null;
         foreach ($cookies as $cookie) {
             if (hasAllValues($cookie.getName(), this.cookieNames, true)) {
                 $value = _encrypt($cookie.getValue(), this.cipherType);

@@ -159,7 +159,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @param array<string, mixed> $options Array of options.
      * @return string Relative time string.
      */
-    string timeAgoInWords(STRINGAA someOptions = []) {
+    string timeAgoInWords(STRINGAA someOptions = null) {
         /** @psalm-suppress UndefinedInterfaceMethod */
         return static::getDiffFormatter().timeAgoInWords(this, $options);
     }
@@ -179,7 +179,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @return array List of timezone identifiers
      * @since 2.2
      */
-    static array listTimezones($filter = null, Nullable!string $country = null, $options = []) {
+    static array listTimezones($filter = null, Nullable!string $country = null, $options = null) {
         if (is_bool($options)) {
             $options = [
                 "group": $options,
@@ -213,7 +213,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
         }
 
         if ($group) {
-            $groupedIdentifiers = [];
+            $groupedIdentifiers = null;
             $now = time();
             $before = $options["before"];
             $after = $options["after"];
