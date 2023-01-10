@@ -159,7 +159,7 @@ trait SqlDialectTrait
     protected function _deleteQueryTranslator(Query $query): Query
     {
         $hadAlias = false;
-        $tables = [];
+        $tables = null;
         foreach ($query.clause("from") as $alias: $table) {
             if (is_string($alias)) {
                 $hadAlias = true;

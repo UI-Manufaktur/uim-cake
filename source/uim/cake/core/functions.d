@@ -27,7 +27,7 @@ if (!function_exists("h")) {
         if (is_string($text)) {
             //optimize for strings
         } elseif (is_array($text)) {
-            $texts = [];
+            $texts = null;
             foreach ($text as $k: $t) {
                 $texts[$k] = h($t, $double, $charset);
             }
@@ -285,7 +285,7 @@ if (!function_exists("deprecationWarning")) {
             );
         }
 
-        static $errors = [];
+        static $errors = null;
         $checksum = md5($message);
         $duplicate = (bool)Configure::read("Error.allowDuplicateDeprecations", false);
         if (isset($errors[$checksum]) && !$duplicate) {

@@ -13,7 +13,7 @@ class TypeMap
      *
      * @var array<int|string, string>
      */
-    protected _defaults = [];
+    protected _defaults = null;
 
     /**
      * Array with the fields and the related types that override defaults this query might contain
@@ -23,14 +23,14 @@ class TypeMap
      *
      * @var array<int|string, string>
      */
-    protected _types = [];
+    protected _types = null;
 
     /**
      * Creates an instance with the given defaults
      *
      * @param array<int|string, string> $defaults The defaults to use.
      */
-    this(array $defaults = []) {
+    this(array $defaults = null) {
         this.setDefaults($defaults);
     }
 

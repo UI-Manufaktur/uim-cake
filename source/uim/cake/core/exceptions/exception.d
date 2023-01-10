@@ -22,7 +22,7 @@ class UIMException : RuntimeException {
      *
      * @var array
      */
-    protected _attributes = [];
+    protected _attributes = null;
 
     // Template string that has attributes sprintf()"ed into it.
     protected string _messageTemplate = "";

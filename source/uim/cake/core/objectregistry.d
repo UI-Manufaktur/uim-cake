@@ -34,7 +34,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @var array<object>
      * @psalm-var array<array-key, TObject>
      */
-    protected _loaded = [];
+    protected _loaded = null;
 
     /**
      * Loads/constructs an object instance.
@@ -62,7 +62,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
-    function load(string aName, Json aConfig = []) {
+    function load(string aName, Json aConfig = null) {
         if (isset(aConfig["className"])) {
             $objName = $name;
             $name = aConfig["className"];
@@ -264,9 +264,9 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return array<string, array> Array of normalized objects.
      */
     array normalizeArray(array $objects) {
-        $normal = [];
+        $normal = null;
         foreach ($objects as $i: $objectName) {
-            aConfig = [];
+            aConfig = null;
             if (!is_int($i)) {
                 aConfig = (array)$objectName;
                 $objectName = $i;

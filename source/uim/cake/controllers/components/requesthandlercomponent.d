@@ -58,7 +58,7 @@ class RequestHandlerComponent : Component
      * @param uim.cake.controllers.ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> aConfig Array of config.
      */
-    this(ComponentRegistry $registry, Json aConfig = []) {
+    this(ComponentRegistry $registry, Json aConfig = null) {
         aConfig += [
             'viewClassMap': [
                 'json': 'Json',
@@ -372,7 +372,7 @@ class RequestHandlerComponent : Component
      * @return void
      * @see uim.cake.controllers.components.RequestHandlerComponent::respondAs()
      */
-    void renderAs(Controller $controller, string $type, STRINGAA someOptions = []) {
+    void renderAs(Controller $controller, string $type, STRINGAA someOptions = null) {
         $defaults = ['charset': 'UTF-8'];
         $viewClassMap = this.getConfig('viewClassMap');
 
@@ -427,7 +427,7 @@ class RequestHandlerComponent : Component
      *    not exist in the type map, or if the Content-type header has
      *    already been set by this method.
      */
-    bool respondAs($type, STRINGAA someOptions = []) {
+    bool respondAs($type, STRINGAA someOptions = null) {
         $defaults = ['index': null, 'charset': null, 'attachment': false];
         $options += $defaults;
 

@@ -37,7 +37,7 @@ class AggregateExpression : FunctionExpression : IWindow
      * @return this
      * @see uim.cake.databases.Query::where()
      */
-    function filter($conditions, array $types = []) {
+    function filter($conditions, array $types = null) {
         if (this.filter == null) {
             this.filter = new QueryExpression();
         }

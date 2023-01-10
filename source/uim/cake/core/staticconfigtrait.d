@@ -21,7 +21,7 @@ trait StaticConfigTrait
      *
      * @var array<string, mixed>
      */
-    protected static _config = [];
+    protected static _config = null;
 
     /**
      * This method can be used to define configuration adapters for an application.
@@ -234,7 +234,7 @@ REGEXP;
             throw new InvalidArgumentException("The DSN string "{$dsn}" could not be parsed.");
         }
 
-        $exists = [];
+        $exists = null;
         foreach ($parsed as $k: $v) {
             if (is_int($k)) {
                 unset($parsed[$k]);

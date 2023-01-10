@@ -68,7 +68,7 @@ trait TupleComparisonTranslatorTrait
             /** @var array<string, string> $typeMap */
             $typeMap = array_combine($fields, $type) ?: [];
         } else {
-            $typeMap = [];
+            $typeMap = null;
         }
 
         $surrogate = $query.getConnection()
@@ -81,7 +81,7 @@ trait TupleComparisonTranslatorTrait
 
         $conditions = ["OR": []];
         foreach ($value as $tuple) {
-            $item = [];
+            $item = null;
             foreach (array_values($tuple) as $i: $value2) {
                 $item[] = [$fields[$i]: $value2];
             }

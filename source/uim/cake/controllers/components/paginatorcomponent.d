@@ -36,7 +36,7 @@ class PaginatorComponent : Component
     protected _paginator;
 
 
-    this(ComponentRegistry $registry, Json aConfig = []) {
+    this(ComponentRegistry $registry, Json aConfig = null) {
         deprecationWarning(
             "PaginatorComponent is deprecated, use a Cake\Datasource\Pagination\NumericPaginator instance directly."
         );
@@ -173,7 +173,7 @@ class PaginatorComponent : Component
      * @return uim.cake.Datasource\IResultSet Query results
      * @throws uim.cake.http.exceptions.NotFoundException
      */
-    function paginate(object $object, array $settings = []): IResultSet
+    function paginate(object $object, array $settings = null): IResultSet
     {
         $request = _registry.getController().getRequest();
 

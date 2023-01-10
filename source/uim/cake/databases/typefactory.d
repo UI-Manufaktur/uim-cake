@@ -47,7 +47,7 @@ class TypeFactory
      *
      * @var array<uim.cake.databases.TypeInterface>
      */
-    protected static _builtTypes = [];
+    protected static _builtTypes = null;
 
     /**
      * Returns a Type object capable of converting a type identified by name.
@@ -74,7 +74,7 @@ class TypeFactory
      * @return array<uim.cake.databases.TypeInterface>
      */
     static array buildAll() {
-        $result = [];
+        $result = null;
         foreach (static::_types as $name: $type) {
             $result[$name] = static::_builtTypes[$name] ?? static::build($name);
         }
@@ -115,7 +115,7 @@ class TypeFactory
      */
     static void setMap(array $map) {
         static::_types = $map;
-        static::_builtTypes = [];
+        static::_builtTypes = null;
     }
 
     /**
@@ -136,7 +136,7 @@ class TypeFactory
      * Clears out all created instances and mapped types classes, useful for testing
      */
     static void clear() {
-        static::_types = [];
-        static::_builtTypes = [];
+        static::_types = null;
+        static::_builtTypes = null;
     }
 }

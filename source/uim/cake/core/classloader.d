@@ -21,7 +21,7 @@ class ClassLoader
      *
      * @var array<string, array>
      */
-    protected _prefixes = [];
+    protected _prefixes = null;
 
     /**
      * Register loader with SPL autoloader stack.

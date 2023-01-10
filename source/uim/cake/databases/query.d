@@ -124,7 +124,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @var array<callable>
      */
-    protected _resultDecorators = [];
+    protected _resultDecorators = null;
 
     /**
      * Statement object resulting from executing this query.
@@ -385,7 +385,7 @@ class Query : IExpression, IteratorAggregate
      */
     function with($cte, bool canOverwrite = false) {
         if (canOverwrite) {
-            _parts["with"] = [];
+            _parts["with"] = null;
         }
 
         if ($cte instanceof Closure) {
@@ -439,7 +439,7 @@ class Query : IExpression, IteratorAggregate
      * @param bool canOverwrite whether to reset fields with passed list or not
      * @return this
      */
-    function select($fields = [], bool canOverwrite = false) {
+    function select($fields = null, bool canOverwrite = false) {
         if (!is_string($fields) && is_callable($fields)) {
             $fields = $fields(this);
         }
@@ -488,15 +488,15 @@ class Query : IExpression, IteratorAggregate
      * @param bool canOverwrite whether to reset fields with passed list or not
      * @return this
      */
-    function distinct($on = [], canOverwrite = false) {
-        if ($on == []) {
+    function distinct($on = null, canOverwrite = false) {
+        if ($on == null) {
             $on = true;
         } elseif (is_string($on)) {
             $on = [$on];
         }
 
         if (is_array($on)) {
-            $merge = [];
+            $merge = null;
             if (is_array(_parts["distinct"])) {
                 $merge = _parts["distinct"];
             }
@@ -534,7 +534,7 @@ class Query : IExpression, IteratorAggregate
     function modifier($modifiers, canOverwrite = false) {
         _dirty();
         if (canOverwrite) {
-            _parts["modifier"] = [];
+            _parts["modifier"] = null;
         }
         if (!is_array($modifiers)) {
             $modifiers = [$modifiers];
@@ -573,7 +573,7 @@ class Query : IExpression, IteratorAggregate
      * @param bool canOverwrite whether to reset tables with passed list or not
      * @return this
      */
-    function from($tables = [], canOverwrite = false) {
+    function from($tables = null, canOverwrite = false) {
         $tables = (array)$tables;
 
         if (canOverwrite) {
@@ -673,12 +673,12 @@ class Query : IExpression, IteratorAggregate
      * @see uim.cake.databases.TypeFactory
      * @return this
      */
-    function join($tables, $types = [], canOverwrite = false) {
+    function join($tables, $types = null, canOverwrite = false) {
         if (is_string($tables) || isset($tables["table"])) {
             $tables = [$tables];
         }
 
-        $joins = [];
+        $joins = null;
         $i = count(_parts["join"]);
         foreach ($tables as $alias: $t) {
             if (!is_array($t)) {
@@ -760,7 +760,7 @@ class Query : IExpression, IteratorAggregate
      * values to the corresponding database representation.
      * @return this
      */
-    function leftJoin($table, $conditions = [], $types = []) {
+    function leftJoin($table, $conditions = null, $types = null) {
         this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_LEFT), $types);
 
         return this;
@@ -781,7 +781,7 @@ class Query : IExpression, IteratorAggregate
      * values to the corresponding database representation.
      * @return this
      */
-    function rightJoin($table, $conditions = [], $types = []) {
+    function rightJoin($table, $conditions = null, $types = null) {
         this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_RIGHT), $types);
 
         return this;
@@ -802,7 +802,7 @@ class Query : IExpression, IteratorAggregate
      * values to the corresponding database representation.
      * @return this
      */
-    function innerJoin($table, $conditions = [], $types = []) {
+    function innerJoin($table, $conditions = null, $types = null) {
         this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_INNER), $types);
 
         return this;
@@ -959,7 +959,7 @@ class Query : IExpression, IteratorAggregate
      * @see uim.cake.databases.Expression\QueryExpression
      * @return this
      */
-    function where($conditions = null, array $types = [], bool canOverwrite = false) {
+    function where($conditions = null, array $types = null, bool canOverwrite = false) {
         if (canOverwrite) {
             _parts["where"] = this.newExpr();
         }
@@ -1028,7 +1028,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereInList(string $field, array $values, STRINGAA someOptions = []) {
+    function whereInList(string $field, array $values, STRINGAA someOptions = null) {
         $options += [
             "types": [],
             "allowEmpty": false,
@@ -1054,7 +1054,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereNotInList(string $field, array $values, STRINGAA someOptions = []) {
+    function whereNotInList(string $field, array $values, STRINGAA someOptions = null) {
         $options += [
             "types": [],
             "allowEmpty": false,
@@ -1081,7 +1081,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereNotInListOrNull(string $field, array $values, STRINGAA someOptions = []) {
+    function whereNotInListOrNull(string $field, array $values, STRINGAA someOptions = null) {
         $options += [
             "types": [],
             "allowEmpty": false,
@@ -1155,7 +1155,7 @@ class Query : IExpression, IteratorAggregate
      * @see uim.cake.databases.TypeFactory
      * @return this
      */
-    function andWhere($conditions, array $types = []) {
+    function andWhere($conditions, array $types = null) {
         _conjugate("where", $conditions, "AND", $types);
 
         return this;
@@ -1332,7 +1332,7 @@ class Query : IExpression, IteratorAggregate
      */
     function group($fields, canOverwrite = false) {
         if (canOverwrite) {
-            _parts["group"] = [];
+            _parts["group"] = null;
         }
 
         if (!is_array($fields)) {
@@ -1360,7 +1360,7 @@ class Query : IExpression, IteratorAggregate
      * @see uim.cake.databases.Query::where()
      * @return this
      */
-    function having($conditions = null, $types = [], canOverwrite = false) {
+    function having($conditions = null, $types = null, canOverwrite = false) {
         if (canOverwrite) {
             _parts["having"] = this.newExpr();
         }
@@ -1383,7 +1383,7 @@ class Query : IExpression, IteratorAggregate
      * @see uim.cake.databases.Query::andWhere()
      * @return this
      */
-    function andHaving($conditions, $types = []) {
+    function andHaving($conditions, $types = null) {
         _conjugate("having", $conditions, "AND", $types);
 
         return this;
@@ -1401,7 +1401,7 @@ class Query : IExpression, IteratorAggregate
      */
     function window(string aName, $window, bool canOverwrite = false) {
         if (canOverwrite) {
-            _parts["window"] = [];
+            _parts["window"] = null;
         }
 
         if ($window instanceof Closure) {
@@ -1527,7 +1527,7 @@ class Query : IExpression, IteratorAggregate
      */
     function union($query, canOverwrite = false) {
         if (canOverwrite) {
-            _parts["union"] = [];
+            _parts["union"] = null;
         }
         _parts["union"][] = [
             "all": false,
@@ -1561,7 +1561,7 @@ class Query : IExpression, IteratorAggregate
      */
     function unionAll($query, canOverwrite = false) {
         if (canOverwrite) {
-            _parts["union"] = [];
+            _parts["union"] = null;
         }
         _parts["union"][] = [
             "all": true,
@@ -1583,7 +1583,7 @@ class Query : IExpression, IteratorAggregate
      * @return this
      * @throws \RuntimeException When there are 0 columns.
      */
-    function insert(array $columns, array $types = []) {
+    function insert(array $columns, array $types = null) {
         if (empty($columns)) {
             throw new RuntimeException("At least 1 column is required to perform an insert.");
         }
@@ -1726,7 +1726,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, string>|string $types The column types to treat data as.
      * @return this
      */
-    function set(string aKey, $value = null, $types = []) {
+    function set(string aKey, $value = null, $types = null) {
         if (empty(_parts["set"])) {
             _parts["set"] = this.newExpr().setConjunction(",");
         }
@@ -1964,7 +1964,7 @@ class Query : IExpression, IteratorAggregate
      */
     function decorateResults(?callable $callback, bool canOverwrite = false) {
         if (canOverwrite) {
-            _resultDecorators = [];
+            _resultDecorators = null;
         }
 
         if ($callback != null) {
@@ -2330,7 +2330,7 @@ class Query : IExpression, IteratorAggregate
             $params = this.getValueBinder().bindings();
         } catch (RuntimeException $e) {
             $sql = "SQL could not be generated for this query as it is incomplete.";
-            $params = [];
+            $params = null;
         } finally {
             restore_error_handler();
         }

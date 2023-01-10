@@ -282,5 +282,5 @@ interface IDriver
      * @param array $columns The list of columns for the schema.
      * @return uim.cake.databases.Schema\TableSchema
      */
-    function newTableSchema(string $table, array $columns = []): TableSchema;
+    function newTableSchema(string $table, array $columns = null): TableSchema;
 }

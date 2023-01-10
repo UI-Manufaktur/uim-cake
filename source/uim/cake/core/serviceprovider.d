@@ -24,7 +24,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * @var array<string>
      * @see ServiceProvider::provides()
      */
-    protected $provides = [];
+    protected $provides = null;
 
     /**
      * Get the container.

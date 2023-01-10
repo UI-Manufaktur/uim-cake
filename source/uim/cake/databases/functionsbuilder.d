@@ -38,7 +38,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\AggregateExpression
      */
-    function sum($expression, $types = []): AggregateExpression
+    function sum($expression, $types = null): AggregateExpression
     {
         $returnType = "float";
         if (current($types) == "integer") {
@@ -55,7 +55,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\AggregateExpression
      */
-    function avg($expression, $types = []): AggregateExpression
+    function avg($expression, $types = null): AggregateExpression
     {
         return this.aggregate("AVG", this.toLiteralParam($expression), $types, "float");
     }
@@ -67,7 +67,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\AggregateExpression
      */
-    function max($expression, $types = []): AggregateExpression
+    function max($expression, $types = null): AggregateExpression
     {
         return this.aggregate("MAX", this.toLiteralParam($expression), $types, current($types) ?: "float");
     }
@@ -79,7 +79,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\AggregateExpression
      */
-    function min($expression, $types = []): AggregateExpression
+    function min($expression, $types = null): AggregateExpression
     {
         return this.aggregate("MIN", this.toLiteralParam($expression), $types, current($types) ?: "float");
     }
@@ -91,7 +91,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\AggregateExpression
      */
-    function count($expression, $types = []): AggregateExpression
+    function count($expression, $types = null): AggregateExpression
     {
         return this.aggregate("COUNT", this.toLiteralParam($expression), $types, "integer");
     }
@@ -103,7 +103,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function concat(array $args, array $types = []): FunctionExpression
+    function concat(array $args, array $types = null): FunctionExpression
     {
         return new FunctionExpression("CONCAT", $args, $types, "string");
     }
@@ -115,7 +115,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function coalesce(array $args, array $types = []): FunctionExpression
+    function coalesce(array $args, array $types = null): FunctionExpression
     {
         return new FunctionExpression("COALESCE", $args, $types, current($types) ?: "string");
     }
@@ -159,7 +159,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function dateDiff(array $args, array $types = []): FunctionExpression
+    function dateDiff(array $args, array $types = null): FunctionExpression
     {
         return new FunctionExpression("DATEDIFF", $args, $types, "integer");
     }
@@ -172,7 +172,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function datePart(string $part, $expression, array $types = []): FunctionExpression
+    function datePart(string $part, $expression, array $types = null): FunctionExpression
     {
         return this.extract($part, $expression, $types);
     }
@@ -185,7 +185,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function extract(string $part, $expression, array $types = []): FunctionExpression
+    function extract(string $part, $expression, array $types = null): FunctionExpression
     {
         $expression = new FunctionExpression("EXTRACT", this.toLiteralParam($expression), $types, "integer");
         $expression.setConjunction(" FROM").add([$part: "literal"], [], true);
@@ -202,7 +202,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function dateAdd($expression, $value, string $unit, array $types = []): FunctionExpression
+    function dateAdd($expression, $value, string $unit, array $types = null): FunctionExpression
     {
         if (!is_numeric($value)) {
             $value = 0;
@@ -222,7 +222,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function dayOfWeek($expression, $types = []): FunctionExpression
+    function dayOfWeek($expression, $types = null): FunctionExpression
     {
         return new FunctionExpression("DAYOFWEEK", this.toLiteralParam($expression), $types, "integer");
     }
@@ -235,7 +235,7 @@ class FunctionsBuilder
      * @param array $types list of types to bind to the arguments
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function weekday($expression, $types = []): FunctionExpression
+    function weekday($expression, $types = null): FunctionExpression
     {
         return this.dayOfWeek($expression, $types);
     }
@@ -289,7 +289,7 @@ class FunctionsBuilder
             $params[] = $default;
         }
 
-        $types = [];
+        $types = null;
         if ($type != null) {
             $types = [$type, "integer", $type];
         }
@@ -313,7 +313,7 @@ class FunctionsBuilder
             $params[] = $default;
         }
 
-        $types = [];
+        $types = null;
         if ($type != null) {
             $types = [$type, "integer", $type];
         }
@@ -333,7 +333,7 @@ class FunctionsBuilder
      * @param string $return Return type of the entire expression. Defaults to float.
      * @return uim.cake.databases.Expression\AggregateExpression
      */
-    function aggregate(string aName, array $params = [], array $types = [], string $return = "float") {
+    function aggregate(string aName, array $params = null, array $types = null, string $return = "float") {
         return new AggregateExpression($name, $params, $types, $return);
     }
 

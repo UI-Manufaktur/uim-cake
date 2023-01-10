@@ -62,8 +62,8 @@ class FieldTypeConverter
         $map = $typeMap.toArray();
         $types = TypeFactory::buildAll();
 
-        $simpleMap = $batchingMap = [];
-        $simpleResult = $batchingResult = [];
+        $simpleMap = $batchingMap = null;
+        $simpleResult = $batchingResult = null;
 
         foreach ($types as $k: $type) {
             if ($type instanceof OptionalConvertInterface && !$type.requiresToPhpCast()) {

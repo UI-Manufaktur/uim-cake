@@ -111,7 +111,7 @@ class Sqlite : Driver
             $chmodFile = !file_exists(aConfig["database"]);
         }
 
-        $params = [];
+        $params = null;
         if (aConfig["cache"]) {
             $params[] = "cache=" ~ aConfig["cache"];
         }

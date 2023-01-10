@@ -17,7 +17,7 @@ abstract class Driver : IDriver
     /**
      * @var array<int>  DB-specific error codes that allow connect retry
      */
-    protected const RETRY_ERROR_CODES = [];
+    protected const RETRY_ERROR_CODES = null;
 
     /**
      * Instance of PDO.
@@ -39,7 +39,7 @@ abstract class Driver : IDriver
      *
      * @var array<string, mixed>
      */
-    protected _baseConfig = [];
+    protected _baseConfig = null;
 
     /**
      * Indicates whether the driver is doing automatic identifier quoting
@@ -64,7 +64,7 @@ abstract class Driver : IDriver
      * @param array<string, mixed> aConfig The configuration for the driver.
      * @throws \InvalidArgumentException
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         if (empty(aConfig["username"]) && !empty(aConfig["login"])) {
             throw new InvalidArgumentException(
                 "Please pass "username" instead of "login" for connecting to the database"
@@ -379,7 +379,7 @@ abstract class Driver : IDriver
     }
 
 
-    function newTableSchema(string $table, array $columns = []): TableSchema
+    function newTableSchema(string $table, array $columns = null): TableSchema
     {
         $className = TableSchema::class;
         if (isset(_config["tableSchema"])) {

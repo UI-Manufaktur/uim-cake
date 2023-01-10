@@ -151,7 +151,7 @@ class QueryCompiler
      */
     protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder) {
         $recursive = false;
-        $expressions = [];
+        $expressions = null;
         foreach ($parts as $cte) {
             $recursive = $recursive || $cte.isRecursive();
             $expressions[] = $cte.sql($binder);
@@ -182,7 +182,7 @@ class QueryCompiler
 
         $driver = $query.getConnection().getDriver();
         $quoteIdentifiers = $driver.isAutoQuotingEnabled() || _quotedSelectAliases;
-        $normalized = [];
+        $normalized = null;
         $parts = _stringifyExpressions($parts, $binder);
         foreach ($parts as $k: $p) {
             if (!is_numeric($k)) {
@@ -219,7 +219,7 @@ class QueryCompiler
      */
     protected string _buildFromPart(array $parts, Query $query, ValueBinder aBinder) {
         $select = " FROM %s";
-        $normalized = [];
+        $normalized = null;
         $parts = _stringifyExpressions($parts, $binder);
         foreach ($parts as $k: $p) {
             if (!is_numeric($k)) {
@@ -279,7 +279,7 @@ class QueryCompiler
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
     protected string _buildWindowPart(array $parts, Query $query, ValueBinder aBinder) {
-        $windows = [];
+        $windows = null;
         foreach ($parts as $window) {
             $windows[] = $window["name"].sql($binder) ~ " AS (" ~ $window["window"].sql($binder) ~ ")";
         }
@@ -295,7 +295,7 @@ class QueryCompiler
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
     protected string _buildSetPart(array $parts, Query $query, ValueBinder aBinder) {
-        $set = [];
+        $set = null;
         foreach ($parts as $part) {
             if ($part instanceof IExpression) {
                 $part = $part.sql($binder);
@@ -395,7 +395,7 @@ class QueryCompiler
      * @return string SQL fragment.
      */
     protected string _buildModifierPart(array $parts, Query $query, ValueBinder aBinder) {
-        if ($parts == []) {
+        if ($parts == null) {
             return "";
         }
 
@@ -411,7 +411,7 @@ class QueryCompiler
      * @param bool $wrap Whether to wrap each expression object with parenthesis
      */
     protected array _stringifyExpressions(array $expressions, ValueBinder aBinder, bool $wrap = true) {
-        $result = [];
+        $result = null;
         foreach ($expressions as $k: $expression) {
             if ($expression instanceof IExpression) {
                 $value = $expression.sql($binder);

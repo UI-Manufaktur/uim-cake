@@ -122,7 +122,7 @@ class IdentifierQuoter
      * @return array<string, mixed>
      */
     protected array _basicQuoter(array $part) {
-        $result = [];
+        $result = null;
         foreach ($part as $alias: $value) {
             $value = !is_string($value) ? $value : _driver.quoteIdentifier($value);
             $alias = is_numeric($alias) ? $alias : _driver.quoteIdentifier($alias);
@@ -140,7 +140,7 @@ class IdentifierQuoter
      * @return array<string, array>
      */
     protected array _quoteJoins(array $joins) {
-        $result = [];
+        $result = null;
         foreach ($joins as $value) {
             $alias = "";
             if (!empty($value["alias"])) {
@@ -201,7 +201,7 @@ class IdentifierQuoter
         if (is_string($field)) {
             $expression.setField(_driver.quoteIdentifier($field));
         } elseif (is_array($field)) {
-            $quoted = [];
+            $quoted = null;
             foreach ($field as $f) {
                 $quoted[] = _driver.quoteIdentifier($f);
             }

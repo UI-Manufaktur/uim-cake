@@ -27,7 +27,7 @@ interface IPluginApplication : IEventDispatcher
      * @param array<string, mixed> aConfig The configuration data for the plugin if using a string for $name
      * @return this
      */
-    function addPlugin($name, Json aConfig = []);
+    function addPlugin($name, Json aConfig = null);
 
     /**
      * Run bootstrap logic for loaded plugins.

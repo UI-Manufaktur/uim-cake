@@ -42,7 +42,7 @@ class SqlserverCompiler : QueryCompiler
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
     protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder) {
-        $expressions = [];
+        $expressions = null;
         foreach ($parts as $cte) {
             $expressions[] = $cte.sql($binder);
         }

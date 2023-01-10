@@ -181,7 +181,7 @@ class Sqlserver : Driver
             }
 
             if (!$query.isBufferedResultsEnabled()) {
-                $options = [];
+                $options = null;
             }
         }
 
@@ -454,7 +454,7 @@ class Sqlserver : Driver
                 $expression.setName("DATEPART").setConjunction(" ,");
                 break;
             case "DATE_ADD":
-                $params = [];
+                $params = null;
                 $visitor = function ($p, $key) use (&$params) {
                     if ($key == 0) {
                         $params[2] = $p;
@@ -486,7 +486,7 @@ class Sqlserver : Driver
             case "SUBSTR":
                 $expression.setName("SUBSTRING");
                 if (count($expression) < 4) {
-                    $params = [];
+                    $params = null;
                     $expression
                         .iterateParts(function ($p) use (&$params) {
                             return $params[] = $p;

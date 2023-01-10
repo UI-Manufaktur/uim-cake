@@ -53,7 +53,7 @@ class CaseStatementExpression : IExpression, ITypedResult
      *
      * @var array<uim.cake.databases.Expression\WhenThenExpression>
      */
-    protected $when = [];
+    protected $when = null;
 
     /**
      * Buffer that holds values and types for use with `then()`.
@@ -421,7 +421,7 @@ class CaseStatementExpression : IExpression, ITypedResult
             return this.returnType;
         }
 
-        $types = [];
+        $types = null;
         foreach (this.when as $when) {
             $type = $when.getResultType();
             if ($type != null) {
@@ -501,7 +501,7 @@ class CaseStatementExpression : IExpression, ITypedResult
             $value = this.compileNullableValue($binder, this.value, this.valueType) ~ " ";
         }
 
-        $whenThenExpressions = [];
+        $whenThenExpressions = null;
         foreach (this.when as $whenThen) {
             $whenThenExpressions[] = $whenThen.sql($binder);
         }

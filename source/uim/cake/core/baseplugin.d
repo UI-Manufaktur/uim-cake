@@ -49,7 +49,7 @@ class BasePlugin : IPlugin {
      * Constructor
      * @param array<string, mixed> $options Options
      */
-    this(STRINGAA someOptions = []) {
+    this(STRINGAA someOptions = null) {
         foreach (static::VALID_HOOKS as $key) {
             if (isset($options[$key])) {
                 this.{"{$key}Enabled"} = (bool)$options[$key];

@@ -40,7 +40,7 @@ trait ContainerStubTrait
      *
      * @var array
      */
-    private $containerServices = [];
+    private $containerServices = null;
 
     /**
      * Configure the application class to use in integration tests.
@@ -151,6 +151,6 @@ trait ContainerStubTrait
     void cleanupContainer() {
         _appArgs = null;
         _appClass = null;
-        this.containerServices = [];
+        this.containerServices = null;
     }
 }

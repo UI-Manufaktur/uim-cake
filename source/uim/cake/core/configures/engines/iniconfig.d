@@ -83,7 +83,7 @@ class IniConfig : ConfigEngineInterface
         if (_section && isset($contents[_section])) {
             $values = _parseNestedValues($contents[_section]);
         } else {
-            $values = [];
+            $values = null;
             foreach ($contents as $section: $attribs) {
                 if (is_array($attribs)) {
                     $values[$section] = _parseNestedValues($attribs);
@@ -131,7 +131,7 @@ class IniConfig : ConfigEngineInterface
      * @return bool Success.
      */
     bool dump(string aKey, array $data) {
-        $result = [];
+        $result = null;
         foreach ($data as $k: $value) {
             $isSection = false;
             /** @psalm-suppress InvalidArrayAccess */

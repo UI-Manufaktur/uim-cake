@@ -33,7 +33,7 @@ class Configure {
      * @see uim.cake.Core\Configure::load()
      * @var array<uim.cake.Core\Configure\ConfigEngineInterface>
      */
-    protected static _engines = [];
+    protected static _engines = null;
 
     /**
      * Flag to track whether ini_set exists.
@@ -347,7 +347,7 @@ class Configure {
      * @return bool Success
      * @throws uim.cake.Core\exceptions.UIMException if the adapter does not implement a `dump` method.
      */
-    static bool dump(string aKey, string aConfig = "default", array $keys = []) {
+    static bool dump(string aKey, string aConfig = "default", array $keys = null) {
         $engine = static::_getEngine(aConfig);
         if (!$engine) {
             throw new UIMException(sprintf("There is no '%s' config engine.", aConfig));
@@ -455,6 +455,6 @@ class Configure {
      * Clear all values stored in Configure.
      */
     static void clear() {
-        static::_values = [];
+        static::_values = null;
     }
 }

@@ -17,7 +17,7 @@ trait InstanceConfigTrait
      *
      * @var array<string, mixed>
      */
-    protected _config = [];
+    protected _config = null;
 
     /**
      * Whether the config property has already been configured with defaults

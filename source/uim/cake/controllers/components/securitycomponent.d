@@ -305,7 +305,7 @@ class SecurityComponent : Component
 
         $fields = Hash::flatten($check);
         $fieldList = array_keys($fields);
-        $multi = $lockedFields = [];
+        $multi = $lockedFields = null;
         $isUnlocked = false;
 
         foreach ($fieldList as $i: $key) {
@@ -385,7 +385,7 @@ class SecurityComponent : Component
      * @return string Message explaining why the tokens are not matching
      */
     protected string _debugPostTokenNotMatching(Controller $controller, array $hashParts) {
-        $messages = [];
+        $messages = null;
         $expectedParts = json_decode(urldecode($controller.getRequest().getData("_Token.debug")), true);
         if (!is_array($expectedParts) || count($expectedParts) != 3) {
             return "Invalid security debug token.";
@@ -438,7 +438,7 @@ class SecurityComponent : Component
      */
     protected string[] _debugCheckFields(
         array $dataFields,
-        array $expectedFields = [],
+        array $expectedFields = null,
         string $intKeyMessage = "",
         string $stringKeyMessage = "",
         string $missingMessage = ""
@@ -479,7 +479,7 @@ class SecurityComponent : Component
      * @return mixed Controller callback method"s response
      * @throws uim.cake.http.exceptions.BadRequestException When a the blackholeCallback is not callable.
      */
-    protected function _callback(Controller $controller, string $method, array $params = []) {
+    protected function _callback(Controller $controller, string $method, array $params = null) {
         $callable = [$controller, $method];
 
         if (!is_callable($callable)) {
@@ -506,7 +506,7 @@ class SecurityComponent : Component
         string $intKeyMessage,
         string $stringKeyMessage
     ) {
-        $messages = [];
+        $messages = null;
         foreach ($dataFields as $key: $value) {
             if (is_int($key)) {
                 $foundKey = array_search($value, $expectedFields, true);
@@ -533,12 +533,12 @@ class SecurityComponent : Component
      * @param string $missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected Nullable!string _debugExpectedFields(array $expectedFields = [], string $missingMessage = "") {
+    protected Nullable!string _debugExpectedFields(array $expectedFields = null, string $missingMessage = "") {
         if (count($expectedFields) == 0) {
             return null;
         }
 
-        $expectedFieldNames = [];
+        $expectedFieldNames = null;
         foreach ($expectedFields as $key: $expectedField) {
             if (is_int($key)) {
                 $expectedFieldNames[] = $expectedField;

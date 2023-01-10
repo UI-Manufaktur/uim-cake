@@ -140,7 +140,7 @@ class Connection : IConnection {
      * @return this
      * @deprecated 4.4.0 Setting the driver is deprecated. Use the connection config instead.
      */
-    function setDriver($driver, aConfig = []) {
+    function setDriver($driver, aConfig = null) {
         deprecationWarning('Setting the driver is deprecated. Use the connection config instead.');
 
         _driver = this.createDriver($driver, aConfig);
@@ -262,7 +262,7 @@ class Connection : IConnection {
      * @param array $types list or associative array of types to be used for casting values in query
      * @return uim.cake.databases.IStatement executed statement
      */
-    function execute(string $sql, array $params = [], array $types = []): IStatement
+    function execute(string $sql, array $params = null, array $types = null): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($sql, $params, $types) {
             $statement = this.prepare($sql);
@@ -372,7 +372,7 @@ class Connection : IConnection {
      * @param array<int|string, string> $types Array containing the types to be used for casting
      * @return uim.cake.databases.IStatement
      */
-    function insert(string $table, array $values, array $types = []): IStatement
+    function insert(string $table, array $values, array $types = null): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($table, $values, $types) {
             $columns = array_keys($values);
@@ -393,7 +393,7 @@ class Connection : IConnection {
      * @param array<string> $types list of associative array containing the types to be used for casting
      * @return uim.cake.databases.IStatement
      */
-    function update(string $table, array $values, array $conditions = [], array $types = []): IStatement
+    function update(string $table, array $values, array $conditions = null, array $types = null): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($table, $values, $conditions, $types) {
             return this.newQuery().update($table)
@@ -411,7 +411,7 @@ class Connection : IConnection {
      * @param array<string> $types list of associative array containing the types to be used for casting
      * @return uim.cake.databases.IStatement
      */
-    function delete(string $table, array $conditions = [], array $types = []): IStatement
+    function delete(string $table, array $conditions = null, array $types = null): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($table, $conditions, $types) {
             return this.newQuery().delete($table)

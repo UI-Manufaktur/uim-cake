@@ -34,21 +34,21 @@ class PluginCollection : Iterator, Countable
      *
      * @var array<uim.cake.Core\IPlugin>
      */
-    protected $plugins = [];
+    protected $plugins = null;
 
     /**
      * Names of plugins
      *
      * @var array<string>
      */
-    protected $names = [];
+    protected $names = null;
 
     /**
      * Iterator position stack.
      *
      * @var array<int>
      */
-    protected $positions = [];
+    protected $positions = null;
 
     /**
      * Loop depth
@@ -60,7 +60,7 @@ class PluginCollection : Iterator, Countable
      *
      * @param array<uim.cake.Core\IPlugin> $plugins The map of plugins to add to the collection.
      */
-    this(array $plugins = []) {
+    this(array $plugins = null) {
         foreach ($plugins as $plugin) {
             this.add($plugin);
         }
@@ -164,9 +164,9 @@ class PluginCollection : Iterator, Countable
      * @return this
      */
     function clear() {
-        this.plugins = [];
-        this.names = [];
-        this.positions = [];
+        this.plugins = null;
+        this.names = null;
+        this.positions = null;
         this.loopDepth = -1;
 
         return this;
@@ -211,7 +211,7 @@ class PluginCollection : Iterator, Countable
      * @return uim.cake.Core\IPlugin
      * @throws uim.cake.Core\exceptions.MissingPluginException When plugin instance could not be created.
      */
-    function create(string aName, Json aConfig = []): IPlugin
+    function create(string aName, Json aConfig = null): IPlugin
     {
         if (strpos(aName, "\\") != false) {
             /** @var uim.cake.Core\IPlugin */

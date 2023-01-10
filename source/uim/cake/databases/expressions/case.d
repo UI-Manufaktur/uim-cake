@@ -22,7 +22,7 @@ class CaseExpression : IExpression
      *
      * @var array
      */
-    protected _conditions = [];
+    protected _conditions = null;
 
     /**
      * Values that are associated with the conditions in the _conditions array.
@@ -30,7 +30,7 @@ class CaseExpression : IExpression
      *
      * @var array
      */
-    protected _values = [];
+    protected _values = null;
 
     /**
      * The `ELSE` value for the case statement. If null then no `ELSE` will be included.
@@ -50,7 +50,7 @@ class CaseExpression : IExpression
      * @param array<string> $types Associative array of types to be associated with the values
      * passed in $values
      */
-    this($conditions = [], $values = [], $types = []) {
+    this($conditions = null, $values = null, $types = null) {
         $conditions = is_array($conditions) ? $conditions : [$conditions];
         $values = is_array($values) ? $values : [$values];
         $types = is_array($types) ? $types : [$types];
@@ -77,7 +77,7 @@ class CaseExpression : IExpression
      * @param array<string> $types Associative array of types to be associated with the values
      * @return this
      */
-    function add($conditions = [], $values = [], $types = []) {
+    function add($conditions = null, $values = null, $types = null) {
         $conditions = is_array($conditions) ? $conditions : [$conditions];
         $values = is_array($values) ? $values : [$values];
         $types = is_array($types) ? $types : [$types];
@@ -189,7 +189,7 @@ class CaseExpression : IExpression
      * @param uim.cake.databases.ValueBinder aBinder Placeholder generator object
      */
     string sql(ValueBinder aBinder) {
-        $parts = [];
+        $parts = null;
         $parts[] = "CASE";
         foreach (_conditions as $k: $part) {
             $value = _values[$k];

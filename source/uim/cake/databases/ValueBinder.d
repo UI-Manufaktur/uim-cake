@@ -17,7 +17,7 @@ class ValueBinder {
      *
      * @var array
      */
-    protected _bindings = [];
+    protected _bindings = null;
 
     // A counter of the number of parameters bound in this expression object
     protected int _bindingsCount = 0;
@@ -64,7 +64,7 @@ class ValueBinder {
      * @return array with the placeholders to insert in the query
      */
     array generateManyNamed(iterable $values, $type = null) {
-        $placeholders = [];
+        $placeholders = null;
         foreach ($values as $k: $value) {
             $param = this.placeholder("c");
             _bindings[$param] = [
@@ -90,7 +90,7 @@ class ValueBinder {
      * Clears any bindings that were previously registered
      */
     void reset() {
-        _bindings = [];
+        _bindings = null;
         _bindingsCount = 0;
     }
 
