@@ -648,7 +648,7 @@ class View : IEventDispatcher {
 
         $title = this.Blocks.get("title");
         if ($title == "") {
-            $title = Inflector::humanize(str_replace(DIRECTORY_SEPARATOR, "/", this.templatePath));
+            $title = Inflector::humanize(replace(DIRECTORY_SEPARATOR, "/", this.templatePath));
             this.Blocks.set("title", $title);
         }
 
@@ -1139,7 +1139,7 @@ class View : IEventDispatcher {
         }
 
         [myPlugin, myName] = this.pluginSplit(myName);
-        myName = str_replace("/", DIRECTORY_SEPARATOR, myName);
+        myName = replace("/", DIRECTORY_SEPARATOR, myName);
 
         if (indexOf(myName, DIRECTORY_SEPARATOR) == false && myName != "" && myName[0] != ".") {
             myName = myTemplatePath . $subDir . _inflectTemplateFileName(myName);
@@ -1421,9 +1421,9 @@ class View : IEventDispatcher {
 
         myPluginKey = null;
         if (myPlugin) {
-            myPluginKey = str_replace("/", "_", Inflector::underscore(myPlugin));
+            myPluginKey = replace("/", "_", Inflector::underscore(myPlugin));
         }
-        $elementKey = str_replace(["\\", "/"], "_", myName);
+        $elementKey = replace(["\\", "/"], "_", myName);
 
         $cache = myOptions["cache"];
         unset(myOptions["cache"]);

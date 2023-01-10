@@ -182,7 +182,7 @@ class Validation {
             return false;
         }
 
-        $check = str_replace(["-", " "], "", (string)$check);
+        $check = replace(["-", " "], "", (string)$check);
         if (mb_strlen($check) < 13) {
             return false;
         }
@@ -715,9 +715,9 @@ class Validation {
 
         // There are two types of non-breaking spaces - we inject a space to account for human input
         if (myGroupingSep == "\xc2\xa0" || myGroupingSep == "\xe2\x80\xaf") {
-            $check = str_replace([" ", myGroupingSep, $decimalPoint], ["", "", "."], (string)$check);
+            $check = replace([" ", myGroupingSep, $decimalPoint], ["", "", "."], (string)$check);
         } else {
-            $check = str_replace([myGroupingSep, $decimalPoint], ["", "."], (string)$check);
+            $check = replace([myGroupingSep, $decimalPoint], ["", "."], (string)$check);
         }
 
         return static::_check($check, $regex);
@@ -1584,7 +1584,7 @@ class Validation {
         foreach (range(10, 35) as $tmp) {
             $replace[] = strval($tmp);
         }
-        $numStr = str_replace($search, $replace, $account . myCountry ~ "00");
+        $numStr = replace($search, $replace, $account . myCountry ~ "00");
         $checksum = intval(substr($numStr, 0, 1));
         $numStrLength = strlen($numStr);
         for ($pos = 1; $pos < $numStrLength; $pos++) {

@@ -451,8 +451,8 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      */
     void assertTextNotEquals(string $expected, string $result, string $message = "") {
-        $expected = str_replace(["\r\n", "\r"], "\n", $expected);
-        $result = str_replace(["\r\n", "\r"], "\n", $result);
+        $expected = replace(["\r\n", "\r"], "\n", $expected);
+        $result = replace(["\r\n", "\r"], "\n", $result);
         this.assertNotEquals($expected, $result, $message);
     }
 
@@ -465,8 +465,8 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      */
     void assertTextEquals(string $expected, string $result, string $message = "") {
-        $expected = str_replace(["\r\n", "\r"], "\n", $expected);
-        $result = str_replace(["\r\n", "\r"], "\n", $result);
+        $expected = replace(["\r\n", "\r"], "\n", $expected);
+        $result = replace(["\r\n", "\r"], "\n", $result);
         this.assertEquals($expected, $result, $message);
     }
 
@@ -479,8 +479,8 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      */
     void assertTextStartsWith(string $prefix, string $string, string $message = "") {
-        $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
-        $string = str_replace(["\r\n", "\r"], "\n", $string);
+        $prefix = replace(["\r\n", "\r"], "\n", $prefix);
+        $string = replace(["\r\n", "\r"], "\n", $string);
         this.assertStringStartsWith($prefix, $string, $message);
     }
 
@@ -493,8 +493,8 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      */
     void assertTextStartsNotWith(string $prefix, string $string, string $message = "") {
-        $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
-        $string = str_replace(["\r\n", "\r"], "\n", $string);
+        $prefix = replace(["\r\n", "\r"], "\n", $prefix);
+        $string = replace(["\r\n", "\r"], "\n", $string);
         this.assertStringStartsNotWith($prefix, $string, $message);
     }
 
@@ -507,8 +507,8 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      */
     void assertT:With(string $suffix, string $string, string $message = "") {
-        $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
-        $string = str_replace(["\r\n", "\r"], "\n", $string);
+        $suffix = replace(["\r\n", "\r"], "\n", $suffix);
+        $string = replace(["\r\n", "\r"], "\n", $string);
         this.assertStringEndsWith($suffix, $string, $message);
     }
 
@@ -521,8 +521,8 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      */
     void assertT:NotWith(string $suffix, string $string, string $message = "") {
-        $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
-        $string = str_replace(["\r\n", "\r"], "\n", $string);
+        $suffix = replace(["\r\n", "\r"], "\n", $suffix);
+        $string = replace(["\r\n", "\r"], "\n", $string);
         this.assertStringEndsNotWith($suffix, $string, $message);
     }
 
@@ -541,8 +541,8 @@ abstract class TestCase : BaseTestCase
         string $message = "",
         bool $ignoreCase = false
     ) {
-        $needle = str_replace(["\r\n", "\r"], "\n", $needle);
-        $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
+        $needle = replace(["\r\n", "\r"], "\n", $needle);
+        $haystack = replace(["\r\n", "\r"], "\n", $haystack);
 
         if ($ignoreCase) {
             this.assertStringContainsStringIgnoringCase($needle, $haystack, $message);
@@ -566,8 +566,8 @@ abstract class TestCase : BaseTestCase
         string $message = "",
         bool $ignoreCase = false
     ) {
-        $needle = str_replace(["\r\n", "\r"], "\n", $needle);
-        $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
+        $needle = replace(["\r\n", "\r"], "\n", $needle);
+        $haystack = replace(["\r\n", "\r"], "\n", $haystack);
 
         if ($ignoreCase) {
             this.assertStringNotContainsStringIgnoringCase($needle, $haystack, $message);
@@ -603,8 +603,8 @@ abstract class TestCase : BaseTestCase
      */
     void assertRegExpSql(string $pattern, string $actual, bool $optional = false) {
         $optional = $optional ? "?" : "";
-        $pattern = str_replace("<", "[`"\[]" ~ $optional, $pattern);
-        $pattern = str_replace(">", "[`"\]]" ~ $optional, $pattern);
+        $pattern = replace("<", "[`"\[]" ~ $optional, $pattern);
+        $pattern = replace(">", "[`"\]]" ~ $optional, $pattern);
         this.assertMatchesRegularExpression("#" ~ $pattern ~ "#", $actual);
     }
 
@@ -727,7 +727,7 @@ abstract class TestCase : BaseTestCase
                         $val = ".+?";
                         $explanations[] = sprintf("Attribute '%s' present", $attr);
                     } elseif (!empty($val) && preg_match("/^preg\:\/(.+)\/$/i", $val, $matches)) {
-                        $val = str_replace(
+                        $val = replace(
                             [".*", ".+"],
                             [".*?", ".+?"],
                             $matches[1]
@@ -846,7 +846,7 @@ abstract class TestCase : BaseTestCase
      * @return string Normalized path separated by DIRECTORY_SEPARATOR.
      */
     protected string _normalizePath(string $path) {
-        return str_replace("/", DIRECTORY_SEPARATOR, $path);
+        return replace("/", DIRECTORY_SEPARATOR, $path);
     }
 
 // phpcs:disable
@@ -890,8 +890,8 @@ abstract class TestCase : BaseTestCase
      * @return void
      */
     protected static function assertPathEquals($expected, $result, $message = "") {
-        $expected = str_replace(DIRECTORY_SEPARATOR, "/", $expected);
-        $result = str_replace(DIRECTORY_SEPARATOR, "/", $result);
+        $expected = replace(DIRECTORY_SEPARATOR, "/", $expected);
+        $result = replace(DIRECTORY_SEPARATOR, "/", $result);
         static::assertEquals($expected, $result, $message);
     }
 

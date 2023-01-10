@@ -531,7 +531,7 @@ trait IntegrationTestTrait
         }
         if (isset(_request["headers"])) {
             foreach (_request["headers"] as $k: $v) {
-                $name = strtoupper(str_replace("-", "_", $k));
+                $name = strtoupper(replace("-", "_", $k));
                 if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
                     $name = "HTTP_" ~ $name;
                 }

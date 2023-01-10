@@ -167,7 +167,7 @@ class TranslatorRegistry
         }
 
         // Cache keys cannot contain / if they go to file engine.
-        $keyName = str_replace("/", ".", $name);
+        $keyName = replace("/", ".", $name);
         $key = "translations.{$keyName}.{$locale}";
         $translator = _cacher.get(string aKey);
 

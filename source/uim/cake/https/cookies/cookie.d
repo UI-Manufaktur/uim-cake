@@ -250,8 +250,8 @@ class Cookie : ICookie
      */
     static function createFromHeaderString(string cookie, array $defaults = []) {
         if (indexOf($cookie, "";"") != false) {
-            $cookie = str_replace("";"", "{__cookie_replace__}", $cookie);
-            $parts = str_replace("{__cookie_replace__}", "";"", explode(";", $cookie));
+            $cookie = replace("";"", "{__cookie_replace__}", $cookie);
+            $parts = replace("{__cookie_replace__}", "";"", explode(";", $cookie));
         } else {
             $parts = preg_split("/\;[ \t]*/", $cookie);
         }

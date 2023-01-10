@@ -193,7 +193,7 @@ class Text
             while (($pos = strpos($str, "?", $offset)) != false) {
                 $val = array_shift($data);
                 $offset = $pos + strlen($val);
-                $str = substr_replace($str, $val, $pos, 1);
+                $str = subreplace($str, $val, $pos, 1);
             }
 
             return $options["clean"] ? static::cleanInsert($str, $options) : $str;
@@ -204,8 +204,8 @@ class Text
             $format = sprintf(
                 "/(?<!%s)%s%%s%s/",
                 preg_quote($options["escape"], "/"),
-                str_replace("%", "%%", preg_quote($options["before"], "/")),
-                str_replace("%", "%%", preg_quote($options["after"], "/"))
+                replace("%", "%%", preg_quote($options["before"], "/")),
+                replace("%", "%%", preg_quote($options["after"], "/"))
             );
         }
 
@@ -223,11 +223,11 @@ class Text
         $dataReplacements = array_combine($hashKeys, array_values($data));
         foreach ($dataReplacements as $tmpHash: $tmpValue) {
             $tmpValue = is_array($tmpValue) ? "" : (string)$tmpValue;
-            $str = str_replace($tmpHash, $tmpValue, $str);
+            $str = replace($tmpHash, $tmpValue, $str);
         }
 
         if (!isset($options["format"]) && isset($options["before"])) {
-            $str = str_replace($options["escape"] . $options["before"], $options["before"], $str);
+            $str = replace($options["escape"] . $options["before"], $options["before"], $str);
         }
 
         return $options["clean"] ? static::cleanInsert($str, $options) : $str;

@@ -255,8 +255,8 @@ class Cookie : CookieInterface
      */
     static function createFromHeaderString(string $cookie, array $defaults = []) {
         if (strpos($cookie, "";"") != false) {
-            $cookie = str_replace("";"", "{__cookie_replace__}", $cookie);
-            $parts = str_replace("{__cookie_replace__}", "";"", explode(";", $cookie));
+            $cookie = replace("";"", "{__cookie_replace__}", $cookie);
+            $parts = replace("{__cookie_replace__}", "";"", explode(";", $cookie));
         } else {
             $parts = preg_split("/\;[ \t]*/", $cookie);
         }
@@ -275,7 +275,7 @@ class Cookie : CookieInterface
                 $value = true;
             }
 
-            $key = strtolower($key);
+            $key = $key.toLower;
             $data[$key] = $value;
         }
 

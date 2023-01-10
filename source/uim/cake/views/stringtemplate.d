@@ -151,10 +151,10 @@ class StringTemplate {
             _compiled[myName] = [null, null];
         }
 
-        myTemplate = str_replace("%", "%%", myTemplate);
+        myTemplate = replace("%", "%%", myTemplate);
         preg_match_all("#\{\{([\w\._]+)\}\}#", myTemplate, $matches);
         _compiled[myName] = [
-            str_replace($matches[0], '%s', myTemplate),
+            replace($matches[0], '%s', myTemplate),
             $matches[1],
         ];
       }

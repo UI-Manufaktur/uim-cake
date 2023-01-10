@@ -143,7 +143,7 @@ class Asset
                 $placeHolderVal = static::inflectString($plugin) ~ "/";
             }
 
-            $path = str_replace("{plugin}", $placeHolderVal, $pathPrefix) . $path;
+            $path = replace("{plugin}", $placeHolderVal, $pathPrefix) . $path;
         }
         if (
             !empty($options["ext"]) &&
@@ -199,7 +199,7 @@ class Asset
         $parts = array_map("rawurlencode", $parts);
         $encoded = implode("/", $parts);
 
-        return str_replace($path, $encoded, $url);
+        return replace($path, $encoded, $url);
     }
 
     /**
@@ -226,7 +226,7 @@ class Asset
                 "",
                 urldecode($path)
             );
-            $webrootPath = Configure::read("App.wwwRoot") . str_replace("/", DIRECTORY_SEPARATOR, $filepath);
+            $webrootPath = Configure::read("App.wwwRoot") . replace("/", DIRECTORY_SEPARATOR, $filepath);
             if (is_file($webrootPath)) {
                 return $path ~ "?" ~ filemtime($webrootPath);
             }
@@ -278,7 +278,7 @@ class Asset
             $theme = static::inflectString($themeName) ~ "/";
 
             if (DIRECTORY_SEPARATOR == "\\") {
-                $file = str_replace("/", "\\", $file);
+                $file = replace("/", "\\", $file);
             }
 
             if (is_file(Configure::read("App.wwwRoot") . $theme . $file)) {
@@ -292,7 +292,7 @@ class Asset
             }
         }
         if (strpos($webPath, "//") != false) {
-            return str_replace("//", "/", $webPath . $asset[1]);
+            return replace("//", "/", $webPath . $asset[1]);
         }
 
         return $webPath . $asset[1];

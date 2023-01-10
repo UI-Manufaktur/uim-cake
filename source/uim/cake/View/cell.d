@@ -161,7 +161,7 @@ abstract class Cell : IEventDispatcher
             $name = substr($name, 0, -4);
             if (!$builder.getTemplatePath()) {
                 $builder.setTemplatePath(
-                    static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . str_replace("\\", DIRECTORY_SEPARATOR, $name)
+                    static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . replace("\\", DIRECTORY_SEPARATOR, $name)
                 );
             }
             $template = $builder.getTemplate();
@@ -203,7 +203,7 @@ abstract class Cell : IEventDispatcher
         }
         $template = $template ?: "default";
         $key = "cell_" ~ Inflector::underscore(static::class) ~ "_" ~ $action ~ "_" ~ $template;
-        $key = str_replace("\\", "_", $key);
+        $key = replace("\\", "_", $key);
         $default = [
             "config": "default",
             "key": $key,

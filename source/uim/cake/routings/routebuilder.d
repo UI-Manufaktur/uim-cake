@@ -684,7 +684,7 @@ class RouteBuilder
                 ));
             }
 
-            $route = str_replace("//", "/", _path . $route);
+            $route = replace("//", "/", _path . $route);
             if ($route != "/") {
                 $route = rtrim($route, "/");
             }

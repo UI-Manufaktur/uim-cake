@@ -30,10 +30,10 @@ class MailTransport : AbstractTransport
 
         // https://github.com/cakephp/cakephp/issues/2209
         // https://bugs.php.net/bug.php?id=47983
-        $subject = str_replace("\r\n", "", $message.getSubject());
+        $subject = replace("\r\n", "", $message.getSubject());
 
         $to = $message.getHeaders(["to"])["To"];
-        $to = str_replace("\r\n", "", $to);
+        $to = replace("\r\n", "", $to);
 
         $eol = this.getConfig("eol", version_compare(PHP_VERSION, "8.0", ">=") ? "\r\n" : "\n");
         $headers = $message.getHeadersString(
@@ -48,7 +48,7 @@ class MailTransport : AbstractTransport
             ],
             $eol,
             function ($val) {
-                return str_replace("\r\n", "", $val);
+                return replace("\r\n", "", $val);
             }
         );
 

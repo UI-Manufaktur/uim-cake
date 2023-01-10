@@ -36,7 +36,7 @@ class FixtureHelper
                     $baseNamespace = Configure::read("App.namespace");
                 } elseif ($type == "plugin") {
                     [$plugin, $name] = explode(".", $pathName);
-                    $baseNamespace = str_replace("/", "\\", $plugin);
+                    $baseNamespace = replace("/", "\\", $plugin);
                     $additionalPath = null;
                 } else {
                     $baseNamespace = "";
@@ -44,7 +44,7 @@ class FixtureHelper
                 }
 
                 if (strpos($name, "/") > 0) {
-                    $name = str_replace("/", "\\", $name);
+                    $name = replace("/", "\\", $name);
                 }
 
                 $nameSegments = [

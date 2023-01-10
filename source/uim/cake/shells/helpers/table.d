@@ -101,7 +101,7 @@ class TableHelper : Helper {
                 if ($matches[1] != "" || $matches[2] != "") {
                     throw new UnexpectedValueException("You cannot include text before or after the text-right tag.");
                 }
-                $column = str_replace(["<text-right>", "</text-right>"], "", $column);
+                $column = replace(["<text-right>", "</text-right>"], "", $column);
                 $out ~= "| " ~ str_repeat(" ", $pad) . $column ~ " ";
             } else {
                 $out ~= "| " ~ $column . str_repeat(" ", $pad) ~ " ";

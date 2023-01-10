@@ -473,7 +473,7 @@ class Router
 
         $protocol = preg_match("#^[a-z][a-z0-9+\-.]*\://#i", $output);
         if ($protocol == 0) {
-            $output = str_replace("//", "/", "/" ~ $output);
+            $output = replace("//", "/", "/" ~ $output);
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
             }
@@ -673,7 +673,7 @@ class Router
         $url = "/" ~ $url;
 
         while (strpos($url, "//") != false) {
-            $url = str_replace("//", "/", $url);
+            $url = replace("//", "/", $url);
         }
         $url = preg_replace("/(?:(\/$))/", "", $url);
 

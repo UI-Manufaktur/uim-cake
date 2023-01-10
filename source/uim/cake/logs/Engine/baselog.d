@@ -198,6 +198,6 @@ abstract class BaseLog : AbstractLogger
         }
 
         /** @psalm-suppress InvalidArgument */
-        return str_replace(array_keys($replacements), $replacements, $message);
+        return replace(array_keys($replacements), $replacements, $message);
     }
 }

@@ -337,6 +337,6 @@ class Oauth
      * @return string
      */
     protected string _encode(string myValue) {
-        return str_replace(["%7E", "+"], ["~", " "], rawurlencode(myValue));
+        return replace(["%7E", "+"], ["~", " "], rawurlencode(myValue));
     }
 }

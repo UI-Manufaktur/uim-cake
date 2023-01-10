@@ -398,7 +398,7 @@ class PaginatorHelper : Helper
             $title = myKey;
 
             if (indexOf($title, ".") != false) {
-                $title = str_replace(".", " ", $title);
+                $title = replace(".", " ", $title);
             }
 
             $title = __(Inflector::humanize(preg_replace("/_id$/", "", $title)));

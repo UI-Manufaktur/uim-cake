@@ -1733,7 +1733,7 @@ class FormHelper : Helper
         $confirmMessage = myOptions["confirm"];
         unset(myOptions["confirm"]);
 
-        $formName = str_replace(".", "", uniqid("post_", true));
+        $formName = replace(".", "", uniqid("post_", true));
         $formOptions = [
             "name": $formName,
             "style": "display:none;",

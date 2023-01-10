@@ -273,7 +273,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
             $fWord = $options["accuracy"]["minute"];
         }
 
-        $fNum = str_replace(
+        $fNum = replace(
             ["year", "month", "week", "day", "hour", "minute", "second"],
             ["1", "2", "3", "4", "5", "6", "7"],
             $fWord

@@ -356,7 +356,7 @@ class Inflector
         $result = static::_cache($cacheKey, $string);
 
         if ($result == false) {
-            $result = str_replace(" ", "", static::humanize($string, $delimiter));
+            $result = replace(" ", "", static::humanize($string, $delimiter));
             static::_cache($cacheKey, $string, $result);
         }
 
@@ -373,7 +373,7 @@ class Inflector
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
     static string underscore(string $string) {
-        return static::delimit(str_replace("-", "_", $string), "_");
+        return static::delimit(replace("-", "_", $string), "_");
     }
 
     /**
@@ -385,7 +385,7 @@ class Inflector
      * @return string Dashed version of the input string
      */
     static string dasherize(string $string) {
-        return static::delimit(str_replace("_", "-", $string), "-");
+        return static::delimit(replace("_", "-", $string), "-");
     }
 
     /**
@@ -403,7 +403,7 @@ class Inflector
         $result = static::_cache($cacheKey, $string);
 
         if ($result == false) {
-            $result = explode(" ", str_replace($delimiter, " ", $string));
+            $result = explode(" ", replace($delimiter, " ", $string));
             foreach ($result as &$word) {
                 $word = mb_strtoupper(mb_substr($word, 0, 1)) . mb_substr($word, 1);
             }

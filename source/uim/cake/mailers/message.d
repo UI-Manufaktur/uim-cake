@@ -823,7 +823,7 @@ class Message : JsonSerializable, Serializable {
         }
         if (this.messageId != false) {
             if (this.messageId == true) {
-                this.messageId = "<" ~ str_replace("-", "", Text::uuid()) ~ "@" ~ this.domain ~ ">";
+                this.messageId = "<" ~ replace("-", "", Text::uuid()) ~ "@" ~ this.domain ~ ">";
             }
 
             $headers["Message-ID"] = this.messageId;
@@ -899,7 +899,7 @@ class Message : JsonSerializable, Serializable {
             } else {
                 $encoded = this.encodeForHeader($alias);
                 if ($encoded == $alias && preg_match("/[^a-z0-9 ]/i", $encoded)) {
-                    $encoded = """ ~ str_replace(""", "\"", $encoded) ~ """;
+                    $encoded = """ ~ replace(""", "\"", $encoded) ~ """;
                 }
                 $return[] = sprintf("%s <%s>", $encoded, $email);
             }
@@ -1388,7 +1388,7 @@ class Message : JsonSerializable, Serializable {
                 ));
             }
 
-            $text = str_replace(["\r\n", "\r"], "\n", $text);
+            $text = replace(["\r\n", "\r"], "\n", $text);
             $text = this.encodeString($text, this.getCharset());
             $text = this.wrap($text);
             $text = implode("\n", $text);
@@ -1472,7 +1472,7 @@ class Message : JsonSerializable, Serializable {
         if ($message == null || $message == "") {
             return [""];
         }
-        $message = str_replace(["\r\n", "\r"], "\n", $message);
+        $message = replace(["\r\n", "\r"], "\n", $message);
         $lines = explode("\n", $message);
         $formatted = [];
         $cut = ($wrapLength == static::LINE_LENGTH_MUST);

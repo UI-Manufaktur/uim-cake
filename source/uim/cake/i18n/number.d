@@ -430,7 +430,7 @@ class Number
             // is denoted with ¤, whereas the international code is marked with ¤¤,
             // in order to use the code we need to simply duplicate the character wherever
             // it appears in the pattern.
-            $pattern = trim(str_replace("¤", "¤¤ ", $formatter.getPattern()));
+            $pattern = trim(replace("¤", "¤¤ ", $formatter.getPattern()));
             $formatter.setPattern($pattern);
         }
 

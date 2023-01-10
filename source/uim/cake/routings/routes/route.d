@@ -344,7 +344,7 @@ class Route
         }
         $mode = empty(this.options["multibytePattern"]) ? "" : "u";
         krsort($routeParams);
-        $parsed = str_replace(array_keys($routeParams), $routeParams, $parsed);
+        $parsed = replace(array_keys($routeParams), $routeParams, $parsed);
         _compiledRoute = "#^" ~ $parsed ~ "[/]*$#" ~ $mode;
         this.keys = $names;
 
@@ -521,7 +521,7 @@ class Route
      * @return bool Whether the host matches any conditions set in for this route.
      */
     bool hostMatches(string $host) {
-        $pattern = "@^" ~ str_replace("\*", ".*", preg_quote(this.options["_host"], "@")) ~ "$@";
+        $pattern = "@^" ~ replace("\*", ".*", preg_quote(this.options["_host"], "@")) ~ "$@";
 
         return preg_match($pattern, $host) != 0;
     }
@@ -799,7 +799,7 @@ class Route
             $search[] = "*";
             $replace[] = $pass;
         }
-        $out = str_replace($search, $replace, $out);
+        $out = replace($search, $replace, $out);
 
         // add base url if applicable.
         if (isset($params["_base"])) {
@@ -807,7 +807,7 @@ class Route
             unset($params["_base"]);
         }
 
-        $out = str_replace("//", "/", $out);
+        $out = replace("//", "/", $out);
         if (
             isset($params["_scheme"]) ||
             isset($params["_host"]) ||
