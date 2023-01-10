@@ -104,7 +104,7 @@ use InvalidArgumentException;
  * @method string getSubject() Gets subject. {@see uim.cake.mailers.Message::getSubject()}
  * @method this setHeaders(array $headers) Sets headers for the message. {@see uim.cake.mailers.Message::setHeaders()}
  * @method this addHeaders(array $headers) Add header for the message. {@see uim.cake.mailers.Message::addHeaders()}
- * @method this getHeaders(array $include = []) Get list of headers. {@see uim.cake.mailers.Message::getHeaders()}
+ * @method this getHeaders(array $include = null) Get list of headers. {@see uim.cake.mailers.Message::getHeaders()}
  * @method this setEmailFormat($format) Sets email format. {@see uim.cake.mailers.Message::getHeaders()}
  * @method string getEmailFormat() Gets email format. {@see uim.cake.mailers.Message::getEmailFormat()}
  * @method this setMessageId($message) Sets message ID. {@see uim.cake.mailers.Message::setMessageId()}
@@ -178,7 +178,7 @@ class Mailer : IEventListener
      * @var array<string, string>
      * @psalm-var array<string, class-string>
      */
-    protected static _dsnClassMap = [];
+    protected static _dsnClassMap = null;
 
     /**
      * @var array|null
@@ -319,7 +319,7 @@ class Mailer : IEventListener
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
-    array send(Nullable!string $action = null, array $args = [], array $headers = []) {
+    array send(Nullable!string $action = null, array $args = null, array $headers = null) {
         if ($action == null) {
             return this.deliver();
         }

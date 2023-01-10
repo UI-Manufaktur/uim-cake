@@ -15,7 +15,7 @@ abstract class AbstractTransport
      *
      * @var array<string, mixed>
      */
-    protected _defaultConfig = [];
+    protected _defaultConfig = null;
 
     /**
      * Send mail
@@ -31,7 +31,7 @@ abstract class AbstractTransport
      *
      * @param array<string, mixed> aConfig Configuration options.
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.setConfig(aConfig);
     }
 
@@ -44,9 +44,9 @@ abstract class AbstractTransport
      */
     protected void checkRecipient(Message $message) {
         if (
-            $message.getTo() == []
-            && $message.getCc() == []
-            && $message.getBcc() == []
+            $message.getTo() == null
+            && $message.getCc() == null
+            && $message.getBcc() == null
         ) {
             throw new UIMException(
                 "You must specify at least one recipient."

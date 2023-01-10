@@ -54,7 +54,7 @@ class RouteBuilder
      *
      * @var array<string>
      */
-    protected _extensions = [];
+    protected _extensions = null;
 
     /**
      * The path prefix scope that this collection uses.
@@ -86,7 +86,7 @@ class RouteBuilder
      *
      * @var array<string>
      */
-    protected $middleware = [];
+    protected $middleware = null;
 
     /**
      * Constructor
@@ -103,7 +103,7 @@ class RouteBuilder
      * @param array $params The scope"s routing parameters.
      * @param array<string, mixed> $options Options list.
      */
-    this(RouteCollection $collection, string $path, array $params = [], STRINGAA someOptions = []) {
+    this(RouteCollection $collection, string $path, array $params = null, STRINGAA someOptions = null) {
         _collection = $collection;
         _path = $path;
         _params = $params;
@@ -313,10 +313,10 @@ class RouteBuilder
      *   scopes inherit the existing path and "id" parameter.
      * @return this
      */
-    function resources(string aName, $options = [], $callback = null) {
+    function resources(string aName, $options = null, $callback = null) {
         if (!is_array($options)) {
             $callback = $options;
-            $options = [];
+            $options = null;
         }
         $options += [
             "connectOptions": [],
@@ -627,7 +627,7 @@ class RouteBuilder
      * @throws \InvalidArgumentException
      * @throws \BadMethodCallException
      */
-    function connect($route, $defaults = [], STRINGAA someOptions = []): Route
+    function connect($route, $defaults = null, STRINGAA someOptions = null): Route
     {
         $defaults = this.parseDefaults($defaults);
         if (empty($options["_ext"])) {
@@ -748,7 +748,7 @@ class RouteBuilder
      *   shifted into the passed arguments. As well as supplying patterns for routing parameters.
      * @return uim.cake.routings.Route\Route|uim.cake.routings.Route\RedirectRoute
      */
-    function redirect(string $route, $url, STRINGAA someOptions = []): Route
+    function redirect(string $route, $url, STRINGAA someOptions = null): Route
     {
         $options["routeClass"] = $options["routeClass"] ?? RedirectRoute::class;
         if (is_string($url)) {
@@ -790,10 +790,10 @@ class RouteBuilder
      * @return this
      * @throws \InvalidArgumentException If a valid callback is not passed
      */
-    function prefix(string aName, $params = [], $callback = null) {
+    function prefix(string aName, $params = null, $callback = null) {
         if (!is_array($params)) {
             $callback = $params;
-            $params = [];
+            $params = null;
         }
         $path = "/" ~ Inflector::dasherize($name);
         $name = Inflector::camelize($name);
@@ -834,10 +834,10 @@ class RouteBuilder
      *   Only required when $options is defined.
      * @return this
      */
-    function plugin(string aName, $options = [], $callback = null) {
+    function plugin(string aName, $options = null, $callback = null) {
         if (!is_array($options)) {
             $callback = $options;
-            $options = [];
+            $options = null;
         }
 
         $path = $options["path"] ?? "/" ~ Inflector::dasherize($name);
@@ -870,7 +870,7 @@ class RouteBuilder
     function scope(string $path, $params, $callback = null) {
         if (!is_array($params)) {
             $callback = $params;
-            $params = [];
+            $params = null;
         }
         if (!is_callable($callback)) {
             throw new InvalidArgumentException(sprintf(

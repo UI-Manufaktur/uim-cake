@@ -79,7 +79,7 @@ class Email : JsonSerializable, Serializable
      *
      * @var array<string, mixed>
      */
-    protected _profile = [];
+    protected _profile = null;
 
     /**
      * Message class name.
@@ -500,7 +500,7 @@ class Email : JsonSerializable, Serializable
             this.renderer.reset();
         }
         _transport = null;
-        _profile = [];
+        _profile = null;
 
         return this;
     }

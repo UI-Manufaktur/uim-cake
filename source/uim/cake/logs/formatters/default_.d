@@ -22,11 +22,11 @@ class DefaultFormatter : AbstractFormatter {
     /**
      * @param array<string, mixed> myConfig Formatter config
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         this.setConfig(myConfig);
     }
 
-    string format($level, string myMessage, array $context = []) {
+    string format($level, string myMessage, array $context = null) {
         if (_config["includeDate"]) {
             myMessage = sprintf("%s %s: %s", date(_config["dateFormat"]), $level, myMessage);
         } else {

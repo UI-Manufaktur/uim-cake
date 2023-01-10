@@ -34,8 +34,8 @@ class Renderer
      * @psalm-param array<uim.cake.mailers.Message::MESSAGE_HTML|uim.cake.mailers.Message::MESSAGE_TEXT> $types
      * @psalm-return array{html?: string, text?: string}
      */
-    array render(string $content, array $types = []) {
-        $rendered = [];
+    array render(string $content, array $types = null) {
+        $rendered = null;
         $template = this.viewBuilder().getTemplate();
         if (empty($template)) {
             foreach ($types as $type) {

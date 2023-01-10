@@ -72,7 +72,7 @@ class SyslogLog : BaseLog {
     protected _open = false;
 
 
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         if (isset(myConfig["format"])) {
             deprecationWarning(
                 "`format` option is now deprecated in favor of custom formatters~ " ~
@@ -100,7 +100,7 @@ class SyslogLog : BaseLog {
      * @return void
      * @see uim.cake.logs.Log::_levels
      */
-    void log($level, myMessage, array $context = []) {
+    void log($level, myMessage, array $context = null) {
         if (!_open) {
             myConfig = _config;
             _open(myConfig["prefix"], myConfig["flag"], myConfig["facility"]);

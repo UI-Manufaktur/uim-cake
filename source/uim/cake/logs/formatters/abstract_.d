@@ -21,7 +21,7 @@ abstract class AbstractFormatter {
     /**
      * @param array<string, mixed> myConfig Config options
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         this.setConfig(myConfig);
     }
 
@@ -33,5 +33,5 @@ abstract class AbstractFormatter {
      * @param array $context Mesage context
      * @return string Formatted message
      */
-    abstract string format($level, string myMessage, array $context = []);
+    abstract string format($level, string myMessage, array $context = null);
 }

@@ -80,7 +80,7 @@ class Router
      *
      * @var array<string, mixed>
      */
-    protected static _requestContext = [];
+    protected static _requestContext = null;
 
     /**
      * Named expressions
@@ -110,7 +110,7 @@ class Router
      *
      * @var array
      */
-    protected static _initialState = [];
+    protected static _initialState = null;
 
     /**
      * The stack of URL filters to apply against routing URLs before passing the
@@ -118,21 +118,21 @@ class Router
      *
      * @var array<callable>
      */
-    protected static _urlFilters = [];
+    protected static _urlFilters = null;
 
     /**
      * Default extensions defined with Router::extensions()
      *
      * @var array<string>
      */
-    protected static _defaultExtensions = [];
+    protected static _defaultExtensions = null;
 
     /**
      * Cache of parsed route paths
      *
      * @var array<string, mixed>
      */
-    protected static _routePaths = [];
+    protected static _routePaths = null;
 
     /**
      * Get or set default route class.
@@ -177,7 +177,7 @@ class Router
      * @see uim.cake.routings.Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
      */
-    static void connect($route, $defaults = [], $options = []) {
+    static void connect($route, $defaults = null, $options = null) {
         deprecationWarning(
             "`Router::connect()` is deprecated, use the non-static method `RouteBuilder::connect()` instead."
         );
@@ -265,7 +265,7 @@ class Router
      */
     static void resetRoutes() {
         static::_collection = new RouteCollection();
-        static::_urlFilters = [];
+        static::_urlFilters = null;
     }
 
     /**
@@ -498,7 +498,7 @@ class Router
      *   Default is false.
      * @return string Full translated URL with base path.
      */
-    static string pathUrl(string $path, array $params = [], bool $full = false) {
+    static string pathUrl(string $path, array $params = null, bool $full = false) {
         return static::url(["_path": $path] + $params, $full);
     }
 
@@ -725,7 +725,7 @@ class Router
      * @param array<string, mixed> $options The options for the builder
      * @return uim.cake.routings.RouteBuilder
      */
-    static function createRouteBuilder(string $path, STRINGAA someOptions = []): RouteBuilder
+    static function createRouteBuilder(string $path, STRINGAA someOptions = null): RouteBuilder
     {
         $defaults = [
             "routeClass": static::defaultRouteClass(),
@@ -782,12 +782,12 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::scope()` instead.
      */
-    static void scope(string $path, $params = [], $callback = null) {
+    static void scope(string $path, $params = null, $callback = null) {
         deprecationWarning(
             "`Router::scope()` is deprecated, use the non-static method `RouteBuilder::scope()` instead."
         );
 
-        $options = [];
+        $options = null;
         if (is_array($params)) {
             $options = $params;
             unset($params["routeClass"], $params["extensions"]);
@@ -820,14 +820,14 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::prefix()` instead.
      */
-    static void prefix(string aName, $params = [], $callback = null) {
+    static void prefix(string aName, $params = null, $callback = null) {
         deprecationWarning(
             "`Router::prefix()` is deprecated, use the non-static method `RouteBuilder::prefix()` instead."
         );
 
         if (!is_array($params)) {
             $callback = $params;
-            $params = [];
+            $params = null;
         }
 
         $path = $params["path"] ?? "/" ~ Inflector::dasherize($name);
@@ -856,14 +856,14 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::plugin()` instead.
      */
-    static void plugin(string aName, $options = [], $callback = null) {
+    static void plugin(string aName, $options = null, $callback = null) {
         deprecationWarning(
             "`Router::plugin()` is deprecated, use the non-static method `RouteBuilder::plugin()` instead."
         );
 
         if (!is_array($options)) {
             $callback = $options;
-            $options = [];
+            $options = null;
         }
         $params = ["plugin": $name];
         $path = $options["path"] ?? "/" ~ Inflector::dasherize($name);
@@ -954,7 +954,7 @@ class Router
             throw new InvalidArgumentException("Could not parse a string route path `{$url}`.");
         }
 
-        $defaults = [];
+        $defaults = null;
 
         if ($matches["plugin"] != "") {
             $defaults["plugin"] = $matches["plugin"];

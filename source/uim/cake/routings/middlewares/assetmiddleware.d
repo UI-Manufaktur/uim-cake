@@ -29,7 +29,7 @@ class AssetMiddleware : IMiddleware
      *
      * @param array<string, mixed> $options The options to use
      */
-    this(STRINGAA someOptions = []) {
+    this(STRINGAA someOptions = null) {
         if (!empty($options["cacheTime"])) {
             this.cacheTime = $options["cacheTime"];
         }
@@ -96,7 +96,7 @@ class AssetMiddleware : IMiddleware
      */
     protected Nullable!string _getAssetFile(string $url) {
         $parts = explode("/", ltrim($url, "/"));
-        $pluginPart = [];
+        $pluginPart = null;
         for ($i = 0; $i < 2; $i++) {
             if (!isset($parts[$i])) {
                 break;

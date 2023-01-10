@@ -35,7 +35,7 @@ class ArrayLog : BaseLog
      *
      * @var array
      */
-    protected myContents = [];
+    protected myContents = null;
 
     /**
      * : writing to the internal storage.
@@ -46,7 +46,7 @@ class ArrayLog : BaseLog
      * @return void success of write.
      * @see uim.cake.logs.Log::_levels
      */
-    function log($level, myMessage, array $context = []) {
+    function log($level, myMessage, array $context = null) {
         myMessage = _format(myMessage, $context);
         this.content[] = this.formatter.format($level, myMessage, $context);
     }
@@ -58,6 +58,6 @@ class ArrayLog : BaseLog
 
     // Reset internal storage.
     void clear() {
-        this.content = [];
+        this.content = null;
     }
 }

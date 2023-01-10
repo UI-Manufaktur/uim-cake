@@ -79,7 +79,7 @@ class FileLog : BaseLog
      *
      * @param array<string, mixed> aConfig Configuration array
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         super((aConfig);
 
         _path = this.getConfig("path", sys_get_temp_dir() . DIRECTORY_SEPARATOR);
@@ -117,7 +117,7 @@ class FileLog : BaseLog
      * @return void
      * @see uim.cake.logs.Log::_levels
      */
-    void log($level, $message, array $context = []) {
+    void log($level, $message, array $context = null) {
         $message = _format($message, $context);
         $message = this.formatter.format($level, $message, $context);
 

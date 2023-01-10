@@ -47,7 +47,7 @@ class Socket
      *
      * @var array<string, mixed>
      */
-    protected $lastError = [];
+    protected $lastError = null;
 
     /**
      * True if the socket stream is encrypted after a {@link uim.cake.Network\Socket::enableCrypto()} call
@@ -78,7 +78,7 @@ class Socket
      *
      * @var array<string>
      */
-    protected _connectionErrors = [];
+    protected _connectionErrors = null;
 
     /**
      * Constructor.
@@ -86,7 +86,7 @@ class Socket
      * @param array<string, mixed> aConfig Socket configuration, which will be merged with the base configuration
      * @see uim.cake.Network\Socket::_defaultConfig
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.setConfig(aConfig);
     }
 
@@ -403,7 +403,7 @@ class Socket
      */
     void reset(?array $state = null) {
         if (empty($state)) {
-            static $initialState = [];
+            static $initialState = null;
             if (empty($initialState)) {
                 $initialState = get_class_vars(self::class);
             }

@@ -43,14 +43,14 @@ class SmtpTransport : AbstractTransport
      *
      * @var array<string, string>
      */
-    protected _content = [];
+    protected _content = null;
 
     /**
      * The response of the last sent SMTP command.
      *
      * @var array
      */
-    protected _lastResponse = [];
+    protected _lastResponse = null;
 
     /**
      * Detected authentication type.
@@ -175,7 +175,7 @@ class SmtpTransport : AbstractTransport
      * @param array<string> $responseLines Response lines to parse.
      */
     protected void _bufferResponseLines(array $responseLines) {
-        $response = [];
+        $response = null;
         foreach ($responseLines as $responseLine) {
             if (preg_match("/^(\d{3})(?:[ -]+(.*))?$/", $responseLine, $match)) {
                 $response[] = [
@@ -402,7 +402,7 @@ class SmtpTransport : AbstractTransport
      */
     protected string _prepareMessage(Message $message) {
         $lines = $message.getBody();
-        $messages = [];
+        $messages = null;
         foreach ($lines as $line) {
             if (!empty($line) && ($line[0] == ".")) {
                 $messages[] = "." ~ $line;
@@ -487,7 +487,7 @@ class SmtpTransport : AbstractTransport
      * @throws uim.cake.Network\exceptions.SocketException
      */
     protected Nullable!string _smtpSend(Nullable!string $data, $checkCode = "250") {
-        _lastResponse = [];
+        _lastResponse = null;
 
         if ($data != null) {
             _socket().write($data ~ "\r\n");

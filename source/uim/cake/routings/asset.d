@@ -43,7 +43,7 @@ class Asset
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    static string imageUrl(string $path, STRINGAA someOptions = []) {
+    static string imageUrl(string $path, STRINGAA someOptions = null) {
         $pathPrefix = Configure::read("App.imageBaseUrl");
 
         return static::url($path, $options + compact("pathPrefix"));
@@ -67,7 +67,7 @@ class Asset
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    static string cssUrl(string $path, STRINGAA someOptions = []) {
+    static string cssUrl(string $path, STRINGAA someOptions = null) {
         $pathPrefix = Configure::read("App.cssBaseUrl");
         $ext = ".css";
 
@@ -92,7 +92,7 @@ class Asset
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    static string scriptUrl(string $path, STRINGAA someOptions = []) {
+    static string scriptUrl(string $path, STRINGAA someOptions = null) {
         $pathPrefix = Configure::read("App.jsBaseUrl");
         $ext = ".js";
 
@@ -122,7 +122,7 @@ class Asset
      * @param array<string, mixed> $options Options array.
      * @return string Generated URL
      */
-    static string url(string $path, STRINGAA someOptions = []) {
+    static string url(string $path, STRINGAA someOptions = null) {
         if (preg_match("/^data:[a-z]+\/[a-z]+;/", $path)) {
             return $path;
         }
@@ -263,7 +263,7 @@ class Asset
      * @param array<string, mixed> $options Options array.
      * @return string Web accessible path to file.
      */
-    static string webroot(string $file, STRINGAA someOptions = []) {
+    static string webroot(string $file, STRINGAA someOptions = null) {
         $options += ["theme": null];
         $requestWebroot = static::requestWebroot();
 

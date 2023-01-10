@@ -59,35 +59,35 @@ class Message : JsonSerializable, Serializable {
      *
      * @var array
      */
-    protected $to = [];
+    protected $to = null;
 
     /**
      * The mail which the email is sent from
      *
      * @var array
      */
-    protected $from = [];
+    protected $from = null;
 
     /**
      * The sender email
      *
      * @var array
      */
-    protected $sender = [];
+    protected $sender = null;
 
     /**
      * List of email(s) that the recipient will reply to
      *
      * @var array
      */
-    protected $replyTo = [];
+    protected $replyTo = null;
 
     /**
      * The read receipt email
      *
      * @var array
      */
-    protected $readReceipt = [];
+    protected $readReceipt = null;
 
     /**
      * The mail that will be used in case of any errors like
@@ -97,7 +97,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @var array
      */
-    protected $returnPath = [];
+    protected $returnPath = null;
 
     /**
      * Carbon Copy
@@ -107,7 +107,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @var array
      */
-    protected $cc = [];
+    protected $cc = null;
 
     /**
      * Blind Carbon Copy
@@ -117,7 +117,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @var array
      */
-    protected $bcc = [];
+    protected $bcc = null;
 
     /**
      * Message ID
@@ -143,7 +143,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @var array
      */
-    protected $headers = [];
+    protected $headers = null;
 
     /**
      * Text message
@@ -160,7 +160,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @var array
      */
-    protected $message = [];
+    protected $message = null;
 
     /**
      * Available formats to be sent.
@@ -219,7 +219,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @var array<string, array>
      */
-    protected $attachments = [];
+    protected $attachments = null;
 
     /**
      * If set, boundary to use for multipart mime messages
@@ -607,7 +607,7 @@ class Message : JsonSerializable, Serializable {
 
             return this;
         }
-        $list = [];
+        $list = null;
         foreach ($email as $key: $value) {
             if (is_int($key)) {
                 $key = $value;
@@ -656,7 +656,7 @@ class Message : JsonSerializable, Serializable {
      * @throws \InvalidArgumentException
      */
     protected function setEmailSingle(string $varName, $email, Nullable!string aName, string $throwMessage) {
-        if ($email == []) {
+        if ($email == null) {
             this.{$varName} = $email;
 
             return this;
@@ -692,7 +692,7 @@ class Message : JsonSerializable, Serializable {
 
             return this;
         }
-        $list = [];
+        $list = null;
         foreach ($email as $key: $value) {
             if (is_int($key)) {
                 $key = $value;
@@ -774,7 +774,7 @@ class Message : JsonSerializable, Serializable {
      * @param array<string> $include List of headers.
      * @return array<string>
      */
-    array getHeaders(array $include = []) {
+    array getHeaders(array $include = null) {
         this.createBoundary();
 
         if ($include == array_values($include)) {
@@ -789,7 +789,7 @@ class Message : JsonSerializable, Serializable {
         );
         $include += $defaults;
 
-        $headers = [];
+        $headers = null;
         $relation = [
             "from": "From",
             "replyTo": "Reply-To",
@@ -861,14 +861,14 @@ class Message : JsonSerializable, Serializable {
      * @return string
      * @see Message::getHeaders()
      */
-    string getHeadersString(array $include = [], string $eol = "\r\n", ?Closure $callback = null) {
+    string getHeadersString(array $include = null, string $eol = "\r\n", ?Closure $callback = null) {
         $lines = this.getHeaders($include);
 
         if ($callback) {
             $lines = array_map($callback, $lines);
         }
 
-        $headers = [];
+        $headers = null;
         foreach ($lines as $key: $value) {
             if (empty($value) && $value != "0") {
                 continue;
@@ -892,7 +892,7 @@ class Message : JsonSerializable, Serializable {
      * @param array $address Addresses to format.
      */
     protected array formatAddress(array $address) {
-        $return = [];
+        $return = null;
         foreach ($address as $email: $alias) {
             if ($email == $alias) {
                 $return[] = $email;
@@ -1049,7 +1049,7 @@ class Message : JsonSerializable, Serializable {
      * @throws \InvalidArgumentException
      */
     function setAttachments(array $attachments) {
-        $attach = [];
+        $attach = null;
         foreach ($attachments as $name: $fileInfo) {
             if (!is_array($fileInfo)) {
                 $fileInfo = ["file": $fileInfo];
@@ -1172,7 +1172,7 @@ class Message : JsonSerializable, Serializable {
      */
     protected array generateMessage() {
         this.createBoundary();
-        $msg = [];
+        $msg = null;
 
         $contentIds = array_filter((array)Hash::extract(this.attachments, "{s}.contentId"));
         $hasInlineAttachments = count($contentIds) > 0;
@@ -1268,7 +1268,7 @@ class Message : JsonSerializable, Serializable {
             $boundary = this.boundary;
         }
 
-        $msg = [];
+        $msg = null;
         foreach (this.attachments as $filename: $fileInfo) {
             if (!empty($fileInfo["contentId"])) {
                 continue;
@@ -1307,7 +1307,7 @@ class Message : JsonSerializable, Serializable {
             $boundary = this.boundary;
         }
 
-        $msg = [];
+        $msg = null;
         foreach (this.getAttachments() as $filename: $fileInfo) {
             if (empty($fileInfo["contentId"])) {
                 continue;
@@ -1399,7 +1399,7 @@ class Message : JsonSerializable, Serializable {
         }
 
         this.boundary = null;
-        this.message = [];
+        this.message = null;
 
         return this;
     }
@@ -1474,7 +1474,7 @@ class Message : JsonSerializable, Serializable {
         }
         $message = replace(["\r\n", "\r"], "\n", $message);
         $lines = explode("\n", $message);
-        $formatted = [];
+        $formatted = null;
         $cut = ($wrapLength == static::LINE_LENGTH_MUST);
 
         foreach ($lines as $line) {
@@ -1575,26 +1575,26 @@ class Message : JsonSerializable, Serializable {
      * @return this
      */
     function reset() {
-        this.to = [];
-        this.from = [];
-        this.sender = [];
-        this.replyTo = [];
-        this.readReceipt = [];
-        this.returnPath = [];
-        this.cc = [];
-        this.bcc = [];
+        this.to = null;
+        this.from = null;
+        this.sender = null;
+        this.replyTo = null;
+        this.readReceipt = null;
+        this.returnPath = null;
+        this.cc = null;
+        this.bcc = null;
         this.messageId = true;
         this.subject = "";
-        this.headers = [];
+        this.headers = null;
         this.textMessage = "";
         this.htmlMessage = "";
-        this.message = [];
+        this.message = null;
         this.emailFormat = static::MESSAGE_TEXT;
         this.priority = null;
         this.charset = "utf-8";
         this.headerCharset = null;
         this.transferEncoding = null;
-        this.attachments = [];
+        this.attachments = null;
         this.emailPattern = static::EMAIL_PATTERN;
 
         return this;
@@ -1704,7 +1704,7 @@ class Message : JsonSerializable, Serializable {
             "textMessage", "htmlMessage",
         ];
 
-        $array = [];
+        $array = null;
         foreach ($properties as $property) {
             $array[$property] = this.{$property};
         }

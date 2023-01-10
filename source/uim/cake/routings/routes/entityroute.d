@@ -25,7 +25,7 @@ class EntityRoute : Route
      *   directory.
      * @return string|null Either a string URL or null.
      */
-    Nullable!string match(array $url, array $context = []) {
+    Nullable!string match(array $url, array $context = null) {
         if (empty(_compiledRoute)) {
             this.compile();
         }

@@ -30,12 +30,12 @@ class DefaultFormatter : AbstractFormatter {
     /**
      * @param array<string, mixed> aConfig Formatter config
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.setConfig(aConfig);
     }
 
 
-    string format($level, string $message, array $context = []) {
+    string format($level, string $message, array $context = null) {
         if (_config["includeDate"]) {
             $message = sprintf("%s %s: %s", (new DateTime()).format(_config["dateFormat"]), $level, $message);
         } else {

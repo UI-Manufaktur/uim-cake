@@ -125,7 +125,7 @@ class RoutingMiddleware : IMiddleware
         try {
             Router::setRequest($request);
             $params = (array)$request.getAttribute("params", []);
-            $middleware = [];
+            $middleware = null;
             if (empty($params["controller"])) {
                 $params = Router::parseRequest($request) + $params;
                 if (isset($params["_middleware"])) {

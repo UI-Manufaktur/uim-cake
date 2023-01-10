@@ -28,12 +28,12 @@ class JsonFormatter : AbstractFormatter {
     /**
      * @param array<string, mixed> aConfig Formatter config
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.setConfig(aConfig);
     }
 
 
-    string format($level, string $message, array $context = []) {
+    string format($level, string $message, array $context = null) {
         $log = ["date": date(_config["dateFormat"]), "level": (string)$level, "message": $message];
         $json = json_encode($log, _config["flags"]);
 

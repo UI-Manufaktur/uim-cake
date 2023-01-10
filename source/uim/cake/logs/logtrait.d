@@ -21,7 +21,7 @@ trait LogTrait {
     * @param array|string $context Additional log data relevant to this message.
     * @return bool Success of log write.
     */
-  bool log(string $message, $level = LogLevel::ERROR, $context = []) {
+  bool log(string $message, $level = LogLevel::ERROR, $context = null) {
       return Log::write($level, $message, $context);
   }
 }

@@ -13,7 +13,7 @@ if (!function_exists("urlArray")) {
      * @return array URL
      * @see uim.cake.routings.Router::pathUrl()
      */
-    array urlArray(string $path, array $params = []) {
+    array urlArray(string $path, array $params = null) {
         $url = Router::parseRoutePath($path);
         $url += [
             "plugin": false,

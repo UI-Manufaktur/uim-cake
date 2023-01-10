@@ -50,7 +50,7 @@ abstract class BaseLog : AbstractLogger
      *
      * @param array<string, mixed> aConfig Configuration array
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.setConfig(aConfig);
 
         if (!is_array(_config["scopes"]) && _config["scopes"] != false) {
@@ -72,7 +72,7 @@ abstract class BaseLog : AbstractLogger
                 $options = $formatter;
             } else {
                 $class = $formatter;
-                $options = [];
+                $options = null;
             }
             /** @var class-string<uim.cake.logs.Formatter\AbstractFormatter> $class */
             $formatter = new $class($options);
@@ -117,7 +117,7 @@ abstract class BaseLog : AbstractLogger
      * @return string
      * @deprecated 4.3.0 Call `interpolate()` directly from your log engine and format the message in a formatter.
      */
-    protected string _format(string $message, array $context = []) {
+    protected string _format(string $message, array $context = null) {
         return this.interpolate($message, $context);
     }
 
@@ -127,7 +127,7 @@ abstract class BaseLog : AbstractLogger
      * @param string $message Formatted string
      * @param array $context Context for placeholder values.
      */
-    protected string interpolate(string $message, array $context = []) {
+    protected string interpolate(string $message, array $context = null) {
         if (strpos($message, "{") == false && strpos($message, "}") == false) {
             return $message;
         }
@@ -142,7 +142,7 @@ abstract class BaseLog : AbstractLogger
         }
 
         $placeholders = array_intersect($matches[1], array_keys($context));
-        $replacements = [];
+        $replacements = null;
 
         foreach ($placeholders as $key) {
             $value = $context[$key];

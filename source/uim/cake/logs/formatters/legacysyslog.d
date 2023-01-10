@@ -23,12 +23,12 @@ class LegacySyslogFormatter : AbstractFormatter {
     /**
      * @param array<string, mixed> myConfig Formatter config
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         this.setConfig(myConfig);
     }
 
 
-    string format($level, string myMessage, array $context = []) {
+    string format($level, string myMessage, array $context = null) {
         return sprintf(this.getConfig("format"), $level, myMessage);
     }
 }

@@ -25,42 +25,42 @@ class RouteCollection {
      *
      * @var array<string, array<uim.cake.routings.Route\Route>>
      */
-    protected _routeTable = [];
+    protected _routeTable = null;
 
     /**
      * The hash map of named routes that are in this collection.
      *
      * @var array<uim.cake.routings.Route\Route>
      */
-    protected _named = [];
+    protected _named = null;
 
     /**
      * Routes indexed by path prefix.
      *
      * @var array<string, array<uim.cake.routings.Route\Route>>
      */
-    protected _paths = [];
+    protected _paths = null;
 
     /**
      * A map of middleware names and the related objects.
      *
      * @var array
      */
-    protected _middleware = [];
+    protected _middleware = null;
 
     /**
      * A map of middleware group names and the related middleware names.
      *
      * @var array
      */
-    protected _middlewareGroups = [];
+    protected _middlewareGroups = null;
 
     /**
      * Route extensions
      *
      * @var array<string>
      */
-    protected _extensions = [];
+    protected _extensions = null;
 
     /**
      * Add a route to the collection.
@@ -69,7 +69,7 @@ class RouteCollection {
      * @param array<string, mixed> $options Additional options for the route. Primarily for the
      *   `_name` option, which enables named routes.
      */
-    void add(Route $route, STRINGAA someOptions = []) {
+    void add(Route $route, STRINGAA someOptions = null) {
         // Explicit names
         if (isset($options["_name"])) {
             if (isset(_named[$options["_name"]])) {
@@ -117,7 +117,7 @@ class RouteCollection {
                 continue;
             }
 
-            $queryParameters = [];
+            $queryParameters = null;
             if (strpos($url, "?") != false) {
                 [$url, $qs] = explode("?", $url, 2);
                 parse_str($qs, $queryParameters);
@@ -440,7 +440,7 @@ class RouteCollection {
      * @throws \RuntimeException when a requested middleware does not exist.
      */
     array getMiddleware(array $names) {
-        $out = [];
+        $out = null;
         foreach ($names as $name) {
             if (this.hasMiddlewareGroup($name)) {
                 $out = array_merge($out, this.getMiddleware(_middlewareGroups[$name]));

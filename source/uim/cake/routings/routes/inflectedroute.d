@@ -55,7 +55,7 @@ class InflectedRoute : Route
      *   directory.
      * @return string|null Either a string URL for the parameters if they match or null.
      */
-    Nullable!string match(array $url, array $context = []) {
+    Nullable!string match(array $url, array $context = null) {
         $url = _underscore($url);
         if (!_inflectedDefaults) {
             _inflectedDefaults = true;
