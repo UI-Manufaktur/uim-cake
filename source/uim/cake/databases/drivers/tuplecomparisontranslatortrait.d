@@ -39,7 +39,7 @@ trait TupleComparisonTranslatorTrait
         }
 
         $operator = strtoupper($expression.getOperator());
-        if (!in_array($operator, ["IN", "="])) {
+        if (!hasAllValues($operator, ["IN", "="])) {
             throw new RuntimeException(
                 sprintf(
                     "Tuple comparison transform only supports the `IN` and `=` operators, `%s` given.",

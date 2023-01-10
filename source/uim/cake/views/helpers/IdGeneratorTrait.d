@@ -50,7 +50,7 @@ trait IdGeneratorTrait
         $idSuffix = mb_strtolower(replace(["/", "@", "<", ">", " ", """, "\""], "-", $val));
         myCount = 1;
         $check = $idSuffix;
-        while (in_array($check, _idSuffixes, true)) {
+        while (hasAllValues($check, _idSuffixes, true)) {
             $check = $idSuffix . myCount++;
         }
         _idSuffixes[] = $check;

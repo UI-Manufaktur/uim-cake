@@ -509,7 +509,7 @@ class Paginator : IPaginator {
             if (isset(myOptions["direction"])) {
                 $direction = strtolower(myOptions["direction"]);
             }
-            if (!in_array($direction, ["asc", "desc"], true)) {
+            if (!hasAllValues($direction, ["asc", "desc"], true)) {
                 $direction = "asc";
             }
 
@@ -537,7 +537,7 @@ class Paginator : IPaginator {
             myOptions["sortableFields"] = myOptions["sortWhitelist"] = $allowed;
 
             myField = key(myOptions["order"]);
-            $sortAllowed = in_array(myField, $allowed, true);
+            $sortAllowed = hasAllValues(myField, $allowed, true);
             if (!$sortAllowed) {
                 myOptions["order"] = [];
                 myOptions["sort"] = null;

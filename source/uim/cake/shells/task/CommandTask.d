@@ -65,7 +65,7 @@ class CommandTask : Shell {
 
         foreach (myShells as myShell) {
             myName = Inflector::underscore(preg_replace("/(Shell|Command)$/", "", myShell));
-            if (!in_array(myName, $skip, true)) {
+            if (!hasAllValues(myName, $skip, true)) {
                 myShellList[myType][] = myName;
             }
         }

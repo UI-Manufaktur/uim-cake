@@ -47,7 +47,7 @@ class OrderByExpression : QueryExpression
             if (
                 is_string($key) &&
                 is_string($val) &&
-                !in_array(strtoupper($val), ["ASC", "DESC"], true)
+                !hasAllValues(strtoupper($val), ["ASC", "DESC"], true)
             ) {
                 throw new RuntimeException(
                     sprintf(

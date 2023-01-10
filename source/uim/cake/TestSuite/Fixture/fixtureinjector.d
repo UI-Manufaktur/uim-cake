@@ -37,7 +37,7 @@ class FixtureInjector : TestListener
      */
     this(FixtureManager $manager) {
         if (isset(_SERVER["argv"])) {
-            $manager.setDebug(in_array("--debug", _SERVER["argv"], true));
+            $manager.setDebug(hasAllValues("--debug", _SERVER["argv"], true));
         }
         _fixtureManager = $manager;
         _fixtureManager.shutDown();

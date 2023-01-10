@@ -539,7 +539,7 @@ class Controller : IEventListener, IEventDispatcher {
         foreach (this.middlewares as $middleware) {
             $options = $middleware["options"];
             if (!empty($options["only"])) {
-                if (in_array($action, (array)$options["only"], true)) {
+                if (hasAllValues($action, (array)$options["only"], true)) {
                     $matching[] = $middleware["middleware"];
                 }
 
@@ -548,7 +548,7 @@ class Controller : IEventListener, IEventDispatcher {
 
             if (
                 !empty($options["except"]) &&
-                in_array($action, (array)$options["except"], true)
+                hasAllValues($action, (array)$options["except"], true)
             ) {
                 continue;
             }

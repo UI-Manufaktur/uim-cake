@@ -449,7 +449,7 @@ class Route
 
         if (
             isset(this.defaults["_method"]) &&
-            !in_array($method, (array)this.defaults["_method"], true)
+            !hasAllValues($method, (array)this.defaults["_method"], true)
         ) {
             return null;
         }
@@ -752,7 +752,7 @@ class Route
         $defaults = (array)this.defaults["_method"];
         $methods = (array)this.normalizeAndValidateMethods($url["_method"]);
         foreach ($methods as $value) {
-            if (in_array($value, $defaults, true)) {
+            if (hasAllValues($value, $defaults, true)) {
                 return true;
             }
         }

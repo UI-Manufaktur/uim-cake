@@ -32,7 +32,7 @@ class Oauth
             $credentials["method"] = "hmac-sha1";
         }
 
-        $credentials["method"] = strtoupper($credentials["method"]);
+        $credentials["method"] = ($credentials["method"]).toUpper;
 
         switch ($credentials["method"]) {
             case "HMAC-SHA1":

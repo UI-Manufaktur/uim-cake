@@ -52,7 +52,7 @@ trait MergeVariablesTrait
         $isAssoc = false;
         if (
             isset(myOptions["associative"]) &&
-            in_array($property, (array)myOptions["associative"], true)
+            hasAllValues($property, (array)myOptions["associative"], true)
         ) {
             $isAssoc = true;
         }

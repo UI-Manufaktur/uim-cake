@@ -512,7 +512,7 @@ trait QueryTrait
      */
     function __call(string $method, array $arguments) {
         $resultSetClass = _decoratorClass();
-        if (in_array($method, get_class_methods($resultSetClass), true)) {
+        if (hasAllValues($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(
                 "Calling `%s` methods, such as `%s()`, on queries is deprecated~ " ~
                 "You must call `all()` first (for example, `all().%s()`).",

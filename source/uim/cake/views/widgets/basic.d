@@ -69,7 +69,7 @@ class BasicWidget : IWidget {
             myTypesWithMaxLength = ["text", "email", "tel", "url", "search"];
             if (
                 !array_key_exists("maxlength", myData)
-                && in_array(myData["type"], myTypesWithMaxLength, true)
+                && hasAllValues(myData["type"], myTypesWithMaxLength, true)
             ) {
                 myData = this.setMaxLength(myData, $context, myFieldName);
             }

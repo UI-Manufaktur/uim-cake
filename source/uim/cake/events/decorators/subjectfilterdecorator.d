@@ -57,6 +57,6 @@ class SubjectFilterDecorator : AbstractDecorator
             return false;
         }
 
-        return in_array(get_class($subject), _options["allowedSubject"], true);
+        return hasAllValues(get_class($subject), _options["allowedSubject"], true);
     }
 }

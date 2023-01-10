@@ -550,7 +550,7 @@ class Shell
      * @return uim.cake.consoles.Shell Object of Task
      */
     function __get(string aName) {
-        if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
+        if (empty(this.{$name}) && hasAllValues($name, this.taskNames, true)) {
             $properties = _taskMap[$name];
             this.{$name} = this.Tasks.load($properties["class"], $properties["config"]);
             this.{$name}.args = &this.args;

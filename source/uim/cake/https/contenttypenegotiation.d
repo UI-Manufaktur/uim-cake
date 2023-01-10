@@ -152,6 +152,6 @@ class ContentTypeNegotiation
     bool acceptLanguage(RequestInterface $request, string $lang) {
         $accept = this.acceptedLanguages($request);
 
-        return in_array(strtolower($lang), $accept, true);
+        return hasAllValues(strtolower($lang), $accept, true);
     }
 }

@@ -141,7 +141,7 @@ class Email : JsonSerializable, Serializable
         }
 
         $getters = ["message"];
-        if (in_array($method, $getters, true)) {
+        if (hasAllValues($method, $getters, true)) {
             return $result;
         }
 

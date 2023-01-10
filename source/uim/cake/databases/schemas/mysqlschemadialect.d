@@ -99,10 +99,10 @@ class MysqlSchemaDialect : SchemaDialect
             return $type;
         }
 
-        if (in_array($col, ["date", "time"])) {
+        if (hasAllValues($col, ["date", "time"])) {
             return ["type": $col, "length": null];
         }
-        if (in_array($col, ["datetime", "timestamp"])) {
+        if (hasAllValues($col, ["datetime", "timestamp"])) {
             $typeName = $col;
             if ($length > 0) {
                 $typeName = $col ~ "fractional";
@@ -125,7 +125,7 @@ class MysqlSchemaDialect : SchemaDialect
         if ($col == "smallint") {
             return ["type": TableSchema::TYPE_SMALLINTEGER, "length": null, "unsigned": $unsigned];
         }
-        if (in_array($col, ["int", "integer", "mediumint"])) {
+        if (hasAllValues($col, ["int", "integer", "mediumint"])) {
             return ["type": TableSchema::TYPE_INTEGER, "length": null, "unsigned": $unsigned];
         }
         if ($col == "char" && $length == 36) {
@@ -146,7 +146,7 @@ class MysqlSchemaDialect : SchemaDialect
         if ($col == "binary" && $length == 16) {
             return ["type": TableSchema::TYPE_BINARY_UUID, "length": null];
         }
-        if (strpos($col, "blob") != false || in_array($col, ["binary", "varbinary"])) {
+        if (strpos($col, "blob") != false || hasAllValues($col, ["binary", "varbinary"])) {
             $lengthName = substr($col, 0, -4);
             $length = TableSchema::$columnLengths[$lengthName] ?? $length;
 
@@ -348,7 +348,7 @@ class MysqlSchemaDialect : SchemaDialect
                     }
                     break;
                 case TableSchema::TYPE_TEXT:
-                    $isKnownLength = in_array($data["length"], TableSchema::$columnLengths);
+                    $isKnownLength = hasAllValues($data["length"], TableSchema::$columnLengths);
                     if (empty($data["length"]) || !$isKnownLength) {
                         $out ~= " TEXT";
                         break;
@@ -356,15 +356,15 @@ class MysqlSchemaDialect : SchemaDialect
 
                     /** @var string $length */
                     $length = array_search($data["length"], TableSchema::$columnLengths);
-                    $out ~= " " ~ strtoupper($length) ~ "TEXT";
+                    $out ~= " " ~ $length.toUpper ~ "TEXT";
 
                     break;
                 case TableSchema::TYPE_BINARY:
-                    $isKnownLength = in_array($data["length"], TableSchema::$columnLengths);
+                    $isKnownLength = hasAllValues($data["length"], TableSchema::$columnLengths);
                     if ($isKnownLength) {
                         /** @var string $length */
                         $length = array_search($data["length"], TableSchema::$columnLengths);
-                        $out ~= " " ~ strtoupper($length) ~ "BLOB";
+                        $out ~= " " ~ $length.toUpper ~ "BLOB";
                         break;
                     }
 
@@ -388,12 +388,12 @@ class MysqlSchemaDialect : SchemaDialect
             TableSchema::TYPE_TINYINTEGER,
             TableSchema::TYPE_STRING,
         ];
-        if (in_array($data["type"], $hasLength, true) && isset($data["length"])) {
+        if (hasAllValues($data["type"], $hasLength, true) && isset($data["length"])) {
             $out ~= "(" ~ $data["length"] ~ ")";
         }
 
         $lengthAndPrecisionTypes = [TableSchema::TYPE_FLOAT, TableSchema::TYPE_DECIMAL];
-        if (in_array($data["type"], $lengthAndPrecisionTypes, true) && isset($data["length"])) {
+        if (hasAllValues($data["type"], $lengthAndPrecisionTypes, true) && isset($data["length"])) {
             if (isset($data["precision"])) {
                 $out ~= "(" ~ (int)$data["length"] ~ "," ~ (int)$data["precision"] ~ ")";
             } else {
@@ -402,7 +402,7 @@ class MysqlSchemaDialect : SchemaDialect
         }
 
         $precisionTypes = [TableSchema::TYPE_DATETIME_FRACTIONAL, TableSchema::TYPE_TIMESTAMP_FRACTIONAL];
-        if (in_array($data["type"], $precisionTypes, true) && isset($data["precision"])) {
+        if (hasAllValues($data["type"], $precisionTypes, true) && isset($data["precision"])) {
             $out ~= "(" ~ (int)$data["precision"] ~ ")";
         }
 
@@ -415,7 +415,7 @@ class MysqlSchemaDialect : SchemaDialect
             TableSchema::TYPE_DECIMAL,
         ];
         if (
-            in_array($data["type"], $hasUnsigned, true) &&
+            hasAllValues($data["type"], $hasUnsigned, true) &&
             isset($data["unsigned"]) &&
             $data["unsigned"] == true
         ) {
@@ -427,7 +427,7 @@ class MysqlSchemaDialect : SchemaDialect
             TableSchema::TYPE_CHAR,
             TableSchema::TYPE_STRING,
         ];
-        if (in_array($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
+        if (hasAllValues($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
             $out ~= " COLLATE " ~ $data["collate"];
         }
 
@@ -440,7 +440,7 @@ class MysqlSchemaDialect : SchemaDialect
             !isset($data["autoIncrement"])
         );
         if (
-            in_array($data["type"], [TableSchema::TYPE_INTEGER, TableSchema::TYPE_BIGINTEGER]) &&
+            hasAllValues($data["type"], [TableSchema::TYPE_INTEGER, TableSchema::TYPE_BIGINTEGER]) &&
             (
                 $data["autoIncrement"] == true ||
                 $addAutoIncrement
@@ -454,7 +454,7 @@ class MysqlSchemaDialect : SchemaDialect
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
-        if (isset($data["null"]) && $data["null"] == true && in_array($data["type"], $timestampTypes, true)) {
+        if (isset($data["null"]) && $data["null"] == true && hasAllValues($data["type"], $timestampTypes, true)) {
             $out ~= " NULL";
             unset($data["default"]);
         }
@@ -468,7 +468,7 @@ class MysqlSchemaDialect : SchemaDialect
         ];
         if (
             isset($data["default"]) &&
-            in_array($data["type"], $dateTimeTypes) &&
+            hasAllValues($data["type"], $dateTimeTypes) &&
             strpos(strtolower($data["default"]), "current_timestamp") != false
         ) {
             $out ~= " DEFAULT CURRENT_TIMESTAMP";

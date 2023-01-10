@@ -97,10 +97,10 @@ class PostgresSchemaDialect : SchemaDialect
             return $type;
         }
 
-        if (in_array($col, ["date", "time", "boolean"], true)) {
+        if (hasAllValues($col, ["date", "time", "boolean"], true)) {
             return ["type": $col, "length": null];
         }
-        if (in_array($col, ["timestamptz", "timestamp with time zone"], true)) {
+        if (hasAllValues($col, ["timestamptz", "timestamp with time zone"], true)) {
             return ["type": TableSchema::TYPE_TIMESTAMP_TIMEZONE, "length": null];
         }
         if (strpos($col, "timestamp") != false) {
@@ -426,7 +426,7 @@ class PostgresSchemaDialect : SchemaDialect
         }
 
         $hasCollate = [TableSchema::TYPE_TEXT, TableSchema::TYPE_STRING, TableSchema::TYPE_CHAR];
-        if (in_array($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
+        if (hasAllValues($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
             $out ~= " COLLATE "" ~ $data["collate"] ~ """;
         }
 
@@ -438,7 +438,7 @@ class PostgresSchemaDialect : SchemaDialect
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
-        if (in_array($data["type"], $hasPrecision) && isset($data["precision"])) {
+        if (hasAllValues($data["type"], $hasPrecision) && isset($data["precision"])) {
             $out ~= "(" ~ $data["precision"] ~ ")";
         }
 
@@ -465,7 +465,7 @@ class PostgresSchemaDialect : SchemaDialect
         ];
         if (
             isset($data["default"]) &&
-            in_array($data["type"], $datetimeTypes) &&
+            hasAllValues($data["type"], $datetimeTypes) &&
             strtolower($data["default"]) == "current_timestamp"
         ) {
             $out ~= " DEFAULT CURRENT_TIMESTAMP";

@@ -84,7 +84,7 @@ class SqliteSchemaDialect : SchemaDialect
                 "unsigned": $unsigned,
             ];
         }
-        if (in_array($col, ["float", "real", "double"])) {
+        if (hasAllValues($col, ["float", "real", "double"])) {
             return [
                 "type": TableSchema::TYPE_FLOAT,
                 "length": $length,
@@ -110,7 +110,7 @@ class SqliteSchemaDialect : SchemaDialect
         if ($col == "binary" && $length == 16) {
             return ["type": TableSchema::TYPE_BINARY_UUID, "length": null];
         }
-        if (in_array($col, ["blob", "clob", "binary", "varbinary"])) {
+        if (hasAllValues($col, ["blob", "clob", "binary", "varbinary"])) {
             return ["type": TableSchema::TYPE_BINARY, "length": $length];
         }
 
@@ -123,7 +123,7 @@ class SqliteSchemaDialect : SchemaDialect
             "datetime",
             "datetimefractional",
         ];
-        if (in_array($col, $datetimeTypes)) {
+        if (hasAllValues($col, $datetimeTypes)) {
             return ["type": $col, "length": null];
         }
 
@@ -352,7 +352,7 @@ class SqliteSchemaDialect : SchemaDialect
         ];
 
         if (
-            in_array($data["type"], $hasUnsigned, true) &&
+            hasAllValues($data["type"], $hasUnsigned, true) &&
             isset($data["unsigned"]) &&
             $data["unsigned"] == true
         ) {
@@ -401,7 +401,7 @@ class SqliteSchemaDialect : SchemaDialect
             TableSchema::TYPE_INTEGER,
         ];
         if (
-            in_array($data["type"], $integerTypes, true) &&
+            hasAllValues($data["type"], $integerTypes, true) &&
             isset($data["length"]) &&
             $schema.getPrimaryKeys() != [$name]
         ) {
@@ -410,7 +410,7 @@ class SqliteSchemaDialect : SchemaDialect
 
         $hasPrecision = [TableSchema::TYPE_FLOAT, TableSchema::TYPE_DECIMAL];
         if (
-            in_array($data["type"], $hasPrecision, true) &&
+            hasAllValues($data["type"], $hasPrecision, true) &&
             (
                 isset($data["length"]) ||
                 isset($data["precision"])
@@ -434,7 +434,7 @@ class SqliteSchemaDialect : SchemaDialect
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
-        if (isset($data["null"]) && $data["null"] == true && in_array($data["type"], $timestampTypes, true)) {
+        if (isset($data["null"]) && $data["null"] == true && hasAllValues($data["type"], $timestampTypes, true)) {
             $out ~= " DEFAULT NULL";
         }
         if (isset($data["default"])) {

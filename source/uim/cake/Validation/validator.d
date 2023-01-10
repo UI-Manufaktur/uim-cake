@@ -2451,7 +2451,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
         }
 
         $newRecord = $context["newRecord"];
-        if (in_array($required, [static::WHEN_CREATE, static::WHEN_UPDATE], true)) {
+        if (hasAllValues($required, [static::WHEN_CREATE, static::WHEN_UPDATE], true)) {
             return ($required == static::WHEN_CREATE && !$newRecord) ||
                 ($required == static::WHEN_UPDATE && $newRecord);
         }
@@ -2473,7 +2473,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
         }
 
         $newRecord = $context["newRecord"];
-        if (in_array($allowed, [static::WHEN_CREATE, static::WHEN_UPDATE], true)) {
+        if (hasAllValues($allowed, [static::WHEN_CREATE, static::WHEN_UPDATE], true)) {
             $allowed = ($allowed == static::WHEN_CREATE && $newRecord) ||
                 ($allowed == static::WHEN_UPDATE && !$newRecord);
         }

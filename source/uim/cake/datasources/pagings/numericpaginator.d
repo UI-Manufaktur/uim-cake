@@ -513,7 +513,7 @@ class NumericPaginator : PaginatorInterface
             if (isset($options["direction"])) {
                 $direction = strtolower($options["direction"]);
             }
-            if (!in_array($direction, ["asc", "desc"], true)) {
+            if (!hasAllValues($direction, ["asc", "desc"], true)) {
                 $direction = "asc";
             }
 
@@ -541,7 +541,7 @@ class NumericPaginator : PaginatorInterface
             $options["sortableFields"] = $options["sortWhitelist"] = $allowed;
 
             $field = key($options["order"]);
-            $sortAllowed = in_array($field, $allowed, true);
+            $sortAllowed = hasAllValues($field, $allowed, true);
             if (!$sortAllowed) {
                 $options["order"] = [];
                 $options["sort"] = null;

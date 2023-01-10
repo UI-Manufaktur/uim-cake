@@ -94,7 +94,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $override = false;
 
         if (
-            in_array($method, ["PUT", "DELETE", "PATCH"], true) &&
+            hasAllValues($method, ["PUT", "DELETE", "PATCH"], true) &&
             indexOf((string)myRequest.contentType(), "application/x-www-form-urlencoded") == 0
         ) {
             myData = (string)myRequest.getBody();
@@ -114,7 +114,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
         if (
             $override &&
-            !in_array(myRequest.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
+            !hasAllValues(myRequest.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
         ) {
             $parsedBody = [];
         }

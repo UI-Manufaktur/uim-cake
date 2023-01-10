@@ -388,7 +388,7 @@ class TableSchema : TableISchema, ISqlGenerator
         $attrs += static::_indexKeys;
         unset($attrs["references"], $attrs["update"], $attrs["delete"]);
 
-        if (!in_array($attrs["type"], static::_validIndexTypes, true)) {
+        if (!hasAllValues($attrs["type"], static::_validIndexTypes, true)) {
             throw new DatabaseException(sprintf(
                 "Invalid index type '%s' in index '%s' in table '%s'.",
                 $attrs["type"],
@@ -467,7 +467,7 @@ class TableSchema : TableISchema, ISqlGenerator
         }
         $attrs = array_intersect_key($attrs, static::_indexKeys);
         $attrs += static::_indexKeys;
-        if (!in_array($attrs["type"], static::_validConstraintTypes, true)) {
+        if (!hasAllValues($attrs["type"], static::_validConstraintTypes, true)) {
             throw new DatabaseException(sprintf(
                 "Invalid constraint type '%s' in table '%s'.",
                 $attrs["type"],
@@ -553,13 +553,13 @@ class TableSchema : TableISchema, ISqlGenerator
         if (count($attrs["references"]) < 2) {
             throw new DatabaseException("References must contain a table and column.");
         }
-        if (!in_array($attrs["update"], static::_validForeignKeyActions)) {
+        if (!hasAllValues($attrs["update"], static::_validForeignKeyActions)) {
             throw new DatabaseException(sprintf(
                 "Update action is invalid. Must be one of %s",
                 implode(",", static::_validForeignKeyActions)
             ));
         }
-        if (!in_array($attrs["delete"], static::_validForeignKeyActions)) {
+        if (!hasAllValues($attrs["delete"], static::_validForeignKeyActions)) {
             throw new DatabaseException(sprintf(
                 "Delete action is invalid. Must be one of %s",
                 implode(",", static::_validForeignKeyActions)

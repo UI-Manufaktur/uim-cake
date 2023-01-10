@@ -94,7 +94,7 @@ class SecurityComponent : Component
             }
 
             if (
-                !in_array(_action, (array)_config["unlockedActions"], true) &&
+                !hasAllValues(_action, (array)_config["unlockedActions"], true) &&
                 $hasData &&
                 _config["validatePost"]
             ) {
@@ -189,7 +189,7 @@ class SecurityComponent : Component
         $requireSecure = _config["requireSecure"];
         if (
             ($requireSecure[0] == "*" ||
-                in_array(_action, $requireSecure, true)
+                hasAllValues(_action, $requireSecure, true)
             ) &&
             !$controller.getRequest().is("ssl")
         ) {
@@ -328,7 +328,7 @@ class SecurityComponent : Component
         );
 
         foreach ($fieldList as $i: $key) {
-            $isLocked = in_array($key, $locked, true);
+            $isLocked = hasAllValues($key, $locked, true);
 
             if (!empty($unlockedFields)) {
                 foreach ($unlockedFields as $off) {

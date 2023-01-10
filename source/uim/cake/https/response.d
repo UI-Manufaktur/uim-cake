@@ -452,7 +452,7 @@ class Response : IResponse
      * @param string myType The type to set.
      */
     protected void _setContentType(string myType) {
-        if (in_array(_status, [304, 204], true)) {
+        if (hasAllValues(_status, [304, 204], true)) {
             _clearHeader("Content-Type");
 
             return;
@@ -466,7 +466,7 @@ class Response : IResponse
             _charset &&
             (
                 indexOf(myType, "text/") == 0 ||
-                in_array(myType, $allowed, true)
+                hasAllValues(myType, $allowed, true)
             )
         ) {
             $charset = true;
@@ -596,7 +596,7 @@ class Response : IResponse
         _reasonPhrase = $reasonPhrase;
 
         // These status codes don"t have bodies and can"t have content-types.
-        if (in_array($code, [304, 204], true)) {
+        if (hasAllValues($code, [304, 204], true)) {
             _clearHeader("Content-Type");
         }
     }
@@ -706,7 +706,7 @@ class Response : IResponse
         }
 
         foreach (_mimeTypes as myAlias: myTypes) {
-            if (in_array($ctype, (array)myTypes, true)) {
+            if (hasAllValues($ctype, (array)myTypes, true)) {
                 return myAlias;
             }
         }
@@ -1042,7 +1042,7 @@ class Response : IResponse
      */
     bool outputCompressed() {
         return indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false
-            && (ini_get("zlib.output_compression") == "1" || in_array("ob_gzhandler", ob_list_handlers(), true));
+            && (ini_get("zlib.output_compression") == "1" || hasAllValues("ob_gzhandler", ob_list_handlers(), true));
     }
 
     /**
@@ -1121,7 +1121,7 @@ class Response : IResponse
         $responseTag = this.getHeaderLine("Etag");
         $etagMatches = null;
         if ($responseTag) {
-            $etagMatches = in_array("*", $etags, true) || in_array($responseTag, $etags, true);
+            $etagMatches = hasAllValues("*", $etags, true) || hasAllValues($responseTag, $etags, true);
         }
 
         $modifiedSince = myRequest.getHeaderLine("If-Modified-Since");

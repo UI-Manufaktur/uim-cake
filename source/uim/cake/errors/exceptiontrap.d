@@ -256,7 +256,7 @@ class ExceptionTrap
             E_ERROR,
             E_PARSE,
         ];
-        if (!in_array($error["type"], $fatals, true)) {
+        if (!hasAllValues($error["type"], $fatals, true)) {
             return;
         }
         this.handleFatalError(

@@ -139,7 +139,7 @@ class DateTimeWidget : BasicWidget {
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
 
-        if (in_array($dbType, $fractionalTypes, true)) {
+        if (hasAllValues($dbType, $fractionalTypes, true)) {
             myData["step"] = "0.001";
         }
 

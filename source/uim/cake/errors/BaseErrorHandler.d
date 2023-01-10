@@ -88,7 +88,7 @@ abstract class BaseErrorHandler
                 E_ERROR,
                 E_PARSE,
             ];
-            if (!in_array(myError["type"], $fatals, true)) {
+            if (!hasAllValues(myError["type"], $fatals, true)) {
                 return;
             }
             this.handleFatalError(

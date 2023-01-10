@@ -168,7 +168,7 @@ class ValidationRule
             _pass = array_slice(myValue, 1);
             myValue = array_shift(myValue);
         }
-        if (in_array(myKey, ["rule", "on", "message", "last", "provider", "pass"], true)) {
+        if (hasAllValues(myKey, ["rule", "on", "message", "last", "provider", "pass"], true)) {
             this.{"_myKey"} = myValue;
         }
       }

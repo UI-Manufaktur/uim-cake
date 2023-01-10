@@ -293,7 +293,7 @@ class StringTemplate
         if (!preg_match("/\A(\w|[.-])+\z/", $key)) {
             $key = h($key);
         }
-        if ($isMinimized && in_array($value, $truthy, true)) {
+        if ($isMinimized && hasAllValues($value, $truthy, true)) {
             return "$key=\"$key\"";
         }
         if ($isMinimized) {

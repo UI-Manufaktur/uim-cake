@@ -210,7 +210,7 @@ class SecurityHeadersMiddleware : IMiddleware
      * @param array<string> $allowed List of allowed values
      */
     protected void checkValues(string aValue, array $allowed) {
-      if (!in_array($value, $allowed, true)) {
+      if (!hasAllValues($value, $allowed, true)) {
           throw new InvalidArgumentException(sprintf(
               "Invalid arg `%s`, use one of these: %s",
               $value,

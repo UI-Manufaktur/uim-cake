@@ -74,7 +74,7 @@ class BasicWidget : WidgetInterface
             $typesWithMaxLength = ["text", "email", "tel", "url", "search"];
             if (
                 !array_key_exists("maxlength", $data)
-                && in_array($data["type"], $typesWithMaxLength, true)
+                && hasAllValues($data["type"], $typesWithMaxLength, true)
             ) {
                 $data = this.setMaxLength($data, $context, $fieldName);
             }

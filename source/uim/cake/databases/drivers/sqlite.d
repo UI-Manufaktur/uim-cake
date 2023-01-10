@@ -150,7 +150,7 @@ class Sqlite : Driver
      * @return bool true if it is valid to use this driver
      */
     bool enabled() {
-        return in_array("sqlite", PDO::getAvailableDrivers(), true);
+        return hasAllValues("sqlite", PDO::getAvailableDrivers(), true);
     }
 
     /**

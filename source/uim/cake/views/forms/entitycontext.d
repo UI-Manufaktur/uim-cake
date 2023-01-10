@@ -160,7 +160,7 @@ class EntityContext : IContext {
         }
         $primaryKey = (array)myTable.getPrimaryKeys();
 
-        return in_array(array_pop($parts), $primaryKey, true);
+        return hasAllValues(array_pop($parts), $primaryKey, true);
     }
 
     /**

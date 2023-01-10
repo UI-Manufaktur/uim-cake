@@ -269,7 +269,7 @@ class Validation {
     static bool comparison($check1, string operator, $check2) {
         if (
             (!is_numeric($check1) || !is_numeric($check2)) &&
-            !in_array($operator, static::COMPARE_STRING)
+            !hasAllValues($operator, static::COMPARE_STRING)
         ) {
             return false;
         }
@@ -629,7 +629,7 @@ class Validation {
             $booleanValues = [true, false, 0, 1, "0", "1"];
         }
 
-        return in_array($check, $booleanValues, true);
+        return hasAllValues($check, $booleanValues, true);
     }
 
     /**
@@ -646,7 +646,7 @@ class Validation {
             $truthyValues = [true, 1, "1"];
         }
 
-        return in_array($check, $truthyValues, true);
+        return hasAllValues($check, $truthyValues, true);
     }
 
     /**
@@ -663,7 +663,7 @@ class Validation {
             $falseyValues = [false, 0, "0"];
         }
 
-        return in_array($check, $falseyValues, true);
+        return hasAllValues($check, $falseyValues, true);
     }
 
     /**
@@ -944,7 +944,7 @@ class Validation {
                 if ($caseInsensitive) {
                     $val = mb_strtolower($val);
                 }
-                if (!in_array((string)$val, myOptions["in"], $strict)) {
+                if (!hasAllValues((string)$val, myOptions["in"], $strict)) {
                     return false;
                 }
             }
@@ -1064,7 +1064,7 @@ class Validation {
             $list = array_map("strval", $list);
         }
 
-        return in_array((string)$check, $list, true);
+        return hasAllValues((string)$check, $list, true);
     }
 
     /**
@@ -1159,7 +1159,7 @@ class Validation {
             $mimeTypes[myKey] = strtolower($val);
         }
 
-        return in_array(strtolower($mime), $mimeTypes, true);
+        return hasAllValues(strtolower($mime), $mimeTypes, true);
     }
 
     /**
@@ -1237,7 +1237,7 @@ class Validation {
             $code = $check;
         }
         if ($allowNoFile) {
-            return in_array((int)$code, [UPLOAD_ERR_OK, UPLOAD_ERR_NO_FILE], true);
+            return hasAllValues((int)$code, [UPLOAD_ERR_OK, UPLOAD_ERR_NO_FILE], true);
         }
 
         return (int)$code == UPLOAD_ERR_OK;

@@ -64,7 +64,7 @@ class FormProtectionComponent : Component
         $hasData = ($data || $request.is(['put', 'post', 'delete', 'patch']));
 
         if (
-            !in_array($request.getParam('action'), _config['unlockedActions'], true)
+            !hasAllValues($request.getParam('action'), _config['unlockedActions'], true)
             && $hasData
             && _config['validate']
         ) {

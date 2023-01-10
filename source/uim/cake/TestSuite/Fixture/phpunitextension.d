@@ -23,7 +23,7 @@ class PHPUnitExtension : BeforeFirstTestHook
         $helper = new ConnectionHelper();
         $helper.addTestAliases();
 
-        $enableLogging = in_array("--debug", _SERVER["argv"] ?? [], true);
+        $enableLogging = hasAllValues("--debug", _SERVER["argv"] ?? [], true);
         if ($enableLogging) {
             $helper.enableQueryLogging();
             Log::drop("queries");

@@ -1216,9 +1216,9 @@ class FormHelper : Helper
                 return "checkbox";
             case isset(myOptions["options"]):
                 return "select";
-            case in_array(myFieldName, ["passwd", "password"], true):
+            case hasAllValues(myFieldName, ["passwd", "password"], true):
                 return "password";
-            case in_array(myFieldName, ["tel", "telephone", "phone"], true):
+            case hasAllValues(myFieldName, ["tel", "telephone", "phone"], true):
                 return "tel";
             case myFieldName == "email":
                 return "email";
@@ -1285,8 +1285,8 @@ class FormHelper : Helper
         myOptions = this.setRequiredAndCustomValidity(myFieldName, myOptions);
 
         myTypesWithOptions = ["text", "number", "radio", "select"];
-        $magicOptions = (in_array(myOptions["type"], ["radio", "select"], true) || $allowOverride);
-        if ($magicOptions && in_array(myOptions["type"], myTypesWithOptions, true)) {
+        $magicOptions = (hasAllValues(myOptions["type"], ["radio", "select"], true) || $allowOverride);
+        if ($magicOptions && hasAllValues(myOptions["type"], myTypesWithOptions, true)) {
             myOptions = _optionsOptions(myFieldName, myOptions);
         }
 
@@ -1397,7 +1397,7 @@ class FormHelper : Helper
         }
 
         $labelAttributes["for"] = myOptions["id"];
-        if (in_array(myOptions["type"], _groupedInputTypes, true)) {
+        if (hasAllValues(myOptions["type"], _groupedInputTypes, true)) {
             $labelAttributes["for"] = false;
         }
         if (myOptions["nestedInput"]) {
@@ -2272,7 +2272,7 @@ class FormHelper : Helper
             // Complex option types
             if (is_array($first)) {
                 $disabled = array_filter(myOptions["options"], function ($i) use (myOptions) {
-                    return in_array($i["value"], myOptions["disabled"], true);
+                    return hasAllValues($i["value"], myOptions["disabled"], true);
                 });
 
                 return count($disabled) > 0;

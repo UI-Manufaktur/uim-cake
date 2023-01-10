@@ -55,7 +55,7 @@ class Curl : AdapterInterface
                 CURLE_URL_MALFORMAT,
                 CURLE_URL_MALFORMAT_USER,
             ];
-            if (in_array($errorCode, $errorNumbers, true)) {
+            if (hasAllValues($errorCode, $errorNumbers, true)) {
                 throw new RequestException($message, $request);
             }
             throw new NetworkException($message, $request);

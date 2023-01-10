@@ -449,7 +449,7 @@ class ConsoleIo
             $options
         );
         $in = "";
-        while ($in == "" || !in_array($in, $options, true)) {
+        while ($in == "" || !hasAllValues($in, $options, true)) {
             $in = _getInput($prompt, $printOptions, $default);
         }
 

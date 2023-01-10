@@ -86,7 +86,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $method = $request.getMethod();
-        $hasData = in_array($method, ["PUT", "POST", "DELETE", "PATCH"], true)
+        $hasData = hasAllValues($method, ["PUT", "POST", "DELETE", "PATCH"], true)
             || $request.getParsedBody();
 
         if (

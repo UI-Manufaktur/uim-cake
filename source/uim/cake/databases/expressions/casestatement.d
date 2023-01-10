@@ -473,7 +473,7 @@ class CaseStatementExpression : IExpression, ITypedResult
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
     function clause(string $clause) {
-        if (!in_array($clause, this.validClauseNames, true)) {
+        if (!hasAllValues($clause, this.validClauseNames, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "The `$clause` argument must be one of `%s`, the given value `%s` is invalid.",

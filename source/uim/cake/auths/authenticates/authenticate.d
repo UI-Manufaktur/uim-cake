@@ -122,7 +122,7 @@ abstract class BaseAuthenticate : IEventListener {
             $result.unset($passwordField);
         }
         $hidden = $result.getHidden();
-        if ($password == null && in_array($passwordField, $hidden, true)) {
+        if ($password == null && hasAllValues($passwordField, $hidden, true)) {
             $key = array_search($passwordField, $hidden, true);
             unset($hidden[$key]);
             $result.setHidden($hidden);

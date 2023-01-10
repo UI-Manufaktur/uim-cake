@@ -130,7 +130,7 @@ class App
             "Cake",
             replace("\\", "/", (string)Configure::read("App.namespace")),
         ];
-        if (in_array($pluginName, $nonPluginNamespaces, true)) {
+        if (hasAllValues($pluginName, $nonPluginNamespaces, true)) {
             return $name;
         }
 

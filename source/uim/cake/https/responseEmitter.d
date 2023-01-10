@@ -70,7 +70,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\messages.IResponse $response The response to emit
      */
     protected void emitBody(IResponse $response) {
-        if (in_array($response.getStatusCode(), [204, 304], true)) {
+        if (hasAllValues($response.getStatusCode(), [204, 304], true)) {
             return;
         }
         $body = $response.getBody();

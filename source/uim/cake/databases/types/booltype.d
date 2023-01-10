@@ -31,7 +31,7 @@ class BoolType : BaseType : BatchCastingInterface
             return $value;
         }
 
-        if (in_array($value, [1, 0, "1", "0"], true)) {
+        if (hasAllValues($value, [1, 0, "1", "0"], true)) {
             return (bool)$value;
         }
 

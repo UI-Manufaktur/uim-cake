@@ -157,7 +157,7 @@ class ExceptionRenderer : IExceptionRenderer
      * @return void
      */
     protected void clearOutput() {
-        if (in_array(PHP_SAPI, ["cli", "phpdbg"])) {
+        if (hasAllValues(PHP_SAPI, ["cli", "phpdbg"])) {
             return;
         }
         while (ob_get_level()) {

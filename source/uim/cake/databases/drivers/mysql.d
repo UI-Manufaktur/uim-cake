@@ -154,7 +154,7 @@ class Mysql : Driver
      * @return bool true if it is valid to use this driver
      */
     bool enabled() {
-        return in_array("mysql", PDO::getAvailableDrivers(), true);
+        return hasAllValues("mysql", PDO::getAvailableDrivers(), true);
     }
 
     /**

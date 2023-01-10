@@ -130,7 +130,7 @@ class MemcachedEngine : CacheEngine {
         if ($serverList) {
             if (_Memcached.isPersistent()) {
                 foreach ($serverList as $server) {
-                    if (!in_array($server["host"] ~ ":" ~ $server["port"], _config["servers"], true)) {
+                    if (!hasAllValues($server["host"] ~ ":" ~ $server["port"], _config["servers"], true)) {
                         throw new InvalidArgumentException(
                             "Invalid cache configuration. Multiple persistent cache configurations are detected" ~
                             " with different `servers` values. `servers` values for persistent cache configurations" ~

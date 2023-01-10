@@ -96,16 +96,16 @@ class I18nExtractCommand : Command {
                 implode(", ", $currentPaths)
             );
             $response = $io.ask($message, $defaultPaths[$defaultPathIndex] ?? "D");
-            if (strtoupper($response) == "Q") {
+            if ($response.toUpper == "Q") {
                 $io.err("Extract Aborted");
                 this.abort();
             }
-            if (strtoupper($response) == "D" && count(_paths)) {
+            if ($response.toUpper == "D" && count(_paths)) {
                 $io.out();
 
                 return;
             }
-            if (strtoupper($response) == "D") {
+            if ($response.toUpper == "D") {
                 $io.warning("No directories selected. Please choose a directory.");
             } elseif (is_dir($response)) {
                 _paths[] = $response;
@@ -177,7 +177,7 @@ class I18nExtractCommand : Command {
                     $message,
                     $localePaths[0]
                 );
-                if (strtoupper($response) == "Q") {
+                if ($response.toUpper == "Q") {
                     $io.err("Extract Aborted");
 
                     return static::CODE_ERROR;
@@ -568,20 +568,20 @@ class I18nExtractCommand : Command {
             }
 
             $response = "";
-            while ($overwriteAll == false && file_exists($outputPath) && strtoupper($response) != "Y") {
+            while ($overwriteAll == false && file_exists($outputPath) && $response.toUpper != "Y") {
                 $io.out();
                 $response = $io.askChoice(
                     sprintf("Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll", $filename),
                     ["y", "n", "a"],
                     "y"
                 );
-                if (strtoupper($response) == "N") {
+                if ($response.toUpper == "N") {
                     $response = "";
                     while (!$response) {
                         $response = $io.ask("What would you like to name this file?", "new_" ~ $filename);
                         $filename = $response;
                     }
-                } elseif (strtoupper($response) == "A") {
+                } elseif ($response.toUpper == "A") {
                     $overwriteAll = true;
                 }
             }

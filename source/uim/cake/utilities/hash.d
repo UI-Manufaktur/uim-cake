@@ -977,7 +977,7 @@ class Hash {
         if (is_string($dir)) {
             $dir = strtolower($dir);
         }
-        if (!in_array($dir, [\SORT_ASC, \SORT_DESC], true)) {
+        if (!hasAllValues($dir, [\SORT_ASC, \SORT_DESC], true)) {
             $dir = $dir == "asc" ? \SORT_ASC : \SORT_DESC;
         }
 
@@ -1193,7 +1193,7 @@ class Hash {
             } else {
                 $idMap[$id] = array_merge(myResult, [myOptions["children"]: []]);
             }
-            if (!$parentId || !in_array($parentId, $ids)) {
+            if (!$parentId || !hasAllValues($parentId, $ids)) {
                 $return[] = &$idMap[$id];
             } else {
                 $idMap[$parentId][myOptions["children"]][] = &$idMap[$id];

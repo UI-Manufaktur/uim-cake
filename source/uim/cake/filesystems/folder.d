@@ -317,7 +317,7 @@ class Folder
      */
     static bool isRegisteredStreamWrapper(string $path) {
         return preg_match("/^[^:\/]+?(?=:\/\/)/", $path, $matches) &&
-            in_array($matches[0], stream_get_wrappers(), true);
+            hasAllValues($matches[0], stream_get_wrappers(), true);
     }
 
     /**
@@ -432,7 +432,7 @@ class Folder
                     $check = explode(DIRECTORY_SEPARATOR, $fullpath);
                     $count = count($check);
 
-                    if (in_array($check[$count - 1], $exceptions, true)) {
+                    if (hasAllValues($check[$count - 1], $exceptions, true)) {
                         continue;
                     }
 
@@ -780,7 +780,7 @@ class Folder
             // phpcs:enable
             while ((myItem = readdir($handle)) != false) {
                 $to = Folder::addPathElement($toDir, myItem);
-                if (($options["scheme"] != Folder::SKIP || !is_dir($to)) && !in_array(myItem, $exceptions, true)) {
+                if (($options["scheme"] != Folder::SKIP || !is_dir($to)) && !hasAllValues(myItem, $exceptions, true)) {
                     $from = Folder::addPathElement($fromDir, myItem);
                     if (is_file($from) && (!is_file($to) || $options["scheme"] != Folder::SKIP)) {
                         if (copy($from, $to)) {

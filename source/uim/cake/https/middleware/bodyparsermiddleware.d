@@ -140,7 +140,7 @@ class BodyParserMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        if (!in_array($request.getMethod(), this.methods, true)) {
+        if (!hasAllValues($request.getMethod(), this.methods, true)) {
             return $handler.handle($request);
         }
         [$type] = explode(";", $request.getHeaderLine("Content-Type"));

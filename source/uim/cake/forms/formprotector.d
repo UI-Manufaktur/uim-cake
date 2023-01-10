@@ -114,7 +114,7 @@ class FormProtector
         $field = preg_replace("/(\.\d+)+$/", "", $field);
 
         if ($lock) {
-            if (!in_array($field, this.fields, true)) {
+            if (!hasAllValues($field, this.fields, true)) {
                 if ($value != null) {
                     this.fields[$field] = $value;
 
@@ -166,7 +166,7 @@ class FormProtector
      * @return this
      */
     function unlockField($name) {
-        if (!in_array($name, this.unlockedFields, true)) {
+        if (!hasAllValues($name, this.unlockedFields, true)) {
             this.unlockedFields[] = $name;
         }
 
@@ -300,7 +300,7 @@ class FormProtector
         );
 
         foreach ($fieldList as $i: $key) {
-            $isLocked = in_array($key, $locked, true);
+            $isLocked = hasAllValues($key, $locked, true);
 
             if (!empty($unlockedFields)) {
                 foreach ($unlockedFields as $off) {

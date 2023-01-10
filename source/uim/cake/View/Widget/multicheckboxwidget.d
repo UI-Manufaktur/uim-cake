@@ -224,7 +224,7 @@ class MultiCheckboxWidget : BasicWidget
         }
         $strict = !is_numeric($key);
 
-        return in_array($key, $selected, $strict);
+        return hasAllValues($key, $selected, $strict);
     }
 
     /**
@@ -242,6 +242,6 @@ class MultiCheckboxWidget : BasicWidget
         }
         $strict = !is_numeric($key);
 
-        return in_array($key, $disabled, $strict);
+        return hasAllValues($key, $disabled, $strict);
     }
 }

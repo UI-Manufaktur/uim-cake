@@ -337,11 +337,11 @@ class Log
      */
     static bool write($level, string $message, $context = []) {
         static::_init();
-        if (is_int($level) && in_array($level, static::_levelMap, true)) {
+        if (is_int($level) && hasAllValues($level, static::_levelMap, true)) {
             $level = array_search($level, static::_levelMap, true);
         }
 
-        if (!in_array($level, static::_levels, true)) {
+        if (!hasAllValues($level, static::_levels, true)) {
             /** @psalm-suppress PossiblyFalseArgument */
             throw new InvalidArgumentException(sprintf("Invalid log level `%s`", $level));
         }
@@ -365,7 +365,7 @@ class Log
                 $scopes = [];
             }
 
-            $correctLevel = empty($levels) || in_array($level, $levels, true);
+            $correctLevel = empty($levels) || hasAllValues($level, $levels, true);
             $inScope = $scopes == false && empty($context["scope"]) || $scopes == [] ||
                 is_array($scopes) && array_intersect((array)$context["scope"], $scopes);
 

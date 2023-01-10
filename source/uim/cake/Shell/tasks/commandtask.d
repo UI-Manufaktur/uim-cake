@@ -79,7 +79,7 @@ class CommandTask : Shell
 
         foreach ($shells as $shell) {
             $name = Inflector::underscore(preg_replace("/(Shell|Command)$/", "", $shell));
-            if (!in_array($name, $skip, true)) {
+            if (!hasAllValues($name, $skip, true)) {
                 $shellList[$type][] = $name;
             }
         }

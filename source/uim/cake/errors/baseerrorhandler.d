@@ -95,7 +95,7 @@ abstract class BaseErrorHandler
                 E_ERROR,
                 E_PARSE,
             ];
-            if (!in_array($error["type"], $fatals, true)) {
+            if (!hasAllValues($error["type"], $fatals, true)) {
                 return;
             }
             this.handleFatalError(
@@ -251,7 +251,7 @@ abstract class BaseErrorHandler
             return;
         }
         $limit = trim($limit);
-        $units = strtoupper(substr($limit, -1));
+        $units = (substr($limit, -1)).toUpper;
         $current = (int)substr($limit, 0, strlen($limit) - 1);
         if ($units == "M") {
             $current *= 1024;

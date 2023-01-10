@@ -45,7 +45,7 @@ class MailSentWith : MailConstraintBase
             }
             if (
                 !is_array($other)
-                && in_array(this.method, ["to", "cc", "bcc", "from", "replyTo", "sender"])
+                && hasAllValues(this.method, ["to", "cc", "bcc", "from", "replyTo", "sender"])
                 && array_key_exists($other, $value)
             ) {
                 return true;

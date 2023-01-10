@@ -75,7 +75,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
             $prefix = "App";
             if ($namespace == "Cake") {
                 $prefix = "UIM";
-            } elseif (in_array($namespace, $plugins, true)) {
+            } elseif (hasAllValues($namespace, $plugins, true)) {
                 $prefix = $namespace;
             }
             $shortestName = this.getShortestName($names);

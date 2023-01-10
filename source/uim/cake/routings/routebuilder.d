@@ -359,7 +359,7 @@ class RouteBuilder
         }
 
         foreach ($resourceMap as $method: $params) {
-            if (!in_array($method, $only, true)) {
+            if (!hasAllValues($method, $only, true)) {
                 continue;
             }
 

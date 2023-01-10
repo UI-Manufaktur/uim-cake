@@ -532,7 +532,7 @@ trait IntegrationTestTrait
         if (isset(_request["headers"])) {
             foreach (_request["headers"] as $k: $v) {
                 $name = strtoupper(replace("-", "_", $k));
-                if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
+                if (!hasAllValues($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
                     $name = "HTTP_" ~ $name;
                 }
                 $env[$name] = $v;

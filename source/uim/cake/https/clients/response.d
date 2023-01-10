@@ -203,7 +203,7 @@ class Response : Message : IResponse
             static::STATUS_TEMPORARY_REDIRECT,
         ];
 
-        return in_array(this.code, $codes, true) &&
+        return hasAllValues(this.code, $codes, true) &&
             this.getHeaderLine("Location");
     }
 

@@ -595,7 +595,7 @@ class Text
             preg_match_all("/(<\/?([\w+]+)[^>]*>)?([^<>]*)/", $text, $tags, PREG_SET_ORDER);
             foreach ($tags as $tag) {
                 $contentLength = 0;
-                if (!in_array($tag[2], static::_defaultHtmlNoCount, true)) {
+                if (!hasAllValues($tag[2], static::_defaultHtmlNoCount, true)) {
                     $contentLength = self::_strlen($tag[3], $options);
                 }
 
@@ -991,7 +991,7 @@ class Text
         if (ctype_digit($size)) {
             return (int)$size;
         }
-        $size = strtoupper($size);
+        $size = $size.toUpper;
 
         $l = -2;
         $i = array_search(substr($size, -2), ["KB", "MB", "GB", "TB", "PB"], true);

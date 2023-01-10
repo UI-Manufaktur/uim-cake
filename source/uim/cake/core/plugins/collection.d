@@ -310,7 +310,7 @@ class PluginCollection : Iterator, Countable
      */
     function with(string $hook): Generator
     {
-        if (!in_array($hook, IPlugin::VALID_HOOKS, true)) {
+        if (!hasAllValues($hook, IPlugin::VALID_HOOKS, true)) {
             throw new InvalidArgumentException("The `{$hook}` hook is not a known plugin hook.");
         }
         foreach (this as $plugin) {

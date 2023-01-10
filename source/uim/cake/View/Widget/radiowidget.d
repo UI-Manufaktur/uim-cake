@@ -117,7 +117,7 @@ class RadioWidget : BasicWidget
         }
         $isNumeric = is_numeric($radio["value"]);
 
-        return !is_array($disabled) || in_array((string)$radio["value"], $disabled, !$isNumeric);
+        return !is_array($disabled) || hasAllValues((string)$radio["value"], $disabled, !$isNumeric);
     }
 
     /**

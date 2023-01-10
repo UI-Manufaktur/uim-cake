@@ -101,7 +101,7 @@ class SqlserverSchemaDialect : SchemaDialect
             return $type;
         }
 
-        if (in_array($col, ["date", "time"])) {
+        if (hasAllValues($col, ["date", "time"])) {
             return ["type": $col, "length": null];
         }
 
@@ -412,7 +412,7 @@ class SqlserverSchemaDialect : SchemaDialect
         if ($data["type"] == TableSchema::TYPE_BINARY) {
             if (
                 !isset($data["length"])
-                || in_array($data["length"], [TableSchema::LENGTH_MEDIUM, TableSchema::LENGTH_LONG], true)
+                || hasAllValues($data["length"], [TableSchema::LENGTH_MEDIUM, TableSchema::LENGTH_LONG], true)
             ) {
                 $data["length"] = "MAX";
             }
@@ -439,7 +439,7 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         $hasCollate = [TableSchema::TYPE_TEXT, TableSchema::TYPE_STRING, TableSchema::TYPE_CHAR];
-        if (in_array($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
+        if (hasAllValues($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
             $out ~= " COLLATE " ~ $data["collate"];
         }
 
@@ -450,7 +450,7 @@ class SqlserverSchemaDialect : SchemaDialect
             TableSchema::TYPE_TIMESTAMP,
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
         ];
-        if (in_array($data["type"], $precisionTypes, true) && isset($data["precision"])) {
+        if (hasAllValues($data["type"], $precisionTypes, true) && isset($data["precision"])) {
             $out ~= "(" ~ (int)$data["precision"] ~ ")";
         }
 
@@ -484,8 +484,8 @@ class SqlserverSchemaDialect : SchemaDialect
         ];
         if (
             isset($data["default"]) &&
-            in_array($data["type"], $dateTimeTypes, true) &&
-            in_array(strtolower($data["default"]), $dateTimeDefaults, true)
+            hasAllValues($data["type"], $dateTimeTypes, true) &&
+            hasAllValues(strtolower($data["default"]), $dateTimeDefaults, true)
         ) {
             $out ~= " DEFAULT " ~ strtoupper($data["default"]);
         } elseif (isset($data["default"])) {
@@ -618,7 +618,7 @@ class SqlserverSchemaDialect : SchemaDialect
         if (count($pk) == 1) {
             /** @var array $column */
             $column = $schema.getColumn($pk[0]);
-            if (in_array($column["type"], ["integer", "biginteger"])) {
+            if (hasAllValues($column["type"], ["integer", "biginteger"])) {
                 $queries[] = sprintf(
                     "IF EXISTS (SELECT * FROM sys.identity_columns WHERE OBJECT_NAME(OBJECT_ID) = '%s' AND " ~
                     "last_value IS NOT NULL) DBCC CHECKIDENT('%s', RESEED, 0)",

@@ -513,7 +513,7 @@ class ServerRequest : IServerRequest
     protected bool _acceptHeaderDetector(array $detect) {
         $acceptHeaders = explode(",", (string)this.getEnv("HTTP_ACCEPT"));
         foreach ($detect["accept"] as $header) {
-            if (in_array($header, $acceptHeaders, true)) {
+            if (hasAllValues($header, $acceptHeaders, true)) {
                 return true;
             }
         }
@@ -556,7 +556,7 @@ class ServerRequest : IServerRequest
             return isset(this.params[myKey]) ? this.params[myKey] == myValue : false;
         }
         if (isset($detect["options"])) {
-            return isset(this.params[myKey]) ? in_array(this.params[myKey], $detect["options"]) : false;
+            return isset(this.params[myKey]) ? hasAllValues(this.params[myKey], $detect["options"]) : false;
         }
 
         return false;
@@ -703,8 +703,8 @@ class ServerRequest : IServerRequest
      * @return string The normalized header name.
      */
     protected string normalizeHeaderName(string myName) {
-        myName = replace("-", "_", strtoupper(myName));
-        if (!in_array(myName, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
+        myName = replace("-", "_", (myName).toUpper);
+        if (!hasAllValues(myName, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
             myName = "HTTP_" ~ myName;
         }
 
@@ -1035,7 +1035,7 @@ class ServerRequest : IServerRequest
             return $accept;
         }
 
-        return in_array(myType, $accept, true);
+        return hasAllValues(myType, $accept, true);
     }
 
     /**
@@ -1081,7 +1081,7 @@ class ServerRequest : IServerRequest
             return $accept;
         }
 
-        return in_array(strtolower(myLanguage), $accept, true);
+        return hasAllValues(strtolower(myLanguage), $accept, true);
     }
 
     /**
@@ -1436,7 +1436,7 @@ class ServerRequest : IServerRequest
                 return true;
             }
         }
-        $allowed = strtoupper(implode(", ", $methods));
+        $allowed = (implode(", ", $methods)).toUpper;
         $e = new MethodNotAllowedException();
         $e.setHeader("Allow", $allowed);
         throw $e;
@@ -1520,7 +1520,7 @@ class ServerRequest : IServerRequest
      */
     function withAttribute(myName, myValue) {
         $new = clone this;
-        if (in_array(myName, this.emulatedAttributes, true)) {
+        if (hasAllValues(myName, this.emulatedAttributes, true)) {
             $new.{myName} = myValue;
         } else {
             $new.attributes[myName] = myValue;
@@ -1538,7 +1538,7 @@ class ServerRequest : IServerRequest
      */
     function withoutAttribute(myName) {
         $new = clone this;
-        if (in_array(myName, this.emulatedAttributes, true)) {
+        if (hasAllValues(myName, this.emulatedAttributes, true)) {
             throw new InvalidArgumentException(
                 "You cannot unset "myName". It is a required UIM attribute."
             );
@@ -1556,7 +1556,7 @@ class ServerRequest : IServerRequest
      * @return mixed
      */
     auto getAttribute(myName, $default = null) {
-        if (in_array(myName, this.emulatedAttributes, true)) {
+        if (hasAllValues(myName, this.emulatedAttributes, true)) {
             if (myName == "here") {
                 return this.base . this.uri.getPath();
             }

@@ -295,7 +295,7 @@ class SelectBoxWidget : BasicWidget
         }
         $strict = !is_numeric(myKey);
 
-        return in_array(myKey, $selected, $strict);
+        return hasAllValues(myKey, $selected, $strict);
     }
 
     /**
@@ -310,6 +310,6 @@ class SelectBoxWidget : BasicWidget
         }
         $strict = !is_numeric(myKey);
 
-        return in_array(myKey, $disabled, $strict);
+        return hasAllValues(myKey, $disabled, $strict);
     }
 }

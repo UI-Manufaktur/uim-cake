@@ -105,7 +105,7 @@ class Postgres : Driver
      * @return bool true if it is valid to use this driver
      */
     bool enabled() {
-        return in_array("pgsql", PDO::getAvailableDrivers(), true);
+        return hasAllValues("pgsql", PDO::getAvailableDrivers(), true);
     }
 
 

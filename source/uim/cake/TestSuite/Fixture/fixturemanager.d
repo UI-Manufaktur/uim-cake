@@ -230,7 +230,7 @@ class FixtureManager
         }
 
         $table = $fixture.sourceName();
-        $exists = in_array($table, $sources, true);
+        $exists = hasAllValues($table, $sources, true);
 
         $hasSchema = $fixture instanceof TableSchemaAwareInterface && $fixture.getTableSchema() instanceof TableSchema;
 
@@ -269,7 +269,7 @@ class FixtureManager
                         continue;
                     }
 
-                    if (in_array($fixture.sourceName(), $tables, true)) {
+                    if (hasAllValues($fixture.sourceName(), $tables, true)) {
                         try {
                             $fixture.dropConstraints($db);
                         } catch (PDOException $e) {
@@ -285,7 +285,7 @@ class FixtureManager
                 }
 
                 foreach ($fixtures as $fixture) {
-                    if (!in_array($fixture, _insertionMap[$configName], true)) {
+                    if (!hasAllValues($fixture, _insertionMap[$configName], true)) {
                         _setupTable($fixture, $db, $tables, $test.dropTables);
                     } else {
                         $fixture.truncate($db);
@@ -468,6 +468,6 @@ class FixtureManager
      * @param uim.cake.Datasource\IFixture $fixture The fixture to check.
      */
     bool isFixtureSetup(string $connection, IFixture $fixture) {
-        return isset(_insertionMap[$connection]) && in_array($fixture, _insertionMap[$connection], true);
+        return isset(_insertionMap[$connection]) && hasAllValues($fixture, _insertionMap[$connection], true);
     }
 }

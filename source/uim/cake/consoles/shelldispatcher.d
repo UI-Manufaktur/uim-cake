@@ -184,12 +184,12 @@ class ShellDispatcher
 
             return false;
         }
-        if (in_array($shellName, ["help", "--help", "-h"], true)) {
+        if (hasAllValues($shellName, ["help", "--help", "-h"], true)) {
             this.help();
 
             return true;
         }
-        if (in_array($shellName, ["version", "--version"], true)) {
+        if (hasAllValues($shellName, ["version", "--version"], true)) {
             this.version();
 
             return true;

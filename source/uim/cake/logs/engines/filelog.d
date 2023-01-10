@@ -152,7 +152,7 @@ class FileLog : BaseLog
             myfilename = _file;
         } elseif ($level == "error" || $level == "warning") {
             myfilename = "error.log";
-        } elseif (in_array($level, $debugTypes, true)) {
+        } elseif (hasAllValues($level, $debugTypes, true)) {
             myfilename = "debug.log";
         } else {
             myfilename = $level ~ ".log";

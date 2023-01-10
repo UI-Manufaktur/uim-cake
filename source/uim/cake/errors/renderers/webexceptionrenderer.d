@@ -160,7 +160,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * Clear output buffers so error pages display properly.
      */
     protected void clearOutput() {
-        if (in_array(PHP_SAPI, ["cli", "phpdbg"])) {
+        if (hasAllValues(PHP_SAPI, ["cli", "phpdbg"])) {
             return;
         }
         while (ob_get_level()) {

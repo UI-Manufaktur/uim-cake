@@ -1231,9 +1231,9 @@ class FormHelper : Helper
                 return "checkbox";
             case isset($options["options"]):
                 return "select";
-            case in_array($fieldName, ["passwd", "password"], true):
+            case hasAllValues($fieldName, ["passwd", "password"], true):
                 return "password";
-            case in_array($fieldName, ["tel", "telephone", "phone"], true):
+            case hasAllValues($fieldName, ["tel", "telephone", "phone"], true):
                 return "tel";
             case $fieldName == "email":
                 return "email";
@@ -1300,8 +1300,8 @@ class FormHelper : Helper
         $options = this.setRequiredAndCustomValidity($fieldName, $options);
 
         $typesWithOptions = ["text", "number", "radio", "select"];
-        $magicOptions = (in_array($options["type"], ["radio", "select"], true) || $allowOverride);
-        if ($magicOptions && in_array($options["type"], $typesWithOptions, true)) {
+        $magicOptions = (hasAllValues($options["type"], ["radio", "select"], true) || $allowOverride);
+        if ($magicOptions && hasAllValues($options["type"], $typesWithOptions, true)) {
             $options = _optionsOptions($fieldName, $options);
         }
 
@@ -1412,7 +1412,7 @@ class FormHelper : Helper
         }
 
         $labelAttributes["for"] = $options["id"];
-        if (in_array($options["type"], _groupedInputTypes, true)) {
+        if (hasAllValues($options["type"], _groupedInputTypes, true)) {
             $labelAttributes["for"] = false;
         }
         if ($options["nestedInput"]) {
@@ -2310,7 +2310,7 @@ class FormHelper : Helper
             // Complex option types
             if (is_array($first)) {
                 $disabled = array_filter($options["options"], function ($i) use ($options) {
-                    return in_array($i["value"], $options["disabled"], true);
+                    return hasAllValues($i["value"], $options["disabled"], true);
                 });
 
                 return count($disabled) > 0;

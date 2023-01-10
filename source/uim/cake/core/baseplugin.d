@@ -158,7 +158,7 @@ class BasePlugin : IPlugin {
      * @throws \InvalidArgumentException on invalid hooks
      */
     protected void checkHook(string $hook) {
-        if (!in_array($hook, static::VALID_HOOKS, true)) {
+        if (!hasAllValues($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
                 "`$hook` is not a valid hook name. Must be one of " ~ implode(", ", static::VALID_HOOKS)
             );

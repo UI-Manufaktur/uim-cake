@@ -533,7 +533,7 @@ class ServerRequest : IServerRequest
         if ($accepted == null) {
             return false;
         }
-        if ($exclude && in_array($accepted, $exclude, true)) {
+        if ($exclude && hasAllValues($accepted, $exclude, true)) {
             return false;
         }
 
@@ -575,7 +575,7 @@ class ServerRequest : IServerRequest
             return isset(this.params[$key]) ? this.params[$key] == $value : false;
         }
         if (isset($detect["options"])) {
-            return isset(this.params[$key]) ? in_array(this.params[$key], $detect["options"]) : false;
+            return isset(this.params[$key]) ? hasAllValues(this.params[$key], $detect["options"]) : false;
         }
 
         return false;
@@ -722,8 +722,8 @@ class ServerRequest : IServerRequest
      * @return string The normalized header name.
      */
     protected string normalizeHeaderName(string aName) {
-        $name = replace("-", "_", strtoupper($name));
-        if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
+        $name = replace("-", "_", ($name).toUpper);
+        if (!hasAllValues($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
             $name = "HTTP_" ~ $name;
         }
 
@@ -1356,7 +1356,7 @@ class ServerRequest : IServerRequest
      * @return string|null Either the environment value, or null if the value doesn"t exist.
      */
     Nullable!string getEnv(string aKey, Nullable!string $default = null) {
-        $key = strtoupper($key);
+        $key = ($key).toUpper;
         if (!array_key_exists($key, _environment)) {
             _environment[$key] = env($key);
         }
@@ -1406,7 +1406,7 @@ class ServerRequest : IServerRequest
                 return true;
             }
         }
-        $allowed = strtoupper(implode(", ", $methods));
+        $allowed = (implode(", ", $methods)).toUpper;
         $e = new MethodNotAllowedException();
         $e.setHeader("Allow", $allowed);
         throw $e;
@@ -1490,7 +1490,7 @@ class ServerRequest : IServerRequest
      */
     function withAttribute($name, $value) {
         $new = clone this;
-        if (in_array($name, this.emulatedAttributes, true)) {
+        if (hasAllValues($name, this.emulatedAttributes, true)) {
             $new.{$name} = $value;
         } else {
             $new.attributes[$name] = $value;
@@ -1508,7 +1508,7 @@ class ServerRequest : IServerRequest
      */
     function withoutAttribute($name) {
         $new = clone this;
-        if (in_array($name, this.emulatedAttributes, true)) {
+        if (hasAllValues($name, this.emulatedAttributes, true)) {
             throw new InvalidArgumentException(
                 "You cannot unset "$name". It is a required UIM attribute."
             );
@@ -1526,7 +1526,7 @@ class ServerRequest : IServerRequest
      * @return mixed
      */
     function getAttribute($name, $default = null) {
-        if (in_array($name, this.emulatedAttributes, true)) {
+        if (hasAllValues($name, this.emulatedAttributes, true)) {
             if ($name == "here") {
                 return this.base . this.uri.getPath();
             }

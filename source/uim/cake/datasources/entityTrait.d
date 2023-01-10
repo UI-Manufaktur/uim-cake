@@ -295,7 +295,7 @@ trait EntityTrait
         $originals = _original;
         $originalKeys = array_keys($originals);
         foreach (_fields as $key: $value) {
-            if (!in_array($key, $originalKeys, true)) {
+            if (!hasAllValues($key, $originalKeys, true)) {
                 $originals[$key] = $value;
             }
         }

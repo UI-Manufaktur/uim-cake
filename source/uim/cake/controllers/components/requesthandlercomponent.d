@@ -138,7 +138,7 @@ class RequestHandlerComponent : Component
         $response = $controller.getResponse();
 
         this.ext = myServerRequest.getParam('_ext');
-        if (!this.ext || in_array(this.ext, ['html', 'htm'], true)) {
+        if (!this.ext || hasAllValues(this.ext, ['html', 'htm'], true)) {
             _setExtension(myServerRequest, $response);
         }
 
@@ -178,7 +178,7 @@ class RequestHandlerComponent : Component
         $controller = this.getController();
         $response = $controller.getResponse();
 
-        if (this.ext && !in_array(this.ext, ['html', 'htm'], true)) {
+        if (this.ext && !hasAllValues(this.ext, ['html', 'htm'], true)) {
             if (!$response.getMimeType(this.ext)) {
                 throw new NotFoundException('Invoked extension not recognized/configured: ' . this.ext);
             }
@@ -237,7 +237,7 @@ class RequestHandlerComponent : Component
         if (is_array($type)) {
             foreach ($type as $t) {
                 $t = this.mapAlias($t);
-                if (in_array($t, $accepted, true)) {
+                if (hasAllValues($t, $accepted, true)) {
                     return true;
                 }
             }
@@ -246,7 +246,7 @@ class RequestHandlerComponent : Component
         }
 
         if (is_string($type)) {
-            return in_array(this.mapAlias($type), $accepted, true);
+            return hasAllValues(this.mapAlias($type), $accepted, true);
         }
 
         return false;
@@ -334,10 +334,10 @@ class RequestHandlerComponent : Component
         $types = (array)$type;
         if (count($types) == 1) {
             if (this.ext) {
-                return in_array(this.ext, $types, true);
+                return hasAllValues(this.ext, $types, true);
             }
 
-            return in_array($types[0], $accepts, true);
+            return hasAllValues($types[0], $accepts, true);
         }
 
         $intersect = array_values(array_intersect($accepts, $types));

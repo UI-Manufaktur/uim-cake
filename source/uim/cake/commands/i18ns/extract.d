@@ -110,18 +110,18 @@ class I18nExtractCommand : Command {
                 implode(", ", $currentPaths)
             );
             $response = $io.ask(myMessage, $defaultPaths[$defaultPathIndex] ?? "D");
-            if (strtoupper($response) == "Q") {
+            if ($response.toUpper == "Q") {
                 $io.err("Extract Aborted");
                 this.abort();
 
                 return;
             }
-            if (strtoupper($response) == "D" && count(_paths)) {
+            if ($response.toUpper == "D" && count(_paths)) {
                 $io.out();
 
                 return;
             }
-            if (strtoupper($response) == "D") {
+            if ($response.toUpper == "D") {
                 $io.warning("No directories selected. Please choose a directory.");
             } elseif (is_dir($response)) {
                 _paths[] = $response;
@@ -193,7 +193,7 @@ class I18nExtractCommand : Command {
                     myMessage,
                     $localePaths[0]
                 );
-                if (strtoupper($response) == "Q") {
+                if ($response.toUpper == "Q") {
                     $io.err("Extract Aborted");
 
                     return static::CODE_ERROR;
@@ -595,13 +595,13 @@ class I18nExtractCommand : Command {
                     ["y", "n", "a"],
                     "y"
                 );
-                if (strtoupper($response) == "N") {
+                if ($response.toUpper == "N") {
                     $response = "";
                     while (!$response) {
                         $response = $io.ask("What would you like to name this file?", "new_" ~ myfilename);
                         myfilename = $response;
                     }
-                } elseif (strtoupper($response) == "A") {
+                } elseif ($response.toUpper == "A") {
                     $overwriteAll = true;
                 }
             }

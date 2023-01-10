@@ -244,7 +244,7 @@ class FileEngine : CacheEngine
             }
 
             $path = $realPath . DIRECTORY_SEPARATOR;
-            if (!in_array($path, $cleared, true)) {
+            if (!hasAllValues($path, $cleared, true)) {
                 _clearDirectory($path);
                 $cleared[] = $path;
             }

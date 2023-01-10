@@ -423,7 +423,7 @@ class Debugger
                     $reference ~= ')';
                 }
             }
-            if (in_array($signature, $options['exclude'], true)) {
+            if (hasAllValues($signature, $options['exclude'], true)) {
                 continue;
             }
             if ($options['format'] == 'points') {
@@ -902,7 +902,7 @@ class Debugger
      */
     static void addRenderer(string aName, string $class) {
         deprecationWarning('Debugger::addRenderer() is deprecated.');
-        if (!in_array(ErrorRendererInterface::class, class_implements($class))) {
+        if (!hasAllValues(ErrorRendererInterface::class, class_implements($class))) {
             throw new InvalidArgumentException(
                 'Invalid renderer class. $class must implement ' . ErrorRendererInterface::class
             );

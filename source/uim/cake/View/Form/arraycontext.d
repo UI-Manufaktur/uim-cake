@@ -113,7 +113,7 @@ class ArrayContext : IContext
     bool isPrimaryKey(string $field) {
         $primaryKey = this.getPrimaryKeys();
 
-        return in_array($field, $primaryKey, true);
+        return hasAllValues($field, $primaryKey, true);
     }
 
     /**

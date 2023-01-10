@@ -36,7 +36,7 @@ class Curl : IAdapter
                 CURLE_URL_MALFORMAT,
                 CURLE_URL_MALFORMAT_USER,
             ];
-            if (in_array(myErrorCode, myErrorNumbers, true)) {
+            if (hasAllValues(myErrorCode, myErrorNumbers, true)) {
                 throw new RequestException(myMessage, myRequest);
             }
             throw new NetworkException(myMessage, myRequest);

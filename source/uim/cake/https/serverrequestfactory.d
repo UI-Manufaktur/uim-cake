@@ -109,7 +109,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $override = false;
 
         if (
-            in_array($method, ["PUT", "DELETE", "PATCH"], true) &&
+            hasAllValues($method, ["PUT", "DELETE", "PATCH"], true) &&
             strpos((string)myServerRequest.contentType(), "application/x-www-form-urlencoded") == 0
         ) {
             $data = (string)myServerRequest.getBody();
@@ -129,7 +129,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
 
         if (
             $override &&
-            !in_array(myServerRequest.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
+            !hasAllValues(myServerRequest.getMethod(), ["PUT", "POST", "DELETE", "PATCH"], true)
         ) {
             $parsedBody = [];
         }

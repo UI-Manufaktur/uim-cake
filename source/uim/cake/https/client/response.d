@@ -218,7 +218,7 @@ class Response : Message : IResponse
             static::STATUS_PERMANENT_REDIRECT,
         ];
 
-        return in_array(this.code, $codes, true) &&
+        return hasAllValues(this.code, $codes, true) &&
             this.getHeaderLine("Location");
     }
 

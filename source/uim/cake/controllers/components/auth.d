@@ -292,7 +292,7 @@ class AuthComponent : Component : IEventDispatcher
     protected bool _isAllowed(Controller $controller) {
         $action = strtolower($controller.getRequest().getParam('action', ''));
 
-        return in_array($action, array_map('strtolower', this.allowedActions), true);
+        return hasAllValues($action, array_map('strtolower', this.allowedActions), true);
     }
 
     /**

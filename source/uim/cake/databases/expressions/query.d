@@ -664,7 +664,7 @@ class QueryExpression : IExpression, Countable
             $isOperator = $isNot = false;
             if (!$numericKey) {
                 $normalizedKey = strtolower($k);
-                $isOperator = in_array($normalizedKey, $operators);
+                $isOperator = hasAllValues($normalizedKey, $operators);
                 $isNot = $normalizedKey == "not";
             }
 
@@ -738,7 +738,7 @@ class QueryExpression : IExpression, Countable
         $type = this.getTypeMap().type($expression);
 
         $typeMultiple = (is_string($type) && strpos($type, "[]") != false);
-        if (in_array($operator, ["in", "not in"]) || $typeMultiple) {
+        if (hasAllValues($operator, ["in", "not in"]) || $typeMultiple) {
             $type = $type ?: "string";
             if (!$typeMultiple) {
                 $type ~= "[]";

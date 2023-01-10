@@ -190,6 +190,6 @@ class TupleComparison : ComparisonExpression
      * itself
      */
     bool isMulti() {
-        return in_array(strtolower(_operator), ["in", "not in"]);
+        return hasAllValues(strtolower(_operator), ["in", "not in"]);
     }
 }

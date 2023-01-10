@@ -110,7 +110,7 @@ class CommandScanner
             $file = $fileInfo.getFilename();
 
             $name = Inflector::underscore(preg_replace($classPattern, "", $file));
-            if (in_array($name, $hide, true)) {
+            if (hasAllValues($name, $hide, true)) {
                 continue;
             }
 

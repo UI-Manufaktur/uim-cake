@@ -224,7 +224,7 @@ class ConsoleInputOption
         if (empty(_choices)) {
             return true;
         }
-        if (!in_array($value, _choices, true)) {
+        if (!hasAllValues($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     "'%s' is not a valid value for --%s. Please use one of '%s'",

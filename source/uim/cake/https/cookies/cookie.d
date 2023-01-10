@@ -282,7 +282,7 @@ class Cookie : ICookie
         if (isset(myData["samesite"])) {
             // Ignore invalid value when parsing headers
             // https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1
-            if (!in_array(myData["samesite"], ICookie::SAMESITE_VALUES, true)) {
+            if (!hasAllValues(myData["samesite"], ICookie::SAMESITE_VALUES, true)) {
                 unset(myData["samesite"]);
             }
         }
@@ -552,7 +552,7 @@ class Cookie : ICookie
      * @throws \InvalidArgumentException
      */
     protected static function validateSameSiteValue(string sameSite) {
-      if (!in_array($sameSite, ICookie::SAMESITE_VALUES, true)) {
+      if (!hasAllValues($sameSite, ICookie::SAMESITE_VALUES, true)) {
         throw new InvalidArgumentException(
             "Samesite value must be either of: " ~ implode(", ", ICookie::SAMESITE_VALUES)
         );

@@ -314,7 +314,7 @@ class ConsoleOutput
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
     void setOutputAs(int $type) {
-        if (!in_array($type, [self::RAW, self::PLAIN, self::COLOR], true)) {
+        if (!hasAllValues($type, [self::RAW, self::PLAIN, self::COLOR], true)) {
             throw new InvalidArgumentException(sprintf("Invalid output type '%s'.", $type));
         }
 
