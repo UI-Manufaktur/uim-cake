@@ -34,7 +34,7 @@ class CachedCollection : ICollection {
   }
 
 
-  function describe(string aName, array $options = []): TableISchema
+  function describe(string aName, STRINGAA someOptions = []): TableISchema
   {
       $options += ["forceRefresh": false];
       $cacheKey = this.cacheKey($name);

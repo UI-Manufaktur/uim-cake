@@ -25,7 +25,7 @@ abstract class AbstractDecorator
      * @param callable $callable Callable.
      * @param array<string, mixed> $options Decorator options.
      */
-    this(callable $callable, array $options = []) {
+    this(callable $callable, STRINGAA someOptions = []) {
         _callable = $callable;
         _options = $options;
     }

@@ -237,7 +237,7 @@ class Session
      * @return \SessionHandlerInterface|null
      * @throws \InvalidArgumentException
      */
-    function engine($class = null, array $options = []): ?SessionHandlerInterface
+    function engine($class = null, STRINGAA someOptions = []): ?SessionHandlerInterface
     {
         if ($class == null) {
             return _engine;
@@ -286,7 +286,7 @@ class Session
      * @return void
      * @throws \RuntimeException if any directive could not be set
      */
-    void options(array $options) {
+    void options(STRINGAA someOptions) {
         if (session_status() == \PHP_SESSION_ACTIVE || headers_sent()) {
             return;
         }

@@ -241,7 +241,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return bool False on validation failure, otherwise returns the
      *   result of the `_execute()` method.
      */
-    bool execute(array $data, array $options = []) {
+    bool execute(array $data, STRINGAA someOptions = []) {
         _data = $data;
 
         $options += ["validate": true];

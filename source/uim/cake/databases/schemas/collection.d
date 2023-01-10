@@ -87,7 +87,7 @@ class Collection : ICollection {
      * @return uim.cake.databases.Schema\TableSchema Object with column metadata.
      * @throws uim.cake.databases.exceptions.DatabaseException when table cannot be described.
      */
-    function describe(string aName, array $options = []): TableISchema
+    function describe(string aName, STRINGAA someOptions = []): TableISchema
     {
         aConfig = _connection.config();
         if (strpos($name, ".")) {

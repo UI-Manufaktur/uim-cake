@@ -742,7 +742,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success.
      */
-    bool copy(string $to, array $options = []) {
+    bool copy(string $to, STRINGAA someOptions = []) {
         if (!this.pwd()) {
             return false;
         }
@@ -842,7 +842,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success
      */
-    bool move(string $to, array $options = []) {
+    bool move(string $to, STRINGAA someOptions = []) {
         $options += ["from": this.path, "mode": this.mode, "skip": [], "recursive": true];
 
         if (this.copy($to, $options) && this.delete($options["from"])) {

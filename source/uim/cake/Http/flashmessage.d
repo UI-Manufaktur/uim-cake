@@ -70,7 +70,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::_defaultConfig For default values for the options.
      */
-    void set($message, array $options = []) {
+    void set($message, STRINGAA someOptions = []) {
         $options += (array)this.getConfig();
 
         if (isset($options["escape"]) && !isset($options["params"]["escape"])) {
@@ -125,7 +125,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void setExceptionMessage(Throwable $exception, array $options = []) {
+    void setExceptionMessage(Throwable $exception, STRINGAA someOptions = []) {
         $options["element"] = $options["element"] ?? "error";
         $options["params"]["code"] = $options["params"]["code"] ?? $exception.getCode();
 
@@ -154,7 +154,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void success(string $message, array $options = []) {
+    void success(string $message, STRINGAA someOptions = []) {
         $options["element"] = "success";
         this.set($message, $options);
     }
@@ -169,7 +169,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void error(string $message, array $options = []) {
+    void error(string $message, STRINGAA someOptions = []) {
         $options["element"] = "error";
         this.set($message, $options);
     }
@@ -184,7 +184,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void warning(string $message, array $options = []) {
+    void warning(string $message, STRINGAA someOptions = []) {
         $options["element"] = "warning";
         this.set($message, $options);
     }
@@ -199,7 +199,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void info(string $message, array $options = []) {
+    void info(string $message, STRINGAA someOptions = []) {
         $options["element"] = "info";
         this.set($message, $options);
     }

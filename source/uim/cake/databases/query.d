@@ -1028,7 +1028,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereInList(string $field, array $values, array $options = []) {
+    function whereInList(string $field, array $values, STRINGAA someOptions = []) {
         $options += [
             "types": [],
             "allowEmpty": false,
@@ -1054,7 +1054,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereNotInList(string $field, array $values, array $options = []) {
+    function whereNotInList(string $field, array $values, STRINGAA someOptions = []) {
         $options += [
             "types": [],
             "allowEmpty": false,
@@ -1081,7 +1081,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereNotInListOrNull(string $field, array $values, array $options = []) {
+    function whereNotInListOrNull(string $field, array $values, STRINGAA someOptions = []) {
         $options += [
             "types": [],
             "allowEmpty": false,

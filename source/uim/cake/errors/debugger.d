@@ -356,7 +356,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function trace(array $options = []) {
+    static function trace(STRINGAA someOptions = []) {
         return Debugger::formatTrace(debug_backtrace(), $options);
     }
 
@@ -377,7 +377,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function formatTrace($backtrace, array $options = []) {
+    static function formatTrace($backtrace, STRINGAA someOptions = []) {
         if ($backtrace instanceof Throwable) {
             $backtrace = $backtrace.getTrace();
         }

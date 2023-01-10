@@ -61,7 +61,7 @@ if (!function_exists("stackTrace")) {
      *
      * @param array<string, mixed> $options Format for outputting stack trace
      */
-    void stackTrace(array $options = []) {
+    void stackTrace(STRINGAA someOptions = []) {
         if (!Configure::read("debug")) {
             return;
         }

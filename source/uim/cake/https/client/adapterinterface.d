@@ -26,5 +26,5 @@ interface AdapterInterface
      * @param array<string, mixed> $options Array of options for the stream.
      * @return array<uim.cake.Http\Client\Response> Array of populated Response objects
      */
-    array send(RequestInterface $request, array $options);
+    array send(RequestInterface $request, STRINGAA someOptions);
 }

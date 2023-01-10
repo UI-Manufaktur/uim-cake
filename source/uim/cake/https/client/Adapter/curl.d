@@ -33,7 +33,7 @@ use Psr\Http\messages.RequestInterface;
 class Curl : AdapterInterface
 {
 
-    array send(RequestInterface $request, array $options) {
+    array send(RequestInterface $request, STRINGAA someOptions) {
         if (!extension_loaded("curl")) {
             throw new ClientException("curl extension is not loaded.");
         }
@@ -73,7 +73,7 @@ class Curl : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request.
      * @param array<string, mixed> $options The client options
      */
-    array buildOptions(RequestInterface $request, array $options) {
+    array buildOptions(RequestInterface $request, STRINGAA someOptions) {
         $headers = [];
         foreach ($request.getHeaders() as $key: $values) {
             $headers[] = $key ~ ": " ~ implode(", ", $values);

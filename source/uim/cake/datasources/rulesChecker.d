@@ -93,7 +93,7 @@ class RulesChecker
      *
      * @param array<string, mixed> $options The options to pass to every rule
      */
-    this(array $options = []) {
+    this(STRINGAA someOptions = []) {
         _options = $options;
         _useI18n = function_exists("__d");
     }
@@ -117,7 +117,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function add(callable $rule, $name = null, array $options = []) {
+    function add(callable $rule, $name = null, STRINGAA someOptions = []) {
         _rules[] = _addError($rule, $name, $options);
 
         return this;
@@ -141,7 +141,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addCreate(callable $rule, $name = null, array $options = []) {
+    function addCreate(callable $rule, $name = null, STRINGAA someOptions = []) {
         _createRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -165,7 +165,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addUpdate(callable $rule, $name = null, array $options = []) {
+    function addUpdate(callable $rule, $name = null, STRINGAA someOptions = []) {
         _updateRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -189,7 +189,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addDelete(callable $rule, $name = null, array $options = []) {
+    function addDelete(callable $rule, $name = null, STRINGAA someOptions = []) {
         _deleteRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -206,7 +206,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    bool check(IEntity $entity, string $mode, array $options = []) {
+    bool check(IEntity $entity, string $mode, STRINGAA someOptions = []) {
         if ($mode == self::CREATE) {
             return this.checkCreate($entity, $options);
         }
@@ -229,7 +229,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkCreate(IEntity $entity, array $options = []) {
+    bool checkCreate(IEntity $entity, STRINGAA someOptions = []) {
         return _checkRules($entity, $options, array_merge(_rules, _createRules));
     }
 
@@ -240,7 +240,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkUpdate(IEntity $entity, array $options = []) {
+    bool checkUpdate(IEntity $entity, STRINGAA someOptions = []) {
         return _checkRules($entity, $options, array_merge(_rules, _updateRules));
     }
 
@@ -251,7 +251,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkDelete(IEntity $entity, array $options = []) {
+    bool checkDelete(IEntity $entity, STRINGAA someOptions = []) {
         return _checkRules($entity, $options, _deleteRules);
     }
 
@@ -263,7 +263,7 @@ class RulesChecker
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @param array<uim.cake.Datasource\RuleInvoker> $rules The list of rules that must be checked.
      */
-    protected bool _checkRules(IEntity $entity, array $options = [], array $rules = []) {
+    protected bool _checkRules(IEntity $entity, STRINGAA someOptions = [], array $rules = []) {
         $success = true;
         $options += _options;
         foreach ($rules as $rule) {
@@ -282,7 +282,7 @@ class RulesChecker
      * @param array<string, mixed> $options The options containing the error message and field.
      * @return uim.cake.Datasource\RuleInvoker
      */
-    protected function _addError(callable $rule, $name = null, array $options = []): RuleInvoker
+    protected function _addError(callable $rule, $name = null, STRINGAA someOptions = []): RuleInvoker
     {
         if (is_array($name)) {
             $options = $name;

@@ -419,7 +419,7 @@ class Response : IResponse
      *  - charset: the charset for the response body
      * @throws \InvalidArgumentException
      */
-    this(array $options = []) {
+    this(STRINGAA someOptions = []) {
         _streamTarget = $options["streamTarget"] ?? _streamTarget;
         _streamMode = $options["streamMode"] ?? _streamMode;
         if (isset($options["stream"])) {
@@ -1104,7 +1104,7 @@ class Response : IResponse
      * @return static
 
      */
-    function withAddedLink(string $url, array $options = []) {
+    function withAddedLink(string $url, STRINGAA someOptions = []) {
         $params = [];
         foreach ($options as $key: $option) {
             $params[] = $key ~ "="" ~ $option ~ """;
@@ -1326,7 +1326,7 @@ class Response : IResponse
      * @return static
      * @throws uim.cake.http.exceptions.NotFoundException
      */
-    function withFile(string $path, array $options = []) {
+    function withFile(string $path, STRINGAA someOptions = []) {
         $file = this.validateFile($path);
         $options += [
             "name": null,

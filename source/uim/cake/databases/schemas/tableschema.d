@@ -581,7 +581,7 @@ class TableSchema : TableISchema, ISqlGenerator
     }
 
 
-    function setOptions(array $options) {
+    function setOptions(STRINGAA someOptions) {
         _options = $options + _options;
 
         return this;

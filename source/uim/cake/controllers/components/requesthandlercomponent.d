@@ -372,7 +372,7 @@ class RequestHandlerComponent : Component
      * @return void
      * @see uim.cake.controllers.components.RequestHandlerComponent::respondAs()
      */
-    void renderAs(Controller $controller, string $type, array $options = []) {
+    void renderAs(Controller $controller, string $type, STRINGAA someOptions = []) {
         $defaults = ['charset': 'UTF-8'];
         $viewClassMap = this.getConfig('viewClassMap');
 
@@ -427,7 +427,7 @@ class RequestHandlerComponent : Component
      *    not exist in the type map, or if the Content-type header has
      *    already been set by this method.
      */
-    bool respondAs($type, array $options = []) {
+    bool respondAs($type, STRINGAA someOptions = []) {
         $defaults = ['index': null, 'charset': null, 'attachment': false];
         $options += $defaults;
 

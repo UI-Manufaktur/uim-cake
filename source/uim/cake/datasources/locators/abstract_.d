@@ -38,7 +38,7 @@ abstract class AbstractLocator : ILocator
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    function get(string $alias, array $options = []) {
+    function get(string $alias, STRINGAA someOptions = []) {
         $storeOptions = $options;
         unset($storeOptions["allowFallbackClass"]);
 
@@ -65,7 +65,7 @@ abstract class AbstractLocator : ILocator
      * @param array<string, mixed> $options The options you want to build the instance with.
      * @return uim.cake.Datasource\IRepository
      */
-    abstract protected function createInstance(string $alias, array $options);
+    abstract protected function createInstance(string $alias, STRINGAA someOptions);
 
 
     function set(string $alias, IRepository $repository) {

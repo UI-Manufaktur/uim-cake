@@ -379,7 +379,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $options An array of parameters that define the behavior of the option
      * @return this
      */
-    function addOption($name, array $options = []) {
+    function addOption($name, STRINGAA someOptions = []) {
         if ($name instanceof ConsoleInputOption) {
             $option = $name;
             $name = $option.name();
@@ -506,7 +506,7 @@ class ConsoleOptionParser
      * @see uim.cake.consoles.ConsoleOptionParser::addOption()
      * @return this
      */
-    function addOptions(array $options) {
+    function addOptions(STRINGAA someOptions) {
         foreach ($options as $name: $params) {
             if ($params instanceof ConsoleInputOption) {
                 $name = $params;
@@ -534,7 +534,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $options Array of params, see above.
      * @return this
      */
-    function addSubcommand($name, array $options = []) {
+    function addSubcommand($name, STRINGAA someOptions = []) {
         if ($name instanceof ConsoleInputSubcommand) {
             $command = $name;
             $name = $command.name();

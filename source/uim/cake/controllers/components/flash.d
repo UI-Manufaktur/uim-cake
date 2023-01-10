@@ -11,10 +11,10 @@ use Throwable;
  * to the session from your controllers, to be rendered in a view with the
  * FlashHelper.
  *
- * @method void success(string $message, array $options = []) Set a message using "success" element
- * @method void info(string $message, array $options = []) Set a message using "info" element
- * @method void warning(string $message, array $options = []) Set a message using "warning" element
- * @method void error(string $message, array $options = []) Set a message using "error" element
+ * @method void success(string $message, STRINGAA someOptions = []) Set a message using "success" element
+ * @method void info(string $message, STRINGAA someOptions = []) Set a message using "info" element
+ * @method void warning(string $message, STRINGAA someOptions = []) Set a message using "warning" element
+ * @method void error(string $message, STRINGAA someOptions = []) Set a message using "error" element
  */
 class FlashComponent : Component
 {
@@ -51,7 +51,7 @@ class FlashComponent : Component
      *   in params.
      * @param array<string, mixed> $options An array of options
      */
-    void set($message, array $options = []) {
+    void set($message, STRINGAA someOptions = []) {
         if ($message instanceof Throwable) {
             this.flash().setExceptionMessage($message, $options);
         } else {

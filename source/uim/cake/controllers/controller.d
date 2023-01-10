@@ -519,7 +519,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @since 4.3.0
      * @psalm-param array{only?: array|string, except?: array|string} $options
      */
-    function middleware($middleware, array $options = []) {
+    function middleware($middleware, STRINGAA someOptions = []) {
         this.middlewares[] = [
             "middleware": $middleware,
             "options": $options,

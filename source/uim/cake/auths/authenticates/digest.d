@@ -203,8 +203,8 @@ class DigestAuthenticate : BasicAuthenticate {
      * @param uim.cake.http.ServerRequest myServerRequest Request object.
      * @return array<string, string> Headers for logging in.
      */
-    STRINGAA loginHeaders(ServerRequest $request) {
-        $realm = _config["realm"] ?: $request.getEnv("SERVER_NAME");
+    STRINGAA loginHeaders(ServerRequest anServerRequest) {
+        $realm = _config["realm"] ?: anServerRequest.getEnv("SERVER_NAME");
 
         $options = [
             "realm": $realm,

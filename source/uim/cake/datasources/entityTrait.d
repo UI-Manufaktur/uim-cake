@@ -197,7 +197,7 @@ trait EntityTrait
      * @return this
      * @throws \InvalidArgumentException
      */
-    function set($field, $value = null, array $options = []) {
+    function set($field, $value = null, STRINGAA someOptions = []) {
         if (is_string($field) && $field != "") {
             $guard = false;
             $field = [$field: $value];

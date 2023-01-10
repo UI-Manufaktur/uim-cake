@@ -134,7 +134,7 @@ interface ISchema {
      * @param array<string, mixed> $options The options to set, or null to read options.
      * @return this
      */
-    function setOptions(array $options);
+    function setOptions(STRINGAA someOptions);
 
     /**
      * Gets the options for a table.

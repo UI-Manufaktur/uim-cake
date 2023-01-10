@@ -104,7 +104,7 @@ interface IQuery
      * @param array<string, mixed> $options list of query clauses to apply new parts to.
      * @return this
      */
-    function applyOptions(array $options);
+    function applyOptions(STRINGAA someOptions);
 
     /**
      * Apply custom finds to against an existing query object.
@@ -122,7 +122,7 @@ interface IQuery
      * @param array<string, mixed> $options The options for the finder.
      * @return static Returns a modified query.
      */
-    function find(string $finder, array $options = []);
+    function find(string $finder, STRINGAA someOptions = []);
 
     /**
      * Returns the first result out of executing this query, if the query has not been

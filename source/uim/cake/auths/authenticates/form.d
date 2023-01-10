@@ -43,9 +43,9 @@ class FormAuthenticate : BaseAuthenticate
      * @param array<string, string> $fields The fields to be checked.
      * @return bool False if the fields have not been supplied. True if they exist.
      */
-    protected bool _checkFields(ServerRequest myServerRequest, STRINGAA $fields) {
-        foreach ([$fields["username"], $fields["password"]] as $field) {
-            $value = myServerRequest.getData($field);
+    protected bool _checkFields(ServerRequest myServerRequest, STRINGAA checkFields) {
+        foreach ([checkFields["username"], checkFields["password"]] as checkFields) {
+            $value = myServerRequest.getData(checkFields);
             if (empty($value) || !is_string($value)) {
                 return false;
             }
@@ -63,7 +63,7 @@ class FormAuthenticate : BaseAuthenticate
      * @param uim.cake.http.Response $response Unused response object.
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
-    function authenticate(ServerRequest myServerRequest, Response $response) {
+    function authenticate(ServerRequest myServerRequest, Response anResponse) {
         $fields = _config["fields"];
         if (!_checkFields(myServerRequest, $fields)) {
             return false;
