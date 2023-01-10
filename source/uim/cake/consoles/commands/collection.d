@@ -19,7 +19,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @psalm-var array<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|class-string>
      * @psalm-suppress DeprecatedClass
      */
-    protected ICommand commands = [];
+    protected ICommand commands = null;
 
     /**
      * Constructor
@@ -157,7 +157,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @return A flat map of command names: class names.
      */
     protected STRINGAA resolveNames(array $input) {
-        $out = [];
+        $out = null;
         foreach ($input as $info) {
             myName = $info["name"];
             $addLong = myName != $info["fullName"];

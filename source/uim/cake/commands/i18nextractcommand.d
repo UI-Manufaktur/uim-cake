@@ -13,12 +13,12 @@ class I18nExtractCommand : Command {
     /**
      * Paths to use when looking for strings
      */
-    protected string[] _paths = [];
+    protected string[] _paths = null;
 
     /**
      * Files from where to extract
      */
-    protected string[] _files = [];
+    protected string[] _files = null;
 
     /**
      * Merge all domain strings into the default.pot file
@@ -35,21 +35,21 @@ class I18nExtractCommand : Command {
      *
      * @var array<string, mixed>
      */
-    protected _storage = [];
+    protected _storage = null;
 
     /**
      * Extracted tokens
      *
      * @var array
      */
-    protected _tokens = [];
+    protected _tokens = null;
 
     /**
      * Extracted strings indexed by domain.
      *
      * @var array<string, mixed>
      */
-    protected _translations = [];
+    protected _translations = null;
 
     /**
      * Destination path
@@ -59,7 +59,7 @@ class I18nExtractCommand : Command {
     /**
      * An array of directories to exclude.
      */
-    protected string[] _exclude = [];
+    protected string[] _exclude = null;
 
     /**
      * Holds whether this call should extract the UIM Lib messages
@@ -235,7 +235,7 @@ class I18nExtractCommand : Command {
      * @param string $msgid The message string
      * @param array $details Context and plural form if any, file and line references
      */
-    protected void _addTranslation(string $domain, string $msgid, array $details = []) {
+    protected void _addTranslation(string $domain, string $msgid, array $details = null) {
         $context = $details["msgctxt"] ?? "";
 
         if (empty(_translations[$domain][$msgid][$context])) {
@@ -274,8 +274,8 @@ class I18nExtractCommand : Command {
         _extractTokens($args, $io);
         _buildFiles($args);
         _writeFiles($args, $io);
-        _paths = _files = _storage = [];
-        _translations = _tokens = [];
+        _paths = _files = _storage = null;
+        _translations = _tokens = null;
         $io.out();
         if (_countMarkerError) {
             $io.err("{_countMarkerError} marker error(s) detected.");
@@ -375,7 +375,7 @@ class I18nExtractCommand : Command {
             if (preg_match($pattern, $code) == 1) {
                 $allTokens = token_get_all($code);
 
-                _tokens = [];
+                _tokens = null;
                 foreach ($allTokens as $token) {
                     if (!is_array($token) || ($token[0] != T_WHITESPACE && $token[0] != T_INLINE_HTML)) {
                         _tokens[] = $token;
@@ -479,7 +479,7 @@ class I18nExtractCommand : Command {
                     $header = "";
 
                     if (!$args.getOption("no-location")) {
-                        $occurrences = [];
+                        $occurrences = null;
                         foreach ($files as $file: $lines) {
                             $lines = array_unique($lines);
                             foreach ($lines as $line) {
@@ -648,7 +648,7 @@ class I18nExtractCommand : Command {
      * @return array Strings extracted
      */
     protected array _getStrings(int &$position, int $target) {
-        $strings = [];
+        $strings = null;
         $count = 0;
         while (
             $count < $target
@@ -747,7 +747,7 @@ class I18nExtractCommand : Command {
     protected void _searchFiles() {
         $pattern = false;
         if (!empty(_exclude)) {
-            $exclude = [];
+            $exclude = null;
             foreach (_exclude as $e) {
                 if (DIRECTORY_SEPARATOR != "\\" && $e[0] != DIRECTORY_SEPARATOR) {
                     $e = DIRECTORY_SEPARATOR . $e;

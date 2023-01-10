@@ -211,7 +211,7 @@ abstract class BaseCommand : ICommand {
      * @param uim.cake.consoles.ConsoleIo|null $io The ConsoleIo instance to use for the executed command.
      * @return int|null The exit code or null for success of the command.
      */
-    Nullable!int executeCommand($command, array $args = [], ?ConsoleIo $io = null) {
+    Nullable!int executeCommand($command, array $args = null, ?ConsoleIo $io = null) {
         if (is_string($command)) {
             if (!class_exists($command)) {
                 throw new InvalidArgumentException("Command class "{$command}" does not exist.");

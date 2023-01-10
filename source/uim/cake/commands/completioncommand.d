@@ -100,7 +100,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
     protected int getCommands(Arguments $args, ConsoleIo $io) {
-        $options = [];
+        $options = null;
         foreach (this.commands as $key: $value) {
             $parts = explode(" ", $key);
             $options[] = $parts[0];
@@ -123,7 +123,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
             return static::CODE_SUCCESS;
         }
 
-        $options = [];
+        $options = null;
         foreach (this.commands as $key: $value) {
             $parts = explode(" ", $key);
             if ($parts[0] != $name) {
@@ -199,7 +199,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
         $name = $args.getArgument("command");
         $subcommand = $args.getArgument("subcommand");
 
-        $options = [];
+        $options = null;
         foreach (this.commands as $key: $value) {
             $parts = explode(" ", $key);
             if ($parts[0] != $name) {

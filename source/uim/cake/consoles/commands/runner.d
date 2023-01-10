@@ -33,7 +33,7 @@ class CommandRunner : IEventDispatcher
     protected string $root;
 
     // Alias mappings.
-    protected string[] $aliases = [];
+    protected string[] $aliases = null;
 
     /**
      * Constructor

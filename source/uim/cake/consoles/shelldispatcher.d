@@ -22,14 +22,14 @@ class ShellDispatcher
      *
      * @var array
      */
-    $args = [];
+    $args = null;
 
     /**
      * List of connected aliases.
      *
      * @var array<string, string>
      */
-    protected static STRINGAA _aliases = [];
+    protected static STRINGAA _aliases = null;
 
     /**
      * Constructor
@@ -40,7 +40,7 @@ class ShellDispatcher
      * @param array $args the argv from PHP
      * @param bool $bootstrap Should the environment be bootstrapped.
      */
-    this(array $args = [], bool $bootstrap = true) {
+    this(array $args = null, bool $bootstrap = true) {
         set_time_limit(0);
         this.args = $args;
 
@@ -91,7 +91,7 @@ class ShellDispatcher
      * Clear any aliases that have been set.
      */
     static void resetAliases() {
-        static::_aliases = [];
+        static::_aliases = null;
     }
 
     /**
@@ -101,7 +101,7 @@ class ShellDispatcher
      * @param array $extra Extra parameters
      * @return int The exit code of the shell process.
      */
-    static int run(array $argv, array $extra = []) {
+    static int run(array $argv, array $extra = null) {
         $dispatcher = new ShellDispatcher($argv);
 
         return $dispatcher.dispatch($extra);
@@ -147,7 +147,7 @@ class ShellDispatcher
      * - `requested` : if used, will prevent the Shell welcome message to be displayed
      * @return int The CLI command exit code. 0 is success.
      */
-    int dispatch(array $extra = []) {
+    int dispatch(array $extra = null) {
         try {
             $result = _dispatch($extra);
         } catch (StopException $e) {
@@ -176,7 +176,7 @@ class ShellDispatcher
      * @return int|bool|null
      * @throws uim.cake.consoles.exceptions.MissingShellMethodException
      */
-    protected function _dispatch(array $extra = []) {
+    protected function _dispatch(array $extra = null) {
         $shellName = this.shiftArgs();
 
         if (!$shellName) {
@@ -218,7 +218,7 @@ class ShellDispatcher
         $io.setLoggers(false);
         $list = $task.getShellList() + ["app": []];
         $fixed = array_flip($list["app"]) + array_flip($list["CORE"]);
-        $aliases = $others = [];
+        $aliases = $others = null;
 
         foreach ($plugins as $plugin) {
             if (!isset($list[$plugin])) {

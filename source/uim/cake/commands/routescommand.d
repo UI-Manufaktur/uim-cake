@@ -21,7 +21,7 @@ class RoutesCommand : Command {
         }
 
         $availableRoutes = Router::routes();
-        $output = $duplicateRoutesCounter = [];
+        $output = $duplicateRoutesCounter = null;
 
         foreach ($availableRoutes as $route) {
             $methods = isset($route.defaults["_method"]) ? (array)$route.defaults["_method"] : [""];
@@ -63,7 +63,7 @@ class RoutesCommand : Command {
         $io.helper("table").output($output);
         $io.out();
 
-        $duplicateRoutes = [];
+        $duplicateRoutes = null;
 
         foreach ($availableRoutes as $route) {
             $methods = isset($route.defaults["_method"]) ? (array)$route.defaults["_method"] : [""];

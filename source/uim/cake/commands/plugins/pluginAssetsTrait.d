@@ -40,7 +40,7 @@ trait PluginAssetsTrait
             myPluginsList = [myName];
         }
 
-        myPlugins = [];
+        myPlugins = null;
 
         foreach (myPlugin; myPluginsList) {
             myPath = Plugin::path(myPlugin) ~ "webroot";

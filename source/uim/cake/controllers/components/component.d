@@ -54,7 +54,7 @@ class Component : IEventListener {
      *
      * @var array
      */
-    protected $components = [];
+    protected $components = null;
 
     /**
      * Default config
@@ -63,14 +63,14 @@ class Component : IEventListener {
      *
      * @var array<string, mixed>
      */
-    protected _defaultConfig = [];
+    protected _defaultConfig = null;
 
     /**
      * A component lookup table used to lazy load component objects.
      *
      * @var array<string, array>
      */
-    protected _componentMap = [];
+    protected _componentMap = null;
 
     /**
      * Constructor
@@ -79,7 +79,7 @@ class Component : IEventListener {
      *  this component can use to lazy load its components.
      * @param array<string, mixed> aConfig Array of configuration settings.
      */
-    this(ComponentRegistry $registry, Json aConfig = []) {
+    this(ComponentRegistry $registry, Json aConfig = null) {
         _registry = $registry;
 
         this.setConfig(aConfig);
@@ -145,7 +145,7 @@ class Component : IEventListener {
             'Controller.beforeRedirect': 'beforeRedirect',
             'Controller.shutdown': 'afterFilter',
         ];
-        $events = [];
+        $events = null;
         foreach ($eventMap as $event: $method) {
             if (method_exists(this, $method)) {
                 $events[$event] = $method;

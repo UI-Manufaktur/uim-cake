@@ -53,17 +53,17 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param iterable $commands The command collection to output.
      */
     protected void asText(ConsoleIo $io, iterable $commands) {
-        $invert = [];
+        $invert = null;
         foreach ($commands as $name: $class) {
             if (is_object($class)) {
                 $class = get_class($class);
             }
             if (!isset($invert[$class])) {
-                $invert[$class] = [];
+                $invert[$class] = null;
             }
             $invert[$class][] = $name;
         }
-        $grouped = [];
+        $grouped = null;
         $plugins = Plugin::loaded();
         foreach ($invert as $class: $names) {
             preg_match("/^(.+)\\\\(Command|Shell)\\\\/", $class, $matches);
@@ -116,7 +116,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param uim.cake.consoles.ConsoleIo $io IO object.
      */
     protected void outputPaths(ConsoleIo $io) {
-        $paths = [];
+        $paths = null;
         if (Configure::check("App.dir")) {
             $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             // Extra space is to align output

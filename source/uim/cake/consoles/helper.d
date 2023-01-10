@@ -24,7 +24,7 @@ abstract class Helper
      *
      * @var array<string, mixed>
      */
-    protected _defaultConfig = [];
+    protected _defaultConfig = null;
 
     /**
      * ConsoleIo instance.
@@ -39,7 +39,7 @@ abstract class Helper
      * @param uim.cake.consoles.ConsoleIo $io The ConsoleIo instance to use.
      * @param array<string, mixed> aConfig The settings for this helper.
      */
-    this(ConsoleIo $io, Json aConfig = []) {
+    this(ConsoleIo $io, Json aConfig = null) {
         _io = $io;
         this.setConfig(aConfig);
     }

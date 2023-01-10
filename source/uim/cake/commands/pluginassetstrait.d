@@ -38,7 +38,7 @@ trait PluginAssetsTrait
             $pluginsList = [$name];
         }
 
-        $plugins = [];
+        $plugins = null;
 
         foreach ($pluginsList as $plugin) {
             $path = Plugin::path($plugin) ~ "webroot";

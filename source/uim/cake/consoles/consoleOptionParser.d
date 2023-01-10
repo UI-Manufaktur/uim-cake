@@ -84,14 +84,14 @@ class ConsoleOptionParser
      * @see uim.cake.consoles.ConsoleOptionParser::addOption()
      * @var array<string, uim.cake.consoles.ConsoleInputOption>
      */
-    protected _options = [];
+    protected _options = null;
 
     /**
      * Map of short . long options, generated when using addOption()
      *
      * @var array<string, string>
      */
-    protected _shortOptions = [];
+    protected _shortOptions = null;
 
     /**
      * Positional argument definitions.
@@ -99,7 +99,7 @@ class ConsoleOptionParser
      * @see uim.cake.consoles.ConsoleOptionParser::addArgument()
      * @var array<uim.cake.consoles.ConsoleInputArgument>
      */
-    protected _args = [];
+    protected _args = null;
 
     /**
      * Subcommands for this Shell.
@@ -107,7 +107,7 @@ class ConsoleOptionParser
      * @see uim.cake.consoles.ConsoleOptionParser::addSubcommand()
      * @var array<string, uim.cake.consoles.ConsoleInputSubcommand>
      */
-    protected _subcommands = [];
+    protected _subcommands = null;
 
     /**
      * Subcommand sorting option
@@ -124,7 +124,7 @@ class ConsoleOptionParser
      *
      * @var array
      */
-    protected _tokens = [];
+    protected _tokens = null;
 
     /**
      * Root alias used in help output
@@ -379,7 +379,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $options An array of parameters that define the behavior of the option
      * @return this
      */
-    function addOption($name, STRINGAA someOptions = []) {
+    function addOption($name, STRINGAA someOptions = null) {
         if ($name instanceof ConsoleInputOption) {
             $option = $name;
             $name = $option.name();
@@ -447,7 +447,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $params Parameters for the argument, see above.
      * @return this
      */
-    function addArgument($name, array $params = []) {
+    function addArgument($name, array $params = null) {
         if ($name instanceof ConsoleInputArgument) {
             $arg = $name;
             $index = count(_args);
@@ -490,7 +490,7 @@ class ConsoleOptionParser
         foreach ($args as $name: $params) {
             if ($params instanceof ConsoleInputArgument) {
                 $name = $params;
-                $params = [];
+                $params = null;
             }
             this.addArgument($name, $params);
         }
@@ -510,7 +510,7 @@ class ConsoleOptionParser
         foreach ($options as $name: $params) {
             if ($params instanceof ConsoleInputOption) {
                 $name = $params;
-                $params = [];
+                $params = null;
             }
             this.addOption($name, $params);
         }
@@ -534,7 +534,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $options Array of params, see above.
      * @return this
      */
-    function addSubcommand($name, STRINGAA someOptions = []) {
+    function addSubcommand($name, STRINGAA someOptions = null) {
         if ($name instanceof ConsoleInputSubcommand) {
             $command = $name;
             $name = $command.name();
@@ -579,7 +579,7 @@ class ConsoleOptionParser
         foreach ($commands as $name: $params) {
             if ($params instanceof ConsoleInputSubcommand) {
                 $name = $params;
-                $params = [];
+                $params = null;
             }
             this.addSubcommand($name, $params);
         }
@@ -600,7 +600,7 @@ class ConsoleOptionParser
      * Get the list of argument names.
      */
     string[] argumentNames() {
-        $out = [];
+        $out = null;
         foreach (_args as $arg) {
             $out[] = $arg.name();
         }
@@ -645,7 +645,7 @@ class ConsoleOptionParser
             /** @psalm-suppress PossiblyNullReference */
             return _subcommands[$command].parser().parse($argv, $io);
         }
-        $params = $args = [];
+        $params = $args = null;
         _tokens = $argv;
         while (($token = array_shift(_tokens)) != null) {
             $token = (string)$token;
@@ -823,7 +823,7 @@ class ConsoleOptionParser
             }
         }
         if (!isset(_shortOptions[$key])) {
-            $options = [];
+            $options = null;
             foreach (_shortOptions as $short: $long) {
                 $options[] = "{$short} (short for `--{$long}`)";
             }

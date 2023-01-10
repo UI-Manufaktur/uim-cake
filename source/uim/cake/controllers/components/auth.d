@@ -151,14 +151,14 @@ class AuthComponent : Component : IEventDispatcher
     protected $components = ['RequestHandler', 'Flash'];
 
     // Objects that will be used for authentication checks.
-    protected BaseAuthenticate _authenticateObjects = [];
+    protected BaseAuthenticate _authenticateObjects = null;
 
     /**
      * Objects that will be used for authorization checks.
      *
      * @var array<uim.cake.Auth\>
      */
-    protected BaseAuthorize _authorizeObjects = [];
+    protected BaseAuthorize _authorizeObjects = null;
 
     /**
      * Storage object.
@@ -173,7 +173,7 @@ class AuthComponent : Component : IEventDispatcher
      * @var array<string>
      * @see uim.cake.controllers.components.AuthComponent::allow()
      */
-    $allowedActions = [];
+    $allowedActions = null;
 
     /**
      * The instance of the Authenticate provider that was used for
@@ -477,9 +477,9 @@ class AuthComponent : Component : IEventDispatcher
         if (empty(_config['authorize'])) {
             return null;
         }
-        _authorizeObjects = [];
+        _authorizeObjects = null;
         $authorize = Hash::normalize((array)_config['authorize']);
-        $global = [];
+        $global = null;
         if (isset($authorize[AuthComponent::ALL])) {
             $global = $authorize[AuthComponent::ALL];
             unset($authorize[AuthComponent::ALL]);
@@ -571,7 +571,7 @@ class AuthComponent : Component : IEventDispatcher
      */
     void deny($actions = null) {
         if ($actions == null) {
-            this.allowedActions = [];
+            this.allowedActions = null;
 
             return;
         }
@@ -764,9 +764,9 @@ class AuthComponent : Component : IEventDispatcher
         if (empty(_config['authenticate'])) {
             return null;
         }
-        _authenticateObjects = [];
+        _authenticateObjects = null;
         $authenticate = Hash::normalize((array)_config['authenticate']);
-        $global = [];
+        $global = null;
         if (isset($authenticate[AuthComponent::ALL])) {
             $global = $authenticate[AuthComponent::ALL];
             unset($authenticate[AuthComponent::ALL]);
@@ -815,7 +815,7 @@ class AuthComponent : Component : IEventDispatcher
         aConfig = _config['storage'];
         if (is_string(aConfig)) {
             $class = aConfig;
-            aConfig = [];
+            aConfig = null;
         } else {
             $class = aConfig['className'];
             unset(aConfig['className']);

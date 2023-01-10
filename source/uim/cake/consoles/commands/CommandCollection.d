@@ -22,14 +22,14 @@ class CommandCollection : IteratorAggregate, Countable
      * @psalm-var array<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|class-string>
      * @psalm-suppress DeprecatedClass
      */
-    protected $commands = [];
+    protected $commands = null;
 
     /**
      * Constructor
      *
      * @param array<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|string> $commands The map of commands to add to the collection.
      */
-    this(array $commands = []) {
+    this(array $commands = null) {
         foreach ($commands as $name: $command) {
             this.add($name, $command);
         }
@@ -162,7 +162,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @return array<string, string> A flat map of command names: class names.
      */
     protected array resolveNames(array $input) {
-        $out = [];
+        $out = null;
         foreach ($input as $info) {
             $name = $info["name"];
             $addLong = $name != $info["fullName"];

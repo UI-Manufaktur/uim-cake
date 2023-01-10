@@ -137,7 +137,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * @return array
      */
     protected array getActionArgs(Closure $action, array $passedParams) {
-        $resolved = [];
+        $resolved = null;
         $function = new ReflectionFunction($action);
         foreach ($function.getParameters() as $parameter) {
             $type = $parameter.getType();

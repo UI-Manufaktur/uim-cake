@@ -105,7 +105,7 @@ class CommandScanner
         /** @var array<\SplFileInfo> $files */
         $files = $fs.find($path, $classPattern);
 
-        $shells = [];
+        $shells = null;
         foreach ($files as $fileInfo) {
             $file = $fileInfo.getFilename();
 

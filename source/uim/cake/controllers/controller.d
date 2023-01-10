@@ -105,7 +105,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @var array
      * @see uim.datasources.Paging\NumericPaginator
      */
-    $paginate = [];
+    $paginate = null;
 
     /**
      * Set to true to automatically render the view
@@ -132,7 +132,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @var array
      * @psalm-var array<int, array{middleware:\Psr\Http\servers.IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
      */
-    protected $middlewares = [];
+    protected $middlewares = null;
 
     /**
      * Constructor.
@@ -258,7 +258,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @return uim.cake.controllers.Component
      * @throws \Exception
      */
-    function loadComponent(string aName, Json aConfig = []): Component
+    function loadComponent(string aName, Json aConfig = null): Component
     {
         [, $prop] = pluginSplit($name);
 
@@ -519,7 +519,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @since 4.3.0
      * @psalm-param array{only?: array|string, except?: array|string} $options
      */
-    function middleware($middleware, STRINGAA someOptions = []) {
+    function middleware($middleware, STRINGAA someOptions = null) {
         this.middlewares[] = [
             "middleware": $middleware,
             "options": $options,
@@ -533,7 +533,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @since 4.3.0
      */
     array getMiddleware() {
-        $matching = [];
+        $matching = null;
         $action = this.request.getParam("action");
 
         foreach (this.middlewares as $middleware) {
@@ -750,7 +750,7 @@ class Controller : IEventListener, IEventDispatcher {
             return null;
         }
 
-        $typeMap = [];
+        $typeMap = null;
         foreach ($possibleViewClasses as $class) {
             $viewContentType = $class::contentType();
             if ($viewContentType && !isset($typeMap[$viewContentType])) {
@@ -842,7 +842,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
-    function paginate($object = null, array $settings = []) {
+    function paginate($object = null, array $settings = null) {
         if (is_object($object)) {
             $table = $object;
         }

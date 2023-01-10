@@ -67,7 +67,7 @@ class HelpFormatter {
      */
     string text(int $width = 72) {
         $parser = _parser;
-        $out = [];
+        $out = null;
         $description = $parser.getDescription();
         if (!empty($description)) {
             $out[] = Text::wrap($description, $width);
@@ -145,7 +145,7 @@ class HelpFormatter {
         if (!empty($subcommands)) {
             $usage[] = "[subcommand]";
         }
-        $options = [];
+        $options = null;
         foreach (_parser.options() as $option) {
             $options[] = $option.usage();
         }
@@ -153,7 +153,7 @@ class HelpFormatter {
             $options = ["[options]"];
         }
         $usage = array_merge($usage, $options);
-        $args = [];
+        $args = null;
         foreach (_parser.arguments() as $argument) {
             $args[] = $argument.usage();
         }

@@ -40,7 +40,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      *
      * @var array
      */
-    protected _iterators = [];
+    protected _iterators = null;
 
     /**
      * Creates the iterator to merge together the values by for all the passed

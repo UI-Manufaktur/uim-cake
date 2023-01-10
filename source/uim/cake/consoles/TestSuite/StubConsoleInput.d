@@ -28,7 +28,7 @@ class StubConsoleInput : ConsoleInput
      *
      * @var array<string>
      */
-    protected $replies = [];
+    protected $replies = null;
 
     /**
      * Current message index

@@ -16,7 +16,7 @@ class MissingOptionException : ConsoleException {
      *
      * @var array<string>
      */
-    protected $suggestions = [];
+    protected $suggestions = null;
 
     /**
      * Constructor.
@@ -30,7 +30,7 @@ class MissingOptionException : ConsoleException {
     this(
         string $message,
         string $requested = "",
-        array $suggestions = [],
+        array $suggestions = null,
         Nullable!int $code = null,
         ?Throwable $previous = null
     ) {
@@ -48,7 +48,7 @@ class MissingOptionException : ConsoleException {
         if ($bestGuess) {
             $out ~= "\nDid you mean: `{$bestGuess}`?";
         }
-        $good = [];
+        $good = null;
         foreach (this.suggestions as $option) {
             if (levenshtein($option, this.requested) < 8) {
                 $good[] = "- " ~ $option;

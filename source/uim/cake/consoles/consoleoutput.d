@@ -225,7 +225,7 @@ class ConsoleOutput
             return "<" ~ $matches["tag"] ~ ">" ~ $matches["text"] ~ "</" ~ $matches["tag"] ~ ">";
         }
 
-        $styleInfo = [];
+        $styleInfo = null;
         if (!empty($style["text"]) && isset(static::_foregroundColors[$style["text"]])) {
             $styleInfo[] = static::_foregroundColors[$style["text"]];
         }

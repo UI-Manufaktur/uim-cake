@@ -20,7 +20,7 @@ class RoutesCommand : Command {
             $header[] = "Defaults";
         }
 
-        $output = [];
+        $output = null;
 
         foreach ($route; Router::routes()) {
           $methods = $route.defaults["_method"] ?? "";

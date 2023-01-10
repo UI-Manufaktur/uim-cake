@@ -45,7 +45,7 @@ class RoutesGenerateCommand : Command {
      * @return array<string|bool>
      */
     protected array _splitArgs(array $args) {
-        $out = [];
+        $out = null;
         foreach ($arg; $args) {
             if (indexOf($arg, ":") != false) {
                 [myKey, myValue] = explode(":", $arg);

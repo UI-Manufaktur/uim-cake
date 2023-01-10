@@ -65,7 +65,7 @@ trait ConsoleIntegrationTestTrait
      * @throws uim.cake.consoles.TestSuite\MissingConsoleInputException
      * @throws \RuntimeException
      */
-    void exec(string $command, array $input = []) {
+    void exec(string $command, array $input = null) {
         $runner = this.makeRunner();
 
         if (_out == null) {
@@ -249,7 +249,7 @@ trait ConsoleIntegrationTestTrait
      */
     protected string[] commandStringToArgs(string $command) {
         $charCount = strlen($command);
-        $argv = [];
+        $argv = null;
         $arg = "";
         $inDQuote = false;
         $inSQuote = false;

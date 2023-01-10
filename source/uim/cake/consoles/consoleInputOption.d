@@ -78,7 +78,7 @@ class ConsoleInputOption
         string $help = "",
         bool $isBoolean = false,
         $default = null,
-        array $choices = [],
+        array $choices = null,
         bool $multiple = false,
         bool $required = false,
         Nullable!string $prompt = null

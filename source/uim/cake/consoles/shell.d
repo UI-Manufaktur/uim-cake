@@ -82,7 +82,7 @@ class Shell
      *
      * @var array
      */
-    $params = [];
+    $params = null;
 
     /**
      * The command (method/task) that is being run.
@@ -96,7 +96,7 @@ class Shell
      *
      * @var array
      */
-    $args = [];
+    $args = null;
 
     /**
      * The name of the shell in camelized.
@@ -119,14 +119,14 @@ class Shell
      * @var array|bool
      * @link https://book.cakephp.org/4/en/console-commands/shells.html#shell-tasks
      */
-    $tasks = [];
+    $tasks = null;
 
     /**
      * Contains the loaded tasks
      *
      * @var array<string>
      */
-    $taskNames = [];
+    $taskNames = null;
 
     /**
      * Task Collection for the command, used to create Tasks.
@@ -140,7 +140,7 @@ class Shell
      *
      * @var array<string, array>
      */
-    protected _taskMap = [];
+    protected _taskMap = null;
 
     /**
      * ConsoleIo instance.
@@ -374,7 +374,7 @@ class Shell
      * Second value has to be an array of extra parameter to pass on to the dispatcher
      */
     array parseDispatchArguments(array $args) {
-        $extra = [];
+        $extra = null;
 
         if (is_string($args[0]) && count($args) == 1) {
             $args = explode(" ", $args[0]);
@@ -426,7 +426,7 @@ class Shell
      * @return int|bool|null
      * @link https://book.cakephp.org/4/en/console-and-shells.html#the-cakephp-console
      */
-    function runCommand(array $argv, bool $autoMethod = false, array $extra = []) {
+    function runCommand(array $argv, bool $autoMethod = false, array $extra = null) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         this.OptionParser = this.getOptionParser();
         try {
@@ -608,7 +608,7 @@ class Shell
      * @see uim.cake.Utility\Text::wrap()
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::wrapText
      */
-    string wrapText(string $text, $options = []) {
+    string wrapText(string $text, $options = null) {
         return Text::wrap($text, $options);
     }
 
@@ -844,7 +844,7 @@ class Shell
      * @param array<string, mixed> aConfig Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
-    function helper(string aName, Json aConfig = []): Helper
+    function helper(string aName, Json aConfig = null): Helper
     {
         return _io.helper($name, aConfig);
     }
