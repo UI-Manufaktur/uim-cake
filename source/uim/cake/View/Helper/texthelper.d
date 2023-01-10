@@ -106,7 +106,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-urls
      */
-    string autoLinkUrls(string $text, array $options = []) {
+    string autoLinkUrls(string $text, STRINGAA someOptions = []) {
         _placeholders = [];
         $options += ["escape": true];
 
@@ -201,7 +201,7 @@ class TextHelper : Helper
      * @return string
      * @see uim.cake.View\Helper\TextHelper::autoLinkEmails()
      */
-    protected string _linkEmails(string $text, array $options) {
+    protected string _linkEmails(string $text, STRINGAA someOptions) {
         $replace = [];
         foreach (_placeholders as $hash: $content) {
             $url = $content["content"];
@@ -224,7 +224,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-email-addresses
      */
-    string autoLinkEmails(string $text, array $options = []) {
+    string autoLinkEmails(string $text, STRINGAA someOptions = []) {
         $options += ["escape": true];
         _placeholders = [];
 
@@ -253,7 +253,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
-    string autoLink(string $text, array $options = []) {
+    string autoLink(string $text, STRINGAA someOptions = []) {
         $text = this.autoLinkUrls($text, $options);
 
         return this.autoLinkEmails($text, ["escape": false] + $options);
@@ -270,7 +270,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::highlight()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#highlighting-substrings
      */
-    string highlight(string $text, string $phrase, array $options = []) {
+    string highlight(string $text, string $phrase, STRINGAA someOptions = []) {
         return _engine.highlight($text, $phrase, $options);
     }
 
@@ -318,7 +318,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::truncate()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-text
      */
-    string truncate(string $text, int $length = 100, array $options = []) {
+    string truncate(string $text, int $length = 100, STRINGAA someOptions = []) {
         return _engine.truncate($text, $length, $options);
     }
 
@@ -340,7 +340,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::tail()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
-    string tail(string $text, int $length = 100, array $options = []) {
+    string tail(string $text, int $length = 100, STRINGAA someOptions = []) {
         return _engine.tail($text, $length, $options);
     }
 

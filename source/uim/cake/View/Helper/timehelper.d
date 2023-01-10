@@ -237,7 +237,7 @@ class TimeHelper : Helper
      * @return string Relative time string.
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    string timeAgoInWords($dateTime, array $options = []) {
+    string timeAgoInWords($dateTime, STRINGAA someOptions = []) {
         $element = null;
         $options += [
             "element": null,

@@ -27,11 +27,11 @@ use RuntimeException;
  *
  * Automatic generation of HTML FORMs from given data.
  *
- * @method string text(string $fieldName, array $options = []) Creates input of type text.
- * @method string number(string $fieldName, array $options = []) Creates input of type number.
- * @method string email(string $fieldName, array $options = []) Creates input of type email.
- * @method string password(string $fieldName, array $options = []) Creates input of type password.
- * @method string search(string $fieldName, array $options = []) Creates input of type search.
+ * @method string text(string $fieldName, STRINGAA someOptions = []) Creates input of type text.
+ * @method string number(string $fieldName, STRINGAA someOptions = []) Creates input of type number.
+ * @method string email(string $fieldName, STRINGAA someOptions = []) Creates input of type email.
+ * @method string password(string $fieldName, STRINGAA someOptions = []) Creates input of type password.
+ * @method string search(string $fieldName, STRINGAA someOptions = []) Creates input of type search.
  * @property uim.cake.View\Helper\HtmlHelper $Html
  * @property uim.cake.View\Helper\UrlHelper $Url
  * @link https://book.cakephp.org/4/en/views/helpers/form.html
@@ -347,7 +347,7 @@ class FormHelper : Helper
      * @return string An formatted opening FORM tag.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#Cake\View\Helper\FormHelper::create
      */
-    string create($context = null, array $options = []) {
+    string create($context = null, STRINGAA someOptions = []) {
         $append = "";
 
         if ($context instanceof IContext) {
@@ -468,7 +468,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options An array of options from create()
      * @return array|string The action attribute for the form.
      */
-    protected function _formUrl(IContext $context, array $options) {
+    protected function _formUrl(IContext $context, STRINGAA someOptions) {
         $request = _View.getRequest();
 
         if ($options["url"] == null) {
@@ -688,7 +688,7 @@ class FormHelper : Helper
      * @return string Formatted errors or "".
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
-    string error(string $field, $text = null, array $options = []) {
+    string error(string $field, $text = null, STRINGAA someOptions = []) {
         if (substr($field, -5) == "._ids") {
             $field = substr($field, 0, -5);
         }
@@ -801,7 +801,7 @@ class FormHelper : Helper
      * @return string The formatted LABEL element
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-labels
      */
-    string label(string $fieldName, Nullable!string $text = null, array $options = []) {
+    string label(string $fieldName, Nullable!string $text = null, STRINGAA someOptions = []) {
         if ($text == null) {
             $text = $fieldName;
             if (substr($text, -5) == "._ids") {
@@ -869,7 +869,7 @@ class FormHelper : Helper
      * @return string Completed form controls.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#generating-entire-forms
      */
-    string allControls(array $fields = [], array $options = []) {
+    string allControls(array $fields = [], STRINGAA someOptions = []) {
         $context = _getContext();
 
         $modelFields = $context.fieldNames();
@@ -905,7 +905,7 @@ class FormHelper : Helper
      * @return string Completed form inputs.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#generating-entire-forms
      */
-    string controls(array $fields, array $options = []) {
+    string controls(array $fields, STRINGAA someOptions = []) {
         $fields = Hash::normalize($fields);
 
         $out = "";
@@ -933,7 +933,7 @@ class FormHelper : Helper
      *    to customize the legend text.
      * @return string Completed form inputs.
      */
-    string fieldset(string $fields = "", array $options = []) {
+    string fieldset(string $fields = "", STRINGAA someOptions = []) {
         $legend = $options["legend"] ?? true;
         $fieldset = $options["fieldset"] ?? true;
         $context = _getContext();
@@ -999,7 +999,7 @@ class FormHelper : Helper
      * @psalm-suppress InvalidReturnType
      * @psalm-suppress InvalidReturnStatement
      */
-    string control(string $fieldName, array $options = []) {
+    string control(string $fieldName, STRINGAA someOptions = []) {
         $options += [
             "type": null,
             "label": null,
@@ -1117,7 +1117,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options The options for group template
      * @return string The generated group template
      */
-    protected string _groupTemplate(array $options) {
+    protected string _groupTemplate(STRINGAA someOptions) {
         $groupTemplate = $options["options"]["type"] ~ "FormGroup";
         if (!this.templater().get($groupTemplate)) {
             $groupTemplate = "formGroup";
@@ -1137,7 +1137,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options The options for input container template
      * @return string The generated input container template
      */
-    protected string _inputContainerTemplate(array $options) {
+    protected string _inputContainerTemplate(STRINGAA someOptions) {
         $inputContainerTemplate = $options["options"]["type"] ~ "Container" ~ $options["errorSuffix"];
         if (!this.templater().get($inputContainerTemplate)) {
             $inputContainerTemplate = "inputContainer" ~ $options["errorSuffix"];
@@ -1160,7 +1160,7 @@ class FormHelper : Helper
      * @return array|string The generated input element string
      *  or array if checkbox() is called with option "hiddenField" set to "_split".
      */
-    protected function _getInput(string $fieldName, array $options) {
+    protected function _getInput(string $fieldName, STRINGAA someOptions) {
         $label = $options["labelOptions"];
         unset($options["labelOptions"]);
         switch (strtolower($options["type"])) {
@@ -1189,7 +1189,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return array<string, mixed> Options
      */
-    protected array _parseOptions(string $fieldName, array $options) {
+    protected array _parseOptions(string $fieldName, STRINGAA someOptions) {
         $needsMagicType = false;
         if (empty($options["type"])) {
             $needsMagicType = true;
@@ -1207,7 +1207,7 @@ class FormHelper : Helper
      * @param string $fieldName the name of the field to guess a type for
      * @param array<string, mixed> $options the options passed to the input method
      */
-    protected string _inputType(string $fieldName, array $options) {
+    protected string _inputType(string $fieldName, STRINGAA someOptions) {
         $context = _getContext();
 
         if ($context.isPrimaryKey($fieldName)) {
@@ -1254,7 +1254,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return array<string, mixed>
      */
-    protected array _optionsOptions(string $fieldName, array $options) {
+    protected array _optionsOptions(string $fieldName, STRINGAA someOptions) {
         if (isset($options["options"])) {
             return $options;
         }
@@ -1292,7 +1292,7 @@ class FormHelper : Helper
      * overwrite the "type" key in options.
      * @return array<string, mixed>
      */
-    protected array _magicOptions(string $fieldName, array $options, bool $allowOverride) {
+    protected array _magicOptions(string $fieldName, STRINGAA someOptions, bool $allowOverride) {
         $options += [
             "templateVars": [],
         ];
@@ -1322,7 +1322,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return array<string, mixed> Modified options list.
      */
-    protected function setRequiredAndCustomValidity(string $fieldName, array $options) {
+    protected function setRequiredAndCustomValidity(string $fieldName, STRINGAA someOptions) {
         $context = _getContext();
 
         if (!isset($options["required"]) && $options["type"] != "hidden") {
@@ -1353,7 +1353,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return string|false Generated label element or false.
      */
-    protected function _getLabel(string $fieldName, array $options) {
+    protected function _getLabel(string $fieldName, STRINGAA someOptions) {
         if ($options["type"] == "hidden") {
             return false;
         }
@@ -1378,7 +1378,7 @@ class FormHelper : Helper
      * @param mixed $default The default option value
      * @return mixed the contents of the option or default
      */
-    protected function _extractOption(string aName, array $options, $default = null) {
+    protected function _extractOption(string aName, STRINGAA someOptions, $default = null) {
         if (array_key_exists($name, $options)) {
             return $options[$name];
         }
@@ -1397,7 +1397,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options for the label element.
      * @return string Generated label element
      */
-    protected string _inputLabel(string $fieldName, $label = null, array $options = []) {
+    protected string _inputLabel(string $fieldName, $label = null, STRINGAA someOptions = []) {
         $options += ["id": null, "input": null, "nestedInput": false, "templateVars": []];
         $labelAttributes = ["templateVars": $options["templateVars"]];
         if (is_array($label)) {
@@ -1444,7 +1444,7 @@ class FormHelper : Helper
      * @return array<string>|string An HTML text input element.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-checkboxes
      */
-    function checkbox(string $fieldName, array $options = []) {
+    function checkbox(string $fieldName, STRINGAA someOptions = []) {
         $options += ["hiddenField": true, "value": 1];
 
         // Work around value=>val translations.
@@ -1579,7 +1579,7 @@ class FormHelper : Helper
      * @return string A generated HTML text input element
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-textareas
      */
-    string textarea(string $fieldName, array $options = []) {
+    string textarea(string $fieldName, STRINGAA someOptions = []) {
         $options = _initInputField($fieldName, $options);
         unset($options["type"]);
 
@@ -1594,7 +1594,7 @@ class FormHelper : Helper
      * @return string A generated hidden input
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-hidden-inputs
      */
-    string hidden(string $fieldName, array $options = []) {
+    string hidden(string $fieldName, STRINGAA someOptions = []) {
         $options += ["required": false, "secure": true];
 
         $secure = $options["secure"];
@@ -1626,7 +1626,7 @@ class FormHelper : Helper
      * @return string A generated file input.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-file-inputs
      */
-    string file(string $fieldName, array $options = []) {
+    string file(string $fieldName, STRINGAA someOptions = []) {
         $options += ["secure": true];
         $options = _initInputField($fieldName, $options);
 
@@ -1650,7 +1650,7 @@ class FormHelper : Helper
      * @return string A HTML button tag.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-button-elements
      */
-    string button(string $title, array $options = []) {
+    string button(string $title, STRINGAA someOptions = []) {
         $options += [
             "type": "submit",
             "escapeTitle": true,
@@ -1695,7 +1695,7 @@ class FormHelper : Helper
      * @return string A HTML button tag.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    string postButton(string $title, $url, array $options = []) {
+    string postButton(string $title, $url, STRINGAA someOptions = []) {
         $formOptions = ["url": $url];
         if (isset($options["method"])) {
             $formOptions["type"] = $options["method"];
@@ -1747,7 +1747,7 @@ class FormHelper : Helper
      * @return string An `<a />` element.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-standalone-buttons-and-post-links
      */
-    string postLink(string $title, $url = null, array $options = []) {
+    string postLink(string $title, $url = null, STRINGAA someOptions = []) {
         $options += ["block": null, "confirm": null];
 
         $requestMethod = "POST";
@@ -1857,7 +1857,7 @@ class FormHelper : Helper
      * @return string A HTML submit button
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    string submit(Nullable!string $caption = null, array $options = []) {
+    string submit(Nullable!string $caption = null, STRINGAA someOptions = []) {
         if ($caption == null) {
             $caption = __d("cake", "Submit");
         }
@@ -2110,7 +2110,7 @@ class FormHelper : Helper
      * @return string Completed year select input
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-year-inputs
      */
-    string year(string $fieldName, array $options = []) {
+    string year(string $fieldName, STRINGAA someOptions = []) {
         $options += [
             "empty": true,
         ];
@@ -2130,7 +2130,7 @@ class FormHelper : Helper
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
      */
-    string month(string $fieldName, array $options = []) {
+    string month(string $fieldName, STRINGAA someOptions = []) {
         $options += [
             "value": null,
         ];
@@ -2152,7 +2152,7 @@ class FormHelper : Helper
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
      */
-    string dateTime(string $fieldName, array $options = []) {
+    string dateTime(string $fieldName, STRINGAA someOptions = []) {
         $options += [
             "value": null,
         ];
@@ -2173,7 +2173,7 @@ class FormHelper : Helper
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
      */
-    string time(string $fieldName, array $options = []) {
+    string time(string $fieldName, STRINGAA someOptions = []) {
         $options += [
             "value": null,
         ];
@@ -2193,7 +2193,7 @@ class FormHelper : Helper
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
      */
-    string date(string $fieldName, array $options = []) {
+    string date(string $fieldName, STRINGAA someOptions = []) {
         $options += [
             "value": null,
         ];
@@ -2228,7 +2228,7 @@ class FormHelper : Helper
      * @param array<string, mixed>|array<string> $options Array of options to append options into.
      * @return array<string, mixed> Array of options for the input.
      */
-    protected array _initInputField(string $field, array $options = []) {
+    protected array _initInputField(string $field, STRINGAA someOptions = []) {
         $options += ["fieldName": $field];
 
         if (!isset($options["secure"])) {
@@ -2291,7 +2291,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options The option set.
      * @return bool Whether the field is disabled.
      */
-    protected bool _isDisabled(array $options) {
+    protected bool _isDisabled(STRINGAA someOptions) {
         if (!isset($options["disabled"])) {
             return false;
         }
@@ -2497,7 +2497,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options The options containing default values.
      * @return mixed Field value derived from sources or defaults.
      */
-    function getSourceValue(string $fieldname, array $options = []) {
+    function getSourceValue(string $fieldname, STRINGAA someOptions = []) {
         $valueMap = [
             "data": "getData",
             "query": "getQuery",
