@@ -8,7 +8,7 @@ module uim.cake.datasources;
 @safe:
 import uim.cake;
 
-module uim.cake.Datasource;
+module uim.cake.satasources;
 
 use ArrayAccess;
 use JsonSerializable;
@@ -31,72 +31,53 @@ interface IEntity : ArrayAccess, JsonSerializable
      */
     function setHidden(array $fields, bool $merge = false);
 
-    /**
-     * Gets the hidden fields.
-     *
-     * @return array<string>
-     */
-    array getHidden();
+    // Gets the hidden fields.
+    string[] getHidden();
 
     /**
      * Sets the virtual fields on this entity.
      *
-     * @param array<string> $fields An array of fields to treat as virtual.
-     * @param bool $merge Merge the new fields with the existing. By default false.
-     * @return this
+     * fieldNames - An array of fields to treat as virtual.
+     * shouldMerge - Merge the new fields with the existing. By default false.
      */
-    function setVirtual(array $fields, bool $merge = false);
+    IEntity virtualFields(string[] fieldNames, bool shouldMerge = false);
 
-    /**
-     * Gets the virtual fields on this entity.
-     *
-     * @return array<string>
-     */
-    string[] getVirtual();
+    // Gets the virtual fields on this entity.
+    string[] virtualFields();
 
     /**
      * Sets the dirty status of a single field.
      *
      * @param string $field the field to set or check status for
-     * @param bool $isDirty true means the field was changed, false means
-     * it was not changed. Default true.
+     * @param bool $isDirty true means the field was changed, false means it was not changed. Default true.
      * @return this
      */
-    function setDirty(string $field, bool $isDirty = true);
+    IENtity isFieldDirty(string fieldName, bool isDirty = true);
 
     /**
      * Checks if the entity is dirty or if a single field of it is dirty.
      *
-     * @param string|null $field The field to check the status for. Null for the whole entity.
-     * @return bool Whether the field was changed or not
+     * fieldName - The field to check the status for. Null for the whole entity.
+     * returns if the field was changed or not
      */
-    bool isDirty(Nullable!string $field = null);
+    bool isFieldDirty(string fieldName);
 
-    /**
-     * Gets the dirty fields.
-     *
-     * @return array<string>
-     */
-    string[] getDirty();
+    // Gets the dirty fields.
+    string[] dirtyFields();
 
-    /**
-     * Returns whether this entity has errors.
-     *
-     * @param bool $includeNested true will check nested entities for hasErrors()
-     */
-    bool hasErrors(bool $includeNested = true);
+    // Returns whether this entity has errors.
+    // includeNested - will check nested entities for hasErrors()
+    bool hasErrors(bool includeNested = true);
 
-    /**
-     * Returns all validation errors.
-     */
-    array getErrors();
+    // Returns all validation errors.
+    array errors();
 
     /**
      * Returns validation errors of a field
      *
-     * @param string $field Field name to get the errors from
+     * fieldName - Field name to get the errors from
      */
-    array getError(string $field);
+    array getError(string fieldName);
 
     /**
      * Sets error messages to the entity
@@ -105,7 +86,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param bool canOverwrite Whether to overwrite pre-existing errors for $fields
      * @return this
      */
-    function setErrors(array $errors, bool canOverwrite = false);
+    IEntity errors(array $errors, bool canOverwrite = false);
 
     /**
      * Sets errors for a single field
@@ -115,7 +96,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param bool canOverwrite Whether to overwrite pre-existing errors for $field
      * @return this
      */
-    function setError(string $field, $errors, bool canOverwrite = false);
+    IEntity errors(string fieldName, array $errors, bool canOverwrite = false);
 
     /**
      * Stores whether a field value can be changed or set in this entity.
@@ -125,14 +106,14 @@ interface IEntity : ArrayAccess, JsonSerializable
      * mark it as protected.
      * @return this
      */
-    function setAccess($field, bool $set);
+    function setAccess(string fieldName, bool $set);
 
     /**
      * Checks if a field is accessible
      *
      * @param string $field Field name to check
      */
-    bool isAccessible(string $field);
+    bool isAccessible(string fieldName);
 
     /**
      * Sets the source alias
@@ -151,7 +132,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginal(array $fields);
+    array extractOriginal(string[] fieldNames);
 
     /**
      * Returns an array with only the original fields
@@ -159,7 +140,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginalChanged(array $fields);
+    array extractOriginalChanged(string[] fieldNames);
 
     /**
      * Sets one or multiple fields to the specified value
@@ -172,7 +153,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * keys are `setter` and `guard`
      * @return this
      */
-    function set($field, $value = null, STRINGAA someOptions = []);
+    function set(string fieldName, $value = null, STRINGAA someOptions = []);
 
     /**
      * Returns the value of a field by name
@@ -180,7 +161,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param string $field the name of the field to retrieve
      * @return mixed
      */
-    function &get(string $field);
+    IValue get(string fieldName);
 
     /**
      * Returns the original value of a field.
@@ -188,12 +169,10 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param string $field The name of the field.
      * @return mixed
      */
-    function getOriginal(string $field);
+    IValue getOriginal(string fieldName);
 
-    /**
-     * Gets all original values of the entity.
-     */
-    array getOriginalValues();
+    // Gets all original values of the entity.
+    IValue[] getOriginalValues();
 
     /**
      * Returns whether this entity contains a field named $field
@@ -201,7 +180,8 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param array<string>|string $field The field to check.
      */
-    bool has($field);
+    bool has(string[] fieldNames);
+    bool has(string[] fieldNames...);
 
     /**
      * Removes a field or list of fields from this entity
@@ -209,14 +189,13 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param array<string>|string $field The field to unset.
      * @return this
      */
-    function unset($field);
+    IEntity unset(string fieldName);
 
     /**
      * Get the list of visible fields.
-     *
-     * @return array<string> A list of fields that are "visible" in all representations.
+     * returns a list of fields that are "visible" in all representations.
      */
-    string[] getVisible();
+    string[] getVisibleFields();
 
     /**
      * Returns an array with all the visible fields set in this entity.
@@ -233,7 +212,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param array<string> $fields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
      */
-    array extract(array $fields, bool $onlyDirty = false);
+    array extract(string[] fieldNAmes, bool $onlyDirty = false);
 
     /**
      * Sets the entire entity as clean, which means that it will appear as

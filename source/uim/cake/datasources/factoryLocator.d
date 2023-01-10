@@ -3,17 +3,13 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.Datasource;
+module uim.cake.satasources;
 
 import uim.cake.datasources.Locator\ILocator;
 import uim.cake.orm.locators.TableLocator;
 use InvalidArgumentException;
 
-/**
- * Class FactoryLocator
- */
-class FactoryLocator
-{
+class FactoryLocator {
     /**
      * A list of model factory functions.
      *
@@ -54,11 +50,10 @@ class FactoryLocator
 
     /**
      * Drop a model factory.
-     *
-     * @param string $type The name of the repository type to drop the factory for.
+     * aRepositoryTypeName - The name of the repository type to drop the factory for.
      */
-    static void drop(string $type) {
-        unset(static::_modelFactories[$type]);
+    static void drop(string aRepositoryTypeName) {
+        static::_modelFactories.remove(aRepositoryTypeName));
     }
 
     /**
@@ -69,7 +64,7 @@ class FactoryLocator
      * @return uim.cake.Datasource\Locator\ILocator|callable The factory for the repository type.
      */
     static function get(string $type) {
-        if (!isset(static::_modelFactories["Table"])) {
+        if ("Table"  !in static::_modelFactories)) {
             static::_modelFactories["Table"] = new TableLocator();
         }
 

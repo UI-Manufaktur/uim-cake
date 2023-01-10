@@ -21,19 +21,15 @@ trait ModelAwareTrait
 {
     /**
      * This object"s primary model class name. Should be a plural form.
-     * UIM will not inflect the name.
-     *
      * Example: For an object named "Comments", the modelClass would be "Comments".
-     * Plugin classes should use `Plugin.Comments` style names to correctly load
-     * models from the correct plugin.
+     * Plugin classes should use `Plugin.Comments` style names to correctly load models from the correct plugin.
      *
      * Use empty string to not use auto-loading on this object. Null auto-detects based on
      * controller name.
      *
-     * @var string|null
      * @deprecated 4.3.0 Use `Cake\orm.Locator\LocatorAwareTrait::$defaultTable` instead.
      */
-    protected $modelClass;
+    protected string _modelClassName;
 
     /**
      * A list of overridden model factory functions.
@@ -69,35 +65,35 @@ trait ModelAwareTrait
      * If a repository provider does not return an object a MissingModelException will
      * be thrown.
      *
-     * @param string|null $modelClass Name of model class to load. Defaults to this.modelClass.
+     * @param string|null _modelClassName Name of model class to load. Defaults to this.modelClass.
      *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null $modelType The type of repository to load. Defaults to the getModelType() value.
      * @return uim.cake.Datasource\IRepository The model instance created.
      * @throws uim.cake.Datasource\exceptions.MissingModelException If the model class cannot be found.
-     * @throws \UnexpectedValueException If $modelClass argument is not provided
-     *   and ModelAwareTrait::$modelClass property value is empty.
+     * @throws \UnexpectedValueException If _modelClassName argument is not provided
+     *   and ModelAwareTrait::_modelClassName property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.
      */
-    function loadModel(Nullable!string $modelClass = null, Nullable!string $modelType = null): IRepository
+    function loadModel(Nullable!string _modelClassName = null, Nullable!string $modelType = null): IRepository
     {
-        $modelClass = $modelClass ?? this.modelClass;
-        if (empty($modelClass)) {
+        _modelClassName = _modelClassName ?? this.modelClass;
+        if (empty(_modelClassName)) {
             throw new UnexpectedValueException("Default modelClass is empty");
         }
         $modelType = $modelType ?? this.getModelType();
 
         $options = [];
-        if (strpos($modelClass, "\\") == false) {
-            [, $alias] = pluginSplit($modelClass, true);
+        if (strpos(_modelClassName, "\\") == false) {
+            [, $alias] = pluginSplit(_modelClassName, true);
         } else {
-            $options["className"] = $modelClass;
+            $options["className"] = _modelClassName;
             /** @psalm-suppress PossiblyFalseOperand */
             $alias = substr(
-                $modelClass,
-                strrpos($modelClass, "\\") + 1,
+                _modelClassName,
+                strrpos(_modelClassName, "\\") + 1,
                 -strlen($modelType)
             );
-            $modelClass = $alias;
+            _modelClassName = $alias;
         }
 
         if (isset(this.{$alias})) {
@@ -106,13 +102,13 @@ trait ModelAwareTrait
 
         $factory = _modelFactories[$modelType] ?? FactoryLocator::get($modelType);
         if ($factory instanceof ILocator) {
-            this.{$alias} = $factory.get($modelClass, $options);
+            this.{$alias} = $factory.get(_modelClassName, $options);
         } else {
-            this.{$alias} = $factory($modelClass, $options);
+            this.{$alias} = $factory(_modelClassName, $options);
         }
 
         if (!this.{$alias}) {
-            throw new MissingModelException([$modelClass, $modelType]);
+            throw new MissingModelException([_modelClassName, $modelType]);
         }
 
         return this.{$alias};
