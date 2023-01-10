@@ -6,9 +6,9 @@
 
  * @since         3.9.0
 
- */module uim.cake.datasources.Paging;
+ */module uim.datasources.Paging;
 
-import uim.cake.datasources.IQuery;
+import uim.datasources.IQuery;
 
 /**
  * Simplified paginator which avoids potentially expensives queries

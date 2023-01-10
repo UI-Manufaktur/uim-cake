@@ -3,14 +3,14 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.datasources;
+module uim.datasources;
 
 @safe:
 import uim.cake;
 
 use BadMethodCallException;
 import uim.cake.collections.Iterator\MapReduce;
-import uim.cake.datasources.exceptions.RecordNotFoundException;
+import uim.datasources.exceptions.RecordNotFoundException;
 use InvalidArgumentException;
 use Traversable;
 
@@ -23,7 +23,7 @@ trait QueryTrait
     /**
      * Instance of a table object this query is bound to
      *
-     * @var uim.cake.datasources.IRepository
+     * @var uim.datasources.IRepository
      */
     protected _repository;
 
@@ -33,7 +33,7 @@ trait QueryTrait
      * When set, query execution will be bypassed.
      *
      * @var iterable|null
-     * @see uim.cake.datasources.QueryTrait::setResult()
+     * @see uim.datasources.QueryTrait::setResult()
      */
     protected _results;
 
@@ -56,7 +56,7 @@ trait QueryTrait
     /**
      * A query cacher instance if this query has caching enabled.
      *
-     * @var uim.cake.datasources.QueryCacher|null
+     * @var uim.datasources.QueryCacher|null
      */
     protected _cache;
 
@@ -493,7 +493,7 @@ trait QueryTrait
      *  $query.getOptions(); // Returns ["doABarrelRoll": true]
      * ```
      *
-     * @see uim.cake.datasources.IQuery::applyOptions() to read about the options that will
+     * @see uim.datasources.IQuery::applyOptions() to read about the options that will
      * be processed by this class and not returned by this function
      * @return array
      * @see applyOptions()

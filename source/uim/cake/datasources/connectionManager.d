@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.datasources;
+module uim.datasources;
 
 import uim.cake.core.StaticConfigTrait;
 import uim.cake.databases.Connection;
@@ -11,7 +11,7 @@ import uim.cake.databases.Driver\Mysql;
 import uim.cake.databases.Driver\Postgres;
 import uim.cake.databases.Driver\Sqlite;
 import uim.cake.databases.Driver\Sqlserver;
-import uim.cake.datasources.exceptions.MissingDatasourceConfigException;
+import uim.datasources.exceptions.MissingDatasourceConfigException;
 
 /**
  * Manages and loads instances of Connection
@@ -52,7 +52,7 @@ class ConnectionManager
     /**
      * The ConnectionRegistry used by the manager.
      *
-     * @var uim.cake.datasources.ConnectionRegistry
+     * @var uim.datasources.ConnectionRegistry
      */
     protected static _registry;
 

@@ -146,7 +146,7 @@ class Hash {
 
             foreach ($context[_key] as $item) {
                 if (is_object($item) && method_exists($item, "toArray")) {
-                    /** @var uim.cake.datasources.IEntity $item */
+                    /** @var uim.datasources.IEntity $item */
                     $item = $item.toArray();
                 }
                 foreach ((array)$item as $k: $v) {

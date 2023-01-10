@@ -4,7 +4,7 @@
   */module uim.cake.TestSuite\Fixture;
 
 import uim.cake.databases.schemas.TableSchema;
-import uim.cake.datasources.ConnectionManager;
+import uim.datasources.ConnectionManager;
 import uim.cake.TestSuite\ConnectionHelper;
 use InvalidArgumentException;
 

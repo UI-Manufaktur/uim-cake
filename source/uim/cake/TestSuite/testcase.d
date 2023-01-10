@@ -6,7 +6,7 @@
 import uim.cake.core.App;
 import uim.cake.core.Configure;
 import uim.cake.core.Plugin;
-import uim.cake.datasources.ConnectionManager;
+import uim.datasources.ConnectionManager;
 import uim.cake.events.EventManager;
 import uim.cake.http.BaseApplication;
 import uim.cake.orm.Entity;

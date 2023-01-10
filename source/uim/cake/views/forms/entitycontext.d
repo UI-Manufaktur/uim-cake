@@ -92,7 +92,7 @@ class EntityContext : IContext {
     protected void _prepare() {
         /** @var DORMTable|null myTable */
         myTable = _context["table"];
-        /** @var uim.cake.datasources.IEntity|iterable $entity */
+        /** @var uim.datasources.IEntity|iterable $entity */
         $entity = _context["entity"];
         if (empty(myTable)) {
             if (is_iterable($entity)) {

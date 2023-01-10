@@ -5,9 +5,9 @@ import uim.cake.core.exceptions.UIMException;
 import uim.cake.databases.IConstraints;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
-import uim.cake.datasources.IConnection;
-import uim.cake.datasources.ConnectionManager;
-import uim.cake.datasources.IFixture;
+import uim.datasources.IConnection;
+import uim.datasources.ConnectionManager;
+import uim.datasources.IFixture;
 import uim.cake.TestSuite\TestCase;
 use PDOException;
 use RuntimeException;
@@ -449,7 +449,7 @@ class FixtureManager
     void shutDown() {
         $shutdown = void (IConnection $db, array $fixtures) {
             $connection = $db.configName();
-            /** @var uim.cake.datasources.IFixture $fixture */
+            /** @var uim.datasources.IFixture $fixture */
             foreach ($fixtures as $fixture) {
                 if (this.isFixtureSetup($connection, $fixture)) {
                     $fixture.drop($db);

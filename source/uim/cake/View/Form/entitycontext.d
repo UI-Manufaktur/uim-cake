@@ -2,8 +2,8 @@ module uim.cake.View\Form;
 
 use ArrayAccess;
 import uim.cake.collections.Collection;
-import uim.cake.datasources.IEntity;
-import uim.cake.datasources.InvalidPropertyInterface;
+import uim.datasources.IEntity;
+import uim.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Entity;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.orm.Table;
@@ -101,7 +101,7 @@ class EntityContext : IContext
     protected void _prepare() {
         /** @var DORMTable|null $table */
         $table = _context["table"];
-        /** @var uim.cake.datasources.IEntity|iterable<uim.cake.Datasource\IEntity|array> $entity */
+        /** @var uim.datasources.IEntity|iterable<uim.cake.Datasource\IEntity|array> $entity */
         $entity = _context["entity"];
 
         _isCollection = is_iterable($entity);

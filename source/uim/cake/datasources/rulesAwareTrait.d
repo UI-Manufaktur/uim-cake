@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.datasources;
+module uim.datasources;
 
 @safe:
 import uim.cake;
@@ -26,7 +26,7 @@ trait RulesAwareTrait
     /**
      * The domain rules to be applied to entities saved by this table
      *
-     * @var uim.cake.datasources.RulesChecker
+     * @var uim.datasources.RulesChecker
      */
     protected _rulesChecker;
 
@@ -77,7 +77,7 @@ trait RulesAwareTrait
      * on rules that may involve complex logic or data that
      * needs to be fetched from relevant datasources.
      *
-     * @see uim.cake.datasources.RulesChecker
+     * @see uim.datasources.RulesChecker
      * @return uim.cake.Datasource\RulesChecker
      */
     function rulesChecker(): RulesChecker

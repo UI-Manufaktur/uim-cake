@@ -5,7 +5,7 @@
 
 import uim.cake.databases.Connection;
 import uim.cake.databases.IDriver;
-import uim.cake.datasources.ConnectionManager;
+import uim.datasources.ConnectionManager;
 use Closure;
 
 /**

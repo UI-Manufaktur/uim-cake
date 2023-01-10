@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.datasources;
+module uim.datasources;
 
 /**
  * Describes the methods that any class representing a data storage should
@@ -69,7 +69,7 @@ interface IRepository
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException if the record with such id
      * could not be found
      * @return uim.cake.Datasource\IEntity
-     * @see uim.cake.datasources.IRepository::find()
+     * @see uim.datasources.IRepository::find()
      */
     function get($primaryKey, STRINGAA someOptions = []): IEntity;
 
@@ -107,7 +107,7 @@ interface IRepository
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Returns the number of affected rows.
-     * @see uim.cake.datasources.IRepository::delete()
+     * @see uim.datasources.IRepository::delete()
      */
     int deleteAll($conditions);
 

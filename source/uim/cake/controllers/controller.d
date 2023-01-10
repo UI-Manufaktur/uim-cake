@@ -103,7 +103,7 @@ class Controller : IEventListener, IEventDispatcher {
      * tables your controller will be paginating.
      *
      * @var array
-     * @see uim.cake.datasources.Paging\NumericPaginator
+     * @see uim.datasources.Paging\NumericPaginator
      */
     $paginate = [];
 

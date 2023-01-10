@@ -1,6 +1,6 @@
 module uim.cake.databases.schemas;
 
-import uim.cake.datasources.ISchema;
+import uim.datasources.ISchema;
 
 // An interface used by database TableSchema objects.
 interface TableISchema : ISchema {

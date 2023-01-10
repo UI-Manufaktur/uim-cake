@@ -2,12 +2,12 @@ module uim.cake.satasources;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
-import uim.cake.datasources.exceptions.MissingDatasourceException;
+import uim.datasources.exceptions.MissingDatasourceException;
 
 /**
  * A registry object for connection instances.
  *
- * @see uim.cake.datasources.ConnectionManager
+ * @see uim.datasources.ConnectionManager
  * @: uim.cake.Core\ObjectRegistry<uim.cake.Datasource\IConnection>
  */
 class ConnectionRegistry : ObjectRegistry
@@ -66,7 +66,7 @@ class ConnectionRegistry : ObjectRegistry
 
         unset(aConfig["className"]);
 
-        /** @var uim.cake.datasources.IConnection */
+        /** @var uim.datasources.IConnection */
         return new $class(aConfig);
     }
 

@@ -5,7 +5,7 @@
 **********************************************************************************************************/
 module uim.cake.satasources;
 
-import uim.cake.datasources.Locator\ILocator;
+import uim.datasources.Locator\ILocator;
 import uim.cake.orm.locators.TableLocator;
 use InvalidArgumentException;
 

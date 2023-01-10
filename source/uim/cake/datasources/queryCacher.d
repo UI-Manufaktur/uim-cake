@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.datasources;
+module uim.datasources;
 
 import uim.cake.caches.Cache;
 use Closure;
@@ -17,7 +17,7 @@ use Traversable;
  * Used by {@link uim.cake.Datasource\QueryTrait} internally.
  *
  * @internal
- * @see uim.cake.datasources.QueryTrait::cache() for the interface.
+ * @see uim.datasources.QueryTrait::cache() for the interface.
  */
 class QueryCacher
 {

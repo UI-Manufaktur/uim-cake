@@ -1,6 +1,6 @@
-module uim.cake.datasources.Paging;
+module uim.datasources.Paging;
 
-import uim.cake.datasources.IResultSet;
+import uim.datasources.IResultSet;
 
 /**
  * This interface describes the methods for paginator instance.
