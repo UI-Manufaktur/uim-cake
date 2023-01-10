@@ -282,7 +282,7 @@ abstract class BaseErrorHandler
             $data["file"],
             $data["line"]
         );
-        $context = [];
+        $context = null;
         if (!empty(_config["trace"])) {
             $context["trace"] = Debugger::trace([
                 "start": 1,

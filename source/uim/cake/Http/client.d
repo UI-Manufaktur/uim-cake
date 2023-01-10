@@ -180,7 +180,7 @@ class Client : ClientInterface
      * @param array<string, mixed> aConfig Config options for scoped clients.
      * @throws \InvalidArgumentException
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.setConfig(aConfig);
 
         $adapter = _config["adapter"];
@@ -281,7 +281,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function get(string $url, $data = [], STRINGAA someOptions = []): Response
+    function get(string $url, $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $body = null;
@@ -307,7 +307,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function post(string $url, $data = [], STRINGAA someOptions = []): Response
+    function post(string $url, $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
@@ -323,7 +323,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function put(string $url, $data = [], STRINGAA someOptions = []): Response
+    function put(string $url, $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
@@ -339,7 +339,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function patch(string $url, $data = [], STRINGAA someOptions = []): Response
+    function patch(string $url, $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
@@ -355,7 +355,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function options(string $url, $data = [], STRINGAA someOptions = []): Response
+    function options(string $url, $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
@@ -371,7 +371,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function trace(string $url, $data = [], STRINGAA someOptions = []): Response
+    function trace(string $url, $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
@@ -387,7 +387,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function delete(string $url, $data = [], STRINGAA someOptions = []): Response
+    function delete(string $url, $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
@@ -403,7 +403,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options for the request.
      * @return uim.cake.http.Client\Response
      */
-    function head(string $url, array $data = [], STRINGAA someOptions = []): Response
+    function head(string $url, array $data = null, STRINGAA someOptions = null): Response
     {
         $options = _mergeOptions($options);
         $url = this.buildUrl($url, $data, $options);
@@ -464,7 +464,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Additional options to use.
      * @return uim.cake.http.Client\Response
      */
-    function send(RequestInterface $request, STRINGAA someOptions = []): Response
+    function send(RequestInterface $request, STRINGAA someOptions = null): Response
     {
         $redirects = 0;
         if (isset($options["redirect"])) {
@@ -520,7 +520,7 @@ class Client : ClientInterface
      * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      */
-    static void addMockResponse(string $method, string $url, Response $response, STRINGAA someOptions = []) {
+    static void addMockResponse(string $method, string $url, Response $response, STRINGAA someOptions = null) {
         if (!static::_mockAdapter) {
             static::_mockAdapter = new MockAdapter();
         }
@@ -558,7 +558,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options The config options stored with Client::config()
      * @return string A complete url with scheme, port, host, and path.
      */
-    string buildUrl(string $url, $query = [], STRINGAA someOptions = []) {
+    string buildUrl(string $url, $query = null, STRINGAA someOptions = null) {
         if (empty($options) && empty($query)) {
             return $url;
         }

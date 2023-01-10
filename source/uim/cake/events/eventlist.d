@@ -17,7 +17,7 @@ class EventList : ArrayAccess, Countable
      * Empties the list of dispatched events.
      */
     void flush() {
-        _events = [];
+        _events = null;
     }
 
     /**

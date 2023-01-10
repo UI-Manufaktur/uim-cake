@@ -45,7 +45,7 @@ interface IEventManager
      * @throws \InvalidArgumentException When event key is missing or callable is not an
      *   instance of Cake\events.IEventListener.
      */
-    function on(myEventKey, myOptions = [], ?callable $callable = null);
+    function on(myEventKey, myOptions = null, ?callable $callable = null);
 
     /**
      * Remove a listener from the active listeners.

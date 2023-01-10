@@ -21,14 +21,14 @@ class FormProtector
      *
      * @var array
      */
-    protected $fields = [];
+    protected $fields = null;
 
     /**
      * Unlocked fields.
      *
      * @var array<string>
      */
-    protected $unlockedFields = [];
+    protected $unlockedFields = null;
 
     /**
      * Error message providing detail for failed validation.
@@ -78,7 +78,7 @@ class FormProtector
      *
      * @param array<string, mixed> $data Data array, can contain key `unlockedFields` with list of unlocked fields.
      */
-    this(array $data = []) {
+    this(array $data = null) {
         if (!empty($data["unlockedFields"])) {
             this.unlockedFields = $data["unlockedFields"];
         }
@@ -277,7 +277,7 @@ class FormProtector
 
         $fields = Hash::flatten($formData);
         $fieldList = array_keys($fields);
-        $multi = $lockedFields = [];
+        $multi = $lockedFields = null;
         $isUnlocked = false;
 
         foreach ($fieldList as $i: $key) {
@@ -356,7 +356,7 @@ class FormProtector
         $fields = this.fields;
         $unlockedFields = this.unlockedFields;
 
-        $locked = [];
+        $locked = null;
         foreach ($fields as $key: $value) {
             if (is_numeric($value)) {
                 $value = (string)$value;
@@ -413,7 +413,7 @@ class FormProtector
      * @return string Message explaining why the tokens are not matching
      */
     protected string debugTokenNotMatching(array $formData, array $hashParts) {
-        $messages = [];
+        $messages = null;
         if (!isset($formData["_Token"]["debug"])) {
             return "Form protection debug token not found.";
         }
@@ -464,7 +464,7 @@ class FormProtector
      */
     protected array debugCheckFields(
         array $dataFields,
-        array $expectedFields = [],
+        array $expectedFields = null,
         string $intKeyMessage = "",
         string $stringKeyMessage = "",
         string $missingMessage = ""
@@ -495,7 +495,7 @@ class FormProtector
         string $intKeyMessage,
         string $stringKeyMessage
     ) {
-        $messages = [];
+        $messages = null;
         foreach ($dataFields as $key: $value) {
             if (is_int($key)) {
                 $foundKey = array_search($value, $expectedFields, true);
@@ -522,12 +522,12 @@ class FormProtector
      * @param string $missingMessage Message template
      * @return string|null Error message about expected fields
      */
-    protected Nullable!string debugExpectedFields(array $expectedFields = [], string $missingMessage = "") {
+    protected Nullable!string debugExpectedFields(array $expectedFields = null, string $missingMessage = "") {
         if (count($expectedFields) == 0) {
             return null;
         }
 
-        $expectedFieldNames = [];
+        $expectedFieldNames = null;
         foreach ($expectedFields as $key: $expectedField) {
             if (is_int($key)) {
                 $expectedFieldNames[] = $expectedField;

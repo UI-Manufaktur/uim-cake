@@ -33,12 +33,12 @@ class ErrorLogger : IErrorLogger
      *
      * @param array<string, mixed> myConfig Config array.
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         this.setConfig(myConfig);
     }
 
 
-    bool logMessage($level, string myMessage, array $context = []) {
+    bool logMessage($level, string myMessage, array $context = null) {
         if (!empty($context["request"])) {
             myMessage ~= this.getRequestContext($context["request"]);
         }

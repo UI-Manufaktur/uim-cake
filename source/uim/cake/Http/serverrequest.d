@@ -41,28 +41,28 @@ class ServerRequest : IServerRequest
      *
      * @var object|array|null
      */
-    protected $data = [];
+    protected $data = null;
 
     /**
      * Array of query string arguments
      *
      * @var array
      */
-    protected $query = [];
+    protected $query = null;
 
     /**
      * Array of cookie data.
      *
      * @var array<string, mixed>
      */
-    protected $cookies = [];
+    protected $cookies = null;
 
     /**
      * Array of environment data.
      *
      * @var array<string, mixed>
      */
-    protected _environment = [];
+    protected _environment = null;
 
     /**
      * Base URL path.
@@ -88,7 +88,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string>
      */
-    protected $trustedProxies = [];
+    protected $trustedProxies = null;
 
     /**
      * The built in detectors used with `is()` can be modified with `addDetector()`.
@@ -122,7 +122,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string, bool>
      */
-    protected _detectorCache = [];
+    protected _detectorCache = null;
 
     /**
      * Request body stream. Contains php://input unless `input` constructor option is used.
@@ -157,7 +157,7 @@ class ServerRequest : IServerRequest
      *
      * @var array<string, mixed>
      */
-    protected $attributes = [];
+    protected $attributes = null;
 
     /**
      * A list of properties that emulated by the PSR7 attribute methods.
@@ -171,7 +171,7 @@ class ServerRequest : IServerRequest
      *
      * @var array
      */
-    protected $uploadedFiles = [];
+    protected $uploadedFiles = null;
 
     /**
      * The HTTP protocol version used.
@@ -207,7 +207,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string, mixed> aConfig An array of request data to create a request with.
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         aConfig += [
             "params": this.params,
             "query": [],
@@ -478,7 +478,7 @@ class ServerRequest : IServerRequest
      * Clears the instance detector cache, used by the is() function
      */
     void clearDetectorCache() {
-        _detectorCache = [];
+        _detectorCache = null;
     }
 
     /**
@@ -743,7 +743,7 @@ class ServerRequest : IServerRequest
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
     array getHeaders() {
-        $headers = [];
+        $headers = null;
         foreach (_environment as $key: $value) {
             $name = null;
             if (strpos($key, "HTTP_") == 0) {
@@ -838,7 +838,7 @@ class ServerRequest : IServerRequest
     function withAddedHeader($name, $value) {
         $new = clone this;
         $name = this.normalizeHeaderName($name);
-        $existing = [];
+        $existing = null;
         if (isset($new._environment[$name])) {
             $existing = (array)$new._environment[$name];
         }
@@ -1048,7 +1048,7 @@ class ServerRequest : IServerRequest
             return $content.preferredType(this, [$type]) != null;
         }
 
-        $accept = [];
+        $accept = null;
         foreach ($content.parseAccept(this) as $types) {
             $accept = array_merge($accept, $types);
         }
@@ -1246,7 +1246,7 @@ class ServerRequest : IServerRequest
      */
     function withCookieCollection(CookieCollection $cookies) {
         $new = clone this;
-        $values = [];
+        $values = null;
         foreach ($cookies as $cookie) {
             $values[$cookie.getName()] = $cookie.getValue();
         }

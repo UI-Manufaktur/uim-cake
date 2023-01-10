@@ -35,7 +35,7 @@ class File
      * @var array<string, mixed>
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$info
      */
-    $info = [];
+    $info = null;
 
     /**
      * Holds the file handler resource if the file is opened

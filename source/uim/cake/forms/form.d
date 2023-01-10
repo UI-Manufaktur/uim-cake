@@ -58,14 +58,14 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * @var array
      */
-    protected _errors = [];
+    protected _errors = null;
 
     /**
      * Form"s data.
      *
      * @var array
      */
-    protected _data = [];
+    protected _data = null;
 
     /**
      * Constructor
@@ -241,7 +241,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      * @return bool False on validation failure, otherwise returns the
      *   result of the `_execute()` method.
      */
-    bool execute(array $data, STRINGAA someOptions = []) {
+    bool execute(array $data, STRINGAA someOptions = null) {
         _data = $data;
 
         $options += ["validate": true];

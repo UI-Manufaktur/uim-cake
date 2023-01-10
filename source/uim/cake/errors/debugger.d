@@ -130,7 +130,7 @@ class Debugger
      *
      * @var array
      */
-    protected _data = [];
+    protected _data = null;
 
     /**
      * Constructor.
@@ -162,7 +162,7 @@ class Debugger
         $t ~= '{:context}{:code}{:trace}</div>';
         _templates['js']['info'] = $t;
 
-        $links = [];
+        $links = null;
         $link = '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-code\')';
         $link ~= '.style.display = (document.getElementById(\'{:id}-code\').style.display == ';
         $link ~= '\'none\' ? \'\' : \'none\')">Code</a>';
@@ -196,7 +196,7 @@ class Debugger
      * @return static
      */
     static function getInstance(Nullable!string $class = null) {
-        static $instance = [];
+        static $instance = null;
         if (!empty($class)) {
             if (!$instance || strtolower($class) != strtolower(get_class($instance[0]))) {
                 $instance[0] = new $class();
@@ -356,7 +356,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function trace(STRINGAA someOptions = []) {
+    static function trace(STRINGAA someOptions = null) {
         return Debugger::formatTrace(debug_backtrace(), $options);
     }
 
@@ -377,7 +377,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    static function formatTrace($backtrace, STRINGAA someOptions = []) {
+    static function formatTrace($backtrace, STRINGAA someOptions = null) {
         if ($backtrace instanceof Throwable) {
             $backtrace = $backtrace.getTrace();
         }
@@ -393,7 +393,7 @@ class Debugger
         $options = Hash::merge($defaults, $options);
 
         $count = count($backtrace);
-        $back = [];
+        $back = null;
 
         _trace = [
             'line': '??',
@@ -414,7 +414,7 @@ class Debugger
                     $signature = $next['class'] . '::' . $next['function'];
                     $reference = $signature . '(';
                     if ($options['args'] && isset($next['args'])) {
-                        $args = [];
+                        $args = null;
                         foreach ($next['args'] as $arg) {
                             $args[] = Debugger::exportVar($arg);
                         }
@@ -500,7 +500,7 @@ class Debugger
      * @link https://book.cakephp.org/4/en/development/debugging.html#getting-an-excerpt-from-a-file
      */
     static string[] excerpt(string $file, int $line, int $context = 2) {
-        $lines = [];
+        $lines = null;
         if (!file_exists($file)) {
             return [];
         }
@@ -693,7 +693,7 @@ class Debugger
      */
     protected static function exportArray(array $var, DebugContext $context): ArrayNode
     {
-        $items = [];
+        $items = null;
 
         $remaining = $context.remainingDepth();
         if ($remaining >= 0) {
@@ -955,8 +955,8 @@ class Debugger
         }
         $trace = static::trace(['start': $data['start'], 'depth': '20']);
         $insertOpts = ['before': '{:', 'after': '}'];
-        $context = [];
-        $links = [];
+        $context = null;
+        $links = null;
         $info = '';
 
         foreach ((array)$data['context'] as $var: $value) {
@@ -1044,7 +1044,7 @@ class Debugger
      *    If null, the format will be chosen based on the configured exportFormatter, or
      *    environment conditions.
      */
-    static void printVar($var, array $location = [], ?bool $showHtml = null) {
+    static void printVar($var, array $location = null, ?bool $showHtml = null) {
         $location += ['file': null, 'line': null];
         if ($location['file']) {
             $location['file'] = static::trimPath((string)$location['file']);

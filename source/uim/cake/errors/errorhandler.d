@@ -92,7 +92,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param array<string, mixed> aConfig The options for error handling.
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         aConfig += [
             "exceptionRenderer": ExceptionRenderer::class,
         ];

@@ -84,7 +84,7 @@ class PhpError
         string $message,
         Nullable!string $file = null,
         Nullable!int $line = null,
-        array $trace = []
+        array $trace = null
     ) {
         this.code = $code;
         this.message = $message;
@@ -150,7 +150,7 @@ class PhpError
      * Get the stacktrace as a string.
      */
     string getTraceAsString() {
-        $out = [];
+        $out = null;
         foreach (this.trace as $frame) {
             $out[] = "{$frame["reference"]} {$frame["file"]}, line {$frame["line"]}";
         }

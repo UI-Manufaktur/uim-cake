@@ -16,7 +16,7 @@ interface PaginatorInterface
      * @param array $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
      */
-    function paginate(object $object, array $params = [], array $settings = []): IResultSet;
+    function paginate(object $object, array $params = null, array $settings = null): IResultSet;
 
     /**
      * Get paging params after pagination operation.

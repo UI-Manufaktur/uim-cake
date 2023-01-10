@@ -110,7 +110,7 @@ abstract class BaseApplication implements
     }
 
 
-    function addPlugin($name, Json aConfig = []) {
+    function addPlugin($name, Json aConfig = null) {
         if (is_string($name)) {
             $plugin = this.plugins.create($name, aConfig);
         } else {
@@ -130,7 +130,7 @@ abstract class BaseApplication implements
      * @param array<string, mixed> aConfig The configuration data for the plugin if using a string for $name
      * @return this
      */
-    function addOptionalPlugin($name, Json aConfig = []) {
+    function addOptionalPlugin($name, Json aConfig = null) {
         try {
             this.addPlugin($name, aConfig);
         } catch (MissingPluginException $e) {

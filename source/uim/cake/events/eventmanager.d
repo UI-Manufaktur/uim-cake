@@ -30,7 +30,7 @@ class EventManager : IEventManager
      *
      * @var array
      */
-    protected _listeners = [];
+    protected _listeners = null;
 
     /**
      * Internal flag to distinguish a common manager from the singleton
@@ -78,7 +78,7 @@ class EventManager : IEventManager
     }
 
 
-    function on(myEventKey, myOptions = [], ?callable $callable = null) {
+    function on(myEventKey, myOptions = null, ?callable $callable = null) {
         if (myEventKey instanceof IEventListener) {
             _attachSubscriber(myEventKey);
 
@@ -110,7 +110,7 @@ class EventManager : IEventManager
      */
     protected void _attachSubscriber(IEventListener $subscriber) {
         foreach ($subscriber.implementedEvents() as myEventKey: $function) {
-            myOptions = [];
+            myOptions = null;
             $method = $function;
             if (is_array($function) && isset($function["callable"])) {
                 [$method, myOptions] = _extractCallable($function, $subscriber);
@@ -281,7 +281,7 @@ class EventManager : IEventManager
 
 
     array listeners(string myEventKey) {
-        $localListeners = [];
+        $localListeners = null;
         if (!_isGlobal) {
             $localListeners = this.prioritisedListeners(myEventKey);
             $localListeners = empty($localListeners) ? [] : $localListeners;
@@ -293,7 +293,7 @@ class EventManager : IEventManager
         $priorities = array_unique($priorities);
         asort($priorities);
 
-        myResult = [];
+        myResult = null;
         foreach ($priorities as $priority) {
             if (isset($globalListeners[$priority])) {
                 myResult = array_merge(myResult, $globalListeners[$priority]);
@@ -412,7 +412,7 @@ class EventManager : IEventManager
     array __debugInfo() {
         $properties = get_object_vars(this);
         $properties["_generalManager"] = "(object) EventManager";
-        $properties["_listeners"] = [];
+        $properties["_listeners"] = null;
         foreach (myKey, $priorities; _listeners) {
             $listenerCount = 0;
             foreach ($priorities as $listeners) {

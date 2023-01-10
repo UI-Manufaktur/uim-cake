@@ -83,7 +83,7 @@ abstract class BaseApplication :
     }
 
 
-    function addPlugin(myName, array myConfig = []) {
+    function addPlugin(myName, array myConfig = null) {
         if (is_string(myName)) {
             myPlugin = this.plugins.create(myName, myConfig);
         } else {
@@ -103,7 +103,7 @@ abstract class BaseApplication :
      * @param array<string, mixed> myConfig The configuration data for the plugin if using a string for myName
      * @return this
      */
-    function addOptionalPlugin(myName, array myConfig = []) {
+    function addOptionalPlugin(myName, array myConfig = null) {
         try {
             this.addPlugin(myName, myConfig);
         } catch (MissingPluginException $e) {

@@ -84,14 +84,14 @@ class Folder
      *
      * @var array
      */
-    protected _messages = [];
+    protected _messages = null;
 
     /**
      * Holds errors from last method.
      *
      * @var array
      */
-    protected _errors = [];
+    protected _errors = null;
 
     /**
      * Holds array of complete directory paths.
@@ -168,7 +168,7 @@ class Folder
      * @return array Contents of current directory as an array, an empty array on failure
      */
     array read($sort = self::SORT_NAME, $exceptions = false, bool $fullPath = false) {
-        $dirs = $files = [];
+        $dirs = $files = null;
 
         if (!this.pwd()) {
             return [$dirs, $files];
@@ -265,7 +265,7 @@ class Folder
      */
     protected array _findRecursive(string $pattern, bool $sort = false) {
         [$dirs, $files] = this.read($sort);
-        $found = [];
+        $found = null;
 
         foreach (myFile; $files) {
             if (preg_match("/^" ~ $pattern ~ "$/i", myFile)) {
@@ -405,7 +405,7 @@ class Folder
      * @param array<string> $exceptions Array of files, directories to skip.
      * @return bool Success.
      */
-    bool chmod(string $path, Nullable!int $mode = null, bool $recursive = true, array $exceptions = []) {
+    bool chmod(string $path, Nullable!int $mode = null, bool $recursive = true, array $exceptions = null) {
         if (!$mode) {
             $mode = this.mode;
         }
@@ -465,7 +465,7 @@ class Folder
         if (!$path) {
             $path = this.path;
         }
-        $subdirectories = [];
+        $subdirectories = null;
 
         try {
             $iterator = new DirectoryIterator($path);
@@ -496,7 +496,7 @@ class Folder
         if (!$path) {
             $path = this.path;
         }
-        $files = [];
+        $files = null;
         $directories = [$path];
 
         if (is_array($exceptions)) {
@@ -742,7 +742,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success.
      */
-    bool copy(string $to, STRINGAA someOptions = []) {
+    bool copy(string $to, STRINGAA someOptions = null) {
         if (!this.pwd()) {
             return false;
         }
@@ -842,7 +842,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success
      */
-    bool move(string $to, STRINGAA someOptions = []) {
+    bool move(string $to, STRINGAA someOptions = null) {
         $options += ["from": this.path, "mode": this.mode, "skip": [], "recursive": true];
 
         if (this.copy($to, $options) && this.delete($options["from"])) {
@@ -860,7 +860,7 @@ class Folder
     array messages(bool $reset = true) {
         $messages = _messages;
         if ($reset) {
-            _messages = [];
+            _messages = null;
         }
 
         return $messages;
@@ -874,7 +874,7 @@ class Folder
     array errors(bool $reset = true) {
         $errors = _errors;
         if ($reset) {
-            _errors = [];
+            _errors = null;
         }
 
         return $errors;
@@ -896,7 +896,7 @@ class Folder
         }
         $path = replace("/", DIRECTORY_SEPARATOR, trim($path));
         $parts = explode(DIRECTORY_SEPARATOR, $path);
-        $newparts = [];
+        $newparts = null;
         $newpath = "";
         if ($path[0] == DIRECTORY_SEPARATOR) {
             $newpath = DIRECTORY_SEPARATOR;

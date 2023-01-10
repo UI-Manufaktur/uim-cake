@@ -41,7 +41,7 @@ class NumericPaginator : PaginatorInterface
      *
      * @var array<string, array>
      */
-    protected _pagingParams = [];
+    protected _pagingParams = null;
 
     /**
      * Handles automatic pagination of model records.
@@ -149,7 +149,7 @@ class NumericPaginator : PaginatorInterface
      * @return uim.cake.Datasource\IResultSet Query results
      * @throws uim.cake.Datasource\Paging\exceptions.PageOutOfBoundsException
      */
-    function paginate(object $object, array $params = [], array $settings = []): IResultSet
+    function paginate(object $object, array $params = null, array $settings = null): IResultSet
     {
         $query = null;
         if ($object instanceof IQuery) {
@@ -391,7 +391,7 @@ class NumericPaginator : PaginatorInterface
     protected string[] getAllowedParameters() {
         $allowed = this.getConfig("allowedParameters");
         if (!$allowed) {
-            $allowed = [];
+            $allowed = null;
         }
         $whitelist = this.getConfig("whitelist");
         if ($whitelist) {
@@ -529,7 +529,7 @@ class NumericPaginator : PaginatorInterface
         unset($options["direction"]);
 
         if (empty($options["order"])) {
-            $options["order"] = [];
+            $options["order"] = null;
         }
         if (!is_array($options["order"])) {
             return $options;
@@ -543,7 +543,7 @@ class NumericPaginator : PaginatorInterface
             $field = key($options["order"]);
             $sortAllowed = hasAllValues($field, $allowed, true);
             if (!$sortAllowed) {
-                $options["order"] = [];
+                $options["order"] = null;
                 $options["sort"] = null;
 
                 return $options;
@@ -571,7 +571,7 @@ class NumericPaginator : PaginatorInterface
      * @return array<string, mixed> $fields Unaliased fields where applicable
      */
     protected array _removeAliases(array $fields, string $model) {
-        $result = [];
+        $result = null;
         foreach ($fields as $field: $sort) {
             if (strpos($field, ".") == false) {
                 $result[$field] = $sort;
@@ -601,7 +601,7 @@ class NumericPaginator : PaginatorInterface
      */
     protected array _prefix(IRepository $object, array $order, bool $allowed = false) {
         $tableAlias = $object.getAlias();
-        $tableOrder = [];
+        $tableOrder = null;
         foreach ($order as $key: $value) {
             if (is_numeric($key)) {
                 $tableOrder[] = $value;

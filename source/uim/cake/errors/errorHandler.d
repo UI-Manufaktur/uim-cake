@@ -77,7 +77,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param array<string, mixed> myConfig The options for error handling.
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         myConfig += [
             "exceptionRenderer":ExceptionRenderer::class,
         ];

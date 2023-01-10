@@ -12,7 +12,7 @@ class Schema {
      *
      * @var array<string, array<string, mixed>>
      */
-    protected _fields = [];
+    protected _fields = null;
 
     /**
      * The default values for fields.

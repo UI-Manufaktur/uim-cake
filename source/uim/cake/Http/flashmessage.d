@@ -44,7 +44,7 @@ class FlashMessage
      * @param array<string, mixed> aConfig Config array.
      * @see FlashMessage::set() For list of valid config keys.
      */
-    this(Session $session, Json aConfig = []) {
+    this(Session $session, Json aConfig = null) {
         this.session = $session;
         this.setConfig(aConfig);
     }
@@ -70,7 +70,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::_defaultConfig For default values for the options.
      */
-    void set($message, STRINGAA someOptions = []) {
+    void set($message, STRINGAA someOptions = null) {
         $options += (array)this.getConfig();
 
         if (isset($options["escape"]) && !isset($options["params"]["escape"])) {
@@ -88,7 +88,7 @@ class FlashMessage
             $options["element"] = "flash/" ~ $element;
         }
 
-        $messages = [];
+        $messages = null;
         if (!$options["clear"]) {
             $messages = (array)this.session.read("Flash." ~ $options["key"]);
         }
@@ -125,7 +125,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void setExceptionMessage(Throwable $exception, STRINGAA someOptions = []) {
+    void setExceptionMessage(Throwable $exception, STRINGAA someOptions = null) {
         $options["element"] = $options["element"] ?? "error";
         $options["params"]["code"] = $options["params"]["code"] ?? $exception.getCode();
 
@@ -154,7 +154,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void success(string $message, STRINGAA someOptions = []) {
+    void success(string $message, STRINGAA someOptions = null) {
         $options["element"] = "success";
         this.set($message, $options);
     }
@@ -169,7 +169,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void error(string $message, STRINGAA someOptions = []) {
+    void error(string $message, STRINGAA someOptions = null) {
         $options["element"] = "error";
         this.set($message, $options);
     }
@@ -184,7 +184,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void warning(string $message, STRINGAA someOptions = []) {
+    void warning(string $message, STRINGAA someOptions = null) {
         $options["element"] = "warning";
         this.set($message, $options);
     }
@@ -199,7 +199,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    void info(string $message, STRINGAA someOptions = []) {
+    void info(string $message, STRINGAA someOptions = null) {
         $options["element"] = "info";
         this.set($message, $options);
     }

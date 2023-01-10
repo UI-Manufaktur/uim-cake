@@ -71,7 +71,7 @@ class ExceptionTrap
      *
      * @var array<\Closure>
      */
-    protected $callbacks = [];
+    protected $callbacks = null;
 
     /**
      * The currently registered global exception handler
@@ -93,7 +93,7 @@ class ExceptionTrap
      *
      * @param array<string, mixed> $options An options array. See _defaultConfig.
      */
-    this(STRINGAA someOptions = []) {
+    this(STRINGAA someOptions = null) {
         this.setConfig($options);
     }
 

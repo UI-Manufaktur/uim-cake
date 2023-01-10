@@ -29,5 +29,5 @@ interface IErrorLogger
      * @param string myMessage The message to be logged.
      * @param array $context Context.
      */
-    bool logMessage($level, string myMessage, array $context = []);
+    bool logMessage($level, string myMessage, array $context = null);
 }

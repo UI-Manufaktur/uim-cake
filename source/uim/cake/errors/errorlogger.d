@@ -30,7 +30,7 @@ class ErrorLogger : ErrorLoggerInterface
      *
      * @param array<string, mixed> aConfig Config array.
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.setConfig(aConfig);
     }
 
@@ -86,7 +86,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Use logError instead.
      */
-    bool logMessage($level, string $message, array $context = []) {
+    bool logMessage($level, string $message, array $context = null) {
         if (!empty($context["request"])) {
             $message ~= this.getRequestContext($context["request"]);
         }

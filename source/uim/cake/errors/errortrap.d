@@ -49,7 +49,7 @@ class ErrorTrap
      *
      * @param array<string, mixed> $options An options array. See _defaultConfig.
      */
-    this(STRINGAA someOptions = []) {
+    this(STRINGAA someOptions = null) {
         this.setConfig($options);
     }
 
@@ -154,7 +154,7 @@ class ErrorTrap
                 "The configured logger `{$loggerClass}` does not implement `logError()` " ~
                 "which will be required in future versions of UIM."
             );
-            $context = [];
+            $context = null;
             if (_config["trace"]) {
                 $context = [
                     "trace": $error.getTraceAsString(),

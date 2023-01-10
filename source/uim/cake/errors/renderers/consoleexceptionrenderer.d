@@ -63,7 +63,7 @@ class ConsoleExceptionRenderer
             $exceptions[] = $previous;
             $previous = $previous.getPrevious();
         }
-        $out = [];
+        $out = null;
         foreach ($exceptions as $i: $error) {
             $out = array_merge($out, this.renderException($error, $i));
         }

@@ -46,7 +46,7 @@ class HtmlErrorRenderer : ErrorRendererInterface
         $toggle = this.renderToggle($errorMessage, $id, "trace");
         $codeToggle = this.renderToggle("Code", $id, "code");
 
-        $excerpt = [];
+        $excerpt = null;
         if ($file && $line) {
             $excerpt = Debugger::excerpt($file, $line, 1);
         }

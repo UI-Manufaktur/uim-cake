@@ -18,7 +18,7 @@ class ConsoleErrorHandler : BaseErrorHandler {
      *
      * @param array<string, mixed> myConfig Config options for the error handler.
      */
-    this(array myConfig = []) {
+    this(array myConfig = null) {
         myConfig += [
             "stderr":new ConsoleOutput("php://stderr"),
             "log":false,

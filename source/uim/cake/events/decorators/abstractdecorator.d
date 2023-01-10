@@ -17,7 +17,7 @@ abstract class AbstractDecorator
      *
      * @var array
      */
-    protected _options = [];
+    protected _options = null;
 
     /**
      * Constructor.
@@ -25,7 +25,7 @@ abstract class AbstractDecorator
      * @param callable $callable Callable.
      * @param array<string, mixed> $options Decorator options.
      */
-    this(callable $callable, STRINGAA someOptions = []) {
+    this(callable $callable, STRINGAA someOptions = null) {
         _callable = $callable;
         _options = $options;
     }

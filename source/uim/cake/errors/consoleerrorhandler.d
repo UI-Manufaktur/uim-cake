@@ -23,7 +23,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      *
      * @param array<string, mixed> aConfig Config options for the error handler.
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         aConfig += [
             "stderr": new ConsoleOutput("php://stderr"),
             "log": false,
