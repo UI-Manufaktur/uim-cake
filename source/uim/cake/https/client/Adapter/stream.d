@@ -64,7 +64,7 @@ class Stream : AdapterInterface
     protected _connectionErrors = [];
 
 
-    array send(RequestInterface $request, array $options) {
+    array send(RequestInterface $request, STRINGAA someOptions) {
         _stream = null;
         _context = null;
         _contextOptions = [];
@@ -112,7 +112,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request to build context from.
      * @param array<string, mixed> $options Additional request options.
      */
-    protected void _buildContext(RequestInterface $request, array $options) {
+    protected void _buildContext(RequestInterface $request, STRINGAA someOptions) {
         _buildContent($request, $options);
         _buildHeaders($request, $options);
         _buildOptions($request, $options);
@@ -136,7 +136,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildHeaders(RequestInterface $request, array $options) {
+    protected void _buildHeaders(RequestInterface $request, STRINGAA someOptions) {
         $headers = [];
         foreach ($request.getHeaders() as $name: $values) {
             $headers[] = sprintf("%s: %s", $name, implode(", ", $values));
@@ -153,7 +153,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildContent(RequestInterface $request, array $options) {
+    protected void _buildContent(RequestInterface $request, STRINGAA someOptions) {
         $body = $request.getBody();
         $body.rewind();
         _contextOptions["content"] = $body.getContents();
@@ -165,7 +165,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildOptions(RequestInterface $request, array $options) {
+    protected void _buildOptions(RequestInterface $request, STRINGAA someOptions) {
         _contextOptions["method"] = $request.getMethod();
         _contextOptions["protocol_version"] = $request.getProtocolVersion();
         _contextOptions["ignore_errors"] = true;
@@ -188,7 +188,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildSslContext(RequestInterface $request, array $options) {
+    protected void _buildSslContext(RequestInterface $request, STRINGAA someOptions) {
         $sslOptions = [
             "ssl_verify_peer",
             "ssl_verify_peer_name",

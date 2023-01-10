@@ -76,7 +76,7 @@ class Number
      * @return string Formatted float.
      * @link https://book.cakephp.org/4/en/core-libraries/number.html#formatting-floating-point-numbers
      */
-    static string precision($value, int $precision = 3, array $options = []) {
+    static string precision($value, int $precision = 3, STRINGAA someOptions = []) {
         $formatter = static::formatter(["precision": $precision, "places": $precision] + $options);
 
         return $formatter.format((float)$value);
@@ -120,7 +120,7 @@ class Number
      * @return string Percentage string
      * @link https://book.cakephp.org/4/en/core-libraries/number.html#formatting-percentages
      */
-    static string toPercentage($value, int $precision = 2, array $options = []) {
+    static string toPercentage($value, int $precision = 2, STRINGAA someOptions = []) {
         $options += ["multiply": false, "type": NumberFormatter::PERCENT];
         if (!$options["multiply"]) {
             $value = (float)$value / 100;
@@ -145,7 +145,7 @@ class Number
      * @param array<string, mixed> $options An array with options.
      * @return string Formatted number
      */
-    static string format($value, array $options = []) {
+    static string format($value, STRINGAA someOptions = []) {
         $formatter = static::formatter($options);
         $options += ["before": "", "after": ""];
 
@@ -165,7 +165,7 @@ class Number
      * @param array<string, mixed> $options An array with options.
      * @return float point number
      */
-    static function parseFloat(string aValue, array $options = []): float
+    static function parseFloat(string aValue, STRINGAA someOptions = []): float
     {
         $formatter = static::formatter($options);
 
@@ -187,7 +187,7 @@ class Number
      * @param array<string, mixed> $options Options list.
      * @return string formatted delta
      */
-    static string formatDelta($value, array $options = []) {
+    static string formatDelta($value, STRINGAA someOptions = []) {
         $options += ["places": 0];
         $value = number_format((float)$value, $options["places"], ".", "");
         $sign = $value > 0 ? "+" : "";
@@ -219,7 +219,7 @@ class Number
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
-    static string currency($value, Nullable!string $currency = null, array $options = []) {
+    static string currency($value, Nullable!string $currency = null, STRINGAA someOptions = []) {
         $value = (float)$value;
         $currency = $currency ?: static::getDefaultCurrency();
 
@@ -343,7 +343,7 @@ class Number
      * @param array<string, mixed> $options An array with options.
      * @return \NumberFormatter The configured formatter instance
      */
-    static function formatter(array $options = []): NumberFormatter
+    static function formatter(STRINGAA someOptions = []): NumberFormatter
     {
         $locale = $options["locale"] ?? ini_get("intl.default_locale");
 
@@ -397,7 +397,7 @@ class Number
      * @param int $type The formatter type to construct. Defaults to NumberFormatter::DECIMAL.
      * @param array<string, mixed> $options See Number::formatter() for possible options.
      */
-    static void config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []) {
+    static void config(string $locale, int $type = NumberFormatter::DECIMAL, STRINGAA someOptions = []) {
         static::_formatters[$locale][$type] = static::_setAttributes(
             new NumberFormatter($locale, $type),
             $options
@@ -411,7 +411,7 @@ class Number
      * @param array<string, mixed> $options See Number::formatter() for possible options.
      * @return \NumberFormatter
      */
-    protected static function _setAttributes(NumberFormatter $formatter, array $options = []): NumberFormatter
+    protected static function _setAttributes(NumberFormatter $formatter, STRINGAA someOptions = []): NumberFormatter
     {
         if (isset($options["places"])) {
             $formatter.setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $options["places"]);
@@ -450,7 +450,7 @@ class Number
      * @param float|int $value An integer
      * @param array<string, mixed> $options An array with options.
      */
-    static string ordinal($value, array $options = []) {
+    static string ordinal($value, STRINGAA someOptions = []) {
         return static::formatter(["type": NumberFormatter::ORDINAL] + $options).format($value);
     }
 }

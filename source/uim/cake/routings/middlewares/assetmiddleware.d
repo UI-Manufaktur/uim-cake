@@ -29,7 +29,7 @@ class AssetMiddleware : IMiddleware
      *
      * @param array<string, mixed> $options The options to use
      */
-    this(array $options = []) {
+    this(STRINGAA someOptions = []) {
         if (!empty($options["cacheTime"])) {
             this.cacheTime = $options["cacheTime"];
         }

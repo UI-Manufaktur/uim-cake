@@ -69,7 +69,7 @@ class RouteCollection {
      * @param array<string, mixed> $options Additional options for the route. Primarily for the
      *   `_name` option, which enables named routes.
      */
-    void add(Route $route, array $options = []) {
+    void add(Route $route, STRINGAA someOptions = []) {
         // Explicit names
         if (isset($options["_name"])) {
             if (isset(_named[$options["_name"]])) {

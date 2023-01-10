@@ -212,7 +212,7 @@ class EntityContext : IContext
      *     schema should be used if it"s not explicitly provided.
      * @return mixed The value of the field or null on a miss.
      */
-    function val(string $field, array $options = []) {
+    function val(string $field, STRINGAA someOptions = []) {
         $options += [
             "default": null,
             "schemaDefault": true,

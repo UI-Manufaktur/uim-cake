@@ -939,7 +939,7 @@ class Validation
      * @param bool $caseInsensitive Set to true for case insensitive comparison.
      * @return bool Success
      */
-    static bool multiple($check, array $options = [], bool $caseInsensitive = false) {
+    static bool multiple($check, STRINGAA someOptions = [], bool $caseInsensitive = false) {
         $defaults = ["in": null, "max": null, "min": null];
         $options += $defaults;
 
@@ -1286,7 +1286,7 @@ class Validation
      * @param mixed $file The uploaded file data from PHP.
      * @param array<string, mixed> $options An array of options for the validation.
      */
-    static bool uploadedFile($file, array $options = []) {
+    static bool uploadedFile($file, STRINGAA someOptions = []) {
         $options += [
             "minSize": null,
             "maxSize": null,
@@ -1344,7 +1344,7 @@ class Validation
      * @return bool
      * @throws \InvalidArgumentException
      */
-    static bool imageSize($file, array $options) {
+    static bool imageSize($file, STRINGAA someOptions) {
         if (!isset($options["height"]) && !isset($options["width"])) {
             throw new InvalidArgumentException(
                 "Invalid image size validation parameters! Missing `width` and / or `height`."
@@ -1427,7 +1427,7 @@ class Validation
      * @param mixed $value Geographic location as string
      * @param array<string, mixed> $options Options for the validation logic.
      */
-    static bool geoCoordinate($value, array $options = []) {
+    static bool geoCoordinate($value, STRINGAA someOptions = []) {
         if (!is_scalar($value)) {
             return false;
         }
@@ -1462,7 +1462,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Latitude
      * @see uim.cake.validations.Validation::geoCoordinate()
      */
-    static bool latitude($value, array $options = []) {
+    static bool latitude($value, STRINGAA someOptions = []) {
         $options["format"] = "lat";
 
         return self::geoCoordinate($value, $options);
@@ -1477,7 +1477,7 @@ class Validation
      * @link https://en.wikipedia.org/wiki/Longitude
      * @see uim.cake.validations.Validation::geoCoordinate()
      */
-    static bool longitude($value, array $options = []) {
+    static bool longitude($value, STRINGAA someOptions = []) {
         $options["format"] = "long";
 
         return self::geoCoordinate($value, $options);
@@ -1512,7 +1512,7 @@ class Validation
      * @param mixed $value The value to check
      * @param array<string, mixed> $options An array of options. See above for the supported options.
      */
-    static bool utf8($value, array $options = []) {
+    static bool utf8($value, STRINGAA someOptions = []) {
         if (!is_string($value)) {
             return false;
         }

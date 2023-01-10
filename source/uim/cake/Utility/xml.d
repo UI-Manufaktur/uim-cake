@@ -93,7 +93,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function build($input, array $options = []) {
+    static function build($input, STRINGAA someOptions = []) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -130,7 +130,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    protected static function _loadXml(string $input, array $options) {
+    protected static function _loadXml(string $input, STRINGAA someOptions) {
         return static::load(
             $input,
             $options,
@@ -156,7 +156,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function loadHtml(string $input, array $options = []) {
+    static function loadHtml(string $input, STRINGAA someOptions = []) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -188,7 +188,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    protected static function load(string $input, array $options, Closure $callable) {
+    protected static function load(string $input, STRINGAA someOptions, Closure $callable) {
         $flags = 0;
         if (!empty($options["parseHuge"])) {
             $flags |= LIBXML_PARSEHUGE;
@@ -253,7 +253,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    static function fromArray($input, array $options = []) {
+    static function fromArray($input, STRINGAA someOptions = []) {
         if (is_object($input) && method_exists($input, "toArray") && is_callable([$input, "toArray"])) {
             $input = $input.toArray();
         }

@@ -174,7 +174,7 @@ class Text
      *     to be replaced with val
      * @param array<string, mixed> $options An array of options, see description above
      */
-    static string insert(string $str, array $data, array $options = []) {
+    static string insert(string $str, array $data, STRINGAA someOptions = []) {
         $defaults = [
             "before": ":", "after": "", "escape": "\\", "format": null, "clean": false,
         ];
@@ -244,7 +244,7 @@ class Text
      * @return string
      * @see uim.cake.Utility\Text::insert()
      */
-    static string cleanInsert(string $str, array $options) {
+    static string cleanInsert(string $str, STRINGAA someOptions) {
         $clean = $options["clean"];
         if (!$clean) {
             return $str;
@@ -474,7 +474,7 @@ class Text
      * @return string The highlighted text
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#highlighting-substrings
      */
-    static string highlight(string $text, $phrase, array $options = []) {
+    static string highlight(string $text, $phrase, STRINGAA someOptions = []) {
         if (empty($phrase)) {
             return $text;
         }
@@ -533,7 +533,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return string Trimmed string.
      */
-    static string tail(string $text, int $length = 100, array $options = []) {
+    static string tail(string $text, int $length = 100, STRINGAA someOptions = []) {
         $default = [
             "ellipsis": "...", "exact": true,
         ];
@@ -572,7 +572,7 @@ class Text
      * @return string Trimmed string.
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#truncating-text
      */
-    static string truncate(string $text, int $length = 100, array $options = []) {
+    static string truncate(string $text, int $length = 100, STRINGAA someOptions = []) {
         $default = [
             "ellipsis": "...", "exact": true, "html": false, "trimWidth": false,
         ];
@@ -674,7 +674,7 @@ class Text
      * @return string Trimmed string.
      * @see uim.cake.Utility\Text::truncate()
      */
-    static string truncateByWidth(string $text, int $length = 100, array $options = []) {
+    static string truncateByWidth(string $text, int $length = 100, STRINGAA someOptions = []) {
         return static::truncate($text, $length, ["trimWidth": true] + $options);
     }
 
@@ -690,7 +690,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return int
      */
-    protected static int _strlen(string $text, array $options) {
+    protected static int _strlen(string $text, STRINGAA someOptions) {
         if (empty($options["trimWidth"])) {
             $strlen = "mb_strlen";
         } else {
@@ -729,7 +729,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return string
      */
-    protected static string _substr(string $text, int $start, Nullable!int $length, array $options) {
+    protected static string _substr(string $text, int $start, Nullable!int $length, STRINGAA someOptions) {
         if (empty($options["trimWidth"])) {
             $substr = "mb_substr";
         } else {

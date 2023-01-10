@@ -121,7 +121,7 @@ class Route
      * @param array<string, mixed> $options Array of additional options for the Route
      * @throws \InvalidArgumentException When `$options["_method"]` are not in `VALID_METHODS` list.
      */
-    this(string $template, array $defaults = [], array $options = []) {
+    this(string $template, array $defaults = [], STRINGAA someOptions = []) {
         this.template = $template;
         this.defaults = $defaults;
         this.options = $options + ["_ext": [], "_middleware": []];

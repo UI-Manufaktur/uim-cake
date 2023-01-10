@@ -80,7 +80,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
      * @return string Relative time string.
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    string timeAgoInWords(I18nDateTimeInterface $time, array $options = []) {
+    string timeAgoInWords(I18nDateTimeInterface $time, STRINGAA someOptions = []) {
         $options = _options($options, FrozenTime::class);
         if ($options["timezone"]) {
             $time = $time.timezone($options["timezone"]);
@@ -300,7 +300,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
      * @return string Relative date string.
      * @see uim.cake.I18n\Date::timeAgoInWords()
      */
-    string dateAgoInWords(I18nDateTimeInterface $date, array $options = []) {
+    string dateAgoInWords(I18nDateTimeInterface $date, STRINGAA someOptions = []) {
         $options = _options($options, FrozenDate::class);
         if ($options["timezone"]) {
             $date = $date.timezone($options["timezone"]);
@@ -378,7 +378,7 @@ class RelativeTimeFormatter : DifferenceIFormatter {
      * @return array<string, mixed> Options with defaults applied.
      * @psalm-param class-string<uim.cake.I18n\FrozenDate>|class-string<uim.cake.I18n\FrozenTime> $class
      */
-    protected array _options(array $options, string $class) {
+    protected array _options(STRINGAA someOptions, string $class) {
         $options += [
             "from": $class::now(),
             "timezone": null,

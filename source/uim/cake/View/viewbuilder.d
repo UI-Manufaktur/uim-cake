@@ -264,7 +264,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      * @since 4.1.0
      */
-    function addHelper(string $helper, array $options = []) {
+    function addHelper(string $helper, STRINGAA someOptions = []) {
         if ($options) {
             $array = [$helper: $options];
         } else {
@@ -416,7 +416,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool $merge Whether to merge existing data with the new data.
      * @return this
      */
-    function setOptions(array $options, bool $merge = true) {
+    function setOptions(STRINGAA someOptions, bool $merge = true) {
         if ($merge) {
             $options = array_merge(_options, $options);
         }

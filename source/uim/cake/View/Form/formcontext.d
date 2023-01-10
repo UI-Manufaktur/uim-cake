@@ -72,7 +72,7 @@ class FormContext : IContext
     }
 
 
-    function val(string $field, array $options = []) {
+    function val(string $field, STRINGAA someOptions = []) {
         $options += [
             "default": null,
             "schemaDefault": true,

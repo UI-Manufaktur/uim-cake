@@ -47,7 +47,7 @@ class Mock : AdapterInterface
      * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      */
-    void addResponse(RequestInterface $request, Response $response, array $options) {
+    void addResponse(RequestInterface $request, Response $response, STRINGAA someOptions) {
         if (isset($options["match"]) && !($options["match"] instanceof Closure)) {
             $type = getTypeName($options["match"]);
             throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{$type}`.");
@@ -66,7 +66,7 @@ class Mock : AdapterInterface
      * @param array<string, mixed> $options Unused.
      * @return uim.cake.http.Client\Response[] The matched response or an empty array for no matches.
      */
-    array send(RequestInterface $request, array $options) {
+    array send(RequestInterface $request, STRINGAA someOptions) {
         $found = null;
         $method = $request.getMethod();
         $requestUri = (string)$request.getUri();

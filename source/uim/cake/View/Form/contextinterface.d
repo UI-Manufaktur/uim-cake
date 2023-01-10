@@ -42,7 +42,7 @@ interface IContext
      *   is needed for.
      * @return mixed
      */
-    function val(string $field, array $options = []);
+    function val(string $field, STRINGAA someOptions = []);
 
     /**
      * Check if a given field is "required".

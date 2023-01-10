@@ -174,7 +174,7 @@ class Cookie : CookieInterface
      *
      * @param array<string, mixed> $options Default options.
      */
-    static void setDefaults(array $options) {
+    static void setDefaults(STRINGAA someOptions) {
         if (isset($options["expires"])) {
             $options["expires"] = static::dateTimeInstance($options["expires"]);
         }
@@ -194,7 +194,7 @@ class Cookie : CookieInterface
      * @return static
      * @see uim.cake.Cookie\Cookie::setDefaults()
      */
-    static function create(string aName, $value, array $options = []) {
+    static function create(string aName, $value, STRINGAA someOptions = []) {
         $options += static::$defaults;
         $options["expires"] = static::dateTimeInstance($options["expires"]);
 

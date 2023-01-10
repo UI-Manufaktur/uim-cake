@@ -2080,7 +2080,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::uploadedFile() For options
      * @return this
      */
-    function uploadedFile(string $field, array $options, Nullable!string $message = null, $when = null) {
+    function uploadedFile(string $field, STRINGAA someOptions, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "uploadedFile", $extra + [
@@ -2284,7 +2284,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::multiple()
      * @return this
      */
-    function multipleOptions(string $field, array $options = [], Nullable!string $message = null, $when = null) {
+    function multipleOptions(string $field, STRINGAA someOptions = [], Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
         $caseInsensitive = $options["caseInsensitive"] ?? false;
         unset($options["caseInsensitive"]);

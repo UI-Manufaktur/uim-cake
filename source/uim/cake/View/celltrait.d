@@ -39,7 +39,7 @@ trait CellTrait
      * @return uim.cake.View\Cell The cell instance
      * @throws uim.cake.View\exceptions.MissingCellException If Cell class was not found.
      */
-    protected function cell(string $cell, array $data = [], array $options = []): Cell
+    protected function cell(string $cell, array $data = [], STRINGAA someOptions = []): Cell
     {
         $parts = explode("::", $cell);
 
@@ -73,7 +73,7 @@ trait CellTrait
      * @param array<string, mixed> $options The constructor options for the cell.
      * @return uim.cake.View\Cell
      */
-    protected function _createCell(string $className, string $action, Nullable!string $plugin, array $options): Cell
+    protected function _createCell(string $className, string $action, Nullable!string $plugin, STRINGAA someOptions): Cell
     {
         /** @var uim.cake.View\Cell $instance */
         $instance = new $className(this.request, this.response, this.getEventManager(), $options);

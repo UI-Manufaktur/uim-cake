@@ -725,7 +725,7 @@ class Router
      * @param array<string, mixed> $options The options for the builder
      * @return uim.cake.routings.RouteBuilder
      */
-    static function createRouteBuilder(string $path, array $options = []): RouteBuilder
+    static function createRouteBuilder(string $path, STRINGAA someOptions = []): RouteBuilder
     {
         $defaults = [
             "routeClass": static::defaultRouteClass(),
@@ -850,7 +850,7 @@ class Router
      * prepended, and have a matching plugin routing key set.
      *
      * @param string aName The plugin name to build routes for
-     * @param callable|array $options Either the options to use, or a callback
+     * @param callable|STRINGAA someOptions Either the options to use, or a callback
      * @param callable|null $callback The callback to invoke that builds the plugin routes.
      *   Only required when $options is defined
      * @return void

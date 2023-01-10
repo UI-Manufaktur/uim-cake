@@ -129,7 +129,7 @@ class Helper : IEventListener
      * @param string aKey the key to use for class. Defaults to `"class"`.
      * @return array<string, mixed> Array of options with $key set.
      */
-    array addClass(array $options, string $class, string aKey = "class") {
+    array addClass(STRINGAA someOptions, string $class, string aKey = "class") {
         if (isset($options[$key]) && is_array($options[$key])) {
             $options[$key][] = $class;
         } elseif (isset($options[$key]) && trim($options[$key])) {

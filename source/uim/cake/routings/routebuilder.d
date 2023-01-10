@@ -103,7 +103,7 @@ class RouteBuilder
      * @param array $params The scope"s routing parameters.
      * @param array<string, mixed> $options Options list.
      */
-    this(RouteCollection $collection, string $path, array $params = [], array $options = []) {
+    this(RouteCollection $collection, string $path, array $params = [], STRINGAA someOptions = []) {
         _collection = $collection;
         _path = $path;
         _params = $params;
@@ -308,7 +308,7 @@ class RouteBuilder
      *   is available at `/posts`
      *
      * @param string aName A controller name to connect resource routes for.
-     * @param callable|array $options Options to use when generating REST routes, or a callback.
+     * @param callable|STRINGAA someOptions Options to use when generating REST routes, or a callback.
      * @param callable|null $callback An optional callback to be executed in a nested scope. Nested
      *   scopes inherit the existing path and "id" parameter.
      * @return this
@@ -627,7 +627,7 @@ class RouteBuilder
      * @throws \InvalidArgumentException
      * @throws \BadMethodCallException
      */
-    function connect($route, $defaults = [], array $options = []): Route
+    function connect($route, $defaults = [], STRINGAA someOptions = []): Route
     {
         $defaults = this.parseDefaults($defaults);
         if (empty($options["_ext"])) {
@@ -748,7 +748,7 @@ class RouteBuilder
      *   shifted into the passed arguments. As well as supplying patterns for routing parameters.
      * @return uim.cake.routings.Route\Route|uim.cake.routings.Route\RedirectRoute
      */
-    function redirect(string $route, $url, array $options = []): Route
+    function redirect(string $route, $url, STRINGAA someOptions = []): Route
     {
         $options["routeClass"] = $options["routeClass"] ?? RedirectRoute::class;
         if (is_string($url)) {
@@ -829,7 +829,7 @@ class RouteBuilder
      *   name of any route created in a scope callback.
      *
      * @param string aName The plugin name to build routes for
-     * @param callable|array $options Either the options to use, or a callback to build routes.
+     * @param callable|STRINGAA someOptions Either the options to use, or a callback to build routes.
      * @param callable|null $callback The callback to invoke that builds the plugin routes
      *   Only required when $options is defined.
      * @return this

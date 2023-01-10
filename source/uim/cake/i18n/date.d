@@ -158,7 +158,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @param array<string, mixed> $options Array of options.
      * @return string Relative time string.
      */
-    string timeAgoInWords(array $options = []) {
+    string timeAgoInWords(STRINGAA someOptions = []) {
         /** @psalm-suppress UndefinedInterfaceMethod */
         return static::getDiffFormatter().dateAgoInWords(this, $options);
     }

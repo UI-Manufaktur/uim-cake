@@ -27,7 +27,7 @@ class RedirectRoute : Route
      * @param array $defaults Defaults for the route. Either a redirect=>value array or a UIM array URL.
      * @param array<string, mixed> $options Array of additional options for the Route
      */
-    this(string $template, array $defaults = [], array $options = []) {
+    this(string $template, array $defaults = [], STRINGAA someOptions = []) {
         super(($template, $defaults, $options);
         if (isset($defaults["redirect"])) {
             $defaults = (array)$defaults["redirect"];

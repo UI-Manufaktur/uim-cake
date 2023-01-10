@@ -920,7 +920,7 @@ abstract class TestCase : BaseTestCase
      * @throws uim.cake.orm.exceptions.MissingTableClassException
      * @return uim.cake.orm.Table|\PHPUnit\Framework\MockObject\MockObject
      */
-    function getMockForModel(string $alias, array $methods = [], array $options = []) {
+    function getMockForModel(string $alias, array $methods = [], STRINGAA someOptions = []) {
         $className = _getTableClassName($alias, $options);
         $connectionName = $className::defaultConnectionName();
         $connection = ConnectionManager::get($connectionName);
@@ -980,7 +980,7 @@ abstract class TestCase : BaseTestCase
      * @throws uim.cake.orm.exceptions.MissingTableClassException
      * @psalm-return class-string<uim.cake.orm.Table>
      */
-    protected string _getTableClassName(string $alias, array $options) {
+    protected string _getTableClassName(string $alias, STRINGAA someOptions) {
         if (empty($options["className"])) {
             $class = Inflector::camelize($alias);
             /** @psalm-var class-string<uim.cake.orm.Table>|null */

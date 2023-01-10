@@ -24,7 +24,7 @@ class Digest
      * @param uim.cake.http.Client $client Http client object.
      * @param array|null $options Options list.
      */
-    this(Client $client, ?array $options = null) {
+    this(Client $client, ?STRINGAA someOptions = null) {
         _client = $client;
     }
 

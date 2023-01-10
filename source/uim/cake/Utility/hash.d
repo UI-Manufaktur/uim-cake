@@ -1169,7 +1169,7 @@ class Hash
      * @throws \InvalidArgumentException When providing invalid data.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::nest
      */
-    static array nest(array $data, array $options = []) {
+    static array nest(array $data, STRINGAA someOptions = []) {
         if (!$data) {
             return $data;
         }

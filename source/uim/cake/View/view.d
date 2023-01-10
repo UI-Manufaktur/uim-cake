@@ -581,7 +581,7 @@ class View : IEventDispatcher
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} $options
      */
-    string element(string aName, array $data = [], array $options = []) {
+    string element(string aName, array $data = [], STRINGAA someOptions = []) {
         $options += ["callbacks": false, "cache": null, "plugin": null, "ignoreMissing": false];
         if (isset($options["cache"])) {
             $options["cache"] = _elementCache(
@@ -625,7 +625,7 @@ class View : IEventDispatcher
      * @return string The rendered content.
      * @throws \RuntimeException When $options is lacking a "key" option.
      */
-    string cache(callable $block, array $options = []) {
+    string cache(callable $block, STRINGAA someOptions = []) {
         $options += ["key": "", "config": this.elementCache];
         if (empty($options["key"])) {
             throw new RuntimeException("Cannot cache content with an empty key");
@@ -1513,7 +1513,7 @@ class View : IEventDispatcher
      * @return array Element Cache configuration.
      * @psalm-return array{key:string, config:string}
      */
-    protected array _elementCache(string aName, array $data, array $options) {
+    protected array _elementCache(string aName, array $data, STRINGAA someOptions) {
         if (isset($options["cache"]["key"], $options["cache"]["config"])) {
             /** @psalm-var array{key:string, config:string}*/
             $cache = $options["cache"];
@@ -1560,7 +1560,7 @@ class View : IEventDispatcher
      * @triggers View.beforeRender this, [$file]
      * @triggers View.afterRender this, [$file, $element]
      */
-    protected string _renderElement(string $file, array $data, array $options) {
+    protected string _renderElement(string $file, array $data, STRINGAA someOptions) {
         $current = _current;
         $restore = _currentType;
         _currentType = static::TYPE_ELEMENT;

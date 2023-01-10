@@ -249,7 +249,7 @@ class StringTemplate
      * @param array<string>|null $exclude Array of options to be excluded, the options here will not be part of the return.
      * @return string Composed attributes.
      */
-    string formatAttributes(?array $options, ?array $exclude = null) {
+    string formatAttributes(?STRINGAA someOptions, ?array $exclude = null) {
         $insertBefore = " ";
         $options = (array)$options + ["escape": true];
 

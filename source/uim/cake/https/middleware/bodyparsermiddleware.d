@@ -51,7 +51,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @param array<string, mixed> $options The options to use. See above.
      */
-    this(array $options = []) {
+    this(STRINGAA someOptions = []) {
         $options += ["json": true, "xml": false, "methods": null];
         if ($options["json"]) {
             this.addParser(
