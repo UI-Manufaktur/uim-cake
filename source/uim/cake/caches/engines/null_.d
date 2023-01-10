@@ -16,7 +16,7 @@ import uim.cake;
 class NullEngine : CacheEngine
 {
 
-    bool init(Json aConfig = []) {
+    bool init(Json aConfig = null) {
         return true;
     }
 

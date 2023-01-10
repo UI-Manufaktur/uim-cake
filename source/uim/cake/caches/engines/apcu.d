@@ -14,7 +14,7 @@ class ApcuEngine : CacheEngine {
      * Contains the compiled group names
      * (prefixed with the global configuration prefix)
      */
-    protected string[] _compiledGroupNames = [];
+    protected string[] _compiledGroupNames = null;
 
     /**
      * Initialize the Cache Engine
@@ -24,7 +24,7 @@ class ApcuEngine : CacheEngine {
      * @param array<string, mixed> aConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(Json aConfig = []) {
+    bool init(Json aConfig = null) {
         if (!extension_loaded("apcu")) {
             throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
         }
@@ -182,7 +182,7 @@ class ApcuEngine : CacheEngine {
             ksort($groups);
         }
 
-        $result = [];
+        $result = null;
         $groups = array_values($groups);
         foreach (_config["groups"] as $i: $group) {
             $result[] = $group . $groups[$i];

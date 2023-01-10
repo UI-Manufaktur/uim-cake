@@ -24,7 +24,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
     ];
 
 
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         if (Configure::read("debug")) {
             Debugger::checkSecurityKeys();
         }

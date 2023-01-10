@@ -63,7 +63,7 @@ class FileEngine : CacheEngine
      * @param array<string, mixed> aConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(Json aConfig = []) {
+    bool init(Json aConfig = null) {
         super.init(aConfig);
 
         if (_config["path"] == null) {
@@ -229,7 +229,7 @@ class FileEngine : CacheEngine
             $directory,
             RecursiveIteratorIterator::SELF_FIRST
         );
-        $cleared = [];
+        $cleared = null;
         /** @var \SplFileInfo $fileInfo */
         foreach ($contents as $fileInfo) {
             if ($fileInfo.isFile()) {

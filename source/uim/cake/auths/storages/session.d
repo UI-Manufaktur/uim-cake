@@ -57,7 +57,7 @@ class SessionStorage : IStorage
      * @param uim.cake.http.Response $response Response instance.
      * @param array<string, mixed> aConfig Configuration list.
      */
-    this(ServerRequest $request, Response $response, Json aConfig = []) {
+    this(ServerRequest $request, Response $response, Json aConfig = null) {
         _session = $request.getSession();
         this.setConfig(aConfig);
     }

@@ -38,7 +38,7 @@ class ControllerAuthorize : BaseAuthorize
     protected _Controller;
 
 
-    this(ComponentRegistry $registry, Json aConfig = []) {
+    this(ComponentRegistry $registry, Json aConfig = null) {
         super(($registry, aConfig);
         this.controller($registry.getController());
     }

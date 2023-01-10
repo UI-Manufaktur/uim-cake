@@ -64,7 +64,7 @@ abstract class BaseAuthenticate : IEventListener {
      * @param uim.cake.controllers.ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> aConfig Array of config to use.
      */
-    this(ComponentRegistry aRegistry, Json aConfig = []) {
+    this(ComponentRegistry aRegistry, Json aConfig = null) {
         _registry = aRegistry;
         this.setConfig(aConfig);
     }

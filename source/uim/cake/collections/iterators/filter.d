@@ -54,7 +54,7 @@ class FilterIterator : Collection {
         // ArrayIterator can be traversed strictly.
         // Let"s do that for performance gains
         $callback = _callback;
-        $res = [];
+        $res = null;
 
         foreach ($k, $v; $iterator) {
             if ($callback($v, $k, $iterator)) {

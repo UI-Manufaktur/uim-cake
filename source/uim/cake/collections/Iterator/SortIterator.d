@@ -48,7 +48,7 @@ class SortIterator : Collection {
         }
 
         $callback = _propertyExtractor($callback);
-        $results = [];
+        $results = null;
         foreach ($items as $key: $val) {
             $val = $callback($val);
             if ($val instanceof DateTimeInterface && $type == \SORT_NUMERIC) {

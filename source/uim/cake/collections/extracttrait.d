@@ -123,7 +123,7 @@ trait ExtractTrait
      */
     protected function _createMatcherFilter(array $conditions): Closure
     {
-        $matchers = [];
+        $matchers = null;
         foreach ($conditions as $property: $value) {
             $extractor = _propertyExtractor($property);
             $matchers[] = function ($v) use ($extractor, $value) {

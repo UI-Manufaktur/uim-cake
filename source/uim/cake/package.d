@@ -30,7 +30,7 @@ if (!function_exists("debug")) {
             return $var;
         }
 
-        myLocation = [];
+        myLocation = null;
         if ($showFrom) {
             $trace = Debugger::trace(["start": 1, "depth": 2, "format": "array"]);
             /** @psalm-suppress PossiblyInvalidArrayOffset */
@@ -60,7 +60,7 @@ if (!function_exists("stackTrace")) {
      *
      * @param array<string, mixed> myOptions Format for outputting stack trace
      */
-    void stackTrace(array myOptions = []) {
+    void stackTrace(array myOptions = null) {
         if (!Configure::read("debug")) {
             return;
         }

@@ -71,7 +71,7 @@ class DigestAuthenticate : BasicAuthenticate {
      *   used on this request.
      * @param array<string, mixed> aConfig Array of config to use.
      */
-    this(ComponentRegistry $registry, Json aConfig = []) {
+    this(ComponentRegistry $registry, Json aConfig = null) {
         this.setConfig([
             "nonceLifetime": 300,
             "secret": Security::getSalt(),
@@ -153,7 +153,7 @@ class DigestAuthenticate : BasicAuthenticate {
         if (substr(aDigest, 0, 7) == "Digest ") {
             aDigest = substr(aDigest, 7);
         }
-        $keys = $match = [];
+        $keys = $match = null;
         $req = ["nonce": 1, "nc": 1, "cnonce": 1, "qop": 1, "username": 1, "uri": 1, "response": 1];
         preg_match_all("/(\w+)=([\""]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/", aDigest, $match, PREG_SET_ORDER);
 
@@ -218,7 +218,7 @@ class DigestAuthenticate : BasicAuthenticate {
             $options["stale"] = true;
         }
 
-        $opts = [];
+        $opts = null;
         foreach ($k, $v, $options) {
             if (is_bool($v)) {
                 $v = $v ? "true" : "false";

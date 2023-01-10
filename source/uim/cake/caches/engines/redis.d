@@ -59,7 +59,7 @@ class RedisEngine : CacheEngine {
      * @param array<string, mixed> aConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(Json aConfig = []) {
+    bool init(Json aConfig = null) {
         if (!extension_loaded("redis")) {
             throw new RuntimeException("The `redis` extension must be enabled to use RedisEngine.");
         }
@@ -305,7 +305,7 @@ class RedisEngine : CacheEngine {
      * @return array<string>
      */
     string[] groups() {
-        $result = [];
+        $result = null;
         foreach (_config["groups"] as $group) {
             $value = _Redis.get(_config["prefix"] . $group);
             if (!$value) {

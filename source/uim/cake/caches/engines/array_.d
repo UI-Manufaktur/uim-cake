@@ -24,7 +24,7 @@ class ArrayEngine : CacheEngine {
      *
      * Structured as [key: [exp: expiration, val: value]]
      */
-    protected array<string, array> $data = [];
+    protected array<string, array> $data = null;
 
     /**
      * Write data for key into cache
@@ -123,7 +123,7 @@ class ArrayEngine : CacheEngine {
      * @return bool True Returns true.
      */
     bool clear() {
-        this.data = [];
+        this.data = null;
 
         return true;
     }
@@ -134,7 +134,7 @@ class ArrayEngine : CacheEngine {
      * the group accordingly.
      */
     string[] groups() {
-        $result = [];
+        $result = null;
         foreach (_config["groups"] as $group) {
             string aKey = _config["prefix"] . $group;
             if (!isset(this.data[string aKey])) {

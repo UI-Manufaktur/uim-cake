@@ -47,7 +47,7 @@ class SortIterator : Collection {
         }
 
         $callback = _propertyExtractor($callback);
-        myResults = [];
+        myResults = null;
         foreach (myItems as myKey: $val) {
             $val = $callback($val);
             if ($val instanceof IDateTime && myType == \SORT_NUMERIC) {

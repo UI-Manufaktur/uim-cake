@@ -70,12 +70,12 @@ class MemcachedEngine : CacheEngine {
      *
      * @var array<string, int>
      */
-    protected _serializers = [];
+    protected _serializers = null;
 
     /**
      * @var array<string>
      */
-    protected string[] _compiledGroupNames = [];
+    protected string[] _compiledGroupNames = null;
 
     /**
      * Initialize the Cache Engine
@@ -87,7 +87,7 @@ class MemcachedEngine : CacheEngine {
      * @throws \InvalidArgumentException When you try use authentication without
      *   Memcached compiled with SASL support
      */
-    bool init(Json aConfig = []) {
+    bool init(Json aConfig = null) {
         if (!extension_loaded("memcached")) {
             throw new RuntimeException("The `memcached` extension must be enabled to use MemcachedEngine.");
         }
@@ -143,7 +143,7 @@ class MemcachedEngine : CacheEngine {
             return true;
         }
 
-        $servers = [];
+        $servers = null;
         foreach (_config["servers"] as $server) {
             $servers[] = this.parseServerString($server);
         }
@@ -300,7 +300,7 @@ class MemcachedEngine : CacheEngine {
      * @return bool Whether the write was successful or not.
      */
     bool setMultiple($values, $ttl = null) {
-        $cacheData = [];
+        $cacheData = null;
         foreach ($values as $key: $value) {
             $cacheData[_key($key)] = $value;
         }
@@ -336,13 +336,13 @@ class MemcachedEngine : CacheEngine {
      *   false if cached data could not be retrieved.
      */
     array getMultiple($keys, $default = null) {
-        $cacheKeys = [];
+        $cacheKeys = null;
         foreach ($keys as $key) {
             $cacheKeys[$key] = _key($key);
         }
 
         $values = _Memcached.getMulti($cacheKeys);
-        $return = [];
+        $return = null;
         foreach ($cacheKeys as $original: $prefixed) {
             $return[$original] = $values[$prefixed] ?? $default;
         }
@@ -391,7 +391,7 @@ class MemcachedEngine : CacheEngine {
      *   deleted, false if it didn"t exist or couldn"t be removed.
      */
     bool deleteMultiple($keys) {
-        $cacheKeys = [];
+        $cacheKeys = null;
         foreach ($keys as $key) {
             $cacheKeys[] = _key($key);
         }
@@ -456,7 +456,7 @@ class MemcachedEngine : CacheEngine {
             ksort($groups);
         }
 
-        $result = [];
+        $result = null;
         $groups = array_values($groups);
         foreach (_config["groups"] as $i: $group) {
             $result[] = $group . $groups[$i];

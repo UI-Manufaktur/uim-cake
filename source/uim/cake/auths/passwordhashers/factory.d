@@ -20,7 +20,7 @@ class PasswordHasherFactory {
      *   it does not extend {@link uim.cake.Auth\AbstractPasswordHasher}
      */
     static function build($passwordHasher): AbstractPasswordHasher {
-        aConfig = [];
+        aConfig = null;
         if (is_string($passwordHasher)) {
             $class = $passwordHasher;
         } else {

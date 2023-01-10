@@ -200,7 +200,7 @@ trait CollectionTrait
     function groupBy($path): ICollection
     {
         $callback = _propertyExtractor($path);
-        $group = [];
+        $group = null;
         foreach (this.optimizeUnwrap() as $value) {
             $pathValue = $callback($value);
             if ($pathValue == null) {
@@ -219,7 +219,7 @@ trait CollectionTrait
     function indexBy($path): ICollection
     {
         $callback = _propertyExtractor($path);
-        $group = [];
+        $group = null;
         foreach (this.optimizeUnwrap() as $value) {
             $pathValue = $callback($value);
             if ($pathValue == null) {
@@ -362,7 +362,7 @@ trait CollectionTrait
         }
 
         $generator = function ($iterator, $length) {
-            $result = [];
+            $result = null;
             $bucket = 0;
             $offset = 0;
 
@@ -501,7 +501,7 @@ trait CollectionTrait
         };
 
         $reducer = void ($values, $key, MapReduce $mapReduce) {
-            $result = [];
+            $result = null;
             foreach ($values as $value) {
                 $result += $value;
             }
@@ -514,13 +514,13 @@ trait CollectionTrait
 
     function nest($idPath, $parentPath, string $nestingKey = "children"): ICollection
     {
-        $parents = [];
+        $parents = null;
         $idPath = _propertyExtractor($idPath);
         $parentPath = _propertyExtractor($parentPath);
         $isObject = true;
 
         $mapper = void ($row, $key, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey) {
-            $row[$nestingKey] = [];
+            $row[$nestingKey] = null;
             $id = $idPath($row, $key);
             $parentId = $parentPath($row, $key);
             $parents[$id] = &$row;
@@ -543,7 +543,7 @@ trait CollectionTrait
                 return null;
             }
 
-            $children = [];
+            $children = null;
             foreach ($values as $id) {
                 $children[] = &$parents[$id];
             }
@@ -778,9 +778,9 @@ trait CollectionTrait
             return this.newCollection([]);
         }
 
-        $collectionArrays = [];
-        $collectionArraysKeys = [];
-        $collectionArraysCounts = [];
+        $collectionArrays = null;
+        $collectionArraysKeys = null;
+        $collectionArraysCounts = null;
 
         foreach (this.toList() as $value) {
             $valueCount = count($value);
@@ -793,7 +793,7 @@ trait CollectionTrait
             $collectionArrays[] = $value;
         }
 
-        $result = [];
+        $result = null;
         $lastIndex = count($collectionArrays) - 1;
         // holds the indexes of the arrays that generate the current combination
         $currentIndexes = array_fill(0, $lastIndex + 1, 0);
@@ -834,7 +834,7 @@ trait CollectionTrait
     {
         $arrayValue = this.toList();
         $length = count(current($arrayValue));
-        $result = [];
+        $result = null;
         foreach ($arrayValue as $row) {
             if (count($row) != $length) {
                 throw new LogicException("Child arrays do not have even length");

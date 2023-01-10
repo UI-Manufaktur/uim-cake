@@ -83,7 +83,7 @@ class Cache {
      *
      * @var array<string, array>
      */
-    protected static _groups = [];
+    protected static _groups = null;
 
     /**
      * Cache Registry used for creating and using cache adapters.
@@ -441,7 +441,7 @@ class Cache {
      * @return array<string, bool> Status code. For each configuration, it reports the status of the operation
      */
     static array clearAll() {
-        $status = [];
+        $status = null;
 
         foreach (self::configured() as aConfig) {
             $status[aConfig] = self::clear(aConfig);

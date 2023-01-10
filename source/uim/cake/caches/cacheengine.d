@@ -65,7 +65,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param array<string, mixed> aConfig Associative array of parameters for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(Json aConfig = []) {
+    bool init(Json aConfig = null) {
         this.setConfig(aConfig);
 
         if (!empty(_config["groups"])) {
@@ -130,7 +130,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     {
         this.ensureValidType($keys);
 
-        $results = [];
+        $results = null;
         foreach ($keys as $key) {
             $results[$key] = this.get(string aKey, $default);
         }

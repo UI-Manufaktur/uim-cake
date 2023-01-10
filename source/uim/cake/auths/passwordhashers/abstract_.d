@@ -19,10 +19,10 @@ abstract class AbstractPasswordHasher {
     /**
      * Default config
      */
-    protected Json _defaultConfig = [];
+    protected Json _defaultConfig = null;
 
     this(
-        Json aConfig = [] // aConfig - Config data
+        Json aConfig = null // aConfig - Config data
     ) {
         this.setConfig(aConfig);
     }

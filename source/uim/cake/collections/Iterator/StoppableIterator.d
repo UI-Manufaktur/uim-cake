@@ -81,7 +81,7 @@ class StoppableIterator : Collection {
         // Let"s do that for performance gains
 
         $callback = _condition;
-        $res = [];
+        $res = null;
 
         foreach ($iterator as $k: $v) {
             if ($callback($v, $k, $iterator)) {

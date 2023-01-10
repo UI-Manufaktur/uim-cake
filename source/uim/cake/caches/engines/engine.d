@@ -50,7 +50,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param array<string, mixed> myConfig Associative array of parameters for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = []) {
+    bool init(array myConfig = null) {
         this.setConfig(myConfig);
 
         if (!empty(_config["groups"])) {
@@ -112,7 +112,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     iterable getMultiple(myKeys, $default = null) {
         this.ensureValidType(myKeys);
 
-        myResults = [];
+        myResults = null;
         foreach (myKey; myKeys) {
             myResults[myKey] = this.get(myKey, $default);
         }
