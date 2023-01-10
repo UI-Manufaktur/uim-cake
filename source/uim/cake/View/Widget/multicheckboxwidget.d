@@ -116,7 +116,7 @@ class MultiCheckboxWidget : BasicWidget
      * @return array<string> An array of rendered inputs.
      */
     protected string[] _renderInputs(array $data, IContext $context) {
-        $out = [];
+        $out = null;
         foreach ($data["options"] as $key: $val) {
             // Grouped inputs in a fieldset.
             if (is_string($key) && is_array($val) && !isset($val["text"], $val["value"])) {

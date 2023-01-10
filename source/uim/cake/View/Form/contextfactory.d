@@ -16,7 +16,7 @@ class ContextFactory
      *
      * @var array<string, array>
      */
-    protected $providers = [];
+    protected $providers = null;
 
     /**
      * Constructor.
@@ -24,7 +24,7 @@ class ContextFactory
      * @param array $providers Array of provider callables. Each element should
      *   be of form `["type": "a-string", "callable": ..]`
      */
-    this(array $providers = []) {
+    this(array $providers = null) {
         foreach ($providers as $provider) {
             this.addProvider($provider["type"], $provider["callable"]);
         }
@@ -37,7 +37,7 @@ class ContextFactory
      *   be of form `["type": "a-string", "callable": ..]`
      * @return static
      */
-    static function createWithDefaults(array $providers = []) {
+    static function createWithDefaults(array $providers = null) {
         $providers = [
             [
                 "type": "orm",
@@ -119,7 +119,7 @@ class ContextFactory
      * @return uim.cake.View\Form\IContext Context provider.
      * @throws \RuntimeException When a context instance cannot be generated for given entity.
      */
-    function get(ServerRequest myServerRequest, array $data = []): IContext
+    function get(ServerRequest myServerRequest, array $data = null): IContext
     {
         $data += ["entity": null];
 

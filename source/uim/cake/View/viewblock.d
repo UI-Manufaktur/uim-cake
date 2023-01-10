@@ -37,14 +37,14 @@ class ViewBlock
      *
      * @var array<string>
      */
-    protected _blocks = [];
+    protected _blocks = null;
 
     /**
      * The active blocks being captured.
      *
      * @var array<string>
      */
-    protected _active = [];
+    protected _active = null;
 
     /**
      * Should the currently captured content be discarded on ViewBlock::end()

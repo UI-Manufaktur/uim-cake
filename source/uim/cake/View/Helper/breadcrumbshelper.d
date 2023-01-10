@@ -46,7 +46,7 @@ class BreadcrumbsHelper : Helper
      *
      * @var array
      */
-    protected $crumbs = [];
+    protected $crumbs = null;
 
     /**
      * Add a crumb to the end of the trail.
@@ -69,7 +69,7 @@ class BreadcrumbsHelper : Helper
      * - *templateVars*: Specific template vars in case you override the templates provided.
      * @return this
      */
-    function add($title, $url = null, STRINGAA someOptions = []) {
+    function add($title, $url = null, STRINGAA someOptions = null) {
         if (is_array($title)) {
             foreach ($title as $crumb) {
                 this.crumbs[] = $crumb + ["title": "", "url": null, "options": []];
@@ -104,9 +104,9 @@ class BreadcrumbsHelper : Helper
      * - *templateVars*: Specific template vars in case you override the templates provided.
      * @return this
      */
-    function prepend($title, $url = null, STRINGAA someOptions = []) {
+    function prepend($title, $url = null, STRINGAA someOptions = null) {
         if (is_array($title)) {
-            $crumbs = [];
+            $crumbs = null;
             foreach ($title as $crumb) {
                 $crumbs[] = $crumb + ["title": "", "url": null, "options": []];
             }
@@ -143,7 +143,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the index is out of bound
      */
-    function insertAt(int $index, string $title, $url = null, STRINGAA someOptions = []) {
+    function insertAt(int $index, string $title, $url = null, STRINGAA someOptions = null) {
         if (!isset(this.crumbs[$index]) && $index != count(this.crumbs)) {
             throw new LogicException(sprintf("No crumb could be found at index '%s'", $index));
         }
@@ -172,7 +172,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found
      */
-    function insertBefore(string $matchingTitle, string $title, $url = null, STRINGAA someOptions = []) {
+    function insertBefore(string $matchingTitle, string $title, $url = null, STRINGAA someOptions = null) {
         $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
@@ -201,7 +201,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      * @throws \LogicException In case the matching crumb can not be found.
      */
-    function insertAfter(string $matchingTitle, string $title, $url = null, STRINGAA someOptions = []) {
+    function insertAfter(string $matchingTitle, string $title, $url = null, STRINGAA someOptions = null) {
         $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
@@ -224,7 +224,7 @@ class BreadcrumbsHelper : Helper
      * @return this
      */
     function reset() {
-        this.crumbs = [];
+        this.crumbs = null;
 
         return this;
     }
@@ -245,7 +245,7 @@ class BreadcrumbsHelper : Helper
      * If you use the default for this option (empty), it will not render a separator.
      * @return string The breadcrumbs trail
      */
-    string render(array $attributes = [], array $separator = []) {
+    string render(array $attributes = null, array $separator = null) {
         if (!this.crumbs) {
             return "";
         }
@@ -274,7 +274,7 @@ class BreadcrumbsHelper : Helper
             $title = $crumb["title"];
             $options = $crumb["options"];
 
-            $optionsLink = [];
+            $optionsLink = null;
             if (isset($options["innerAttrs"])) {
                 $optionsLink = $options["innerAttrs"];
                 unset($options["innerAttrs"]);

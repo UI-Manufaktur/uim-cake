@@ -47,7 +47,7 @@ class TextHelper : Helper
      *
      * @var array<string, array>
      */
-    protected _placeholders = [];
+    protected _placeholders = null;
 
     /**
      * Cake Utility Text instance
@@ -68,7 +68,7 @@ class TextHelper : Helper
      * @param array<string, mixed> aConfig Settings array Settings array
      * @throws uim.cake.Core\exceptions.UIMException when the engine class could not be found.
      */
-    this(View $view, Json aConfig = []) {
+    this(View $view, Json aConfig = null) {
         super(($view, aConfig);
 
         aConfig = _config;
@@ -106,8 +106,8 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-urls
      */
-    string autoLinkUrls(string $text, STRINGAA someOptions = []) {
-        _placeholders = [];
+    string autoLinkUrls(string $text, STRINGAA someOptions = null) {
+        _placeholders = null;
         $options += ["escape": true];
 
         // phpcs:disable Generic.Files.LineLength
@@ -180,7 +180,7 @@ class TextHelper : Helper
      * @return string The text with links inserted.
      */
     protected string _linkUrls(string $text, array $htmlOptions) {
-        $replace = [];
+        $replace = null;
         foreach (_placeholders as $hash: $content) {
             $link = $url = $content["content"];
             $envelope = $content["envelope"];
@@ -202,7 +202,7 @@ class TextHelper : Helper
      * @see uim.cake.View\Helper\TextHelper::autoLinkEmails()
      */
     protected string _linkEmails(string $text, STRINGAA someOptions) {
-        $replace = [];
+        $replace = null;
         foreach (_placeholders as $hash: $content) {
             $url = $content["content"];
             $envelope = $content["envelope"];
@@ -224,9 +224,9 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-email-addresses
      */
-    string autoLinkEmails(string $text, STRINGAA someOptions = []) {
+    string autoLinkEmails(string $text, STRINGAA someOptions = null) {
         $options += ["escape": true];
-        _placeholders = [];
+        _placeholders = null;
 
         $atom = "[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]";
         $text = preg_replace_callback(
@@ -253,7 +253,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
-    string autoLink(string $text, STRINGAA someOptions = []) {
+    string autoLink(string $text, STRINGAA someOptions = null) {
         $text = this.autoLinkUrls($text, $options);
 
         return this.autoLinkEmails($text, ["escape": false] + $options);
@@ -270,7 +270,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::highlight()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#highlighting-substrings
      */
-    string highlight(string $text, string $phrase, STRINGAA someOptions = []) {
+    string highlight(string $text, string $phrase, STRINGAA someOptions = null) {
         return _engine.highlight($text, $phrase, $options);
     }
 
@@ -318,7 +318,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::truncate()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-text
      */
-    string truncate(string $text, int $length = 100, STRINGAA someOptions = []) {
+    string truncate(string $text, int $length = 100, STRINGAA someOptions = null) {
         return _engine.truncate($text, $length, $options);
     }
 
@@ -340,7 +340,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::tail()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
-    string tail(string $text, int $length = 100, STRINGAA someOptions = []) {
+    string tail(string $text, int $length = 100, STRINGAA someOptions = null) {
         return _engine.tail($text, $length, $options);
     }
 
@@ -395,7 +395,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::setTransliterator()
      * @see uim.cake.Utility\Text::setTransliteratorId()
      */
-    string slug(string $string, $options = []) {
+    string slug(string $string, $options = null) {
         return _engine.slug($string, $options);
     }
 

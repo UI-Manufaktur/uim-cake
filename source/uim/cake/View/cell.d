@@ -59,7 +59,7 @@ abstract class Cell : IEventDispatcher
      *
      * @var array
      */
-    protected $args = [];
+    protected $args = null;
 
     /**
      * List of valid options (constructor"s fourth arguments)
@@ -68,7 +68,7 @@ abstract class Cell : IEventDispatcher
      *
      * @var array<string>
      */
-    protected _validCellOptions = [];
+    protected _validCellOptions = null;
 
     /**
      * Caching setup.
@@ -89,7 +89,7 @@ abstract class Cell : IEventDispatcher
         ServerRequest myServerRequest,
         Response $response,
         ?IEventManager $eventManager = null,
-        array $cellOptions = []
+        array $cellOptions = null
     ) {
         if ($eventManager != null) {
             this.setEventManager($eventManager);
@@ -131,7 +131,7 @@ abstract class Cell : IEventDispatcher
      * @throws \BadMethodCallException
      */
     string render(Nullable!string $template = null) {
-        $cache = [];
+        $cache = null;
         if (_cache) {
             $cache = _cacheConfig(this.action, $template);
         }

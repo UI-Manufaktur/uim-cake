@@ -84,7 +84,7 @@ class View : IEventDispatcher
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = null;
 
     /**
      * The name of the subfolder containing templates for this View.
@@ -120,7 +120,7 @@ class View : IEventDispatcher
      *
      * @var array<string, mixed>
      */
-    protected $viewVars = [];
+    protected $viewVars = null;
 
     /**
      * File extension. Defaults to ".php".
@@ -180,28 +180,28 @@ class View : IEventDispatcher
      *
      * @var array<string, mixed>
      */
-    protected _defaultConfig = [];
+    protected _defaultConfig = null;
 
     /**
      * Holds an array of paths.
      *
      * @var array<string>
      */
-    protected _paths = [];
+    protected _paths = null;
 
     /**
      * Holds an array of plugin paths.
      *
      * @var array<string[]>
      */
-    protected _pathsForPlugin = [];
+    protected _pathsForPlugin = null;
 
     /**
      * The names of views and their parents used with View::extend();
      *
      * @var array<string>
      */
-    protected _parents = [];
+    protected _parents = null;
 
     /**
      * The currently rendering view file. Used for resolving parent files.
@@ -219,7 +219,7 @@ class View : IEventDispatcher
      *
      * @var array<string>
      */
-    protected _stack = [];
+    protected _stack = null;
 
     /**
      * ViewBlock class.
@@ -273,7 +273,7 @@ class View : IEventDispatcher
         ?ServerRequest myServerRequest = null,
         ?Response $response = null,
         ?EventManager $eventManager = null,
-        array $viewOptions = []
+        array $viewOptions = null
     ) {
         foreach (_passedVars as $var) {
             if (isset($viewOptions[$var])) {
@@ -581,7 +581,7 @@ class View : IEventDispatcher
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} $options
      */
-    string element(string aName, array $data = [], STRINGAA someOptions = []) {
+    string element(string aName, array $data = null, STRINGAA someOptions = null) {
         $options += ["callbacks": false, "cache": null, "plugin": null, "ignoreMissing": false];
         if (isset($options["cache"])) {
             $options["cache"] = _elementCache(
@@ -625,7 +625,7 @@ class View : IEventDispatcher
      * @return string The rendered content.
      * @throws \RuntimeException When $options is lacking a "key" option.
      */
-    string cache(callable $block, STRINGAA someOptions = []) {
+    string cache(callable $block, STRINGAA someOptions = null) {
         $options += ["key": "", "config": this.elementCache];
         if (empty($options["key"])) {
             throw new RuntimeException("Cannot cache content with an empty key");
@@ -1044,7 +1044,7 @@ class View : IEventDispatcher
      * @triggers View.beforeRenderFile this, [$templateFile]
      * @triggers View.afterRenderFile this, [$templateFile, $content]
      */
-    protected string _render(string $templateFile, array $data = []) {
+    protected string _render(string $templateFile, array $data = null) {
         if (empty($data)) {
             $data = this.viewVars;
         }
@@ -1129,7 +1129,7 @@ class View : IEventDispatcher
      * @return uim.cake.View\Helper a constructed helper object.
      * @see uim.cake.View\HelperRegistry::load()
      */
-    function loadHelper(string aName, Json aConfig = []): Helper
+    function loadHelper(string aName, Json aConfig = null): Helper
     {
         [, $class] = pluginSplit($name);
         $helpers = this.helpers();
@@ -1461,7 +1461,7 @@ class View : IEventDispatcher
             }
         }
         $templatePaths = App::path(static::NAME_TEMPLATE);
-        $pluginPaths = $themePaths = [];
+        $pluginPaths = $themePaths = null;
         if (!empty($plugin)) {
             for ($i = 0, $count = count($templatePaths); $i < $count; $i++) {
                 $pluginPaths[] = $templatePaths[$i]

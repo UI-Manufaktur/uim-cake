@@ -73,28 +73,28 @@ class StringTemplate
      *
      * @var array<string, mixed>
      */
-    protected _defaultConfig = [];
+    protected _defaultConfig = null;
 
     /**
      * A stack of template sets that have been stashed temporarily.
      *
      * @var array
      */
-    protected _configStack = [];
+    protected _configStack = null;
 
     /**
      * Contains the list of compiled templates
      *
      * @var array<string, array>
      */
-    protected _compiled = [];
+    protected _compiled = null;
 
     /**
      * Constructor.
      *
      * @param array<string, mixed> aConfig A set of templates to add.
      */
-    this(Json aConfig = []) {
+    this(Json aConfig = null) {
         this.add(aConfig);
     }
 
@@ -145,7 +145,7 @@ class StringTemplate
      *
      * @param array<string> $templates The template names to compile. If empty all templates will be compiled.
      */
-    protected void _compileTemplates(array $templates = []) {
+    protected void _compileTemplates(array $templates = null) {
         if (empty($templates)) {
             $templates = array_keys(_config);
         }
@@ -211,7 +211,7 @@ class StringTemplate
             $data += $data["templateVars"];
             unset($data["templateVars"]);
         }
-        $replace = [];
+        $replace = null;
         foreach ($placeholders as $placeholder) {
             $replacement = $data[$placeholder] ?? null;
             if (is_array($replacement)) {
@@ -254,13 +254,13 @@ class StringTemplate
         $options = (array)$options + ["escape": true];
 
         if (!is_array($exclude)) {
-            $exclude = [];
+            $exclude = null;
         }
 
         $exclude = ["escape": true, "idPrefix": true, "templateVars": true, "fieldName": true]
             + array_flip($exclude);
         $escape = $options["escape"];
-        $attributes = [];
+        $attributes = null;
 
         foreach ($options as $key: $value) {
             if (!isset($exclude[$key]) && $value != false && $value != null) {
@@ -321,7 +321,7 @@ class StringTemplate
             $class = Hash::get($input, $useIndex, []);
         } else {
             $class = $input;
-            $input = [];
+            $input = null;
         }
 
         // Convert and sanitise the inputs
@@ -329,7 +329,7 @@ class StringTemplate
             if (is_string($class) && !empty($class)) {
                 $class = explode(" ", $class);
             } else {
-                $class = [];
+                $class = null;
             }
         }
 

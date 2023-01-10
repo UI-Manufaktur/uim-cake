@@ -61,7 +61,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $options Array of options.
      * @return string Full translated URL with base path.
      */
-    string build($url = null, STRINGAA someOptions = []) {
+    string build($url = null, STRINGAA someOptions = null) {
         $defaults = [
             "fullBase": false,
             "escape": true,
@@ -93,7 +93,7 @@ class UrlHelper : Helper
      * @return string Full translated URL with base path.
      * @see uim.cake.routings.Router::pathUrl()
      */
-    string buildFromPath(string $path, array $params = [], STRINGAA someOptions = []) {
+    string buildFromPath(string $path, array $params = null, STRINGAA someOptions = null) {
         return this.build(["_path": $path] + $params, $options);
     }
 
@@ -114,7 +114,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string image(string $path, STRINGAA someOptions = []) {
+    string image(string $path, STRINGAA someOptions = null) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::imageUrl($path, $options));
@@ -138,7 +138,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string css(string $path, STRINGAA someOptions = []) {
+    string css(string $path, STRINGAA someOptions = null) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::cssUrl($path, $options));
@@ -162,7 +162,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string script(string $path, STRINGAA someOptions = []) {
+    string script(string $path, STRINGAA someOptions = null) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::scriptUrl($path, $options));
@@ -190,7 +190,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $options Options array.
      * @return string Generated URL
      */
-    string assetUrl(string $path, STRINGAA someOptions = []) {
+    string assetUrl(string $path, STRINGAA someOptions = null) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::url($path, $options));

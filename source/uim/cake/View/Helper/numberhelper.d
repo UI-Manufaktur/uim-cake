@@ -51,7 +51,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> aConfig Configuration settings for the helper
      * @throws uim.cake.Core\exceptions.UIMException When the engine class could not be found.
      */
-    this(View $view, Json aConfig = []) {
+    this(View $view, Json aConfig = null) {
         super(($view, aConfig);
 
         aConfig = _config;
@@ -86,7 +86,7 @@ class NumberHelper : Helper
      * @see uim.cake.I18n\Number::precision()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
-    string precision($number, int $precision = 3, STRINGAA someOptions = []) {
+    string precision($number, int $precision = 3, STRINGAA someOptions = null) {
         return _engine.precision($number, $precision, $options);
     }
 
@@ -116,7 +116,7 @@ class NumberHelper : Helper
      * @see uim.cake.I18n\Number::toPercentage()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-percentages
      */
-    string toPercentage($number, int $precision = 2, STRINGAA someOptions = []) {
+    string toPercentage($number, int $precision = 2, STRINGAA someOptions = null) {
         return _engine.toPercentage($number, $precision, $options);
     }
 
@@ -137,7 +137,7 @@ class NumberHelper : Helper
      * @return string Formatted number
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-numbers
      */
-    string format($number, STRINGAA someOptions = []) {
+    string format($number, STRINGAA someOptions = null) {
         $formatted = _engine.format($number, $options);
         $options += ["escape": true];
 
@@ -168,7 +168,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
-    string currency($number, Nullable!string $currency = null, STRINGAA someOptions = []) {
+    string currency($number, Nullable!string $currency = null, STRINGAA someOptions = null) {
         $formatted = _engine.currency($number, $currency, $options);
         $options += ["escape": true];
 
@@ -191,7 +191,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return string formatted delta
      */
-    string formatDelta($value, STRINGAA someOptions = []) {
+    string formatDelta($value, STRINGAA someOptions = null) {
         $formatted = _engine.formatDelta($value, $options);
         $options += ["escape": true];
 
@@ -231,7 +231,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $options An array with options.
      * @return string formatted number
      */
-    string ordinal($value, STRINGAA someOptions = []) {
+    string ordinal($value, STRINGAA someOptions = null) {
         return _engine.ordinal($value, $options);
     }
 }

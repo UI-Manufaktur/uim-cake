@@ -117,7 +117,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<string, uim.cake.validations.ValidationSet>
      */
-    protected _fields = [];
+    protected _fields = null;
 
     /**
      * An associative array of objects or classes containing methods
@@ -126,7 +126,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @var array<string, object|string>
      * @psalm-var array<string, object|class-string>
      */
-    protected _providers = [];
+    protected _providers = null;
 
     /**
      * An associative array of objects or classes used as a default provider list
@@ -134,7 +134,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @var array<string, object|string>
      * @psalm-var array<string, object|class-string>
      */
-    protected static _defaultProviders = [];
+    protected static _defaultProviders = null;
 
     /**
      * Contains the validation messages associated with checking the presence
@@ -142,7 +142,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<string, string>
      */
-    protected _presenceMessages = [];
+    protected _presenceMessages = null;
 
     /**
      * Whether to use I18n functions for translating default error messages
@@ -155,14 +155,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var array<string, string>
      */
-    protected _allowEmptyMessages = [];
+    protected _allowEmptyMessages = null;
 
     /**
      * Contains the flags which specify what is empty for each corresponding field.
      *
      * @var array<string, int>
      */
-    protected _allowEmptyFlags = [];
+    protected _allowEmptyFlags = null;
 
     /**
      * Whether to apply last flag to generated rule(s).
@@ -214,7 +214,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<array> Array of failed fields
      */
     array validate(array $data, bool $newRecord = true) {
-        $errors = [];
+        $errors = null;
 
         foreach (_fields as $name: $field) {
             $keyPresent = array_key_exists($name, $data);
@@ -461,7 +461,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @throws \InvalidArgumentException If numeric index cannot be resolved to a string one
      * @return this
      */
-    function add(string $field, $name, $rule = []) {
+    function add(string $field, $name, $rule = null) {
         $validationSet = this.field($field);
 
         if (!is_array($name)) {
@@ -574,7 +574,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
                 /** @psalm-suppress PossiblyNullArgument */
                 $validator.setProvider($provider, this.getProvider($provider));
             }
-            $errors = [];
+            $errors = null;
             foreach ($value as $i: $row) {
                 if (!is_array($row)) {
                     return false;
@@ -1086,10 +1086,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<array>
      * @throws \InvalidArgumentException
      */
-    protected array _convertValidatorToArray($fieldName, array $defaults = [], $settings = []) {
+    protected array _convertValidatorToArray($fieldName, array $defaults = null, $settings = null) {
         if (is_string($settings)) {
             $fieldName = $settings;
-            $settings = [];
+            $settings = null;
         }
         if (!is_array($settings)) {
             throw new InvalidArgumentException(
@@ -2284,7 +2284,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::multiple()
      * @return this
      */
-    function multipleOptions(string $field, STRINGAA someOptions = [], Nullable!string $message = null, $when = null) {
+    function multipleOptions(string $field, STRINGAA someOptions = null, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
         $caseInsensitive = $options["caseInsensitive"] ?? false;
         unset($options["caseInsensitive"]);
@@ -2355,7 +2355,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      */
     bool isEmptyAllowed(string $field, bool $newRecord) {
         $providers = _providers;
-        $data = [];
+        $data = null;
         $context = compact("data", "newRecord", "field", "providers");
 
         return _canBeEmpty(this.field($field), $context);
@@ -2370,7 +2370,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      */
     bool isPresenceRequired(string $field, bool $newRecord) {
         $providers = _providers;
-        $data = [];
+        $data = null;
         $context = compact("data", "newRecord", "field", "providers");
 
         return !_checkPresence(this.field($field), $context);
@@ -2508,7 +2508,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
         }
 
         $arrayTypes = self::EMPTY_ARRAY | self::EMPTY_DATE | self::EMPTY_TIME;
-        if ($data == [] && ($flags & $arrayTypes)) {
+        if ($data == null && ($flags & $arrayTypes)) {
             return true;
         }
 
@@ -2562,7 +2562,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<string, mixed>
      */
     protected array _processRules(string $field, ValidationSet $rules, array $data, bool $newRecord) {
-        $errors = [];
+        $errors = null;
         // Loading default provider in case there is none
         this.getProvider("default");
         $message = "The provided value is invalid";
@@ -2602,7 +2602,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<string, mixed>
      */
     array __debugInfo() {
-        $fields = [];
+        $fields = null;
         foreach (_fields as $name: $fieldSet) {
             $fields[$name] = [
                 "isPresenceRequired": $fieldSet.isPresenceRequired(),

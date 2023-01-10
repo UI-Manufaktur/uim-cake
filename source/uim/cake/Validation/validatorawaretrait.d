@@ -41,7 +41,7 @@ trait ValidatorAwareTrait
      *
      * @var array<uim.cake.validations.Validator>
      */
-    protected _validators = [];
+    protected _validators = null;
 
     /**
      * Returns the validation rules tagged with $name. It is possible to have

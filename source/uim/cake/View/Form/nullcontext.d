@@ -44,7 +44,7 @@ class NullContext : IContext
     }
 
 
-    function val(string $field, STRINGAA someOptions = []) {
+    function val(string $field, STRINGAA someOptions = null) {
         return null;
     }
 

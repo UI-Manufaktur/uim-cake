@@ -84,7 +84,7 @@ class PaginatorHelper : Helper
      * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
-    this(View $view, Json aConfig = []) {
+    this(View $view, Json aConfig = null) {
         super(($view, aConfig);
 
         $query = _View.getRequest().getQueryParams();
@@ -132,7 +132,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Default options for pagination links.
      *   See PaginatorHelper::$options for list of keys.
      */
-    void options(STRINGAA someOptions = []) {
+    void options(STRINGAA someOptions = null) {
         $request = _View.getRequest();
 
         if (!empty($options["paging"])) {
@@ -155,7 +155,7 @@ class PaginatorHelper : Helper
 
         _config["options"] = array_filter($options + _config["options"]);
         if (empty(_config["options"]["url"])) {
-            _config["options"]["url"] = [];
+            _config["options"]["url"] = null;
         }
         if (!empty(_config["options"]["model"])) {
             this.defaultModel(_config["options"]["model"]);
@@ -196,7 +196,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    Nullable!string sortKey(Nullable!string $model = null, STRINGAA someOptions = []) {
+    Nullable!string sortKey(Nullable!string $model = null, STRINGAA someOptions = null) {
         if (empty($options)) {
             $options = this.params($model);
         }
@@ -216,7 +216,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    string sortDir(Nullable!string $model = null, STRINGAA someOptions = []) {
+    string sortDir(Nullable!string $model = null, STRINGAA someOptions = null) {
         $dir = null;
 
         if (empty($options)) {
@@ -314,7 +314,7 @@ class PaginatorHelper : Helper
      * @return string A "previous" link or a disabled link.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string prev(string $title = "<< Previous", STRINGAA someOptions = []) {
+    string prev(string $title = "<< Previous", STRINGAA someOptions = null) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -353,7 +353,7 @@ class PaginatorHelper : Helper
      * @return string A "next" link or $disabledTitle text if the link is disabled.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string next(string $title = "Next >>", STRINGAA someOptions = []) {
+    string next(string $title = "Next >>", STRINGAA someOptions = null) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -392,7 +392,7 @@ class PaginatorHelper : Helper
      *  key the returned link will sort by "desc".
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    string sort(string aKey, $title = null, STRINGAA someOptions = []) {
+    string sort(string aKey, $title = null, STRINGAA someOptions = null) {
         $options += ["url": [], "model": null, "escape": true];
         $url = $options["url"];
         unset($options["url"]);
@@ -469,10 +469,10 @@ class PaginatorHelper : Helper
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#generating-pagination-urls
      */
     string generateUrl(
-        STRINGAA someOptions = [],
+        STRINGAA someOptions = null,
         Nullable!string $model = null,
-        array $url = [],
-        array $urlOptions = []
+        array $url = null,
+        array $urlOptions = null
     ) {
         $urlOptions += [
             "escape": true,
@@ -490,7 +490,7 @@ class PaginatorHelper : Helper
      * @param array $url URL.
      * @return array An array of URL parameters
      */
-    array generateUrlParams(STRINGAA someOptions = [], Nullable!string $model = null, array $url = []) {
+    array generateUrlParams(STRINGAA someOptions = null, Nullable!string $model = null, array $url = null) {
         $paging = this.params($model);
         $paging += ["page": null, "sort": null, "direction": null, "limit": null];
 
@@ -610,7 +610,7 @@ class PaginatorHelper : Helper
      */
     bool hasPage(int $page = 1, Nullable!string $model = null) {
         $paging = this.params($model);
-        if ($paging == []) {
+        if ($paging == null) {
             return false;
         }
 
@@ -669,7 +669,7 @@ class PaginatorHelper : Helper
      * @return string Counter string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-a-page-counter
      */
-    string counter(string $format = "pages", STRINGAA someOptions = []) {
+    string counter(string $format = "pages", STRINGAA someOptions = null) {
         $options += [
             "model": this.defaultModel(),
         ];
@@ -740,7 +740,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-page-number-links
      */
-    string numbers(STRINGAA someOptions = []) {
+    string numbers(STRINGAA someOptions = null) {
         $defaults = [
             "before": null, "after": null, "model": this.defaultModel(),
             "modulus": 8, "first": null, "last": null, "url": [],
@@ -986,7 +986,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string first($first = "<< first", STRINGAA someOptions = []) {
+    string first($first = "<< first", STRINGAA someOptions = null) {
         $options += [
             "url": [],
             "model": this.defaultModel(),
@@ -1045,7 +1045,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string last($last = "last >>", STRINGAA someOptions = []) {
+    string last($last = "last >>", STRINGAA someOptions = null) {
         $options += [
             "model": this.defaultModel(),
             "escape": true,
@@ -1106,7 +1106,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Array of options
      * @return string|null Meta links
      */
-    Nullable!string meta(STRINGAA someOptions = []) {
+    Nullable!string meta(STRINGAA someOptions = null) {
         $options += [
                 "model": null,
                 "block": false,
@@ -1118,7 +1118,7 @@ class PaginatorHelper : Helper
 
         $model = $options["model"] ?? null;
         $params = this.params($model);
-        $links = [];
+        $links = null;
 
         if ($options["prev"] && this.hasPrev()) {
             $links[] = this.Html.meta(
@@ -1181,7 +1181,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Options for Select tag attributes like class, id or event
      * @return string html output.
      */
-    string limitControl(array $limits = [], Nullable!int $default = null, STRINGAA someOptions = []) {
+    string limitControl(array $limits = null, Nullable!int $default = null, STRINGAA someOptions = null) {
         $model = $options["model"] ?? this.defaultModel();
         unset($options["model"]);
 

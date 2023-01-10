@@ -34,21 +34,21 @@ class Helper : IEventListener
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = null;
 
     /**
      * Default config for this helper.
      *
      * @var array<string, mixed>
      */
-    protected _defaultConfig = [];
+    protected _defaultConfig = null;
 
     /**
      * A helper lookup table used to lazy load helper objects.
      *
      * @var array<string, array>
      */
-    protected _helperMap = [];
+    protected _helperMap = null;
 
     /**
      * The View instance this helper is attached to
@@ -63,7 +63,7 @@ class Helper : IEventListener
      * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
-    this(View $view, Json aConfig = []) {
+    this(View $view, Json aConfig = null) {
         _View = $view;
         this.setConfig(aConfig);
 
@@ -161,7 +161,7 @@ class Helper : IEventListener
             "View.beforeLayout": "beforeLayout",
             "View.afterLayout": "afterLayout",
         ];
-        $events = [];
+        $events = null;
         foreach ($eventMap as $event: $method) {
             if (method_exists(this, $method)) {
                 $events[$event] = $method;

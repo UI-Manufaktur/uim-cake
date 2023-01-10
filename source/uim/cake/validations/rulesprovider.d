@@ -11,7 +11,7 @@ import uim.cake;
  * A Proxy class used to remove any extra arguments when the user intended to call
  * a method in another class that is not aware of validation providers signature
  *
- * @method bool extension(mixed $check, array $extensions, array $context = [])
+ * @method bool extension(mixed $check, array $extensions, array $context = null)
  */
 class RulesProvider {
     /**

@@ -59,14 +59,14 @@ class EntityContext : IContext
      *
      * @var array<uim.cake.orm.Table>
      */
-    protected _tables = [];
+    protected _tables = null;
 
     /**
      * Dictionary of validators.
      *
      * @var array<uim.cake.validations.Validator>
      */
-    protected _validator = [];
+    protected _validator = null;
 
     /**
      * Constructor.
@@ -212,7 +212,7 @@ class EntityContext : IContext
      *     schema should be used if it"s not explicitly provided.
      * @return mixed The value of the field or null on a miss.
      */
-    function val(string $field, STRINGAA someOptions = []) {
+    function val(string $field, STRINGAA someOptions = null) {
         $options += [
             "default": null,
             "schemaDefault": true,
@@ -684,7 +684,7 @@ class EntityContext : IContext
      * @return bool Returns true if the errors for the field are not empty.
      */
     bool hasError(string $field) {
-        return this.error($field) != [];
+        return this.error($field) != null;
     }
 
     /**

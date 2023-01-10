@@ -74,14 +74,14 @@ class HtmlHelper : Helper
      *
      * @var array<string, array>
      */
-    protected _includedAssets = [];
+    protected _includedAssets = null;
 
     /**
      * Options for the currently opened script block buffer if any.
      *
      * @var array<string, mixed>
      */
-    protected _scriptBlockOptions = [];
+    protected _scriptBlockOptions = null;
 
     /**
      * Creates a link to an external resource and handles basic meta tags
@@ -123,7 +123,7 @@ class HtmlHelper : Helper
      * @return string|null A completed `<link />` element, or null if the element was sent to a block.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-meta-tags
      */
-    Nullable!string meta($type, $content = null, STRINGAA someOptions = []) {
+    Nullable!string meta($type, $content = null, STRINGAA someOptions = null) {
         if (!is_array($type)) {
             $types = [
                 "rss": ["type": "application/rss+xml", "rel": "alternate", "title": $type, "link": $content],
@@ -156,7 +156,7 @@ class HtmlHelper : Helper
                 $type = $types[$options["type"]];
                 unset($options["type"]);
             } else {
-                $type = [];
+                $type = null;
             }
         }
 
@@ -239,7 +239,7 @@ class HtmlHelper : Helper
      * @return string An `<a />` element.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
      */
-    string link($title, $url = null, STRINGAA someOptions = []) {
+    string link($title, $url = null, STRINGAA someOptions = null) {
         $escapeTitle = true;
         if ($url != null) {
             $url = this.Url.build($url, $options);
@@ -306,7 +306,7 @@ class HtmlHelper : Helper
      * @see uim.cake.routings.Router::pathUrl()
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
      */
-    string linkFromPath(string $title, string $path, array $params = [], STRINGAA someOptions = []) {
+    string linkFromPath(string $title, string $path, array $params = null, STRINGAA someOptions = null) {
         return this.link($title, ["_path": $path] + $params, $options);
     }
 
@@ -361,7 +361,7 @@ class HtmlHelper : Helper
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-css-files
      */
-    Nullable!string css($path, STRINGAA someOptions = []) {
+    Nullable!string css($path, STRINGAA someOptions = null) {
         $options += [
             "once": true,
             "block": null,
@@ -460,7 +460,7 @@ class HtmlHelper : Helper
      *   or if $once is true and the file has been included before.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-javascript-files
      */
-    Nullable!string script($url, STRINGAA someOptions = []) {
+    Nullable!string script($url, STRINGAA someOptions = null) {
         $defaults = [
             "block": null,
             "once": true,
@@ -518,7 +518,7 @@ class HtmlHelper : Helper
      * @return string|null String or null depending on the value of `$options["block"]`
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    Nullable!string scriptBlock(string $script, STRINGAA someOptions = []) {
+    Nullable!string scriptBlock(string $script, STRINGAA someOptions = null) {
         $options += ["block": null, "nonce": _View.getRequest().getAttribute("cspScriptNonce")];
 
         $out = this.formatTemplate("javascriptblock", [
@@ -551,7 +551,7 @@ class HtmlHelper : Helper
      * @return void
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    void scriptStart(STRINGAA someOptions = []) {
+    void scriptStart(STRINGAA someOptions = null) {
         _scriptBlockOptions = $options;
         ob_start();
     }
@@ -567,7 +567,7 @@ class HtmlHelper : Helper
     Nullable!string scriptEnd() {
         $buffer = ob_get_clean();
         $options = _scriptBlockOptions;
-        _scriptBlockOptions = [];
+        _scriptBlockOptions = null;
 
         return this.scriptBlock($buffer, $options);
     }
@@ -590,7 +590,7 @@ class HtmlHelper : Helper
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-css-programatically
      */
     string style(array $data, bool $oneLine = true) {
-        $out = [];
+        $out = null;
         foreach ($data as $key: $value) {
             $out[] = $key ~ ":" ~ $value ~ ";";
         }
@@ -632,7 +632,7 @@ class HtmlHelper : Helper
      * @return string completed img tag
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-images
      */
-    string image($path, STRINGAA someOptions = []) {
+    string image($path, STRINGAA someOptions = null) {
         if (is_string($path)) {
             $path = this.Url.image($path, $options);
         } else {
@@ -678,7 +678,7 @@ class HtmlHelper : Helper
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-table-headings
      */
     string tableHeaders(array $names, ?array $trOptions = null, ?array $thOptions = null) {
-        $out = [];
+        $out = null;
         foreach ($names as $arg) {
             if (!is_array($arg)) {
                 $content = $arg;
@@ -741,7 +741,7 @@ class HtmlHelper : Helper
             $count = 0;
         }
 
-        $out = [];
+        $out = null;
         foreach ($data as $line) {
             $count++;
             $cellsOut = _renderCells($line, $useCount);
@@ -766,9 +766,9 @@ class HtmlHelper : Helper
      */
     protected array _renderCells(array $line, bool $useCount = false) {
         $i = 0;
-        $cellsOut = [];
+        $cellsOut = null;
         foreach ($line as $cell) {
-            $cellOptions = [];
+            $cellOptions = null;
 
             if (is_array($cell)) {
                 $cellOptions = $cell[1];
@@ -796,7 +796,7 @@ class HtmlHelper : Helper
      * @param string $content The content of the row.
      * @param array<string, mixed> $options HTML attributes.
      */
-    string tableRow(string $content, STRINGAA someOptions = []) {
+    string tableRow(string $content, STRINGAA someOptions = null) {
         return this.formatTemplate("tablerow", [
             "attrs": this.templater().formatAttributes($options),
             "content": $content,
@@ -809,7 +809,7 @@ class HtmlHelper : Helper
      * @param string $content The content of the cell.
      * @param array<string, mixed> $options HTML attributes.
      */
-    string tableCell(string $content, STRINGAA someOptions = []) {
+    string tableCell(string $content, STRINGAA someOptions = null) {
         return this.formatTemplate("tablecell", [
             "attrs": this.templater().formatAttributes($options),
             "content": $content,
@@ -829,7 +829,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the HTML tag, see above.
      * @return string The formatted tag element
      */
-    string tag(string aName, Nullable!string $text = null, STRINGAA someOptions = []) {
+    string tag(string aName, Nullable!string $text = null, STRINGAA someOptions = null) {
         if (isset($options["escape"]) && $options["escape"]) {
             $text = h($text);
             unset($options["escape"]);
@@ -860,7 +860,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
      */
-    string div(Nullable!string $class = null, Nullable!string $text = null, STRINGAA someOptions = []) {
+    string div(Nullable!string $class = null, Nullable!string $text = null, STRINGAA someOptions = null) {
         if (!empty($class)) {
             $options["class"] = $class;
         }
@@ -880,7 +880,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the P tag
      * @return string The formatted P element
      */
-    string para(Nullable!string $class, Nullable!string $text, STRINGAA someOptions = []) {
+    string para(Nullable!string $class, Nullable!string $text, STRINGAA someOptions = null) {
         if (!empty($options["escape"])) {
             $text = h($text);
         }
@@ -958,7 +958,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Array of HTML attributes, and special options above.
      * @return string Generated media element
      */
-    string media($path, STRINGAA someOptions = []) {
+    string media($path, STRINGAA someOptions = null) {
         $options += [
             "tag": null,
             "pathPrefix": "files/",
@@ -1049,7 +1049,7 @@ class HtmlHelper : Helper
      * @return string The nested list
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-nested-lists
      */
-    string nestedList(array $list, STRINGAA someOptions = [], array $itemOptions = []) {
+    string nestedList(array $list, STRINGAA someOptions = null, array $itemOptions = null) {
         $options += ["tag": "ul"];
         $items = _nestedListItem($list, $options, $itemOptions);
 

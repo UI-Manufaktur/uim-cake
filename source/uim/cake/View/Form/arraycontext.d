@@ -149,7 +149,7 @@ class ArrayContext : IContext
      *     context"s schema should be used if it"s not explicitly provided.
      * @return mixed
      */
-    function val(string $field, STRINGAA someOptions = []) {
+    function val(string $field, STRINGAA someOptions = null) {
         $options += [
             "default": null,
             "schemaDefault": true,

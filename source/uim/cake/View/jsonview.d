@@ -150,7 +150,7 @@ class JsonView : SerializedView
      */
     protected function _dataToSerialize($serialize) {
         if (is_array($serialize)) {
-            $data = [];
+            $data = null;
             foreach ($serialize as $alias: $key) {
                 if (is_numeric($alias)) {
                     $alias = $key;

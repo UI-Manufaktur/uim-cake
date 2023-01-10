@@ -32,7 +32,7 @@ class MissingTemplateException : UIMException {
      * @param int|null $code The code of the error.
      * @param \Throwable|null $previous the previous exception.
      */
-    this($file, array $paths = [], Nullable!int $code = null, ?Throwable $previous = null) {
+    this($file, array $paths = null, Nullable!int $code = null, ?Throwable $previous = null) {
         if (is_array($file)) {
             this.filename = array_pop($file);
             this.templateName = array_pop($file);

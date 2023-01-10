@@ -94,7 +94,7 @@ class RadioWidget : BasicWidget
 
         _idPrefix = $data["idPrefix"];
         _clearIds();
-        $opts = [];
+        $opts = null;
         foreach ($options as $val: $text) {
             $opts[] = _renderInput($val, $text, $data, $context);
         }
