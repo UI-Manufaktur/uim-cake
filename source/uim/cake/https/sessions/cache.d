@@ -18,33 +18,33 @@ class CacheSession : SessionHandlerInterface
     /**
      * Options for this session engine
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _options = null;
 
     /**
      * Constructor.
      *
-     * @param array<string, mixed> myConfig The configuration to use for this engine
+     * @param array<string, mixed> aConfig The configuration to use for this engine
      * It requires the key "config" which is the name of the Cache config to use for
      * storing the session
      * @throws \InvalidArgumentException if the "config" key is not provided
      */
-    this(array myConfig = null) {
-        if (empty(myConfig["config"])) {
+    this(Json aConfig = null) {
+        if (empty(aConfig["config"])) {
             throw new InvalidArgumentException("The cache configuration name to use is required");
         }
-        _options = myConfig;
+        _options = aConfig;
     }
 
     /**
      * Method called on open of a database session.
      *
-     * @param string myPath The path where to store/retrieve the session.
-     * @param string myName The session name.
+     * @param string $path The path where to store/retrieve the session.
+     * @param string aName The session name.
      * @return bool Success
      */
-    bool open(myPath, myName) {
+    bool open($path, $name) {
         return true;
     }
 
@@ -60,39 +60,39 @@ class CacheSession : SessionHandlerInterface
     /**
      * Method used to read from a cache session.
      *
-     * @param string id ID that uniquely identifies session in cache.
+     * @param string $id ID that uniquely identifies session in cache.
      * @return string|false Session data or false if it does not exist.
      */
     #[\ReturnTypeWillChange]
     function read($id) {
-        myValue = Cache::read($id, _options["config"]);
+        $value = Cache::read($id, _options["config"]);
 
-        if (myValue is null) {
+        if ($value == null) {
             return "";
         }
 
-        return myValue;
+        return $value;
     }
 
     /**
      * Helper function called on write for cache sessions.
      *
-     * @param string id ID that uniquely identifies session in cache.
-     * @param string myData The data to be saved.
+     * @param string $id ID that uniquely identifies session in cache.
+     * @param string $data The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
-    bool write($id, myData) {
+    bool write($id, $data) {
         if (!$id) {
             return false;
         }
 
-        return Cache::write($id, myData, _options["config"]);
+        return Cache::write($id, $data, _options["config"]);
     }
 
     /**
      * Method called on the destruction of a cache session.
      *
-     * @param string id ID that uniquely identifies session in cache.
+     * @param string $id ID that uniquely identifies session in cache.
      * @return bool Always true.
      */
     bool destroy($id) {

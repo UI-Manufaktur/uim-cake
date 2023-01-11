@@ -1,7 +1,17 @@
-module uim.cake.https;
+module uim.cake.Http;
 
 @safe:
-import uim.cake;
+import uim.cake; 
+
+use DateTime;
+use DateTimeInterface;
+use DateTimeZone;
+use InvalidArgumentException;
+use Laminas\Diactoros\MessageTrait;
+use Laminas\Diactoros\Stream;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.StreamInterface;
+use SplFileInfo;
 
 /**
  * Responses contain the response text, status and headers of a HTTP response.
@@ -105,197 +115,197 @@ class Response : IResponse
      * @var array<string, mixed>
      */
     protected _mimeTypes = [
-        "html":["text/html", "*/*"],
-        "json":"application/json",
-        "xml":["application/xml", "text/xml"],
-        "xhtml":["application/xhtml+xml", "application/xhtml", "text/xhtml"],
-        "webp":"image/webp",
-        "rss":"application/rss+xml",
-        "ai":"application/postscript",
-        "bcpio":"application/x-bcpio",
-        "bin":"application/octet-stream",
-        "ccad":"application/clariscad",
-        "cdf":"application/x-netcdf",
-        "class":"application/octet-stream",
-        "cpio":"application/x-cpio",
-        "cpt":"application/mac-compactpro",
-        "csh":"application/x-csh",
-        "csv":["text/csv", "application/vnd.ms-excel"],
-        "dcr":"application/x-director",
-        "dir":"application/x-director",
-        "dms":"application/octet-stream",
-        "doc":"application/msword",
-        "docx":"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "drw":"application/drafting",
-        "dvi":"application/x-dvi",
-        "dwg":"application/acad",
-        "dxf":"application/dxf",
-        "dxr":"application/x-director",
-        "eot":"application/vnd.ms-fontobject",
-        "eps":"application/postscript",
-        "exe":"application/octet-stream",
-        "ez":"application/andrew-inset",
-        "flv":"video/x-flv",
-        "gtar":"application/x-gtar",
-        "gz":"application/x-gzip",
-        "bz2":"application/x-bzip",
-        "7z":"application/x-7z-compressed",
-        "hal":["application/hal+xml", "application/vnd.hal+xml"],
-        "haljson":["application/hal+json", "application/vnd.hal+json"],
-        "halxml":["application/hal+xml", "application/vnd.hal+xml"],
-        "hdf":"application/x-hdf",
-        "hqx":"application/mac-binhex40",
-        "ico":"image/x-icon",
-        "ips":"application/x-ipscript",
-        "ipx":"application/x-ipix",
-        "js":"application/javascript",
-        "jsonapi":"application/vnd.api+json",
-        "latex":"application/x-latex",
-        "jsonld":"application/ld+json",
-        "kml":"application/vnd.google-earth.kml+xml",
-        "kmz":"application/vnd.google-earth.kmz",
-        "lha":"application/octet-stream",
-        "lsp":"application/x-lisp",
-        "lzh":"application/octet-stream",
-        "man":"application/x-troff-man",
-        "me":"application/x-troff-me",
-        "mif":"application/vnd.mif",
-        "ms":"application/x-troff-ms",
-        "nc":"application/x-netcdf",
-        "oda":"application/oda",
-        "otf":"font/otf",
-        "pdf":"application/pdf",
-        "pgn":"application/x-chess-pgn",
-        "pot":"application/vnd.ms-powerpoint",
-        "pps":"application/vnd.ms-powerpoint",
-        "ppt":"application/vnd.ms-powerpoint",
-        "pptx":"application/vnd.openxmlformats-officedocument.presentationml.presentation",
-        "ppz":"application/vnd.ms-powerpoint",
-        "pre":"application/x-freelance",
-        "prt":"application/pro_eng",
-        "ps":"application/postscript",
-        "roff":"application/x-troff",
-        "scm":"application/x-lotusscreencam",
-        "set":"application/set",
-        "sh":"application/x-sh",
-        "shar":"application/x-shar",
-        "sit":"application/x-stuffit",
-        "skd":"application/x-koan",
-        "skm":"application/x-koan",
-        "skp":"application/x-koan",
-        "skt":"application/x-koan",
-        "smi":"application/smil",
-        "smil":"application/smil",
-        "sol":"application/solids",
-        "spl":"application/x-futuresplash",
-        "src":"application/x-wais-source",
-        "step":"application/STEP",
-        "stl":"application/SLA",
-        "stp":"application/STEP",
-        "sv4cpio":"application/x-sv4cpio",
-        "sv4crc":"application/x-sv4crc",
-        "svg":"image/svg+xml",
-        "svgz":"image/svg+xml",
-        "swf":"application/x-shockwave-flash",
-        "t":"application/x-troff",
-        "tar":"application/x-tar",
-        "tcl":"application/x-tcl",
-        "tex":"application/x-tex",
-        "texi":"application/x-texinfo",
-        "texinfo":"application/x-texinfo",
-        "tr":"application/x-troff",
-        "tsp":"application/dsptype",
-        "ttc":"font/ttf",
-        "ttf":"font/ttf",
-        "unv":"application/i-deas",
-        "ustar":"application/x-ustar",
-        "vcd":"application/x-cdlink",
-        "vda":"application/vda",
-        "xlc":"application/vnd.ms-excel",
-        "xll":"application/vnd.ms-excel",
-        "xlm":"application/vnd.ms-excel",
-        "xls":"application/vnd.ms-excel",
-        "xlsx":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "xlw":"application/vnd.ms-excel",
-        "zip":"application/zip",
-        "aif":"audio/x-aiff",
-        "aifc":"audio/x-aiff",
-        "aiff":"audio/x-aiff",
-        "au":"audio/basic",
-        "kar":"audio/midi",
-        "mid":"audio/midi",
-        "midi":"audio/midi",
-        "mp2":"audio/mpeg",
-        "mp3":"audio/mpeg",
-        "mpga":"audio/mpeg",
-        "ogg":"audio/ogg",
-        "oga":"audio/ogg",
-        "spx":"audio/ogg",
-        "ra":"audio/x-realaudio",
-        "ram":"audio/x-pn-realaudio",
-        "rm":"audio/x-pn-realaudio",
-        "rpm":"audio/x-pn-realaudio-plugin",
-        "snd":"audio/basic",
-        "tsi":"audio/TSP-audio",
-        "wav":"audio/x-wav",
-        "aac":"audio/aac",
-        "asc":"text/plain",
-        "c":"text/plain",
-        "cc":"text/plain",
-        "css":"text/css",
-        "etx":"text/x-setext",
-        "f":"text/plain",
-        "f90":"text/plain",
-        "h":"text/plain",
-        "hh":"text/plain",
-        "htm":["text/html", "*/*"],
-        "ics":"text/calendar",
-        "m":"text/plain",
-        "rtf":"text/rtf",
-        "rtx":"text/richtext",
-        "sgm":"text/sgml",
-        "sgml":"text/sgml",
-        "tsv":"text/tab-separated-values",
-        "tpl":"text/template",
-        "txt":"text/plain",
-        "text":"text/plain",
-        "avi":"video/x-msvideo",
-        "fli":"video/x-fli",
-        "mov":"video/quicktime",
-        "movie":"video/x-sgi-movie",
-        "mpe":"video/mpeg",
-        "mpeg":"video/mpeg",
-        "mpg":"video/mpeg",
-        "qt":"video/quicktime",
-        "viv":"video/vnd.vivo",
-        "vivo":"video/vnd.vivo",
-        "ogv":"video/ogg",
-        "webm":"video/webm",
-        "mp4":"video/mp4",
-        "m4v":"video/mp4",
-        "f4v":"video/mp4",
-        "f4p":"video/mp4",
-        "m4a":"audio/mp4",
-        "f4a":"audio/mp4",
-        "f4b":"audio/mp4",
-        "gif":"image/gif",
-        "ief":"image/ief",
-        "jpg":"image/jpeg",
-        "jpeg":"image/jpeg",
-        "jpe":"image/jpeg",
-        "pbm":"image/x-portable-bitmap",
-        "pgm":"image/x-portable-graymap",
-        "png":"image/png",
-        "pnm":"image/x-portable-anymap",
-        "ppm":"image/x-portable-pixmap",
-        "ras":"image/cmu-raster",
-        "rgb":"image/x-rgb",
-        "tif":"image/tiff",
-        "tiff":"image/tiff",
-        "xbm":"image/x-xbitmap",
-        "xpm":"image/x-xpixmap",
-        "xwd":"image/x-xwindowdump",
-        "psd":[
+        "html": ["text/html", "*/*"],
+        "json": "application/json",
+        "xml": ["application/xml", "text/xml"],
+        "xhtml": ["application/xhtml+xml", "application/xhtml", "text/xhtml"],
+        "webp": "image/webp",
+        "rss": "application/rss+xml",
+        "ai": "application/postscript",
+        "bcpio": "application/x-bcpio",
+        "bin": "application/octet-stream",
+        "ccad": "application/clariscad",
+        "cdf": "application/x-netcdf",
+        "class": "application/octet-stream",
+        "cpio": "application/x-cpio",
+        "cpt": "application/mac-compactpro",
+        "csh": "application/x-csh",
+        "csv": ["text/csv", "application/vnd.ms-excel"],
+        "dcr": "application/x-director",
+        "dir": "application/x-director",
+        "dms": "application/octet-stream",
+        "doc": "application/msword",
+        "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "drw": "application/drafting",
+        "dvi": "application/x-dvi",
+        "dwg": "application/acad",
+        "dxf": "application/dxf",
+        "dxr": "application/x-director",
+        "eot": "application/vnd.ms-fontobject",
+        "eps": "application/postscript",
+        "exe": "application/octet-stream",
+        "ez": "application/andrew-inset",
+        "flv": "video/x-flv",
+        "gtar": "application/x-gtar",
+        "gz": "application/x-gzip",
+        "bz2": "application/x-bzip",
+        "7z": "application/x-7z-compressed",
+        "hal": ["application/hal+xml", "application/vnd.hal+xml"],
+        "haljson": ["application/hal+json", "application/vnd.hal+json"],
+        "halxml": ["application/hal+xml", "application/vnd.hal+xml"],
+        "hdf": "application/x-hdf",
+        "hqx": "application/mac-binhex40",
+        "ico": "image/x-icon",
+        "ips": "application/x-ipscript",
+        "ipx": "application/x-ipix",
+        "js": "application/javascript",
+        "jsonapi": "application/vnd.api+json",
+        "latex": "application/x-latex",
+        "jsonld": "application/ld+json",
+        "kml": "application/vnd.google-earth.kml+xml",
+        "kmz": "application/vnd.google-earth.kmz",
+        "lha": "application/octet-stream",
+        "lsp": "application/x-lisp",
+        "lzh": "application/octet-stream",
+        "man": "application/x-troff-man",
+        "me": "application/x-troff-me",
+        "mif": "application/vnd.mif",
+        "ms": "application/x-troff-ms",
+        "nc": "application/x-netcdf",
+        "oda": "application/oda",
+        "otf": "font/otf",
+        "pdf": "application/pdf",
+        "pgn": "application/x-chess-pgn",
+        "pot": "application/vnd.ms-powerpoint",
+        "pps": "application/vnd.ms-powerpoint",
+        "ppt": "application/vnd.ms-powerpoint",
+        "pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "ppz": "application/vnd.ms-powerpoint",
+        "pre": "application/x-freelance",
+        "prt": "application/pro_eng",
+        "ps": "application/postscript",
+        "roff": "application/x-troff",
+        "scm": "application/x-lotusscreencam",
+        "set": "application/set",
+        "sh": "application/x-sh",
+        "shar": "application/x-shar",
+        "sit": "application/x-stuffit",
+        "skd": "application/x-koan",
+        "skm": "application/x-koan",
+        "skp": "application/x-koan",
+        "skt": "application/x-koan",
+        "smi": "application/smil",
+        "smil": "application/smil",
+        "sol": "application/solids",
+        "spl": "application/x-futuresplash",
+        "src": "application/x-wais-source",
+        "step": "application/STEP",
+        "stl": "application/SLA",
+        "stp": "application/STEP",
+        "sv4cpio": "application/x-sv4cpio",
+        "sv4crc": "application/x-sv4crc",
+        "svg": "image/svg+xml",
+        "svgz": "image/svg+xml",
+        "swf": "application/x-shockwave-flash",
+        "t": "application/x-troff",
+        "tar": "application/x-tar",
+        "tcl": "application/x-tcl",
+        "tex": "application/x-tex",
+        "texi": "application/x-texinfo",
+        "texinfo": "application/x-texinfo",
+        "tr": "application/x-troff",
+        "tsp": "application/dsptype",
+        "ttc": "font/ttf",
+        "ttf": "font/ttf",
+        "unv": "application/i-deas",
+        "ustar": "application/x-ustar",
+        "vcd": "application/x-cdlink",
+        "vda": "application/vda",
+        "xlc": "application/vnd.ms-excel",
+        "xll": "application/vnd.ms-excel",
+        "xlm": "application/vnd.ms-excel",
+        "xls": "application/vnd.ms-excel",
+        "xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "xlw": "application/vnd.ms-excel",
+        "zip": "application/zip",
+        "aif": "audio/x-aiff",
+        "aifc": "audio/x-aiff",
+        "aiff": "audio/x-aiff",
+        "au": "audio/basic",
+        "kar": "audio/midi",
+        "mid": "audio/midi",
+        "midi": "audio/midi",
+        "mp2": "audio/mpeg",
+        "mp3": "audio/mpeg",
+        "mpga": "audio/mpeg",
+        "ogg": "audio/ogg",
+        "oga": "audio/ogg",
+        "spx": "audio/ogg",
+        "ra": "audio/x-realaudio",
+        "ram": "audio/x-pn-realaudio",
+        "rm": "audio/x-pn-realaudio",
+        "rpm": "audio/x-pn-realaudio-plugin",
+        "snd": "audio/basic",
+        "tsi": "audio/TSP-audio",
+        "wav": "audio/x-wav",
+        "aac": "audio/aac",
+        "asc": "text/plain",
+        "c": "text/plain",
+        "cc": "text/plain",
+        "css": "text/css",
+        "etx": "text/x-setext",
+        "f": "text/plain",
+        "f90": "text/plain",
+        "h": "text/plain",
+        "hh": "text/plain",
+        "htm": ["text/html", "*/*"],
+        "ics": "text/calendar",
+        "m": "text/plain",
+        "rtf": "text/rtf",
+        "rtx": "text/richtext",
+        "sgm": "text/sgml",
+        "sgml": "text/sgml",
+        "tsv": "text/tab-separated-values",
+        "tpl": "text/template",
+        "txt": "text/plain",
+        "text": "text/plain",
+        "avi": "video/x-msvideo",
+        "fli": "video/x-fli",
+        "mov": "video/quicktime",
+        "movie": "video/x-sgi-movie",
+        "mpe": "video/mpeg",
+        "mpeg": "video/mpeg",
+        "mpg": "video/mpeg",
+        "qt": "video/quicktime",
+        "viv": "video/vnd.vivo",
+        "vivo": "video/vnd.vivo",
+        "ogv": "video/ogg",
+        "webm": "video/webm",
+        "mp4": "video/mp4",
+        "m4v": "video/mp4",
+        "f4v": "video/mp4",
+        "f4p": "video/mp4",
+        "m4a": "audio/mp4",
+        "f4a": "audio/mp4",
+        "f4b": "audio/mp4",
+        "gif": "image/gif",
+        "ief": "image/ief",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "jpe": "image/jpeg",
+        "pbm": "image/x-portable-bitmap",
+        "pgm": "image/x-portable-graymap",
+        "png": "image/png",
+        "pnm": "image/x-portable-anymap",
+        "ppm": "image/x-portable-pixmap",
+        "ras": "image/cmu-raster",
+        "rgb": "image/x-rgb",
+        "tif": "image/tiff",
+        "tiff": "image/tiff",
+        "xbm": "image/x-xbitmap",
+        "xpm": "image/x-xpixmap",
+        "xwd": "image/x-xwindowdump",
+        "psd": [
             "application/photoshop",
             "application/psd",
             "image/psd",
@@ -303,51 +313,49 @@ class Response : IResponse
             "image/photoshop",
             "zz-application/zz-winassoc-psd",
         ],
-        "ice":"x-conference/x-cooltalk",
-        "iges":"model/iges",
-        "igs":"model/iges",
-        "mesh":"model/mesh",
-        "msh":"model/mesh",
-        "silo":"model/mesh",
-        "vrml":"model/vrml",
-        "wrl":"model/vrml",
-        "mime":"www/mime",
-        "pdb":"chemical/x-pdb",
-        "xyz":"chemical/x-pdb",
-        "javascript":"application/javascript",
-        "form":"application/x-www-form-urlencoded",
-        "file":"multipart/form-data",
-        "xhtml-mobile":"application/vnd.wap.xhtml+xml",
-        "atom":"application/atom+xml",
-        "amf":"application/x-amf",
-        "wap":["text/vnd.wap.wml", "text/vnd.wap.wmlscript", "image/vnd.wap.wbmp"],
-        "wml":"text/vnd.wap.wml",
-        "wmlscript":"text/vnd.wap.wmlscript",
-        "wbmp":"image/vnd.wap.wbmp",
-        "woff":"application/x-font-woff",
-        "appcache":"text/cache-manifest",
-        "manifest":"text/cache-manifest",
-        "htc":"text/x-component",
-        "rdf":"application/xml",
-        "crx":"application/x-chrome-extension",
-        "oex":"application/x-opera-extension",
-        "xpi":"application/x-xpinstall",
-        "safariextz":"application/octet-stream",
-        "webapp":"application/x-web-app-manifest+json",
-        "vcf":"text/x-vcard",
-        "vtt":"text/vtt",
-        "mkv":"video/x-matroska",
-        "pkpass":"application/vnd.apple.pkpass",
-        "ajax":"text/html",
-        "bmp":"image/bmp",
+        "ice": "x-conference/x-cooltalk",
+        "iges": "model/iges",
+        "igs": "model/iges",
+        "mesh": "model/mesh",
+        "msh": "model/mesh",
+        "silo": "model/mesh",
+        "vrml": "model/vrml",
+        "wrl": "model/vrml",
+        "mime": "www/mime",
+        "pdb": "chemical/x-pdb",
+        "xyz": "chemical/x-pdb",
+        "javascript": "application/javascript",
+        "form": "application/x-www-form-urlencoded",
+        "file": "multipart/form-data",
+        "xhtml-mobile": "application/vnd.wap.xhtml+xml",
+        "atom": "application/atom+xml",
+        "amf": "application/x-amf",
+        "wap": ["text/vnd.wap.wml", "text/vnd.wap.wmlscript", "image/vnd.wap.wbmp"],
+        "wml": "text/vnd.wap.wml",
+        "wmlscript": "text/vnd.wap.wmlscript",
+        "wbmp": "image/vnd.wap.wbmp",
+        "woff": "application/x-font-woff",
+        "appcache": "text/cache-manifest",
+        "manifest": "text/cache-manifest",
+        "htc": "text/x-component",
+        "rdf": "application/xml",
+        "crx": "application/x-chrome-extension",
+        "oex": "application/x-opera-extension",
+        "xpi": "application/x-xpinstall",
+        "safariextz": "application/octet-stream",
+        "webapp": "application/x-web-app-manifest+json",
+        "vcf": "text/x-vcard",
+        "vtt": "text/vtt",
+        "mkv": "video/x-matroska",
+        "pkpass": "application/vnd.apple.pkpass",
+        "ajax": "text/html",
+        "bmp": "image/bmp",
     ];
 
     /**
      * Status code to send to the client
-     *
-     * @var int
      */
-    protected _status = 200;
+    protected int _status = 200;
 
     /**
      * File object for file to be read out as response
@@ -372,7 +380,7 @@ class Response : IResponse
      * Holds all the cache directives that will be converted
      * into headers when sending the request
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _cacheDirectives = null;
 
@@ -403,7 +411,7 @@ class Response : IResponse
     /**
      * Constructor
      *
-     * @param array<string, mixed> myOptions list of parameters to setup the response. Possible values are:
+     * @param array<string, mixed> $options list of parameters to setup the response. Possible values are:
      *
      *  - body: the response text that should be sent to the client
      *  - status: the HTTP status code to respond with
@@ -411,36 +419,38 @@ class Response : IResponse
      *  - charset: the charset for the response body
      * @throws \InvalidArgumentException
      */
-    this(array myOptions = null) {
-        _streamTarget = myOptions["streamTarget"] ?? _streamTarget;
-        _streamMode = myOptions["streamMode"] ?? _streamMode;
-        if (isset(myOptions["stream"])) {
-            if (!myOptions["stream"] instanceof StreamInterface) {
+    this(STRINGAA someOptions = null) {
+        _streamTarget = $options["streamTarget"] ?? _streamTarget;
+        _streamMode = $options["streamMode"] ?? _streamMode;
+        if (isset($options["stream"])) {
+            if (!$options["stream"] instanceof StreamInterface) {
                 throw new InvalidArgumentException("Stream option must be an object that : StreamInterface");
             }
-            this.stream = myOptions["stream"];
+            this.stream = $options["stream"];
         } else {
             _createStream();
         }
-        if (isset(myOptions["body"])) {
-            this.stream.write(myOptions["body"]);
+        if (isset($options["body"])) {
+            this.stream.write($options["body"]);
         }
-        if (isset(myOptions["status"])) {
-            _setStatus(myOptions["status"]);
+        if (isset($options["status"])) {
+            _setStatus($options["status"]);
         }
-        if (!isset(myOptions["charset"])) {
-            myOptions["charset"] = Configure::read("App.encoding");
+        if (!isset($options["charset"])) {
+            $options["charset"] = Configure::read("App.encoding");
         }
-        _charset = myOptions["charset"];
-        myType = "text/html";
-        if (isset(myOptions["type"])) {
-            myType = this.resolveType(myOptions["type"]);
+        _charset = $options["charset"];
+        $type = "text/html";
+        if (isset($options["type"])) {
+            $type = this.resolveType($options["type"]);
         }
-        _setContentType(myType);
+        _setContentType($type);
         _cookies = new CookieCollection();
     }
 
-    // Creates the stream object.
+    /**
+     * Creates the stream object.
+     */
     protected void _createStream() {
         this.stream = new Stream(_streamTarget, _streamMode);
     }
@@ -449,9 +459,9 @@ class Response : IResponse
      * Formats the Content-Type header based on the configured contentType and charset
      * the charset will only be set in the header if the response is of type text/*
      *
-     * @param string myType The type to set.
+     * @param string $type The type to set.
      */
-    protected void _setContentType(string myType) {
+    protected void _setContentType(string $type) {
         if (hasAllValues(_status, [304, 204], true)) {
             _clearHeader("Content-Type");
 
@@ -465,17 +475,17 @@ class Response : IResponse
         if (
             _charset &&
             (
-                indexOf(myType, "text/") == 0 ||
-                hasAllValues(myType, $allowed, true)
+                strpos($type, "text/") == 0 ||
+                hasAllValues($type, $allowed, true)
             )
         ) {
             $charset = true;
         }
 
-        if ($charset && indexOf(myType, ";") == false) {
-            _setHeader("Content-Type", "{myType}; charset={_charset}");
+        if ($charset && strpos($type, ";") == false) {
+            _setHeader("Content-Type", "{$type}; charset={_charset}");
         } else {
-            _setHeader("Content-Type", myType);
+            _setHeader("Content-Type", $type);
         }
     }
 
@@ -485,11 +495,11 @@ class Response : IResponse
      * If the current status code is 200, it will be replaced
      * with 302.
      *
-     * @param string myUrl The location to redirect to.
+     * @param string $url The location to redirect to.
      * @return static A new response with the Location header set.
      */
-    function withLocation(string myUrl) {
-        $new = this.withHeader("Location", myUrl);
+    function withLocation(string $url) {
+        $new = this.withHeader("Location", $url);
         if ($new._status == 200) {
             $new._status = 302;
         }
@@ -500,23 +510,23 @@ class Response : IResponse
     /**
      * Sets a header.
      *
-     * @phpstan-param non-empty-string header
-     * @param string header Header key.
-     * @param string myValue Header value.
+     * @phpstan-param non-empty-string $header
+     * @param string $header Header key.
+     * @param string aValue Header value.
      */
-    protected void _setHeader(string header, string myValue) {
+    protected void _setHeader(string $header, string aValue) {
         $normalized = strtolower($header);
         this.headerNames[$normalized] = $header;
-        this.headers[$header] = [myValue];
+        this.headers[$header] = [$value];
     }
 
     /**
      * Clear header
      *
-     * @phpstan-param non-empty-string header
-     * @param string header Header key.
+     * @phpstan-param non-empty-string $header
+     * @param string $header Header key.
      */
-    protected void _clearHeader(string header) {
+    protected void _clearHeader(string $header) {
         $normalized = strtolower($header);
         if (!isset(this.headerNames[$normalized])) {
             return;
@@ -560,7 +570,7 @@ class Response : IResponse
      * @link https://tools.ietf.org/html/rfc7231#section-6
      * @link https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      * @param int $code The 3-digit integer status code to set.
-     * @param string reasonPhrase The reason phrase to use with the
+     * @param string $reasonPhrase The reason phrase to use with the
      *     provided status code; if none is provided, implementations MAY
      *     use the defaults as suggested in the HTTP specification.
      * @return static
@@ -577,11 +587,11 @@ class Response : IResponse
      * Modifier for response status
      *
      * @param int $code The status code to set.
-     * @param string reasonPhrase The response reason phrase.
+     * @param string $reasonPhrase The response reason phrase.
      * @return void
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    protected void _setStatus(int $code, string reasonPhrase = "") {
+    protected void _setStatus(int $code, string $reasonPhrase = "") {
         if ($code < static::STATUS_CODE_MIN || $code > static::STATUS_CODE_MAX) {
             throw new InvalidArgumentException(sprintf(
                 "Invalid status code: %s. Use a valid HTTP status code in range 1xx - 5xx.",
@@ -611,7 +621,7 @@ class Response : IResponse
      * status code.
      *
      * @link https://tools.ietf.org/html/rfc7231#section-6
-     * @link http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+     * @link https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
      * @return string Reason phrase; must return an empty string if none present.
      */
     string getReasonPhrase() {
@@ -625,11 +635,11 @@ class Response : IResponse
      *
      * This is needed for RequestHandlerComponent and recognition of types.
      *
-     * @param string myType Content type.
-     * @param array<string>|string mimeType Definition of the mime type.
+     * @param string $type Content type.
+     * @param array<string>|string $mimeType Definition of the mime type.
      */
-    void setTypeMap(string myType, $mimeType) {
-        _mimeTypes[myType] = $mimeType;
+    void setTypeMap(string $type, $mimeType) {
+        _mimeTypes[$type] = $mimeType;
     }
 
     /**
@@ -637,7 +647,7 @@ class Response : IResponse
      */
     string getType() {
         $header = this.getHeaderLine("Content-Type");
-        if (indexOf($header, ";") != false) {
+        if (strpos($header, ";") != false) {
             return explode(";", $header)[0];
         }
 
@@ -650,11 +660,11 @@ class Response : IResponse
      * If you attempt to set the type on a 304 or 204 status code response, the
      * content type will not take effect as these status codes do not have content-types.
      *
-     * @param string myContentsType Either a file extension which will be mapped to a mime-type or a concrete mime-type.
+     * @param string $contentType Either a file extension which will be mapped to a mime-type or a concrete mime-type.
      * @return static
      */
-    function withType(string myContentsType) {
-        $mappedType = this.resolveType(myContentsType);
+    function withType(string $contentType) {
+        $mappedType = this.resolveType($contentType);
         $new = clone this;
         $new._setContentType($mappedType);
 
@@ -664,20 +674,20 @@ class Response : IResponse
     /**
      * Translate and validate content-types.
      *
-     * @param string myContentsType The content-type or type alias.
+     * @param string $contentType The content-type or type alias.
      * @return string The resolved content-type
      * @throws \InvalidArgumentException When an invalid content-type or alias is used.
      */
-    protected string resolveType(string myContentsType) {
-        $mapped = this.getMimeType(myContentsType);
+    protected string resolveType(string $contentType) {
+        $mapped = this.getMimeType($contentType);
         if ($mapped) {
             return is_array($mapped) ? current($mapped) : $mapped;
         }
-        if (indexOf(myContentsType, "/") == false) {
-            throw new InvalidArgumentException(sprintf("'%s' is an invalid content type.", myContentsType));
+        if (strpos($contentType, "/") == false) {
+            throw new InvalidArgumentException(sprintf("'%s' is an invalid content type.", $contentType));
         }
 
-        return myContentsType;
+        return $contentType;
     }
 
     /**
@@ -685,11 +695,11 @@ class Response : IResponse
      *
      * e.g `getMimeType("pdf"); // returns "application/pdf"`
      *
-     * @param string aliasName the content type alias to map
-     * @return array|string|false String mapped mime type or false if myAlias is not mapped
+     * @param string $alias the content type alias to map
+     * @return array|string|false String mapped mime type or false if $alias is not mapped
      */
-    auto getMimeType(string aliasName) {
-        return _mimeTypes[myAlias] ?? false;
+    function getMimeType(string $alias) {
+        return _mimeTypes[$alias] ?? false;
     }
 
     /**
@@ -697,7 +707,7 @@ class Response : IResponse
      *
      * e.g `mapType("application/pdf"); // returns "pdf"`
      *
-     * @param array|string ctype Either a string content type to map, or an array of types.
+     * @param array|string $ctype Either a string content type to map, or an array of types.
      * @return array|string|null Aliases for the types provided.
      */
     function mapType($ctype) {
@@ -705,9 +715,9 @@ class Response : IResponse
             return array_map([this, "mapType"], $ctype);
         }
 
-        foreach (_mimeTypes as myAlias: myTypes) {
-            if (hasAllValues($ctype, (array)myTypes, true)) {
-                return myAlias;
+        foreach (_mimeTypes as $alias: $types) {
+            if (hasAllValues($ctype, (array)$types, true)) {
+                return $alias;
             }
         }
 
@@ -724,10 +734,10 @@ class Response : IResponse
     /**
      * Get a new instance with an updated charset.
      *
-     * @param string charset Character set string.
+     * @param string $charset Character set string.
      * @return static
      */
-    function withCharset(string charset) {
+    function withCharset(string $charset) {
         $new = clone this;
         $new._charset = $charset;
         $new._setContentType(this.getType());
@@ -782,10 +792,10 @@ class Response : IResponse
         $new = clone this;
         unset($new._cacheDirectives["private"], $new._cacheDirectives["public"]);
 
-        myKey = $? "public" : "private";
-        $new._cacheDirectives[myKey] = true;
+        $key = $? "public" : "private";
+        $new._cacheDirectives[$key] = true;
 
-        if ($time  !is null) {
+        if ($time != null) {
             $new._cacheDirectives["max-age"] = $time;
         }
         $new._setCacheControl();
@@ -835,12 +845,12 @@ class Response : IResponse
      * stale by a cache under any circumstance without first revalidating
      * with the origin.
      *
-     * @param bool myEnable If boolean sets or unsets the directive.
+     * @param bool $enable If boolean sets or unsets the directive.
      * @return static
      */
-    function withMustRevalidate(bool myEnable) {
+    function withMustRevalidate(bool $enable) {
         $new = clone this;
-        if (myEnable) {
+        if ($enable) {
             $new._cacheDirectives["must-revalidate"] = true;
         } else {
             unset($new._cacheDirectives["must-revalidate"]);
@@ -856,8 +866,8 @@ class Response : IResponse
      */
     protected void _setCacheControl() {
         $control = "";
-        foreach (_cacheDirectives as myKey: $val) {
-            $control ~= $val == true ? myKey : sprintf("%s=%s", myKey, $val);
+        foreach (_cacheDirectives as $key: $val) {
+            $control ~= $val == true ? $key : sprintf("%s=%s", $key, $val);
             $control ~= ", ";
         }
         $control = rtrim($control, ", ");
@@ -877,7 +887,7 @@ class Response : IResponse
      * $response.withExpires(new DateTime("+1 day"))
      * ```
      *
-     * @param \IDateTime|string|int|null $time Valid time string or \DateTime instance.
+     * @param \DateTimeInterface|string|int|null $time Valid time string or \DateTime instance.
      * @return static
      */
     function withExpires($time) {
@@ -899,7 +909,7 @@ class Response : IResponse
      * $response.withModified(new DateTime("+1 day"))
      * ```
      *
-     * @param \IDateTime|string|int $time Valid time string or \DateTime instance.
+     * @param \DateTimeInterface|string|int $time Valid time string or \DateTime instance.
      * @return static
      */
     function withModified($time) {
@@ -914,8 +924,14 @@ class Response : IResponse
      * conflicting headers
      *
      * *Warning* This method mutates the response in-place and should be avoided.
+     *
+     * @deprecated 4.4.0 Use `withNotModified()` instead.
      */
     void notModified() {
+        deprecationWarning(
+            "The `notModified()` method is deprecated~ " ~
+            "Use `withNotModified() instead, and remember immutability of with* methods."
+        );
         _createStream();
         _setStatus(304);
 
@@ -968,7 +984,7 @@ class Response : IResponse
      * separated string. If no parameters are passed, then an
      * array with the current Vary header value is returned
      *
-     * @param array<string>|string cacheVariances A single Vary string or an array
+     * @param array<string>|string $cacheVariances A single Vary string or an array
      *   containing the list for variances.
      * @return static
      */
@@ -992,12 +1008,12 @@ class Response : IResponse
      * they differ by a few bytes. This permits the Client to decide whether they should
      * use the cached data.
      *
-     * @param string hash The unique hash that identifies this response
+     * @param string $hash The unique hash that identifies this response
      * @param bool $weak Whether the response is semantically the same as
      *   other with the same hash or not. Defaults to false
      * @return static
      */
-    function withEtag(string hash, bool $weak = false) {
+    function withEtag(string $hash, bool $weak = false) {
         $hash = sprintf('%s'%s"", $weak ? "W/" : "", $hash);
 
         return this.withHeader("Etag", $hash);
@@ -1007,20 +1023,21 @@ class Response : IResponse
      * Returns a DateTime object initialized at the $time param and using UTC
      * as timezone
      *
-     * @param \IDateTime|string|int|null $time Valid time string or \IDateTime instance.
-     * @return \IDateTime
+     * @param \DateTimeInterface|string|int|null $time Valid time string or \DateTimeInterface instance.
+     * @return \DateTimeInterface
      */
-    protected IDateTime _getUTCDate($time = null) {
-        if ($time instanceof IDateTime) {
-            myResult = clone $time;
+    protected function _getUTCDate($time = null): DateTimeInterface
+    {
+        if ($time instanceof DateTimeInterface) {
+            $result = clone $time;
         } elseif (is_int($time)) {
-            myResult = new DateTime(date("Y-m-d H:i:s", $time));
+            $result = new DateTime(date("Y-m-d H:i:s", $time));
         } else {
-            myResult = new DateTime($time ?? "now");
+            $result = new DateTime($time ?? "now");
         }
 
         /** @psalm-suppress UndefinedInterfaceMethod */
-        return myResult.setTimezone(new DateTimeZone("UTC"));
+        return $result.setTimezone(new DateTimeZone("UTC"));
     }
 
     /**
@@ -1032,7 +1049,7 @@ class Response : IResponse
     bool compress() {
         $compressionEnabled = ini_get("zlib.output_compression") != "1" &&
             extension_loaded("zlib") &&
-            (indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false);
+            (strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false);
 
         return $compressionEnabled && ob_start("ob_gzhandler");
     }
@@ -1041,18 +1058,18 @@ class Response : IResponse
      * Returns whether the resulting output will be compressed by PHP
      */
     bool outputCompressed() {
-        return indexOf((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false
+        return strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false
             && (ini_get("zlib.output_compression") == "1" || hasAllValues("ob_gzhandler", ob_list_handlers(), true));
     }
 
     /**
      * Create a new instance with the Content-Disposition header set.
      *
-     * @param string myfilename The name of the file as the browser will download the response
+     * @param string $filename The name of the file as the browser will download the response
      * @return static
      */
-    function withDownload(string myfilename) {
-        return this.withHeader("Content-Disposition", "attachment; filename="" ~ myfilename ~ """);
+    function withDownload(string $filename) {
+        return this.withHeader("Content-Disposition", "attachment; filename="" ~ $filename ~ """);
     }
 
     /**
@@ -1071,8 +1088,8 @@ class Response : IResponse
      * ### Examples
      *
      * ```
-     * $response = $response.withAddedLink("http://example.com?page=1", ["rel":"prev"])
-     *     .withAddedLink("http://example.com?page=3", ["rel":"next"]);
+     * $response = $response.withAddedLink("http://example.com?page=1", ["rel": "prev"])
+     *     .withAddedLink("http://example.com?page=3", ["rel": "next"]);
      * ```
      *
      * Will generate:
@@ -1082,23 +1099,55 @@ class Response : IResponse
      * Link: <http://example.com?page=3>; rel="next"
      * ```
      *
-     * @param string myUrl The LinkHeader url.
-     * @param array<string, mixed> myOptions The LinkHeader params.
+     * @param string $url The LinkHeader url.
+     * @param array<string, mixed> $options The LinkHeader params.
      * @return static
 
      */
-    function withAddedLink(string myUrl, array myOptions = null) {
-        myParams = null;
-        foreach (myOptions as myKey: $option) {
-            myParams[] = myKey ~ "="" ~ $option ~ """;
+    function withAddedLink(string $url, STRINGAA someOptions = null) {
+        $params = null;
+        foreach ($options as $key: $option) {
+            $params[] = $key ~ "="" ~ $option ~ """;
         }
 
         $param = "";
-        if (myParams) {
-            $param = "; " ~ implode("; ", myParams);
+        if ($params) {
+            $param = "; " ~ implode("; ", $params);
         }
 
-        return this.withAddedHeader("Link", "<" ~ myUrl ~ ">" ~ $param);
+        return this.withAddedHeader("Link", "<" ~ $url ~ ">" ~ $param);
+    }
+
+    /**
+     * Checks whether a response has not been modified according to the "If-None-Match"
+     * (Etags) and "If-Modified-Since" (last modification date) request
+     * headers.
+     *
+     * In order to interact with this method you must mark responses as not modified.
+     * You need to set at least one of the `Last-Modified` or `Etag` response headers
+     * before calling this method. Otherwise, a comparison will not be possible.
+     *
+     * @param uim.cake.http.ServerRequest myServerRequest Request object
+     * @return bool Whether the response is "modified" based on cache headers.
+     */
+    bool isNotModified(ServerRequest myServerRequest) {
+        $etags = preg_split("/\s*,\s*/", myServerRequest.getHeaderLine("If-None-Match"), 0, PREG_SPLIT_NO_EMPTY);
+        $responseTag = this.getHeaderLine("Etag");
+        $etagMatches = null;
+        if ($responseTag) {
+            $etagMatches = hasAllValues("*", $etags, true) || hasAllValues($responseTag, $etags, true);
+        }
+
+        $modifiedSince = myServerRequest.getHeaderLine("If-Modified-Since");
+        $timeMatches = null;
+        if ($modifiedSince && this.hasHeader("Last-Modified")) {
+            $timeMatches = strtotime(this.getHeaderLine("Last-Modified")) == strtotime($modifiedSince);
+        }
+        if ($etagMatches == null && $timeMatches == null) {
+            return false;
+        }
+
+        return $etagMatches != false && $timeMatches != false;
     }
 
     /**
@@ -1113,31 +1162,22 @@ class Response : IResponse
      *
      * *Warning* This method mutates the response in-place and should be avoided.
      *
-     * @param uim.cake.http.ServerRequest myRequest Request object
+     * @param uim.cake.http.ServerRequest myServerRequest Request object
      * @return bool Whether the response was marked as not modified or not.
+     * @deprecated 4.4.0 Use `isNotModified()` and `withNotModified()` instead.
      */
-    bool checkNotModified(ServerRequest myRequest) {
-        $etags = preg_split("/\s*,\s*/", myRequest.getHeaderLine("If-None-Match"), 0, PREG_SPLIT_NO_EMPTY);
-        $responseTag = this.getHeaderLine("Etag");
-        $etagMatches = null;
-        if ($responseTag) {
-            $etagMatches = hasAllValues("*", $etags, true) || hasAllValues($responseTag, $etags, true);
-        }
-
-        $modifiedSince = myRequest.getHeaderLine("If-Modified-Since");
-        $timeMatches = null;
-        if ($modifiedSince && this.hasHeader("Last-Modified")) {
-            $timeMatches = strtotime(this.getHeaderLine("Last-Modified")) == strtotime($modifiedSince);
-        }
-        if ($etagMatches is null && $timeMatches is null) {
-            return false;
-        }
-        $notModified = $etagMatches != false && $timeMatches != false;
-        if ($notModified) {
+    bool checkNotModified(ServerRequest myServerRequest) {
+        deprecationWarning(
+            "The `checkNotModified()` method is deprecated~ " ~
+            "Use `isNotModified() instead and `withNoModified()` instead."
+        );
+        if (this.isNotModified(myServerRequest)) {
             this.notModified();
+
+            return true;
         }
 
-        return $notModified;
+        return false;
     }
 
     /**
@@ -1161,10 +1201,10 @@ class Response : IResponse
      * $response = $response.withCookie(new Cookie("remember_me", 1));
      * ```
      *
-     * @param uim.cake.http.Cookie\ICookie $cookie cookie object
+     * @param uim.cake.http.Cookie\CookieInterface $cookie cookie object
      * @return static
      */
-    function withCookie(ICookie $cookie) {
+    function withCookie(CookieInterface $cookie) {
         $new = clone this;
         $new._cookies = $new._cookies.add($cookie);
 
@@ -1181,10 +1221,10 @@ class Response : IResponse
      * $response = $response.withExpiredCookie(new Cookie("remember_me"));
      * ```
      *
-     * @param uim.cake.http.Cookie\ICookie $cookie cookie object
+     * @param uim.cake.http.Cookie\CookieInterface $cookie cookie object
      * @return static
      */
-    function withExpiredCookie(ICookie $cookie) {
+    function withExpiredCookie(CookieInterface $cookie) {
         $cookie = $cookie.withExpired();
 
         $new = clone this;
@@ -1199,21 +1239,24 @@ class Response : IResponse
      * This method provides read access to pending cookies. It will
      * not read the `Set-Cookie` header if set.
      *
-     * @param string myName The cookie name you want to read.
+     * @param string aName The cookie name you want to read.
      * @return array|null Either the cookie data or null
      */
-    array getCookie(string myName) {
-      if (!_cookies.has(myName)) {
-        return null;
-      }
+    function getCookie(string aName): ?array
+    {
+        if (!_cookies.has($name)) {
+            return null;
+        }
 
-      return _cookies.get(myName).toArray();
+        return _cookies.get($name).toArray();
     }
 
     /**
      * Get all cookies in the response.
      *
      * Returns an associative array of cookie name: cookie data.
+     *
+     * @return array<string, array>
      */
     array getCookies() {
         $out = null;
@@ -1231,8 +1274,9 @@ class Response : IResponse
      *
      * @return uim.cake.http.Cookie\CookieCollection
      */
-    CookieCollection getCookieCollection() {
-      return _cookies;
+    function getCookieCollection(): CookieCollection
+    {
+        return _cookies;
     }
 
     /**
@@ -1251,43 +1295,14 @@ class Response : IResponse
     /**
      * Get a CorsBuilder instance for defining CORS headers.
      *
-     * This method allow multiple ways to setup the domains, see the examples
-     *
-     * ### Full URI
-     * ```
-     * cors(myRequest, "https://www.UIM.org");
-     * ```
-     *
-     * ### URI with wildcard
-     * ```
-     * cors(myRequest, "https://*.UIM.org");
-     * ```
-     *
-     * ### Ignoring the requested protocol
-     * ```
-     * cors(myRequest, "www.UIM.org");
-     * ```
-     *
-     * ### Any URI
-     * ```
-     * cors(myRequest, "*");
-     * ```
-     *
-     * ### Allowed list of URIs
-     * ```
-     * cors(myRequest, ["http://www.UIM.org", "*.google.com", "https://myproject.github.io"]);
-     * ```
-     *
-     * *Note* The `$allowedDomains`, `$allowedMethods`, `$allowedHeaders` parameters are deprecated.
-     * Instead the builder object should be used.
-     *
-     * @param uim.cake.http.ServerRequest myRequest Request object
+     * @param uim.cake.http.ServerRequest myServerRequest Request object
      * @return uim.cake.http.CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */
-    CorsBuilder cors(ServerRequest myRequest) {
-        $origin = myRequest.getHeaderLine("Origin");
-        $ssl = myRequest.is("ssl");
+    function cors(ServerRequest myServerRequest): CorsBuilder
+    {
+        $origin = myServerRequest.getHeaderLine("Origin");
+        $ssl = myServerRequest.is("ssl");
 
         return new CorsBuilder(this, $origin, $ssl);
     }
@@ -1306,22 +1321,22 @@ class Response : IResponse
      * - download: If `true` sets download header and forces file to
      *   be downloaded rather than displayed inline.
      *
-     * @param string myPath Absolute path to file.
-     * @param array<string, mixed> myOptions Options See above.
+     * @param string $path Absolute path to file.
+     * @param array<string, mixed> $options Options See above.
      * @return static
      * @throws uim.cake.http.exceptions.NotFoundException
      */
-    function withFile(string myPath, array myOptions = null) {
-        myfile = this.validateFile(myPath);
-        myOptions += [
-            "name":null,
-            "download":null,
+    function withFile(string $path, STRINGAA someOptions = null) {
+        $file = this.validateFile($path);
+        $options += [
+            "name": null,
+            "download": null,
         ];
 
-        $extension = strtolower(myfile.getExtension());
+        $extension = strtolower($file.getExtension());
         $mapped = this.getMimeType($extension);
-        if ((!$extension || !$mapped) && myOptions["download"] is null) {
-            myOptions["download"] = true;
+        if ((!$extension || !$mapped) && $options["download"] == null) {
+            $options["download"] = true;
         }
 
         $new = clone this;
@@ -1329,33 +1344,33 @@ class Response : IResponse
             $new = $new.withType($extension);
         }
 
-        myfileSize = myfile.getSize();
-        if (myOptions["download"]) {
+        $fileSize = $file.getSize();
+        if ($options["download"]) {
             $agent = (string)env("HTTP_USER_AGENT");
 
             if ($agent && preg_match("%Opera([/ ])([0-9].[0-9]{1,2})%", $agent)) {
-                myContentsType = "application/octet-stream";
+                $contentType = "application/octet-stream";
             } elseif ($agent && preg_match("/MSIE ([0-9].[0-9]{1,2})/", $agent)) {
-                myContentsType = "application/force-download";
+                $contentType = "application/force-download";
             }
 
-            if (isset(myContentsType)) {
-                $new = $new.withType(myContentsType);
+            if (isset($contentType)) {
+                $new = $new.withType($contentType);
             }
-            myName = myOptions["name"] ?: myfile.getFileName();
-            $new = $new.withDownload(myName)
+            $name = $options["name"] ?: $file.getFileName();
+            $new = $new.withDownload($name)
                 .withHeader("Content-Transfer-Encoding", "binary");
         }
 
         $new = $new.withHeader("Accept-Ranges", "bytes");
         $httpRange = (string)env("HTTP_RANGE");
         if ($httpRange) {
-            $new._fileRange(myfile, $httpRange);
+            $new._fileRange($file, $httpRange);
         } else {
-            $new = $new.withHeader("Content-Length", (string)myfileSize);
+            $new = $new.withHeader("Content-Length", (string)$fileSize);
         }
-        $new._file = myfile;
-        $new.stream = new Stream(myfile.getPathname(), "rb");
+        $new._file = $file;
+        $new.stream = new Stream($file.getPathname(), "rb");
 
         return $new;
     }
@@ -1366,7 +1381,7 @@ class Response : IResponse
      * @param string|null $string The string to be sent
      * @return static
      */
-    function withStringBody(Nullable!string string) {
+    function withStringBody(Nullable!string $string) {
         $new = clone this;
         $new._createStream();
         $new.stream.write((string)$string);
@@ -1377,25 +1392,25 @@ class Response : IResponse
     /**
      * Validate a file path is a valid response body.
      *
-     * @param string myPath The path to the file.
+     * @param string $path The path to the file.
      * @throws uim.cake.http.exceptions.NotFoundException
      * @return \SplFileInfo
      */
-    protected auto validateFile(string myPath): SplFileInfo
+    protected function validateFile(string $path): SplFileInfo
     {
-        if (indexOf(myPath, "../") != false || indexOf(myPath, "..\\") != false) {
+        if (strpos($path, "../") != false || strpos($path, "..\\") != false) {
             throw new NotFoundException(__d("cake", "The requested file contains `..` and will not be read."));
         }
 
-        myfile = new SplFileInfo(myPath);
-        if (!myfile.isFile() || !myfile.isReadable()) {
+        $file = new SplFileInfo($path);
+        if (!$file.isFile() || !$file.isReadable()) {
             if (Configure::read("debug")) {
-                throw new NotFoundException(sprintf("The requested file %s was not found or not readable", myPath));
+                throw new NotFoundException(sprintf("The requested file %s was not found or not readable", $path));
             }
             throw new NotFoundException(__d("cake", "The requested file was not found"));
         }
 
-        return myfile;
+        return $file;
     }
 
     /**
@@ -1403,7 +1418,7 @@ class Response : IResponse
      *
      * @return \SplFileInfo|null The file to use in the response or null
      */
-    auto getFile(): ?SplFileInfo
+    function getFile(): ?SplFileInfo
     {
         return _file;
     }
@@ -1414,12 +1429,12 @@ class Response : IResponse
      * If an invalid range is requested a 416 Status code will be used
      * in the response.
      *
-     * @param \SplFileInfo myfile The file to set a range on.
-     * @param string httpRange The range to use.
+     * @param \SplFileInfo $file The file to set a range on.
+     * @param string $httpRange The range to use.
      */
-    protected void _fileRange(SplFileInfo myfile, string httpRange) {
-        myfileSize = myfile.getSize();
-        $lastByte = myfileSize - 1;
+    protected void _fileRange(SplFileInfo $file, string $httpRange) {
+        $fileSize = $file.getSize();
+        $lastByte = $fileSize - 1;
         $start = 0;
         $end = $lastByte;
 
@@ -1430,7 +1445,7 @@ class Response : IResponse
         }
 
         if ($start == "") {
-            $start = myfileSize - (int)$end;
+            $start = $fileSize - (int)$end;
             $end = $lastByte;
         }
         if ($end == "") {
@@ -1439,14 +1454,14 @@ class Response : IResponse
 
         if ($start > $end || $end > $lastByte || $start > $lastByte) {
             _setStatus(416);
-            _setHeader("Content-Range", "bytes 0-" ~ $lastByte ~ "/" ~ myfileSize);
+            _setHeader("Content-Range", "bytes 0-" ~ $lastByte ~ "/" ~ $fileSize);
 
             return;
         }
 
         /** @psalm-suppress PossiblyInvalidOperand */
         _setHeader("Content-Length", (string)($end - $start + 1));
-        _setHeader("Content-Range", "bytes " ~ $start ~ "-" ~ $end ~ "/" ~ myfileSize);
+        _setHeader("Content-Range", "bytes " ~ $start ~ "-" ~ $end ~ "/" ~ $fileSize);
         _setStatus(206);
         /**
          * @var int $start
@@ -1462,15 +1477,15 @@ class Response : IResponse
      * @return array<string, mixed>
      */
     array __debugInfo() {
-      return [
-        "status":_status,
-        "contentType":this.getType(),
-        "headers":this.headers,
-        "file":_file,
-        "fileRange":_fileRange,
-        "cookies":_cookies,
-        "cacheDirectives":_cacheDirectives,
-        "body":(string)this.getBody(),
-      ];
+        return [
+            "status": _status,
+            "contentType": this.getType(),
+            "headers": this.headers,
+            "file": _file,
+            "fileRange": _fileRange,
+            "cookies": _cookies,
+            "cacheDirectives": _cacheDirectives,
+            "body": (string)this.getBody(),
+        ];
     }
 }

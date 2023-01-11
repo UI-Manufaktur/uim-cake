@@ -1,12 +1,15 @@
-/*********************************************************************************************************
-	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
-	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
-	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.https;
+
+
+
+ *
+
+
+ * @since         3.3.0
+  */module uim.cake.Http;
 
 import uim.cake.core.App;
-import uim.cake.https\Middleware\ClosureDecoratorMiddleware;
-import uim.cake.https\Middleware\DoublePassDecoratorMiddleware;
+import uim.cake.http.Middleware\ClosureDecoratorMiddleware;
+import uim.cake.http.Middleware\DoublePassDecoratorMiddleware;
 use Closure;
 use Countable;
 use LogicException;
@@ -20,23 +23,21 @@ use SeekableIterator;
  * Provides methods for creating and manipulating a "queue" of middlewares.
  * This queue is used to process a request and generate response via uim.cake.Http\Runner.
  *
- * @template-: \SeekableIterator<int, \Psr\Http\servers.IMiddleware>
+ * @template-implements \SeekableIterator<int, \Psr\Http\servers.IMiddleware>
  */
 class MiddlewareQueue : Countable, SeekableIterator
 {
     /**
      * Internal position for iterator.
-     *
-     * @var int
      */
-    protected position = 0;
+    protected int $position = 0;
 
     /**
      * The queue of middlewares.
      *
      * @var array<int, mixed>
      */
-    protected queue = null;
+    protected $queue = null;
 
     /**
      * Constructor
@@ -50,20 +51,21 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Resolve middleware name to a PSR 15 compliant middleware instance.
      *
-     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware The middleware to resolve.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to resolve.
      * @return \Psr\Http\servers.IMiddleware
      * @throws \RuntimeException If Middleware not found.
      */
-    protected IMiddleware resolve($middleware) {
+    protected function resolve($middleware): IMiddleware
+    {
         if (is_string($middleware)) {
-            myClassName = App::className($middleware, "Middleware", "Middleware");
-            if (myClassName is null) {
+            $className = App::className($middleware, "Middleware", "Middleware");
+            if ($className == null) {
                 throw new RuntimeException(sprintf(
                     "Middleware '%s' was not found.",
                     $middleware
                 ));
             }
-            $middleware = new myClassName();
+            $middleware = new $className();
         }
 
         if ($middleware instanceof IMiddleware) {
@@ -85,7 +87,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Append a middleware to the end of the queue.
      *
-     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string middleware The middleware(s) to append.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string $middleware The middleware(s) to append.
      * @return this
      */
     function add($middleware) {
@@ -102,7 +104,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Alias for MiddlewareQueue::add().
      *
-     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string middleware The middleware(s) to append.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string $middleware The middleware(s) to append.
      * @return this
      * @see MiddlewareQueue::add()
      */
@@ -113,7 +115,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Prepend a middleware to the start of the queue.
      *
-     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string middleware The middleware(s) to prepend.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string $middleware The middleware(s) to prepend.
      * @return this
      */
     function prepend($middleware) {
@@ -134,7 +136,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * and the existing element will be shifted one index greater.
      *
      * @param int $index The index to insert at.
-     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware The middleware to insert.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      */
     function insertAt(int $index, $middleware) {
@@ -149,12 +151,12 @@ class MiddlewareQueue : Countable, SeekableIterator
      * Finds the index of the first middleware that matches the provided class,
      * and inserts the supplied middleware before it.
      *
-     * @param string myClass The classname to insert the middleware before.
-     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware The middleware to insert.
+     * @param string $class The classname to insert the middleware before.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      * @throws \LogicException If middleware to insert before is not found.
      */
-    function insertBefore(string myClass, $middleware) {
+    function insertBefore(string $class, $middleware) {
         $found = false;
         $i = 0;
         foreach (this.queue as $i: $object) {
@@ -162,9 +164,9 @@ class MiddlewareQueue : Countable, SeekableIterator
             if (
                 (
                     is_string($object)
-                    && $object == myClass
+                    && $object == $class
                 )
-                || is_a($object, myClass)
+                || is_a($object, $class)
             ) {
                 $found = true;
                 break;
@@ -173,7 +175,7 @@ class MiddlewareQueue : Countable, SeekableIterator
         if ($found) {
             return this.insertAt($i, $middleware);
         }
-        throw new LogicException(sprintf("No middleware matching '%s' could be found.", myClass));
+        throw new LogicException(sprintf("No middleware matching '%s' could be found.", $class));
     }
 
     /**
@@ -183,11 +185,11 @@ class MiddlewareQueue : Countable, SeekableIterator
      * and inserts the supplied middleware after it. If the class is not found,
      * this method will behave like add().
      *
-     * @param string myClass The classname to insert the middleware before.
-     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware The middleware to insert.
+     * @param string $class The classname to insert the middleware before.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      */
-    function insertAfter(string myClass, $middleware) {
+    function insertAfter(string $class, $middleware) {
         $found = false;
         $i = 0;
         foreach (this.queue as $i: $object) {
@@ -195,9 +197,9 @@ class MiddlewareQueue : Countable, SeekableIterator
             if (
                 (
                     is_string($object)
-                    && $object == myClass
+                    && $object == $class
                 )
-                || is_a($object, myClass)
+                || is_a($object, $class)
             ) {
                 $found = true;
                 break;
@@ -250,13 +252,19 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return \Psr\Http\servers.IMiddleware
      * @see \Iterator::current()
      */
-    IMiddleware current() {
+    function current(): IMiddleware
+    {
         if (!isset(this.queue[this.position])) {
             throw new OutOfBoundsException("Invalid current position (this.position)");
         }
 
-        if (this.queue[this.position] instanceof IMiddleware) {
+<<<<<<< HEAD
+        if (.queue[.position] instanceof IMiddleware) {
+            return .queue[.position];
+=======
+        if (this.queue[this.position] instanceof MiddlewareInterface) {
             return this.queue[this.position];
+>>>>>>> 0ab62ccd80e3413b8cc3cc8f15f68b7294e4e727
         }
 
         return this.queue[this.position] = this.resolve(this.queue[this.position]);
@@ -274,6 +282,8 @@ class MiddlewareQueue : Countable, SeekableIterator
 
     /**
      * Moves the current position to the next middleware.
+     *
+     * @return void
      * @see \Iterator::next()
      */
     void next() {
@@ -282,6 +292,8 @@ class MiddlewareQueue : Countable, SeekableIterator
 
     /**
      * Checks if current position is valid.
+     *
+     * @return bool
      * @see \Iterator::valid()
      */
     bool valid() {

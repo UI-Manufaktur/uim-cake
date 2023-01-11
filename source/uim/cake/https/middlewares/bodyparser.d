@@ -3,199 +3,188 @@ module uim.cake.https\Middleware;
 @safe:
 import uim.cake
 
-use Throwable;
+use Closure;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
- * The FlashMessage class provides a way for you to write a flash variable
- * to the session, to be rendered in a view with the FlashHelper.
+ * Parse encoded request body data.
+ *
+ * Enables JSON and XML request payloads to be parsed into the request"s body.
+ * You can also add your own request body parsers using the `addParser()` method.
  */
-class FlashMessage
+class BodyParserMiddleware : IMiddleware
 {
-    use InstanceConfigTrait;
-
     /**
-     * Default configuration
+     * Registered Parsers
      *
-     * @var array<string, mixed>
+     * @var array<\Closure>
      */
-    protected _defaultConfig = [
-        "key": "flash",
-        "element": "default",
-        "plugin": null,
-        "params": [],
-        "clear": false,
-        "duplicate": true,
-    ];
+    protected $parsers = null;
 
     /**
-     * @var uim.cake.http.Session
+     * The HTTP methods to parse data on.
+     *
+     * @var array<string>
      */
-    protected $session;
+    protected $methods = ["PUT", "POST", "PATCH", "DELETE"];
 
     /**
      * Constructor
      *
-     * @param uim.cake.http.Session $session Session instance.
-     * @param array<string, mixed> aConfig Config array.
-     * @see FlashMessage::set() For list of valid config keys.
+     * ### Options
+     *
+     * - `json` Set to false to disable JSON body parsing.
+     * - `xml` Set to true to enable XML parsing. Defaults to false, as XML
+     *   handling requires more care than JSON does.
+     * - `methods` The HTTP methods to parse on. Defaults to PUT, POST, PATCH DELETE.
+     *
+     * @param array<string, mixed> $options The options to use. See above.
      */
-    this(Session $session, Json aConfig = null) {
-        this.session = $session;
-        this.setConfig(aConfig);
+    this(STRINGAA someOptions = null) {
+        $options += ["json": true, "xml": false, "methods": null];
+        if ($options["json"]) {
+            this.addParser(
+                ["application/json", "text/json"],
+                Closure::fromCallable([this, "decodeJson"])
+            );
+        }
+        if ($options["xml"]) {
+            this.addParser(
+                ["application/xml", "text/xml"],
+                Closure::fromCallable([this, "decodeXml"])
+            );
+        }
+        if ($options["methods"]) {
+            this.setMethods($options["methods"]);
+        }
     }
 
     /**
-     * Store flash messages that can be output in the view.
+     * Set the HTTP methods to parse request bodies on.
      *
-     * If you make consecutive calls to this method, the messages will stack
-     * (if they are set with the same flash key)
-     *
-     * ### Options:
-     *
-     * - `key` The key to set under the session"s Flash key.
-     * - `element` The element used to render the flash message. You can use
-     *     `"SomePlugin.name"` style value for flash elements from a plugin.
-     * - `plugin` Plugin name to use element from.
-     * - `params` An array of variables to be made available to the element.
-     * - `clear` A bool stating if the current stack should be cleared to start a new one.
-     * - `escape` Set to false to allow templates to print out HTML content.
-     *
-     * @param string $message Message to be flashed.
-     * @param array<string, mixed> $options An array of options
-     * @return void
-     * @see FlashMessage::_defaultConfig For default values for the options.
+     * @param array<string> $methods The methods to parse data on.
+     * @return this
      */
-    void set($message, STRINGAA someOptions = null) {
-        $options += (array)this.getConfig();
+    function setMethods(array $methods) {
+        this.methods = $methods;
 
-        if (isset($options["escape"]) && !isset($options["params"]["escape"])) {
-            $options["params"]["escape"] = $options["escape"];
-        }
-
-        [$plugin, $element] = pluginSplit($options["element"]);
-        if ($options["plugin"]) {
-            $plugin = $options["plugin"];
-        }
-
-        if ($plugin) {
-            $options["element"] = $plugin ~ ".flash/" ~ $element;
-        } else {
-            $options["element"] = "flash/" ~ $element;
-        }
-
-        $messages = null;
-        if (!$options["clear"]) {
-            $messages = (array)this.session.read("Flash." ~ $options["key"]);
-        }
-
-        if (!$options["duplicate"]) {
-            foreach ($messages as $existingMessage) {
-                if ($existingMessage["message"] == $message) {
-                    return;
-                }
-            }
-        }
-
-        $messages[] = [
-            "message": $message,
-            "key": $options["key"],
-            "element": $options["element"],
-            "params": $options["params"],
-        ];
-
-        this.session.write("Flash." ~ $options["key"], $messages);
+        return this;
     }
 
     /**
-     * Set an exception"s message as flash message.
+     * Get the HTTP methods to parse request bodies on.
      *
-     * The following options will be set by default if unset:
+     * @return array<string>
+     */
+    string[] getMethods() {
+        return this.methods;
+    }
+
+    /**
+     * Add a parser.
+     *
+     * Map a set of content-type header values to be parsed by the $parser.
+     *
+     * ### Example
+     *
+     * An naive CSV request body parser could be built like so:
+     *
      * ```
-     * "element": "error",
-     * `params": ["code": $exception.getCode()]
+     * $parser.addParser(["text/csv"], function ($body) {
+     *   return str_getcsv($body);
+     * });
      * ```
      *
-     * @param \Throwable $exception Exception instance.
-     * @param array<string, mixed> $options An array of options.
-     * @return void
-     * @see FlashMessage::set() For list of valid options
+     * @param array<string> $types An array of content-type header values to match. eg. application/json
+     * @param \Closure $parser The parser function. Must return an array of data to be inserted
+     *   into the request.
+     * @return this
      */
-    void setExceptionMessage(Throwable $exception, STRINGAA someOptions = null) {
-        $options["element"] = $options["element"] ?? "error";
-        $options["params"]["code"] = $options["params"]["code"] ?? $exception.getCode();
+    function addParser(array $types, Closure $parser) {
+        foreach ($types as $type) {
+            $type = strtolower($type);
+            this.parsers[$type] = $parser;
+        }
 
-        $message = $exception.getMessage();
-        this.set($message, $options);
+        return this;
     }
 
     /**
-     * Get the messages for given key and remove from session.
+     * Get the current parsers
      *
-     * @param string aKey The key for get messages for.
+     * @return array<\Closure>
+     */
+    array getParsers() {
+        return this.parsers;
+    }
+
+    /**
+     * Apply the middleware.
+     *
+     * Will modify the request adding a parsed body if the content-type is known.
+     *
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
+     */
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
+    {
+        if (!hasAllValues($request.getMethod(), this.methods, true)) {
+            return $handler.handle($request);
+        }
+        [$type] = explode(";", $request.getHeaderLine("Content-Type"));
+        $type = strtolower($type);
+        if (!isset(this.parsers[$type])) {
+            return $handler.handle($request);
+        }
+
+        $parser = this.parsers[$type];
+        $result = $parser($request.getBody().getContents());
+        if (!is_array($result)) {
+            throw new BadRequestException();
+        }
+        $request = $request.withParsedBody($result);
+
+        return $handler.handle($request);
+    }
+
+    /**
+     * Decode JSON into an array.
+     *
+     * @param string $body The request body to decode
      * @return array|null
      */
-    function consume(string aKey): ?array
-    {
-        return this.session.consume("Flash.{$key}");
+    protected function decodeJson(string $body) {
+        if ($body == "") {
+            return [];
+        }
+        $decoded = json_decode($body, true);
+        if (json_last_error() == JSON_ERROR_NONE) {
+            return (array)$decoded;
+        }
+
+        return null;
     }
 
     /**
-     * Set a success message.
+     * Decode XML into an array.
      *
-     * The `"element"` option will be set to  `"success"`.
-     *
-     * @param string $message Message to flash.
-     * @param array<string, mixed> $options An array of options.
-     * @return void
-     * @see FlashMessage::set() For list of valid options
+     * @param string $body The request body to decode
      */
-    void success(string $message, STRINGAA someOptions = null) {
-        $options["element"] = "success";
-        this.set($message, $options);
-    }
+    protected array decodeXml(string $body) {
+        try {
+            $xml = Xml::build($body, ["return": "domdocument", "readFile": false]);
+            // We might not get child nodes if there are nested inline entities.
+            if ((int)$xml.childNodes.length > 0) {
+                return Xml::toArray($xml);
+            }
 
-    /**
-     * Set an success message.
-     *
-     * The `"element"` option will be set to  `"error"`.
-     *
-     * @param string $message Message to flash.
-     * @param array<string, mixed> $options An array of options.
-     * @return void
-     * @see FlashMessage::set() For list of valid options
-     */
-    void error(string $message, STRINGAA someOptions = null) {
-        $options["element"] = "error";
-        this.set($message, $options);
-    }
-
-    /**
-     * Set a warning message.
-     *
-     * The `"element"` option will be set to  `"warning"`.
-     *
-     * @param string $message Message to flash.
-     * @param array<string, mixed> $options An array of options.
-     * @return void
-     * @see FlashMessage::set() For list of valid options
-     */
-    void warning(string $message, STRINGAA someOptions = null) {
-        $options["element"] = "warning";
-        this.set($message, $options);
-    }
-
-    /**
-     * Set an info message.
-     *
-     * The `"element"` option will be set to  `"info"`.
-     *
-     * @param string $message Message to flash.
-     * @param array<string, mixed> $options An array of options.
-     * @return void
-     * @see FlashMessage::set() For list of valid options
-     */
-    void info(string $message, STRINGAA someOptions = null) {
-        $options["element"] = "info";
-        this.set($message, $options);
+            return [];
+        } catch (XmlException $e) {
+            return [];
+        }
     }
 }

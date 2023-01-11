@@ -1,4 +1,4 @@
-module uim.cake.https;
+module uim.cake.Http;
 
 import uim.cake.core.IHttpApplication;
 use Psr\Http\messages.IResponse;
@@ -19,18 +19,17 @@ abstract class MiddlewareApplication : IHttpApplication
 
     abstract void bootstrap();
 
-
-    abstract MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
+    abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
     /**
      * Generate a 404 response as no middleware handled the request.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request
+     * @param \Psr\Http\messages.IServerRequest $request The request
      * @return \Psr\Http\messages.IResponse
      */
-    IResponse handle(
-        IServerRequest myRequest
-    ):  {
-        return new Response(["body":"Not found", "status":404]);
+    function handle(
+        IServerRequest $request
+    ): IResponse {
+        return new Response(["body": "Not found", "status": 404]);
     }
 }

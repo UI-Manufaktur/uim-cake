@@ -1,71 +1,77 @@
-module uim.cake.https;
 
-@safe:
-import uim.cake
+
+
+ *
+
+
+ * @since         3.3.0
+  */module uim.cake.Http;
+
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * Executes the middleware queue and provides the `next` callable
  * that allows the queue to be iterated.
  */
-class Runner : IRequestHandler
+class Runner : RequestHandlerInterface
 {
     /**
      * The middleware queue being run.
      *
      * @var uim.cake.http.MiddlewareQueue
      */
-    protected queue;
+    protected $queue;
 
     /**
      * Fallback handler to use if middleware queue does not generate response.
      *
-     * @var \Psr\Http\servers.IRequestHandler|null
+     * @var \Psr\Http\servers.RequestHandlerInterface|null
      */
-    protected fallbackHandler;
+    protected $fallbackHandler;
 
     /**
      * @param uim.cake.http.MiddlewareQueue $queue The middleware queue
-     * @param \Psr\Http\messages.IServerRequest myRequest The Server Request
-     * @param \Psr\Http\servers.IRequestHandler|null $fallbackHandler Fallback request handler.
+     * @param \Psr\Http\messages.IServerRequest $request The Server Request
+     * @param \Psr\Http\servers.RequestHandlerInterface|null $fallbackHandler Fallback request handler.
      * @return \Psr\Http\messages.IResponse A response object
      */
     function run(
         MiddlewareQueue $queue,
-        IServerRequest myRequest,
-        ?IRequestHandler $fallbackHandler = null
+        IServerRequest $request,
+        ?RequestHandlerInterface $fallbackHandler = null
     ): IResponse {
         this.queue = $queue;
         this.queue.rewind();
         this.fallbackHandler = $fallbackHandler;
 
-        return this.handle(myRequest);
+        return this.handle($request);
     }
 
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The server request
+     * @param \Psr\Http\messages.IServerRequest $request The server request
      * @return \Psr\Http\messages.IResponse An updated response
      */
-    function handle(IServerRequest myRequest): IResponse
+    function handle(IServerRequest $request): IResponse
     {
         if (this.queue.valid()) {
             $middleware = this.queue.current();
             this.queue.next();
 
-            return $middleware.process(myRequest, this);
+            return $middleware.process($request, this);
         }
 
         if (this.fallbackHandler) {
-            return this.fallbackHandler.handle(myRequest);
+            return this.fallbackHandler.handle($request);
         }
 
-        $response = new Response([
-            "body":"Middleware queue was exhausted without returning a response "
+        return new Response([
+            "body": "Middleware queue was exhausted without returning a response "
                 ~ "and no fallback request handler was set for Runner",
-            "status":500,
+            "status": 500,
         ]);
-
-        return $response;
     }
 }

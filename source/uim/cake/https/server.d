@@ -1,8 +1,11 @@
-/*********************************************************************************************************
-	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
-	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
-	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.https;
+
+
+
+ *
+
+
+ * @since         3.3.0
+  */module uim.cake.Http;
 
 import uim.cake.core.IHttpApplication;
 import uim.cake.core.IPluginApplication;
@@ -25,12 +28,12 @@ class Server : IEventDispatcher
     /**
      * @var uim.cake.Core\IHttpApplication
      */
-    protected app;
+    protected $app;
 
     /**
      * @var uim.cake.http.Runner
      */
-    protected runner;
+    protected $runner;
 
     /**
      * Constructor
@@ -54,30 +57,30 @@ class Server : IEventDispatcher
      *   from event listeners.
      * - Run the middleware queue including the application.
      *
-     * @param \Psr\Http\messages.IServerRequest|null myRequest The request to use or null.
+     * @param \Psr\Http\messages.IServerRequest|null $request The request to use or null.
      * @param uim.cake.http.MiddlewareQueue|null $middlewareQueue MiddlewareQueue or null.
      * @return \Psr\Http\messages.IResponse
      * @throws \RuntimeException When the application does not make a response.
      */
     function run(
-        ?IServerRequest myRequest = null,
+        ?IServerRequest $request = null,
         ?MiddlewareQueue $middlewareQueue = null
     ): IResponse {
         this.bootstrap();
 
-        myRequest = myRequest ?: ServerRequestFactory::fromGlobals();
+        $request = $request ?: ServerRequestFactory::fromGlobals();
 
         $middleware = this.app.middleware($middlewareQueue ?? new MiddlewareQueue());
         if (this.app instanceof IPluginApplication) {
             $middleware = this.app.pluginMiddleware($middleware);
         }
 
-        this.dispatchEvent("Server.buildMiddleware", ["middleware":$middleware]);
+        this.dispatchEvent("Server.buildMiddleware", ["middleware": $middleware]);
 
-        $response = this.runner.run($middleware, myRequest, this.app);
+        $response = this.runner.run($middleware, $request, this.app);
 
-        if (myRequest instanceof ServerRequest) {
-            myRequest.getSession().close();
+        if ($request instanceof ServerRequest) {
+            $request.getSession().close();
         }
 
         return $response;
@@ -115,7 +118,7 @@ class Server : IEventDispatcher
      *
      * @return uim.cake.Core\IHttpApplication The application that will be run.
      */
-    auto getApp(): IHttpApplication
+    function getApp(): IHttpApplication
     {
         return this.app;
     }
@@ -125,7 +128,7 @@ class Server : IEventDispatcher
      *
      * @return uim.cake.events.IEventManager
      */
-    auto getEventManager(): IEventManager
+    function getEventManager(): IEventManager
     {
         if (this.app instanceof IEventDispatcher) {
             return this.app.getEventManager();
@@ -139,13 +142,13 @@ class Server : IEventDispatcher
      *
      * If the application does not support events, an exception will be raised.
      *
-     * @param uim.cake.events.IEventManager myEventManager The event manager to set.
+     * @param uim.cake.events.IEventManager $eventManager The event manager to set.
      * @return this
      * @throws \InvalidArgumentException
      */
-    auto setEventManager(IEventManager myEventManager) {
+    function setEventManager(IEventManager $eventManager) {
         if (this.app instanceof IEventDispatcher) {
-            this.app.setEventManager(myEventManager);
+            this.app.setEventManager($eventManager);
 
             return this;
         }

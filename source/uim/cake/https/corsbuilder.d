@@ -1,6 +1,6 @@
-module uim.cake.https;
+module uim.cake.Http;
 
-use Psr\Http\messages.IMessage;
+use Psr\Http\messages.MessageInterface;
 
 /**
  * A builder object that assists in defining Cross Origin Request related
@@ -19,7 +19,7 @@ class CorsBuilder
     /**
      * The response object this builder is attached to.
      *
-     * @var \Psr\Http\messages.IMessage
+     * @var \Psr\Http\messages.MessageInterface
      */
     protected _response;
 
@@ -30,10 +30,8 @@ class CorsBuilder
 
     /**
      * Whether the request was over SSL.
-     *
-     * @var bool
      */
-    protected _isSsl;
+    protected bool _isSsl;
 
     /**
      * The headers that have been queued so far.
@@ -45,11 +43,11 @@ class CorsBuilder
     /**
      * Constructor.
      *
-     * @param \Psr\Http\messages.IMessage $response The response object to add headers onto.
-     * @param string origin The request"s Origin header.
+     * @param \Psr\Http\messages.MessageInterface $response The response object to add headers onto.
+     * @param string $origin The request"s Origin header.
      * @param bool $isSsl Whether the request was over SSL.
      */
-    this(IMessage $response, string origin, bool $isSsl = false) {
+    this(MessageInterface $response, string $origin, bool $isSsl = false) {
         _origin = $origin;
         _isSsl = $isSsl;
         _response = $response;
@@ -61,9 +59,9 @@ class CorsBuilder
      * If the builder has no Origin, or if there are no allowed domains,
      * or if the allowed domains do not match the Origin header no headers will be applied.
      *
-     * @return \Psr\Http\messages.IMessage A new instance of the response with new headers.
+     * @return \Psr\Http\messages.MessageInterface A new instance of the response with new headers.
      */
-    function build(): IMessage
+    function build(): MessageInterface
     {
         $response = _response;
         if (empty(_origin)) {
@@ -71,8 +69,8 @@ class CorsBuilder
         }
 
         if (isset(_headers["Access-Control-Allow-Origin"])) {
-            foreach (_headers as myKey: myValue) {
-                $response = $response.withHeader(myKey, myValue);
+            foreach (_headers as $key: $value) {
+                $response = $response.withHeader($key, $value);
             }
         }
 
@@ -85,7 +83,7 @@ class CorsBuilder
      * Accepts a string or an array of domains that have CORS enabled.
      * You can use `*.example.com` wildcards to accept subdomains, or `*` to allow all domains
      *
-     * @param array<string>|string domains The allowed domains
+     * @param array<string>|string $domains The allowed domains
      * @return this
      */
     function allowOrigin($domains) {
@@ -94,8 +92,8 @@ class CorsBuilder
             if (!preg_match($domain["preg"], _origin)) {
                 continue;
             }
-            myValue = $domain["original"] == "*" ? "*" : _origin;
-            _headers["Access-Control-Allow-Origin"] = myValue;
+            $value = $domain["original"] == "*" ? "*" : _origin;
+            _headers["Access-Control-Allow-Origin"] = $value;
             break;
         }
 
@@ -105,35 +103,34 @@ class CorsBuilder
     /**
      * Normalize the origin to regular expressions and put in an array format
      *
-     * @param $domains Domain names to normalize.
-     * @return array
+     * @param array<string> $domains Domain names to normalize.
      */
-    protected array _normalizeDomains(string[] $domains) {
-        myResult = null;
+    protected array _normalizeDomains(array $domains) {
+        $result = null;
         foreach ($domains as $domain) {
             if ($domain == "*") {
-                myResult[] = ["preg":"@.@", "original":"*"];
+                $result[] = ["preg": "@.@", "original": "*"];
                 continue;
             }
 
             $original = $preg = $domain;
-            if (indexOf($domain, "://") == false) {
+            if (strpos($domain, "://") == false) {
                 $preg = (_isSsl ? "https://" : "http://") . $domain;
             }
             $preg = "@^" ~ replace("\*", ".*", preg_quote($preg, "@")) ~ "$@";
-            myResult[] = compact("original", "preg");
+            $result[] = compact("original", "preg");
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
      * Set the list of allowed HTTP Methods.
      *
-     * @param $methods The allowed HTTP methods
+     * @param array<string> $methods The allowed HTTP methods
      * @return this
      */
-    function allowMethods(string[] $methods) {
+    function allowMethods(array $methods) {
         _headers["Access-Control-Allow-Methods"] = implode(", ", $methods);
 
         return this;
@@ -153,10 +150,10 @@ class CorsBuilder
     /**
      * Allowed headers that can be sent in CORS requests.
      *
-     * @param $headers The list of headers to accept in CORS requests.
+     * @param array<string> $headers The list of headers to accept in CORS requests.
      * @return this
      */
-    function allowHeaders(string[] $headers) {
+    function allowHeaders(array $headers) {
         _headers["Access-Control-Allow-Headers"] = implode(", ", $headers);
 
         return this;
