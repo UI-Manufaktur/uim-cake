@@ -10,6 +10,8 @@
 @safe:
 import uim.cake;
 
+use InvalidArgumentException;
+
 /**
  * ValidationRule object. Represents a validation method, error message and
  * rules for applying such method to a field.
@@ -35,7 +37,9 @@ class ValidationRule
      */
     protected bool _last = false;
 
-    // The "message" key
+    /**
+     * The "message" key
+     */
     protected string _message;
 
     /**
@@ -54,7 +58,7 @@ class ValidationRule
     /**
      * Constructor
      *
-     * @param array $validator [optional] The validator properties
+     * @param array<string, mixed> $validator [optional] The validator properties
      */
     this(array $validator = null) {
         _addValidatorProps($validator);
@@ -73,7 +77,7 @@ class ValidationRule
      * a boolean indicating whether the rule passed or not. If a string is returned
      * it is assumed that the rule failed and the error message was given as a result.
      *
-     * @param mixed myValue The data to validate
+     * @param mixed $value The data to validate
      * @param array<string, mixed> $providers Associative array with objects or class names that will
      * be passed as the last argument for the validation method
      * @param array<string, mixed> $context A key value list of data that could be used as context
@@ -86,7 +90,7 @@ class ValidationRule
      * @throws \InvalidArgumentException when the supplied rule is not a valid
      * callable for the configured scope
      */
-    function process(myValue, array $providers, array $context = null) {
+    function process($value, array $providers, array $context = null) {
         $context += ["data": [], "newRecord": true, "providers": $providers];
 
         if (_skip($context)) {
@@ -104,27 +108,27 @@ class ValidationRule
 
         if (!$isCallable) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            myMessage = sprintf(
+            $message = sprintf(
                 "Unable to call method '%s' in '%s' provider for field '%s'",
                 _rule,
                 _provider,
                 $context["field"]
             );
-            throw new InvalidArgumentException(myMessage);
+            throw new InvalidArgumentException($message);
         }
 
         if (_pass) {
-            $args = array_values(array_merge([myValue], _pass, [$context]));
-            myResult = $callable(...$args);
+            $args = array_values(array_merge([$value], _pass, [$context]));
+            $result = $callable(...$args);
         } else {
-            myResult = $callable(myValue, $context);
+            $result = $callable($value, $context);
         }
 
-        if (myResult == false) {
+        if ($result == false) {
             return _message ?: false;
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
@@ -158,31 +162,32 @@ class ValidationRule
     /**
      * Sets the rule properties from the rule entry in validate
      *
-     * @param array $validator [optional]
+     * @param array<string, mixed> $validator [optional]
      */
     protected void _addValidatorProps(array $validator = null) {
-      foreach (myKey: myValue; $validator) {
-        if (empty(myValue)) continue;
-
-        if (myKey == "rule" && is_array(myValue) && !is_callable(myValue)) {
-            _pass = array_slice(myValue, 1);
-            myValue = array_shift(myValue);
+        foreach ($validator as $key: $value) {
+            if (empty($value)) {
+                continue;
+            }
+            if ($key == "rule" && is_array($value) && !is_callable($value)) {
+                _pass = array_slice($value, 1);
+                $value = array_shift($value);
+            }
+            if (hasAllValues($key, ["rule", "on", "message", "last", "provider", "pass"], true)) {
+                this.{"_$key"} = $value;
+            }
         }
-        if (hasAllValues(myKey, ["rule", "on", "message", "last", "provider", "pass"], true)) {
-            this.{"_myKey"} = myValue;
-        }
-      }
     }
 
     /**
      * Returns the value of a property by name
      *
-     * @param string property The name of the property to retrieve.
+     * @param string $property The name of the property to retrieve.
      * @return mixed
      */
-    auto get(string property) {
-      $property = "_" ~ $property;
+    function get(string $property) {
+        $property = "_" ~ $property;
 
-      return this.{$property} ?? null;
+        return this.{$property} ?? null;
     }
 }

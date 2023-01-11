@@ -1,13 +1,12 @@
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/module uim.cake.validations;
 
+@safe:
+import uim.cake;
 
-
- *
-
-
- * @since         3.0.3
-  */module uim.cake.Validation;
-
-import uim.cake.events.IEventDispatcher;
 use RuntimeException;
 
 /**

@@ -7,17 +7,24 @@
 @safe:
 import uim.cake;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
+use Traversable;
+
 /**
  * ValidationSet object. Holds all validation rules for a field and exposes
  * methods to dynamically add or remove validation rules
  */
-class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
+class ValidationSet : ArrayAccess, IteratorAggregate, Countable
+{
     /**
      * Holds the ValidationRule objects
      *
-     * @var array<uim.cake.validations.>
+     * @var array<uim.cake.validations.ValidationRule>
      */
-    protected ValidationRule[] _rules = null;
+    protected _rules = null;
 
     /**
      * Denotes whether the fieldname key must be present in data array
@@ -79,13 +86,13 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Gets a rule for a given name if exists
      *
-     * @param string myName The name under which the rule is set.
+     * @param string aName The name under which the rule is set.
      * @return uim.cake.validations.ValidationRule|null
      */
-    function rule(string myName): ?ValidationRule
+    function rule(string aName): ?ValidationRule
     {
-        if (!empty(_rules[myName])) {
-            return _rules[myName];
+        if (!empty(_rules[$name])) {
+            return _rules[$name];
         }
 
         return null;
@@ -101,7 +108,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     }
 
     /**
-     * Sets a ValidationRule $rule with a myName
+     * Sets a ValidationRule $rule with a $name
      *
      * ### Example:
      *
@@ -111,15 +118,15 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      *          .add("inRange", ["rule": ["between", 4, 10])
      * ```
      *
-     * @param string myName The name under which the rule should be set
+     * @param string aName The name under which the rule should be set
      * @param uim.cake.validations.ValidationRule|array $rule The validation rule to be set
      * @return this
      */
-    function add(string myName, $rule) {
+    function add(string aName, $rule) {
         if (!($rule instanceof ValidationRule)) {
             $rule = new ValidationRule($rule);
         }
-        _rules[myName] = $rule;
+        _rules[$name] = $rule;
 
         return this;
     }
@@ -135,11 +142,11 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      *          .remove("inRange")
      * ```
      *
-     * @param string myName The name under which the rule should be unset
+     * @param string aName The name under which the rule should be unset
      * @return this
      */
-    function remove(string myName) {
-        unset(_rules[myName]);
+    function remove(string aName) {
+        unset(_rules[$name]);
 
         return this;
     }
@@ -147,7 +154,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns whether an index exists in the rule set
      *
-     * @param string index name of the rule
+     * @param string $index name of the rule
      */
     bool offsetExists($index) {
         return isset(_rules[$index]);
@@ -156,7 +163,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns a rule object by its index
      *
-     * @param string index name of the rule
+     * @param string $index name of the rule
      * @return uim.cake.validations.ValidationRule
      */
     function offsetGet($index): ValidationRule
@@ -167,7 +174,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Sets or replace a validation rule
      *
-     * @param string index name of the rule
+     * @param string $index name of the rule
      * @param uim.cake.validations.ValidationRule|array $rule Rule to add to $index
      */
     void offsetSet($index, $rule) {
@@ -177,7 +184,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Unsets a validation rule
      *
-     * @param string index name of the rule
+     * @param string $index name of the rule
      */
     void offsetUnset($index) {
         unset(_rules[$index]);
@@ -188,7 +195,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return \Traversable<string, uim.cake.validations.ValidationRule>
      */
-    Traversable getIterator() {
+    function getIterator(): Traversable
+    {
         return new ArrayIterator(_rules);
     }
 

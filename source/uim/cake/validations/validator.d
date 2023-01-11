@@ -7,44 +7,65 @@
 @safe:
 import uim.cake;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
+use InvalidArgumentException;
+use IteratorAggregate;
+use Psr\Http\messages.UploadedFileInterface;
+use Traversable;
+
 /**
  * Validator object encapsulates all methods related to data validations for a model
  * It also provides an API to dynamically change validation rules for each model field.
  *
  * : ArrayAccess to easily modify rules in the set
  *
- * @link https://book.UIM.org/4/en/core-libraries/validation.html
+ * @link https://book.cakephp.org/4/en/core-libraries/validation.html
  */
-class Validator : ArrayAccess, IteratorAggregate, Countable {
-    // By using "create" you can make fields required when records are first created.
+class Validator : ArrayAccess, IteratorAggregate, Countable
+{
+    /**
+     * By using "create" you can make fields required when records are first created.
+     */
     const string WHEN_CREATE = "create";
 
-    // By using "update", you can make fields required when they are updated.
+    /**
+     * By using "update", you can make fields required when they are updated.
+     */
     const string WHEN_UPDATE = "update";
 
-    // Used to flag nested rules created with addNested() and addNestedMany()
+    /**
+     * Used to flag nested rules created with addNested() and addNestedMany()
+     */
     const string NESTED = "_nested";
 
     /**
      * A flag for allowEmptyFor()
      *
      * When `null` is given, it will be recognized as empty.
-    */
-    const int EMPTY_NULL = 0;
+     *
+     * @var int
+     */
+    const EMPTY_NULL = 0;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an empty string is given, it will be recognized as empty.
-    */
-    const int EMPTY_STRING = 1;
+     *
+     * @var int
+     */
+    const EMPTY_STRING = 1;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an empty array is given, it will be recognized as empty.
-    */
-    const int EMPTY_ARRAY = 2;
+     *
+     * @var int
+     */
+    const EMPTY_ARRAY = 2;
 
     /**
      * A flag for allowEmptyFor()
@@ -55,29 +76,37 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * When an instance of \Psr\Http\messages.UploadedFileInterface is given the
      * return value of it"s getError() method must be equal to `UPLOAD_ERR_NO_FILE`.
-    */
-    const int EMPTY_FILE = 4;
+     *
+     * @var int
+     */
+    const EMPTY_FILE = 4;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an array is given, if it contains the `year` key, and only empty strings
      * or null values, it will be recognized as empty.
+     *
+     * @var int
      */
-    const int EMPTY_DATE = 8;
+    const EMPTY_DATE = 8;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an array is given, if it contains the `hour` key, and only empty strings
      * or null values, it will be recognized as empty.
+     *
+     * @var int
      */
-    const int EMPTY_TIME = 16;
+    const EMPTY_TIME = 16;
 
     /**
      * A combination of the all EMPTY_* flags
-    */
-    const int EMPTY_ALL = self::EMPTY_STRING
+     *
+     * @var int
+     */
+    const EMPTY_ALL = self::EMPTY_STRING
         | self::EMPTY_ARRAY
         | self::EMPTY_FILE
         | self::EMPTY_DATE
@@ -86,7 +115,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Holds the ValidationSet objects array
      *
-     * @var array<string, uim.cake.validations.>
+     * @var array<string, uim.cake.validations.ValidationSet>
      */
     protected ValidationSet[string] _fields = null;
 
@@ -110,39 +139,33 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Contains the validation messages associated with checking the presence
      * for each corresponding field.
-     *
-     * @var array
      */
-    protected _presenceMessages = null;
+    protected STRINGAA _presenceMessages = null;
 
     /**
      * Whether to use I18n functions for translating default error messages
-     *
-     * @var bool
      */
-    protected _useI18n = false;
+    protected bool _useI18n = false;
 
     /**
      * Contains the validation messages associated with checking the emptiness
      * for each corresponding field.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected _allowEmptyMessages = null;
 
     /**
      * Contains the flags which specify what is empty for each corresponding field.
      *
-     * @var array
+     * @var array<string, int>
      */
     protected _allowEmptyFlags = null;
 
     /**
      * Whether to apply last flag to generated rule(s).
-     *
-     * @var bool
      */
-    protected _stopOnFailure = false;
+    protected bool _stopOnFailure = false;
 
     /**
      * Constructor
@@ -161,7 +184,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param bool $stopOnFailure If to apply last flag.
      * @return this
      */
-    auto setStopOnFailure(bool $stopOnFailure = true) {
+    function setStopOnFailure(bool $stopOnFailure = true) {
         _stopOnFailure = $stopOnFailure;
 
         return this;
@@ -170,52 +193,52 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Validates and returns an array of failed fields and their error messages.
      *
-     * @param array myData The data to be checked for errors
+     * @param array $data The data to be checked for errors
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      * @return array<array> Array of failed fields
      * @deprecated 3.9.0 Renamed to {@link validate()}.
      */
-    array errors(array myData, bool $newRecord = true) {
+    array errors(array $data, bool $newRecord = true) {
         deprecationWarning("`Validator::errors()` is deprecated. Use `Validator::validate()` instead.");
 
-        return this.validate(myData, $newRecord);
+        return this.validate($data, $newRecord);
     }
 
     /**
      * Validates and returns an array of failed fields and their error messages.
      *
-     * @param array myData The data to be checked for errors
+     * @param array $data The data to be checked for errors
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      * @return array<array> Array of failed fields
      */
-    array validate(array myData, bool $newRecord = true) {
-        myErrors = null;
+    array validate(array $data, bool $newRecord = true) {
+        $errors = null;
 
-        foreach (_fields as myName: myField) {
-            myKeyPresent = array_key_exists(myName, myData);
+        foreach (_fields as $name: $field) {
+            $keyPresent = array_key_exists($name, $data);
 
             $providers = _providers;
             $context = compact("data", "newRecord", "field", "providers");
 
-            if (!myKeyPresent && !_checkPresence(myField, $context)) {
-                myErrors[myName]["_required"] = this.getRequiredMessage(myName);
+            if (!$keyPresent && !_checkPresence($field, $context)) {
+                $errors[$name]["_required"] = this.getRequiredMessage($name);
                 continue;
             }
-            if (!myKeyPresent) {
+            if (!$keyPresent) {
                 continue;
             }
 
-            $canBeEmpty = _canBeEmpty(myField, $context);
+            $canBeEmpty = _canBeEmpty($field, $context);
 
             $flags = static::EMPTY_NULL;
-            if (isset(_allowEmptyFlags[myName])) {
-                $flags = _allowEmptyFlags[myName];
+            if (isset(_allowEmptyFlags[$name])) {
+                $flags = _allowEmptyFlags[$name];
             }
 
-            $isEmpty = this.isEmpty(myData[myName], $flags);
+            $isEmpty = this.isEmpty($data[$name], $flags);
 
             if (!$canBeEmpty && $isEmpty) {
-                myErrors[myName]["_empty"] = this.getNotEmptyMessage(myName);
+                $errors[$name]["_empty"] = this.getNotEmptyMessage($name);
                 continue;
             }
 
@@ -223,13 +246,13 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
                 continue;
             }
 
-            myResult = _processRules(myName, myField, myData, $newRecord);
-            if (myResult) {
-                myErrors[myName] = myResult;
+            $result = _processRules($name, $field, $data, $newRecord);
+            if ($result) {
+                $errors[$name] = $result;
             }
         }
 
-        return myErrors;
+        return $errors;
     }
 
     /**
@@ -237,27 +260,27 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * passed a ValidationSet as second argument, it will replace any other rule set defined
      * before
      *
-     * @param string myName [optional] The fieldname to fetch.
+     * @param string aName [optional] The fieldname to fetch.
      * @param uim.cake.validations.ValidationSet|null $set The set of rules for field
      * @return uim.cake.validations.ValidationSet
      */
-    function field(string myName, ?ValidationSet $set = null): ValidationSet
+    function field(string aName, ?ValidationSet $set = null): ValidationSet
     {
-        if (empty(_fields[myName])) {
+        if (empty(_fields[$name])) {
             $set = $set ?: new ValidationSet();
-            _fields[myName] = $set;
+            _fields[$name] = $set;
         }
 
-        return _fields[myName];
+        return _fields[$name];
     }
 
     /**
      * Check whether a validator contains any rules for the given field.
      *
-     * @param string myName The field name to check.
+     * @param string aName The field name to check.
      */
-    bool hasField(string myName) {
-        return isset(_fields[myName]);
+    bool hasField(string aName) {
+        return isset(_fields[$name]);
     }
 
     /**
@@ -266,12 +289,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * deciding whether a validation rule can be applied. All validation methods,
      * when called will receive the full list of providers stored in this validator.
      *
-     * @param string myName The name under which the provider should be set.
-     * @param object|string object Provider object or class name.
-     * @psalm-param object|class-string object
+     * @param string aName The name under which the provider should be set.
+     * @param object|string $object Provider object or class name.
+     * @psalm-param object|class-string $object
      * @return this
      */
-    auto setProvider(string myName, $object) {
+    function setProvider(string aName, $object) {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
                 "The provider must be an object or class name string. Got `%s` instead.",
@@ -279,7 +302,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             ));
         }
 
-        _providers[myName] = $object;
+        _providers[$name] = $object;
 
         return this;
     }
@@ -287,42 +310,42 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns the provider stored under that name if it exists.
      *
-     * @param string myName The name under which the provider should be set.
+     * @param string aName The name under which the provider should be set.
      * @return object|string|null
      * @psalm-return object|class-string|null
      */
-    auto getProvider(string myName) {
-        if (isset(_providers[myName])) {
-            return _providers[myName];
+    function getProvider(string aName) {
+        if (isset(_providers[$name])) {
+            return _providers[$name];
         }
-        if (myName != "default") {
+        if ($name != "default") {
             return null;
         }
 
-        _providers[myName] = new RulesProvider();
+        _providers[$name] = new RulesProvider();
 
-        return _providers[myName];
+        return _providers[$name];
     }
 
     /**
      * Returns the default provider stored under that name if it exists.
      *
-     * @param string myName The name under which the provider should be retrieved.
+     * @param string aName The name under which the provider should be retrieved.
      * @return object|string|null
      * @psalm-return object|class-string|null
      */
-    static auto getDefaultProvider(string myName) {
-        return self::_defaultProviders[myName] ?? null;
+    static function getDefaultProvider(string aName) {
+        return self::_defaultProviders[$name] ?? null;
     }
 
     /**
      * Associates an object to a name so it can be used as a default provider.
      *
-     * @param string myName The name under which the provider should be set.
-     * @param object|string object Provider object or class name.
-     * @psalm-param object|class-string object
+     * @param string aName The name under which the provider should be set.
+     * @param object|string $object Provider object or class name.
+     * @psalm-param object|class-string $object
      */
-    static void addDefaultProvider(string myName, $object) {
+    static void addDefaultProvider(string aName, $object) {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
                 "The provider must be an object or class name string. Got `%s` instead.",
@@ -330,7 +353,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             ));
         }
 
-        self::_defaultProviders[myName] = $object;
+        self::_defaultProviders[$name] = $object;
     }
 
     /**
@@ -342,6 +365,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
     /**
      * Get the list of providers in this validator.
+     *
+     * @return array<string>
      */
     string[] providers() {
         return array_keys(_providers);
@@ -350,47 +375,47 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns whether a rule set is defined for a field or not
      *
-     * @param string myField name of the field to check
+     * @param string $field name of the field to check
      */
-    bool offsetExists(myField) {
-        return isset(_fields[myField]);
+    bool offsetExists($field) {
+        return isset(_fields[$field]);
     }
 
     /**
      * Returns the rule set for a field
      *
-     * @param string myField name of the field to check
+     * @param string $field name of the field to check
      * @return uim.cake.validations.ValidationSet
      */
-    function offsetGet(myField): ValidationSet
+    function offsetGet($field): ValidationSet
     {
-        return this.field(myField);
+        return this.field($field);
     }
 
     /**
      * Sets the rule set for a field
      *
-     * @param string myField name of the field to set
+     * @param string $field name of the field to set
      * @param uim.cake.validations.ValidationSet|array $rules set of rules to apply to field
      */
-    void offsetSet(myField, $rules) {
+    void offsetSet($field, $rules) {
         if (!$rules instanceof ValidationSet) {
             $set = new ValidationSet();
-            foreach ($rules as myName: $rule) {
-                $set.add(myName, $rule);
+            foreach ($rules as $name: $rule) {
+                $set.add($name, $rule);
             }
             $rules = $set;
         }
-        _fields[myField] = $rules;
+        _fields[$field] = $rules;
     }
 
     /**
      * Unsets the rule set for a field
      *
-     * @param string myField name of the field to unset
+     * @param string $field name of the field to unset
      */
-    void offsetUnset(myField) {
-        unset(_fields[myField]);
+    void offsetUnset($field) {
+        unset(_fields[$field]);
     }
 
     /**
@@ -398,7 +423,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return \Traversable<string, uim.cake.validations.ValidationSet>
      */
-    Traversable getIterator() {
+    function getIterator(): Traversable
+    {
         return new ArrayIterator(_fields);
     }
 
@@ -427,38 +453,38 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *      ]);
      * ```
      *
-     * @param string myField The name of the field from which the rule will be added
-     * @param array|string myName The alias for a single rule or multiple rules array
+     * @param string $field The name of the field from which the rule will be added
+     * @param array|string aName The alias for a single rule or multiple rules array
      * @param uim.cake.validations.ValidationRule|array $rule the rule to add
      * @throws \InvalidArgumentException If numeric index cannot be resolved to a string one
      * @return this
      */
-    function add(string myField, myName, $rule = null) {
-        $validationSet = this.field(myField);
+    function add(string $field, $name, $rule = null) {
+        $validationSet = this.field($field);
 
-        if (!is_array(myName)) {
-            $rules = [myName: $rule];
+        if (!is_array($name)) {
+            $rules = [$name: $rule];
         } else {
-            $rules = myName;
+            $rules = $name;
         }
 
-        foreach ($rules as myName: $rule) {
+        foreach ($rules as $name: $rule) {
             if (is_array($rule)) {
                 $rule += [
-                    "rule": myName,
+                    "rule": $name,
                     "last": _stopOnFailure,
                 ];
             }
-            if (!is_string(myName)) {
+            if (!is_string($name)) {
                 /** @psalm-suppress PossiblyUndefinedMethod */
-                myName = $rule["rule"];
-                if (is_array(myName)) {
-                    myName = array_shift(myName);
+                $name = $rule["rule"];
+                if (is_array($name)) {
+                    $name = array_shift($name);
                 }
 
-                if ($validationSet.offsetExists(myName)) {
-                    myMessage = "You cannot add a rule without a unique name, already existing rule found: " ~ myName;
-                    throw new InvalidArgumentException(myMessage);
+                if ($validationSet.offsetExists($name)) {
+                    $message = "You cannot add a rule without a unique name, already existing rule found: " ~ $name;
+                    throw new InvalidArgumentException($message);
                 }
 
                 deprecationWarning(
@@ -466,7 +492,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
                 );
             }
 
-            $validationSet.add(myName, $rule);
+            $validationSet.add($name, $rule);
         }
 
         return this;
@@ -485,30 +511,30 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * errors are checked. This ensures that any validation rule providers connected
      * in the parent will have the same values in the nested validator when rules are evaluated.
      *
-     * @param string myField The root field for the nested validator.
+     * @param string $field The root field for the nested validator.
      * @param uim.cake.validations.Validator $validator The nested validator.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @return this
      */
-    function addNested(string myField, Validator $validator, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["message": myMessage, "on": $when]);
+    function addNested(string $field, Validator $validator, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["message": $message, "on": $when]);
 
-        $validationSet = this.field(myField);
-        $validationSet.add(static::NESTED, $extra + ["rule": function (myValue, $context) use ($validator, myMessage) {
-            if (!is_array(myValue)) {
+        $validationSet = this.field($field);
+        $validationSet.add(static::NESTED, $extra + ["rule": function ($value, $context) use ($validator, $message) {
+            if (!is_array($value)) {
                 return false;
             }
             foreach (this.providers() as $provider) {
                 /** @psalm-suppress PossiblyNullArgument */
                 $validator.setProvider($provider, this.getProvider($provider));
             }
-            myErrors = $validator.validate(myValue, $context["newRecord"]);
+            $errors = $validator.validate($value, $context["newRecord"]);
 
-            myMessage = myMessage ? [static::NESTED: myMessage] : [];
+            $message = $message ? [static::NESTED: $message] : [];
 
-            return empty(myErrors) ? true : myErrors + myMessage;
+            return empty($errors) ? true : $errors + $message;
         }]);
 
         return this;
@@ -527,39 +553,39 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * errors are checked. This ensures that any validation rule providers connected
      * in the parent will have the same values in the nested validator when rules are evaluated.
      *
-     * @param string myField The root field for the nested validator.
+     * @param string $field The root field for the nested validator.
      * @param uim.cake.validations.Validator $validator The nested validator.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @return this
      */
-    function addNestedMany(string myField, Validator $validator, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["message": myMessage, "on": $when]);
+    function addNestedMany(string $field, Validator $validator, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["message": $message, "on": $when]);
 
-        $validationSet = this.field(myField);
-        $validationSet.add(static::NESTED, $extra + ["rule": function (myValue, $context) use ($validator, myMessage) {
-            if (!is_array(myValue)) {
+        $validationSet = this.field($field);
+        $validationSet.add(static::NESTED, $extra + ["rule": function ($value, $context) use ($validator, $message) {
+            if (!is_array($value)) {
                 return false;
             }
             foreach (this.providers() as $provider) {
                 /** @psalm-suppress PossiblyNullArgument */
                 $validator.setProvider($provider, this.getProvider($provider));
             }
-            myErrors = null;
-            foreach (myValue as $i: $row) {
+            $errors = null;
+            foreach ($value as $i: $row) {
                 if (!is_array($row)) {
                     return false;
                 }
                 $check = $validator.validate($row, $context["newRecord"]);
                 if (!empty($check)) {
-                    myErrors[$i] = $check;
+                    $errors[$i] = $check;
                 }
             }
 
-            myMessage = myMessage ? [static::NESTED: myMessage] : [];
+            $message = $message ? [static::NESTED: $message] : [];
 
-            return empty(myErrors) ? true : myErrors + myMessage;
+            return empty($errors) ? true : $errors + $message;
         }]);
 
         return this;
@@ -576,15 +602,15 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *          .remove("user_id")
      * ```
      *
-     * @param string myField The name of the field from which the rule will be removed
+     * @param string $field The name of the field from which the rule will be removed
      * @param string|null $rule the name of the rule to be removed
      * @return this
      */
-    function remove(string myField, Nullable!string rule = null) {
-        if ($rule is null) {
-            unset(_fields[myField]);
+    function remove(string $field, Nullable!string $rule = null) {
+        if ($rule == null) {
+            unset(_fields[$field]);
         } else {
-            this.field(myField).remove($rule);
+            this.field($field).remove($rule);
         }
 
         return this;
@@ -601,30 +627,30 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * You can also set mode and message for all passed fields, the individual
      * setting takes precedence over group settings.
      *
-     * @param array|string myField the name of the field or list of fields.
-     * @param callable|string|bool myMode Valid values are true, false, "create", "update".
+     * @param array|string $field the name of the field or list of fields.
+     * @param callable|string|bool $mode Valid values are true, false, "create", "update".
      *   If a callable is passed then the field will be required only when the callback
      *   returns true.
-     * @param string|null myMessage The message to show if the field presence validation fails.
+     * @param string|null $message The message to show if the field presence validation fails.
      * @return this
      */
-    function requirePresence(myField, myMode = true, Nullable!string myMessage = null) {
+    function requirePresence($field, $mode = true, Nullable!string $message = null) {
         $defaults = [
-            "mode": myMode,
-            "message": myMessage,
+            "mode": $mode,
+            "message": $message,
         ];
 
-        if (!is_array(myField)) {
-            myField = _convertValidatorToArray(myField, $defaults);
+        if (!is_array($field)) {
+            $field = _convertValidatorToArray($field, $defaults);
         }
 
-        foreach (myField as myFieldName: $setting) {
-            $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
-            myFieldName = current(array_keys($settings));
+        foreach ($field as $fieldName: $setting) {
+            $settings = _convertValidatorToArray($fieldName, $defaults, $setting);
+            $fieldName = current(array_keys($settings));
 
-            this.field(myFieldName).requirePresence($settings[myFieldName]["mode"]);
-            if ($settings[myFieldName]["message"]) {
-                _presenceMessages[myFieldName] = $settings[myFieldName]["message"];
+            this.field($fieldName).requirePresence($settings[$fieldName]["mode"]);
+            if ($settings[$fieldName]["message"]) {
+                _presenceMessages[$fieldName] = $settings[$fieldName]["message"];
             }
         }
 
@@ -642,7 +668,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * takes precedence over group settings.
      *
      * This is the opposite of notEmpty() which requires a field to not be empty.
-     * By using myMode equal to "create" or "update", you can allow fields to be empty
+     * By using $mode equal to "create" or "update", you can allow fields to be empty
      * when records are first created, or when they are updated.
      *
      * ### Example:
@@ -692,14 +718,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @deprecated 3.7.0 Use {@link allowEmptyString()}, {@link allowEmptyArray()}, {@link allowEmptyFile()},
      *   {@link allowEmptyDate()}, {@link allowEmptyTime()}, {@link allowEmptyDateTime()} or {@link allowEmptyFor()} instead.
-     * @param array|string myField the name of the field or a list of fields
+     * @param array|string $field the name of the field or a list of fields
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      * Valid values are true (always), "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string|null $message The message to show if the field is not
      * @return this
      */
-    function allowEmpty(myField, $when = true, myMessage = null) {
+    function allowEmpty($field, $when = true, $message = null) {
         deprecationWarning(
             "allowEmpty() is deprecated~ "
             ~ "Use allowEmptyString(), allowEmptyArray(), allowEmptyFile(), allowEmptyDate(), allowEmptyTime(), "
@@ -708,20 +734,20 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
         $defaults = [
             "when": $when,
-            "message": myMessage,
+            "message": $message,
         ];
-        if (!is_array(myField)) {
-            myField = _convertValidatorToArray(myField, $defaults);
+        if (!is_array($field)) {
+            $field = _convertValidatorToArray($field, $defaults);
         }
 
-        foreach (myField as myFieldName: $setting) {
-            $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
-            myFieldName = array_keys($settings)[0];
+        foreach ($field as $fieldName: $setting) {
+            $settings = _convertValidatorToArray($fieldName, $defaults, $setting);
+            $fieldName = array_keys($settings)[0];
             this.allowEmptyFor(
-                myFieldName,
+                $fieldName,
                 static::EMPTY_ALL,
-                $settings[myFieldName]["when"],
-                $settings[myFieldName]["message"]
+                $settings[$fieldName]["when"],
+                $settings[$fieldName]["message"]
             );
         }
 
@@ -787,23 +813,23 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * $validator.allowEmptyArray("items");
      * ```
      *
-     * @param string myField The name of the field.
+     * @param string $field The name of the field.
      * @param int|null $flags A bitmask of EMPTY_* flags which specify what is empty.
      *   If no flags/bitmask is provided only `null` will be allowed as empty value.
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string|null $message The message to show if the field is not
 
      * @return this
      */
-    function allowEmptyFor(string myField, Nullable!int $flags = null, $when = true, Nullable!string myMessage = null) {
-        this.field(myField).allowEmpty($when);
-        if (myMessage) {
-            _allowEmptyMessages[myField] = myMessage;
+    function allowEmptyFor(string $field, Nullable!int $flags = null, $when = true, Nullable!string $message = null) {
+        this.field($field).allowEmpty($when);
+        if ($message) {
+            _allowEmptyMessages[$field] = $message;
         }
-        if ($flags  !is null) {
-            _allowEmptyFlags[myField] = $flags;
+        if ($flags != null) {
+            _allowEmptyFlags[$field] = $flags;
         }
 
         return this;
@@ -814,25 +840,25 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * This method is equivalent to calling allowEmptyFor() with EMPTY_STRING flag.
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is not
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyFor() For detail usage
      */
-    function allowEmptyString(string myField, Nullable!string myMessage = null, $when = true) {
-        return this.allowEmptyFor(myField, self::EMPTY_STRING, $when, myMessage);
+    function allowEmptyString(string $field, Nullable!string $message = null, $when = true) {
+        return this.allowEmptyFor($field, self::EMPTY_STRING, $when, $message);
     }
 
     /**
-     * Requires a field to be not be an empty string.
+     * Requires a field to not be an empty string.
      *
      * Opposite to allowEmptyString()
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is empty.
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is empty.
      * @param callable|string|bool $when Indicates when the field is not allowed
      *   to be empty. Valid values are false (never), "create", "update". If a
      *   callable is passed then the field will be required to be not empty when
@@ -841,10 +867,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @see uim.cake.validations.Validator::allowEmptyString()
      * @since 3.8.0
      */
-    function notEmptyString(string myField, Nullable!string myMessage = null, $when = false) {
+    function notEmptyString(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
-        return this.allowEmptyFor(myField, self::EMPTY_STRING, $when, myMessage);
+        return this.allowEmptyFor($field, self::EMPTY_STRING, $when, $message);
     }
 
     /**
@@ -853,8 +879,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * This method is equivalent to calling allowEmptyFor() with EMPTY_STRING +
      * EMPTY_ARRAY flags.
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is not
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
@@ -862,8 +888,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples.
      */
-    function allowEmptyArray(string myField, Nullable!string myMessage = null, $when = true) {
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_ARRAY, $when, myMessage);
+    function allowEmptyArray(string $field, Nullable!string $message = null, $when = true) {
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_ARRAY, $when, $message);
     }
 
     /**
@@ -871,8 +897,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * Opposite to allowEmptyArray()
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is empty.
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is empty.
      * @param callable|string|bool $when Indicates when the field is not allowed
      *   to be empty. Valid values are false (never), "create", "update". If a
      *   callable is passed then the field will be required to be not empty when
@@ -880,10 +906,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyArray()
      */
-    function notEmptyArray(string myField, Nullable!string myMessage = null, $when = false) {
+    function notEmptyArray(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_ARRAY, $when, myMessage);
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_ARRAY, $when, $message);
     }
 
     /**
@@ -893,8 +919,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * File fields will not accept `""`, or `[]` as empty values. Only `null` and a file
      * upload with `error` equal to `UPLOAD_ERR_NO_FILE` will be treated as empty.
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is not
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      *   Valid values are true, "create", "update". If a callable is passed then
      *   the field will allowed to be empty only when the callback returns true.
@@ -902,8 +928,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      * @see uim.cake.validations.Validator::allowEmptyFor() For detail usage
      */
-    function allowEmptyFile(string myField, Nullable!string myMessage = null, $when = true) {
-        return this.allowEmptyFor(myField, self::EMPTY_FILE, $when, myMessage);
+    function allowEmptyFile(string $field, Nullable!string $message = null, $when = true) {
+        return this.allowEmptyFor($field, self::EMPTY_FILE, $when, $message);
     }
 
     /**
@@ -911,8 +937,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * Opposite to allowEmptyFile()
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is empty.
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is empty.
      * @param callable|string|bool $when Indicates when the field is not allowed
      *   to be empty. Valid values are false (never), "create", "update". If a
      *   callable is passed then the field will be required to be not empty when
@@ -921,10 +947,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @since 3.8.0
      * @see uim.cake.validations.Validator::allowEmptyFile()
      */
-    function notEmptyFile(string myField, Nullable!string myMessage = null, $when = false) {
+    function notEmptyFile(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
-        return this.allowEmptyFor(myField, self::EMPTY_FILE, $when, myMessage);
+        return this.allowEmptyFor($field, self::EMPTY_FILE, $when, $message);
     }
 
     /**
@@ -933,23 +959,23 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Empty date values are `null`, `""`, `[]` and arrays where all values are `""`
      * and the `year` key is present.
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is not
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples
      */
-    function allowEmptyDate(string myField, Nullable!string myMessage = null, $when = true) {
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_DATE, $when, myMessage);
+    function allowEmptyDate(string $field, Nullable!string $message = null, $when = true) {
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE, $when, $message);
     }
 
     /**
      * Require a non-empty date value
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is empty.
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is empty.
      * @param callable|string|bool $when Indicates when the field is not allowed
      *   to be empty. Valid values are false (never), "create", "update". If a
      *   callable is passed then the field will be required to be not empty when
@@ -957,10 +983,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyDate() for examples
      */
-    function notEmptyDate(string myField, Nullable!string myMessage = null, $when = false) {
+    function notEmptyDate(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_DATE, $when, myMessage);
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE, $when, $message);
     }
 
     /**
@@ -972,8 +998,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * This method is equivalent to calling allowEmptyFor() with EMPTY_STRING +
      * EMPTY_TIME flags.
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is not
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
@@ -981,8 +1007,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples.
      */
-    function allowEmptyTime(string myField, Nullable!string myMessage = null, $when = true) {
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_TIME, $when, myMessage);
+    function allowEmptyTime(string $field, Nullable!string $message = null, $when = true) {
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_TIME, $when, $message);
     }
 
     /**
@@ -990,8 +1016,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * Opposite to allowEmptyTime()
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is empty.
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is empty.
      * @param callable|string|bool $when Indicates when the field is not allowed
      *   to be empty. Valid values are false (never), "create", "update". If a
      *   callable is passed then the field will be required to be not empty when
@@ -1000,10 +1026,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @since 3.8.0
      * @see uim.cake.validations.Validator::allowEmptyTime()
      */
-    function notEmptyTime(string myField, Nullable!string myMessage = null, $when = false) {
+    function notEmptyTime(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_TIME, $when, myMessage);
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_TIME, $when, $message);
     }
 
     /**
@@ -1015,8 +1041,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * This method is equivalent to calling allowEmptyFor() with EMPTY_STRING +
      * EMPTY_DATE + EMPTY_TIME flags.
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is not
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is not
      * @param callable|string|bool $when Indicates when the field is allowed to be empty
      *   Valid values are true, false, "create", "update". If a callable is passed then
      *   the field will allowed to be empty only when the callback returns false.
@@ -1024,8 +1050,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples.
      */
-    function allowEmptyDateTime(string myField, Nullable!string myMessage = null, $when = true) {
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_DATE | self::EMPTY_TIME, $when, myMessage);
+    function allowEmptyDateTime(string $field, Nullable!string $message = null, $when = true) {
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE | self::EMPTY_TIME, $when, $message);
     }
 
     /**
@@ -1033,8 +1059,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * Opposite to allowEmptyDateTime
      *
-     * @param string myField The name of the field.
-     * @param string|null myMessage The message to show if the field is empty.
+     * @param string $field The name of the field.
+     * @param string|null $message The message to show if the field is empty.
      * @param callable|string|bool $when Indicates when the field is not allowed
      *   to be empty. Valid values are false (never), "create", "update". If a
      *   callable is passed then the field will be required to be not empty when
@@ -1043,34 +1069,34 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @since 3.8.0
      * @see uim.cake.validations.Validator::allowEmptyDateTime()
      */
-    function notEmptyDateTime(string myField, Nullable!string myMessage = null, $when = false) {
+    function notEmptyDateTime(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
-        return this.allowEmptyFor(myField, self::EMPTY_STRING | self::EMPTY_DATE | self::EMPTY_TIME, $when, myMessage);
+        return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE | self::EMPTY_TIME, $when, $message);
     }
 
     /**
      * Converts validator to fieldName: $settings array
      *
-     * @param string|int myFieldName name of field
+     * @param string|int $fieldName name of field
      * @param array<string, mixed> $defaults default settings
-     * @param array<string, mixed>|string settings settings from data
+     * @param array<string, mixed>|string $settings settings from data
      * @return array<array>
      * @throws \InvalidArgumentException
      */
-    protected array _convertValidatorToArray(myFieldName, array $defaults = null, $settings = null) {
+    protected array _convertValidatorToArray($fieldName, array $defaults = null, $settings = null) {
         if (is_string($settings)) {
-            myFieldName = $settings;
+            $fieldName = $settings;
             $settings = null;
         }
         if (!is_array($settings)) {
             throw new InvalidArgumentException(
-                sprintf("Invalid settings for '%s'. Settings must be an array.", myFieldName)
+                sprintf("Invalid settings for '%s'. Settings must be an array.", $fieldName)
             );
         }
         $settings += $defaults;
 
-        return [myFieldName: $settings];
+        return [$fieldName: $settings];
     }
 
     /**
@@ -1084,25 +1110,25 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * takes precedence over group settings.
      *
      * This is the opposite of `allowEmpty()` which allows a field to be empty.
-     * By using myMode equal to "create" or "update", you can make fields required
+     * By using $mode equal to "create" or "update", you can make fields required
      * when records are first created, or when they are updated.
      *
      * ### Example:
      *
      * ```
-     * myMessage = "This field cannot be empty";
+     * $message = "This field cannot be empty";
      *
      * // Email cannot be empty
      * $validator.notEmpty("email");
      *
      * // Email can be empty on update, but not create
-     * $validator.notEmpty("email", myMessage, "create");
+     * $validator.notEmpty("email", $message, "create");
      *
      * // Email can be empty on create, but required on update.
-     * $validator.notEmpty("email", myMessage, Validator::WHEN_UPDATE);
+     * $validator.notEmpty("email", $message, Validator::WHEN_UPDATE);
      *
      * // Email and title can be empty on create, but are required on update.
-     * $validator.notEmpty(["email", "title"], myMessage, Validator::WHEN_UPDATE);
+     * $validator.notEmpty(["email", "title"], $message, Validator::WHEN_UPDATE);
      *
      * // Email can be empty on create, title must always be not empty
      * $validator.notEmpty(
@@ -1113,7 +1139,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *              "message": "Title cannot be empty"
      *          ]
      *      ],
-     *      myMessage,
+     *      $message,
      *      Validator::WHEN_UPDATE
      * );
      * ```
@@ -1133,15 +1159,15 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @deprecated 3.7.0 Use {@link notEmptyString()}, {@link notEmptyArray()}, {@link notEmptyFile()},
      *   {@link notEmptyDate()}, {@link notEmptyTime()} or {@link notEmptyDateTime()} instead.
-     * @param array|string myField the name of the field or list of fields
-     * @param string|null myMessage The message to show if the field is not
+     * @param array|string $field the name of the field or list of fields
+     * @param string|null $message The message to show if the field is not
      * @param callable|string|bool $when Indicates when the field is not allowed
      *   to be empty. Valid values are true (always), "create", "update". If a
      *   callable is passed then the field will allowed to be empty only when
      *   the callback returns false.
      * @return this
      */
-    function notEmpty(myField, Nullable!string myMessage = null, $when = false) {
+    function notEmpty($field, Nullable!string $message = null, $when = false) {
         deprecationWarning(
             "notEmpty() is deprecated~ "
             ~ "Use notEmptyString(), notEmptyArray(), notEmptyFile(), notEmptyDate(), notEmptyTime() "
@@ -1150,23 +1176,23 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
         $defaults = [
             "when": $when,
-            "message": myMessage,
+            "message": $message,
         ];
 
-        if (!is_array(myField)) {
-            myField = _convertValidatorToArray(myField, $defaults);
+        if (!is_array($field)) {
+            $field = _convertValidatorToArray($field, $defaults);
         }
 
-        foreach (myField as myFieldName: $setting) {
-            $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
-            myFieldName = current(array_keys($settings));
+        foreach ($field as $fieldName: $setting) {
+            $settings = _convertValidatorToArray($fieldName, $defaults, $setting);
+            $fieldName = current(array_keys($settings));
 
-            $whenSetting = this.invertWhenClause($settings[myFieldName]["when"]);
+            $whenSetting = this.invertWhenClause($settings[$fieldName]["when"]);
 
-            this.field(myFieldName).allowEmpty($whenSetting);
-            _allowEmptyFlags[myFieldName] = static::EMPTY_ALL;
-            if ($settings[myFieldName]["message"]) {
-                _allowEmptyMessages[myFieldName] = $settings[myFieldName]["message"];
+            this.field($fieldName).allowEmpty($whenSetting);
+            _allowEmptyFlags[$fieldName] = static::EMPTY_ALL;
+            if ($settings[$fieldName]["message"]) {
+                _allowEmptyMessages[$fieldName] = $settings[$fieldName]["message"];
             }
         }
 
@@ -1182,7 +1208,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *   the callback returns false.
      * @return callable|string|bool
      */
-    protected auto invertWhenClause($when) {
+    protected function invertWhenClause($when) {
         if ($when == static::WHEN_CREATE || $when == static::WHEN_UPDATE) {
             return $when == static::WHEN_CREATE ? static::WHEN_UPDATE : static::WHEN_CREATE;
         }
@@ -1198,17 +1224,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a notBlank rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::notBlank()
      * @return this
      */
-    function notBlank(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function notBlank(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "notBlank", $extra + [
+        return this.add($field, "notBlank", $extra + [
             "rule": "notBlank",
         ]);
     }
@@ -1216,17 +1242,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add an alphanumeric rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::alphaNumeric()
      * @return this
      */
-    function alphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function alphaNumeric(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "alphaNumeric", $extra + [
+        return this.add($field, "alphaNumeric", $extra + [
             "rule": "alphaNumeric",
         ]);
     }
@@ -1234,17 +1260,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a non-alphanumeric rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::notAlphaNumeric()
      * @return this
      */
-    function notAlphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function notAlphaNumeric(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "notAlphaNumeric", $extra + [
+        return this.add($field, "notAlphaNumeric", $extra + [
             "rule": "notAlphaNumeric",
         ]);
     }
@@ -1252,17 +1278,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add an ascii-alphanumeric rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::asciiAlphaNumeric()
      * @return this
      */
-    function asciiAlphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function asciiAlphaNumeric(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "asciiAlphaNumeric", $extra + [
+        return this.add($field, "asciiAlphaNumeric", $extra + [
             "rule": "asciiAlphaNumeric",
         ]);
     }
@@ -1270,17 +1296,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a non-ascii alphanumeric rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::notAlphaNumeric()
      * @return this
      */
-    function notAsciiAlphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function notAsciiAlphaNumeric(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "notAsciiAlphaNumeric", $extra + [
+        return this.add($field, "notAsciiAlphaNumeric", $extra + [
             "rule": "notAsciiAlphaNumeric",
         ]);
     }
@@ -1288,22 +1314,22 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add an rule that ensures a string length is within a range.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param array $range The inclusive minimum and maximum length you want permitted.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::alphaNumeric()
      * @return this
      * @throws \InvalidArgumentException
      */
-    function lengthBetween(string myField, array $range, Nullable!string myMessage = null, $when = null) {
+    function lengthBetween(string $field, array $range, Nullable!string $message = null, $when = null) {
         if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
-        $extra = array_filter(["on": $when, "message": myMessage]);
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "lengthBetween", $extra + [
+        return this.add($field, "lengthBetween", $extra + [
             "rule": ["lengthBetween", array_shift($range), array_shift($range)],
         ]);
     }
@@ -1311,134 +1337,134 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a credit card rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string myType The type of cards you want to allow. Defaults to "all".
+     * @param string $field The field you want to apply the rule to.
+     * @param string $type The type of cards you want to allow. Defaults to "all".
      *   You can also supply an array of accepted card types. e.g `["mastercard", "visa", "amex"]`
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::creditCard()
      * @return this
      */
-    function creditCard(string myField, string myType = "all", Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function creditCard(string $field, string $type = "all", Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "creditCard", $extra + [
-            "rule": ["creditCard", myType, true],
+        return this.add($field, "creditCard", $extra + [
+            "rule": ["creditCard", $type, true],
         ]);
     }
 
     /**
      * Add a greater than comparison rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param float|int myValue The value user data must be greater than.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param float|int $value The value user data must be greater than.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function greaterThan(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function greaterThan(string $field, $value, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "greaterThan", $extra + [
-            "rule": ["comparison", Validation::COMPARE_GREATER, myValue],
+        return this.add($field, "greaterThan", $extra + [
+            "rule": ["comparison", Validation::COMPARE_GREATER, $value],
         ]);
     }
 
     /**
      * Add a greater than or equal to comparison rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param float|int myValue The value user data must be greater than or equal to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param float|int $value The value user data must be greater than or equal to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function greaterThanOrEqual(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function greaterThanOrEqual(string $field, $value, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "greaterThanOrEqual", $extra + [
-            "rule": ["comparison", Validation::COMPARE_GREATER_OR_EQUAL, myValue],
+        return this.add($field, "greaterThanOrEqual", $extra + [
+            "rule": ["comparison", Validation::COMPARE_GREATER_OR_EQUAL, $value],
         ]);
     }
 
     /**
      * Add a less than comparison rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param float|int myValue The value user data must be less than.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param float|int $value The value user data must be less than.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function lessThan(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function lessThan(string $field, $value, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "lessThan", $extra + [
-            "rule": ["comparison", Validation::COMPARE_LESS, myValue],
+        return this.add($field, "lessThan", $extra + [
+            "rule": ["comparison", Validation::COMPARE_LESS, $value],
         ]);
     }
 
     /**
      * Add a less than or equal comparison rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param float|int myValue The value user data must be less than or equal to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param float|int $value The value user data must be less than or equal to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function lessThanOrEqual(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function lessThanOrEqual(string $field, $value, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "lessThanOrEqual", $extra + [
-            "rule": ["comparison", Validation::COMPARE_LESS_OR_EQUAL, myValue],
+        return this.add($field, "lessThanOrEqual", $extra + [
+            "rule": ["comparison", Validation::COMPARE_LESS_OR_EQUAL, $value],
         ]);
     }
 
     /**
      * Add a equal to comparison rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param float|int myValue The value user data must be equal to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param float|int $value The value user data must be equal to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function equals(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function equals(string $field, $value, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "equals", $extra + [
-            "rule": ["comparison", Validation::COMPARE_EQUAL, myValue],
+        return this.add($field, "equals", $extra + [
+            "rule": ["comparison", Validation::COMPARE_EQUAL, $value],
         ]);
     }
 
     /**
      * Add a not equal to comparison rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param float|int myValue The value user data must be not be equal to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param float|int $value The value user data must be not be equal to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function notEquals(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function notEquals(string $field, $value, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "notEquals", $extra + [
-            "rule": ["comparison", Validation::COMPARE_NOT_EQUAL, myValue],
+        return this.add($field, "notEquals", $extra + [
+            "rule": ["comparison", Validation::COMPARE_NOT_EQUAL, $value],
         ]);
     }
 
@@ -1447,18 +1473,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * If both fields have the exact same value the rule will pass.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
      */
-    function sameAs(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function sameAs(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "sameAs", $extra + [
+        return this.add($field, "sameAs", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_SAME],
         ]);
     }
@@ -1466,19 +1492,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to compare that two fields have different values.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
 
      */
-    function notSameAs(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function notSameAs(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "notSameAs", $extra + [
+        return this.add($field, "notSameAs", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_NOT_SAME],
         ]);
     }
@@ -1486,19 +1512,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to compare one field is equal to another.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
 
      */
-    function equalToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function equalToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "equalToField", $extra + [
+        return this.add($field, "equalToField", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_EQUAL],
         ]);
     }
@@ -1506,19 +1532,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to compare one field is not equal to another.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
 
      */
-    function notEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function notEqualToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "notEqualToField", $extra + [
+        return this.add($field, "notEqualToField", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_NOT_EQUAL],
         ]);
     }
@@ -1526,19 +1552,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to compare one field is greater than another.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
 
      */
-    function greaterThanField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function greaterThanField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "greaterThanField", $extra + [
+        return this.add($field, "greaterThanField", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_GREATER],
         ]);
     }
@@ -1546,19 +1572,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to compare one field is greater than or equal to another.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
 
      */
-    function greaterThanOrEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function greaterThanOrEqualToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "greaterThanOrEqualToField", $extra + [
+        return this.add($field, "greaterThanOrEqualToField", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_GREATER_OR_EQUAL],
         ]);
     }
@@ -1566,19 +1592,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to compare one field is less than another.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
 
      */
-    function lessThanField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function lessThanField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "lessThanField", $extra + [
+        return this.add($field, "lessThanField", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_LESS],
         ]);
     }
@@ -1586,19 +1612,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to compare one field is less than or equal to another.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string secondField The field you want to compare against.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
 
      */
-    function lessThanOrEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function lessThanOrEqualToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "lessThanOrEqualToField", $extra + [
+        return this.add($field, "lessThanOrEqualToField", $extra + [
             "rule": ["compareFields", $secondField, Validation::COMPARE_LESS_OR_EQUAL],
         ]);
     }
@@ -1606,20 +1632,20 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a rule to check if a field contains non alpha numeric characters.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param int $limit The minimum number of non-alphanumeric fields required.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::containsNonAlphaNumeric()
      * @return this
      * @deprecated 4.0.0 Use {@link notAlphaNumeric()} instead. Will be removed in 5.0
      */
-    function containsNonAlphaNumeric(string myField, int $limit = 1, Nullable!string myMessage = null, $when = null) {
+    function containsNonAlphaNumeric(string $field, int $limit = 1, Nullable!string $message = null, $when = null) {
         deprecationWarning("Validator::containsNonAlphaNumeric() is deprecated. Use notAlphaNumeric() instead.");
-        $extra = array_filter(["on": $when, "message": myMessage]);
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "containsNonAlphaNumeric", $extra + [
+        return this.add($field, "containsNonAlphaNumeric", $extra + [
             "rule": ["containsNonAlphaNumeric", $limit],
         ]);
     }
@@ -1627,18 +1653,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a date format validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param $formats A list of accepted date formats.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param array<string> $formats A list of accepted date formats.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::date()
      * @return this
      */
-    function date(string myField, string[] $formats = ["ymd"], Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function date(string $field, array $formats = ["ymd"], Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "date", $extra + [
+        return this.add($field, "date", $extra + [
             "rule": ["date", $formats],
         ]);
     }
@@ -1646,18 +1672,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a date time format validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param array<string> $formats A list of accepted date formats.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::datetime()
      * @return this
      */
-    function dateTime(string myField, array $formats = ["ymd"], Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function dateTime(string $field, array $formats = ["ymd"], Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "dateTime", $extra + [
+        return this.add($field, "dateTime", $extra + [
             "rule": ["datetime", $formats],
         ]);
     }
@@ -1665,17 +1691,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a time format validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::time()
      * @return this
      */
-    function time(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function time(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "time", $extra + [
+        return this.add($field, "time", $extra + [
             "rule": "time",
         ]);
     }
@@ -1683,36 +1709,36 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a localized time, date or datetime format validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string myType Parser type, one out of "date", "time", and "datetime"
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $type Parser type, one out of "date", "time", and "datetime"
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::localizedTime()
      * @return this
      */
-    function localizedTime(string myField, string myType = "datetime", Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function localizedTime(string $field, string $type = "datetime", Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "localizedTime", $extra + [
-            "rule": ["localizedTime", myType],
+        return this.add($field, "localizedTime", $extra + [
+            "rule": ["localizedTime", $type],
         ]);
     }
 
     /**
      * Add a boolean validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::boolean()
      * @return this
      */
-    function boolean(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function boolean(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "boolean", $extra + [
+        return this.add($field, "boolean", $extra + [
             "rule": "boolean",
         ]);
     }
@@ -1720,18 +1746,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a decimal validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param int|null $places The number of decimal places to require.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::decimal()
      * @return this
      */
-    function decimal(string myField, Nullable!int $places = null, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function decimal(string $field, Nullable!int $places = null, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "decimal", $extra + [
+        return this.add($field, "decimal", $extra + [
             "rule": ["decimal", $places],
         ]);
     }
@@ -1739,18 +1765,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add an email validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param bool $checkMX Whether to check the MX records.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::email()
      * @return this
      */
-    function email(string myField, bool $checkMX = false, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function email(string $field, bool $checkMX = false, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "email", $extra + [
+        return this.add($field, "email", $extra + [
             "rule": ["email", $checkMX],
         ]);
     }
@@ -1760,17 +1786,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * This rule will accept both IPv4 and IPv6 addresses.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::ip()
      * @return this
      */
-    function ip(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function ip(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "ip", $extra + [
+        return this.add($field, "ip", $extra + [
             "rule": "ip",
         ]);
     }
@@ -1778,17 +1804,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add an IPv4 validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::ip()
      * @return this
      */
-    function ipv4(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function ipv4(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "ipv4", $extra + [
+        return this.add($field, "ipv4", $extra + [
             "rule": ["ip", "ipv4"],
         ]);
     }
@@ -1796,17 +1822,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add an IPv6 validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::ip()
      * @return this
      */
-    function ipv6(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function ipv6(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "ipv6", $extra + [
+        return this.add($field, "ipv6", $extra + [
             "rule": ["ip", "ipv6"],
         ]);
     }
@@ -1814,18 +1840,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a string length validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param int $min The minimum length required.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::minLength()
      * @return this
      */
-    function minLength(string myField, int $min, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function minLength(string $field, int $min, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "minLength", $extra + [
+        return this.add($field, "minLength", $extra + [
             "rule": ["minLength", $min],
         ]);
     }
@@ -1833,18 +1859,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a string length validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param int $min The minimum length required.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::minLengthBytes()
      * @return this
      */
-    function minLengthBytes(string myField, int $min, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function minLengthBytes(string $field, int $min, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "minLengthBytes", $extra + [
+        return this.add($field, "minLengthBytes", $extra + [
             "rule": ["minLengthBytes", $min],
         ]);
     }
@@ -1852,18 +1878,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a string length validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param int $max The maximum length allowed.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::maxLength()
      * @return this
      */
-    function maxLength(string myField, int $max, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function maxLength(string $field, int $max, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "maxLength", $extra + [
+        return this.add($field, "maxLength", $extra + [
             "rule": ["maxLength", $max],
         ]);
     }
@@ -1871,18 +1897,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a string length validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param int $max The maximum length allowed.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::maxLengthBytes()
      * @return this
      */
-    function maxLengthBytes(string myField, int $max, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function maxLengthBytes(string $field, int $max, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "maxLengthBytes", $extra + [
+        return this.add($field, "maxLengthBytes", $extra + [
             "rule": ["maxLengthBytes", $max],
         ]);
     }
@@ -1890,17 +1916,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a numeric value validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::numeric()
      * @return this
      */
-    function numeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function numeric(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "numeric", $extra + [
+        return this.add($field, "numeric", $extra + [
             "rule": "numeric",
         ]);
     }
@@ -1908,17 +1934,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a natural number validation rule to a field.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::naturalNumber()
      * @return this
      */
-    function naturalNumber(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function naturalNumber(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "naturalNumber", $extra + [
+        return this.add($field, "naturalNumber", $extra + [
             "rule": ["naturalNumber", false],
         ]);
     }
@@ -1926,17 +1952,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure a field is a non negative integer.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::naturalNumber()
      * @return this
      */
-    function nonNegativeInteger(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function nonNegativeInteger(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "nonNegativeInteger", $extra + [
+        return this.add($field, "nonNegativeInteger", $extra + [
             "rule": ["naturalNumber", true],
         ]);
     }
@@ -1944,22 +1970,22 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure a field is within a numeric range
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param array $range The inclusive upper and lower bounds of the valid range.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::range()
      * @return this
      * @throws \InvalidArgumentException
      */
-    function range(string myField, array $range, Nullable!string myMessage = null, $when = null) {
+    function range(string $field, array $range, Nullable!string $message = null, $when = null) {
         if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
-        $extra = array_filter(["on": $when, "message": myMessage]);
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "range", $extra + [
+        return this.add($field, "range", $extra + [
             "rule": ["range", array_shift($range), array_shift($range)],
         ]);
     }
@@ -1969,17 +1995,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * This validator does not require a protocol.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::url()
      * @return this
      */
-    function url(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function url(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "url", $extra + [
+        return this.add($field, "url", $extra + [
             "rule": ["url", false],
         ]);
     }
@@ -1989,17 +2015,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * This validator requires the URL to have a protocol.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::url()
      * @return this
      */
-    function urlWithProtocol(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function urlWithProtocol(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "urlWithProtocol", $extra + [
+        return this.add($field, "urlWithProtocol", $extra + [
             "rule": ["url", true],
         ]);
     }
@@ -2007,18 +2033,18 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure the field value is within an allowed list.
      *
-     * @param string myField The field you want to apply the rule to.
+     * @param string $field The field you want to apply the rule to.
      * @param array $list The list of valid options.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::inList()
      * @return this
      */
-    function inList(string myField, array $list, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function inList(string $field, array $list, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "inList", $extra + [
+        return this.add($field, "inList", $extra + [
             "rule": ["inList", $list],
         ]);
     }
@@ -2026,17 +2052,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure the field is a UUID
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::uuid()
      * @return this
      */
-    function uuid(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function uuid(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "uuid", $extra + [
+        return this.add($field, "uuid", $extra + [
             "rule": "uuid",
         ]);
     }
@@ -2044,19 +2070,19 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure the field is an uploaded file
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param array<string, mixed> myOptions An array of options.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param array<string, mixed> $options An array of options.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::uploadedFile() For options
      * @return this
      */
-    function uploadedFile(string myField, array myOptions, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function uploadedFile(string $field, STRINGAA someOptions, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "uploadedFile", $extra + [
-            "rule": ["uploadedFile", myOptions],
+        return this.add($field, "uploadedFile", $extra + [
+            "rule": ["uploadedFile", $options],
         ]);
     }
 
@@ -2065,17 +2091,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * e.g. `<lat>, <lng>`
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::uuid()
      * @return this
      */
-    function latLong(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function latLong(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "latLong", $extra + [
+        return this.add($field, "latLong", $extra + [
             "rule": "geoCoordinate",
         ]);
     }
@@ -2083,17 +2109,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure the field is a latitude.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::latitude()
      * @return this
      */
-    function latitude(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function latitude(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "latitude", $extra + [
+        return this.add($field, "latitude", $extra + [
             "rule": "latitude",
         ]);
     }
@@ -2101,17 +2127,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure the field is a longitude.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::longitude()
      * @return this
      */
-    function longitude(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function longitude(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "longitude", $extra + [
+        return this.add($field, "longitude", $extra + [
             "rule": "longitude",
         ]);
     }
@@ -2119,17 +2145,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure a field contains only ascii bytes
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::ascii()
      * @return this
      */
-    function ascii(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function ascii(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "ascii", $extra + [
+        return this.add($field, "ascii", $extra + [
             "rule": "ascii",
         ]);
     }
@@ -2137,17 +2163,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure a field contains only BMP utf8 bytes
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::utf8()
      * @return this
      */
-    function utf8(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function utf8(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "utf8", $extra + [
+        return this.add($field, "utf8", $extra + [
             "rule": ["utf8", ["extended": false]],
         ]);
     }
@@ -2157,17 +2183,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * This rule will accept 3 and 4 byte UTF8 sequences, which are necessary for emoji.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::utf8()
      * @return this
      */
-    function utf8Extended(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function utf8Extended(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "utf8Extended", $extra + [
+        return this.add($field, "utf8Extended", $extra + [
             "rule": ["utf8", ["extended": true]],
         ]);
     }
@@ -2175,17 +2201,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure a field is an integer value.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::isInteger()
      * @return this
      */
-    function integer(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function integer(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "integer", $extra + [
+        return this.add($field, "integer", $extra + [
             "rule": "isInteger",
         ]);
     }
@@ -2193,17 +2219,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure that a field contains an array.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::isArray()
      * @return this
      */
-    bool isArray(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    bool isArray(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "isArray", $extra + [
+        return this.add($field, "isArray", $extra + [
                 "rule": "isArray",
             ]);
     }
@@ -2211,17 +2237,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure that a field contains a scalar.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::isScalar()
      * @return this
      */
-    function scalar(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function scalar(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "scalar", $extra + [
+        return this.add($field, "scalar", $extra + [
                 "rule": "isScalar",
             ]);
     }
@@ -2229,17 +2255,17 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule to ensure a field is a 6 digits hex color value.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::hexColor()
      * @return this
      */
-    function hexColor(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function hexColor(string $field, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "hexColor", $extra + [
+        return this.add($field, "hexColor", $extra + [
             "rule": "hexColor",
         ]);
     }
@@ -2247,22 +2273,22 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Add a validation rule for a multiple select. Comparison is case sensitive by default.
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param array<string, mixed> myOptions The options for the validator. Includes the options defined in
+     * @param string $field The field you want to apply the rule to.
+     * @param array<string, mixed> $options The options for the validator. Includes the options defined in
      *   uim.cake.validations.Validation::multiple() and the `caseInsensitive` parameter.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::multiple()
      * @return this
      */
-    function multipleOptions(string myField, array myOptions = null, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
-        $caseInsensitive = myOptions["caseInsensitive"] ?? false;
-        unset(myOptions["caseInsensitive"]);
+    function multipleOptions(string $field, STRINGAA someOptions = null, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
+        $caseInsensitive = $options["caseInsensitive"] ?? false;
+        unset($options["caseInsensitive"]);
 
-        return this.add(myField, "multipleOptions", $extra + [
-            "rule": ["multiple", myOptions, $caseInsensitive],
+        return this.add($field, "multipleOptions", $extra + [
+            "rule": ["multiple", $options, $caseInsensitive],
         ]);
     }
 
@@ -2270,24 +2296,24 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a validation rule to ensure that a field is an array containing at least
      * the specified amount of elements
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param int myCount The number of elements the array should at least have
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param int $count The number of elements the array should at least have
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::numElements()
      * @return this
      */
-    bool hasAtLeast(string myField, int myCount, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    bool hasAtLeast(string $field, int $count, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "hasAtLeast", $extra + [
-            "rule": function (myValue) use (myCount) {
-                if (is_array(myValue) && isset(myValue["_ids"])) {
-                    myValue = myValue["_ids"];
+        return this.add($field, "hasAtLeast", $extra + [
+            "rule": function ($value) use ($count) {
+                if (is_array($value) && isset($value["_ids"])) {
+                    $value = $value["_ids"];
                 }
 
-                return Validation::numElements(myValue, Validation::COMPARE_GREATER_OR_EQUAL, myCount);
+                return Validation::numElements($value, Validation::COMPARE_GREATER_OR_EQUAL, $count);
             },
         ]);
     }
@@ -2296,24 +2322,24 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Add a validation rule to ensure that a field is an array containing at most
      * the specified amount of elements
      *
-     * @param string myField The field you want to apply the rule to.
-     * @param int myCount The number maximum amount of elements the field should have
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field The field you want to apply the rule to.
+     * @param int $count The number maximum amount of elements the field should have
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @see uim.cake.validations.Validation::numElements()
      * @return this
      */
-    bool hasAtMost(string myField, int myCount, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    bool hasAtMost(string $field, int $count, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "hasAtMost", $extra + [
-            "rule": function (myValue) use (myCount) {
-                if (is_array(myValue) && isset(myValue["_ids"])) {
-                    myValue = myValue["_ids"];
+        return this.add($field, "hasAtMost", $extra + [
+            "rule": function ($value) use ($count) {
+                if (is_array($value) && isset($value["_ids"])) {
+                    $value = $value["_ids"];
                 }
 
-                return Validation::numElements(myValue, Validation::COMPARE_LESS_OR_EQUAL, myCount);
+                return Validation::numElements($value, Validation::COMPARE_LESS_OR_EQUAL, $count);
             },
         ]);
     }
@@ -2322,46 +2348,46 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Returns whether a field can be left empty for a new or already existing
      * record.
      *
-     * @param string myField Field name.
+     * @param string $field Field name.
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      */
-    bool isEmptyAllowed(string myField, bool $newRecord) {
+    bool isEmptyAllowed(string $field, bool $newRecord) {
         $providers = _providers;
-        myData = null;
+        $data = null;
         $context = compact("data", "newRecord", "field", "providers");
 
-        return _canBeEmpty(this.field(myField), $context);
+        return _canBeEmpty(this.field($field), $context);
     }
 
     /**
      * Returns whether a field can be left out for a new or already existing
      * record.
      *
-     * @param string myField Field name.
+     * @param string $field Field name.
      * @param bool $newRecord Whether the data to be validated is new or to be updated.
      */
-    bool isPresenceRequired(string myField, bool $newRecord) {
+    bool isPresenceRequired(string $field, bool $newRecord) {
         $providers = _providers;
-        myData = null;
+        $data = null;
         $context = compact("data", "newRecord", "field", "providers");
 
-        return !_checkPresence(this.field(myField), $context);
+        return !_checkPresence(this.field($field), $context);
     }
 
     /**
      * Returns whether a field matches against a regular expression.
      *
-     * @param string myField Field name.
-     * @param string regex Regular expression.
-     * @param string|null myMessage The error message when the rule fails.
+     * @param string $field Field name.
+     * @param string $regex Regular expression.
+     * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
      * @return this
      */
-    function regex(string myField, string regex, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on": $when, "message": myMessage]);
+    function regex(string $field, string $regex, Nullable!string $message = null, $when = null) {
+        $extra = array_filter(["on": $when, "message": $message]);
 
-        return this.add(myField, "regex", $extra + [
+        return this.add($field, "regex", $extra + [
             "rule": ["custom", $regex],
         ]);
     }
@@ -2369,11 +2395,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Gets the required message for a field
      *
-     * @param string myField Field name
-     * @return string|null
+     * @param string $field Field name
      */
-    Nullable!string getRequiredMessage(string myField) {
-        if (!isset(_fields[myField])) {
+    Nullable!string getRequiredMessage(string $field) {
+        if (!isset(_fields[$field])) {
             return null;
         }
 
@@ -2382,17 +2407,16 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             $defaultMessage = __d("cake", "This field is required");
         }
 
-        return _presenceMessages[myField] ?? $defaultMessage;
+        return _presenceMessages[$field] ?? $defaultMessage;
     }
 
     /**
      * Gets the notEmpty message for a field
      *
-     * @param string myField Field name
-     * @return string|null
+     * @param string $field Field name
      */
-    Nullable!string getNotEmptyMessage(string myField) {
-        if (!isset(_fields[myField])) {
+    Nullable!string getNotEmptyMessage(string $field) {
+        if (!isset(_fields[$field])) {
             return null;
         }
 
@@ -2401,24 +2425,24 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             $defaultMessage = __d("cake", "This field cannot be left empty");
         }
 
-        foreach (_fields[myField] as $rule) {
+        foreach (_fields[$field] as $rule) {
             if ($rule.get("rule") == "notBlank" && $rule.get("message")) {
                 return $rule.get("message");
             }
         }
 
-        return _allowEmptyMessages[myField] ?? $defaultMessage;
+        return _allowEmptyMessages[$field] ?? $defaultMessage;
     }
 
     /**
      * Returns false if any validation for the passed rule set should be stopped
      * due to the field missing in the data array
      *
-     * @param uim.cake.validations.ValidationSet myField The set of rules for a field.
+     * @param uim.cake.validations.ValidationSet $field The set of rules for a field.
      * @param array<string, mixed> $context A key value list of data containing the validation context.
      */
-    protected bool _checkPresence(ValidationSet myField, array $context) {
-        $required = myField.isPresenceRequired();
+    protected bool _checkPresence(ValidationSet $field, array $context) {
+        $required = $field.isPresenceRequired();
 
         if (!is_string($required) && is_callable($required)) {
             return !$required($context);
@@ -2436,11 +2460,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns whether the field can be left blank according to `allowEmpty`
      *
-     * @param uim.cake.validations.ValidationSet myField the set of rules for a field
+     * @param uim.cake.validations.ValidationSet $field the set of rules for a field
      * @param array<string, mixed> $context a key value list of data containing the validation context.
      */
-    protected bool _canBeEmpty(ValidationSet myField, array $context) {
-        $allowed = myField.isEmptyAllowed();
+    protected bool _canBeEmpty(ValidationSet $field, array $context) {
+        $allowed = $field.isEmptyAllowed();
 
         if (!is_string($allowed) && is_callable($allowed)) {
             return $allowed($context);
@@ -2458,57 +2482,57 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns true if the field is empty in the passed data array
      *
-     * @param mixed myData Value to check against.
+     * @param mixed $data Value to check against.
      * @return bool
      * @deprecated 3.7.0 Use {@link isEmpty()} instead
      */
-    protected bool _fieldIsEmpty(myData) {
-        return this.isEmpty(myData, static::EMPTY_ALL);
+    protected bool _fieldIsEmpty($data) {
+        return this.isEmpty($data, static::EMPTY_ALL);
     }
 
     /**
      * Returns true if the field is empty in the passed data array
      *
-     * @param mixed myData Value to check against.
+     * @param mixed $data Value to check against.
      * @param int $flags A bitmask of EMPTY_* flags which specify what is empty
      */
-    protected bool isEmpty(myData, int $flags) {
-        if (myData is null) {
+    protected bool isEmpty($data, int $flags) {
+        if ($data == null) {
             return true;
         }
 
-        if (myData == "" && ($flags & self::EMPTY_STRING)) {
+        if ($data == "" && ($flags & self::EMPTY_STRING)) {
             return true;
         }
 
         $arrayTypes = self::EMPTY_ARRAY | self::EMPTY_DATE | self::EMPTY_TIME;
-        if (myData == null && ($flags & $arrayTypes)) {
+        if ($data == null && ($flags & $arrayTypes)) {
             return true;
         }
 
-        if (is_array(myData)) {
+        if (is_array($data)) {
             if (
                 ($flags & self::EMPTY_FILE)
-                && isset(myData["name"], myData["type"], myData["tmp_name"], myData["error"])
-                && (int)myData["error"] == UPLOAD_ERR_NO_FILE
+                && isset($data["name"], $data["type"], $data["tmp_name"], $data["error"])
+                && (int)$data["error"] == UPLOAD_ERR_NO_FILE
             ) {
                 return true;
             }
 
             $allFieldsAreEmpty = true;
-            foreach (myData as myField) {
-                if (myField  !is null && myField != "") {
+            foreach ($data as $field) {
+                if ($field != null && $field != "") {
                     $allFieldsAreEmpty = false;
                     break;
                 }
             }
 
             if ($allFieldsAreEmpty) {
-                if (($flags & self::EMPTY_DATE) && isset(myData["year"])) {
+                if (($flags & self::EMPTY_DATE) && isset($data["year"])) {
                     return true;
                 }
 
-                if (($flags & self::EMPTY_TIME) && isset(myData["hour"])) {
+                if (($flags & self::EMPTY_TIME) && isset($data["hour"])) {
                     return true;
                 }
             }
@@ -2516,8 +2540,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
         if (
             ($flags & self::EMPTY_FILE)
-            && myData instanceof UploadedFileInterface
-            && myData.getError() == UPLOAD_ERR_NO_FILE
+            && $data instanceof UploadedFileInterface
+            && $data.getError() == UPLOAD_ERR_NO_FILE
         ) {
             return true;
         }
@@ -2529,37 +2553,37 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Iterates over each rule in the validation set and collects the errors resulting
      * from executing them
      *
-     * @param string myField The name of the field that is being processed
+     * @param string $field The name of the field that is being processed
      * @param uim.cake.validations.ValidationSet $rules the list of rules for a field
-     * @param array myData the full data passed to the validator
+     * @param array $data the full data passed to the validator
      * @param bool $newRecord whether is it a new record or an existing one
      * @return array<string, mixed>
      */
-    protected array _processRules(string myField, ValidationSet $rules, array myData, bool $newRecord) {
-        myErrors = null;
+    protected array _processRules(string $field, ValidationSet $rules, array $data, bool $newRecord) {
+        $errors = null;
         // Loading default provider in case there is none
         this.getProvider("default");
-        myMessage = "The provided value is invalid";
+        $message = "The provided value is invalid";
 
         if (_useI18n) {
-            myMessage = __d("cake", "The provided value is invalid");
+            $message = __d("cake", "The provided value is invalid");
         }
 
         /**
          * @var uim.cake.validations.ValidationRule $rule
          */
-        foreach ($rules as myName: $rule) {
-            myResult = $rule.process(myData[myField], _providers, compact("newRecord", "data", "field"));
-            if (myResult == true) {
+        foreach ($rules as $name: $rule) {
+            $result = $rule.process($data[$field], _providers, compact("newRecord", "data", "field"));
+            if ($result == true) {
                 continue;
             }
 
-            myErrors[myName] = myMessage;
-            if (is_array(myResult) && myName == static::NESTED) {
-                myErrors = myResult;
+            $errors[$name] = $message;
+            if (is_array($result) && $name == static::NESTED) {
+                $errors = $result;
             }
-            if (is_string(myResult)) {
-                myErrors[myName] = myResult;
+            if (is_string($result)) {
+                $errors[$name] = $result;
             }
 
             if ($rule.isLast()) {
@@ -2567,7 +2591,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             }
         }
 
-        return myErrors;
+        return $errors;
     }
 
     /**
@@ -2576,12 +2600,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return array<string, mixed>
      */
     array __debugInfo() {
-        myFields = null;
-        foreach (_fields as myName: myFieldSet) {
-            myFields[myName] = [
-                "isPresenceRequired": myFieldSet.isPresenceRequired(),
-                "isEmptyAllowed": myFieldSet.isEmptyAllowed(),
-                "rules": array_keys(myFieldSet.rules()),
+        $fields = null;
+        foreach (_fields as $name: $fieldSet) {
+            $fields[$name] = [
+                "isPresenceRequired": $fieldSet.isPresenceRequired(),
+                "isEmptyAllowed": $fieldSet.isEmptyAllowed(),
+                "rules": array_keys($fieldSet.rules()),
             ];
         }
 
@@ -2592,7 +2616,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             "_useI18n": _useI18n,
             "_stopOnFailure": _stopOnFailure,
             "_providers": array_keys(_providers),
-            "_fields": myFields,
+            "_fields": $fields,
         ];
     }
 }

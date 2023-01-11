@@ -2,10 +2,13 @@
 	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.validations;
+**********************************************************************************************************/
+module uim.cake.validations.rulesprovider;
 
 @safe:
 import uim.cake;
+
+use ReflectionClass;
 
 /**
  * A Proxy class used to remove any extra arguments when the user intended to call
@@ -31,13 +34,13 @@ class RulesProvider {
     /**
      * Constructor, sets the default class to use for calling methods
      *
-     * @param object|string myClass the default class to proxy
+     * @param object|string $class the default class to proxy
      * @throws \ReflectionException
-     * @psalm-param object|class-string myClass
+     * @psalm-param object|class-string $class
      */
-    this(myClass = Validation::class) {
-        _class = myClass;
-        _reflection = new ReflectionClass(myClass);
+    this($class = Validation::class) {
+        _class = $class;
+        _reflection = new ReflectionClass($class);
     }
 
     /**
@@ -48,11 +51,11 @@ class RulesProvider {
      * the various wrapped validation methods to not receive the validation
      * context unless they need it.
      *
-     * @param string method the validation method to call
+     * @param string $method the validation method to call
      * @param array $arguments the list of arguments to pass to the method
      * @return bool Whether the validation rule passed
      */
-    auto __call(string method, array $arguments) {
+    function __call(string $method, array $arguments) {
         $method = _reflection.getMethod($method);
         $argumentList = $method.getParameters();
         if (array_pop($argumentList).getName() != "context") {
