@@ -3,6 +3,12 @@ module uim.cake.https\Middleware;
 @safe:
 import uim.cake
 
+use Closure;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
+
 /**
  * Decorate closures as PSR-15 middleware.
  *
@@ -10,8 +16,8 @@ import uim.cake
  *
  * ```
  * function (
- *     IServerRequest myRequest,
- *     IRequestHandler $handler
+ *     IServerRequest $request,
+ *     RequestHandlerInterface $handler
  * ): IResponse
  * ```
  *
@@ -24,7 +30,7 @@ class ClosureDecoratorMiddleware : IMiddleware
      *
      * @var \Closure
      */
-    protected callable;
+    protected $callable;
 
     /**
      * Constructor
@@ -38,14 +44,14 @@ class ClosureDecoratorMiddleware : IMiddleware
     /**
      * Run the callable to process an incoming server request.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest Request instance.
-     * @param \Psr\Http\servers.IRequestHandler $handler Request handler instance.
+     * @param \Psr\Http\messages.IServerRequest $request Request instance.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler Request handler instance.
      * @return \Psr\Http\messages.IResponse
      */
-    function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         return (this.callable)(
-            myRequest,
+            $request,
             $handler
         );
     }
@@ -54,7 +60,8 @@ class ClosureDecoratorMiddleware : IMiddleware
      * @internal
      * @return callable
      */
-    callable getCallable() {
+    function getCallable(): callable
+    {
         return this.callable;
     }
 }

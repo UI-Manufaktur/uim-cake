@@ -3,709 +3,269 @@ module uim.cake.https;
 @safe:
 import uim.cake;
 
-use InvalidArgumentException;
-use Laminas\Diactoros\Uri;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\messages.RequestInterface;
+use Closure;
 use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 
 /**
- * The end user interface for doing HTTP requests.
+ * Base class for full-stack applications
  *
- * ### Scoped clients
+ * This class serves as a base class for applications that are using
+ * UIM as a full stack framework. If you are only using the Http or Console libraries
+ * you should implement the relevant interfaces directly.
  *
- * If you"re doing multiple requests to the same hostname it"s often convenient
- * to use the constructor arguments to create a scoped client. This allows you
- * to keep your code DRY and not repeat hostnames, authentication, and other options.
- *
- * ### Doing requests
- *
- * Once you"ve created an instance of Client you can do requests
- * using several methods. Each corresponds to a different HTTP method.
- *
- * - get()
- * - post()
- * - put()
- * - delete()
- * - patch()
- *
- * ### Cookie management
- *
- * Client will maintain cookies from the responses done with
- * a client instance. These cookies will be automatically added
- * to future requests to matching hosts. Cookies will respect the
- * `Expires`, `Path` and `Domain` attributes. You can get the client"s
- * CookieCollection using cookies()
- *
- * You can use the "cookieJar" constructor option to provide a custom
- * cookie jar instance you"ve restored from cache/disk. By default,
- * an empty instance of {@link uim.cake.Http\Client\CookieCollection} will be created.
- *
- * ### Sending request bodies
- *
- * By default, any POST/PUT/PATCH/DELETE request with $data will
- * send their data as `application/x-www-form-urlencoded` unless
- * there are attached files. In that case `multipart/form-data`
- * will be used.
- *
- * When sending request bodies you can use the `type` option to
- * set the Content-Type for the request:
- *
- * ```
- * $http.get("/users", [], ["type": "json"]);
- * ```
- *
- * The `type` option sets both the `Content-Type` and `Accept` header, to
- * the same mime type. When using `type` you can use either a full mime
- * type or an alias. If you need different types in the Accept and Content-Type
- * headers you should set them manually and not use `type`
- *
- * ### Using authentication
- *
- * By using the `auth` key you can use authentication. The type sub option
- * can be used to specify which authentication strategy you want to use.
- * UIM comes with a few built-in strategies:
- *
- * - Basic
- * - Digest
- * - Oauth
- *
- * ### Using proxies
- *
- * By using the `proxy` key you can set authentication credentials for
- * a proxy if you need to use one. The type sub option can be used to
- * specify which authentication strategy you want to use.
- * UIM comes with built-in support for basic authentication.
+ * The application class is responsible for bootstrapping the application,
+ * and ensuring that middleware is attached. It is also invoked as the last piece
+ * of middleware, and delegates request/response handling to the correct controller.
  */
-class Client : ClientInterface
+abstract class BaseApplication implements
+    IConsoleApplication,
+    IContainerApplication,
+    IHttpApplication,
+    IPluginApplication,
+    IRoutingApplication
 {
-    use InstanceConfigTrait;
+    use EventDispatcherTrait;
 
     /**
-     * Default configuration for the client.
-     *
-     * @var array<string, mixed>
+     * @var string Contains the path of the config directory
      */
-    protected _defaultConfig = [
-        "auth": null,
-        "adapter": null,
-        "host": null,
-        "port": null,
-        "scheme": "http",
-        "basePath": "",
-        "timeout": 30,
-        "ssl_verify_peer": true,
-        "ssl_verify_peer_name": true,
-        "ssl_verify_depth": 5,
-        "ssl_verify_host": true,
-        "redirect": false,
-        "protocolVersion": "1.1",
-    ];
+    protected $configDir;
 
     /**
-     * List of cookies from responses made with this client.
+     * Plugin Collection
      *
-     * Cookies are indexed by the cookie"s domain or
-     * request host name.
-     *
-     * @var uim.cake.http.Cookie\CookieCollection
+     * @var uim.cake.Core\PluginCollection
      */
-    protected _cookies;
+    protected $plugins;
 
     /**
-     * Mock adapter for stubbing requests in tests.
+     * Controller factory
      *
-     * @var uim.cake.http.Client\Adapter\Mock|null
+     * @var uim.cake.http.ControllerFactoryInterface|null
      */
-    protected static _mockAdapter;
+    protected $controllerFactory;
 
     /**
-     * Adapter for sending requests.
+     * Container
      *
-     * @var uim.cake.http.Client\AdapterInterface
+     * @var uim.cake.Core\IContainer|null
      */
-    protected _adapter;
+    protected $container;
 
     /**
-     * Create a new HTTP Client.
+     * Constructor
      *
-     * ### Config options
-     *
-     * You can set the following options when creating a client:
-     *
-     * - host - The hostname to do requests on.
-     * - port - The port to use.
-     * - scheme - The default scheme/protocol to use. Defaults to http.
-     * - basePath - A path to append to the domain to use. (/api/v1/)
-     * - timeout - The timeout in seconds. Defaults to 30
-     * - ssl_verify_peer - Whether SSL certificates should be validated.
-     *   Defaults to true.
-     * - ssl_verify_peer_name - Whether peer names should be validated.
-     *   Defaults to true.
-     * - ssl_verify_depth - The maximum certificate chain depth to traverse.
-     *   Defaults to 5.
-     * - ssl_verify_host - Verify that the certificate and hostname match.
-     *   Defaults to true.
-     * - redirect - Number of redirects to follow. Defaults to false.
-     * - adapter - The adapter class name or instance. Defaults to
-     *   uim.cake.Http\Client\Adapter\Curl if `curl` extension is loaded else
-     *   uim.cake.Http\Client\Adapter\Stream.
-     * - protocolVersion - The HTTP protocol version to use. Defaults to 1.1
-     * - auth - The authentication credentials to use. If a `username` and `password`
-     *   key are provided without a `type` key Basic authentication will be assumed.
-     *   You can use the `type` key to define the authentication adapter classname
-     *   to use. Short class names are resolved to the `Http\Client\Auth` namespace.
-     *
-     * @param array<string, mixed> aConfig Config options for scoped clients.
-     * @throws \InvalidArgumentException
+     * @param string $configDir The directory the bootstrap configuration is held in.
+     * @param uim.cake.events.IEventManager|null $eventManager Application event manager instance.
+     * @param uim.cake.http.ControllerFactoryInterface|null $controllerFactory Controller factory.
      */
-    this(Json aConfig = null) {
-        this.setConfig(aConfig);
-
-        $adapter = _config["adapter"];
-        if ($adapter == null) {
-            $adapter = Curl::class;
-
-            if (!extension_loaded("curl")) {
-                $adapter = Stream::class;
-            }
-        } else {
-            this.setConfig("adapter", null);
-        }
-
-        if (is_string($adapter)) {
-            $adapter = new $adapter();
-        }
-
-        if (!$adapter instanceof AdapterInterface) {
-            throw new InvalidArgumentException("Adapter must be an instance of Cake\Http\Client\AdapterInterface");
-        }
-        _adapter = $adapter;
-
-        if (!empty(_config["cookieJar"])) {
-            _cookies = _config["cookieJar"];
-            this.setConfig("cookieJar", null);
-        } else {
-            _cookies = new CookieCollection();
-        }
+    this(
+        string $configDir,
+        ?IEventManager $eventManager = null,
+        ?ControllerFactoryInterface $controllerFactory = null
+    ) {
+        this.configDir = rtrim($configDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        this.plugins = Plugin::getCollection();
+        _eventManager = $eventManager ?: EventManager::instance();
+        this.controllerFactory = $controllerFactory;
     }
 
     /**
-     * Client instance returned is scoped to the domain, port, and scheme parsed from the passed URL string. The passed
-     * string must have a scheme and a domain. Optionally, if a port is included in the string, the port will be scoped
-     * too. If a path is included in the URL, the client instance will build urls with it prepended.
-     * Other parts of the url string are ignored.
-     *
-     * @param string $url A string URL e.g. https://example.com
-     * @return static
-     * @throws \InvalidArgumentException
+     * @param uim.cake.http.MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
+     * @return uim.cake.http.MiddlewareQueue
      */
-    static function createFromUrl(string $url) {
-        $parts = parse_url($url);
+    abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
-        if ($parts == false) {
-            throw new InvalidArgumentException("String " ~ $url ~ " did not parse");
-        }
 
-        aConfig = array_intersect_key($parts, ["scheme": "", "port": "", "host": "", "path": ""]);
-
-        if (empty(aConfig["scheme"]) || empty(aConfig["host"])) {
-            throw new InvalidArgumentException("The URL was parsed but did not contain a scheme or host");
-        }
-
-        if (isset(aConfig["path"])) {
-            aConfig["basePath"] = aConfig["path"];
-            unset(aConfig["path"]);
-        }
-
-        return new static(aConfig);
-    }
-
-    /**
-     * Get the cookies stored in the Client.
-     *
-     * @return uim.cake.http.Cookie\CookieCollection
-     */
-    function cookies(): CookieCollection
+    function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
-        return _cookies;
+        foreach (this.plugins.with("middleware") as $plugin) {
+            $middleware = $plugin.middleware($middleware);
+        }
+
+        return $middleware;
     }
 
-    /**
-     * Adds a cookie to the Client collection.
-     *
-     * @param uim.cake.http.Cookie\CookieInterface $cookie Cookie object.
-     * @return this
-     * @throws \InvalidArgumentException
-     */
-    function addCookie(CookieInterface $cookie) {
-        if (!$cookie.getDomain() || !$cookie.getPath()) {
-            throw new InvalidArgumentException("Cookie must have a domain and a path set.");
+
+    function addPlugin($name, Json aConfig = null) {
+        if (is_string($name)) {
+            $plugin = this.plugins.create($name, aConfig);
+        } else {
+            $plugin = $name;
         }
-        _cookies = _cookies.add($cookie);
+        this.plugins.add($plugin);
 
         return this;
     }
 
     /**
-     * Do a GET request.
+     * Add an optional plugin
      *
-     * The $data argument supports a special `_content` key
-     * for providing a request body in a GET request. This is
-     * generally not used, but services like ElasticSearch use
-     * this feature.
+     * If it isn"t available, ignore it.
      *
-     * @param string $url The url or path you want to request.
-     * @param array|string $data The query data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
+     * @param uim.cake.Core\IPlugin|string aName The plugin name or plugin object.
+     * @param array<string, mixed> aConfig The configuration data for the plugin if using a string for $name
+     * @return this
      */
-    function get(string $url, $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $body = null;
-        if (is_array($data) && isset($data["_content"])) {
-            $body = $data["_content"];
-            unset($data["_content"]);
-        }
-        $url = this.buildUrl($url, $data, $options);
-
-        return _doRequest(
-            Request::METHOD_GET,
-            $url,
-            $body,
-            $options
-        );
-    }
-
-    /**
-     * Do a POST request.
-     *
-     * @param string $url The url or path you want to request.
-     * @param mixed $data The post data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
-     */
-    function post(string $url, $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $url = this.buildUrl($url, [], $options);
-
-        return _doRequest(Request::METHOD_POST, $url, $data, $options);
-    }
-
-    /**
-     * Do a PUT request.
-     *
-     * @param string $url The url or path you want to request.
-     * @param mixed $data The request data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
-     */
-    function put(string $url, $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $url = this.buildUrl($url, [], $options);
-
-        return _doRequest(Request::METHOD_PUT, $url, $data, $options);
-    }
-
-    /**
-     * Do a PATCH request.
-     *
-     * @param string $url The url or path you want to request.
-     * @param mixed $data The request data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
-     */
-    function patch(string $url, $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $url = this.buildUrl($url, [], $options);
-
-        return _doRequest(Request::METHOD_PATCH, $url, $data, $options);
-    }
-
-    /**
-     * Do an OPTIONS request.
-     *
-     * @param string $url The url or path you want to request.
-     * @param mixed $data The request data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
-     */
-    function options(string $url, $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $url = this.buildUrl($url, [], $options);
-
-        return _doRequest(Request::METHOD_OPTIONS, $url, $data, $options);
-    }
-
-    /**
-     * Do a TRACE request.
-     *
-     * @param string $url The url or path you want to request.
-     * @param mixed $data The request data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
-     */
-    function trace(string $url, $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $url = this.buildUrl($url, [], $options);
-
-        return _doRequest(Request::METHOD_TRACE, $url, $data, $options);
-    }
-
-    /**
-     * Do a DELETE request.
-     *
-     * @param string $url The url or path you want to request.
-     * @param mixed $data The request data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
-     */
-    function delete(string $url, $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $url = this.buildUrl($url, [], $options);
-
-        return _doRequest(Request::METHOD_DELETE, $url, $data, $options);
-    }
-
-    /**
-     * Do a HEAD request.
-     *
-     * @param string $url The url or path you want to request.
-     * @param array $data The query string data you want to send.
-     * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.http.Client\Response
-     */
-    function head(string $url, array $data = null, STRINGAA someOptions = null): Response
-    {
-        $options = _mergeOptions($options);
-        $url = this.buildUrl($url, $data, $options);
-
-        return _doRequest(Request::METHOD_HEAD, $url, "", $options);
-    }
-
-    /**
-     * Helper method for doing non-GET requests.
-     *
-     * @param string $method HTTP method.
-     * @param string $url URL to request.
-     * @param mixed $data The request body.
-     * @param array<string, mixed> $options The options to use. Contains auth, proxy, etc.
-     * @return uim.cake.http.Client\Response
-     */
-    protected function _doRequest(string $method, string $url, $data, $options): Response
-    {
-        $request = _createRequest(
-            $method,
-            $url,
-            $data,
-            $options
-        );
-
-        return this.send($request, $options);
-    }
-
-    /**
-     * Does a recursive merge of the parameter with the scope config.
-     *
-     * @param array<string, mixed> $options Options to merge.
-     * @return array Options merged with set config.
-     */
-    protected array _mergeOptions(STRINGAA someOptions) {
-        return Hash::merge(_config, $options);
-    }
-
-    /**
-     * Sends a PSR-7 request and returns a PSR-7 response.
-     *
-     * @param \Psr\Http\messages.RequestInterface $request Request instance.
-     * @return \Psr\Http\messages.IResponse Response instance.
-     * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
-     */
-    function sendRequest(RequestInterface $request): IResponse
-    {
-        return this.send($request, _config);
-    }
-
-    /**
-     * Send a request.
-     *
-     * Used internally by other methods, but can also be used to send
-     * handcrafted Request objects.
-     *
-     * @param \Psr\Http\messages.RequestInterface $request The request to send.
-     * @param array<string, mixed> $options Additional options to use.
-     * @return uim.cake.http.Client\Response
-     */
-    function send(RequestInterface $request, STRINGAA someOptions = null): Response
-    {
-        $redirects = 0;
-        if (isset($options["redirect"])) {
-            $redirects = (int)$options["redirect"];
-            unset($options["redirect"]);
+    function addOptionalPlugin($name, Json aConfig = null) {
+        try {
+            this.addPlugin($name, aConfig);
+        } catch (MissingPluginException $e) {
+            // Do not halt if the plugin is missing
         }
 
-        do {
-            $response = _sendRequest($request, $options);
+        return this;
+    }
 
-            $handleRedirect = $response.isRedirect() && $redirects-- > 0;
-            if ($handleRedirect) {
-                $url = $request.getUri();
+    /**
+     * Get the plugin collection in use.
+     *
+     * @return uim.cake.Core\PluginCollection
+     */
+    function getPlugins(): PluginCollection
+    {
+        return this.plugins;
+    }
 
-                $location = $response.getHeaderLine("Location");
-                $locationUrl = this.buildUrl($location, [], [
-                    "host": $url.getHost(),
-                    "port": $url.getPort(),
-                    "scheme": $url.getScheme(),
-                    "protocolRelative": true,
-                ]);
-                $request = $request.withUri(new Uri($locationUrl));
-                $request = _cookies.addToRequest($request, []);
+
+    void bootstrap() {
+        require_once this.configDir ~ "bootstrap.php";
+    }
+
+
+    void pluginBootstrap() {
+        foreach (this.plugins.with("bootstrap") as $plugin) {
+            $plugin.bootstrap(this);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * By default, this will load `config/routes.php` for ease of use and backwards compatibility.
+     *
+     * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
+     */
+    void routes(RouteBuilder $routes) {
+        // Only load routes if the router is empty
+        if (!Router::routes()) {
+            $return = require this.configDir ~ "routes.php";
+            if ($return instanceof Closure) {
+                $return($routes);
             }
-        } while ($handleRedirect);
-
-        return $response;
-    }
-
-    /**
-     * Clear all mocked responses
-     */
-    static void clearMockResponses() {
-        static::_mockAdapter = null;
-    }
-
-    /**
-     * Add a mocked response.
-     *
-     * Mocked responses are stored in an adapter that is called
-     * _before_ the network adapter is called.
-     *
-     * ### Matching Requests
-     *
-     * TODO finish this.
-     *
-     * ### Options
-     *
-     * - `match` An additional closure to match requests with.
-     *
-     * @param string $method The HTTP method being mocked.
-     * @param string $url The URL being matched. See above for examples.
-     * @param uim.cake.http.Client\Response $response The response that matches the request.
-     * @param array<string, mixed> $options See above.
-     */
-    static void addMockResponse(string $method, string $url, Response $response, STRINGAA someOptions = null) {
-        if (!static::_mockAdapter) {
-            static::_mockAdapter = new MockAdapter();
         }
-        $request = new Request($url, $method);
-        static::_mockAdapter.addResponse($request, $response, $options);
     }
 
-    /**
-     * Send a request without redirection.
-     *
-     * @param \Psr\Http\messages.RequestInterface $request The request to send.
-     * @param array<string, mixed> $options Additional options to use.
-     * @return uim.cake.http.Client\Response
-     */
-    protected function _sendRequest(RequestInterface $request, STRINGAA someOptions): Response
+
+    function pluginRoutes(RouteBuilder $routes): RouteBuilder
     {
-        if (static::_mockAdapter) {
-            $responses = static::_mockAdapter.send($request, $options);
-        }
-        if (empty($responses)) {
-            $responses = _adapter.send($request, $options);
-        }
-        foreach ($responses as $response) {
-            _cookies = _cookies.addFromResponse($response, $request);
+        foreach (this.plugins.with("routes") as $plugin) {
+            $plugin.routes($routes);
         }
 
-        return array_pop($responses);
+        return $routes;
     }
 
     /**
-     * Generate a URL based on the scoped client options.
+     * Define the console commands for an application.
      *
-     * @param string $url Either a full URL or just the path.
-     * @param array|string $query The query data for the URL.
-     * @param array<string, mixed> $options The config options stored with Client::config()
-     * @return string A complete url with scheme, port, host, and path.
-     */
-    string buildUrl(string $url, $query = null, STRINGAA someOptions = null) {
-        if (empty($options) && empty($query)) {
-            return $url;
-        }
-        $defaults = [
-            "host": null,
-            "port": null,
-            "scheme": "http",
-            "basePath": "",
-            "protocolRelative": false,
-        ];
-        $options += $defaults;
-
-        if ($query) {
-            $q = strpos($url, "?") == false ? "?" : "&";
-            $url ~= $q;
-            $url ~= is_string($query) ? $query : http_build_query($query, "", "&", PHP_QUERY_RFC3986);
-        }
-
-        if ($options["protocolRelative"] && preg_match("#^//#", $url)) {
-            $url = $options["scheme"] ~ ":" ~ $url;
-        }
-        if (preg_match("#^https?://#", $url)) {
-            return $url;
-        }
-
-        $defaultPorts = [
-            "http": 80,
-            "https": 443,
-        ];
-        $out = $options["scheme"] ~ "://" ~ $options["host"];
-        if ($options["port"] && (int)$options["port"] != $defaultPorts[$options["scheme"]]) {
-            $out ~= ":" ~ $options["port"];
-        }
-        if (!empty($options["basePath"])) {
-            $out ~= "/" ~ trim($options["basePath"], "/");
-        }
-        $out ~= "/" ~ ltrim($url, "/");
-
-        return $out;
-    }
-
-    /**
-     * Creates a new request object based on the parameters.
+     * By default, all commands in UIM, plugins and the application will be
+     * loaded using conventions based names.
      *
-     * @param string $method HTTP method name.
-     * @param string $url The url including query string.
-     * @param mixed $data The request body.
-     * @param array<string, mixed> $options The options to use. Contains auth, proxy, etc.
-     * @return uim.cake.http.Client\Request
+     * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to add commands into.
+     * @return uim.cake.consoles.CommandCollection The updated collection.
      */
-    protected function _createRequest(string $method, string $url, $data, $options): Request
+    function console(CommandCollection $commands): CommandCollection
     {
-        /** @var array<non-empty-string, non-empty-string> $headers */
-        $headers = (array)($options["headers"] ?? []);
-        if (isset($options["type"])) {
-            $headers = array_merge($headers, _typeHeaders($options["type"]));
-        }
-        if (is_string($data) && !isset($headers["Content-Type"]) && !isset($headers["content-type"])) {
-            $headers["Content-Type"] = "application/x-www-form-urlencoded";
-        }
-
-        $request = new Request($url, $method, $headers, $data);
-        $request = $request.withProtocolVersion(this.getConfig("protocolVersion"));
-        $cookies = $options["cookies"] ?? [];
-        /** @var uim.cake.http.Client\Request $request */
-        $request = _cookies.addToRequest($request, $cookies);
-        if (isset($options["auth"])) {
-            $request = _addAuthentication($request, $options);
-        }
-        if (isset($options["proxy"])) {
-            $request = _addProxy($request, $options);
-        }
-
-        return $request;
+        return $commands.addMany($commands.autoDiscover());
     }
 
-    /**
-     * Returns headers for Accept/Content-Type based on a short type
-     * or full mime-type.
-     *
-     * @phpstan-param non-empty-string $type
-     * @param string $type short type alias or full mimetype.
-     * @return array<string, string> Headers to set on the request.
-     * @throws uim.cake.Core\exceptions.UIMException When an unknown type alias is used.
-     * @psalm-return array<non-empty-string, non-empty-string>
-     */
-    protected function _typeHeaders(string $type) {
-        if (strpos($type, "/") != false) {
-            return [
-                "Accept": $type,
-                "Content-Type": $type,
-            ];
-        }
-        $typeMap = [
-            "json": "application/json",
-            "xml": "application/xml",
-        ];
-        if (!isset($typeMap[$type])) {
-            throw new UIMException("Unknown type alias "$type".");
-        }
 
-        return [
-            "Accept": $typeMap[$type],
-            "Content-Type": $typeMap[$type],
-        ];
-    }
-
-    /**
-     * Add authentication headers to the request.
-     *
-     * Uses the authentication type to choose the correct strategy
-     * and use its methods to add headers.
-     *
-     * @param uim.cake.http.Client\Request $request The request to modify.
-     * @param array<string, mixed> $options Array of options containing the "auth" key.
-     * @return uim.cake.http.Client\Request The updated request object.
-     */
-    protected function _addAuthentication(Request $request, STRINGAA someOptions): Request
+    function pluginConsole(CommandCollection $commands): CommandCollection
     {
-        $auth = $options["auth"];
-        /** @var uim.cake.http.Client\Auth\Basic $adapter */
-        $adapter = _createAuth($auth, $options);
+        foreach (this.plugins.with("console") as $plugin) {
+            $commands = $plugin.console($commands);
+        }
 
-        return $adapter.authentication($request, $options["auth"]);
+        return $commands;
     }
 
     /**
-     * Add proxy authentication headers.
+     * Get the dependency injection container for the application.
      *
-     * Uses the authentication type to choose the correct strategy
-     * and use its methods to add headers.
+     * The first time the container is fetched it will be constructed
+     * and stored for future calls.
      *
-     * @param uim.cake.http.Client\Request $request The request to modify.
-     * @param array<string, mixed> $options Array of options containing the "proxy" key.
-     * @return uim.cake.http.Client\Request The updated request object.
+     * @return uim.cake.Core\IContainer
      */
-    protected function _addProxy(Request $request, STRINGAA someOptions): Request
+    function getContainer(): IContainer
     {
-        $auth = $options["proxy"];
-        /** @var uim.cake.http.Client\Auth\Basic $adapter */
-        $adapter = _createAuth($auth, $options);
+        if (this.container == null) {
+            this.container = this.buildContainer();
+        }
 
-        return $adapter.proxyAuthentication($request, $options["proxy"]);
+        return this.container;
     }
 
     /**
-     * Create the authentication strategy.
+     * Build the service container
      *
-     * Use the configuration options to create the correct
-     * authentication strategy handler.
+     * Override this method if you need to use a custom container or
+     * want to change how the container is built.
      *
-     * @param array $auth The authentication options to use.
-     * @param array<string, mixed> $options The overall request options to use.
-     * @return object Authentication strategy instance.
-     * @throws uim.cake.Core\exceptions.UIMException when an invalid strategy is chosen.
+     * @return uim.cake.Core\IContainer
      */
-    protected function _createAuth(array $auth, STRINGAA someOptions) {
-        if (empty($auth["type"])) {
-            $auth["type"] = "basic";
-        }
-        $name = ucfirst($auth["type"]);
-        $class = App::className($name, "Http/Client/Auth");
-        if (!$class) {
-            throw new UIMException(
-                sprintf("Invalid authentication type %s", $name)
-            );
+    protected function buildContainer(): IContainer
+    {
+        $container = new Container();
+        this.services($container);
+        foreach (this.plugins.with("services") as $plugin) {
+            $plugin.services($container);
         }
 
-        return new $class(this, $options);
+        $event = this.dispatchEvent("Application.buildContainer", ["container": $container]);
+        if ($event.getResult() instanceof IContainer) {
+            return $event.getResult();
+        }
+
+        return $container;
+    }
+
+    /**
+     * Register application container services.
+     *
+     * @param uim.cake.Core\IContainer $container The Container to update.
+     */
+    void services(IContainer $container) {
+    }
+
+    /**
+     * Invoke the application.
+     *
+     * - Add the request to the container, enabling its injection into other services.
+     * - Create the controller that will handle this request.
+     * - Invoke the controller.
+     *
+     * @param \Psr\Http\messages.IServerRequest $request The request
+     * @return \Psr\Http\messages.IResponse
+     */
+    function handle(
+        IServerRequest $request
+    ): IResponse {
+        $container = this.getContainer();
+        $container.add(ServerRequest::class, $request);
+
+        if (this.controllerFactory == null) {
+            this.controllerFactory = new ControllerFactory($container);
+        }
+
+        if (Router::getRequest() != $request) {
+            Router::setRequest($request);
+        }
+
+        $controller = this.controllerFactory.create($request);
+
+        return this.controllerFactory.invoke($controller);
     }
 }

@@ -3,6 +3,11 @@ module uim.cake.https\Middleware;
 @safe:
 import uim.cake;
 
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
+
 /**
  * Decorate double-pass middleware as PSR-15 middleware.
  *
@@ -10,10 +15,10 @@ import uim.cake;
  *
  * ```
  * function (
- *     IServerRequest myRequest,
+ *     IServerRequest $request,
  *     IResponse $response,
  *     callable $next
- * )IResponse
+ * ): IResponse
  * ```
  *
  * or a class with `__invoke()` method with same signature as above.
@@ -30,7 +35,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
      *
      * @var callable
      */
-    protected callable;
+    protected $callable;
 
     /**
      * Constructor
@@ -40,7 +45,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
     this(callable $callable) {
         deprecationWarning(
             ""Double pass" middleware are deprecated. Use a `Closure` with the signature of"
-            ~ " `(myRequest, $handler)` or a class which : `Psr\Http\servers.IMiddleware` instead.",
+            ~ " `($request, $handler)` or a class which : `Psr\Http\servers.IMiddleware` instead.",
             0
         );
         this.callable = $callable;
@@ -49,16 +54,17 @@ class DoublePassDecoratorMiddleware : IMiddleware
     /**
      * Run the internal double pass callable to process an incoming server request.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest Request instance.
-     * @param \Psr\Http\servers.IRequestHandler $handler Request handler instance.
+     * @param \Psr\Http\messages.IServerRequest $request Request instance.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler Request handler instance.
      * @return \Psr\Http\messages.IResponse
      */
-    IResponse process(IServerRequest myRequest, IRequestHandler $handler) {
+    function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
+    {
         return (this.callable)(
-            myRequest,
+            $request,
             new Response(),
-            function (myRequest, $res) use ($handler) {
-                return $handler.handle(myRequest);
+            function ($request, $res) use ($handler) {
+                return $handler.handle($request);
             }
         );
     }
@@ -67,7 +73,8 @@ class DoublePassDecoratorMiddleware : IMiddleware
      * @internal
      * @return callable
      */
-    callable getCallable() {
+    function getCallable(): callable
+    {
         return this.callable;
     }
 }

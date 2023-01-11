@@ -1,4 +1,7 @@
-module uim.cake.https;
+module uim.cake.https\Middleware;
+
+@safe:
+import uim.cake
 
 use Throwable;
 
