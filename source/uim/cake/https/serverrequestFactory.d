@@ -58,7 +58,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             "base":$uri.base,
             "session":$session,
             "input":$server["CAKEPHP_INPUT"] ?? null,
-!==
+!=
             "environment": $server,
             "uri": $uri,
             "cookies": $cookies ?: _COOKIE,

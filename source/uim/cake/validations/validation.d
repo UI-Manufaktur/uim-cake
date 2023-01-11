@@ -20,7 +20,7 @@ class Validation {
     const string COMPARE_SAME = "==";
 
     // Not same as comparison operator.
-    const string COMPARE_NOT_SAME = "!==";
+    const string COMPARE_NOT_SAME = "!=";
 
     // Equal to comparison operator.
     const string COMPARE_EQUAL = "==";
@@ -261,7 +261,7 @@ class Validation {
      *
      * @param string|int $check1 The left value to compare.
      * @param string operator Can be one of following operator strings:
-     *   ">", "<", ">=", "<=", "==", "!=", "==" and "!==". You can use one of
+     *   ">", "<", ">=", "<=", "==", "!=", "==" and "!=". You can use one of
      *   the Validation::COMPARE_* constants.
      * @param string|int $check2 The right value to compare.
      * @return bool Success

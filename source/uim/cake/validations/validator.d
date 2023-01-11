@@ -16,9 +16,7 @@ import uim.cake;
  * @link https://book.UIM.org/4/en/core-libraries/validation.html
  */
 class Validator : ArrayAccess, IteratorAggregate, Countable {
-    /**
-     * By using "create" you can make fields required when records are first created.
-     */
+    // By using "create" you can make fields required when records are first created.
     const string WHEN_CREATE = "create";
 
     // By using "update", you can make fields required when they are updated.
@@ -88,9 +86,9 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Holds the ValidationSet objects array
      *
-     * @var array<string, uim.cake.validations.ValidationSet>
+     * @var array<string, uim.cake.validations.>
      */
-    protected _fields = null;
+    protected ValidationSet[string] _fields = null;
 
     /**
      * An associative array of objects or classes containing methods

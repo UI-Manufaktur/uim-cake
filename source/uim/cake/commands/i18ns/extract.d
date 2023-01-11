@@ -343,7 +343,7 @@ class I18nExtractCommand : Command {
 <<<<<<< HEAD
             "help":"Extract messages from the UIM core libraries.",
             "choices":["yes", "no"],
-!==
+!=
             "help": "Extract messages from the UIM core libraries.",
             "choices": ["yes", "no"],
 >>>>>>> 7150a867e48cdb2613daa023accf8964a29f88b9
