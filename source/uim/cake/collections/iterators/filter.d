@@ -1,7 +1,11 @@
-module uim.cake.collections.iterators.filter;
+module uim.cake.collections.Iterator;
 
-@safe:
-import uim.cake;
+use ArrayIterator;
+import uim.cake.collections.Collection;
+import uim.cake.collections.ICollection;
+use CallbackFilterIterator;
+use Iterator;
+use Traversable;
 
 /**
  * Creates a filtered iterator from another iterator. The filtering is done by
@@ -21,24 +25,25 @@ class FilterIterator : Collection {
      * accepted or rejected.
      *
      * Each time the callback is executed it will receive the value of the element
-     * in the current iteration, the key of the element and the passed myItems iterator
+     * in the current iteration, the key of the element and the passed $items iterator
      * as arguments, in that order.
      *
-     * @param \Traversable|array myItems The items to be filtered.
+     * @param \Traversable|array $items The items to be filtered.
      * @param callable $callback Callback.
      */
-    this(myItems, callable $callback) {
-        if (!myItems instanceof Iterator) {
-            myItems = new Collection(myItems);
+    this($items, callable $callback) {
+        if (!$items instanceof Iterator) {
+            $items = new Collection($items);
         }
 
         _callback = $callback;
-        $wrapper = new CallbackFilterIterator(myItems, $callback);
-        super.this($wrapper);
+        $wrapper = new CallbackFilterIterator($items, $callback);
+        super(($wrapper);
     }
 
 
-    Traversable unwrap() {
+    function unwrap(): Traversable
+    {
         /** @var \IteratorIterator $filter */
         $filter = this.getInnerIterator();
         $iterator = $filter.getInnerIterator();
@@ -56,7 +61,7 @@ class FilterIterator : Collection {
         $callback = _callback;
         $res = null;
 
-        foreach ($k, $v; $iterator) {
+        foreach ($iterator as $k: $v) {
             if ($callback($v, $k, $iterator)) {
                 $res[$k] = $v;
             }

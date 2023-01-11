@@ -1,7 +1,9 @@
-module uim.cake.collections.iterators.treeprinter;
+module uim.cake.collections.Iterator;
 
-@safe:
-import uim.cake;
+import uim.cake.collections.ICollection;
+import uim.cake.collections.CollectionTrait;
+use RecursiveIterator;
+use RecursiveIteratorIterator;
 
 /**
  * Iterator for flattening elements in a tree structure while adding some
@@ -31,33 +33,31 @@ class TreePrinter : RecursiveIteratorIterator : ICollection {
      */
     protected _current;
 
-    /**
-     * The string to use for prefixing the values according to their depth in the tree.
-     */
+    // The string to use for prefixing the values according to their depth in the tree.
     protected string _spacer;
 
     /**
      * Constructor
      *
-     * @param \RecursiveIterator myItems The iterator to flatten.
-     * @param callable|string myValuePath The property to extract or a callable to return
+     * @param \RecursiveIterator $items The iterator to flatten.
+     * @param callable|string aValuePath The property to extract or a callable to return
      * the display value.
-     * @param callable|string myKeyPath The property to use as iteration key or a
+     * @param callable|string aKeyPath The property to use as iteration key or a
      * callable returning the key value.
-     * @param string spacer The string to use for prefixing the values according to
+     * @param string $spacer The string to use for prefixing the values according to
      * their depth in the tree.
-     * @param int myMode Iterator mode.
+     * @param int $mode Iterator mode.
      */
     this(
-        RecursiveIterator myItems,
-        myValuePath,
-        myKeyPath,
-        string spacer,
-        int myMode = RecursiveIteratorIterator::SELF_FIRST
+        RecursiveIterator $items,
+        $valuePath,
+        $keyPath,
+        string $spacer,
+        int $mode = RecursiveIteratorIterator::SELF_FIRST
     ) {
-        super.this(myItems, myMode);
-        _value = _propertyExtractor(myValuePath);
-        _key = _propertyExtractor(myKeyPath);
+        super(($items, $mode);
+        _value = _propertyExtractor($valuePath);
+        _key = _propertyExtractor($keyPath);
         _spacer = $spacer;
     }
 
@@ -97,8 +97,8 @@ class TreePrinter : RecursiveIteratorIterator : ICollection {
      *
      * @return mixed
      */
-    protected auto _fetchCurrent() {
-        if (_current  !is null) {
+    protected function _fetchCurrent() {
+        if (_current != null) {
             return _current;
         }
 

@@ -1,7 +1,9 @@
-module uim.cake.collections.iterators.mapreduce;
+module uim.cake.collections.Iterator;
 
-@safe:
-import uim.cake;
+use ArrayIterator;
+use IteratorAggregate;
+use LogicException;
+use Traversable;
 
 /**
  * : a simplistic version of the popular Map-Reduce algorithm. Acts
@@ -9,7 +11,8 @@ import uim.cake;
  * processed, thus offering a transparent wrapper for results coming from any
  * source.
  */
-class MapReduce : IteratorAggregate {
+class MapReduce : IteratorAggregate
+{
     /**
      * Holds the shuffled results that were emitted from the map
      * phase
@@ -27,10 +30,8 @@ class MapReduce : IteratorAggregate {
 
     /**
      * Whether the Map-Reduce routine has been executed already on the data
-     *
-     * @var bool
      */
-    protected _executed = false;
+    protected bool _executed = false;
 
     /**
      * Holds the original data that needs to be processed
@@ -56,10 +57,8 @@ class MapReduce : IteratorAggregate {
 
     /**
      * Count of elements emitted during the Reduce phase
-     *
-     * @var int
      */
-    protected _counter = 0;
+    protected int _counter = 0;
 
     /**
      * Constructor
@@ -69,25 +68,25 @@ class MapReduce : IteratorAggregate {
      * Separate all unique odd and even numbers in an array
      *
      * ```
-     *  myData = new \ArrayObject([1, 2, 3, 4, 5, 3]);
-     *  $mapper = function (myValue, myKey, $mr) {
-     *      myType = (myValue % 2 == 0) ? "even" : "odd";
-     *      $mr.emitIntermediate(myValue, myType);
+     *  $data = new \ArrayObject([1, 2, 3, 4, 5, 3]);
+     *  $mapper = function ($value, $key, $mr) {
+     *      $type = ($value % 2 == 0) ? "even" : "odd";
+     *      $mr.emitIntermediate($value, $type);
      *  };
      *
-     *  $reducer = function ($numbers, myType, $mr) {
-     *      $mr.emit(array_unique($numbers), myType);
+     *  $reducer = function ($numbers, $type, $mr) {
+     *      $mr.emit(array_unique($numbers), $type);
      *  };
-     *  myResults = new MapReduce(myData, $mapper, $reducer);
+     *  $results = new MapReduce($data, $mapper, $reducer);
      * ```
      *
      * Previous example will generate the following result:
      *
      * ```
-     *  ["odd":[1, 3, 5], "even":[2, 4]]
+     *  ["odd": [1, 3, 5], "even": [2, 4]]
      * ```
      *
-     * @param \Traversable myData the original data to be processed
+     * @param \Traversable $data the original data to be processed
      * @param callable $mapper the mapper callback. This function will receive 3 arguments.
      * The first one is the current value, second the current results key and third is
      * this class instance so you can call the result emitters.
@@ -96,8 +95,8 @@ class MapReduce : IteratorAggregate {
      * of the bucket that was created during the mapping phase and third one is an
      * instance of this class.
      */
-    this(Traversable myData, callable $mapper, ?callable $reducer = null) {
-        _data = myData;
+    this(Traversable $data, callable $mapper, ?callable $reducer = null) {
+        _data = $data;
         _mapper = $mapper;
         _reducer = $reducer;
     }
@@ -108,7 +107,8 @@ class MapReduce : IteratorAggregate {
      *
      * @return \Traversable
      */
-    Traversable getIterator() {
+    function getIterator(): Traversable
+    {
         if (!_executed) {
             _execute();
         }
@@ -117,7 +117,7 @@ class MapReduce : IteratorAggregate {
     }
 
     /**
-     * Appends a new record to the bucket labelled with myKey, usually as a result
+     * Appends a new record to the bucket labelled with $key, usually as a result
      * of mapping a single record from the original data.
      *
      * @param mixed $val The record itself to store in the bucket
@@ -132,10 +132,10 @@ class MapReduce : IteratorAggregate {
      * for this record.
      *
      * @param mixed $val The value to be appended to the final list of results
-     * @param mixed myKey and optional key to assign to the value
+     * @param mixed $key and optional key to assign to the value
      */
-    void emit($val, myKey = null) {
-        _result[myKey ?? _counter] = $val;
+    void emit($val, $key = null) {
+        _result[$key ?? _counter] = $val;
         _counter++;
     }
 
@@ -144,13 +144,14 @@ class MapReduce : IteratorAggregate {
      * and call the mapper function for each , then for each intermediate
      * bucket created during the Map phase call the reduce function.
      *
+     * @return void
      * @throws \LogicException if emitIntermediate was called but no reducer function
      * was provided
      */
     protected void _execute() {
         $mapper = _mapper;
-        foreach (myKey, $val; _data) {
-            $mapper($val, myKey, this);
+        foreach (_data as $key: $val) {
+            $mapper($val, $key, this);
         }
 
         if (!empty(_intermediate) && empty(_reducer)) {
@@ -159,8 +160,8 @@ class MapReduce : IteratorAggregate {
 
         /** @var callable $reducer */
         $reducer = _reducer;
-        foreach (myKey, $list; _intermediate) {
-            $reducer($list, myKey, this);
+        foreach (_intermediate as $key: $list) {
+            $reducer($list, $key, this);
         }
         _intermediate = null;
         _executed = true;

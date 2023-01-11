@@ -1,7 +1,9 @@
-module uim.cake.collections.iterators.extract;
+module uim.cake.collections.Iterator;
 
-@safe:
-import uim.cake;
+use ArrayIterator;
+import uim.cake.collections.Collection;
+import uim.cake.collections.ICollection;
+use Traversable;
 
 /**
  * Creates an iterator from another iterator that extract the requested column
@@ -18,32 +20,32 @@ class ExtractIterator : Collection {
 
     /**
      * Creates the iterator that will return the requested property for each value
-     * in the collection expressed in myPath
+     * in the collection expressed in $path
      *
      * ### Example:
      *
      * Extract the user name for all comments in the array:
      *
      * ```
-     * myItems = [
-     *  ["comment":["body":"cool", "user":["name":"Mark"]],
-     *  ["comment":["body":"very cool", "user":["name":"Renan"]]
+     * $items = [
+     *  ["comment": ["body": "cool", "user": ["name": "Mark"]],
+     *  ["comment": ["body": "very cool", "user": ["name": "Renan"]]
      * ];
-     * $extractor = new ExtractIterator(myItems, "comment.user.name"");
+     * $extractor = new ExtractIterator($items, "comment.user.name"");
      * ```
      *
-     * @param iterable myItems The list of values to iterate
-     * @param callable|string myPath A dot separated path of column to follow
+     * @param iterable $items The list of values to iterate
+     * @param callable|string $path A dot separated path of column to follow
      * so that the final one can be returned or a callable that will take care
      * of doing that.
      */
-    this(iterable myItems, myPath) {
-        _extractor = _propertyExtractor(myPath);
-        super.this(myItems);
+    this(iterable $items, $path) {
+        _extractor = _propertyExtractor($path);
+        super(($items);
     }
 
     /**
-     * Returns the column value defined in myPath or null if the path could not be
+     * Returns the column value defined in $path or null if the path could not be
      * followed
      *
      * @return mixed
@@ -56,7 +58,8 @@ class ExtractIterator : Collection {
     }
 
 
-    Traversable unwrap() {
+    function unwrap(): Traversable
+    {
         $iterator = this.getInnerIterator();
 
         if ($iterator instanceof ICollection) {
@@ -73,7 +76,7 @@ class ExtractIterator : Collection {
         $callback = _extractor;
         $res = null;
 
-        foreach ($k, $v; $iterator.getArrayCopy()) {
+        foreach ($iterator.getArrayCopy() as $k: $v) {
             $res[$k] = $callback($v);
         }
 

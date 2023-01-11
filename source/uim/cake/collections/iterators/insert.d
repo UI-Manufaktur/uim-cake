@@ -1,7 +1,6 @@
-module uim.cake.collections.iterators.insert;
+module uim.cake.collections.Iterator;
 
-@safe:
-import uim.cake;
+import uim.cake.collections.Collection;
 
 /**
  * This iterator will insert values into a property of each of the records returned.
@@ -35,33 +34,33 @@ class InsertIterator : Collection {
 
     /**
      * Constructs a new collection that will dynamically add properties to it out of
-     * the values found in myValues.
+     * the values found in $values.
      *
      * @param iterable $into The target collection to which the values will
      * be inserted at the specified path.
-     * @param string myPath A dot separated list of properties that need to be traversed
+     * @param string $path A dot separated list of properties that need to be traversed
      * to insert the value into the target collection.
-     * @param iterable myValues The source collection from which the values will
+     * @param iterable $values The source collection from which the values will
      * be inserted at the specified path.
      */
-    this(iterable $into, string myPath, iterable myValues) {
-        super.this($into);
+    this(iterable $into, string $path, iterable $values) {
+        super(($into);
 
-        if (!(myValues instanceof Collection)) {
-            myValues = new Collection(myValues);
+        if (!($values instanceof Collection)) {
+            $values = new Collection($values);
         }
 
-        myPath = explode(".", myPath);
-        myTarget = array_pop(myPath);
-        _path = myPath;
-        _target = myTarget;
-        _values = myValues;
+        $path = explode(".", $path);
+        $target = array_pop($path);
+        _path = $path;
+        _target = $target;
+        _values = $values;
     }
 
     /**
      * Advances the cursor to the next record
      */
-    void  next() {
+    void next() {
         super.next();
         if (_validValues) {
             _values.next();
@@ -84,7 +83,7 @@ class InsertIterator : Collection {
         }
 
         $pointer = &$row;
-        foreach ($step; _path) {
+        foreach (_path as $step) {
             if (!isset($pointer[$step])) {
                 return $row;
             }

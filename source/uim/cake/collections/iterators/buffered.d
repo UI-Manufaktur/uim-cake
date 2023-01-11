@@ -1,7 +1,9 @@
-module uim.cake.collections.iterators.buffered;
+module uim.cake.collections.Iterator;
 
-@safe:
-import uim.cake;
+import uim.cake.collections.Collection;
+use Countable;
+use Serializable;
+use SplDoublyLinkedList;
 
 /**
  * Creates an iterator from another iterator that will keep the results of the inner
@@ -9,11 +11,16 @@ import uim.cake;
  */
 class BufferedIterator : Collection : Countable, Serializable
 {
-    // The in-memory cache containing results from previous iterators
-    // @var \SplDoublyLinkedList
+    /**
+     * The in-memory cache containing results from previous iterators
+     *
+     * @var \SplDoublyLinkedList
+     */
     protected _buffer;
 
-    // Points to the next record number that should be fetched
+    /**
+     * Points to the next record number that should be fetched
+     */
     protected int _index = 0;
 
     /**
@@ -33,27 +40,23 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Whether the internal iterator"s rewind method was already
      * called
-     *
-     * @var bool
      */
-    protected _started = false;
+    protected bool _started = false;
 
     /**
      * Whether the internal iterator has reached its end.
-     *
-     * @var bool
      */
-    protected _finished = false;
+    protected bool _finished = false;
 
     /**
      * Maintains an in-memory cache of the results yielded by the internal
      * iterator.
      *
-     * @param iterable myItems The items to be filtered.
+     * @param iterable $items The items to be filtered.
      */
-    this(iterable myItems) {
+    this(iterable $items) {
         _buffer = new SplDoublyLinkedList();
-        super.this(myItems);
+        super(($items);
     }
 
     /**
@@ -92,6 +95,8 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Returns whether the iterator has more elements
+     *
+     * @return bool
      */
     bool valid() {
         if (_buffer.offsetExists(_index)) {
@@ -108,8 +113,8 @@ class BufferedIterator : Collection : Countable, Serializable
             _current = super.current();
             _key = super.key();
             _buffer.push([
-                "key":_key,
-                "value":_current,
+                "key": _key,
+                "value": _current,
             ]);
         }
 
@@ -160,7 +165,9 @@ class BufferedIterator : Collection : Countable, Serializable
         return serialize(_buffer);
     }
 
-    // Magic method used for serializing the iterator instance.
+    /**
+     * Magic method used for serializing the iterator instance.
+     */
     array __serialize() {
         if (!_finished) {
             this.count();
@@ -172,11 +179,11 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Unserializes the passed string and rebuilds the BufferedIterator instance
      *
-     * @param string myCollection The serialized buffer iterator
+     * @param string $collection The serialized buffer iterator
      */
-    void unserialize(myCollection) {
-        this.this([]);
-        _buffer = unserialize(myCollection);
+    void unserialize($collection) {
+        __construct([]);
+        _buffer = unserialize($collection);
         _started = true;
         _finished = true;
     }
@@ -184,13 +191,13 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Magic method used to rebuild the iterator instance.
      *
-     * @param array myData Data array.
+     * @param array $data Data array.
      */
-    void __unserialize(array myData) {
-        this.this([]);
+    void __unserialize(array $data) {
+        __construct([]);
 
-        foreach (myValue; myData) {
-            _buffer.push(myValue);
+        foreach ($data as $value) {
+            _buffer.push($value);
         }
 
         _started = true;
