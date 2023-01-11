@@ -3,6 +3,11 @@ module uim.cake.http.clients\Exception;
 @safe:
 import uim.cake;
 
+use Psr\Http\Client\RequestExceptionInterface;
+use Psr\Http\messages.RequestInterface;
+use RuntimeException;
+use Throwable;
+
 /**
  * Exception for when a request failed.
  *
@@ -16,18 +21,18 @@ class RequestException : RuntimeException : RequestExceptionInterface
     /**
      * @var \Psr\Http\messages.RequestInterface
      */
-    protected myRequest;
+    protected $request;
 
     /**
      * Constructor.
      *
-     * @param string myMessage Exeception message.
-     * @param \Psr\Http\messages.RequestInterface myRequest Request instance.
+     * @param string $message Exeception message.
+     * @param \Psr\Http\messages.RequestInterface $request Request instance.
      * @param \Throwable|null $previous Previous Exception
      */
-    this(string myMessage, RequestInterface myRequest, ?Throwable $previous = null) {
-        this.request = myRequest;
-        super.this(myMessage, 0, $previous);
+    this(string $message, RequestInterface $request, ?Throwable $previous = null) {
+        this.request = $request;
+        super(($message, 0, $previous);
     }
 
     /**
@@ -37,7 +42,7 @@ class RequestException : RuntimeException : RequestExceptionInterface
      *
      * @return \Psr\Http\messages.RequestInterface
      */
-    auto getRequest(): RequestInterface
+    function getRequest(): RequestInterface
     {
         return this.request;
     }

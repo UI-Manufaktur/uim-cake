@@ -7,7 +7,7 @@ import uim.cake;
  * Digest authentication adapter for Cake\Http\Client
  *
  * Generally not directly constructed, but instead used by {@link uim.cake.Http\Client}
- * when myOptions["auth"]["type"] is "digest"
+ * when $options["auth"]["type"] is "digest"
  */
 class Digest
 {
@@ -22,34 +22,34 @@ class Digest
      * Constructor
      *
      * @param uim.cake.http.Client $client Http client object.
-     * @param array|null myOptions Options list.
+     * @param array|null $options Options list.
      */
-    this(Client $client, ?array myOptions = null) {
+    this(Client $client, ?STRINGAA someOptions = null) {
         _client = $client;
     }
 
     /**
      * Add Authorization header to the request.
      *
-     * @param uim.cake.http.Client\Request myRequest The request object.
+     * @param uim.cake.http.Client\Request $request The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
      * @return uim.cake.http.Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
-    function authentication(Request myRequest, array $credentials): Request
+    function authentication(Request $request, array $credentials): Request
     {
         if (!isset($credentials["username"], $credentials["password"])) {
-            return myRequest;
+            return $request;
         }
         if (!isset($credentials["realm"])) {
-            $credentials = _getServerInfo(myRequest, $credentials);
+            $credentials = _getServerInfo($request, $credentials);
         }
         if (!isset($credentials["realm"])) {
-            return myRequest;
+            return $request;
         }
-        myValue = _generateHeader(myRequest, $credentials);
+        $value = _generateHeader($request, $credentials);
 
-        return myRequest.withHeader("Authorization", myValue);
+        return $request.withHeader("Authorization", $value);
     }
 
     /**
@@ -59,15 +59,15 @@ class Digest
      * another request without authentication to get authentication
      * challenge.
      *
-     * @param uim.cake.http.Client\Request myRequest The request object.
+     * @param uim.cake.http.Client\Request $request The request object.
      * @param array $credentials Authentication credentials.
      * @return array modified credentials.
      */
-    protected array _getServerInfo(Request myRequest, array $credentials) {
+    protected array _getServerInfo(Request $request, array $credentials) {
         $response = _client.get(
-            (string)myRequest.getUri(),
+            (string)$request.getUri(),
             [],
-            ["auth":["type":null]]
+            ["auth": ["type": null]]
         );
 
         if (!$response.getHeader("WWW-Authenticate")) {
@@ -92,14 +92,13 @@ class Digest
     /**
      * Generate the header Authorization
      *
-     * @param uim.cake.http.Client\Request myRequest The request object.
+     * @param uim.cake.http.Client\Request $request The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
-     * @return string
      */
-    protected string _generateHeader(Request myRequest, array $credentials) {
-        myPath = myRequest.getUri().getPath();
+    protected string _generateHeader(Request $request, array $credentials) {
+        $path = $request.getUri().getPath();
         $a1 = md5($credentials["username"] ~ ":" ~ $credentials["realm"] ~ ":" ~ $credentials["password"]);
-        $a2 = md5(myRequest.getMethod() ~ ":" ~ myPath);
+        $a2 = md5($request.getMethod() ~ ":" ~ $path);
         $nc = "";
 
         if (empty($credentials["qop"])) {
@@ -116,7 +115,7 @@ class Digest
         $authHeader ~= "username="" ~ replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) ~ "", ";
         $authHeader ~= "realm="" ~ $credentials["realm"] ~ "", ";
         $authHeader ~= "nonce="" ~ $credentials["nonce"] ~ "", ";
-        $authHeader ~= "uri="" ~ myPath ~ "", ";
+        $authHeader ~= "uri="" ~ $path ~ "", ";
         $authHeader ~= "response="" ~ $response ~ """;
         if (!empty($credentials["opaque"])) {
             $authHeader ~= ", opaque="" ~ $credentials["opaque"] ~ """;

@@ -1,1 +1,1 @@
-module uim.cake.httops.clients.adapters;
+module uim.cake.https.clients.adapters;

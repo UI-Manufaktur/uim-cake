@@ -3,6 +3,9 @@ module uim.cake.http.clients.adapters;
 @safe:
 import uim.cake;
 
+use Composer\CaBundle\CaBundle;
+use Psr\Http\messages.RequestInterface;
+
 /**
  * : sending Cake\Http\Client\Request via ext/curl.
  *
@@ -11,35 +14,35 @@ import uim.cake;
  * can be set via the `curl` option key when making requests or configuring
  * a client.
  */
-class Curl : IAdapter
+class Curl : AdapterInterface
 {
 
-    array send(RequestInterface myRequest, array myOptions) {
+    array send(RequestInterface $request, STRINGAA someOptions) {
         if (!extension_loaded("curl")) {
             throw new ClientException("curl extension is not loaded.");
         }
 
         $ch = curl_init();
-        myOptions = this.buildOptions(myRequest, myOptions);
-        curl_setopt_array($ch, myOptions);
+        $options = this.buildOptions($request, $options);
+        curl_setopt_array($ch, $options);
 
         /** @var string|false $body */
         $body = this.exec($ch);
         if ($body == false) {
-            myErrorCode = curl_errno($ch);
-            myError = curl_error($ch);
+            $errorCode = curl_errno($ch);
+            $error = curl_error($ch);
             curl_close($ch);
 
-            myMessage = "cURL Error ({myErrorCode}) {myError}";
-            myErrorNumbers = [
+            $message = "cURL Error ({$errorCode}) {$error}";
+            $errorNumbers = [
                 CURLE_FAILED_INIT,
                 CURLE_URL_MALFORMAT,
                 CURLE_URL_MALFORMAT_USER,
             ];
-            if (hasAllValues(myErrorCode, myErrorNumbers, true)) {
-                throw new RequestException(myMessage, myRequest);
+            if (hasAllValues($errorCode, $errorNumbers, true)) {
+                throw new RequestException($message, $request);
             }
-            throw new NetworkException(myMessage, myRequest);
+            throw new NetworkException($message, $request);
         }
 
         $responses = this.createResponse($ch, $body);
@@ -51,24 +54,23 @@ class Curl : IAdapter
     /**
      * Convert client options into curl options.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request.
-     * @param array<string, mixed> myOptions The client options
-     * @return array
+     * @param \Psr\Http\messages.RequestInterface $request The request.
+     * @param array<string, mixed> $options The client options
      */
-    array buildOptions(RequestInterface myRequest, array myOptions) {
+    array buildOptions(RequestInterface $request, STRINGAA someOptions) {
         $headers = null;
-        foreach (myRequest.getHeaders() as myKey: myValues) {
-            $headers[] = myKey ~ ": " ~ implode(", ", myValues);
+        foreach ($request.getHeaders() as $key: $values) {
+            $headers[] = $key ~ ": " ~ implode(", ", $values);
         }
 
         $out = [
-            CURLOPT_URL: (string)myRequest.getUri(),
-            CURLOPT_HTTP_VERSION: this.getProtocolVersion(myRequest),
+            CURLOPT_URL: (string)$request.getUri(),
+            CURLOPT_HTTP_VERSION: this.getProtocolVersion($request),
             CURLOPT_RETURNTRANSFER: true,
             CURLOPT_HEADER: true,
             CURLOPT_HTTPHEADER: $headers,
         ];
-        switch (myRequest.getMethod()) {
+        switch ($request.getMethod()) {
             case Request::METHOD_GET:
                 $out[CURLOPT_HTTPGET] = true;
                 break;
@@ -83,11 +85,11 @@ class Curl : IAdapter
 
             default:
                 $out[CURLOPT_POST] = true;
-                $out[CURLOPT_CUSTOMREQUEST] = myRequest.getMethod();
+                $out[CURLOPT_CUSTOMREQUEST] = $request.getMethod();
                 break;
         }
 
-        $body = myRequest.getBody();
+        $body = $request.getBody();
         $body.rewind();
         $out[CURLOPT_POSTFIELDS] = $body.getContents();
         // GET requests with bodies require custom request to be used.
@@ -98,37 +100,37 @@ class Curl : IAdapter
             unset($out[CURLOPT_POSTFIELDS]);
         }
 
-        if (empty(myOptions["ssl_cafile"])) {
-            myOptions["ssl_cafile"] = CaBundle::getBundledCaBundlePath();
+        if (empty($options["ssl_cafile"])) {
+            $options["ssl_cafile"] = CaBundle::getBundledCaBundlePath();
         }
-        if (!empty(myOptions["ssl_verify_host"])) {
+        if (!empty($options["ssl_verify_host"])) {
             // Value of 1 or true is deprecated. Only 2 or 0 should be used now.
-            myOptions["ssl_verify_host"] = 2;
+            $options["ssl_verify_host"] = 2;
         }
         $optionMap = [
-            "timeout":CURLOPT_TIMEOUT,
-            "ssl_verify_peer":CURLOPT_SSL_VERIFYPEER,
-            "ssl_verify_host":CURLOPT_SSL_VERIFYHOST,
-            "ssl_cafile":CURLOPT_CAINFO,
-            "ssl_local_cert":CURLOPT_SSLCERT,
-            "ssl_passphrase":CURLOPT_SSLCERTPASSWD,
+            "timeout": CURLOPT_TIMEOUT,
+            "ssl_verify_peer": CURLOPT_SSL_VERIFYPEER,
+            "ssl_verify_host": CURLOPT_SSL_VERIFYHOST,
+            "ssl_cafile": CURLOPT_CAINFO,
+            "ssl_local_cert": CURLOPT_SSLCERT,
+            "ssl_passphrase": CURLOPT_SSLCERTPASSWD,
         ];
         foreach ($optionMap as $option: $curlOpt) {
-            if (isset(myOptions[$option])) {
-                $out[$curlOpt] = myOptions[$option];
+            if (isset($options[$option])) {
+                $out[$curlOpt] = $options[$option];
             }
         }
-        if (isset(myOptions["proxy"]["proxy"])) {
-            $out[CURLOPT_PROXY] = myOptions["proxy"]["proxy"];
+        if (isset($options["proxy"]["proxy"])) {
+            $out[CURLOPT_PROXY] = $options["proxy"]["proxy"];
         }
-        if (isset(myOptions["proxy"]["username"])) {
-            myPassword = !empty(myOptions["proxy"]["password"]) ? myOptions["proxy"]["password"] : "";
-            $out[CURLOPT_PROXYUSERPWD] = myOptions["proxy"]["username"] ~ ":" ~ myPassword;
+        if (isset($options["proxy"]["username"])) {
+            $password = !empty($options["proxy"]["password"]) ? $options["proxy"]["password"] : "";
+            $out[CURLOPT_PROXYUSERPWD] = $options["proxy"]["username"] ~ ":" ~ $password;
         }
-        if (isset(myOptions["curl"]) && is_array(myOptions["curl"])) {
+        if (isset($options["curl"]) && is_array($options["curl"])) {
             // Can"t use array_merge() because keys will be re-ordered.
-            foreach (myOptions["curl"] as myKey: myValue) {
-                $out[myKey] = myValue;
+            foreach ($options["curl"] as $key: $value) {
+                $out[$key] = $value;
             }
         }
 
@@ -138,11 +140,10 @@ class Curl : IAdapter
     /**
      * Convert HTTP version number into curl value.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request to get a protocol version for.
-     * @return int
+     * @param \Psr\Http\messages.RequestInterface $request The request to get a protocol version for.
      */
-    protected int getProtocolVersion(RequestInterface myRequest) {
-        switch (myRequest.getProtocolVersion()) {
+    protected int getProtocolVersion(RequestInterface $request) {
+        switch ($request.getProtocolVersion()) {
             case "1.0":
                 return CURL_HTTP_VERSION_1_0;
             case "1.1":
@@ -165,18 +166,18 @@ class Curl : IAdapter
      * Convert the raw curl response into an Http\Client\Response
      *
      * @param resource|\CurlHandle $handle Curl handle
-     * @param string responseData string The response data from curl_exec
+     * @param string $responseData string The response data from curl_exec
      * @return array<uim.cake.Http\Client\Response>
      * @psalm-suppress UndefinedDocblockClass
      */
     protected array createResponse($handle, $responseData) {
-      /** @psalm-suppress PossiblyInvalidArgument */
-      $headerSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
-      $headers = trim(substr($responseData, 0, $headerSize));
-      $body = substr($responseData, $headerSize);
-      $response = new Response(explode("\r\n", $headers), $body);
+        /** @psalm-suppress PossiblyInvalidArgument */
+        $headerSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+        $headers = trim(substr($responseData, 0, $headerSize));
+        $body = substr($responseData, $headerSize);
+        $response = new Response(explode("\r\n", $headers), $body);
 
-      return [$response];
+        return [$response];
     }
 
     /**
@@ -186,8 +187,8 @@ class Curl : IAdapter
      * @return string|bool
      * @psalm-suppress UndefinedDocblockClass
      */
-    protected auto exec($ch) {
-      /** @psalm-suppress PossiblyInvalidArgument */
-      return curl_exec($ch);
+    protected function exec($ch) {
+        /** @psalm-suppress PossiblyInvalidArgument */
+        return curl_exec($ch);
     }
 }

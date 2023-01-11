@@ -7,7 +7,6 @@ import uim.cake.core.exceptions\UIMException;
  */
 class MissingResponseException : UIMException {
     /**
-     * @var string
      */
-    protected _messageTemplate = "Unable to find a mocked response for `%s` to `%s`.";
+    protected string _messageTemplate = "Unable to find a mocked response for `%s` to `%s`.";
 }

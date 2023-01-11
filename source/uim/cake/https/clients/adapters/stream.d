@@ -3,13 +3,16 @@ module uim.cake.http.clients.adapters;
 @safe:
 import uim.cake;
 
+use Composer\CaBundle\CaBundle;
+use Psr\Http\messages.RequestInterface;
+
 /**
  * : sending Cake\Http\Client\Request
  * via php"s stream API.
  *
  * This approach and implementation is partly inspired by Aura.Http
  */
-class Stream : IAdapter
+class Stream : AdapterInterface
 {
     /**
      * Context resource used by the stream API.
@@ -21,14 +24,14 @@ class Stream : IAdapter
     /**
      * Array of options/content for the HTTP stream context.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _contextOptions = null;
 
     /**
      * Array of options/content for the SSL stream context.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     protected _sslContextOptions = null;
 
@@ -47,16 +50,16 @@ class Stream : IAdapter
     protected _connectionErrors = null;
 
 
-    array send(RequestInterface myRequest, array myOptions) {
+    array send(RequestInterface $request, STRINGAA someOptions) {
         _stream = null;
         _context = null;
         _contextOptions = null;
         _sslContextOptions = null;
         _connectionErrors = null;
 
-        _buildContext(myRequest, myOptions);
+        _buildContext($request, $options);
 
-        return _send(myRequest);
+        return _send($request);
     }
 
     /**
@@ -66,10 +69,10 @@ class Stream : IAdapter
      * of redirects that occurred.
      *
      * @param array $headers The list of headers from the request(s)
-     * @param string myContents The response content.
+     * @param string $content The response content.
      * @return array<uim.cake.Http\Client\Response> The list of responses from the request(s)
      */
-    array createResponses(array $headers, string myContents) {
+    array createResponses(array $headers, string $content) {
         $indexes = $responses = null;
         foreach ($headers as $i: $header) {
             if (strtoupper(substr($header, 0, 5)) == "HTTP/") {
@@ -82,7 +85,7 @@ class Stream : IAdapter
             $end = isset($indexes[$i + 1]) ? $indexes[$i + 1] - $start : null;
             /** @psalm-suppress PossiblyInvalidArgument */
             $headerSlice = array_slice($headers, $start, $end);
-            $body = $i == $last ? myContents : "";
+            $body = $i == $last ? $content : "";
             $responses[] = _buildResponse($headerSlice, $body);
         }
 
@@ -92,22 +95,22 @@ class Stream : IAdapter
     /**
      * Build the stream context out of the request object.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request to build context from.
-     * @param array<string, mixed> myOptions Additional request options.
+     * @param \Psr\Http\messages.RequestInterface $request The request to build context from.
+     * @param array<string, mixed> $options Additional request options.
      */
-    protected void _buildContext(RequestInterface myRequest, array myOptions) {
-        _buildContent(myRequest, myOptions);
-        _buildHeaders(myRequest, myOptions);
-        _buildOptions(myRequest, myOptions);
+    protected void _buildContext(RequestInterface $request, STRINGAA someOptions) {
+        _buildContent($request, $options);
+        _buildHeaders($request, $options);
+        _buildOptions($request, $options);
 
-        myUrl = myRequest.getUri();
-        $scheme = parse_url((string)myUrl, PHP_URL_SCHEME);
+        $url = $request.getUri();
+        $scheme = parse_url((string)$url, PHP_URL_SCHEME);
         if ($scheme == "https") {
-            _buildSslContext(myRequest, myOptions);
+            _buildSslContext($request, $options);
         }
         _context = stream_context_create([
-            "http":_contextOptions,
-            "ssl":_sslContextOptions,
+            "http": _contextOptions,
+            "ssl": _sslContextOptions,
         ]);
     }
 
@@ -116,13 +119,13 @@ class Stream : IAdapter
      *
      * Creates cookies & headers.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
-     * @param array<string, mixed> myOptions Array of options to use.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
+     * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildHeaders(RequestInterface myRequest, array myOptions) {
+    protected void _buildHeaders(RequestInterface $request, STRINGAA someOptions) {
         $headers = null;
-        foreach (myRequest.getHeaders() as myName: myValues) {
-            $headers[] = sprintf("%s: %s", myName, implode(", ", myValues));
+        foreach ($request.getHeaders() as $name: $values) {
+            $headers[] = sprintf("%s: %s", $name, implode(", ", $values));
         }
         _contextOptions["header"] = implode("\r\n", $headers);
     }
@@ -130,14 +133,14 @@ class Stream : IAdapter
     /**
      * Builds the request content based on the request object.
      *
-     * If the myRequest.body() is a string, it will be used as is.
+     * If the $request.body() is a string, it will be used as is.
      * Array data will be processed with {@link uim.cake.Http\Client\FormData}
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
-     * @param array<string, mixed> myOptions Array of options to use.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
+     * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildContent(RequestInterface myRequest, array myOptions) {
-        $body = myRequest.getBody();
+    protected void _buildContent(RequestInterface $request, STRINGAA someOptions) {
+        $body = $request.getBody();
         $body.rewind();
         _contextOptions["content"] = $body.getContents();
     }
@@ -145,33 +148,33 @@ class Stream : IAdapter
     /**
      * Build miscellaneous options for the request.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
-     * @param array<string, mixed> myOptions Array of options to use.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
+     * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildOptions(RequestInterface myRequest, array myOptions) {
-        _contextOptions["method"] = myRequest.getMethod();
-        _contextOptions["protocol_version"] = myRequest.getProtocolVersion();
+    protected void _buildOptions(RequestInterface $request, STRINGAA someOptions) {
+        _contextOptions["method"] = $request.getMethod();
+        _contextOptions["protocol_version"] = $request.getProtocolVersion();
         _contextOptions["ignore_errors"] = true;
 
-        if (isset(myOptions["timeout"])) {
-            _contextOptions["timeout"] = myOptions["timeout"];
+        if (isset($options["timeout"])) {
+            _contextOptions["timeout"] = $options["timeout"];
         }
         // Redirects are handled in the client layer because of cookie handling issues.
         _contextOptions["max_redirects"] = 0;
 
-        if (isset(myOptions["proxy"]["proxy"])) {
+        if (isset($options["proxy"]["proxy"])) {
             _contextOptions["request_fulluri"] = true;
-            _contextOptions["proxy"] = myOptions["proxy"]["proxy"];
+            _contextOptions["proxy"] = $options["proxy"]["proxy"];
         }
     }
 
     /**
      * Build SSL options for the request.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
-     * @param array<string, mixed> myOptions Array of options to use.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
+     * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildSslContext(RequestInterface myRequest, array myOptions) {
+    protected void _buildSslContext(RequestInterface $request, STRINGAA someOptions) {
         $sslOptions = [
             "ssl_verify_peer",
             "ssl_verify_peer_name",
@@ -182,18 +185,18 @@ class Stream : IAdapter
             "ssl_local_pk",
             "ssl_passphrase",
         ];
-        if (empty(myOptions["ssl_cafile"])) {
-            myOptions["ssl_cafile"] = CaBundle::getBundledCaBundlePath();
+        if (empty($options["ssl_cafile"])) {
+            $options["ssl_cafile"] = CaBundle::getBundledCaBundlePath();
         }
-        if (!empty(myOptions["ssl_verify_host"])) {
-            myUrl = myRequest.getUri();
-            $host = parse_url((string)myUrl, PHP_URL_HOST);
+        if (!empty($options["ssl_verify_host"])) {
+            $url = $request.getUri();
+            $host = parse_url((string)$url, PHP_URL_HOST);
             _sslContextOptions["peer_name"] = $host;
         }
-        foreach ($sslOptions as myKey) {
-            if (isset(myOptions[myKey])) {
-                myName = substr(myKey, 4);
-                _sslContextOptions[myName] = myOptions[myKey];
+        foreach ($sslOptions as $key) {
+            if (isset($options[$key])) {
+                $name = substr($key, 4);
+                _sslContextOptions[$name] = $options[$key];
             }
         }
     }
@@ -201,19 +204,19 @@ class Stream : IAdapter
     /**
      * Open the stream and send the request.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request object.
+     * @param \Psr\Http\messages.RequestInterface $request The request object.
      * @return array Array of populated Response objects
      * @throws \Psr\Http\Client\NetworkExceptionInterface
      */
-    protected array _send(RequestInterface myRequest) {
+    protected array _send(RequestInterface $request) {
         $deadline = false;
         if (isset(_contextOptions["timeout"]) && _contextOptions["timeout"] > 0) {
             $deadline = time() + _contextOptions["timeout"];
         }
 
-        myUrl = myRequest.getUri();
-        _open((string)myUrl, myRequest);
-        myContents = "";
+        $url = $request.getUri();
+        _open((string)$url, $request);
+        $content = "";
         $timedOut = false;
 
         /** @psalm-suppress PossiblyNullArgument  */
@@ -222,7 +225,7 @@ class Stream : IAdapter
                 stream_set_timeout(_stream, max($deadline - time(), 1));
             }
 
-            myContents ~= fread(_stream, 8192);
+            $content ~= fread(_stream, 8192);
 
             $meta = stream_get_meta_data(_stream);
             if ($meta["timed_out"] || ($deadline != false && time() > $deadline)) {
@@ -236,7 +239,7 @@ class Stream : IAdapter
         fclose(_stream);
 
         if ($timedOut) {
-            throw new NetworkException("Connection timed out " ~ myUrl, myRequest);
+            throw new NetworkException("Connection timed out " ~ $url, $request);
         }
 
         $headers = $meta["wrapper_data"];
@@ -244,47 +247,48 @@ class Stream : IAdapter
             $headers = $headers["headers"];
         }
 
-        return this.createResponses($headers, myContents);
+        return this.createResponses($headers, $content);
     }
 
     /**
      * Build a response object
      *
      * @param array $headers Unparsed headers.
-     * @param string body The response body.
+     * @param string $body The response body.
      * @return uim.cake.http.Client\Response
      */
-    protected Response _buildResponse(array $headers, string body) {
+    protected function _buildResponse(array $headers, string $body): Response
+    {
         return new Response($headers, $body);
     }
 
     /**
      * Open the socket and handle any connection errors.
      *
-     * @param string myUrl The url to connect to.
-     * @param \Psr\Http\messages.RequestInterface myRequest The request object.
+     * @param string $url The url to connect to.
+     * @param \Psr\Http\messages.RequestInterface $request The request object.
      * @return void
      * @throws \Psr\Http\Client\RequestExceptionInterface
      */
-    protected void _open(string myUrl, RequestInterface myRequest) {
+    protected void _open(string $url, RequestInterface $request) {
         if (!(bool)ini_get("allow_url_fopen")) {
             throw new ClientException("The PHP directive `allow_url_fopen` must be enabled.");
         }
 
-        set_error_handler(bool ($code, myMessage) {
-            _connectionErrors[] = myMessage;
+        set_error_handler(bool ($code, $message) {
+            _connectionErrors[] = $message;
 
             return true;
         });
         try {
             /** @psalm-suppress PossiblyNullArgument */
-            _stream = fopen(myUrl, "rb", false, _context);
+            _stream = fopen($url, "rb", false, _context);
         } finally {
             restore_error_handler();
         }
 
-        if (!_stream || !empty(_connectionErrors)) {
-            throw new RequestException(implode("\n", _connectionErrors), myRequest);
+        if (!_stream || _connectionErrors) {
+            throw new RequestException(implode("\n", _connectionErrors), $request);
         }
     }
 
@@ -292,6 +296,8 @@ class Stream : IAdapter
      * Get the context options
      *
      * Useful for debugging and testing context creation.
+     *
+     * @return array<string, mixed>
      */
     array contextOptions() {
         return array_merge(_contextOptions, _sslContextOptions);

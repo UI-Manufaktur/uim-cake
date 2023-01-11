@@ -1,8 +1,5 @@
 module uim.cake.http.clients.adapters;
 
-import uim.cake.http.clients.adaptersInterface;
-import uim.cake.http.clients\exceptions.MissingResponseException;
-import uim.cake.http.clients\Response;
 use Closure;
 use InvalidArgumentException;
 use Psr\Http\messages.RequestInterface;
@@ -15,14 +12,14 @@ use Psr\Http\messages.RequestInterface;
  *
  * @internal
  */
-class Mock : IAdapter
+class Mock : AdapterInterface
 {
     /**
      * List of mocked responses.
      *
      * @var array
      */
-    protected responses = null;
+    protected $responses = null;
 
     /**
      * Add a mocked response.
@@ -31,43 +28,43 @@ class Mock : IAdapter
      *
      * - `match` An additional closure to match requests with.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest A partial request to use for matching.
+     * @param \Psr\Http\messages.RequestInterface $request A partial request to use for matching.
      * @param uim.cake.http.Client\Response $response The response that matches the request.
-     * @param array<string, mixed> myOptions See above.
+     * @param array<string, mixed> $options See above.
      */
-    void addResponse(RequestInterface myRequest, Response $response, array myOptions) {
-        if (isset(myOptions["match"]) && !(myOptions["match"] instanceof Closure)) {
-            myType = getTypeName(myOptions["match"]);
-            throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{myType}`.");
+    void addResponse(RequestInterface $request, Response $response, STRINGAA someOptions) {
+        if (isset($options["match"]) && !($options["match"] instanceof Closure)) {
+            $type = getTypeName($options["match"]);
+            throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{$type}`.");
         }
         this.responses[] = [
-            "request":myRequest,
-            "response":$response,
-            "options":myOptions,
+            "request": $request,
+            "response": $response,
+            "options": $options,
         ];
     }
 
     /**
      * Find a response if one exists.
      *
-     * @param \Psr\Http\messages.RequestInterface myRequest The request to match
-     * @param array<string, mixed> myOptions Unused.
+     * @param \Psr\Http\messages.RequestInterface $request The request to match
+     * @param array<string, mixed> $options Unused.
      * @return uim.cake.http.Client\Response[] The matched response or an empty array for no matches.
      */
-    array send(RequestInterface myRequest, array myOptions) {
+    array send(RequestInterface $request, STRINGAA someOptions) {
         $found = null;
-        $method = myRequest.getMethod();
-        myRequestUri = (string)myRequest.getUri();
+        $method = $request.getMethod();
+        $requestUri = (string)$request.getUri();
 
         foreach (this.responses as $index: $mock) {
             if ($method != $mock["request"].getMethod()) {
                 continue;
             }
-            if (!this.urlMatches(myRequestUri, $mock["request"])) {
+            if (!this.urlMatches($requestUri, $mock["request"])) {
                 continue;
             }
             if (isset($mock["options"]["match"])) {
-                $match = $mock["options"]["match"](myRequest);
+                $match = $mock["options"]["match"]($request);
                 if (!is_bool($match)) {
                     throw new InvalidArgumentException("Match callback must return a boolean value.");
                 }
@@ -78,7 +75,7 @@ class Mock : IAdapter
             $found = $index;
             break;
         }
-        if ($found  !is null) {
+        if ($found != null) {
             // Move the current mock to the end so that when there are multiple
             // matches for a URL the next match is used on subsequent requests.
             $mock = this.responses[$found];
@@ -88,25 +85,25 @@ class Mock : IAdapter
             return [$mock["response"]];
         }
 
-        throw new MissingResponseException(["method":$method, "url":myRequestUri]);
+        throw new MissingResponseException(["method": $method, "url": $requestUri]);
     }
 
     /**
      * Check if the request URI matches the mock URI.
      *
-     * @param string myRequestUri The request being sent.
+     * @param string $requestUri The request being sent.
      * @param \Psr\Http\messages.RequestInterface $mock The request being mocked.
      */
-    protected bool urlMatches(string myRequestUri, RequestInterface $mock) {
+    protected bool urlMatches(string $requestUri, RequestInterface $mock) {
         $mockUri = (string)$mock.getUri();
-        if (myRequestUri == $mockUri) {
+        if ($requestUri == $mockUri) {
             return true;
         }
         $starPosition = strrpos($mockUri, "/%2A");
         if ($starPosition == strlen($mockUri) - 4) {
             $mockUri = substr($mockUri, 0, $starPosition);
 
-            return indexOf(myRequestUri, $mockUri) == 0;
+            return strpos($requestUri, $mockUri) == 0;
         }
 
         return false;
