@@ -5,42 +5,44 @@
 **********************************************************************************************************/
 module uim.datasources;
 
-// Defines the interface that testing fixtures use.
-interface IFixture {
+/**
+ * Defines the interface that testing fixtures use.
+ */
+interface IFixture
+{
     /**
      * Create the fixture schema/mapping/definition
      *
-     * @param uim.cake.Datasource\IConnection myConnection An instance of the connection the fixture should be created on.
+     * @param uim.cake.Datasource\IConnection $connection An instance of the connection the fixture should be created on.
      * @return bool True on success, false on failure.
      */
-    bool create(IConnection myConnection);
+    bool create(IConnection aConnection);
 
     /**
      * Run after all tests executed, should remove the table/collection from the connection.
      *
-     * @param uim.cake.Datasource\IConnection myConnection An instance of the connection the fixture should be removed from.
+     * @param uim.cake.Datasource\IConnection $connection An instance of the connection the fixture should be removed from.
      * @return bool True on success, false on failure.
      */
-    bool drop(IConnection myConnection);
+    bool drop(IConnection aConnection);
 
     /**
      * Run before each test is executed.
      *
      * Should insert all the records into the test database.
      *
-     * @param uim.cake.Datasource\IConnection myConnection An instance of the connection
+     * @param uim.cake.Datasource\IConnection $connection An instance of the connection
      *   into which the records will be inserted.
-     * @return uim.cake.databases.IStatement|bool on success or if there are no records to insert,
+     * @return uim.cake.databases.StatementInterface|bool on success or if there are no records to insert,
      *  or false on failure.
      */
-    function insert(IConnection myConnection);
+    function insert(IConnection aConnection);
 
     /**
      * Truncates the current fixture.
-     *
-     * @param uim.cake.Datasource\IConnection myConnection A reference to a db instance
+     * @param uim.cake.Datasource\IConnection $connection A reference to a db instance
      */
-    bool truncate(IConnection myConnection);
+    bool truncate(IConnection aConnection);
 
     // Get the connection name this fixture should be inserted into.
     string connection();
