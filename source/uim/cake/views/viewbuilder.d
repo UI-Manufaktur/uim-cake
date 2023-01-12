@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
 @safe:
 import uim.cake;
@@ -68,7 +68,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * or a fully moduled classname.
      *
      * @var string|null
-     * @psalm-var class-string<uim.cake.View\View>|string|null
+     * @psalm-var class-string<uim.cake.views\View>|string|null
      */
     protected _className;
 
@@ -449,14 +449,14 @@ class ViewBuilder : JsonSerializable, Serializable
      * Using the data in the builder, create a view instance.
      *
      * If className() is null, App\View\AppView will be used.
-     * If that class does not exist, then {@link uim.cake.View\View} will be used.
+     * If that class does not exist, then {@link uim.cake.views\View} will be used.
      *
      * @param array<string, mixed> $vars The view variables/context to use.
      * @param uim.cake.http.ServerRequest|null myRequest The request to use.
      * @param uim.cake.http.Response|null $response The response to use.
      * @param uim.cake.events.IEventManager|null myEvents The event manager to use.
-     * @return uim.cake.View\View
-     * @throws uim.cake.View\exceptions.MissingViewException
+     * @return uim.cake.views\View
+     * @throws uim.cake.views\exceptions.MissingViewException
      */
     function build(
         array $vars = null,
@@ -496,7 +496,7 @@ class ViewBuilder : JsonSerializable, Serializable
         ];
         myData += _options;
 
-        /** @var uim.cake.View\View */
+        /** @var uim.cake.views\View */
         return new myClassName(myRequest, $response, myEvents, myData);
     }
 

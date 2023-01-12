@@ -1,4 +1,4 @@
-module uim.cake.View;
+module uim.cake.views;
 
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.events.IEventListener;
@@ -53,14 +53,14 @@ class Helper : IEventListener
     /**
      * The View instance this helper is attached to
      *
-     * @var uim.cake.View\View
+     * @var uim.cake.views\View
      */
     protected _View;
 
     /**
      * Default Constructor
      *
-     * @param uim.cake.View\View $view The View this helper is being attached to.
+     * @param uim.cake.views\View $view The View this helper is being attached to.
      * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
     this(View $view, Json aConfig = null) {
@@ -89,7 +89,7 @@ class Helper : IEventListener
      * Lazy loads helpers.
      *
      * @param string aName Name of the property being accessed.
-     * @return uim.cake.View\Helper|null|void Helper instance if helper with provided name exists
+     * @return uim.cake.views\Helper|null|void Helper instance if helper with provided name exists
      */
     function __get(string aName) {
         if (isset(_helperMap[$name]) && !isset(this.{$name})) {
@@ -103,7 +103,7 @@ class Helper : IEventListener
     /**
      * Get the view instance this helper is bound to.
      *
-     * @return uim.cake.View\View The bound view instance.
+     * @return uim.cake.views\View The bound view instance.
      */
     function getView(): View
     {

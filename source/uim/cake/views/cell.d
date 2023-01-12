@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
 @safe:
 import uim.cake;
@@ -27,7 +27,7 @@ abstract class Cell : IEventDispatcher
      * Instance of the View created during rendering. Won"t be set until after
      * Cell::__toString()/render() is called.
      *
-     * @var uim.cake.View\View
+     * @var uim.cake.views\View
      */
     protected View;
 
@@ -124,7 +124,7 @@ abstract class Cell : IEventDispatcher
      * @param string|null myTemplate Custom template name to render. If not provided (null), the last
      * value will be used. This value is automatically set by `CellTrait::cell()`.
      * @return string The rendered cell.
-     * @throws uim.cake.View\exceptions.MissingCellTemplateException
+     * @throws uim.cake.views\exceptions.MissingCellTemplateException
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */

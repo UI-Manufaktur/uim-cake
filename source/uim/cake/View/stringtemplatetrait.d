@@ -1,4 +1,4 @@
-module uim.cake.View;
+module uim.cake.views;
 
 /**
  * Adds string template functionality to any class by providing methods to
@@ -13,7 +13,7 @@ trait StringTemplateTrait
     /**
      * StringTemplate instance.
      *
-     * @var uim.cake.View\StringTemplate|null
+     * @var uim.cake.views\StringTemplate|null
      */
     protected _templater;
 
@@ -52,11 +52,11 @@ trait StringTemplateTrait
     /**
      * Returns the templater instance.
      *
-     * @return uim.cake.View\StringTemplate
+     * @return uim.cake.views\StringTemplate
      */
     StringTemplate templater() {
         if (_templater == null) {
-            /** @var class-string<uim.cake.View\StringTemplate> $class */
+            /** @var class-string<uim.cake.views\StringTemplate> $class */
             $class = this.getConfig("templateClass") ?: StringTemplate::class;
             _templater = new $class();
 

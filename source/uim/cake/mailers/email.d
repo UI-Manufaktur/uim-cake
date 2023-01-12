@@ -7,7 +7,7 @@ module uim.cake.Mailer;
 
 use BadMethodCallException;
 import uim.cake.logs.Log;
-import uim.cake.View\ViewBuilder;
+import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 use JsonSerializable;
 use LogicException;
@@ -379,7 +379,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Get view builder.
      *
-     * @return uim.cake.View\ViewBuilder
+     * @return uim.cake.views\ViewBuilder
      */
     function viewBuilder(): ViewBuilder
     {

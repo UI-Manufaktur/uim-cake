@@ -5,7 +5,7 @@
 
 
  * @since         2.1.0
-  */module uim.cake.View;
+  */module uim.cake.views;
 
 import uim.cake.core.Configure;
 import uim.cake.utilities.Hash;

@@ -1,10 +1,10 @@
-module uim.cake.View;
+module uim.cake.views;
 
 import uim.cake.core.App;
 import uim.cake.events.IEventManager;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
-import uim.cake.View\exceptions.MissingViewException;
+import uim.cake.views\exceptions.MissingViewException;
 use Closure;
 use Exception;
 use JsonSerializable;
@@ -73,7 +73,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * or a fully namespaced classname.
      *
      * @var string|null
-     * @psalm-var class-string<uim.cake.View\View>|string|null
+     * @psalm-var class-string<uim.cake.views\View>|string|null
      */
     protected _className;
 
@@ -482,14 +482,14 @@ class ViewBuilder : JsonSerializable, Serializable
      * Using the data in the builder, create a view instance.
      *
      * If className() is null, App\View\AppView will be used.
-     * If that class does not exist, then {@link uim.cake.View\View} will be used.
+     * If that class does not exist, then {@link uim.cake.views\View} will be used.
      *
      * @param array<string, mixed> $vars The view variables/context to use.
      * @param uim.cake.http.ServerRequest|null $request The request to use.
      * @param uim.cake.http.Response|null $response The response to use.
      * @param uim.cake.events.IEventManager|null $events The event manager to use.
-     * @return uim.cake.View\View
-     * @throws uim.cake.View\exceptions.MissingViewException
+     * @return uim.cake.views\View
+     * @throws uim.cake.views\exceptions.MissingViewException
      */
     function build(
         array $vars = null,
@@ -529,7 +529,7 @@ class ViewBuilder : JsonSerializable, Serializable
         ];
         $data += _options;
 
-        /** @var uim.cake.View\View */
+        /** @var uim.cake.views\View */
         return new $className($request, $response, $events, $data);
     }
 

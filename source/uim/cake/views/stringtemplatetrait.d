@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
 @safe:
 import uim.cake;
@@ -21,7 +21,7 @@ trait StringTemplateTrait
     /**
      * StringTemplate instance.
      *
-     * @var uim.cake.View\StringTemplate|null
+     * @var uim.cake.views\StringTemplate|null
      */
     protected _templater;
 
@@ -60,12 +60,12 @@ trait StringTemplateTrait
     /**
      * Returns the templater instance.
      *
-     * @return uim.cake.View\StringTemplate
+     * @return uim.cake.views\StringTemplate
      */
     function templater(): StringTemplate
     {
         if (_templater is null) {
-            /** @var class-string<uim.cake.View\StringTemplate> myClass */
+            /** @var class-string<uim.cake.views\StringTemplate> myClass */
             myClass = this.getConfig("templateClass") ?: StringTemplate::class;
             _templater = new myClass();
 

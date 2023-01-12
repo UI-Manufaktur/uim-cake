@@ -1,4 +1,4 @@
-module uim.cake.View;
+module uim.cake.views;
 
 @safe:
 import uim.cake;
@@ -29,7 +29,7 @@ abstract class Cell : IEventDispatcher
      * Instance of the View created during rendering. Won"t be set until after
      * Cell::__toString()/render() is called.
      *
-     * @var uim.cake.View\View
+     * @var uim.cake.views\View
      */
     protected $View;
 
@@ -126,7 +126,7 @@ abstract class Cell : IEventDispatcher
      * @param string|null $template Custom template name to render. If not provided (null), the last
      * value will be used. This value is automatically set by `CellTrait::cell()`.
      * @return string The rendered cell.
-     * @throws uim.cake.View\exceptions.MissingCellTemplateException
+     * @throws uim.cake.views\exceptions.MissingCellTemplateException
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */

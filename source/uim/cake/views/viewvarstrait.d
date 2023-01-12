@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
 @safe:
 import uim.cake
@@ -20,14 +20,14 @@ trait ViewVarsTrait {
     /**
      * The view builder instance being used.
      *
-     * @var uim.cake.View\ViewBuilder|null
+     * @var uim.cake.views\ViewBuilder|null
      */
     protected _viewBuilder;
 
     /**
      * Get the view builder being used.
      *
-     * @return uim.cake.View\ViewBuilder
+     * @return uim.cake.views\ViewBuilder
      */
     function viewBuilder(): ViewBuilder
     {
@@ -42,8 +42,8 @@ trait ViewVarsTrait {
      * Constructs the view class instance based on the current configuration.
      *
      * @param string|null $viewClass Optional moduled class name of the View class to instantiate.
-     * @return uim.cake.View\View
-     * @throws uim.cake.View\exceptions.MissingViewException If view class was not found.
+     * @return uim.cake.views\View
+     * @throws uim.cake.views\exceptions.MissingViewException If view class was not found.
      */
     function createView(Nullable!string viewClass = null): View
     {

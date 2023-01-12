@@ -1,8 +1,8 @@
-module uim.cake.View;
+module uim.cake.views;
 
 import uim.cake.core.App;
 import uim.cake.utilities.Inflector;
-import uim.cake.View\exceptions.MissingCellException;
+import uim.cake.views\exceptions.MissingCellException;
 
 /**
  * Provides cell() method for usage in Controller and View classes.
@@ -36,8 +36,8 @@ trait CellTrait
      * @param array $data Additional arguments for cell method. e.g.:
      *    `cell("TagCloud::smallList", ["a1": "v1", "a2": "v2"])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
      * @param array<string, mixed> $options Options for Cell"s constructor
-     * @return uim.cake.View\Cell The cell instance
-     * @throws uim.cake.View\exceptions.MissingCellException If Cell class was not found.
+     * @return uim.cake.views\Cell The cell instance
+     * @throws uim.cake.views\exceptions.MissingCellException If Cell class was not found.
      */
     protected function cell(string $cell, array $data = null, STRINGAA someOptions = null): Cell
     {
@@ -71,11 +71,11 @@ trait CellTrait
      * @param string $action The action name.
      * @param string|null $plugin The plugin name.
      * @param array<string, mixed> $options The constructor options for the cell.
-     * @return uim.cake.View\Cell
+     * @return uim.cake.views\Cell
      */
     protected function _createCell(string $className, string $action, Nullable!string $plugin, STRINGAA someOptions): Cell
     {
-        /** @var uim.cake.View\Cell $instance */
+        /** @var uim.cake.views\Cell $instance */
         $instance = new $className(this.request, this.response, this.getEventManager(), $options);
 
         $builder = $instance.viewBuilder();

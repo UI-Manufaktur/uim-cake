@@ -1,4 +1,4 @@
-module uim.cake.View\Exception;
+module uim.cake.views\Exception;
 
 /**
  * Used when an element file cannot be found.

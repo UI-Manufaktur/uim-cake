@@ -5,7 +5,7 @@
 
 
  * @since         2.1.0
-  */module uim.cake.View;
+  */module uim.cake.views;
 
 import uim.cake.core.exceptions.UIMException;
 
@@ -49,7 +49,7 @@ class ViewBlock
     /**
      * Should the currently captured content be discarded on ViewBlock::end()
      *
-     * @see uim.cake.View\ViewBlock::end()
+     * @see uim.cake.views\ViewBlock::end()
      */
     protected bool _discardActiveBufferOnEnd = false;
 
@@ -80,7 +80,7 @@ class ViewBlock
      * End a capturing block. The compliment to ViewBlock::start()
      *
      * @return void
-     * @see uim.cake.View\ViewBlock::start()
+     * @see uim.cake.views\ViewBlock::start()
      */
     void end() {
         if (_discardActiveBufferOnEnd) {

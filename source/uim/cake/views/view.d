@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
 @safe:
 import uim.cake;
@@ -31,16 +31,16 @@ import uim.cake;
  * `plugins/SuperHot/templates/Posts/index.php`. If a theme template
  * is not found for the current action the default app template file is used.
  *
- * @property uim.cake.View\Helper\BreadcrumbsHelper $Breadcrumbs
- * @property uim.cake.View\Helper\FlashHelper $Flash
- * @property uim.cake.View\Helper\FormHelper $Form
- * @property uim.cake.View\Helper\HtmlHelper $Html
- * @property uim.cake.View\Helper\NumberHelper $Number
- * @property uim.cake.View\Helper\PaginatorHelper $Paginator
- * @property uim.cake.View\Helper\TextHelper $Text
- * @property uim.cake.View\Helper\TimeHelper $Time
- * @property uim.cake.View\Helper\UrlHelper myUrl
- * @property uim.cake.View\ViewBlock $Blocks
+ * @property uim.cake.views\Helper\BreadcrumbsHelper $Breadcrumbs
+ * @property uim.cake.views\Helper\FlashHelper $Flash
+ * @property uim.cake.views\Helper\FormHelper $Form
+ * @property uim.cake.views\Helper\HtmlHelper $Html
+ * @property uim.cake.views\Helper\NumberHelper $Number
+ * @property uim.cake.views\Helper\PaginatorHelper $Paginator
+ * @property uim.cake.views\Helper\TextHelper $Text
+ * @property uim.cake.views\Helper\TimeHelper $Time
+ * @property uim.cake.views\Helper\UrlHelper myUrl
+ * @property uim.cake.views\ViewBlock $Blocks
  */
 class View : IEventDispatcher {
     use CellTrait {
@@ -55,14 +55,14 @@ class View : IEventDispatcher {
     /**
      * Helpers collection
      *
-     * @var uim.cake.View\HelperRegistry
+     * @var uim.cake.views\HelperRegistry
      */
     protected _helpers;
 
     /**
      * ViewBlock instance.
      *
-     * @var uim.cake.View\ViewBlock
+     * @var uim.cake.views\ViewBlock
      */
     protected Blocks;
 
@@ -145,7 +145,7 @@ class View : IEventDispatcher {
      * per element.
      *
      * @var string
-     * @see uim.cake.View\View::element()
+     * @see uim.cake.views\View::element()
      */
     protected elementCache = "default";
 
@@ -209,7 +209,7 @@ class View : IEventDispatcher {
      * ViewBlock class.
      *
      * @var string
-     * @psalm-var class-string<uim.cake.View\ViewBlock>
+     * @psalm-var class-string<uim.cake.views\ViewBlock>
      */
     protected _viewBlockClass = ViewBlock::class;
 
@@ -479,7 +479,7 @@ class View : IEventDispatcher {
      * - `plugin` - setting to false will force to use the application"s element from plugin templates, when the
      *   plugin has element with same name. Defaults to true
      * @return string Rendered Element
-     * @throws uim.cake.View\exceptions.MissingElementException When an element is missing and `ignoreMissing`
+     * @throws uim.cake.views\exceptions.MissingElementException When an element is missing and `ignoreMissing`
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} myOptions
      */
@@ -718,7 +718,7 @@ class View : IEventDispatcher {
      * Get the names of all the existing blocks.
      *
      * @return An array containing the blocks.
-     * @see uim.cake.View\ViewBlock::keys()
+     * @see uim.cake.views\ViewBlock::keys()
      */
     string[] blocks() {
         return this.Blocks.keys();
@@ -746,7 +746,7 @@ class View : IEventDispatcher {
      *
      * @param string myName The name of the block to capture for.
      * @return this
-     * @see uim.cake.View\ViewBlock::start()
+     * @see uim.cake.views\ViewBlock::start()
      */
     function start(string myName) {
         this.Blocks.start(myName);
@@ -763,7 +763,7 @@ class View : IEventDispatcher {
      * @param mixed myValue The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see uim.cake.View\ViewBlock::concat()
+     * @see uim.cake.views\ViewBlock::concat()
      */
     function append(string myName, myValue = null) {
         this.Blocks.concat(myName, myValue);
@@ -780,7 +780,7 @@ class View : IEventDispatcher {
      * @param mixed myValue The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see uim.cake.View\ViewBlock::concat()
+     * @see uim.cake.views\ViewBlock::concat()
      */
     function prepend(string myName, myValue) {
         this.Blocks.concat(myName, myValue, ViewBlock::PREPEND);
@@ -796,7 +796,7 @@ class View : IEventDispatcher {
      * @param mixed myValue The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see uim.cake.View\ViewBlock::set()
+     * @see uim.cake.views\ViewBlock::set()
      */
     function assign(string myName, myValue) {
         this.Blocks.set(myName, myValue);
@@ -810,7 +810,7 @@ class View : IEventDispatcher {
      *
      * @param string myName Name of the block
      * @return this
-     * @see uim.cake.View\ViewBlock::set()
+     * @see uim.cake.views\ViewBlock::set()
      */
     function reset(string myName) {
         this.assign(myName, "");
@@ -825,7 +825,7 @@ class View : IEventDispatcher {
      * @param string myName Name of the block
      * @param string default Default text
      * @return string The block content or $default if the block does not exist.
-     * @see uim.cake.View\ViewBlock::get()
+     * @see uim.cake.views\ViewBlock::get()
      */
     string fetch(string myName, string default = "") {
         return this.Blocks.get(myName, $default);
@@ -835,7 +835,7 @@ class View : IEventDispatcher {
      * End a capturing block. The compliment to View::start()
      *
      * @return this
-     * @see uim.cake.View\ViewBlock::end()
+     * @see uim.cake.views\ViewBlock::end()
      */
     function end() {
         this.Blocks.end();
@@ -905,7 +905,7 @@ class View : IEventDispatcher {
      * Magic accessor for helpers.
      *
      * @param string myName Name of the attribute to get.
-     * @return uim.cake.View\Helper|null
+     * @return uim.cake.views\Helper|null
      */
     auto __get(string myName) {
         $registry = this.helpers();
@@ -1011,7 +1011,7 @@ class View : IEventDispatcher {
     /**
      * Get the helper registry in use by this View class.
      *
-     * @return uim.cake.View\HelperRegistry
+     * @return uim.cake.views\HelperRegistry
      */
     function helpers(): HelperRegistry
     {
@@ -1027,8 +1027,8 @@ class View : IEventDispatcher {
      *
      * @param string myName Name of the helper to load.
      * @param array<string, mixed> myConfig Settings for the helper
-     * @return uim.cake.View\Helper a constructed helper object.
-     * @see uim.cake.View\HelperRegistry::load()
+     * @return uim.cake.views\Helper a constructed helper object.
+     * @see uim.cake.views\HelperRegistry::load()
      */
     Helper loadHelper(string myName, array myConfig = null) {
         [, myClass] = pluginSplit(myName);
@@ -1042,7 +1042,7 @@ class View : IEventDispatcher {
      *
      * @param string subDir Sub-directory name.
      * @return this
-     * @see uim.cake.View\View::$subDir
+     * @see uim.cake.views\View::$subDir
 
      */
     auto setSubDir(string subDir) {
@@ -1055,7 +1055,7 @@ class View : IEventDispatcher {
      * Get sub-directory for this template files.
      *
      * @return string
-     * @see uim.cake.View\View::$subDir
+     * @see uim.cake.views\View::$subDir
 
      */
     string getSubDir() {
@@ -1100,7 +1100,7 @@ class View : IEventDispatcher {
      *
      * @param string elementCache Cache config name.
      * @return this
-     * @see uim.cake.View\View::$elementCache
+     * @see uim.cake.views\View::$elementCache
 
      */
     auto setElementCache(string elementCache) {
@@ -1118,7 +1118,7 @@ class View : IEventDispatcher {
      *
      * @param string|null myName Controller action to find template filename for
      * @return string Template filename
-     * @throws uim.cake.View\exceptions.MissingTemplateException when a template file could not be found.
+     * @throws uim.cake.views\exceptions.MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
     protected string _getTemplateFileName(Nullable!string myName = null) {
@@ -1234,7 +1234,7 @@ class View : IEventDispatcher {
      *
      * @param string|null myName The name of the layout to find.
      * @return string Filename for layout file.
-     * @throws uim.cake.View\exceptions.MissingLayoutException when a layout cannot be located
+     * @throws uim.cake.views\exceptions.MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
     protected string _getLayoutFileName(Nullable!string myName = null) {

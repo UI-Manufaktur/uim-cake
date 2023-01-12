@@ -13,7 +13,7 @@ import uim.cake.events.IEventListener;
 import uim.cake.logs.Log;
 import uim.cake.mailers.exceptions.MissingActionException;
 import uim.cake.orm.locators.LocatorAwareTrait;
-import uim.cake.View\ViewBuilder;
+import uim.cake.views\ViewBuilder;
 use InvalidArgumentException;
 
 /**
@@ -214,7 +214,7 @@ class Mailer : IEventListener
     /**
      * Get the view builder.
      *
-     * @return uim.cake.View\ViewBuilder
+     * @return uim.cake.views\ViewBuilder
      */
     function viewBuilder(): ViewBuilder
     {

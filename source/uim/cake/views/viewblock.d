@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
 @safe:
 import uim.cake;
@@ -48,7 +48,7 @@ class ViewBlock
     /**
      * Should the currently captured content be discarded on ViewBlock::end()
      *
-     * @see uim.cake.View\ViewBlock::end()
+     * @see uim.cake.views\ViewBlock::end()
      * @var bool
      */
     protected _discardActiveBufferOnEnd = false;
@@ -80,7 +80,7 @@ class ViewBlock
      * End a capturing block. The compliment to ViewBlock::start()
      *
      * @return void
-     * @see uim.cake.View\ViewBlock::start()
+     * @see uim.cake.views\ViewBlock::start()
      */
     void end() {
         if (_discardActiveBufferOnEnd) {

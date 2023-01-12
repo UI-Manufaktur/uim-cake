@@ -3,7 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
 @safe:
 import uim.cake;
@@ -37,8 +37,8 @@ trait CellTrait {
      * @param array myData Additional arguments for cell method. e.g.:
      *    `cell("TagCloud::smallList", ["a1": "v1", "a2": "v2"])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
      * @param array<string, mixed> myOptions Options for Cell"s constructor
-     * @return uim.cake.View\Cell The cell instance
-     * @throws uim.cake.View\exceptions.MissingCellException If Cell class was not found.
+     * @return uim.cake.views\Cell The cell instance
+     * @throws uim.cake.views\exceptions.MissingCellException If Cell class was not found.
      */
     protected Cell cell(string cell, array myData = null, array myOptions = null) {
         $parts = explode("::", $cell);
@@ -72,11 +72,11 @@ trait CellTrait {
      * @param string action The action name.
      * @param string|null myPlugin The plugin name.
      * @param array<string, mixed> myOptions The constructor options for the cell.
-     * @return uim.cake.View\Cell
+     * @return uim.cake.views\Cell
      */
     protected auto _createCell(string myClassName, string action, Nullable!string myPlugin, array myOptions)Cell
     {
-        /** @var uim.cake.View\Cell $instance */
+        /** @var uim.cake.views\Cell $instance */
         $instance = new myClassName(this.request, this.response, this.getEventManager(), myOptions);
 
         myBuilder = $instance.viewBuilder();

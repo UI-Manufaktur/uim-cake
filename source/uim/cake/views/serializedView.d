@@ -3,9 +3,9 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.views;
+module uim.cake.viewss;
 
-import uim.cake.views.exceptions.SerializationFailureException;
+import uim.cake.viewss.exceptions.SerializationFailureException;
 use Exception;
 use TypeError;
 
@@ -69,7 +69,7 @@ abstract class SerializedView : View
      * @param string|null myTemplate The template being rendered.
      * @param string|false|null $layout The layout being rendered.
      * @return The rendered view.
-     * @throws uim.cake.View\exceptions.SerializationFailureException When serialization fails.
+     * @throws uim.cake.views\exceptions.SerializationFailureException When serialization fails.
      */
     string render(Nullable!string myTemplate = null, $layout = null) {
         $serialize = this.getConfig("serialize", false);

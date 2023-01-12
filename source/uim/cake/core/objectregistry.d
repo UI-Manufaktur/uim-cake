@@ -22,7 +22,7 @@ use Traversable;
  * uim.cake.events.EventDispatcherTrait to attach and detach on set and bind
  *
  * @see uim.cake.controllers.ComponentRegistry
- * @see uim.cake.View\HelperRegistry
+ * @see uim.cake.views\HelperRegistry
  * @see uim.cake.consoles.TaskRegistry
  * @template TObject
  */

@@ -1,4 +1,4 @@
-module uim.cake.View;
+module uim.cake.views;
 
 import uim.cake.core.configures.engines.PhpConfig;
 import uim.cake.core.exceptions.UIMException;

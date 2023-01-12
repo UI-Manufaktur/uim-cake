@@ -1,16 +1,16 @@
-module uim.cake.View;
+module uim.cake.views;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
 import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
-import uim.cake.View\exceptions.MissingHelperException;
+import uim.cake.views\exceptions.MissingHelperException;
 
 /**
  * HelperRegistry is used as a registry for loaded helpers and handles loading
  * and constructing helper class objects.
  *
- * @: uim.cake.Core\ObjectRegistry<uim.cake.View\Helper>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.views\Helper>
  */
 class HelperRegistry : ObjectRegistry : IEventDispatcher
 {
@@ -19,14 +19,14 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
     /**
      * View object to use when making helpers.
      *
-     * @var uim.cake.View\View
+     * @var uim.cake.views\View
      */
     protected _View;
 
     /**
      * Constructor
      *
-     * @param uim.cake.View\View $view View object.
+     * @param uim.cake.views\View $view View object.
      */
     this(View $view) {
         _View = $view;
@@ -40,7 +40,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string $helper The helper name to be loaded
      * @return bool whether the helper could be loaded or not
-     * @throws uim.cake.View\exceptions.MissingHelperException When a helper could not be found.
+     * @throws uim.cake.views\exceptions.MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
     bool __isSet(string $helper) {
@@ -70,7 +70,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * Provide read access to the loaded objects
      *
      * @param string aName Name of property to read
-     * @return uim.cake.View\Helper|null
+     * @return uim.cake.views\Helper|null
      */
     function __get(string aName) {
         if (isset(_loaded[$name])) {
@@ -105,7 +105,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the helper is missing in.
      * @return void
-     * @throws uim.cake.View\exceptions.MissingHelperException
+     * @throws uim.cake.views\exceptions.MissingHelperException
      */
     protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new MissingHelperException([
@@ -123,12 +123,12 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @param string $class The class to create.
      * @param string $alias The alias of the loaded helper.
      * @param array<string, mixed> aConfig An array of settings to use for the helper.
-     * @return uim.cake.View\Helper The constructed helper class.
+     * @return uim.cake.views\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected function _create($class, string $alias, Json aConfig): Helper
     {
-        /** @var uim.cake.View\Helper $instance */
+        /** @var uim.cake.views\Helper $instance */
         $instance = new $class(_View, aConfig);
 
         $enable = aConfig["enabled"] ?? true;
