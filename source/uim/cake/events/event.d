@@ -1,4 +1,4 @@
-module uim.cake.Event;
+vuim.cake.Event;
 
 @safe:
 import uim.cake;

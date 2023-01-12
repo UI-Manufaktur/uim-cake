@@ -1,4 +1,4 @@
-module uim.cake.errors;
+vuim.cake.errors;
 
 @safe:
 import uim.cake;

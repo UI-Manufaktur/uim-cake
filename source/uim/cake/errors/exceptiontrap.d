@@ -1,5 +1,4 @@
-
-module uim.cake.Error;
+vuim.cake.Error;
 
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.errors.rendererss.ConsoleExceptionRenderer;
