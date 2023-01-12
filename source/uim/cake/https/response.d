@@ -1,4 +1,4 @@
-module uim.cake.Http;
+vuim.cake.Http;
 
 @safe:
 import uim.cake; 

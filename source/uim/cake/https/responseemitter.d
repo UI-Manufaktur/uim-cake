@@ -1,15 +1,9 @@
-
-
-
- *
-
-
- * @since         3.3.5
-  *
- * Parts of this file are derived from Zend-Diactoros
- * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (https://www.zend.com/)
- * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
- */module uim.cake.Http;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.Http;
 
 import uim.cake.http.Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;
