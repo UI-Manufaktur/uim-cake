@@ -1,7 +1,7 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
-import uim.cake.View\StringTemplate;
+import uim.cake.views\Form\IContext;
+import uim.cake.views\StringTemplate;
 
 /**
  * Form "widget" for creating labels.
@@ -14,7 +14,7 @@ class LabelWidget : WidgetInterface
     /**
      * Templates
      *
-     * @var uim.cake.View\StringTemplate
+     * @var uim.cake.views\StringTemplate
      */
     protected _templates;
 
@@ -31,7 +31,7 @@ class LabelWidget : WidgetInterface
      * - `label` Used to generate the label for a radio button.
      *   Can use the following variables `attrs`, `text` and `input`.
      *
-     * @param uim.cake.View\StringTemplate $templates Templates list.
+     * @param uim.cake.views\StringTemplate $templates Templates list.
      */
     this(StringTemplate $templates) {
         _templates = $templates;
@@ -49,7 +49,7 @@ class LabelWidget : WidgetInterface
      * All other attributes will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data Data array.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      */
     string render(array $data, IContext $context) {
         $data += [

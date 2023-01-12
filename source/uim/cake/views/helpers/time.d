@@ -1,4 +1,4 @@
-module uim.cake.views.Helper;
+module uim.cake.viewss.Helper;
 
 @safe:
 import uim.cake;

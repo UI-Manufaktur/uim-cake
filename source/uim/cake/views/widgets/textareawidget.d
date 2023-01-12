@@ -1,6 +1,6 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
+import uim.cake.views\Form\IContext;
 
 /**
  * Input widget class for generating a textarea control.
@@ -35,7 +35,7 @@ class TextareaWidget : BasicWidget
      * All other keys will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data The data to build a textarea with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
     string render(array $data, IContext $context) {

@@ -1,4 +1,9 @@
-module uim.cake.views.widgets;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.viewss.widgets;
 
 @safe:
 import uim.cake;
@@ -14,7 +19,7 @@ class LabelWidget : IWidget
     /**
      * Templates
      *
-     * @var uim.cake.View\StringTemplate
+     * @var uim.cake.views\StringTemplate
      */
     protected _templates;
 
@@ -31,7 +36,7 @@ class LabelWidget : IWidget
      * - `label` Used to generate the label for a radio button.
      *   Can use the following variables `attrs`, `text` and `input`.
      *
-     * @param uim.cake.View\StringTemplate myTemplates Templates list.
+     * @param uim.cake.views\StringTemplate myTemplates Templates list.
      */
     this(StringTemplate myTemplates) {
         _templates = myTemplates;
@@ -49,7 +54,7 @@ class LabelWidget : IWidget
      * All other attributes will be converted into HTML attributes.
      *
      * @param array<string, mixed> myData Data array.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      */
     string render(array myData, IContext $context) {
         myData += [

@@ -5,21 +5,21 @@
 
 
  * @since         0.10.0
-  */module uim.cake.View\Helper;
+  */module uim.cake.views\Helper;
 
 import uim.cake.core.App;
 import uim.cake.core.exceptions.UIMException;
 import uim.cake.utilities.Security;
 import uim.cake.utilities.Text;
-import uim.cake.View\Helper;
-import uim.cake.View\View;
+import uim.cake.views\Helper;
+import uim.cake.views\View;
 
 /**
  * Text helper library.
  *
  * Text manipulations: Highlight, excerpt, truncate, strip of links, convert email addresses to mailto: links...
  *
- * @property uim.cake.View\Helper\HtmlHelper $Html
+ * @property uim.cake.views\Helper\HtmlHelper $Html
  * @link https://book.cakephp.org/4/en/views/helpers/text.html
  * @see uim.cake.Utility\Text
  */
@@ -64,7 +64,7 @@ class TextHelper : Helper
      * - `engine` Class name to use to replace String functionality.
      *            The class needs to be placed in the `Utility` directory.
      *
-     * @param uim.cake.View\View $view the view object the helper is attached to.
+     * @param uim.cake.views\View $view the view object the helper is attached to.
      * @param array<string, mixed> aConfig Settings array Settings array
      * @throws uim.cake.Core\exceptions.UIMException when the engine class could not be found.
      */
@@ -199,7 +199,7 @@ class TextHelper : Helper
      * @param string $text The text to operate on
      * @param array<string, mixed> $options An array of options to use for the HTML.
      * @return string
-     * @see uim.cake.View\Helper\TextHelper::autoLinkEmails()
+     * @see uim.cake.views\Helper\TextHelper::autoLinkEmails()
      */
     protected string _linkEmails(string $text, STRINGAA someOptions) {
         $replace = null;

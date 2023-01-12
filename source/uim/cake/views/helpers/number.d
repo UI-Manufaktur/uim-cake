@@ -1,4 +1,9 @@
-module uim.cake.views.Helper;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.viewss.Helper;
 
 @safe:
 import uim.cake;
@@ -37,7 +42,7 @@ class NumberHelper : Helper
      * - `engine` Class name to use to replace Cake\I18n\Number functionality
      *            The class needs to be placed in the `Utility` directory.
      *
-     * @param uim.cake.View\View $view The View this helper is being attached to.
+     * @param uim.cake.views\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper
      * @throws uim.cake.Core\exceptions.UIMException When the engine class could not be found.
      */

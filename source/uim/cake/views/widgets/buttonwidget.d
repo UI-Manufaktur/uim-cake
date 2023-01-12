@@ -1,7 +1,7 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
-import uim.cake.View\StringTemplate;
+import uim.cake.views\Form\IContext;
+import uim.cake.views\StringTemplate;
 
 /**
  * Button input class
@@ -15,14 +15,14 @@ class ButtonWidget : WidgetInterface
     /**
      * StringTemplate instance.
      *
-     * @var uim.cake.View\StringTemplate
+     * @var uim.cake.views\StringTemplate
      */
     protected _templates;
 
     /**
      * Constructor.
      *
-     * @param uim.cake.View\StringTemplate $templates Templates list.
+     * @param uim.cake.views\StringTemplate $templates Templates list.
      */
     this(StringTemplate $templates) {
         _templates = $templates;
@@ -42,7 +42,7 @@ class ButtonWidget : WidgetInterface
      * Any other keys provided in $data will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data The data to build a button with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      */
     string render(array $data, IContext $context) {
         $data += [

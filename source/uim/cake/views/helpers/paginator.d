@@ -1,4 +1,4 @@
-module uim.cake.views.Helper;
+module uim.cake.viewss.Helper;
 
 @safe:
 import uim.cake;
@@ -8,10 +8,10 @@ import uim.cake;
  *
  * PaginationHelper encloses all methods needed when working with pagination.
  *
- * @property uim.cake.View\Helper\UrlHelper myUrl
- * @property uim.cake.View\Helper\NumberHelper $Number
- * @property uim.cake.View\Helper\HtmlHelper $Html
- * @property uim.cake.View\Helper\FormHelper $Form
+ * @property uim.cake.views\Helper\UrlHelper myUrl
+ * @property uim.cake.views\Helper\NumberHelper $Number
+ * @property uim.cake.views\Helper\HtmlHelper $Html
+ * @property uim.cake.views\Helper\FormHelper $Form
  * @link https://book.UIM.org/4/en/views/helpers/paginator.html
  */
 class PaginatorHelper : Helper
@@ -78,7 +78,7 @@ class PaginatorHelper : Helper
     /**
      * Constructor. Overridden to merge passed args with URL options.
      *
-     * @param uim.cake.View\View $view The View this helper is being attached to.
+     * @param uim.cake.views\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper.
      */
     this(View $view, array myConfig = null) {
@@ -807,7 +807,7 @@ class PaginatorHelper : Helper
     /**
      * Formats a number for the paginator number output.
      *
-     * @param uim.cake.View\StringTemplate myTemplater StringTemplate instance.
+     * @param uim.cake.views\StringTemplate myTemplater StringTemplate instance.
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string
      */
@@ -823,7 +823,7 @@ class PaginatorHelper : Helper
     /**
      * Generates the numbers for the paginator numbers() method.
      *
-     * @param uim.cake.View\StringTemplate myTemplater StringTemplate instance.
+     * @param uim.cake.views\StringTemplate myTemplater StringTemplate instance.
      * @param array<string, mixed> myParams Params from the numbers() method.
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.
@@ -929,7 +929,7 @@ class PaginatorHelper : Helper
     /**
      * Generates the numbers for the paginator numbers() method.
      *
-     * @param uim.cake.View\StringTemplate myTemplater StringTemplate instance.
+     * @param uim.cake.views\StringTemplate myTemplater StringTemplate instance.
      * @param array<string, mixed> myParams Params from the numbers() method.
      * @param array<string, mixed> myOptions Options from the numbers() method.
      * @return string Markup output.

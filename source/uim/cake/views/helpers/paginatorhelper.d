@@ -1,21 +1,26 @@
-module uim.cake.View\Helper;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.views\Helper;
 
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;
-import uim.cake.View\Helper;
-import uim.cake.View\StringTemplate;
-import uim.cake.View\StringTemplateTrait;
-import uim.cake.View\View;
+import uim.cake.views\Helper;
+import uim.cake.views\StringTemplate;
+import uim.cake.views\StringTemplateTrait;
+import uim.cake.views\View;
 
 /**
  * Pagination Helper class for easy generation of pagination links.
  *
  * PaginationHelper encloses all methods needed when working with pagination.
  *
- * @property uim.cake.View\Helper\UrlHelper $Url
- * @property uim.cake.View\Helper\NumberHelper $Number
- * @property uim.cake.View\Helper\HtmlHelper $Html
- * @property uim.cake.View\Helper\FormHelper $Form
+ * @property uim.cake.views\Helper\UrlHelper $Url
+ * @property uim.cake.views\Helper\NumberHelper $Number
+ * @property uim.cake.views\Helper\HtmlHelper $Html
+ * @property uim.cake.views\Helper\FormHelper $Form
  * @link https://book.cakephp.org/4/en/views/helpers/paginator.html
  */
 class PaginatorHelper : Helper
@@ -81,7 +86,7 @@ class PaginatorHelper : Helper
     /**
      * Constructor. Overridden to merge passed args with URL options.
      *
-     * @param uim.cake.View\View $view The View this helper is being attached to.
+     * @param uim.cake.views\View $view The View this helper is being attached to.
      * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
     this(View $view, Json aConfig = null) {
@@ -809,7 +814,7 @@ class PaginatorHelper : Helper
     /**
      * Formats a number for the paginator number output.
      *
-     * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
+     * @param uim.cake.views\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $options Options from the numbers() method.
      */
     protected string _formatNumber(StringTemplate $templater, STRINGAA someOptions) {
@@ -824,7 +829,7 @@ class PaginatorHelper : Helper
     /**
      * Generates the numbers for the paginator numbers() method.
      *
-     * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
+     * @param uim.cake.views\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $params Params from the numbers() method.
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.
@@ -930,7 +935,7 @@ class PaginatorHelper : Helper
     /**
      * Generates the numbers for the paginator numbers() method.
      *
-     * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
+     * @param uim.cake.views\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $params Params from the numbers() method.
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.

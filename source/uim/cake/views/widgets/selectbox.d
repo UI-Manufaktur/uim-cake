@@ -1,4 +1,4 @@
-module uim.cake.views.widgets;
+module uim.cake.viewss.widgets;
 
 @safe:
 import uim.cake;
@@ -97,7 +97,7 @@ class SelectBoxWidget : BasicWidget
      * nest complex types as required.
      *
      * @param array<string, mixed> myData Data to render with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return string A generated select box.
      * @throws \RuntimeException when the name attribute is empty.
      */

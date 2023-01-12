@@ -1,6 +1,6 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
+import uim.cake.views\Form\IContext;
 
 /**
  * Interface for input widgets.
@@ -11,7 +11,7 @@ interface WidgetInterface
      * Converts the $data into one or many HTML elements.
      *
      * @param array<string, mixed> $data The data to render.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return string Generated HTML for the widget element.
      */
     string render(array $data, IContext $context);

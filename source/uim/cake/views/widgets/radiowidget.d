@@ -1,8 +1,8 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
-import uim.cake.View\Helper\IdGeneratorTrait;
-import uim.cake.View\StringTemplate;
+import uim.cake.views\Form\IContext;
+import uim.cake.views\Helper\IdGeneratorTrait;
+import uim.cake.views\StringTemplate;
 use Traversable;
 
 /**
@@ -35,7 +35,7 @@ class RadioWidget : BasicWidget
     /**
      * Label instance.
      *
-     * @var uim.cake.View\Widget\LabelWidget
+     * @var uim.cake.views\Widget\LabelWidget
      */
     protected _label;
 
@@ -50,8 +50,8 @@ class RadioWidget : BasicWidget
      *   the radio + input element. Can use the `input` and `label`
      *   variables.
      *
-     * @param uim.cake.View\StringTemplate $templates Templates list.
-     * @param uim.cake.View\Widget\LabelWidget $label Label widget instance.
+     * @param uim.cake.views\StringTemplate $templates Templates list.
+     * @param uim.cake.views\Widget\LabelWidget $label Label widget instance.
      */
     this(StringTemplate $templates, LabelWidget $label) {
         _templates = $templates;
@@ -75,7 +75,7 @@ class RadioWidget : BasicWidget
      * - `idPrefix` Prefix for generated ID attributes.
      *
      * @param array<string, mixed> $data The data to build radio buttons with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      */
     string render(array $data, IContext $context) {
         $data += this.mergeDefaults($data, $context);
@@ -126,7 +126,7 @@ class RadioWidget : BasicWidget
      * @param string|int $val The value of the radio input.
      * @param array<string, mixed>|string $text The label text, or complex radio type.
      * @param array<string, mixed> $data Additional options for input generation.
-     * @param uim.cake.View\Form\IContext $context The form context
+     * @param uim.cake.views\Form\IContext $context The form context
      */
     protected string _renderInput($val, $text, $data, $context) {
         $escape = $data["escape"];
@@ -214,7 +214,7 @@ class RadioWidget : BasicWidget
      * @param array<string, mixed> $radio The input properties.
      * @param array<string, mixed>|string|false $label The properties for a label.
      * @param string $input The input widget.
-     * @param uim.cake.View\Form\IContext $context The form context.
+     * @param uim.cake.views\Form\IContext $context The form context.
      * @param bool $escape Whether to HTML escape the label.
      * @return string|false Generated label.
      */

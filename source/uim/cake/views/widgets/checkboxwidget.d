@@ -1,6 +1,6 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
+import uim.cake.views\Form\IContext;
 
 /**
  * Input widget for creating checkbox widgets.
@@ -37,7 +37,7 @@ class CheckboxWidget : BasicWidget
      * Any other attributes passed in will be treated as HTML attributes.
      *
      * @param array<string, mixed> $data The data to create a checkbox with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return string Generated HTML string.
      */
     string render(array $data, IContext $context) {

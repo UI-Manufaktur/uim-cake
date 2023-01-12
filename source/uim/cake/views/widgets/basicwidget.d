@@ -1,7 +1,7 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
-import uim.cake.View\StringTemplate;
+import uim.cake.views\Form\IContext;
+import uim.cake.views\StringTemplate;
 
 /**
  * Basic input class.
@@ -15,7 +15,7 @@ class BasicWidget : WidgetInterface
     /**
      * StringTemplate instance.
      *
-     * @var uim.cake.View\StringTemplate
+     * @var uim.cake.views\StringTemplate
      */
     protected _templates;
 
@@ -35,7 +35,7 @@ class BasicWidget : WidgetInterface
     /**
      * Constructor.
      *
-     * @param uim.cake.View\StringTemplate $templates Templates list.
+     * @param uim.cake.views\StringTemplate $templates Templates list.
      */
     this(StringTemplate $templates) {
         _templates = $templates;
@@ -53,7 +53,7 @@ class BasicWidget : WidgetInterface
      * Any other keys provided in $data will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data The data to build an input with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      */
     string render(array $data, IContext $context) {
         $data = this.mergeDefaults($data, $context);
@@ -95,7 +95,7 @@ class BasicWidget : WidgetInterface
      * Merge default values with supplied data.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\IContext $context Context instance.
+     * @param uim.cake.views\Form\IContext $context Context instance.
      * @return array<string, mixed> Updated data array.
      */
     protected array mergeDefaults(array $data, IContext $context) {
@@ -112,7 +112,7 @@ class BasicWidget : WidgetInterface
      * Set value for "required" attribute if applicable.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\IContext $context Context instance.
+     * @param uim.cake.views\Form\IContext $context Context instance.
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
@@ -137,7 +137,7 @@ class BasicWidget : WidgetInterface
      * Set value for "maxlength" attribute if applicable.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\IContext $context Context instance.
+     * @param uim.cake.views\Form\IContext $context Context instance.
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
@@ -154,7 +154,7 @@ class BasicWidget : WidgetInterface
      * Set value for "step" attribute if applicable.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\IContext $context Context instance.
+     * @param uim.cake.views\Form\IContext $context Context instance.
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */

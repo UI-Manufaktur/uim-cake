@@ -1,4 +1,4 @@
-module uim.cake.views.widgetss;
+module uim.cake.viewss.widgetss;
 
 @safe:
 import uim.cake;
@@ -28,15 +28,15 @@ class YearWidget : BasicWidget
     /**
      * Select box widget.
      *
-     * @var uim.cake.View\Widget\SelectBoxWidget
+     * @var uim.cake.views\Widget\SelectBoxWidget
      */
     protected _select;
 
     /**
      * Constructor
      *
-     * @param uim.cake.View\StringTemplate myTemplates Templates list.
-     * @param uim.cake.View\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
+     * @param uim.cake.views\StringTemplate myTemplates Templates list.
+     * @param uim.cake.views\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
      */
     this(StringTemplate myTemplates, SelectBoxWidget $selectBox) {
         _select = $selectBox;
@@ -47,7 +47,7 @@ class YearWidget : BasicWidget
      * Renders a year select box.
      *
      * @param array<string, mixed> myData Data to render with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return A generated select box.
      */
     string render(array myData, IContext $context) {

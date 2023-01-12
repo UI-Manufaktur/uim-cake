@@ -1,8 +1,8 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
-import uim.cake.View\Helper\IdGeneratorTrait;
-import uim.cake.View\StringTemplate;
+import uim.cake.views\Form\IContext;
+import uim.cake.views\Helper\IdGeneratorTrait;
+import uim.cake.views\StringTemplate;
 
 /**
  * Input widget class for generating multiple checkboxes.
@@ -33,7 +33,7 @@ class MultiCheckboxWidget : BasicWidget
     /**
      * Label widget instance.
      *
-     * @var uim.cake.View\Widget\LabelWidget
+     * @var uim.cake.views\Widget\LabelWidget
      */
     protected _label;
 
@@ -50,8 +50,8 @@ class MultiCheckboxWidget : BasicWidget
      * - `multicheckboxWrapper` Renders a wrapper around grouped inputs.
      * - `multicheckboxTitle` Renders the title element for grouped inputs.
      *
-     * @param uim.cake.View\StringTemplate $templates Templates list.
-     * @param uim.cake.View\Widget\LabelWidget $label Label widget instance.
+     * @param uim.cake.views\StringTemplate $templates Templates list.
+     * @param uim.cake.views\Widget\LabelWidget $label Label widget instance.
      */
     this(StringTemplate $templates, LabelWidget $label) {
         _templates = $templates;
@@ -97,7 +97,7 @@ class MultiCheckboxWidget : BasicWidget
      * If either is not set options will not be generated correctly.
      *
      * @param array<string, mixed> $data The data to generate a checkbox set with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      */
     string render(array $data, IContext $context) {
         $data += this.mergeDefaults($data, $context);
@@ -112,7 +112,7 @@ class MultiCheckboxWidget : BasicWidget
      * Render the checkbox inputs.
      *
      * @param array<string, mixed> $data The data array defining the checkboxes.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return array<string> An array of rendered inputs.
      */
     protected string[] _renderInputs(array $data, IContext $context) {
@@ -169,7 +169,7 @@ class MultiCheckboxWidget : BasicWidget
      * Render a single checkbox & wrapper.
      *
      * @param array<string, mixed> $checkbox An array containing checkbox key/value option pairs
-     * @param uim.cake.View\Form\IContext $context Context object.
+     * @param uim.cake.views\Form\IContext $context Context object.
      */
     protected string _renderInput(array $checkbox, IContext $context) {
         $input = _templates.format("checkbox", [

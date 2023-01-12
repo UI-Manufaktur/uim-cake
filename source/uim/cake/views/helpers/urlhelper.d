@@ -1,10 +1,10 @@
-module uim.cake.View\Helper;
+module uim.cake.views\Helper;
 
 import uim.cake.core.App;
 import uim.cake.core.exceptions.UIMException;
 import uim.cake.routings.Asset;
 import uim.cake.routings.Router;
-import uim.cake.View\Helper;
+import uim.cake.views\Helper;
 
 /**
  * UrlHelper class for generating URLs.

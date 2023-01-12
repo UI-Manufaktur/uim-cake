@@ -1,4 +1,9 @@
-module uim.cake.views.widgets;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.viewss.widgets;
 
 @safe:
 import uim.cake;
@@ -30,22 +35,22 @@ class WidgetLocator
     /**
      * Templates to use.
      *
-     * @var uim.cake.View\StringTemplate
+     * @var uim.cake.views\StringTemplate
      */
     protected _templates;
 
     /**
      * View instance.
      *
-     * @var uim.cake.View\View
+     * @var uim.cake.views\View
      */
     protected _view;
 
     /**
      * Constructor
      *
-     * @param uim.cake.View\StringTemplate myTemplates Templates instance to use.
-     * @param uim.cake.View\View $view The view instance to set as a widget.
+     * @param uim.cake.views\StringTemplate myTemplates Templates instance to use.
+     * @param uim.cake.views\View $view The view instance to set as a widget.
      * @param array $widgets See add() method for more information.
      */
     this(StringTemplate myTemplates, View $view, array $widgets = null) {
@@ -123,7 +128,7 @@ class WidgetLocator
      * the `_default` widget is undefined.
      *
      * @param string myName The widget name to get.
-     * @return uim.cake.View\Widget\IWidget IWidget instance.
+     * @return uim.cake.views\Widget\IWidget IWidget instance.
      * @throws \RuntimeException when widget is undefined.
      */
     auto get(string myName): IWidget
@@ -152,7 +157,7 @@ class WidgetLocator
      * Resolves a widget spec into an instance.
      *
      * @param mixed myConfig The widget config.
-     * @return uim.cake.View\Widget\IWidget Widget instance.
+     * @return uim.cake.views\Widget\IWidget Widget instance.
      * @throws \ReflectionException
      */
     protected IWidget _resolveWidget(myConfig) {
@@ -179,10 +184,10 @@ class WidgetLocator
                     $arguments[] = this.get($requirement);
                 }
             }
-            /** @var uim.cake.View\Widget\IWidget $instance */
+            /** @var uim.cake.views\Widget\IWidget $instance */
             $instance = $reflection.newInstanceArgs($arguments);
         } else {
-            /** @var uim.cake.View\Widget\IWidget $instance */
+            /** @var uim.cake.views\Widget\IWidget $instance */
             $instance = new myClassName(_templates);
         }
 

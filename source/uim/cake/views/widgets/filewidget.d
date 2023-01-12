@@ -1,7 +1,12 @@
-module uim.cake.View\Widget;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.views\Widget;
 
 import uim.cake.core.Configure;
-import uim.cake.View\Form\IContext;
+import uim.cake.views\Form\IContext;
 
 /**
  * Input widget class for generating a file upload control.
@@ -35,7 +40,7 @@ class FileWidget : BasicWidget
      * ignored.
      *
      * @param array<string, mixed> $data The data to build a file input with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
     string render(array $data, IContext $context) {

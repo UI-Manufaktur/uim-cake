@@ -1,4 +1,4 @@
-module uim.cake.views.widgets;
+module uim.cake.viewss.widgets;
 
 @safe:
 import uim.cake;

@@ -1,4 +1,4 @@
-module uim.cake.views.widgetss;
+module uim.cake.viewss.widgetss;
 
 @safe:
 import uim.cake;
@@ -15,14 +15,14 @@ class ButtonWidget : IWidget
     /**
      * StringTemplate instance.
      *
-     * @var uim.cake.View\StringTemplate
+     * @var uim.cake.views\StringTemplate
      */
     protected _templates;
 
     /**
      * Constructor.
      *
-     * @param uim.cake.View\StringTemplate myTemplates Templates list.
+     * @param uim.cake.views\StringTemplate myTemplates Templates list.
      */
     this(StringTemplate myTemplates) {
         _templates = myTemplates;
@@ -42,7 +42,7 @@ class ButtonWidget : IWidget
      * Any other keys provided in myData will be converted into HTML attributes.
      *
      * @param array<string, mixed> myData The data to build a button with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      */
     string render(array myData, IContext $context) {
         myData += [

@@ -1,1 +1,1 @@
-module uim.cake.views.helpers;
+module uim.cake.viewss.helpers;
