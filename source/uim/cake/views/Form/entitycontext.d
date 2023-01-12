@@ -1,4 +1,4 @@
-module uim.cake.View\Form;
+module uim.cake.views\Form;
 
 use ArrayAccess;
 import uim.cake.collections.Collection;

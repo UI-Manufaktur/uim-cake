@@ -1,22 +1,20 @@
-
-
-
- *
-
-
- * @since         0.9.1
-  */module uim.cake.View\Helper;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.views\Helper;
 
 import uim.cake.core.Configure;
-import uim.cake.View\Helper;
-import uim.cake.View\StringTemplateTrait;
+import uim.cake.views\Helper;
+import uim.cake.views\StringTemplateTrait;
 
 /**
  * Html Helper class for easy use of HTML widgets.
  *
  * HtmlHelper encloses all methods needed while working with HTML pages.
  *
- * @property uim.cake.View\Helper\UrlHelper $Url
+ * @property uim.cake.views\Helper\UrlHelper $Url
  * @link https://book.cakephp.org/4/en/views/helpers/html.html
  */
 class HtmlHelper : Helper
@@ -1066,7 +1064,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the list (ol/ul) tag.
      * @param array<string, mixed> $itemOptions Options and additional HTML attributes of the list item (LI) tag.
      * @return string The nested list element
-     * @see uim.cake.View\Helper\HtmlHelper::nestedList()
+     * @see uim.cake.views\Helper\HtmlHelper::nestedList()
      */
     protected string _nestedListItem(array $items, STRINGAA someOptions, array $itemOptions) {
         $out = "";

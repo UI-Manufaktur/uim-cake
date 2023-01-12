@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         0.10.0
-  */module uim.cake.View\Helper;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.views\Helper;
 
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.UIMException;
@@ -13,12 +11,12 @@ import uim.cake.Form\FormProtector;
 import uim.cake.routings.Router;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;
-import uim.cake.View\Form\ContextFactory;
-import uim.cake.View\Form\IContext;
-import uim.cake.View\Helper;
-import uim.cake.View\StringTemplateTrait;
-import uim.cake.View\View;
-import uim.cake.View\Widget\WidgetLocator;
+import uim.cake.views\Form\ContextFactory;
+import uim.cake.views\Form\IContext;
+import uim.cake.views\Helper;
+import uim.cake.views\StringTemplateTrait;
+import uim.cake.views\View;
+import uim.cake.views\Widget\WidgetLocator;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -32,8 +30,8 @@ use RuntimeException;
  * @method string email(string $fieldName, STRINGAA someOptions = null) Creates input of type email.
  * @method string password(string $fieldName, STRINGAA someOptions = null) Creates input of type password.
  * @method string search(string $fieldName, STRINGAA someOptions = null) Creates input of type search.
- * @property uim.cake.View\Helper\HtmlHelper $Html
- * @property uim.cake.View\Helper\UrlHelper $Url
+ * @property uim.cake.views\Helper\HtmlHelper $Html
+ * @property uim.cake.views\Helper\UrlHelper $Url
  * @link https://book.cakephp.org/4/en/views/helpers/form.html
  */
 class FormHelper : Helper
@@ -182,21 +180,21 @@ class FormHelper : Helper
     /**
      * Locator for input widgets.
      *
-     * @var uim.cake.View\Widget\WidgetLocator
+     * @var uim.cake.views\Widget\WidgetLocator
      */
     protected _locator;
 
     /**
      * Context for the current form.
      *
-     * @var uim.cake.View\Form\IContext|null
+     * @var uim.cake.views\Form\IContext|null
      */
     protected _context;
 
     /**
      * Context factory.
      *
-     * @var uim.cake.View\Form\ContextFactory|null
+     * @var uim.cake.views\Form\ContextFactory|null
      */
     protected _contextFactory;
 
@@ -242,7 +240,7 @@ class FormHelper : Helper
     /**
      * Construct the widgets and binds the default context providers
      *
-     * @param uim.cake.View\View $view The View this helper is being attached to.
+     * @param uim.cake.views\View $view The View this helper is being attached to.
      * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
     this(View $view, Json aConfig = null) {
@@ -277,7 +275,7 @@ class FormHelper : Helper
     /**
      * Get the widget locator currently used by the helper.
      *
-     * @return uim.cake.View\Widget\WidgetLocator Current locator instance
+     * @return uim.cake.views\Widget\WidgetLocator Current locator instance
 
      */
     function getWidgetLocator(): WidgetLocator
@@ -288,7 +286,7 @@ class FormHelper : Helper
     /**
      * Set the widget locator the helper will use.
      *
-     * @param uim.cake.View\Widget\WidgetLocator $instance The locator instance to set.
+     * @param uim.cake.views\Widget\WidgetLocator $instance The locator instance to set.
      * @return this
 
      */
@@ -301,9 +299,9 @@ class FormHelper : Helper
     /**
      * Set the context factory the helper will use.
      *
-     * @param uim.cake.View\Form\ContextFactory|null $instance The context factory instance to set.
+     * @param uim.cake.views\Form\ContextFactory|null $instance The context factory instance to set.
      * @param array $contexts An array of context providers.
-     * @return uim.cake.View\Form\ContextFactory
+     * @return uim.cake.views\Form\ContextFactory
      */
     function contextFactory(?ContextFactory $instance = null, array $contexts = null): ContextFactory
     {
@@ -464,7 +462,7 @@ class FormHelper : Helper
     /**
      * Create the URL for a form based on the options.
      *
-     * @param uim.cake.View\Form\IContext $context The context object to use.
+     * @param uim.cake.views\Form\IContext $context The context object to use.
      * @param array<string, mixed> $options An array of options from create()
      * @return array|string The action attribute for the form.
      */
@@ -1974,7 +1972,7 @@ class FormHelper : Helper
      *   SELECT element
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
-     * @see uim.cake.View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
+     * @see uim.cake.views\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-select-pickers
      */
     string select(string $fieldName, iterable $options = null, array $attributes = null) {
@@ -2052,7 +2050,7 @@ class FormHelper : Helper
      *   (as "value"=>"Text" pairs) to be used in the checkboxes element.
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
-     * @see uim.cake.View\Helper\FormHelper::select() for supported option formats.
+     * @see uim.cake.views\Helper\FormHelper::select() for supported option formats.
      */
     string multiCheckbox(string $fieldName, iterable $options, array $attributes = null) {
         $attributes += [
@@ -2343,8 +2341,8 @@ class FormHelper : Helper
      *
      * If there is no active form null will be returned.
      *
-     * @param uim.cake.View\Form\IContext|null $context Either the new context when setting, or null to get.
-     * @return uim.cake.View\Form\IContext The context for the form.
+     * @param uim.cake.views\Form\IContext|null $context Either the new context when setting, or null to get.
+     * @return uim.cake.views\Form\IContext The context for the form.
      */
     function context(?IContext $context = null): IContext
     {
@@ -2361,7 +2359,7 @@ class FormHelper : Helper
      * If no type can be matched a NullContext will be returned.
      *
      * @param mixed $data The data to get a context provider for.
-     * @return uim.cake.View\Form\IContext Context provider.
+     * @return uim.cake.views\Form\IContext Context provider.
      * @throws \RuntimeException when the context class does not implement the
      *   IContext.
      */
@@ -2382,7 +2380,7 @@ class FormHelper : Helper
      * Allows you to add or replace widget instances with custom code.
      *
      * @param string aName The name of the widget. e.g~ "text".
-     * @param uim.cake.View\Widget\WidgetInterface|array $spec Either a string class
+     * @param uim.cake.views\Widget\WidgetInterface|array $spec Either a string class
      *   name or an object implementing the WidgetInterface.
      */
     void addWidget(string aName, $spec) {

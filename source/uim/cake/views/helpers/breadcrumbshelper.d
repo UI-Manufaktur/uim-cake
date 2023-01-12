@@ -1,20 +1,18 @@
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.views\Helper;
 
-
-
- *
-
-
- * @since         3.3.6
-  */module uim.cake.View\Helper;
-
-import uim.cake.View\Helper;
-import uim.cake.View\StringTemplateTrait;
+import uim.cake.views\Helper;
+import uim.cake.views\StringTemplateTrait;
 use LogicException;
 
 /**
  * BreadcrumbsHelper to register and display a breadcrumb trail for your views
  *
- * @property uim.cake.View\Helper\UrlHelper $Url
+ * @property uim.cake.views\Helper\UrlHelper $Url
  */
 class BreadcrumbsHelper : Helper
 {

@@ -1,4 +1,9 @@
-module uim.cake.views.Helper;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.viewss.Helper;
 
 @safe:
 import uim.cake;
@@ -6,7 +11,7 @@ import uim.cake;
 /**
  * BreadcrumbsHelper to register and display a breadcrumb trail for your views
  *
- * @property uim.cake.View\Helper\UrlHelper myUrl
+ * @property uim.cake.views\Helper\UrlHelper myUrl
  */
 class BreadcrumbsHelper : Helper
 {

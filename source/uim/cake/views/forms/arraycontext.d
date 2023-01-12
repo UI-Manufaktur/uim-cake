@@ -1,4 +1,4 @@
-module uim.cake.views.forms;
+module uim.cake.viewss.forms;
 
 @safe:
 import uim.cake;

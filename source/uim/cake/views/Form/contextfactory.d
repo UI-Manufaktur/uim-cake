@@ -1,4 +1,4 @@
-module uim.cake.View\Form;
+module uim.cake.views\Form;
 
 import uim.cake.collections.Collection;
 import uim.datasources.IEntity;
@@ -116,7 +116,7 @@ class ContextFactory
      *
      * @param uim.cake.http.ServerRequest myServerRequest Request instance.
      * @param array<string, mixed> $data The data to get a context provider for.
-     * @return uim.cake.View\Form\IContext Context provider.
+     * @return uim.cake.views\Form\IContext Context provider.
      * @throws \RuntimeException When a context instance cannot be generated for given entity.
      */
     function get(ServerRequest myServerRequest, array $data = null): IContext

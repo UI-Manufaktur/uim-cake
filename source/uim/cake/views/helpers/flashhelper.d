@@ -1,6 +1,11 @@
-module uim.cake.View\Helper;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.views\Helper;
 
-import uim.cake.View\Helper;
+import uim.cake.views\Helper;
 
 /**
  * FlashHelper class to render flash messages.

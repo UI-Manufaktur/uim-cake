@@ -1,4 +1,9 @@
-module uim.cake.views.Helper;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.viewss.Helper;
 
 @safe:
 import uim.cake;
@@ -8,7 +13,7 @@ import uim.cake;
  *
  * HtmlHelper encloses all methods needed while working with HTML pages.
  *
- * @property uim.cake.View\Helper\UrlHelper myUrl
+ * @property uim.cake.views\Helper\UrlHelper myUrl
  * @link https://book.UIM.org/4/en/views/helpers/html.html
  */
 class HtmlHelper : Helper {
@@ -1055,7 +1060,7 @@ class HtmlHelper : Helper {
      * @param array<string, mixed> myOptions Additional HTML attributes of the list (ol/ul) tag.
      * @param array<string, mixed> $itemOptions Options and additional HTML attributes of the list item (LI) tag.
      * @return string The nested list element
-     * @see uim.cake.View\Helper\HtmlHelper::nestedList()
+     * @see uim.cake.views\Helper\HtmlHelper::nestedList()
      */
     protected string _nestedListItem(array myItems, array myOptions, array $itemOptions) {
         $out = "";

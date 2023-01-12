@@ -1,4 +1,4 @@
-module uim.cake.View\Exception;
+module uim.cake.views\Exception;
 
 import uim.cake.core.exceptions.UIMException;
 use Throwable;
