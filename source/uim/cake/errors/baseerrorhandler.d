@@ -1,8 +1,10 @@
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
 module uim.cake.Error;
 
-import uim.cake.core.Configure;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.routings.Router;
 use Psr\Http\messages.IServerRequest;
 use RuntimeException;
 use Throwable;
@@ -23,23 +25,24 @@ abstract class BaseErrorHandler
      *
      * @var array<string, mixed>
      */
-    protected _defaultConfig = [
-        "log": true,
-        "trace": false,
-        "skipLog": [],
-        "errorLogger": ErrorLogger::class,
+    protected STRINGAA _defaultConfig = [
+        "log":true,
+        "trace":false,
+        "skipLog":[],
+        "errorLogger":ErrorLogger::class,
     ];
 
     /**
+     * @var bool
      */
-    protected bool _handled = false;
+    protected _handled = false;
 
     /**
      * Exception logger instance.
      *
-     * @var uim.cake.errors.ErrorLoggerInterface|null
+     * @var uim.cake.errors.IErrorLogger|null
      */
-    protected $logger;
+    protected logger;
 
     /**
      * Display an error message in an environment specific way.
@@ -47,11 +50,10 @@ abstract class BaseErrorHandler
      * Subclasses should implement this method to display the error as
      * desired for the runtime they operate in.
      *
-     * @param array $error An array of error data.
+     * @param array myError An array of error data.
      * @param bool $debug Whether the app is in debug mode.
-     * @return void
      */
-    abstract protected void _displayError(array $error, bool $debug);
+    abstract protected void _displayError(array myError, bool $debug);
 
     /**
      * Display an exception in an environment specific way.
@@ -59,21 +61,14 @@ abstract class BaseErrorHandler
      * Subclasses should implement this method to display an uncaught exception as
      * desired for the runtime they operate in.
      *
-     * @param \Throwable $exception The uncaught exception.
-     * @return void
+     * @param \Throwable myException The uncaught exception.
      */
-    abstract protected void _displayException(Throwable $exception);
+    abstract protected void _displayException(Throwable myException);
 
     /**
      * Register the error and exception handlers.
      */
     void register() {
-        deprecationWarning(
-            "Use of `BaseErrorHandler` and subclasses are deprecated~ " ~
-            "Upgrade to the new `ErrorTrap` and `ExceptionTrap` subsystem~ " ~
-            "See https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html"
-        );
-
         $level = _config["errorLevel"] ?? -1;
         error_reporting($level);
         set_error_handler([this, "handleError"], $level);
@@ -86,8 +81,8 @@ abstract class BaseErrorHandler
             if ($megabytes > 0) {
                 this.increaseMemoryLimit($megabytes * 1024);
             }
-            $error = error_get_last();
-            if (!is_array($error)) {
+            myError = error_get_last();
+            if (!is_array(myError)) {
                 return;
             }
             $fatals = [
@@ -95,14 +90,14 @@ abstract class BaseErrorHandler
                 E_ERROR,
                 E_PARSE,
             ];
-            if (!hasAllValues($error["type"], $fatals, true)) {
+            if (!hasAllValues(myError["type"], $fatals, true)) {
                 return;
             }
             this.handleFatalError(
-                $error["type"],
-                $error["message"],
-                $error["file"],
-                $error["line"]
+                myError["type"],
+                myError["message"],
+                myError["file"],
+                myError["line"]
             );
         });
     }
@@ -118,16 +113,16 @@ abstract class BaseErrorHandler
      * Stack traces for errors can be enabled with the "trace" option.
      *
      * @param int $code Code of error
-     * @param string $description Error description
-     * @param string|null $file File on which error occurred
+     * @param string description Error description
+     * @param string|null myfile File on which error occurred
      * @param int|null $line Line that triggered the error
      * @param array<string, mixed>|null $context Context
      * @return bool True if error was handled
      */
     bool handleError(
         int $code,
-        string $description,
-        Nullable!string $file = null,
+        string description,
+        Nullable!string myfile = null,
         Nullable!int $line = null,
         ?array $context = null
     ) {
@@ -135,18 +130,18 @@ abstract class BaseErrorHandler
             return false;
         }
         _handled = true;
-        [$error, $log] = static::mapErrorCode($code);
+        [myError, $log] = static::mapErrorCode($code);
         if ($log == LOG_ERR) {
             /** @psalm-suppress PossiblyNullArgument */
-            return this.handleFatalError($code, $description, $file, $line);
+            return this.handleFatalError($code, $description, myfile, $line);
         }
-        $data = [
-            "level": $log,
-            "code": $code,
-            "error": $error,
-            "description": $description,
-            "file": $file,
-            "line": $line,
+        myData = [
+            "level":$log,
+            "code":$code,
+            "error":myError,
+            "description":$description,
+            "file":myfile,
+            "line":$line,
         ];
 
         $debug = (bool)Configure::read("debug");
@@ -161,14 +156,14 @@ abstract class BaseErrorHandler
                 $start += $context["_trace_frame_offset"];
                 unset($context["_trace_frame_offset"]);
             }
-            $data += [
-                "context": $context,
-                "start": $start,
-                "path": Debugger::trimPath((string)$file),
+            myData += [
+                "context":$context,
+                "start":$start,
+                "path":Debugger::trimPath((string)myfile),
             ];
         }
-        _displayError($data, $debug);
-        _logError($log, $data);
+        _displayError(myData, $debug);
+        _logError($log, myData);
 
         return true;
     }
@@ -178,13 +173,12 @@ abstract class BaseErrorHandler
      * then, it wraps the passed object inside another Exception object
      * for backwards compatibility purposes.
      *
-     * @param \Throwable $exception The exception to handle
-     * @return void
+     * @param \Throwable myException The exception to handle
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
-    void wrapAndHandleException(Throwable $exception) {
+    void wrapAndHandleException(Throwable myException) {
         deprecationWarning("This method is no longer in use. Call handleException instead.");
-        this.handleException($exception);
+        this.handleException(myException);
     }
 
     /**
@@ -193,15 +187,15 @@ abstract class BaseErrorHandler
      * Uses a template method provided by subclasses to display errors in an
      * environment appropriate way.
      *
-     * @param \Throwable $exception Exception instance.
+     * @param \Throwable myException Exception instance.
      * @return void
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    void handleException(Throwable $exception) {
-        _displayException($exception);
-        this.logException($exception);
-        $code = $exception.getCode() ?: 1;
+    void handleException(Throwable myException) {
+        _displayException(myException);
+        this.logException(myException);
+        $code = myException.getCode() ?: 1;
         _stop((int)$code);
     }
 
@@ -220,21 +214,21 @@ abstract class BaseErrorHandler
      * Display/Log a fatal error.
      *
      * @param int $code Code of error
-     * @param string $description Error description
-     * @param string $file File on which error occurred
+     * @param string description Error description
+     * @param string myfile File on which error occurred
      * @param int $line Line that triggered the error
      */
-    bool handleFatalError(int $code, string $description, string $file, int $line) {
-        $data = [
-            "code": $code,
-            "description": $description,
-            "file": $file,
-            "line": $line,
-            "error": "Fatal Error",
+    bool handleFatalError(int $code, string description, string myfile, int $line) {
+        myData = [
+            "code":$code,
+            "description":$description,
+            "file":myfile,
+            "line":$line,
+            "error":"Fatal Error",
         ];
-        _logError(LOG_ERR, $data);
+        _logError(LOG_ERR, myData);
 
-        this.handleException(new FatalErrorException($description, 500, $file, $line));
+        this.handleException(new FatalErrorException($description, 500, myfile, $line));
 
         return true;
     }
@@ -251,7 +245,7 @@ abstract class BaseErrorHandler
             return;
         }
         $limit = trim($limit);
-        $units = (substr($limit, -1)).toUpper;
+        $units = strtoupper(substr($limit, -1));
         $current = (int)substr($limit, 0, strlen($limit) - 1);
         if ($units == "M") {
             $current *= 1024;
@@ -271,65 +265,60 @@ abstract class BaseErrorHandler
      * Log an error.
      *
      * @param string|int $level The level name of the log.
-     * @param array $data Array of error data.
+     * @param array myData Array of error data.
      */
-    protected bool _logError($level, array $data) {
-        $message = sprintf(
+    protected bool _logError($level, array myData) {
+        myMessage = sprintf(
             "%s (%s): %s in [%s, line %s]",
-            $data["error"],
-            $data["code"],
-            $data["description"],
-            $data["file"],
-            $data["line"]
+            myData["error"],
+            myData["code"],
+            myData["description"],
+            myData["file"],
+            myData["line"]
         );
         $context = null;
         if (!empty(_config["trace"])) {
             $context["trace"] = Debugger::trace([
-                "start": 1,
-                "format": "log",
+                "start":1,
+                "format":"log",
             ]);
             $context["request"] = Router::getRequest();
         }
 
-        return this.getLogger().logMessage($level, $message, $context);
+        return this.getLogger().logMessage($level, myMessage, $context);
     }
 
     /**
      * Log an error for the exception if applicable.
      *
-     * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\messages.IServerRequest|null $request The current request.
+     * @param \Throwable myException The exception to log a message for.
+     * @param \Psr\Http\messages.IServerRequest|null myRequest The current request.
      */
-    bool logException(Throwable $exception, ?IServerRequest $request = null) {
+    bool logException(Throwable myException, ?IServerRequest myRequest = null) {
         if (empty(_config["log"])) {
             return false;
         }
-        foreach (_config["skipLog"] as $class) {
-            if ($exception instanceof $class) {
-                return false;
-            }
-        }
 
-        return this.getLogger().log($exception, $request ?? Router::getRequest());
+        return this.getLogger().log(myException, myRequest ?? Router::getRequest());
     }
 
     /**
      * Get exception logger.
      *
-     * @return uim.cake.errors.ErrorLoggerInterface
+     * @return uim.cake.errors.IErrorLogger
      */
-    function getLogger() {
-        if (this.logger == null) {
-            /** @var uim.cake.errors.ErrorLoggerInterface $logger */
+    auto getLogger() {
+        if (this.logger is null) {
+            /** @var uim.cake.errors.IErrorLogger $logger */
             $logger = new _config["errorLogger"](_config);
 
-            if (!$logger instanceof ErrorLoggerInterface) {
+            if (!$logger instanceof IErrorLogger) {
                 // Set the logger so that the next error can be logged.
                 this.logger = new ErrorLogger(_config);
 
-                $interface = ErrorLoggerInterface::class;
-                $type = getTypeName($logger);
-                throw new RuntimeException("Cannot create logger. `{$type}` does not implement `{$interface}`.");
+                $interface = IErrorLogger::class;
+                myType = getTypeName($logger);
+                throw new RuntimeException("Cannot create logger. `{myType}` does not implement `{$interface}`.");
             }
             this.logger = $logger;
         }
@@ -361,16 +350,16 @@ abstract class BaseErrorHandler
             E_USER_DEPRECATED: "deprecated",
         ];
         $logMap = [
-            "error": LOG_ERR,
-            "warning": LOG_WARNING,
-            "notice": LOG_NOTICE,
-            "strict": LOG_NOTICE,
-            "deprecated": LOG_NOTICE,
+            "error":LOG_ERR,
+            "warning":LOG_WARNING,
+            "notice":LOG_NOTICE,
+            "strict":LOG_NOTICE,
+            "deprecated":LOG_NOTICE,
         ];
 
-        $error = $levelMap[$code];
-        $log = $logMap[$error];
+        myError = $levelMap[$code];
+        $log = $logMap[myError];
 
-        return [ucfirst($error), $log];
+        return [ucfirst(myError), $log];
     }
 }
