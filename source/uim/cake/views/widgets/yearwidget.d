@@ -1,7 +1,7 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
-import uim.cake.View\Form\IContext;
-import uim.cake.View\StringTemplate;
+import uim.cake.views\Form\IContext;
+import uim.cake.views\StringTemplate;
 use DateTimeInterface;
 use InvalidArgumentException;
 
@@ -30,15 +30,15 @@ class YearWidget : BasicWidget
     /**
      * Select box widget.
      *
-     * @var uim.cake.View\Widget\SelectBoxWidget
+     * @var uim.cake.views\Widget\SelectBoxWidget
      */
     protected _select;
 
     /**
      * Constructor
      *
-     * @param uim.cake.View\StringTemplate $templates Templates list.
-     * @param uim.cake.View\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
+     * @param uim.cake.views\StringTemplate $templates Templates list.
+     * @param uim.cake.views\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
      */
     this(StringTemplate $templates, SelectBoxWidget $selectBox) {
         _select = $selectBox;
@@ -49,7 +49,7 @@ class YearWidget : BasicWidget
      * Renders a year select box.
      *
      * @param array<string, mixed> $data Data to render with.
-     * @param uim.cake.View\Form\IContext $context The current form context.
+     * @param uim.cake.views\Form\IContext $context The current form context.
      * @return string A generated select box.
      */
     string render(array $data, IContext $context) {

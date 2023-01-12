@@ -1,9 +1,9 @@
-module uim.cake.View\Widget;
+module uim.cake.views\Widget;
 
 import uim.cake.core.App;
 import uim.cake.core.configures.engines.PhpConfig;
-import uim.cake.View\StringTemplate;
-import uim.cake.View\View;
+import uim.cake.views\StringTemplate;
+import uim.cake.views\View;
 use ReflectionClass;
 use RuntimeException;
 
@@ -34,22 +34,22 @@ class WidgetLocator
     /**
      * Templates to use.
      *
-     * @var uim.cake.View\StringTemplate
+     * @var uim.cake.views\StringTemplate
      */
     protected _templates;
 
     /**
      * View instance.
      *
-     * @var uim.cake.View\View
+     * @var uim.cake.views\View
      */
     protected _view;
 
     /**
      * Constructor
      *
-     * @param uim.cake.View\StringTemplate $templates Templates instance to use.
-     * @param uim.cake.View\View $view The view instance to set as a widget.
+     * @param uim.cake.views\StringTemplate $templates Templates instance to use.
+     * @param uim.cake.views\View $view The view instance to set as a widget.
      * @param array $widgets See add() method for more information.
      */
     this(StringTemplate $templates, View $view, array $widgets = null) {
@@ -128,7 +128,7 @@ class WidgetLocator
      * the `_default` widget is undefined.
      *
      * @param string aName The widget name to get.
-     * @return uim.cake.View\Widget\WidgetInterface WidgetInterface instance.
+     * @return uim.cake.views\Widget\WidgetInterface WidgetInterface instance.
      * @throws \RuntimeException when widget is undefined.
      */
     function get(string aName): WidgetInterface
@@ -159,7 +159,7 @@ class WidgetLocator
      * Resolves a widget spec into an instance.
      *
      * @param mixed aConfig The widget config.
-     * @return uim.cake.View\Widget\WidgetInterface Widget instance.
+     * @return uim.cake.views\Widget\WidgetInterface Widget instance.
      * @throws \ReflectionException
      */
     protected function _resolveWidget(aConfig): WidgetInterface
@@ -187,10 +187,10 @@ class WidgetLocator
                     $arguments[] = this.get($requirement);
                 }
             }
-            /** @var uim.cake.View\Widget\WidgetInterface $instance */
+            /** @var uim.cake.views\Widget\WidgetInterface $instance */
             $instance = $reflection.newInstanceArgs($arguments);
         } else {
-            /** @var uim.cake.View\Widget\WidgetInterface $instance */
+            /** @var uim.cake.views\Widget\WidgetInterface $instance */
             $instance = new $className(_templates);
         }
 
